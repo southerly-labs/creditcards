@@ -26,9 +26,17 @@ min_credit = 1000
 
 [rewards]
 program = "qantas"
-earn = []
 earn_source = "manual"
 earn_text_hash = "a2ecffa94b55a9a4"
+
+[[rewards.earn]]
+rate = 0.75
+cap_monthly = 3000
+
+[[rewards.earn]]
+rate = 0.35
+cap_monthly = 10857
+note = "5,000-point cap per calendar month (from 1 Nov 2026)"
 
 [perks]
 

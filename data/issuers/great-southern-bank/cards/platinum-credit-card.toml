@@ -24,9 +24,12 @@ min_credit = 6000
 
 [rewards]
 program = "cashback"
-earn = []
 earn_source = "manual"
 earn_text_hash = "a0b0c5b83e9750f9"
+
+[[rewards.earn]]
+rate = 0.5
+note = "0.5% cashback, uncapped"
 
 [perks]
 insurance = [ "Travel Insurance", "Purchase Protection" ]

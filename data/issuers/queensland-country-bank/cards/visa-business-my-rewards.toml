@@ -4,6 +4,7 @@ network = "visa"
 status = "active"
 description = "Our Business Visa Credit Card comes with a competitive low interest rate, low annual fee and up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date, and is linked to our free rewards program, Business Rewarder"
 image = "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visabusiness-reward.jpg"
+locked = [ "rewards.program" ]
 
 [cdr]
 brand = "Queensland Country Bank"
@@ -24,10 +25,14 @@ interest_free_days = 55
 min_credit = 500
 
 [rewards]
-program = "queensland-country-bank-rewards"
-earn = []
+program = "cashback"
 earn_source = "manual"
 earn_text_hash = "33f923b631025751"
+
+[[rewards.earn]]
+rate = 0.667
+cap_monthly = 21000
+note = "$1 cashback per $150, up to $140 a month"
 
 [perks]
 

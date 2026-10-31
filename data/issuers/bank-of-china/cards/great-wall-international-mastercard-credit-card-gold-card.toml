@@ -26,9 +26,11 @@ min_credit = 4000
 
 [rewards]
 program = "bank-of-china-rewards"
-earn = []
 earn_source = "manual"
 earn_text_hash = "de215437106e7bee"
+
+[[rewards.earn]]
+rate = 2
 
 [perks]
 
