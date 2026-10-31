@@ -32,10 +32,9 @@ rate = 0.5
 note = "0.5% cashback, uncapped"
 
 [[rewards.earn_check]]
-url = "https://www.greatsouthernbank.com.au/credit-cards/platinum"
+url = "https://www.greatsouthernbank.com.au/credit-cards"
 expect = [
-  "earn 0.50% on every eligible dollar spent",
-  "no caps. no points to accrue",
+  "earn uncapped cashback at 0.50% on every eligible dollar.",
 ]
 
 [perks]
