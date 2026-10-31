@@ -30,6 +30,7 @@
     "@oxlint/plugins": "1.90.0",
     "@shekohex/oxc-effect": "0.2.1",
     "@types/bun": "1.4.4",
+    "oxc-parser": "0.156.0",
     "oxfmt": "0.75.0",
     "oxlint": "1.90.0",
     "oxlint-tsgolint": "7.0.2005",
