@@ -1,7 +1,7 @@
-import { DateTime, Effect, Schedule, Schema } from "effect"
-import { CdrClient } from "../cdr/CdrClient.ts"
+import { DateTime, Effect, Schema } from "effect"
+import { CdrClient, type CdrError, REQUEST_VARIANTS } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
-import type { ProductDetail } from "../cdr/schema.ts"
+import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
 import { Card, type Issuer, type Program } from "../model/schema.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
@@ -54,17 +54,16 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
   }
   const fetched = yield* Effect.forEach(brands, (brand) =>
     Effect.gen(function*() {
-      // Some data holders (seen with Bank of Melbourne and BankSA)
-      // intermittently return an empty product list. Retry when we expect cards.
+      // Some data holders' CDNs serve a stale empty list for particular
+      // request headers. When we expect cards, try the other header variants.
       const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
-      const listed = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY).pipe(
-        Effect.repeat({
-          while: (products) => expectsCards && products.length === 0,
-          schedule: Schedule.spaced("5 seconds"),
-          times: 2
-        }),
-        Effect.result
-      )
+      const list = Effect.fnUntraced(function*(variant: number): Effect.fn.Return<ReadonlyArray<ProductSummary>, CdrError> {
+        const products = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY, variant)
+        return products.length === 0 && expectsCards && variant + 1 < REQUEST_VARIANTS.length
+          ? yield* list(variant + 1)
+          : products
+      })
+      const listed = yield* list(0).pipe(Effect.result)
       if (listed._tag === "Failure") {
         return { brand: brand.brandName, products: [], listError: listed.failure.message, productErrors: [] } satisfies BrandFetch
       }

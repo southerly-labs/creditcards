@@ -18,6 +18,17 @@ export class CdrError extends Schema.TaggedError<CdrError>()("CdrError", {
   message: Schema.String
 }) {}
 
+// Westpac group's CloudFront caches a response per Accept/Accept-Encoding
+// combination, and some of those copies are stale and list no products.
+// Which combination is broken varies by brand and over time, so callers that
+// expect products can retry the listing with another variant.
+export const REQUEST_VARIANTS: ReadonlyArray<Readonly<Record<string, string>>> = [
+  { accept: "application/json", "accept-encoding": "identity" },
+  { accept: "application/json", "accept-encoding": "gzip" },
+  { accept: "*/*", "accept-encoding": "identity" },
+  { accept: "*/*", "accept-encoding": "gzip" }
+]
+
 export interface VersionedProduct {
   readonly version: number
   readonly raw: unknown
@@ -26,7 +37,7 @@ export interface VersionedProduct {
 
 export class CdrClient extends Context.Service<CdrClient, {
   readonly brands: Effect.Effect<ReadonlyArray<DataHolderBrand>, CdrError>
-  listProducts(baseUri: string, category: string): Effect.Effect<ReadonlyArray<ProductSummary>, CdrError>
+  listProducts(baseUri: string, category: string, variant?: number): Effect.Effect<ReadonlyArray<ProductSummary>, CdrError>
   getProduct(baseUri: string, productId: string): Effect.Effect<VersionedProduct, CdrError>
 }>()("creditcards/cdr/CdrClient") {
   static readonly layer = Layer.effect(
@@ -38,11 +49,9 @@ export class CdrClient extends Context.Service<CdrClient, {
 
       // GET with CDR version negotiation. Not every data holder honours
       // x-min-v, so on a 406 fall back to probing each version downwards.
-      const getVersioned = Effect.fnUntraced(function*(url: string, maxVersion: number) {
+      const getVersioned = Effect.fnUntraced(function*(url: string, maxVersion: number, variant = 0) {
         const attempt = (headers: Record<string, string>) =>
-          // Westpac group's CDN serves an empty product list for gzip-encoded
-          // responses, so request uncompressed bodies.
-          client.get(url, { headers: { accept: "application/json", "accept-encoding": "identity", ...headers } }).pipe(
+          client.get(url, { headers: { ...REQUEST_VARIANTS[variant % REQUEST_VARIANTS.length], ...headers } }).pipe(
             Effect.timeout("20 seconds"),
             Effect.mapError((cause) => new CdrError({ url, message: String(cause) }))
           )
@@ -73,14 +82,14 @@ export class CdrClient extends Context.Service<CdrClient, {
         return response.data.filter((brand) => brand.industries.some((i) => LENDING_INDUSTRIES.has(i)))
       }).pipe(Effect.withSpan("CdrClient.brands"))
 
-      const listProducts = Effect.fn("CdrClient.listProducts")(function*(baseUri: string, category: string) {
+      const listProducts = Effect.fn("CdrClient.listProducts")(function*(baseUri: string, category: string, variant = 0) {
         const products: Array<ProductSummary> = []
         // Fetch unfiltered and filter locally: some data holders mishandle
         // product-category (e.g. Westpac returns nothing when it is combined
         // with page-size).
         let url: string | null | undefined = `${trimSlash(baseUri)}/cds-au/v1/banking/products?page-size=100`
         for (let page = 0; url && page < 20; page++) {
-          const { body }: { body: unknown } = yield* getVersioned(url, PRODUCTS_MAX_VERSION)
+          const { body }: { body: unknown } = yield* getVersioned(url, PRODUCTS_MAX_VERSION, variant)
           const decoded: typeof ProductsPage.Type = yield* decodeProductsPage(body).pipe(Effect.mapError(schemaError(url)))
           products.push(...decoded.data.products.filter((p) => p.productCategory === category))
           const next: string | null | undefined = decoded.links?.next
