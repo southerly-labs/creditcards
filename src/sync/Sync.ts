@@ -1,4 +1,4 @@
-import { DateTime, Effect, Schema } from "effect"
+import { DateTime, Effect, Schedule, Schema } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
 import type { ProductDetail } from "../cdr/schema.ts"
@@ -48,9 +48,23 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
 
   // ---- Fetch ---------------------------------------------------------------
   const brands = yield* cdr.brands
+  const activeByBrand = new Map<string, number>()
+  for (const card of cards.values()) {
+    if (card.status === "active" && card.cdr) activeByBrand.set(card.cdr.brand, (activeByBrand.get(card.cdr.brand) ?? 0) + 1)
+  }
   const fetched = yield* Effect.forEach(brands, (brand) =>
     Effect.gen(function*() {
-      const listed = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY).pipe(Effect.result)
+      // Some data holders (seen with Bank of Melbourne and BankSA)
+      // intermittently return an empty product list. Retry when we expect cards.
+      const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
+      const listed = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY).pipe(
+        Effect.repeat({
+          while: (products) => expectsCards && products.length === 0,
+          schedule: Schedule.spaced("5 seconds"),
+          times: 2
+        }),
+        Effect.result
+      )
       if (listed._tag === "Failure") {
         return { brand: brand.brandName, products: [], listError: listed.failure.message, productErrors: [] } satisfies BrandFetch
       }
