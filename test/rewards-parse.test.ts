@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@effect/vitest"
-import { loyaltyTextHash, parseEarn } from "../src/rewards/parse.ts"
-import { planRewards } from "../src/rewards/plan.ts"
+import { loyaltyTextHash, ParseResult, parseEarn } from "../src/rewards/parse.ts"
+import { planRewards, RewardsPlan } from "../src/rewards/plan.ts"
 
 // Real CDR LOYALTY_PROGRAM text (value — info).
 const feature = (additionalValue: string, additionalInfo = "") => ({ additionalValue, additionalInfo })
@@ -8,17 +8,15 @@ const parse = (value: string, info?: string) => parseEarn([feature(value, info)]
 
 describe("parses simple earn rates", () => {
   test("single rate", () => {
-    expect(parse("Bendigo Bank Rewards", "Earn 1.5 Bendigo Bank Rewards points for every dollar spent")).toEqual({
-      _tag: "Parsed",
-      earn: [{ rate: 1.5 }]
-    })
+    expect(parse("Bendigo Bank Rewards", "Earn 1.5 Bendigo Bank Rewards points for every dollar spent")).toEqual(
+      ParseResult.Parsed({ earn: [{ rate: 1.5 }] })
+    )
   })
 
   test("rate per $2", () => {
-    expect(parse("Earn Qantas Frequent Flyer Points - Earn 1 Qantas point for every $2 you spend")).toEqual({
-      _tag: "Parsed",
-      earn: [{ rate: 0.5 }]
-    })
+    expect(parse("Earn Qantas Frequent Flyer Points - Earn 1 Qantas point for every $2 you spend")).toEqual(
+      ParseResult.Parsed({ earn: [{ rate: 0.5 }] })
+    )
   })
 
   test("rate per $1.50 with a spend cap", () => {
@@ -27,7 +25,7 @@ describe("parses simple earn rates", () => {
         "Qantas Business Rewards",
         "Earn points on everyday business purchases Earn 1 Qantas Point for every AU$1.50 you spend on everyday business purchases. Qantas Points are earned at the business level. Qantas Points are capped at $50,000 per card per statement period."
       )
-    ).toEqual({ _tag: "Parsed", earn: [{ rate: 0.6667, cap_monthly: 50000 }] })
+    ).toEqual(ParseResult.Parsed({ earn: [{ rate: 0.6667, cap_monthly: 50000 }] }))
   })
 
   test("ANZ-style tiers with a hard ceiling", () => {
@@ -36,13 +34,14 @@ describe("parses simple earn rates", () => {
         "Qantas Points",
         "Qantas Points you will earn on eligible purchases: • 1 Qantas Point per $1 spent on eligible purchases up to and including $7,500 per statement period. • 0.5 Qantas Points per $1 spent on eligible purchases over $7,500 up to and including $50,000 per statement period. • No Qantas Points earned over $50,000 per statement period."
       )
-    ).toEqual({
-      _tag: "Parsed",
-      earn: [
-        { rate: 1, cap_monthly: 7500 },
-        { rate: 0.5, cap_monthly: 50000 }
-      ]
-    })
+    ).toEqual(
+      ParseResult.Parsed({
+        earn: [
+          { rate: 1, cap_monthly: 7500 },
+          { rate: 0.5, cap_monthly: 50000 }
+        ]
+      })
+    )
   })
 
   test("Bankwest-style 'first $X ... thereafter'", () => {
@@ -51,7 +50,7 @@ describe("parses simple earn rates", () => {
         "Qantas Rewards",
         "Earn uncapped Qantas Points. Earn 1 Qantas Point per $1 on the first $3,000 spent on eligible purchases per month, and 0.2 points thereafter."
       )
-    ).toEqual({ _tag: "Parsed", earn: [{ rate: 1, cap_monthly: 3000 }, { rate: 0.2 }] })
+    ).toEqual(ParseResult.Parsed({ earn: [{ rate: 1, cap_monthly: 3000 }, { rate: 0.2 }] }))
   })
 
   test("Macquarie-style 'up to ... then ... over'", () => {
@@ -60,7 +59,7 @@ describe("parses simple earn rates", () => {
         "Macquarie Rewards",
         "Earn 2 Macquarie Reward Points per $1 spent on eligible purchases up to and including $10,000, then earn 0.5 Macquarie Reward points for every $1 spent on eligible purchases over $10,000 in any given statement period."
       )
-    ).toEqual({ _tag: "Parsed", earn: [{ rate: 2, cap_monthly: 10000 }, { rate: 0.5 }] })
+    ).toEqual(ParseResult.Parsed({ earn: [{ rate: 2, cap_monthly: 10000 }, { rate: 0.5 }] }))
   })
 })
 
@@ -133,10 +132,10 @@ describe("planRewards", () => {
   const hash = loyaltyTextHash(simple)
 
   test("parser sets earn for new cards and leaves unchanged ones alone", () => {
-    expect(planRewards({ program: "x" }, simple)).toEqual({ _tag: "Set", earn: [{ rate: 1.5 }], hash })
+    expect(planRewards({ program: "x" }, simple)).toEqual(RewardsPlan.Set({ earn: [{ rate: 1.5 }], hash }))
     expect(
       planRewards({ program: "x", earn: [{ rate: 1.5 }], earn_source: "parser", earn_text_hash: hash }, simple)
-    ).toEqual({ _tag: "Unchanged" })
+    ).toEqual(RewardsPlan.Unchanged())
   })
 
   test("complex text goes to review", () => {
@@ -145,7 +144,7 @@ describe("planRewards", () => {
 
   test("manual earn is never replaced, only re-reviewed when the text changes", () => {
     const manual = { program: "x", earn: [{ rate: 9 }], earn_source: "manual" as const, earn_text_hash: hash }
-    expect(planRewards(manual, simple)).toEqual({ _tag: "Unchanged" })
+    expect(planRewards(manual, simple)).toEqual(RewardsPlan.Unchanged())
     expect(planRewards(manual, complex)._tag).toBe("Review")
   })
 })

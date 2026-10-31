@@ -1,11 +1,11 @@
 import { encodeJson } from "../util/json.ts"
 import { required } from "../util/required.ts"
-import { DateTime, Effect, Schema } from "effect"
+import { DateTime, Effect, Result, Schema } from "effect"
 import { CdrClient, type CdrError, REQUEST_VARIANTS } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
 import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
 import { Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
-import { planRewards } from "../rewards/plan.ts"
+import { planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
 import { diffCard, type FieldChange, holdReasons, MAX_DISCONTINUED_SHARE, mergeCard, MIN_SEEN_SHARE } from "./merge.ts"
@@ -78,7 +78,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
             : products
         })
         const listed = yield* list(0).pipe(Effect.result)
-        if (listed._tag === "Failure") {
+        if (Result.isFailure(listed)) {
           return {
             brand: brand.brandName,
             products: [],
@@ -185,7 +185,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       if (mergedRewards !== undefined && Schema.is(Card.fields.rewards)(mergedRewards)) {
         const loyalty = (product.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
         const plan = planRewards(mergedRewards, loyalty)
-        if (plan._tag === "Set") {
+        if (RewardsPlan.$is("Set")(plan)) {
           merged["rewards"] = {
             ...mergedRewards,
             earn: plan.earn,
@@ -193,12 +193,12 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
             earn_text_hash: plan.hash
           }
           earnSet = plan.earn
-        } else if (plan._tag === "Review") {
+        } else if (RewardsPlan.$is("Review")(plan)) {
           rewardsReview.push({ card: key, reason: plan.reason })
         }
       }
       const decoded = yield* decodeCard(merged).pipe(Effect.result)
-      if (decoded._tag === "Failure") {
+      if (Result.isFailure(decoded)) {
         held.push({ card: key, reasons: [`invalid: ${decoded.failure.message.split("\n").slice(0, 3).join(" ")}`] })
         continue
       }

@@ -38,3 +38,19 @@ test("the existing Effect plugin remains active beside anti-slop", async () => {
   assert.notStrictEqual(result.exitCode, 0)
   assert.isTrue(result.diagnostics.some((diagnostic) => diagnostic.code === "effect(no-effect-fn-untraced)"))
 })
+
+test("the anti-slop Effect plugin rejects manual tagged construction", async () => {
+  const result = await lintSource('export const state = { _tag: "Ready", value: 1 }\n')
+  assert.notStrictEqual(result.exitCode, 0)
+  assert.isTrue(
+    result.diagnostics.some((diagnostic) => diagnostic.code === "anti-slop-effect(no-manual-tagged-construction)")
+  )
+})
+
+test("anti-slop rejects adjacent eager array passes", async () => {
+  const result = await lintSource(
+    "export const values = [1, 2].filter((value) => value > 0).map((value) => value * 2)\n"
+  )
+  assert.notStrictEqual(result.exitCode, 0)
+  assert.isTrue(result.diagnostics.some((diagnostic) => diagnostic.code === "anti-slop(no-array-filter-map)"))
+})

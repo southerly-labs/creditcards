@@ -1,5 +1,7 @@
+import { encodeJson } from "../util/json.ts"
+import { Data } from "effect"
 import type { Card, EarnRate } from "../model/schema.ts"
-import { type LoyaltyFeature, loyaltyTextHash, parseEarn } from "./parse.ts"
+import { type LoyaltyFeature, loyaltyTextHash, ParseResult, parseEarn } from "./parse.ts"
 
 // Decides what to do with a card's earn rates given its current CDR loyalty
 // text. Manual earn rates are never replaced; a change in their source text
@@ -10,7 +12,10 @@ export type RewardsPlan =
   | { readonly _tag: "Set"; readonly earn: ReadonlyArray<EarnRate>; readonly hash: string }
   | { readonly _tag: "Review"; readonly reason: string; readonly hash: string }
 
-const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b)
+export const RewardsPlan = Data.taggedEnum<RewardsPlan>()
+
+const equal = (a: unknown, b: unknown) =>
+  a === undefined || b === undefined ? a === b : encodeJson(a) === encodeJson(b)
 
 export const planRewards = (
   current: Card["rewards"] | undefined,
@@ -19,21 +24,20 @@ export const planRewards = (
   const hash = loyaltyTextHash(features)
   if (current?.earn_source === "manual") {
     return current.earn_text_hash === hash
-      ? { _tag: "Unchanged" }
-      : { _tag: "Review", reason: "loyalty text changed since manual review", hash }
+      ? RewardsPlan.Unchanged()
+      : RewardsPlan.Review({ reason: "loyalty text changed since manual review", hash })
   }
   const parsed = parseEarn(features)
-  if (parsed._tag === "Parsed") {
+  if (ParseResult.$is("Parsed")(parsed)) {
     const same =
       current?.earn_source === "parser" && current.earn_text_hash === hash && equal(current.earn, parsed.earn)
-    return same ? { _tag: "Unchanged" } : { _tag: "Set", earn: parsed.earn, hash }
+    return same ? RewardsPlan.Unchanged() : RewardsPlan.Set({ earn: parsed.earn, hash })
   }
   if (current?.earn_source === "parser") {
-    return {
-      _tag: "Review",
+    return RewardsPlan.Review({
       reason: `loyalty text changed and the parser can no longer read it (${parsed.reason})`,
       hash
-    }
+    })
   }
-  return { _tag: "Review", reason: parsed.reason, hash }
+  return RewardsPlan.Review({ reason: parsed.reason, hash })
 }

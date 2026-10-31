@@ -1,3 +1,4 @@
+import { Data } from "effect"
 import { required } from "../util/required.ts"
 import { createHash } from "node:crypto"
 import type { EarnRate } from "../model/schema.ts"
@@ -16,6 +17,8 @@ export type ParseResult =
   | { readonly _tag: "Parsed"; readonly earn: ReadonlyArray<EarnRate> }
   | { readonly _tag: "Review"; readonly reason: string }
 
+export const ParseResult = Data.taggedEnum<ParseResult>()
+
 const clean = (s: string | null | undefined) => (s ?? "").replaceAll(/\s+/gu, " ").trim()
 
 export const loyaltyText = (features: ReadonlyArray<LoyaltyFeature>): string =>
@@ -24,7 +27,7 @@ export const loyaltyText = (features: ReadonlyArray<LoyaltyFeature>): string =>
 export const loyaltyTextHash = (features: ReadonlyArray<LoyaltyFeature>): string =>
   createHash("sha256").update(loyaltyText(features)).digest("hex").slice(0, 16)
 
-const review = (reason: string): ParseResult => ({ _tag: "Review", reason })
+const review = (reason: string): ParseResult => ParseResult.Review({ reason })
 
 // "1.5 Reward Points", "0.75 Qantas Points", "1 Amplify point", "2 points"
 const MENTION = /(?<![\d.,$])(\d+(?:\.\d+)?)\s+(?:[A-Za-z&]+\s+){0,3}?points?\b/giu
@@ -118,5 +121,5 @@ export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult 
     if (prev === undefined) return review("spend tiers without a threshold")
     if (cap !== undefined && cap <= prev) return review("spend tiers out of order")
   }
-  return { _tag: "Parsed", earn: tiers }
+  return ParseResult.Parsed({ earn: tiers })
 }

@@ -136,8 +136,10 @@ export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefi
       (FX_NAME.test(f.name ?? "") || FX_NAME.test(f.additionalInfo ?? ""))
   )
   const rates = candidates
+    .values()
     .map((f) => feeRate(f) ?? (fixedAmount(f) === 0 ? 0 : undefined))
     .filter((r): r is number => r !== undefined)
+    .toArray()
   // Take the highest when several apply (e.g. single vs multi-currency).
   return rates.length > 0 ? Math.max(...rates) : undefined
 }
@@ -154,6 +156,7 @@ export const cashAdvanceFee = (fees: ReadonlyArray<Fee>) => {
 
 export const latePaymentFee = (fees: ReadonlyArray<Fee>) =>
   fees
+    .values()
     .filter((f) => f.feeType === "LATE_PAYMENT")
     .map((fee) => fixedAmount(fee))
     .find((r) => r !== undefined)
@@ -164,6 +167,7 @@ type LendingRate = NonNullable<ProductDetail["lendingRates"]>[number]
 
 const ongoingRate = (rates: ReadonlyArray<LendingRate>, type: string, exclude?: RegExp) =>
   rates
+    .values()
     .filter((r) => r.lendingRateType === type && isoMonths(r.additionalValue) === undefined)
     .filter((r) => !exclude || !exclude.test(r.additionalValue ?? ""))
     .map((r) => toPercent(r.rate))
@@ -227,9 +231,10 @@ export const network = (p: ProductDetail, brandName: string): Network | undefine
   const fromName = NETWORKS.filter(([, re]) => re.test(p.name))
   if (fromName.length === 1) return required(fromName[0])[0]
   const text = [p.description, ...(p.features ?? []).flatMap((f) => [f.additionalValue, f.additionalInfo])].join(" ")
-  const counts = NETWORKS.map(([n, re]) => [n, (text.match(new RegExp(re, "giu")) ?? []).length] as const).filter(
-    ([n, c]) => c > 0 && n !== "amex"
-  )
+  const counts = NETWORKS.values()
+    .map(([n, re]) => [n, (text.match(new RegExp(re, "giu")) ?? []).length] as const)
+    .filter(([n, c]) => c > 0 && n !== "amex")
+    .toArray()
   return counts.length === 1 ? required(counts[0])[0] : undefined
 }
 

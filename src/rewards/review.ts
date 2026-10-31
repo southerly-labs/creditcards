@@ -4,7 +4,7 @@ import { CdrClient } from "../cdr/CdrClient.ts"
 import type { Card, EarnRate } from "../model/schema.ts"
 import { splitCardKey, Store } from "../store/Store.ts"
 import { loyaltyText, loyaltyTextHash, type LoyaltyFeature } from "./parse.ts"
-import { planRewards } from "./plan.ts"
+import { planRewards, RewardsPlan } from "./plan.ts"
 
 // Local tooling for the human (or Claude Code session) that resolves earn
 // rates the parser cannot read.
@@ -43,7 +43,7 @@ const registerBaseUris = Effect.gen(function* () {
 
 const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFeature>): ReviewItem | undefined => {
   const plan = planRewards(card.rewards, features)
-  if (plan._tag !== "Review") return undefined
+  if (!RewardsPlan.$is("Review")(plan)) return undefined
   return {
     card: key,
     name: card.name,

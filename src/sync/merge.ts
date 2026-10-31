@@ -99,8 +99,10 @@ const withoutTimestamp = (path: string, value: unknown) => {
 export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<FieldChange> => {
   const paths = [...CDR_OWNED_PATHS, "status", "discontinued", ...EARN_PATHS]
   return paths
+    .values()
     .map((path) => ({ path, before: before ? getPath(before, path) : undefined, after: getPath(after, path) }))
     .filter((c) => !equal(withoutTimestamp(c.path, c.before), withoutTimestamp(c.path, c.after)))
+    .toArray()
 }
 
 // Written by the earn-rate parser (src/rewards), not the CDR merge.

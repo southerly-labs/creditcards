@@ -1,5 +1,5 @@
 import { required } from "../util/required.ts"
-import { Effect, Schedule, Schema } from "effect"
+import { Effect, Result, Schedule, Schema } from "effect"
 import { HttpClient } from "effect/http"
 import { extractText, getDocumentProxy } from "unpdf"
 import type { Card } from "../model/schema.ts"
@@ -139,7 +139,7 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
   )
   const toCheckResult = ({ card, url, expect }: (typeof checks)[number]): CheckResult => {
     const text = required(texts.get(url))
-    return text._tag === "Failure"
+    return Result.isFailure(text)
       ? { card, url, missing: [], error: text.failure.message }
       : { card, url, missing: missingQuotes(text.success, expect) }
   }

@@ -61,7 +61,12 @@
     "anti-slop/no-shape-in-symbol-names": "error",
     "anti-slop/no-unknown-type-aliases": "error",
     "anti-slop/no-object-parameters": "error",
-    "oxc/no-accumulating-spread": "error"
+    "oxc/no-accumulating-spread": "error",
+    "anti-slop/no-array-filter-map": "error",
+    "anti-slop-effect/no-manual-effect-error-tag": "error",
+    "anti-slop-effect/no-manual-tag-comparison": "error",
+    "anti-slop-effect/no-manual-tagged-construction": "error",
+    "anti-slop-effect/prefer-effect-match": "error"
   },
   "ignorePatterns": ["dist/**", "tools/oxlint/anti-slop/**"],
   "extends": ["./node_modules/@shekohex/oxc-effect/configs/full.jsonc"],
@@ -69,6 +74,10 @@
     {
       "name": "anti-slop",
       "specifier": "./tools/oxlint/anti-slop/index.ts"
+    },
+    {
+      "name": "anti-slop-effect",
+      "specifier": "./tools/oxlint/anti-slop/effect/index.ts"
     }
   ]
 }

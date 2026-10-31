@@ -1,7 +1,7 @@
 import type { Api } from "../src/build/build.ts"
 import { required } from "../src/util/required.ts"
 import { decodeApi, loadPointValues } from "../src/model/api.ts"
-import type { Card, Program } from "../src/model/schema.ts"
+import type { Card, IntroOffer, Program } from "../src/model/schema.ts"
 
 interface Row {
   readonly id: string
@@ -33,11 +33,15 @@ const pct = (n: number | undefined) =>
   n === undefined ? dash : n === 0 ? '<span class="zero">0%</span>' : `${n.toFixed(2).replace(/\.?0+$/u, "")}%`
 const int = (n: number | undefined) => (n === undefined ? dash : n.toLocaleString("en-AU"))
 
+const introTargets = { purchase: "purchases", balance_transfer: "BT", both: "BT + purchases" } satisfies Record<
+  IntroOffer["applies_to"],
+  string
+>
+
 const intro = (r: Row) => {
   const offer = r.card.rates.intro?.[0]
   if (!offer) return undefined
-  const what =
-    offer.applies_to === "balance_transfer" ? "BT" : offer.applies_to === "purchase" ? "purchases" : "BT + purchases"
+  const what = introTargets[offer.applies_to]
   return `${pct(offer.rate)} ${what}${(offer.months ?? 0) !== 0 ? ` ${offer.months}m` : ""}`
 }
 
