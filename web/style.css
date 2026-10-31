@@ -74,6 +74,41 @@ h1 {
   align-items: center;
   color: var(--muted);
 }
+.columns {
+  position: relative;
+}
+.columns summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--fg);
+}
+.columns summary::-webkit-details-marker {
+  display: none;
+}
+.columns summary::after {
+  content: " ▾";
+  color: var(--muted);
+}
+.column-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 3;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+}
+.column-menu #column-list {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
 #count {
   margin-left: auto;
   color: var(--muted);
@@ -213,6 +248,7 @@ tbody tr:hover {
   color: var(--fg);
   text-align: right;
 }
+.column-menu button,
 .values button {
   font: inherit;
   padding: 4px 10px;

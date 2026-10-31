@@ -1,6 +1,6 @@
 import type { Api } from "../src/build/build.ts"
 import { required } from "../src/util/required.ts"
-import { decodeApi, loadPointValues } from "../src/model/api.ts"
+import { decodeApi, loadColumnVisibility, loadPointValues } from "../src/model/api.ts"
 import type { Card, IntroOffer, Program } from "../src/model/schema.ts"
 
 interface Row {
@@ -13,7 +13,10 @@ interface Row {
 type Value = number | string | undefined
 
 interface Column {
+  readonly id: string
   readonly label: string
+  readonly fixed?: boolean
+  readonly hiddenByDefault?: boolean
   readonly num?: boolean
   readonly sortValue: (r: Row) => Value
   readonly render: (r: Row) => string
@@ -108,7 +111,9 @@ const bonusValue = (r: Row) => {
 
 const columns: ReadonlyArray<Column> = [
   {
+    id: "card",
     label: "Card",
+    fixed: true,
     sortValue: (r) => r.card.name.toLowerCase(),
     render: (r) => {
       const img =
@@ -125,33 +130,64 @@ const columns: ReadonlyArray<Column> = [
     }
   },
   {
+    id: "network",
     label: "Network",
     sortValue: (r) => r.card.network,
     render: (r) => (r.card.network ? `<span class="tag">${r.card.network}</span>` : dash)
   },
-  { label: "Annual fee", num: true, sortValue: (r) => r.card.fees.annual, render: (r) => money(r.card.fees.annual) },
-  { label: "Purchase", num: true, sortValue: (r) => r.card.rates.purchase, render: (r) => pct(r.card.rates.purchase) },
   {
+    id: "annual-fee",
+    label: "Annual fee",
+    num: true,
+    sortValue: (r) => r.card.fees.annual,
+    render: (r) => money(r.card.fees.annual)
+  },
+  {
+    id: "purchase",
+    label: "Purchase",
+    hiddenByDefault: true,
+    num: true,
+    sortValue: (r) => r.card.rates.purchase,
+    render: (r) => pct(r.card.rates.purchase)
+  },
+  {
+    id: "cash-advance",
     label: "Cash adv.",
+    hiddenByDefault: true,
     num: true,
     sortValue: (r) => r.card.rates.cash_advance,
     render: (r) => pct(r.card.rates.cash_advance)
   },
-  { label: "Intro offer", sortValue: (r) => r.card.rates.intro?.[0]?.months, render: (r) => intro(r) ?? dash },
   {
+    id: "intro",
+    label: "Intro offer",
+    hiddenByDefault: true,
+    sortValue: (r) => r.card.rates.intro?.[0]?.months,
+    render: (r) => intro(r) ?? dash
+  },
+  {
+    id: "interest-free-days",
     label: "Int. free days",
+    hiddenByDefault: true,
     num: true,
     sortValue: (r) => r.card.rates.interest_free_days,
     render: (r) => int(r.card.rates.interest_free_days)
   },
   {
+    id: "fx-fee",
     label: "FX fee",
     num: true,
     sortValue: (r) => r.card.fees.foreign_txn_pct,
     render: (r) => pct(r.card.fees.foreign_txn_pct)
   },
-  { label: "Rewards", sortValue: (r) => r.program?.name, render: (r) => (r.program ? esc(r.program.name) : dash) },
   {
+    id: "rewards",
+    label: "Rewards",
+    sortValue: (r) => r.program?.name,
+    render: (r) => (r.program ? esc(r.program.name) : dash)
+  },
+  {
+    id: "earn",
     label: "Earn /$",
     num: true,
     sortValue: (r) => baseEarn(r),
@@ -166,6 +202,7 @@ const columns: ReadonlyArray<Column> = [
     }
   },
   {
+    id: "government-earn",
     label: "Government earn",
     num: true,
     sortValue: governmentEarn,
@@ -177,6 +214,7 @@ const columns: ReadonlyArray<Column> = [
     }
   },
   {
+    id: "earn-value",
     label: "Value /$",
     num: true,
     sortValue: earnValue,
@@ -196,12 +234,14 @@ const columns: ReadonlyArray<Column> = [
     }
   },
   {
+    id: "bonus-points",
     label: "Bonus pts",
     num: true,
     sortValue: (r) => r.card.rewards?.bonus_points,
     render: (r) => int(r.card.rewards?.bonus_points)
   },
   {
+    id: "bonus-value",
     label: "Bonus value",
     num: true,
     sortValue: bonusValue,
@@ -221,18 +261,21 @@ const columns: ReadonlyArray<Column> = [
     }
   },
   {
+    id: "min-credit",
     label: "Min credit",
     num: true,
     sortValue: (r) => r.card.limits.min_credit,
     render: (r) => money(r.card.limits.min_credit)
   },
   {
+    id: "min-income",
     label: "Min income",
     num: true,
     sortValue: (r) => r.card.limits.min_income,
     render: (r) => money(r.card.limits.min_income)
   },
   {
+    id: "perks",
     label: "Perks",
     sortValue: (r) => (r.card.perks.lounge_access === true ? 100 : 0) + (r.card.perks.insurance?.length ?? 0),
     render: (r) =>
@@ -274,11 +317,49 @@ const rows: ReadonlyArray<Row> = Object.entries(api.issuers).flatMap(([issuerId,
 let sortIndex = 2
 let sortDir: "asc" | "desc" = "asc"
 
-const head = $("head")
+const COLUMNS_KEY = "creditcards.columns"
 
-head.innerHTML = columns
-  .map((c, i) => `<th class="${c.num === true ? "num" : ""}" data-i="${i}">${c.label}</th>`)
-  .join("")
+const columnChoices: Record<string, boolean> = loadColumnVisibility(() => localStorage.getItem(COLUMNS_KEY))
+
+const isShown = (c: Column) => c.fixed === true || (columnChoices[c.id] ?? c.hiddenByDefault !== true)
+
+const renderColumnPicker = () => {
+  $("column-list").innerHTML = columns
+    .flatMap((c) =>
+      c.fixed === true
+        ? []
+        : [
+            `<label><input type="checkbox" data-column="${esc(c.id)}"${isShown(c) ? " checked" : ""} /> ${esc(c.label)}</label>`
+          ]
+    )
+    .join("")
+}
+
+const toggleColumn = (e: Event) => {
+  const input = e.target
+
+  if (!(input instanceof HTMLInputElement)) return
+  const id = input.dataset["column"]
+  const column = columns.find((c) => c.id === id)
+
+  if (!column) return
+
+  if (input.checked === (column.hiddenByDefault !== true)) delete columnChoices[column.id]
+  else columnChoices[column.id] = input.checked
+  localStorage.setItem(COLUMNS_KEY, JSON.stringify(columnChoices))
+  render()
+}
+
+$("column-list").addEventListener("change", toggleColumn)
+
+$("column-reset").addEventListener("click", () => {
+  for (const id of Object.keys(columnChoices)) delete columnChoices[id]
+  localStorage.setItem(COLUMNS_KEY, JSON.stringify(columnChoices))
+  renderColumnPicker()
+  render()
+})
+
+const head = $("head")
 
 const sortHead = (e: MouseEvent) => {
   const th = e.target instanceof HTMLElement ? e.target.closest("th") : null
@@ -331,16 +412,21 @@ const render = () => {
   const visible = rows.filter((r) => matchesFilters(r))
   const col = required(columns[sortIndex])
   const sorted = visible.toSorted((a, b) => compare(col.sortValue(a), col.sortValue(b)))
+  const shown = columns.flatMap((c, i) => (isShown(c) ? [{ c, i }] : []))
 
-  for (const th of head.querySelectorAll("th")) {
-    if (Number(th.dataset["i"]) === sortIndex) th.dataset["dir"] = sortDir
-    else delete th.dataset["dir"]
-  }
+  head.innerHTML = shown
+    .map(
+      ({ c, i }) =>
+        `<th class="${c.num === true ? "num" : ""}" data-i="${i}"${i === sortIndex ? ` data-dir="${sortDir}"` : ""}>${c.label}</th>`
+    )
+    .join("")
 
   $("rows").innerHTML = sorted
     .map(
       (r) =>
-        `<tr class="${r.card.status === "active" ? "" : "disc"}">${columns.map((c) => `<td class="${c.num === true ? "num" : ""}">${c.render(r)}</td>`).join("")}</tr>`
+        `<tr class="${r.card.status === "active" ? "" : "disc"}">${shown
+          .map(({ c }) => `<td class="${c.num === true ? "num" : ""}">${c.render(r)}</td>`)
+          .join("")}</tr>`
     )
     .join("")
   $("count").textContent = `${visible.length} of ${rows.length} cards`
@@ -424,6 +510,8 @@ $("value-reset").addEventListener("click", () => {
 })
 
 renderValueGrid()
+
+renderColumnPicker()
 
 for (const id of ["search", "type", "program", "nofx", "nofee", "government", "discontinued"]) {
   $(id).addEventListener("input", render)
