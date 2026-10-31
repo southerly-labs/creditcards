@@ -38,6 +38,16 @@ export const EarnRate = Schema.Struct({
 })
 export type EarnRate = typeof EarnRate.Type
 
+// An issuer page (HTML or PDF) that states a card's earn rates, with short
+// quotes copied from it. A daily check flags the card for review when a
+// quote no longer appears, so manual earn rates notice issuer changes that
+// the CDR text does not carry. Matching ignores case and whitespace.
+export const EarnCheck = Schema.Struct({
+  url: Schema.String.pipe(Schema.check(Schema.isPattern(/^https:\/\//))),
+  expect: Schema.NonEmptyArray(Schema.NonEmptyString)
+})
+export type EarnCheck = typeof EarnCheck.Type
+
 export const Card = Schema.Struct({
   name: Schema.NonEmptyString,
   type: CardType,
@@ -83,6 +93,7 @@ export const Card = Schema.Struct({
     earn_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
     // Hash of the CDR loyalty text `earn` was derived from, to detect changes.
     earn_text_hash: Schema.optionalKey(Schema.String),
+    earn_check: Schema.optionalKey(Schema.Array(EarnCheck)),
     bonus_points: Schema.optionalKey(between(0, 1_000_000))
   })),
   perks: Schema.Struct({
