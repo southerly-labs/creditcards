@@ -30,7 +30,16 @@ min_income = 35000
 
 [rewards]
 program = "virgin-money-rewards"
+earn_source = "manual"
+earn_text_hash = "6b396e6b0d9311f2"
 bonus_points = 60000
+
+[[rewards.earn]]
+rate = 0.5
+
+[[rewards.earn]]
+rate = 1
+category = "grocery and dining"
 
 [perks]
 

@@ -25,6 +25,9 @@ min_income = 2000
 
 [rewards]
 program = "revolut-rewards"
+earn = []
+earn_source = "manual"
+earn_text_hash = "48844b97c459c362"
 
 [perks]
 insurance = [ "Everyday Protection and/or Travel Insurance" ]

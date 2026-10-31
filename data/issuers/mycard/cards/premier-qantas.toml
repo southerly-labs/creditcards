@@ -28,6 +28,9 @@ max_credit = 100000
 
 [rewards]
 program = "qantas"
+earn = []
+earn_source = "manual"
+earn_text_hash = "ef462de0d11c82c5"
 
 [perks]
 insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Mobile phone insurance" ]

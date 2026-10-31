@@ -28,6 +28,9 @@ min_income = 35000
 
 [rewards]
 program = "kogan-money-rewards"
+earn = []
+earn_source = "manual"
+earn_text_hash = "1c0e0dbcbd7920cb"
 
 [perks]
 

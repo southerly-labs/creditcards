@@ -34,6 +34,20 @@ max_credit = 20000
 
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "42a9697f1034f396"
+
+[[rewards.earn]]
+rate = 1
+cap_monthly = 2500
+
+[[rewards.earn]]
+rate = 0.5
+
+[[rewards.earn]]
+rate = 2
+category = "selected Qantas products and services"
+note = "1 extra point on top of the base rate"
 
 [perks]
 

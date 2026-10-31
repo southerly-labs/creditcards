@@ -25,6 +25,9 @@ min_credit = 500
 
 [rewards]
 program = "queensland-country-bank-rewards"
+earn = []
+earn_source = "manual"
+earn_text_hash = "33f923b631025751"
 
 [perks]
 

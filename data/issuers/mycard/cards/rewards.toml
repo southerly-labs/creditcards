@@ -27,6 +27,9 @@ max_credit = 100000
 
 [rewards]
 program = "mycard-rewards"
+earn = []
+earn_source = "manual"
+earn_text_hash = "1d6df1b26a3ba75b"
 
 [perks]
 insurance = [ "Extended Warranty Insurance", "Purchase Protection Insurance", "Mobile phone insurance" ]

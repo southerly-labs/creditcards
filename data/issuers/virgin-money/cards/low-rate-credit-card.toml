@@ -30,6 +30,9 @@ min_income = 35000
 
 [rewards]
 program = "virgin-money-rewards"
+earn = []
+earn_source = "manual"
+earn_text_hash = "775b95fba636d7a1"
 
 [perks]
 

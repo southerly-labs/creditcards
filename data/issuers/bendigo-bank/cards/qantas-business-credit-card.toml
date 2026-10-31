@@ -25,6 +25,19 @@ max_credit = 50000
 
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "c6f6d6530f876dfe"
+
+[[rewards.earn]]
+rate = 0.6
+
+[[rewards.earn]]
+rate = 1.6
+category = "selected Qantas products and services"
+
+[[rewards.earn]]
+rate = 0.3
+category = "utilities and government"
 
 [perks]
 insurance = [ "Extended Warranty", "Purchase Protection", "Travel Insurance" ]

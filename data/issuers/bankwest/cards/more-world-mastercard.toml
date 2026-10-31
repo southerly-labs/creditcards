@@ -33,7 +33,16 @@ min_credit = 6000
 
 [rewards]
 program = "bankwest-rewards"
+earn_source = "manual"
+earn_text_hash = "07739c4212d5a439"
 bonus_points = 50000
+
+[[rewards.earn]]
+rate = 2.5
+cap_monthly = 2000
+
+[[rewards.earn]]
+rate = 0.5
 
 [perks]
 insurance = [ "Complimentary Overseas Travel Insurance" ]

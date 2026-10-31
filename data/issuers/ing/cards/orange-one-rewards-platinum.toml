@@ -29,6 +29,13 @@ min_income = 36000
 
 [rewards]
 program = "cashback"
+earn_source = "manual"
+earn_text_hash = "cfaa11731a4b4b52"
+
+[[rewards.earn]]
+rate = 1
+cap_monthly = 3000
+note = "1% cashback, up to $30 a month"
 
 [perks]
 insurance = [ "Travel insurance" ]

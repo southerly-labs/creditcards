@@ -28,6 +28,12 @@ max_credit = 50000
 
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "374d9f00addc01e9"
+
+[[rewards.earn]]
+rate = 0.6
+note = "capped at 20,000 Qantas Points per statement period"
 
 [perks]
 insurance = [ "International Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess Insurance" ]

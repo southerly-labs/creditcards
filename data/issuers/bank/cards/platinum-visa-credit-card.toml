@@ -26,6 +26,9 @@ min_credit = 1000
 
 [rewards]
 program = "qantas"
+earn = []
+earn_source = "manual"
+earn_text_hash = "a2ecffa94b55a9a4"
 
 [perks]
 

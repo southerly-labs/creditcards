@@ -20,6 +20,12 @@ interest_free_days = 55
 [limits]
 [rewards]
 program = "summerland-bank-rewards"
+earn_source = "manual"
+earn_text_hash = "2132d2ada44e107e"
+
+[[rewards.earn]]
+rate = 1
+note = "max 100,000 points per 12 months; points are paid back as cash every six months"
 
 [perks]
 

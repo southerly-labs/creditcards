@@ -26,6 +26,26 @@ min_income = 120000
 [rewards]
 program = "qantas"
 partners = [ "velocity" ]
+earn_source = "manual"
+earn_text_hash = "de85cd107bedb49b"
+
+[[rewards.earn]]
+rate = 1
+cap_monthly = 7500
+note = "Qantas or Velocity points"
+
+[[rewards.earn]]
+rate = 0.5
+cap_monthly = 30000
+
+[[rewards.earn]]
+rate = 1
+category = "international purchases"
+
+[[rewards.earn]]
+rate = 2
+category = "selected Qantas products and services in Australia"
+note = "1 additional Qantas Point on top of the base rate"
 
 [perks]
 insurance = [ "Travel insurance and retail item cover" ]

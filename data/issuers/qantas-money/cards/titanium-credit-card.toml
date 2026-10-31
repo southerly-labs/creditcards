@@ -29,6 +29,9 @@ min_income = 200000
 
 [rewards]
 program = "qantas"
+earn = []
+earn_source = "manual"
+earn_text_hash = "cd2235b1a67c0222"
 
 [perks]
 insurance = [ "Complimentary Travel Insurance" ]

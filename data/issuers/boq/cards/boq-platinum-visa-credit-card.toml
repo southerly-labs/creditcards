@@ -31,7 +31,20 @@ min_income = 35000
 
 [rewards]
 program = "boq-rewards"
+earn_source = "manual"
+earn_text_hash = "9d837f7569fdf6a3"
 bonus_points = 100000
+
+[[rewards.earn]]
+rate = 1
+
+[[rewards.earn]]
+rate = 3
+category = "groceries"
+
+[[rewards.earn]]
+rate = 2
+category = "dining"
 
 [perks]
 insurance = [ "Mobile Phone Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance" ]
