@@ -331,7 +331,27 @@ const renderValueGrid = () => {
     </label>`
   }
 
-  $("value-grid").innerHTML = programs.map(({ id, program }) => renderPointValue(id, program)).join("")
+  const renderGroup = (type: Program["type"], title: string) => {
+    const entries = programs.filter(({ program }) => program.type === type)
+
+    if (entries.length === 0) return ""
+
+    return `<section class="value-group"><h3>${title}</h3><div class="value-grid">${entries
+      .map(({ id, program }) => renderPointValue(id, program))
+      .join("")}</div></section>`
+  }
+
+  const otherGroups = [
+    renderGroup("bank", "Bank rewards"),
+    renderGroup("retail", "Retail rewards"),
+    renderGroup("cashback", "Cashback")
+  ].join("")
+
+  $("value-grid").innerHTML = `${renderGroup("airline", "Frequent flyer programs")}${
+    otherGroups === ""
+      ? ""
+      : `<details class="other-values"><summary>Other program values</summary>${otherGroups}</details>`
+  }`
 }
 
 const updatePointValue = (e: Event) => {

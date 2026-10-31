@@ -178,9 +178,19 @@ tbody tr:hover {
   cursor: pointer;
   font-weight: 600;
 }
+.value-group h3 {
+  margin: 14px 0 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.other-values {
+  margin: 14px 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
 .value-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: 6px 16px;
   margin: 10px 0;
 }
@@ -191,9 +201,7 @@ tbody tr:hover {
 }
 .value-grid label > span:first-child {
   flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  min-width: 0;
 }
 .value-grid input {
   width: 70px;
