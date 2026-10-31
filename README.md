@@ -52,4 +52,6 @@ bun run check               # everything CI runs; also the pre-commit hook
 
 ## Hosting
 
-`bun run build` writes a fully static site to `dist/` (`index.html`, hashed JS/CSS and `api.json`). It is meant for Cloudflare Pages connected to this repo: build command `bun run build`, output directory `dist`. Every push to `main`, including the daily sync, then redeploys.
+Live at <https://creditcards.matthewstibbard.workers.dev>.
+
+`bun run build` writes a fully static site to `dist/` (`index.html`, hashed JS/CSS and `api.json`). Cloudflare Workers serves `dist/` as static assets, building with `bun run build` from this repo. Every push to `main`, including the daily sync, redeploys it.
