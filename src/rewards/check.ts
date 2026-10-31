@@ -1,6 +1,6 @@
 import { Effect, Schedule, Schema } from "effect"
 import { HttpClient } from "effect/http"
-import { extractText } from "unpdf"
+import { extractText, getDocumentProxy } from "unpdf"
 import type { Card } from "../model/schema.ts"
 
 // Checks manual earn rates against the issuer pages they were read from.
@@ -40,7 +40,11 @@ export const htmlText = (html: string): string =>
 
 export const pdfText = (url: string, bytes: Uint8Array) =>
   Effect.tryPromise({
-    try: () => extractText(new Uint8Array(bytes), { mergePages: true }).then((r) => r.text),
+    // verbosity 0: pdf.js otherwise logs font warnings that don't affect the text.
+    try: () =>
+      getDocumentProxy(new Uint8Array(bytes), { verbosity: 0 })
+        .then((pdf) => extractText(pdf, { mergePages: true }))
+        .then((r) => r.text),
     catch: (cause) => new PageError({ url, message: `PDF: ${cause instanceof Error ? cause.message : String(cause)}` })
   })
 
