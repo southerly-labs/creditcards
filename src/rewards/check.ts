@@ -1,3 +1,4 @@
+import { required } from "../util/required.ts"
 import { Effect, Schedule, Schema } from "effect"
 import { HttpClient } from "effect/http"
 import { extractText, getDocumentProxy } from "unpdf"
@@ -37,7 +38,7 @@ const NAMED_ENTITIES: Record<string, string> = {
 const decodeEntities = (s: string) =>
   s.replaceAll(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/giu, (match, name: string) => {
     if (name[0] === "#") {
-      const code = name[1] === "x" || name[1] === "X" ? parseInt(name.slice(2), 16) : parseInt(name.slice(1), 10)
+      const code = name[1] === "x" || name[1] === "X" ? parseInt(name.slice(2), 16) : Math.trunc(Number(name.slice(1)))
       return Number.isFinite(code) ? String.fromCodePoint(code) : match
     }
     return NAMED_ENTITIES[name.toLowerCase()] ?? match
@@ -119,7 +120,9 @@ export interface CheckResult {
 // Checks every card with `rewards.earn_check`, fetching each URL once.
 export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: ReadonlyMap<string, Card>) {
   const checks = [...cards].flatMap(([card, c]) =>
-    c.status === "active" ? (c.rewards?.earn_check ?? []).map((check) => ({ card, ...check })) : []
+    c.status === "active"
+      ? (c.rewards?.earn_check ?? []).map((check) => ({ card, url: check.url, expect: check.expect }))
+      : []
   )
   const urls = [...new Set(checks.map((c) => c.url))]
   const texts = new Map(
@@ -134,7 +137,7 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
     )
   )
   return checks.map(({ card, url, expect }): CheckResult => {
-    const text = texts.get(url)!
+    const text = required(texts.get(url))
     return text._tag === "Failure"
       ? { card, url, missing: [], error: text.failure.message }
       : { card, url, missing: missingQuotes(text.success, expect) }

@@ -1,4 +1,4 @@
-import { Context, Effect, Layer, Schedule, Schema } from "effect"
+import { Context, Effect, Layer, Predicate, Schedule, Schema } from "effect"
 import { FetchHttpClient, HttpClient, HttpClientResponse } from "effect/http"
 import { DataHolderBrand, ProductDetail, ProductsPage, RegisterResponse, type ProductSummary } from "./schema.ts"
 
@@ -71,7 +71,7 @@ export class CdrClient extends Context.Service<
           return yield* new CdrError({ url, status: response.status, message: `HTTP ${response.status}` })
         }
         const body = yield* response.json.pipe(
-          Effect.mapError((cause) => new CdrError({ url, message: `Invalid JSON: ${cause}` }))
+          Effect.mapError((cause) => new CdrError({ url, message: `Invalid JSON: ${String(cause)}` }))
         )
         const version = Number(response.headers["x-v"] ?? NaN)
         return { body, version }
@@ -114,7 +114,7 @@ export class CdrClient extends Context.Service<
       const getProduct = Effect.fn("CdrClient.getProduct")(function* (baseUri: string, productId: string) {
         const url = `${trimSlash(baseUri)}/cds-au/v1/banking/products/${encodeURIComponent(productId)}`
         const { body, version } = yield* getVersioned(url, PRODUCT_DETAIL_MAX_VERSION)
-        const raw = (body as { data?: unknown }).data
+        const raw = Predicate.isObject(body) ? body["data"] : undefined
         const detail = yield* decodeProductDetail(raw).pipe(Effect.mapError(schemaError(url)))
         return { version, raw, detail }
       })

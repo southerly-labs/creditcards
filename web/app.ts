@@ -1,4 +1,5 @@
-import type { Api } from "../src/build/build.ts"
+import { required } from "../src/util/required.ts"
+import { decodeApi } from "../src/model/api.ts"
 import type { Card, Program } from "../src/model/schema.ts"
 
 interface Row {
@@ -13,12 +14,12 @@ type Value = number | string | undefined
 interface Column {
   readonly label: string
   readonly num?: boolean
-  readonly sort: (r: Row) => Value
+  readonly sortValue: (r: Row) => Value
   readonly render: (r: Row) => string
 }
 
 const esc = (s: string) =>
-  s.replaceAll(/[&<>"']/gu, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!)
+  s.replaceAll(/[&<>"']/gu, (c) => required({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]))
 
 const dash = '<span class="dim">—</span>'
 const money = (n: number | undefined) =>
@@ -33,7 +34,7 @@ const int = (n: number | undefined) => (n === undefined ? dash : n.toLocaleStrin
 
 const intro = (r: Row) => {
   const offer = r.card.rates.intro?.[0]
-  if (!offer) return
+  if (!offer) return undefined
   const what =
     offer.applies_to === "balance_transfer" ? "BT" : offer.applies_to === "purchase" ? "purchases" : "BT + purchases"
   return `${pct(offer.rate)} ${what}${(offer.months ?? 0) !== 0 ? ` ${offer.months}m` : ""}`
@@ -55,7 +56,7 @@ const describeEarn = (earn: Earn) => {
             ? previousCap !== undefined
               ? " thereafter"
               : ""
-            : ` up to ${money(e.cap_monthly).replace(/<[^>]+>/gu, "")} a month`
+            : ` up to ${money(e.cap_monthly).replaceAll(/<[^>]+>/gu, "")} a month`
       if ((e.category == null || e.category === "") && e.cap_monthly !== undefined) previousCap = e.cap_monthly
       return `${e.rate} per $1${where}${e.note != null && e.note !== "" ? ` (${e.note})` : ""}`
     })
@@ -71,7 +72,7 @@ const OVERRIDES_KEY = "creditcards.pointValues"
 const loadOverrides = (): Record<string, number> => {
   try {
     const parsed: unknown = JSON.parse(localStorage.getItem(OVERRIDES_KEY) ?? "{}")
-    return parsed && typeof parsed === "object"
+    return parsed !== null && typeof parsed === "object"
       ? Object.fromEntries(
           Object.entries(parsed).filter(([, v]) => typeof v === "number" && Number.isFinite(v) && v >= 0)
         )
@@ -98,7 +99,7 @@ const earnValue = (r: Row) => {
 const columns: ReadonlyArray<Column> = [
   {
     label: "Card",
-    sort: (r) => r.card.name.toLowerCase(),
+    sortValue: (r) => r.card.name.toLowerCase(),
     render: (r) => {
       const img =
         r.card.image != null && r.card.image !== ""
@@ -113,35 +114,35 @@ const columns: ReadonlyArray<Column> = [
   },
   {
     label: "Network",
-    sort: (r) => r.card.network,
+    sortValue: (r) => r.card.network,
     render: (r) => (r.card.network ? `<span class="tag">${r.card.network}</span>` : dash)
   },
-  { label: "Annual fee", num: true, sort: (r) => r.card.fees.annual, render: (r) => money(r.card.fees.annual) },
-  { label: "Purchase", num: true, sort: (r) => r.card.rates.purchase, render: (r) => pct(r.card.rates.purchase) },
+  { label: "Annual fee", num: true, sortValue: (r) => r.card.fees.annual, render: (r) => money(r.card.fees.annual) },
+  { label: "Purchase", num: true, sortValue: (r) => r.card.rates.purchase, render: (r) => pct(r.card.rates.purchase) },
   {
     label: "Cash adv.",
     num: true,
-    sort: (r) => r.card.rates.cash_advance,
+    sortValue: (r) => r.card.rates.cash_advance,
     render: (r) => pct(r.card.rates.cash_advance)
   },
-  { label: "Intro offer", sort: (r) => r.card.rates.intro?.[0]?.months, render: (r) => intro(r) ?? dash },
+  { label: "Intro offer", sortValue: (r) => r.card.rates.intro?.[0]?.months, render: (r) => intro(r) ?? dash },
   {
     label: "Int. free days",
     num: true,
-    sort: (r) => r.card.rates.interest_free_days,
+    sortValue: (r) => r.card.rates.interest_free_days,
     render: (r) => int(r.card.rates.interest_free_days)
   },
   {
     label: "FX fee",
     num: true,
-    sort: (r) => r.card.fees.foreign_txn_pct,
+    sortValue: (r) => r.card.fees.foreign_txn_pct,
     render: (r) => pct(r.card.fees.foreign_txn_pct)
   },
-  { label: "Rewards", sort: (r) => r.program?.name, render: (r) => (r.program ? esc(r.program.name) : dash) },
+  { label: "Rewards", sortValue: (r) => r.program?.name, render: (r) => (r.program ? esc(r.program.name) : dash) },
   {
     label: "Earn /$",
     num: true,
-    sort: (r) => baseEarn(r),
+    sortValue: (r) => baseEarn(r),
     render: (r) => {
       const earn = r.card.rewards?.earn
       const base = baseEarn(r)
@@ -153,7 +154,7 @@ const columns: ReadonlyArray<Column> = [
   {
     label: "Value /$",
     num: true,
-    sort: earnValue,
+    sortValue: earnValue,
     render: (r) => {
       const value = earnValue(r)
       if (value === undefined) {
@@ -169,24 +170,24 @@ const columns: ReadonlyArray<Column> = [
   {
     label: "Bonus pts",
     num: true,
-    sort: (r) => r.card.rewards?.bonus_points,
+    sortValue: (r) => r.card.rewards?.bonus_points,
     render: (r) => int(r.card.rewards?.bonus_points)
   },
   {
     label: "Min credit",
     num: true,
-    sort: (r) => r.card.limits.min_credit,
+    sortValue: (r) => r.card.limits.min_credit,
     render: (r) => money(r.card.limits.min_credit)
   },
   {
     label: "Min income",
     num: true,
-    sort: (r) => r.card.limits.min_income,
+    sortValue: (r) => r.card.limits.min_income,
     render: (r) => money(r.card.limits.min_income)
   },
   {
     label: "Perks",
-    sort: (r) => (r.card.perks.lounge_access === true ? 100 : 0) + (r.card.perks.insurance?.length ?? 0),
+    sortValue: (r) => (r.card.perks.lounge_access === true ? 100 : 0) + (r.card.perks.insurance?.length ?? 0),
     render: (r) =>
       [
         r.card.perks.lounge_access === true ? '<span class="tag">Lounge</span>' : "",
@@ -197,9 +198,14 @@ const columns: ReadonlyArray<Column> = [
   }
 ]
 
-const $ = <T extends HTMLElement>(id: string) => document.querySelector(`#${id}`) as T
+const element = <T extends HTMLElement>(id: string, kind: { new (): T }): T => {
+  const found = document.querySelector(`#${id}`)
+  if (!(found instanceof kind)) throw new Error(`Missing or invalid element: ${id}`)
+  return found
+}
+const $ = (id: string) => element(id, HTMLElement)
 
-const api: Api = await fetch("/api.json").then((r) => r.json())
+const api = decodeApi(await fetch("/api.json").then((r): Promise<unknown> => r.json()))
 
 const rows: ReadonlyArray<Row> = Object.entries(api.issuers).flatMap(([issuerId, issuer]) =>
   Object.entries(issuer.cards).map(([cardId, card]) => {
@@ -220,7 +226,7 @@ head.innerHTML = columns
   .map((c, i) => `<th class="${c.num === true ? "num" : ""}" data-i="${i}">${c.label}</th>`)
   .join("")
 head.addEventListener("click", (e) => {
-  const th = (e.target as HTMLElement).closest("th")
+  const th = e.target instanceof HTMLElement ? e.target.closest("th") : null
   if (!th) return
   const i = Number(th.dataset["i"])
   sortDir = i === sortIndex && sortDir === "asc" ? "desc" : "asc"
@@ -237,30 +243,30 @@ const compare = (a: Value, b: Value) => {
 }
 
 const render = () => {
-  const q = $<HTMLInputElement>("search").value.trim().toLowerCase()
-  const type = $<HTMLSelectElement>("type").value
-  const program = $<HTMLSelectElement>("program").value
-  const noFx = $<HTMLInputElement>("nofx").checked
-  const noFee = $<HTMLInputElement>("nofee").checked
-  const showDisc = $<HTMLInputElement>("discontinued").checked
+  const q = element("search", HTMLInputElement).value.trim().toLowerCase()
+  const type = element("type", HTMLSelectElement).value
+  const program = element("program", HTMLSelectElement).value
+  const noFx = element("nofx", HTMLInputElement).checked
+  const noFee = element("nofee", HTMLInputElement).checked
+  const showDisc = element("discontinued", HTMLInputElement).checked
 
   const visible = rows.filter((r) => {
     if (!showDisc && r.card.status !== "active") return false
     if (type && r.card.type !== type) return false
-    if (program === "none" ? r.program !== undefined : program && r.program?.type !== program) return false
+    if (program === "none" ? r.program !== undefined : program !== "" && r.program?.type !== program) return false
     if (noFx && r.card.fees.foreign_txn_pct !== 0) return false
     if (noFee && r.card.fees.annual !== 0) return false
     if (q && !`${r.card.name} ${r.issuer} ${r.program?.name ?? ""}`.toLowerCase().includes(q)) return false
     return true
   })
-  const col = columns[sortIndex]!
-  visible.sort((a, b) => compare(col.sort(a), col.sort(b)))
+  const col = required(columns[sortIndex])
+  const sorted = visible.toSorted((a, b) => compare(col.sortValue(a), col.sortValue(b)))
 
   for (const th of head.querySelectorAll("th")) {
     if (Number(th.dataset["i"]) === sortIndex) th.dataset["dir"] = sortDir
     else delete th.dataset["dir"]
   }
-  $("rows").innerHTML = visible
+  $("rows").innerHTML = sorted
     .map(
       (r) =>
         `<tr class="${r.card.status === "active" ? "" : "disc"}">${columns.map((c) => `<td class="${c.num === true ? "num" : ""}">${c.render(r)}</td>`).join("")}</tr>`
@@ -273,10 +279,12 @@ const renderValueGrid = () => {
   const counts = new Map<string, number>()
   for (const r of rows) if (r.program) counts.set(r.program.id, (counts.get(r.program.id) ?? 0) + 1)
   const programs = [...counts.keys()]
-    .map((id) => ({ id, ...api.programs[id]! }))
-    .sort((a, b) => counts.get(b.id)! - counts.get(a.id)! || a.name.localeCompare(b.name))
+    .map((id) => ({ id, program: required(api.programs[id]) }))
+    .toSorted(
+      (a, b) => required(counts.get(b.id)) - required(counts.get(a.id)) || a.program.name.localeCompare(b.program.name)
+    )
   $("value-grid").innerHTML = programs
-    .map((p) => {
+    .map(({ id, program: p }) => {
       const basis = [
         p.value_basis,
         p.value_source,
@@ -287,8 +295,8 @@ const renderValueGrid = () => {
       const fallback = p.cents_per_point === undefined ? "no default" : `default ${p.cents_per_point}c`
       return `<label title="${esc(basis || "No default value for this program")}">
       <span>${esc(p.name)}</span>
-      <input type="number" min="0" max="10" step="0.01" inputmode="decimal" data-program="${esc(p.id)}"
-        placeholder="${p.cents_per_point ?? ""}" value="${overrides[p.id] ?? ""}" />
+      <input type="number" min="0" max="10" step="0.01" inputmode="decimal" data-program="${esc(id)}"
+        placeholder="${p.cents_per_point ?? ""}" value="${overrides[id] ?? ""}" />
       <span class="dim">c · ${fallback}</span>
     </label>`
     })
@@ -296,7 +304,8 @@ const renderValueGrid = () => {
 }
 
 $("value-grid").addEventListener("input", (e) => {
-  const input = e.target as HTMLInputElement
+  const input = e.target
+  if (!(input instanceof HTMLInputElement)) return
   const id = input.dataset["program"]
   if (id == null || id === "") return
   const value = input.value.trim() === "" ? NaN : Number(input.value)

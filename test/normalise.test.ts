@@ -1,4 +1,6 @@
+import { required } from "../src/util/required.ts"
 import { describe, expect, test } from "bun:test"
+import { Schema } from "effect"
 import {
   annualFee,
   cardType,
@@ -12,7 +14,7 @@ import {
 import type { Fee, ProductDetail } from "../src/cdr/schema.ts"
 import { diffCard, holdReasons, mergeCard } from "../src/sync/merge.ts"
 import { cardSlug } from "../src/sync/issuers.ts"
-import type { Card } from "../src/model/schema.ts"
+import { Card } from "../src/model/schema.ts"
 
 const fixed = (name: string, amount: string, period?: string): Fee => ({
   name,
@@ -145,23 +147,25 @@ describe("merge and guardrails", () => {
   }
 
   test("CDR-owned fields update, locked and curated fields survive", () => {
-    const merged = mergeCard(existing, {
-      name: "Card",
-      type: "personal",
-      status: "active",
-      fees: { annual: 120, foreign_txn_pct: 3 },
-      rates: { purchase: 21 },
-      limits: {},
-      rewards: { program: "qantas" },
-      perks: {}
-    }) as Card
+    const merged = Schema.decodeUnknownSync(Card)(
+      mergeCard(existing, {
+        name: "Card",
+        type: "personal",
+        status: "active",
+        fees: { annual: 120, foreign_txn_pct: 3 },
+        rates: { purchase: 21 },
+        limits: {},
+        rewards: { program: "qantas" },
+        perks: {}
+      })
+    )
     expect(merged.fees).toEqual({ annual: 120, foreign_txn_pct: 0 })
     expect(merged.rewards?.earn).toEqual([{ rate: 1 }])
   })
 
   test("a cdr.last_updated bump alone is not a change", () => {
     const card: Card = { ...existing, cdr: { brand: "B", product_id: "p", last_updated: "2026-10-30" } }
-    const bumped = { ...card, cdr: { ...card.cdr!, last_updated: "2026-10-31" } }
+    const bumped = { ...card, cdr: { ...required(card.cdr), last_updated: "2026-10-31" } }
     expect(diffCard(card, bumped)).toEqual([])
     expect(diffCard(card, { ...bumped, fees: { annual: 120 } }).map((c) => c.path)).toEqual([
       "fees.annual",

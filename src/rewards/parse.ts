@@ -1,3 +1,4 @@
+import { required } from "../util/required.ts"
 import { createHash } from "node:crypto"
 import type { EarnRate } from "../model/schema.ts"
 
@@ -72,7 +73,7 @@ const COMPLEX = new RegExp(
     "\\bor\\b \\d",
     "opt[- ]in"
   ].join("|"),
-  "i"
+  "iu"
 )
 
 const NEXT_TIER = /\b(?:over|above) \$|thereafter|further|once you spend|after spending/iu
@@ -97,23 +98,23 @@ export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult 
   const clauses = mentions.map((m, i) => text.slice(m.index, mentions[i + 1]?.index ?? text.length))
   const tiers: Array<EarnRate> = []
   for (let i = 0; i < mentions.length; i++) {
-    const clause = clauses[i]!
+    const clause = required(clauses[i])
     if (i > 0 && !NEXT_TIER.test(clause)) return review("several rates that are not spend tiers")
     const divisor = Number(clause.match(DIVISOR)?.[1] ?? 1)
-    const rate = Math.round((Number(mentions[i]![1]) / divisor) * 10_000) / 10_000
+    const rate = Math.round((Number(required(mentions[i])[1]) / divisor) * 10_000) / 10_000
     if (!(rate > 0 && rate <= 10)) return review(`implausible rate ${rate}`)
-    const capHere = clause.slice(mentions[i]![0].length).match(CAP_HERE)?.[1]
+    const capHere = clause.slice(required(mentions[i])[0].length).match(CAP_HERE)?.[1]
     const capNext = clauses[i + 1]?.match(THRESHOLD)?.[1]
     const cap = capHere ?? capNext
     tiers.push({ rate, ...(cap != null && cap !== "" ? { cap_monthly: amount(cap) } : {}) })
   }
   const spendCap = text.match(SPEND_CAP)?.[1]
-  const last = tiers.at(-1)!
+  const last = required(tiers.at(-1))
   if (spendCap != null && spendCap !== "" && last.cap_monthly === undefined)
     tiers[tiers.length - 1] = { ...last, cap_monthly: amount(spendCap) }
   for (let i = 1; i < tiers.length; i++) {
-    const prev = tiers[i - 1]!.cap_monthly
-    const cap = tiers[i]!.cap_monthly
+    const prev = required(tiers[i - 1]).cap_monthly
+    const cap = required(tiers[i]).cap_monthly
     if (prev === undefined) return review("spend tiers without a threshold")
     if (cap !== undefined && cap <= prev) return review("spend tiers out of order")
   }

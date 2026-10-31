@@ -1,3 +1,5 @@
+import { Predicate } from "effect"
+import { required } from "../util/required.ts"
 import type { Card } from "../model/schema.ts"
 import type { NormalisedCard } from "../cdr/normalise.ts"
 
@@ -36,16 +38,21 @@ export const CDR_OWNED_PATHS = [
 type Obj = Record<string, unknown>
 
 const getPath = (obj: Obj, path: string): unknown =>
-  path.split(".").reduce<unknown>((o, k) => (o && typeof o === "object" ? (o as Obj)[k] : undefined), obj)
+  path.split(".").reduce<unknown>((o, k) => (Predicate.isObject(o) ? o[k] : undefined), obj)
 
 const setPath = (obj: Obj, path: string, value: unknown) => {
   const keys = path.split(".")
   let target = obj
   for (const k of keys.slice(0, -1)) {
-    if (!target[k] || typeof target[k] !== "object") target[k] = {}
-    target = target[k] as Obj
+    const next = target[k]
+    if (Predicate.isObject(next)) target = next
+    else {
+      const child: Obj = {}
+      target[k] = child
+      target = child
+    }
   }
-  const last = keys.at(-1)!
+  const last = required(keys.at(-1))
   if (value === undefined) delete target[last]
   else target[last] = value
 }
@@ -57,18 +64,19 @@ const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b
 
 export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard): Obj => {
   if (!existing) return structuredClone(incoming)
-  const merged = structuredClone(existing) as Obj
+  const merged: Obj = structuredClone(existing)
   const locked = existing.locked ?? []
   for (const path of CDR_OWNED_PATHS) {
     if (isLocked(locked, path)) continue
-    setPath(merged, path, structuredClone(getPath(incoming as Obj, path)))
+    setPath(merged, path, structuredClone(getPath(incoming, path)))
   }
   merged["status"] = "active"
   delete merged["discontinued"]
   // A rewards table without a program is invalid: the card no longer has a
   // loyalty program, so drop the table unless a human has locked it.
-  const rewards = merged["rewards"] as Obj | undefined
-  if (rewards && rewards["program"] === undefined && !isLocked(locked, "rewards")) delete merged["rewards"]
+  const rewards = merged["rewards"]
+  if (Predicate.isObject(rewards) && rewards["program"] === undefined && !isLocked(locked, "rewards"))
+    delete merged["rewards"]
   return merged
 }
 
@@ -81,15 +89,15 @@ export interface FieldChange {
 // Some data holders bump cdr.last_updated on every request, so it alone is
 // not a change. It is still written whenever something else changes.
 const withoutTimestamp = (path: string, value: unknown) => {
-  if (path !== "cdr" || !value || typeof value !== "object") return value
-  const { last_updated: _, ...rest } = value as Obj
+  if (path !== "cdr" || !Predicate.isObject(value)) return value
+  const { last_updated: _, ...rest } = value
   return rest
 }
 
 export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<FieldChange> => {
   const paths = [...CDR_OWNED_PATHS, "status", "discontinued", ...EARN_PATHS]
   return paths
-    .map((path) => ({ path, before: before ? getPath(before as Obj, path) : undefined, after: getPath(after, path) }))
+    .map((path) => ({ path, before: before ? getPath(before, path) : undefined, after: getPath(after, path) }))
     .filter((c) => !equal(withoutTimestamp(c.path, c.before), withoutTimestamp(c.path, c.after)))
 }
 
@@ -105,7 +113,7 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<
   const reasons: Array<string> = []
   for (const { path, before, after } of changes) {
     if (KEY_FIELDS.has(path) && before !== undefined && after === undefined) {
-      reasons.push(`${path} disappeared (was ${before})`)
+      reasons.push(`${path} disappeared (was ${JSON.stringify(before)})`)
       continue
     }
     if (path === "rewards.earn" && Array.isArray(before) && Array.isArray(after)) {

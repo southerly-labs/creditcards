@@ -1,3 +1,5 @@
+import { Schema } from "effect"
+import { required } from "../util/required.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
 import type { Fee, ProductDetail } from "./schema.ts"
 
@@ -16,8 +18,8 @@ export interface ProgramIndex {
 
 export const makeProgramIndex = (programs: Record<string, Program>): ProgramIndex => ({
   programs: Object.entries(programs)
-    .map(([id, program]) => ({ id, program, patterns: (program.aliases ?? []).map((a) => new RegExp(a, "i")) }))
-    .sort((a, b) => (b.program.priority ?? 0) - (a.program.priority ?? 0))
+    .map(([id, program]) => ({ id, program, patterns: (program.aliases ?? []).map((a) => new RegExp(a, "iu")) }))
+    .toSorted((a, b) => (b.program.priority ?? 0) - (a.program.priority ?? 0))
 })
 
 export interface NormaliseContext {
@@ -58,7 +60,7 @@ export const timesPerYear = (period: string | null | undefined, name: string): n
   if (iso) {
     const n = Number(iso[1])
     if (n === 0) return undefined
-    switch (iso[2]!.toUpperCase()) {
+    switch (required(iso[2]).toUpperCase()) {
       case "Y":
         return 1 / n
       case "M":
@@ -77,7 +79,7 @@ export const timesPerYear = (period: string | null | undefined, name: string): n
 
 export const isoMonths = (value: string | null | undefined): number | undefined => {
   const iso = value?.trim().match(/^P(\d+)([YM])$/iu)
-  if (iso) return Number(iso[1]) * (iso[2]!.toUpperCase() === "Y" ? 12 : 1)
+  if (iso) return Number(iso[1]) * (required(iso[2]).toUpperCase() === "Y" ? 12 : 1)
   const text = value?.match(/(\d+)\s*months?/iu)
   return text ? Number(text[1]) : undefined
 }
@@ -109,12 +111,18 @@ export const annualFee = (fees: ReadonlyArray<Fee>) =>
 export const additionalCardFee = (fees: ReadonlyArray<Fee>) =>
   annualised(fees.filter((f) => f.feeType === "PERIODIC" && ADDITIONAL_CARD.test(f.name ?? "")))
 
+const FeeDiscounts = Schema.Struct({
+  discounts: Schema.optional(
+    Schema.Array(Schema.Struct({ description: Schema.optional(Schema.NullOr(Schema.String)) }))
+  )
+})
+
 export const firstYearFee = (fees: ReadonlyArray<Fee>): number | undefined => {
   const discounted = fees.some(
     (f) =>
       f.feeType === "PERIODIC" &&
       !NOT_CARD_FEE.test(f.name ?? "") &&
-      ((f as { discounts?: ReadonlyArray<{ description?: string | null }> }).discounts ?? []).some((d) =>
+      (Schema.decodeUnknownSync(FeeDiscounts)(f).discounts ?? []).some((d) =>
         /first year free|\$0 (annual fee )?(in|for) the first year|no annual fee (in|for) the first year/iu.test(
           d.description ?? ""
         )
@@ -142,10 +150,10 @@ export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefi
 
 export const cashAdvanceFee = (fees: ReadonlyArray<Fee>) => {
   const cash = fees.filter((f) => f.feeType === "CASH_ADVANCE" && !/overseas|international/iu.test(f.name ?? ""))
-  const pct = cash.map(feeRate).find((r) => r !== undefined)
+  const pct = cash.map((fee) => feeRate(fee)).find((r) => r !== undefined)
   const min = cash
     .map((f) => f.fixedAmount?.amount ?? f.amount)
-    .map(parseNumber)
+    .map((value) => parseNumber(value))
     .find((r) => r !== undefined)
   return { pct, min }
 }
@@ -153,7 +161,7 @@ export const cashAdvanceFee = (fees: ReadonlyArray<Fee>) => {
 export const latePaymentFee = (fees: ReadonlyArray<Fee>) =>
   fees
     .filter((f) => f.feeType === "LATE_PAYMENT")
-    .map(fixedAmount)
+    .map((fee) => fixedAmount(fee))
     .find((r) => r !== undefined)
 
 // ---- Rates -------------------------------------------------------------------
@@ -223,12 +231,12 @@ const NETWORKS: ReadonlyArray<readonly [Network, RegExp]> = [
 export const network = (p: ProductDetail, brandName: string): Network | undefined => {
   if (/american express/iu.test(brandName)) return "amex"
   const fromName = NETWORKS.filter(([, re]) => re.test(p.name))
-  if (fromName.length === 1) return fromName[0]![0]
+  if (fromName.length === 1) return required(fromName[0])[0]
   const text = [p.description, ...(p.features ?? []).flatMap((f) => [f.additionalValue, f.additionalInfo])].join(" ")
-  const counts = NETWORKS.map(([n, re]) => [n, (text.match(new RegExp(re, "gi")) ?? []).length] as const).filter(
+  const counts = NETWORKS.map(([n, re]) => [n, (text.match(new RegExp(re, "giu")) ?? []).length] as const).filter(
     ([n, c]) => c > 0 && n !== "amex"
   )
-  return counts.length === 1 ? counts[0]![0] : undefined
+  return counts.length === 1 ? required(counts[0])[0] : undefined
 }
 
 // ---- Rewards -------------------------------------------------------------------
@@ -255,7 +263,7 @@ const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
   const [program, ...partners] = ids
   return {
     rewards: {
-      program: program!,
+      program: required(program),
       ...(partners.length > 0 ? { partners } : {}),
       ...(bonus === undefined ? {} : { bonus_points: bonus })
     },
@@ -290,6 +298,8 @@ type Defined<T> = { [K in keyof T as undefined extends T[K] ? never : K]: T[K] }
 }
 
 const defined = <T extends object>(obj: T): Defined<T> =>
+  // TypeScript cannot infer a conditional mapped type from Object.fromEntries.
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
   Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== undefined)) as Defined<T>
 
 export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult => {

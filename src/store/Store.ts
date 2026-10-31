@@ -16,7 +16,9 @@ export interface Dataset {
 
 export const cardKey = (issuer: string, card: string) => `${issuer}/${card}`
 export const splitCardKey = (key: string) => {
-  const [issuer, card] = key.split("/") as [string, string]
+  const [issuer, card] = key.split("/")
+  if (issuer === undefined || issuer === "" || card === undefined || card === "")
+    throw new Error(`Invalid card key: ${key}`)
   return { issuer, card }
 }
 
@@ -43,17 +45,17 @@ export class Store extends Context.Service<
         const fail = (file: string) => (cause: unknown) =>
           new StoreError({ file, message: cause instanceof Error ? cause.message : String(cause) })
 
-        const readToml = <S extends Schema.Codec<any, any>>(schema: S, file: string) =>
+        const readToml = <A, I>(schema: Schema.Codec<A, I>, file: string) =>
           fs.readFileString(file).pipe(
             Effect.flatMap((text) => Effect.try({ try: () => Toml.parse(text), catch: fail(file) })),
             Effect.flatMap((data) => Schema.decodeUnknownEffect(schema)(data)),
             Effect.mapError(fail(file))
-          ) as Effect.Effect<S["Type"], StoreError>
+          )
 
         const listDir = (dir: string) =>
           fs.exists(dir).pipe(
             Effect.flatMap((exists) => (exists ? fs.readDirectory(dir) : Effect.succeed([]))),
-            Effect.map((names) => names.sort()),
+            Effect.map((names) => names.toSorted()),
             Effect.mapError(fail(dir))
           )
 
@@ -78,7 +80,7 @@ export class Store extends Context.Service<
         }).pipe(Effect.withSpan("Store.load"))
 
         // Writes only when the encoded content differs; returns whether it wrote.
-        const writeToml = <S extends Schema.Codec<any, any>>(schema: S, file: string, value: S["Type"]) =>
+        const writeToml = <A, I>(schema: Schema.Codec<A, I>, file: string, value: A) =>
           Effect.gen(function* () {
             const encoded = yield* Schema.encodeUnknownEffect(schema)(value).pipe(Effect.mapError(fail(file)))
             const text = `${Toml.stringify(encoded)}\n`

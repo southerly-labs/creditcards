@@ -1,3 +1,4 @@
+import { required } from "../util/required.ts"
 import { Effect, Schema } from "effect"
 import type { Card, Program } from "../model/schema.ts"
 import { type Dataset, splitCardKey, Store } from "../store/Store.ts"
@@ -58,7 +59,7 @@ export const toApi = (dataset: Dataset): Api => {
   }
   for (const [key, { locked: _l, ...card }] of dataset.cards) {
     const { issuer, card: slug } = splitCardKey(key)
-    issuers[issuer]!.cards[slug] = card
+    required(issuers[issuer]).cards[slug] = card
   }
   return { programs, issuers }
 }

@@ -108,7 +108,7 @@ const rewardsCheck = Command.make(
     const report = formatCheck(results)
     yield* writeFile(`${reportDir}/earn-check.json`, JSON.stringify(results, null, 2))
     yield* writeFile(`${reportDir}/earn-check.md`, report)
-    yield* Console.log(report)
+    return yield* Console.log(report)
   })
 ).pipe(Command.withDescription("Check manual earn rates against the issuer pages in rewards.earn_check (report only)"))
 
@@ -125,5 +125,7 @@ Command.make("creditcards").pipe(
   Command.withSubcommands([sync, validateCommand, build, rewards]),
   Command.run({ version: "0.1.0" }),
   Effect.provide(MainLayer),
-  BunRuntime.runMain
+  (program) => {
+    BunRuntime.runMain(program)
+  }
 )

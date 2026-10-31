@@ -1,3 +1,4 @@
+import { required } from "../util/required.ts"
 import { DateTime, Effect, Schema } from "effect"
 import { CdrClient, type CdrError, REQUEST_VARIANTS } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
@@ -109,7 +110,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   // ---- Global guardrail ------------------------------------------------------
   const cardsSeen = fetched.reduce((n, b) => n + b.products.length, 0)
-  const activeCdrCards = [...cards.values()].filter((c) => c.status === "active" && c.cdr).length
+  const activeCdrCards = [...cards.values()].filter((c) => c.status === "active" && c.cdr !== undefined).length
   if (activeCdrCards > 0 && cardsSeen < activeCdrCards * MIN_SEEN_SHARE) {
     return yield* new SyncAborted({
       message: `Only ${cardsSeen} cards returned vs ${activeCdrCards} active; refusing to sync (likely CDR outage)`
@@ -150,7 +151,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   for (const { brand, products } of fetched) {
     if (products.length === 0) continue
     const issuerSlug = resolveIssuer(brand)
-    const issuerName = issuers.get(issuerSlug)!.name
+    const issuerName = required(issuers.get(issuerSlug)).name
     for (const product of products) {
       const { card: incoming, fallbackProgram } = normalise(product, {
         issuerSlug,
@@ -179,12 +180,13 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
       const merged = mergeCard(existing, incoming)
       let earnSet: ReadonlyArray<EarnRate> | undefined
-      if (merged["rewards"]) {
+      const mergedRewards = merged["rewards"]
+      if (mergedRewards !== undefined && Schema.is(Card.fields.rewards)(mergedRewards)) {
         const loyalty = (product.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
-        const plan = planRewards(merged["rewards"] as Card["rewards"], loyalty)
+        const plan = planRewards(mergedRewards, loyalty)
         if (plan._tag === "Set") {
           merged["rewards"] = {
-            ...merged["rewards"],
+            ...mergedRewards,
             earn: plan.earn,
             earn_source: "parser",
             earn_text_hash: plan.hash
@@ -233,15 +235,15 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       continue
     }
     for (const key of keys) {
-      writes.set(key, { ...cards.get(key)!, status: "discontinued", discontinued: date })
+      writes.set(key, { ...required(cards.get(key)), status: "discontinued", discontinued: date })
       discontinued.push(key)
     }
   }
 
   // ---- Write --------------------------------------------------------------------------
   if (!options.dryRun) {
-    for (const slug of new Set(newIssuers)) yield* store.writeIssuer(slug, issuers.get(slug)!)
-    for (const id of newPrograms) yield* store.writeProgram(id, programs.get(id)!)
+    for (const slug of new Set(newIssuers)) yield* store.writeIssuer(slug, required(issuers.get(slug)))
+    for (const id of newPrograms) yield* store.writeProgram(id, required(programs.get(id)))
     for (const [key, card] of writes) {
       const { issuer, card: slug } = splitCardKey(key)
       yield* store.writeCard(issuer, slug, card)
@@ -259,14 +261,15 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     newPrograms,
     brandErrors: fetched
       .filter((b) => b.listError !== undefined && !/HTTP 4\d\d/u.test(b.listError))
-      .map((b) => ({ brand: b.brand, error: b.listError! })),
+      .map((b) => ({ brand: b.brand, error: required(b.listError) })),
     rewards: { set: rewardsSet, review: rewardsReview }
   } satisfies SyncReport
 })
 
 // Markdown summary used for the commit message body and the held-changes issue.
 export const summariseReport = (r: SyncReport): string => {
-  const fmt = (v: unknown) => (v === undefined ? "—" : typeof v === "object" ? JSON.stringify(v) : String(v))
+  const fmt = (v: unknown) =>
+    v === undefined ? "—" : typeof v === "object" ? JSON.stringify(v) : typeof v === "string" ? v : JSON.stringify(v)
   const lines = [
     `CDR sync ${r.date}: ${r.cardsSeen} cards seen, ${r.added.length} added, ${r.updated.length} updated, ` +
       `${r.discontinued.length} discontinued, ${r.held.length} held`,

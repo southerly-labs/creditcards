@@ -116,4 +116,5 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
     })
     yield* Effect.logInfo(`Stamped ${key} (${hash})`)
   }
+  return undefined
 })
