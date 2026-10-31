@@ -27,7 +27,26 @@ max_credit = 80000
 
 [rewards]
 program = "amplify"
+earn_source = "manual"
+earn_text_hash = "7f477ad6a085f69d"
 bonus_points = 50000
+
+[[rewards.earn]]
+rate = 1
+cap_monthly = 5000
+
+[[rewards.earn]]
+rate = 0.5
+
+[[rewards.earn]]
+rate = 1.25
+category = "everyday spend"
+note = "until $5,000 total spend in a statement cycle, then 0.5 per $1"
+
+[[rewards.earn]]
+rate = 2
+category = "international spend"
+note = "until $5,000 total spend in a statement cycle, then 0.5 per $1"
 
 [perks]
 lounge_access = true

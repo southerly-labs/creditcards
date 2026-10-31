@@ -28,7 +28,26 @@ min_income = 30000
 
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "ca98dd612dc6da80"
 bonus_points = 50000
+
+[[rewards.earn]]
+rate = 0.33
+cap_monthly = 5000
+
+[[rewards.earn]]
+rate = 0.2
+
+[[rewards.earn]]
+rate = 0.5
+category = "everyday spend"
+note = "until $5,000 total spend in a statement cycle, then 0.2 per $1"
+
+[[rewards.earn]]
+rate = 0.75
+category = "international spend"
+note = "until $5,000 total spend in a statement cycle, then 0.2 per $1"
 
 [perks]
 insurance = [ "Complimentary insurance", "Complimentary travel insurances" ]

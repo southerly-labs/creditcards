@@ -27,7 +27,26 @@ max_credit = 80000
 
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "53c9b1030208d183"
 bonus_points = 30000
+
+[[rewards.earn]]
+rate = 0.33
+cap_monthly = 5000
+
+[[rewards.earn]]
+rate = 0.2
+
+[[rewards.earn]]
+rate = 0.5
+category = "everyday spend"
+note = "until $5,000 total spend in a statement cycle, then 0.2 per $1"
+
+[[rewards.earn]]
+rate = 0.75
+category = "international spend"
+note = "until $5,000 total spend in a statement cycle, then 0.2 per $1"
 
 [perks]
 lounge_access = true

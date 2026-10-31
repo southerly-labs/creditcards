@@ -24,6 +24,20 @@ interest_free_days = 55
 [rewards]
 program = "amplify"
 partners = [ "qantas" ]
+earn_source = "manual"
+earn_text_hash = "ed0343da11bedeea"
+
+[[rewards.earn]]
+rate = 1.5
+note = "Amplify Qantas option: 0.5 Qantas Points per $1 (1 overseas, 0.25 government)"
+
+[[rewards.earn]]
+rate = 2.5
+category = "overseas purchases"
+
+[[rewards.earn]]
+rate = 1
+category = "government"
 
 [perks]
 

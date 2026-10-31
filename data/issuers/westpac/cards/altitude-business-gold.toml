@@ -26,6 +26,16 @@ max_credit = 80000
 
 [rewards]
 program = "westpac-altitude"
+earn_source = "manual"
+earn_text_hash = "d3ad368d09ddaa5f"
+
+[[rewards.earn]]
+rate = 1.5
+note = "Australian and international merchants; capped at 20,000 points per statement cycle"
+
+[[rewards.earn]]
+rate = 0.5
+category = "government"
 
 [perks]
 insurance = [ "Complimentary insurance", "International Travel insurance", "Interstate Flight Inconvenience insurance", "Overseas Transit Accident insurance", "Purchase Protection insurance", "Extended Warranty insurance", "Account holder's Unauthorised Transaction insurance" ]
