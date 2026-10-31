@@ -107,8 +107,14 @@ export const Program = Schema.Struct({
   aliases: Schema.optionalKey(Schema.Array(Schema.String)),
   // Matching precedence when several programs match the same text.
   priority: Schema.optionalKey(Schema.Int),
-  // Estimated value of one point, in cents. Curated by hand.
+  // Estimated value of one point, in cents. Curated by hand: airline programs
+  // use a flight-redemption benchmark, bank programs the airline value divided
+  // by their transfer ratio, retail/cashback programs their cash value.
   cents_per_point: Schema.optionalKey(between(0, 10)),
+  // How cents_per_point was worked out, where from, and when (YYYY-MM-DD).
+  value_basis: Schema.optionalKey(Schema.String),
+  value_source: Schema.optionalKey(Schema.String),
+  value_updated: Schema.optionalKey(Schema.String),
   website: Schema.optionalKey(Schema.String)
 })
 export type Program = typeof Program.Type
