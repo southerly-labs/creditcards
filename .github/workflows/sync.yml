@@ -44,6 +44,13 @@ jobs:
           git commit -F .cache/sync-summary.md
           git push origin HEAD:main
 
+      # Report only: compares manual earn rates with the issuer pages in
+      # rewards.earn_check and never writes data/. A failure here must not
+      # block the sync, so it is allowed to fail.
+      - name: Check issuer earn pages
+        continue-on-error: true
+        run: bun run cli rewards check
+
       - name: Report held changes
         env:
           GH_TOKEN: ${{ github.token }}
@@ -65,8 +72,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           count=$(jq '.rewards.review | length' .cache/sync-report.json)
+          changed=0
+          if [ -f .cache/earn-check.json ]; then
+            changed=$(jq '[.[] | select(.missing | length > 0)] | length' .cache/earn-check.json)
+            printf '\n' >> .cache/rewards-review.md
+            cat .cache/earn-check.md >> .cache/rewards-review.md
+          fi
           number=$(gh issue list --label rewards-review --state open --json number --jq '.[0].number')
-          if [ "$count" -eq 0 ]; then
+          if [ "$count" -eq 0 ] && [ "$changed" -eq 0 ]; then
             if [ -n "$number" ]; then
               gh issue close "$number" --comment "All earn rates are resolved."
             fi
