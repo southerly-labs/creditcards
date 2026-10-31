@@ -1,0 +1,22 @@
+name = "Classic Credit Card"
+type = "personal"
+status = "active"
+description = "Use your credit card for shopping, online purchasing, travelling overseas or even to consolidate other credit or store card debt."
+url = "https://www.nicu.com.au/banking/banking-enquiry"
+
+[cdr]
+brand = "Northern Inland Credit Union Limited"
+product_id = "NICUS55"
+last_updated = "2026-01-21T11:16:44.000+11:00"
+
+[fees]
+annual = 40
+
+[rates]
+purchase = 14
+cash_advance = 14
+balance_transfer = 0
+
+[limits]
+[perks]
+

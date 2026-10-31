@@ -6,7 +6,7 @@ description = "A Procurement Management Account is a corporate card 'account' (1
 [cdr]
 brand = "CommBank"
 product_id = "926fd37a329f4a28977ad5c2a943a05e"
-last_updated = "2026-10-30T02:15:38.000Z"
+last_updated = "2026-10-31T02:15:41.000Z"
 
 [fees]
 annual = 715

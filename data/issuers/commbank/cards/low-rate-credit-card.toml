@@ -9,7 +9,7 @@ image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/cr
 [cdr]
 brand = "CommBank"
 product_id = "67b2f138050940d8977cbbaebbfcc636"
-last_updated = "2026-10-30T02:15:38.000Z"
+last_updated = "2026-10-31T02:15:41.000Z"
 
 [fees]
 annual = 72

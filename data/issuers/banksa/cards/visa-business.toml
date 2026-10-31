@@ -1,0 +1,26 @@
+name = "VISA Business"
+type = "business"
+network = "visa"
+status = "active"
+description = "A low interest rate on purchases to help manage your business cash flow"
+image = "https://www.banksa.com.au/content/dam/bsa/images/business/credit-cards/BSA_VISA-business-credit-card_261x166.jpg"
+
+[cdr]
+brand = "BankSA"
+product_id = "BSACCBusVISABusiness"
+last_updated = "2026-10-29T01:03:02Z"
+
+[fees]
+annual = 55
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 0
+
+[rates]
+purchase = 9.99
+cash_advance = 17.15
+interest_free_days = 55
+
+[limits]
+[perks]
+

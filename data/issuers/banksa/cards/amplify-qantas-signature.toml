@@ -1,0 +1,34 @@
+name = "Amplify Qantas Signature"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our top-tier credit card for Qantas point lovers"
+image = "https://www.banksa.com.au/content/dam/public/open-banking/BSA-Amplify-Signature-Card-Art-232x146.png"
+
+[cdr]
+brand = "BankSA"
+product_id = "BSACCAmplifySignaturecardFrequentFlyer"
+last_updated = "2026-10-29T01:03:01Z"
+
+[fees]
+annual = 450
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 23.98
+cash_advance = 23.99
+interest_free_days = 45
+
+[limits]
+min_credit = 15000
+max_credit = 80000
+
+[rewards]
+program = "qantas"
+bonus_points = 60000
+
+[perks]
+lounge_access = true
+

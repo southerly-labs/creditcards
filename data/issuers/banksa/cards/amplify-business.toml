@@ -1,0 +1,29 @@
+name = "Amplify Business"
+type = "business"
+status = "active"
+description = "Amplify Business is a personal liability business credit card that rewards you for your business expenses. Earn something more rewarding with uncapped points on eligible business purchases."
+image = "https://www.banksa.com.au/content/dam/bsa/images/business/credit-cards/BSA_Business-Amplify-credit-card_261x166.jpg"
+
+[cdr]
+brand = "BankSA"
+product_id = "BSACCBusAmplifyBusiness"
+last_updated = "2026-10-29T01:03:02Z"
+
+[fees]
+annual = 89
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 0
+
+[rates]
+purchase = 19.49
+cash_advance = 20.24
+interest_free_days = 55
+
+[limits]
+[rewards]
+program = "amplify"
+partners = [ "qantas" ]
+
+[perks]
+
