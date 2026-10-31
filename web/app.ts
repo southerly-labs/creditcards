@@ -94,6 +94,13 @@ const earnValue = (r: Row) => {
   return earn === undefined || cents === undefined ? undefined : Math.round(earn * cents * 1000) / 1000
 }
 
+const bonusValue = (r: Row) => {
+  const points = r.card.rewards?.bonus_points
+  const cents = centsPerPoint(r)
+
+  return points === undefined || cents === undefined ? undefined : (points * cents) / 100
+}
+
 const columns: ReadonlyArray<Column> = [
   {
     label: "Card",
@@ -177,6 +184,25 @@ const columns: ReadonlyArray<Column> = [
     num: true,
     sortValue: (r) => r.card.rewards?.bonus_points,
     render: (r) => int(r.card.rewards?.bonus_points)
+  },
+  {
+    label: "Bonus value",
+    num: true,
+    sortValue: bonusValue,
+    render: (r) => {
+      const value = bonusValue(r)
+
+      if (value === undefined) {
+        return r.card.rewards?.bonus_points !== undefined && r.program
+          ? `<span class="dim" title="No point value for ${esc(r.program.name)}; set one under Point values">?</span>`
+          : dash
+      }
+
+      const custom = r.program !== undefined && overrides[r.program.id] !== undefined
+      const title = `${r.card.rewards?.bonus_points} bonus points × ${centsPerPoint(r)}c per point${custom ? " (your value)" : ""}; before annual fees`
+
+      return `<span class="${custom ? "custom" : ""}" title="${esc(title)}">${money(value)}</span>`
+    }
   },
   {
     label: "Min credit",
