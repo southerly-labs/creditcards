@@ -1,4 +1,4 @@
-import { Schema } from "effect"
+import { Record as EffectRecord, Schema } from "effect"
 import { required } from "../util/required.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
 import type { Fee, ProductDetail } from "./schema.ts"
@@ -60,16 +60,10 @@ export const timesPerYear = (period: string | null | undefined, name: string): n
   if (iso) {
     const n = Number(iso[1])
     if (n === 0) return undefined
-    switch (required(iso[2]).toUpperCase()) {
-      case "Y":
-        return 1 / n
-      case "M":
-        return 12 / n
-      case "W":
-        return 52 / n
-      default:
-        return undefined // daily periodic fees are not annual/monthly card fees
-    }
+    const periods: Record<string, number> = { Y: 1, M: 12, W: 52 }
+    const perYear = periods[required(iso[2]).toUpperCase()]
+    // Daily periodic fees are not annual/monthly card fees.
+    return perYear === undefined ? undefined : perYear / n
   }
   const text = `${period ?? ""} ${name}`
   if (/month/iu.test(text)) return 12
@@ -300,7 +294,7 @@ type Defined<T> = { [K in keyof T as undefined extends T[K] ? never : K]: T[K] }
 const defined = <T extends object>(obj: T): Defined<T> =>
   // TypeScript cannot infer a conditional mapped type from Object.fromEntries.
   // oxlint-disable-next-line typescript/no-unsafe-type-assertion
-  Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== undefined)) as Defined<T>
+  EffectRecord.filter(obj, (value) => value !== undefined) as Defined<T>
 
 export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult => {
   const fees = p.fees ?? []

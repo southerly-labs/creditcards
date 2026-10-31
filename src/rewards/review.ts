@@ -3,7 +3,7 @@ import { Effect, Schema } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
 import type { Card, EarnRate } from "../model/schema.ts"
 import { splitCardKey, Store } from "../store/Store.ts"
-import { loyaltyText, loyaltyTextHash } from "./parse.ts"
+import { loyaltyText, loyaltyTextHash, type LoyaltyFeature } from "./parse.ts"
 import { planRewards } from "./plan.ts"
 
 // Local tooling for the human (or Claude Code session) that resolves earn
@@ -41,6 +41,20 @@ const registerBaseUris = Effect.gen(function* () {
   return new Map(brands.map((b) => [b.brandName, b.publicBaseUri]))
 })
 
+const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFeature>): ReviewItem | undefined => {
+  const plan = planRewards(card.rewards, features)
+  if (plan._tag !== "Review") return undefined
+  return {
+    card: key,
+    name: card.name,
+    program: card.rewards?.program,
+    reason: plan.reason,
+    hash: plan.hash,
+    text: loyaltyText(features),
+    earn: card.rewards?.earn
+  }
+}
+
 // Active rewards cards whose earn rates need a person, with their CDR text.
 export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | undefined) {
   const dataset = yield* (yield* Store).load
@@ -56,19 +70,7 @@ export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | 
     candidates,
     ([key, card]) =>
       loyaltyFeatures(card, baseUris).pipe(
-        Effect.map((features): ReviewItem | undefined => {
-          const plan = planRewards(card.rewards, features)
-          if (plan._tag !== "Review") return undefined
-          return {
-            card: key,
-            name: card.name,
-            program: card.rewards?.program,
-            reason: plan.reason,
-            hash: plan.hash,
-            text: loyaltyText(features),
-            earn: card.rewards?.earn
-          }
-        }),
+        Effect.map((features) => toReviewItem(key, card, features)),
         Effect.catch((e) => warnReviewFailure(key, e))
       ),
     { concurrency: 8 }

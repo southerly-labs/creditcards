@@ -165,7 +165,8 @@ describe("merge and guardrails", () => {
 
   test("a cdr.last_updated bump alone is not a change", () => {
     const card: Card = { ...existing, cdr: { brand: "B", product_id: "p", last_updated: "2026-10-30" } }
-    const bumped = { ...card, cdr: { ...required(card.cdr), last_updated: "2026-10-31" } }
+    const cdr = required(card.cdr)
+    const bumped = { ...card, cdr: { ...cdr, last_updated: "2026-10-31" } }
     expect(diffCard(card, bumped)).toEqual([])
     expect(diffCard(card, { ...bumped, fees: { annual: 120 } }).map((c) => c.path)).toEqual([
       "fees.annual",

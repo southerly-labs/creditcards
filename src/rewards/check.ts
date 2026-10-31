@@ -35,14 +35,15 @@ const NAMED_ENTITIES: Record<string, string> = {
   dollar: "$"
 }
 
-const decodeEntities = (s: string) =>
-  s.replaceAll(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/giu, (match, name: string) => {
-    if (name[0] === "#") {
-      const code = name[1] === "x" || name[1] === "X" ? parseInt(name.slice(2), 16) : Math.trunc(Number(name.slice(1)))
-      return Number.isFinite(code) ? String.fromCodePoint(code) : match
-    }
-    return NAMED_ENTITIES[name.toLowerCase()] ?? match
-  })
+const decodeEntity = (match: string, name: string): string => {
+  if (name[0] === "#") {
+    const code = name[1] === "x" || name[1] === "X" ? parseInt(name.slice(2), 16) : Math.trunc(Number(name.slice(1)))
+    return Number.isFinite(code) ? String.fromCodePoint(code) : match
+  }
+  return NAMED_ENTITIES[name.toLowerCase()] ?? match
+}
+
+const decodeEntities = (s: string) => s.replaceAll(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/giu, decodeEntity)
 
 // Visible text of an HTML page. Script and style bodies are dropped, tags
 // become spaces so adjacent elements don't run together.
@@ -136,12 +137,13 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
       { concurrency: 4 }
     )
   )
-  return checks.map(({ card, url, expect }): CheckResult => {
+  const toCheckResult = ({ card, url, expect }: (typeof checks)[number]): CheckResult => {
     const text = required(texts.get(url))
     return text._tag === "Failure"
       ? { card, url, missing: [], error: text.failure.message }
       : { card, url, missing: missingQuotes(text.success, expect) }
-  })
+  }
+  return checks.map((check) => toCheckResult(check))
 })
 
 export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {

@@ -1,3 +1,4 @@
+import type { Api } from "../src/build/build.ts"
 import { required } from "../src/util/required.ts"
 import { decodeApi, decodePointValues } from "../src/model/api.ts"
 import type { Card, Program } from "../src/model/schema.ts"
@@ -47,20 +48,19 @@ const baseEarn = (r: Row) => r.card.rewards?.earn?.find((e) => e.category == nul
 
 const describeEarn = (earn: Earn) => {
   let previousCap: number | undefined
-  return earn
-    .map((e) => {
-      const where =
-        e.category != null && e.category !== ""
-          ? ` on ${e.category}`
-          : e.cap_monthly === undefined
-            ? previousCap !== undefined
-              ? " thereafter"
-              : ""
-            : ` up to ${money(e.cap_monthly).replaceAll(/<[^>]+>/gu, "")} a month`
-      if ((e.category == null || e.category === "") && e.cap_monthly !== undefined) previousCap = e.cap_monthly
-      return `${e.rate} per $1${where}${e.note != null && e.note !== "" ? ` (${e.note})` : ""}`
-    })
-    .join("\n")
+  const describeTier = (e: Earn[number]) => {
+    const where =
+      e.category != null && e.category !== ""
+        ? ` on ${e.category}`
+        : e.cap_monthly === undefined
+          ? previousCap !== undefined
+            ? " thereafter"
+            : ""
+          : ` up to ${money(e.cap_monthly).replaceAll(/<[^>]+>/gu, "")} a month`
+    if ((e.category == null || e.category === "") && e.cap_monthly !== undefined) previousCap = e.cap_monthly
+    return `${e.rate} per $1${where}${e.note != null && e.note !== "" ? ` (${e.note})` : ""}`
+  }
+  return earn.map((e) => describeTier(e)).join("\n")
 }
 
 // ---- Point values -------------------------------------------------------------
@@ -196,15 +196,15 @@ const $ = (id: string) => element(id, HTMLElement)
 
 const api = decodeApi(await fetch("/api.json").then((r): Promise<unknown> => r.json()))
 
+const makeRow = (issuerId: string, issuer: Api["issuers"][string], cardId: string, card: Row["card"]): Row => {
+  const programId = card.rewards?.program
+  const publicProgram = programId === undefined ? undefined : api.programs[programId]
+  const program =
+    programId !== undefined && publicProgram !== undefined ? { id: programId, ...publicProgram } : undefined
+  return { id: `${issuerId}/${cardId}`, issuer: issuer.name, card, program }
+}
 const rows: ReadonlyArray<Row> = Object.entries(api.issuers).flatMap(([issuerId, issuer]) =>
-  Object.entries(issuer.cards).map(([cardId, card]) => {
-    const programId = card.rewards?.program
-    const program =
-      programId != null && programId !== "" && api.programs[programId]
-        ? { id: programId, ...api.programs[programId] }
-        : undefined
-    return { id: `${issuerId}/${cardId}`, issuer: issuer.name, card, program }
-  })
+  Object.entries(issuer.cards).map(([cardId, card]) => makeRow(issuerId, issuer, cardId, card))
 )
 
 let sortIndex = 2
@@ -214,14 +214,15 @@ const head = $("head")
 head.innerHTML = columns
   .map((c, i) => `<th class="${c.num === true ? "num" : ""}" data-i="${i}">${c.label}</th>`)
   .join("")
-head.addEventListener("click", (e) => {
+const sortHead = (e: MouseEvent) => {
   const th = e.target instanceof HTMLElement ? e.target.closest("th") : null
   if (!th) return
   const i = Number(th.dataset["i"])
   sortDir = i === sortIndex && sortDir === "asc" ? "desc" : "asc"
   sortIndex = i
   render()
-})
+}
+head.addEventListener("click", sortHead)
 
 const compare = (a: Value, b: Value) => {
   // Missing values always sort last, whatever the direction.
@@ -239,7 +240,7 @@ const render = () => {
   const noFee = element("nofee", HTMLInputElement).checked
   const showDisc = element("discontinued", HTMLInputElement).checked
 
-  const visible = rows.filter((r) => {
+  const matchesFilters = (r: Row) => {
     if (!showDisc && r.card.status !== "active") return false
     if (type && r.card.type !== type) return false
     if (program === "none" ? r.program !== undefined : program !== "" && r.program?.type !== program) return false
@@ -247,7 +248,8 @@ const render = () => {
     if (noFee && r.card.fees.annual !== 0) return false
     if (q && !`${r.card.name} ${r.issuer} ${r.program?.name ?? ""}`.toLowerCase().includes(q)) return false
     return true
-  })
+  }
+  const visible = rows.filter((r) => matchesFilters(r))
   const col = required(columns[sortIndex])
   const sorted = visible.toSorted((a, b) => compare(col.sortValue(a), col.sortValue(b)))
 
@@ -272,27 +274,26 @@ const renderValueGrid = () => {
     .toSorted(
       (a, b) => required(counts.get(b.id)) - required(counts.get(a.id)) || a.program.name.localeCompare(b.program.name)
     )
-  $("value-grid").innerHTML = programs
-    .map(({ id, program: p }) => {
-      const basis = [
-        p.value_basis,
-        p.value_source,
-        p.value_updated != null && p.value_updated !== "" && `Updated ${p.value_updated}`
-      ]
-        .filter(Boolean)
-        .join("\n")
-      const fallback = p.cents_per_point === undefined ? "no default" : `default ${p.cents_per_point}c`
-      return `<label title="${esc(basis || "No default value for this program")}">
+  const renderPointValue = (id: string, p: Api["programs"][string]) => {
+    const basis = [
+      p.value_basis,
+      p.value_source,
+      p.value_updated != null && p.value_updated !== "" && `Updated ${p.value_updated}`
+    ]
+      .filter(Boolean)
+      .join("\n")
+    const fallback = p.cents_per_point === undefined ? "no default" : `default ${p.cents_per_point}c`
+    return `<label title="${esc(basis || "No default value for this program")}">
       <span>${esc(p.name)}</span>
       <input type="number" min="0" max="10" step="0.01" inputmode="decimal" data-program="${esc(id)}"
         placeholder="${p.cents_per_point ?? ""}" value="${overrides[id] ?? ""}" />
       <span class="dim">c · ${fallback}</span>
     </label>`
-    })
-    .join("")
+  }
+  $("value-grid").innerHTML = programs.map(({ id, program }) => renderPointValue(id, program)).join("")
 }
 
-$("value-grid").addEventListener("input", (e) => {
+const updatePointValue = (e: Event) => {
   const input = e.target
   if (!(input instanceof HTMLInputElement)) return
   const id = input.dataset["program"]
@@ -302,7 +303,8 @@ $("value-grid").addEventListener("input", (e) => {
   else delete overrides[id]
   saveOverrides()
   render()
-})
+}
+$("value-grid").addEventListener("input", updatePointValue)
 
 $("value-reset").addEventListener("click", () => {
   for (const id of Object.keys(overrides)) delete overrides[id]

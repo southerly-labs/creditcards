@@ -236,7 +236,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       continue
     }
     for (const key of keys) {
-      writes.set(key, { ...required(cards.get(key)), status: "discontinued", discontinued: date })
+      const missingCard = required(cards.get(key))
+      writes.set(key, { ...missingCard, status: "discontinued", discontinued: date })
       discontinued.push(key)
     }
   }
