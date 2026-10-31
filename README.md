@@ -87,7 +87,7 @@ and performance rules, including type-aware unsafe-value and promise checks. Gen
 `dist/` output is excluded. Both lint and formatting run in `check`, the commit hook and CI.
 
 The native lint exceptions are intentional: file/function size limits, class counts, inline
-comments, underscore names, function placement and negated conditions are style choices;
+comments, underscore names, import counts, function placement and negated conditions are style choices;
 `no-redeclare` incorrectly flags Schema value/type pairs; `prefer-readonly-parameter-types`
 rejects library types and deliberately mutable working models; `no-useless-undefined` conflicts
 with explicit return checking and required Effect arguments. One local assertion reconstructs

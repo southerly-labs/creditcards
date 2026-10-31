@@ -32,7 +32,8 @@
     "eqeqeq": ["error", "smart"],
     "unicorn/no-useless-undefined": "off",
     "no-negated-condition": "off",
-    "unicorn/no-negated-condition": "off"
+    "unicorn/no-negated-condition": "off",
+    "import/max-dependencies": "off"
   },
   "ignorePatterns": ["dist/**"]
 }
