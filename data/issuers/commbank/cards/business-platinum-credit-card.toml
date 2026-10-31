@@ -31,9 +31,17 @@ max_credit = 50000
 [rewards]
 program = "commbank-yello"
 partners = [ "qantas" ]
-earn = []
 earn_source = "manual"
 earn_text_hash = "81943427c26e2288"
+
+[[rewards.earn]]
+rate = 1
+note = "Yello and Yello Plus tiers; 1.25 Gold, 1.5 Diamond"
+
+[[rewards.earn]]
+rate = 2
+category = "international spend"
+note = "all Yello tiers"
 
 [perks]
 insurance = [ "Transit Accident Insurance", "International travel insurance", "Unauthorised Transactions Insurance" ]

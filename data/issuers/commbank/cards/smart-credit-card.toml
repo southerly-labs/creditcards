@@ -28,10 +28,18 @@ min_credit = 2000
 
 [rewards]
 program = "commbank-yello"
-earn = []
 earn_source = "manual"
 earn_text_hash = "17f0b26b02654255"
 bonus_points = 60000
+
+[[rewards.earn]]
+rate = 0.5
+note = "Yello tier; 0.75 Yello Plus, 1 Gold, 1.5 Diamond"
+
+[[rewards.earn]]
+rate = 2
+category = "international spend"
+note = "all Yello tiers"
 
 [perks]
 insurance = [ "Cracked Screen Cover", "International travel insurance" ]
