@@ -25,6 +25,19 @@ min_credit = 2000
 
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "5732e4a57a0f3ffa"
+
+[[rewards.earn]]
+rate = 1
+
+[[rewards.earn]]
+rate = 2
+category = "Qantas products and services"
+
+[[rewards.earn]]
+rate = 0.5
+category = "government"
 
 [perks]
 insurance = [ "Complimentary Travel Insurance", "Card Purchase Cover", "Card Refund Cover" ]

@@ -21,6 +21,21 @@ purchase = 23.99
 [limits]
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "32ff597ac06f2436"
+
+[[rewards.earn]]
+rate = 1.25
+note = "drops to 0.75 per $1 after 500,000 Qantas Points in a calendar year"
+
+[[rewards.earn]]
+rate = 2
+category = "Qantas products and services"
+note = "plus 2 bonus points per $1 on eligible Qantas flights once flown"
+
+[[rewards.earn]]
+rate = 0.5
+category = "government, utilities and insurance"
 
 [perks]
 insurance = [ "Complimentary Travel Insurance" ]

@@ -25,6 +25,15 @@ min_credit = 3000
 
 [rewards]
 program = "amex-membership-rewards"
+earn_source = "manual"
+earn_text_hash = "cb5992b48c9dca7a"
+
+[[rewards.earn]]
+rate = 2
+
+[[rewards.earn]]
+rate = 1
+category = "government"
 
 [perks]
 insurance = [ "International & Domestic Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Smartphone Front Screen Cover Insurance", "Buyer's Advantage Cover" ]

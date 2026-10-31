@@ -21,6 +21,19 @@ purchase = 23.99
 [limits]
 [rewards]
 program = "velocity"
+earn_source = "manual"
+earn_text_hash = "19aab4663a42f245"
+
+[[rewards.earn]]
+rate = 1
+
+[[rewards.earn]]
+rate = 2
+category = "Virgin Australia"
+
+[[rewards.earn]]
+rate = 0.5
+category = "government"
 
 [perks]
 insurance = [ "Complimentary Travel Insurance" ]

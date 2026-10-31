@@ -21,6 +21,24 @@ purchase = 23.99
 [limits]
 [rewards]
 program = "amex-membership-rewards"
+earn_source = "manual"
+earn_text_hash = "b225360103d7a057"
+
+[[rewards.earn]]
+rate = 1.5
+note = "accelerated rates apply to the first 200,000 points a calendar year, then 1 per $1 on all spend"
+
+[[rewards.earn]]
+rate = 3
+category = "Xero, Google Ads, Meta, Amazon Web Services and Dell"
+
+[[rewards.earn]]
+rate = 2
+category = "AccessLine"
+
+[[rewards.earn]]
+rate = 1
+category = "government"
 
 [perks]
 insurance = [ "International & Domestic Travel Insurance" ]

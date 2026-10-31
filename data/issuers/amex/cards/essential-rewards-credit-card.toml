@@ -25,6 +25,24 @@ min_credit = 2000
 
 [rewards]
 program = "amex-membership-rewards"
+earn_source = "manual"
+earn_text_hash = "cd63f5a5491d2c02"
+
+[[rewards.earn]]
+rate = 1
+note = "accelerated category rates apply up to 10,000 points a month, then 1 per $1"
+
+[[rewards.earn]]
+rate = 5
+category = "eligible eats and drinks in Australia"
+
+[[rewards.earn]]
+rate = 3
+category = "selected streaming services in Australia"
+
+[[rewards.earn]]
+rate = 2
+category = "selected major retailers in Australia"
 
 [perks]
 insurance = [ "Card Purchase Cover", "Card Refund Cover", "Smartphone Front Screen Cover Insurance", "Buyer's Advantage Cover" ]

@@ -25,6 +25,19 @@ min_credit = 3000
 
 [rewards]
 program = "velocity"
+earn_source = "manual"
+earn_text_hash = "a248a58cf67c93d2"
+
+[[rewards.earn]]
+rate = 1.25
+
+[[rewards.earn]]
+rate = 2.25
+category = "Virgin Australia"
+
+[[rewards.earn]]
+rate = 0.5
+category = "government"
 
 [perks]
 insurance = [ "Complimentary Travel insurance", "Card Purchase Cover", "Card Refund Cover" ]

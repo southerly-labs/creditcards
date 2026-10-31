@@ -25,6 +25,19 @@ min_credit = 3000
 
 [rewards]
 program = "amex-membership-rewards"
+earn_source = "manual"
+earn_text_hash = "cd2841cbc8a026d4"
+
+[[rewards.earn]]
+rate = 1
+
+[[rewards.earn]]
+rate = 3
+category = "major supermarkets and petrol stations in Australia"
+
+[[rewards.earn]]
+rate = 2
+category = "foreign currency spend, overseas and online"
 
 [perks]
 insurance = [ "International & Domestic Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Smartphone Front Screen Cover Insurance", "Buyer's Advantage Cover" ]

@@ -25,6 +25,20 @@ min_credit = 3000
 
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "1d2295c08750ea21"
+
+[[rewards.earn]]
+rate = 1.25
+note = "drops to 1 per $1 after 100,000 Qantas Points in a calendar year"
+
+[[rewards.earn]]
+rate = 2.25
+category = "Qantas products and services"
+
+[[rewards.earn]]
+rate = 0.5
+category = "government"
 
 [perks]
 insurance = [ "Complimentary Travel Insurance", "Card Purchase Cover", "Card Refund Cover" ]

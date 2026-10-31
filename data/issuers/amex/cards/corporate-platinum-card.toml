@@ -20,6 +20,19 @@ cash_advance_pct = 3.5
 [limits]
 [rewards]
 program = "amex-membership-rewards"
+earn_source = "manual"
+earn_text_hash = "785de1c0caa40d72"
+
+[[rewards.earn]]
+rate = 1.5
+
+[[rewards.earn]]
+rate = 2
+category = "international purchases, airlines, dining and hotels"
+
+[[rewards.earn]]
+rate = 1
+category = "government"
 
 [perks]
 insurance = [ "International & Domestic Travel Insurance" ]

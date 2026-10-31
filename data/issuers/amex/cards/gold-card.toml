@@ -19,6 +19,12 @@ foreign_txn_pct = 3.5
 [limits]
 [rewards]
 program = "amex-membership-rewards"
+earn_source = "manual"
+earn_text_hash = "755d2068186d49ac"
+
+[[rewards.earn]]
+rate = 1.5
+note = "excluding government bodies"
 
 [perks]
 insurance = [ "Complimentary Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Buyer’s Advantage Cover" ]

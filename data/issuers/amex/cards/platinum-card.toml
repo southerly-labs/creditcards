@@ -20,6 +20,15 @@ foreign_txn_pct = 3.5
 [limits]
 [rewards]
 program = "amex-membership-rewards"
+earn_source = "manual"
+earn_text_hash = "0945044b855bb667"
+
+[[rewards.earn]]
+rate = 2.25
+
+[[rewards.earn]]
+rate = 1
+category = "government"
 
 [perks]
 insurance = [ "International & Domestic Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Smartphone Front Screen Cover Insurance", "Buyer’s Advantage Cover", "Loss Damage Waiver Cover", "Legal, Roadside, and Home Assistance" ]

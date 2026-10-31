@@ -25,6 +25,20 @@ min_credit = 2000
 
 [rewards]
 program = "velocity"
+earn_source = "manual"
+earn_text_hash = "1f47802bb34b2db9"
+
+[[rewards.earn]]
+rate = 1
+note = "drops to 0.75 per $1 after 12,000 Velocity Points in a calendar year"
+
+[[rewards.earn]]
+rate = 1.75
+category = "Virgin Australia"
+
+[[rewards.earn]]
+rate = 0.5
+category = "government"
 
 [perks]
 insurance = [ "Complimentary Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Buyer’s Advantage Cover" ]
