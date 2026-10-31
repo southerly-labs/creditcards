@@ -58,11 +58,19 @@ export interface FieldChange {
   readonly after: unknown
 }
 
+// Some data holders bump cdr.last_updated on every request, so it alone is
+// not a change. It is still written whenever something else changes.
+const withoutTimestamp = (path: string, value: unknown) => {
+  if (path !== "cdr" || !value || typeof value !== "object") return value
+  const { last_updated: _, ...rest } = value as Obj
+  return rest
+}
+
 export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<FieldChange> => {
   const paths = [...CDR_OWNED_PATHS, "status", "discontinued"]
   return paths
     .map((path) => ({ path, before: before ? getPath(before as Obj, path) : undefined, after: getPath(after, path) }))
-    .filter((c) => !equal(c.before, c.after))
+    .filter((c) => !equal(withoutTimestamp(c.path, c.before), withoutTimestamp(c.path, c.after)))
 }
 
 // ---- Guardrails ---------------------------------------------------------------

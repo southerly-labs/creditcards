@@ -10,7 +10,7 @@ import {
   toPercent
 } from "../src/cdr/normalise.ts"
 import type { Fee, ProductDetail } from "../src/cdr/schema.ts"
-import { holdReasons, mergeCard } from "../src/sync/merge.ts"
+import { diffCard, holdReasons, mergeCard } from "../src/sync/merge.ts"
 import { cardSlug } from "../src/sync/issuers.ts"
 import type { Card } from "../src/model/schema.ts"
 
@@ -121,6 +121,13 @@ describe("merge and guardrails", () => {
     }) as Card
     expect(merged.fees).toEqual({ annual: 120, foreign_txn_pct: 0 })
     expect(merged.rewards?.earn).toEqual([{ rate: 1 }])
+  })
+
+  test("a cdr.last_updated bump alone is not a change", () => {
+    const card: Card = { ...existing, cdr: { brand: "B", product_id: "p", last_updated: "2026-10-30" } }
+    const bumped = { ...card, cdr: { ...card.cdr!, last_updated: "2026-10-31" } }
+    expect(diffCard(card, bumped)).toEqual([])
+    expect(diffCard(card, { ...bumped, fees: { annual: 120 } }).map((c) => c.path)).toEqual(["fees.annual", "fees.foreign_txn_pct"])
   })
 
   test("implausible changes are held", () => {
