@@ -73,3 +73,9 @@ bun run check               # everything CI runs; also the pre-commit hook
 Live at <https://creditcards.matthewstibbard.workers.dev>.
 
 `bun run build` writes a fully static site to `dist/` (`index.html`, hashed JS/CSS and `api.json`). Cloudflare Workers serves `dist/` as static assets, building with `bun run build` from this repo. Every push to `main`, including the daily sync, redeploys it.
+
+## Licence
+
+MIT, for both the code and the data in `data/` and `dist/api.json`. See [LICENSE](LICENSE).
+
+The data is provided as is. Card terms change, so check the issuer's own site before you apply for a card.

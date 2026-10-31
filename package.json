@@ -1,6 +1,7 @@
 {
   "name": "creditcards",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "cli": "bun run src/cli.ts",
