@@ -1,4 +1,5 @@
-import { Record as EffectRecord, Schema } from "effect"
+import { defined } from "../util/defined.ts"
+import { Schema } from "effect"
 import { required } from "../util/required.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
 import type { Fee, ProductDetail } from "./schema.ts"
@@ -339,15 +340,6 @@ const perks = (p: ProductDetail): NormalisedCard["perks"] => {
 // ---- Card --------------------------------------------------------------------------
 
 // Drop undefined-valued keys so optional fields are absent (TOML has no null).
-type Defined<T> = { [K in keyof T as undefined extends T[K] ? never : K]: T[K] } & {
-  [K in keyof T as undefined extends T[K] ? K : never]?: Exclude<T[K], undefined>
-}
-
-const defined = <T extends object>(obj: T): Defined<T> =>
-  // TypeScript cannot infer a conditional mapped type from Record.filter.
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
-  EffectRecord.filter(obj, (value) => value !== undefined) as Defined<T>
-
 export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult => {
   const fees = p.fees ?? []
   const rates = p.lendingRates ?? []

@@ -67,7 +67,8 @@
     "anti-slop-effect/no-manual-tag-comparison": "error",
     "anti-slop-effect/no-manual-tagged-construction": "error",
     "anti-slop-effect/prefer-effect-match": "error",
-    "anti-slop/require-readable-spacing": "error"
+    "anti-slop/require-readable-spacing": "error",
+    "anti-slop/require-safety-comment-for-type-assertion": "error"
   },
   "ignorePatterns": ["dist/**", "tools/oxlint/anti-slop/**"],
   "extends": ["./node_modules/@shekohex/oxc-effect/configs/full.jsonc"],
@@ -79,6 +80,15 @@
     {
       "name": "anti-slop-effect",
       "specifier": "./tools/oxlint/anti-slop/effect/index.ts"
+    }
+  ],
+  "overrides": [
+    {
+      "files": ["src/util/defined.ts"],
+      "rules": {
+        "typescript/no-unsafe-type-assertion": "off",
+        "anti-slop/require-safety-comment-for-type-assertion": "off"
+      }
     }
   ]
 }

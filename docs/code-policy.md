@@ -16,3 +16,13 @@ The anti-slop rules banning unknown parameters/returns, unknown dictionaries, ru
 remain allowed because absent optional fields must stay absent. The service-constructor
 import rule mistakes the pure `makeProgramIndex` lookup builder for a service and is
 not enabled. Other native lint exceptions are documented in the root README.
+
+## Optional-field type invariant
+
+`src/util/defined.ts` removes exactly the enumerable keys whose values are undefined,
+leaving all other keys and values intact. Its conditional mapped result type expresses
+that contract. TypeScript cannot infer the relationship from `Record.filter`, so the
+single assertion lives in this single-purpose utility. Only this file is exempt from
+`typescript/no-unsafe-type-assertion` and anti-slop's assertion-comment requirement;
+the implementation and rationale are reviewed together here. The assertion-comment
+rule remains enabled elsewhere. All `as const` assertions remain valid.
