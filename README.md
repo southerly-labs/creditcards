@@ -47,4 +47,5 @@ bun run sync                # pull CDR data and write data/
 bun run validate            # check every file in data/
 bun run build               # write dist/api.json
 bun test
+bun run check               # everything CI runs; also the pre-commit hook
 ```

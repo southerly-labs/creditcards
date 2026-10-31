@@ -8,8 +8,10 @@
     "validate": "bun run src/cli.ts validate",
     "build": "bun run src/cli.ts build",
     "test": "bun test",
-    "typecheck": "tsc --noEmit",
-    "dev": "bun run build && bun run web/server.ts"
+    "typecheck": "tsrs --noEmit",
+    "dev": "bun run build && bun run web/server.ts",
+    "check": "tsrs --noEmit && bun test && bun run validate && bun run build",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@effect/platform-bun": "4.1.0",
@@ -18,6 +20,6 @@
   },
   "devDependencies": {
     "@types/bun": "^1.4.4",
-    "typescript": "^7.0.2"
+    "tsrs": "0.20.1-ts7.1.0-beta"
   }
 }

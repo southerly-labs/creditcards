@@ -1,0 +1,8 @@
+#!/bin/sh
+# Runs the same checks as CI. Bypass only in an emergency: git commit --no-verify
+set -e
+if command -v bun >/dev/null 2>&1; then
+  exec bun run check
+else
+  exec nix shell nixpkgs#bun -c bun run check
+fi
