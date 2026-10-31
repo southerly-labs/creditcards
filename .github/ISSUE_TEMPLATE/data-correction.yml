@@ -1,0 +1,39 @@
+name: Data correction
+description: A card, fee, rate, earn rate or program value is wrong or missing.
+labels: [data]
+body:
+  - type: input
+    id: card
+    attributes:
+      label: Card or program
+      description: Its name, or its path such as `anz/business-black`.
+    validations:
+      required: true
+  - type: input
+    id: field
+    attributes:
+      label: Field
+      description: For example annual fee, purchase rate, foreign transaction fee or earn rate.
+    validations:
+      required: true
+  - type: input
+    id: current
+    attributes:
+      label: Value shown now
+  - type: input
+    id: correct
+    attributes:
+      label: Correct value
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link to the issuer's page or PDF that shows the correct value.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else

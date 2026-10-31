@@ -1,0 +1,20 @@
+name: Bug report
+description: Something is broken on the website, in api.json or in the CLI.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected and what you saw instead.
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: A URL, the CLI command you ran, or the api.json key.
+  - type: input
+    id: environment
+    attributes:
+      label: Browser or Bun version

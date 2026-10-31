@@ -1,0 +1,11 @@
+name: Idea
+description: A new field, issuer, feature or data source.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What you'd like and why it would help.
+    validations:
+      required: true
