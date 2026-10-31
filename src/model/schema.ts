@@ -24,9 +24,13 @@ export const IntroOffer = Schema.Struct({
 })
 export type IntroOffer = typeof IntroOffer.Type
 
+// Points per AUD spent. Entries without a category are the base earn rate,
+// listed as cumulative spend tiers: each applies until its cap_monthly
+// (statement-period spend), then the next entry applies. If the last tier
+// has a cap, spend above it earns nothing. Entries with a category override
+// the base rate for that kind of spend.
 export const EarnRate = Schema.Struct({
   rate: between(0, 20),
-  // Points per AUD spent within this tier/category
   category: Schema.optionalKey(Schema.String),
   cap_monthly: Schema.optionalKey(Aud),
   cap_annual: Schema.optionalKey(Aud),
@@ -74,6 +78,10 @@ export const Card = Schema.Struct({
     program: Slug,
     partners: Schema.optionalKey(Schema.Array(Slug)),
     earn: Schema.optionalKey(Schema.Array(EarnRate)),
+    // Who wrote `earn`: the rule-based parser, or a person (never overwritten).
+    earn_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
+    // Hash of the CDR loyalty text `earn` was derived from, to detect changes.
+    earn_text_hash: Schema.optionalKey(Schema.String),
     bonus_points: Schema.optionalKey(between(0, 1_000_000))
   })),
   perks: Schema.Struct({
