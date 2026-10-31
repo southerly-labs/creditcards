@@ -1,3 +1,6 @@
 name = "MyCard Rewards"
 type = "bank"
-
+cents_per_point = 0.75
+value_basis = "Transfers to Velocity at 2:1 (1.5c / 2)"
+value_source = "https://ozflyer.com/posts/velocity-transfer-partners-2026-midyear-check/"
+value_updated = "2026-10-31"

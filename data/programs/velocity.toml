@@ -3,3 +3,7 @@ type = "airline"
 aliases = [ 'velocity' ]
 priority = 10
 website = "https://www.velocityfrequentflyer.com"
+cents_per_point = 1.5
+value_basis = "Flight-redemption benchmark (median of an 18-scenario basket of cash fare vs points plus charges)"
+value_source = "https://rewardsthatfly.com.au/valuations"
+value_updated = "2026-10-31"

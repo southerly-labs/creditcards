@@ -1,3 +1,7 @@
 name = "NAB Rewards"
 type = "bank"
 aliases = [ 'nab rewards' ]
+cents_per_point = 0.5
+value_basis = "Transfers to Velocity at 3:1 from 1 October 2026 (1.5c / 3)"
+value_source = "https://www.shopback.com.au/blog/finance/westpac-vs-cba-vs-anz-vs-nab-credit-cards-2026"
+value_updated = "2026-10-31"

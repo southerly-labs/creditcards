@@ -1,3 +1,7 @@
 name = "CommBank Yello"
 type = "bank"
 aliases = [ 'yello' ]
+cents_per_point = 0.43
+value_basis = "Converts to Qantas at 3:1 (1.3c / 3); Ultimate cardholders only, $149/yr opt-in fee"
+value_source = "https://www.commbank.com.au/credit-cards/qantas-frequent-flyer.html"
+value_updated = "2026-10-31"

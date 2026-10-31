@@ -1,3 +1,7 @@
 name = "Amplify Rewards"
 type = "bank"
 aliases = [ 'amplify' ]
+cents_per_point = 0.75
+value_basis = "Transfers to Velocity at 2:1 (1.5c / 2)"
+value_source = "https://www.pointsbrotherhood.com/st-george-amplify-credit-card-review/"
+value_updated = "2026-10-31"

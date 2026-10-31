@@ -2,3 +2,7 @@ name = "Flybuys"
 type = "retail"
 aliases = [ 'flybuys' ]
 priority = 5
+cents_per_point = 0.5
+value_basis = "Cash value: 2,000 points = $10 off at participating stores"
+value_source = "https://www.thepointcalculator.com/au/flybuys-points/flybuys-points-value/"
+value_updated = "2026-10-31"

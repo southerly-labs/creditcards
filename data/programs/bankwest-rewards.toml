@@ -1,3 +1,6 @@
 name = "Bankwest Rewards"
 type = "bank"
-
+cents_per_point = 0.22
+value_basis = "Cash value: cashback or gift cards (e.g. 9,000 points = $20)"
+value_source = "https://www.thepointcalculator.com/au/bankwest-more-rewards-points/bankwest-more-points-value/"
+value_updated = "2026-10-31"

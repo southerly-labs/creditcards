@@ -1,3 +1,7 @@
 name = "American Express Membership Rewards"
 type = "bank"
 aliases = [ 'membership rewards' ]
+cents_per_point = 0.75
+value_basis = "Transfers to Velocity at 2:1 on all Membership Rewards cards (1.5c / 2)"
+value_source = "https://rwrds.com.au/blog/transfer-amex-membership-rewards-to-velocity"
+value_updated = "2026-10-31"

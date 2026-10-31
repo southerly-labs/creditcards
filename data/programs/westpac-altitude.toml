@@ -1,3 +1,7 @@
 name = "Westpac Altitude"
 type = "bank"
 aliases = [ 'altitude' ]
+cents_per_point = 0.38
+value_basis = "Transfers to Velocity at 4:1 from 30 September 2026 (1.5c / 4)"
+value_source = "https://www.australianfrequentflyer.com.au/community/threads/changes-to-westpac-credit-card-points-earn-from-30-sep-2026.123932/"
+value_updated = "2026-10-31"
