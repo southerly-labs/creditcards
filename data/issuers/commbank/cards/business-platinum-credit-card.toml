@@ -2,6 +2,7 @@ name = "Business Platinum credit card"
 type = "business"
 network = "mastercard"
 status = "active"
+locked = [ "rewards.program", "rewards.partners" ]
 description = "Earn flexible rewards and enjoy up to 55 days interest-free to keep your cashflow in check."
 url = "https://www.commbank.com.au/business/business-credit-cards/business-awards-credit-cards/business-awards-platinum-credit-card.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/personal-liability/mastercard-business-platinum-credit-card.png"
@@ -28,8 +29,8 @@ min_credit = 6000
 max_credit = 50000
 
 [rewards]
-program = "qantas"
-partners = [ "commbank-yello" ]
+program = "commbank-yello"
+partners = [ "qantas" ]
 
 [perks]
 insurance = [ "Transit Accident Insurance", "International travel insurance", "Unauthorised Transactions Insurance" ]
