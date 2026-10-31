@@ -179,11 +179,16 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
       const merged = mergeCard(existing, incoming)
       let earnSet: ReadonlyArray<EarnRate> | undefined
-      if (merged.rewards) {
+      if (merged["rewards"]) {
         const loyalty = (product.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
-        const plan = planRewards(merged.rewards as Card["rewards"], loyalty)
+        const plan = planRewards(merged["rewards"] as Card["rewards"], loyalty)
         if (plan._tag === "Set") {
-          merged.rewards = { ...merged.rewards, earn: plan.earn, earn_source: "parser", earn_text_hash: plan.hash }
+          merged["rewards"] = {
+            ...merged["rewards"],
+            earn: plan.earn,
+            earn_source: "parser",
+            earn_text_hash: plan.hash
+          }
           earnSet = plan.earn
         } else if (plan._tag === "Review") {
           rewardsReview.push({ card: key, reason: plan.reason })
@@ -267,8 +272,8 @@ export const summariseReport = (r: SyncReport): string => {
       `${r.discontinued.length} discontinued, ${r.held.length} held`,
     ""
   ]
-  if (r.added.length) lines.push("Added:", ...r.added.map((c) => `- ${c}`), "")
-  if (r.updated.length) {
+  if (r.added.length > 0) lines.push("Added:", ...r.added.map((c) => `- ${c}`), "")
+  if (r.updated.length > 0) {
     lines.push("Updated:")
     for (const u of r.updated) {
       const shown = u.changes.filter(
@@ -280,14 +285,15 @@ export const summariseReport = (r: SyncReport): string => {
     }
     lines.push("")
   }
-  if (r.discontinued.length) lines.push("Discontinued:", ...r.discontinued.map((c) => `- ${c}`), "")
-  if (r.held.length) lines.push("Held for review:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")
-  if (r.newPrograms.length)
+  if (r.discontinued.length > 0) lines.push("Discontinued:", ...r.discontinued.map((c) => `- ${c}`), "")
+  if (r.held.length > 0)
+    lines.push("Held for review:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")
+  if (r.newPrograms.length > 0)
     lines.push("New fallback programs (add aliases or rename):", ...r.newPrograms.map((p) => `- ${p}`), "")
-  if (r.rewards.set.length || r.rewards.review.length) {
+  if (r.rewards.set.length > 0 || r.rewards.review.length > 0) {
     lines.push(`Earn rates: ${r.rewards.set.length} set by parser, ${r.rewards.review.length} need review`, "")
   }
-  if (r.brandErrors.length) lines.push("Brand errors:", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")
+  if (r.brandErrors.length > 0) lines.push("Brand errors:", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")
   return lines.join("\n")
 }
 

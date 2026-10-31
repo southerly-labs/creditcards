@@ -21,5 +21,3 @@ await Bun.write(
 )
 
 console.log(`Wrote ${result.outputs.length} site files to dist/`)
-
-export {}

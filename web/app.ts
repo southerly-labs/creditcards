@@ -18,7 +18,7 @@ interface Column {
 }
 
 const esc = (s: string) =>
-  s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!)
+  s.replaceAll(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!)
 
 const dash = '<span class="dim">—</span>'
 const money = (n: number | undefined) =>
@@ -33,7 +33,7 @@ const int = (n: number | undefined) => (n === undefined ? dash : n.toLocaleStrin
 
 const intro = (r: Row) => {
   const offer = r.card.rates.intro?.[0]
-  if (!offer) return undefined
+  if (!offer) return
   const what =
     offer.applies_to === "balance_transfer" ? "BT" : offer.applies_to === "purchase" ? "purchases" : "BT + purchases"
   return `${pct(offer.rate)} ${what}${offer.months ? ` ${offer.months}m` : ""}`
@@ -50,11 +50,11 @@ const describeEarn = (earn: Earn) => {
     .map((e) => {
       const where = e.category
         ? ` on ${e.category}`
-        : e.cap_monthly !== undefined
-          ? ` up to ${money(e.cap_monthly).replace(/<[^>]+>/g, "")} a month`
-          : previousCap !== undefined
+        : e.cap_monthly === undefined
+          ? previousCap !== undefined
             ? " thereafter"
             : ""
+          : ` up to ${money(e.cap_monthly).replace(/<[^>]+>/g, "")} a month`
       if (!e.category && e.cap_monthly !== undefined) previousCap = e.cap_monthly
       return `${e.rate} per $1${where}${e.note ? ` (${e.note})` : ""}`
     })
@@ -81,7 +81,9 @@ const loadOverrides = (): Record<string, number> => {
 }
 
 const overrides: Record<string, number> = loadOverrides()
-const saveOverrides = () => localStorage.setItem(OVERRIDES_KEY, JSON.stringify(overrides))
+const saveOverrides = () => {
+  localStorage.setItem(OVERRIDES_KEY, JSON.stringify(overrides))
+}
 
 const centsPerPoint = (r: Row) => (r.program ? (overrides[r.program.id] ?? r.program.cents_per_point) : undefined)
 
@@ -190,7 +192,7 @@ const columns: ReadonlyArray<Column> = [
   }
 ]
 
-const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T
+const $ = <T extends HTMLElement>(id: string) => document.querySelector(`#${id}`) as T
 
 const api: Api = await fetch("/api.json").then((r) => r.json())
 
@@ -210,7 +212,7 @@ head.innerHTML = columns.map((c, i) => `<th class="${c.num ? "num" : ""}" data-i
 head.addEventListener("click", (e) => {
   const th = (e.target as HTMLElement).closest("th")
   if (!th) return
-  const i = Number(th.dataset.i)
+  const i = Number(th.dataset["i"])
   sortDir = i === sortIndex && sortDir === "asc" ? "desc" : "asc"
   sortIndex = i
   render()
@@ -245,13 +247,13 @@ const render = () => {
   visible.sort((a, b) => compare(col.sort(a), col.sort(b)))
 
   for (const th of head.querySelectorAll("th")) {
-    if (Number(th.dataset.i) === sortIndex) th.dataset.dir = sortDir
-    else delete th.dataset.dir
+    if (Number(th.dataset["i"]) === sortIndex) th.dataset["dir"] = sortDir
+    else delete th.dataset["dir"]
   }
   $("rows").innerHTML = visible
     .map(
       (r) =>
-        `<tr class="${r.card.status !== "active" ? "disc" : ""}">${columns.map((c) => `<td class="${c.num ? "num" : ""}">${c.render(r)}</td>`).join("")}</tr>`
+        `<tr class="${r.card.status === "active" ? "" : "disc"}">${columns.map((c) => `<td class="${c.num ? "num" : ""}">${c.render(r)}</td>`).join("")}</tr>`
     )
     .join("")
   $("count").textContent = `${visible.length} of ${rows.length} cards`
@@ -281,7 +283,7 @@ const renderValueGrid = () => {
 
 $("value-grid").addEventListener("input", (e) => {
   const input = e.target as HTMLInputElement
-  const id = input.dataset.program
+  const id = input.dataset["program"]
   if (!id) return
   const value = input.value.trim() === "" ? NaN : Number(input.value)
   if (Number.isFinite(value) && value >= 0) overrides[id] = value

@@ -35,7 +35,7 @@ const NAMED_ENTITIES: Record<string, string> = {
 }
 
 const decodeEntities = (s: string) =>
-  s.replace(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/gi, (match, name: string) => {
+  s.replaceAll(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/gi, (match, name: string) => {
     if (name[0] === "#") {
       const code = name[1] === "x" || name[1] === "X" ? parseInt(name.slice(2), 16) : parseInt(name.slice(1), 10)
       return Number.isFinite(code) ? String.fromCodePoint(code) : match
@@ -48,9 +48,9 @@ const decodeEntities = (s: string) =>
 export const htmlText = (html: string): string =>
   decodeEntities(
     html
-      .replace(/<!--[\s\S]*?-->/g, " ")
-      .replace(/<(script|style|noscript|template)\b[\s\S]*?<\/\1\s*>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
+      .replaceAll(/<!--[\s\S]*?-->/g, " ")
+      .replaceAll(/<(script|style|noscript|template)\b[\s\S]*?<\/\1\s*>/gi, " ")
+      .replaceAll(/<[^>]+>/g, " ")
   )
 
 export const pdfText = (url: string, bytes: Uint8Array) =>
@@ -69,10 +69,10 @@ export const normaliseText = (s: string): string =>
   s
     .normalize("NFKC")
     .toLowerCase()
-    .replace(/[‘’‚′]/g, "'")
-    .replace(/[“”„″]/g, '"')
-    .replace(/[‐-―−]/g, "-")
-    .replace(/[\s ​]+/g, " ")
+    .replaceAll(/[‘’‚′]/g, "'")
+    .replaceAll(/[“”„″]/g, '"')
+    .replaceAll(/[‐-―−]/g, "-")
+    .replaceAll(/[\s ​]+/g, " ")
     .trim()
 
 export const missingQuotes = (text: string, expect: ReadonlyArray<string>): ReadonlyArray<string> => {
@@ -148,7 +148,7 @@ export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {
     `Issuer earn pages: ${results.length} checked, ${changed.length} changed, ${failed.length} unreadable.`,
     ""
   ]
-  if (changed.length) {
+  if (changed.length > 0) {
     lines.push(
       "These pages no longer contain the quoted earn wording. Re-read the page, update `rewards.earn` and",
       "`rewards.earn_check.expect` in the card's file, then `bun run cli rewards stamp <issuer/card>`.",
@@ -159,7 +159,7 @@ export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {
     }
     lines.push("")
   }
-  if (failed.length)
+  if (failed.length > 0)
     lines.push("Unreadable (not checked this run):", ...failed.map((r) => `- \`${r.card}\` — ${r.url}: ${r.error}`), "")
   return lines.join("\n")
 }

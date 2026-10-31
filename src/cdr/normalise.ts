@@ -36,7 +36,7 @@ export interface NormaliseResult {
 
 export const parseNumber = (value: string | null | undefined): number | undefined => {
   if (value == null) return undefined
-  const cleaned = value.replace(/[$,\s]/g, "")
+  const cleaned = value.replaceAll(/[$,\s]/g, "")
   if (cleaned === "") return undefined
   const n = Number(cleaned)
   return Number.isFinite(n) ? n : undefined
@@ -177,8 +177,8 @@ export const introOffers = (rates: ReadonlyArray<LendingRate>): Array<IntroOffer
     const rate = toPercent(r.rate)
     if (rate === undefined) continue
     const text = `${r.additionalInfo ?? ""} ${r.additionalValue ?? ""}`.toLowerCase()
-    const bt = r.lendingRateType === "BALANCE_TRANSFER" || /balance transfer/.test(text)
-    const purchase = r.lendingRateType === "PURCHASE" || /purchase/.test(text)
+    const bt = r.lendingRateType === "BALANCE_TRANSFER" || text.includes("balance transfer")
+    const purchase = r.lendingRateType === "PURCHASE" || text.includes("purchase")
     const applies_to = bt && purchase ? "both" : purchase ? "purchase" : "balance_transfer"
     const months = isoMonths(r.additionalValue) ?? isoMonths(r.additionalInfo)
     const offer = { applies_to, rate, ...(months !== undefined && months <= 60 ? { months } : {}) } as const
@@ -255,7 +255,7 @@ const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
     rewards: {
       program: program!,
       ...(partners.length > 0 ? { partners } : {}),
-      ...(bonus !== undefined ? { bonus_points: bonus } : {})
+      ...(bonus === undefined ? {} : { bonus_points: bonus })
     },
     fallback
   }

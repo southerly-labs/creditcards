@@ -95,7 +95,9 @@ describe("leaves anything complex for review", () => {
     ]
   ]
   for (const [name, value, info] of cases) {
-    test(name, () => expect(parse(value, info)._tag).toBe("Review"))
+    test(name, () => {
+      expect(parse(value, info)._tag).toBe("Review")
+    })
   }
 
   test("several loyalty features with different categories", () => {

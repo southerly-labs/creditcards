@@ -15,7 +15,7 @@ export type ParseResult =
   | { readonly _tag: "Parsed"; readonly earn: ReadonlyArray<EarnRate> }
   | { readonly _tag: "Review"; readonly reason: string }
 
-const clean = (s: string | null | undefined) => (s ?? "").replace(/\s+/g, " ").trim()
+const clean = (s: string | null | undefined) => (s ?? "").replaceAll(/\s+/g, " ").trim()
 
 export const loyaltyText = (features: ReadonlyArray<LoyaltyFeature>): string =>
   features.map((f) => [clean(f.additionalValue), clean(f.additionalInfo)].filter(Boolean).join(" — ")).join("\n")
@@ -82,7 +82,7 @@ const THRESHOLD = /\b(?:over|above|once you spend|after spending) \$\s?([\d,]+)/
 // cap on the last tier. (Points caps like "capped at 20,000 points" are COMPLEX.)
 const SPEND_CAP = /capped at \$\s?([\d,]+)/i
 
-const amount = (s: string) => Number(s.replace(/,/g, ""))
+const amount = (s: string) => Number(s.replaceAll(",", ""))
 
 export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult => {
   const text = loyaltyText(features)
@@ -108,7 +108,7 @@ export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult 
     tiers.push({ rate, ...(cap ? { cap_monthly: amount(cap) } : {}) })
   }
   const spendCap = text.match(SPEND_CAP)?.[1]
-  const last = tiers[tiers.length - 1]!
+  const last = tiers.at(-1)!
   if (spendCap && last.cap_monthly === undefined) tiers[tiers.length - 1] = { ...last, cap_monthly: amount(spendCap) }
   for (let i = 1; i < tiers.length; i++) {
     const prev = tiers[i - 1]!.cap_monthly

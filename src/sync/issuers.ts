@@ -21,17 +21,17 @@ export const ISSUER_SEEDS: Record<string, { readonly slug: string; readonly name
 export const slugify = (s: string) =>
   s
     .normalize("NFKD")
-    .replace(/[®™©]/g, "")
+    .replaceAll(/[®™©]/g, "")
     .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
+    .replaceAll("&", " and ")
+    .replaceAll(/[^a-z0-9]+/g, "-")
+    .replaceAll(/^-|-$/g, "")
 
 const CORPORATE_SUFFIX = /\b(limited|ltd|pty|australia|bank of australia)\b/gi
 
 export const issuerSeed = (brandName: string) =>
   ISSUER_SEEDS[brandName] ?? {
-    slug: slugify(brandName.replace(CORPORATE_SUFFIX, "")),
+    slug: slugify(brandName.replaceAll(CORPORATE_SUFFIX, "")),
     name: brandName.replace(/\s+(Limited|Ltd\.?)$/i, "").trim()
   }
 

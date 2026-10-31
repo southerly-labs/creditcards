@@ -45,7 +45,7 @@ const setPath = (obj: Obj, path: string, value: unknown) => {
     if (!target[k] || typeof target[k] !== "object") target[k] = {}
     target = target[k] as Obj
   }
-  const last = keys[keys.length - 1]!
+  const last = keys.at(-1)!
   if (value === undefined) delete target[last]
   else target[last] = value
 }
@@ -56,19 +56,19 @@ const isLocked = (locked: ReadonlyArray<string>, path: string) =>
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b)
 
 export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard): Obj => {
-  if (!existing) return structuredClone(incoming) as Obj
+  if (!existing) return structuredClone(incoming)
   const merged = structuredClone(existing) as Obj
   const locked = existing.locked ?? []
   for (const path of CDR_OWNED_PATHS) {
     if (isLocked(locked, path)) continue
     setPath(merged, path, structuredClone(getPath(incoming as Obj, path)))
   }
-  merged.status = "active"
-  delete merged.discontinued
+  merged["status"] = "active"
+  delete merged["discontinued"]
   // A rewards table without a program is invalid: the card no longer has a
   // loyalty program, so drop the table unless a human has locked it.
-  const rewards = merged.rewards as Obj | undefined
-  if (rewards && rewards.program === undefined && !isLocked(locked, "rewards")) delete merged.rewards
+  const rewards = merged["rewards"] as Obj | undefined
+  if (rewards && rewards["program"] === undefined && !isLocked(locked, "rewards")) delete merged["rewards"]
   return merged
 }
 
@@ -99,12 +99,12 @@ export const EARN_PATHS = ["rewards.earn", "rewards.earn_source", "rewards.earn_
 // ---- Guardrails ---------------------------------------------------------------
 // Auto-merge is only safe if implausible changes are held back for a human.
 
-const KEY_FIELDS = ["fees.annual", "rates.purchase", "fees.foreign_txn_pct"]
+const KEY_FIELDS = new Set(["fees.annual", "rates.purchase", "fees.foreign_txn_pct"])
 
 export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<string> => {
   const reasons: Array<string> = []
   for (const { path, before, after } of changes) {
-    if (KEY_FIELDS.includes(path) && before !== undefined && after === undefined) {
+    if (KEY_FIELDS.has(path) && before !== undefined && after === undefined) {
       reasons.push(`${path} disappeared (was ${before})`)
       continue
     }
