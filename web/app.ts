@@ -54,6 +54,11 @@ type Earn = NonNullable<NonNullable<Card["rewards"]>["earn"]>
 
 const baseEarn = (r: Row) => r.card.rewards?.earn?.find((e) => e.category == null || e.category === "")?.rate
 
+const governmentRates = (r: Row) =>
+  r.card.rewards?.earn?.filter((e) => /\bgovernment\b|\btaxation\b/iu.test(e.category ?? "")) ?? []
+
+const governmentEarn = (r: Row) => Math.max(0, ...governmentRates(r).map((e) => e.rate))
+
 const describeEarn = (earn: Earn) => {
   let previousCap: number | undefined
 
@@ -158,6 +163,17 @@ const columns: ReadonlyArray<Column> = [
       const more = earn.length > 1 ? '<span class="dim">+</span>' : ""
 
       return `<span title="${esc(describeEarn(earn))}">${base}${more}</span>`
+    }
+  },
+  {
+    label: "Government earn",
+    num: true,
+    sortValue: governmentEarn,
+    render: (r) => {
+      const rates = governmentRates(r)
+      const title = rates.length > 0 ? describeEarn(rates) : "No government earn rate listed; treated as 0"
+
+      return `<span title="${esc(title)}">${governmentEarn(r)} per $1</span>`
     }
   },
   {
@@ -291,6 +307,7 @@ const render = () => {
   const program = element("program", HTMLSelectElement).value
   const noFx = element("nofx", HTMLInputElement).checked
   const noFee = element("nofee", HTMLInputElement).checked
+  const government = element("government", HTMLInputElement).checked
   const showDisc = element("discontinued", HTMLInputElement).checked
 
   const matchesFilters = (r: Row) => {
@@ -303,6 +320,8 @@ const render = () => {
     if (noFx && r.card.fees.foreign_txn_pct !== 0) return false
 
     if (noFee && r.card.fees.annual !== 0) return false
+
+    if (government && governmentEarn(r) <= 0) return false
 
     if (q && !`${r.card.name} ${r.issuer} ${r.program?.name ?? ""}`.toLowerCase().includes(q)) return false
 
@@ -406,7 +425,7 @@ $("value-reset").addEventListener("click", () => {
 
 renderValueGrid()
 
-for (const id of ["search", "type", "program", "nofx", "nofee", "discontinued"]) {
+for (const id of ["search", "type", "program", "nofx", "nofee", "government", "discontinued"]) {
   $(id).addEventListener("input", render)
 }
 
