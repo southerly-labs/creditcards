@@ -20,7 +20,8 @@ export interface SyncReport {
   readonly newIssuers: ReadonlyArray<string>
   readonly newPrograms: ReadonlyArray<string>
   readonly brandErrors: ReadonlyArray<{ readonly brand: string; readonly error: string }>
-  // Earn-rate extraction, report-only for now: nothing here is written.
+  // Earn rates the parser set (unless the card was held), and cards a person
+  // needs to review with `bun run cli rewards todo`.
   readonly rewards: {
     readonly set: ReadonlyArray<{ readonly card: string; readonly earn: ReadonlyArray<EarnRate> }>
     readonly review: ReadonlyArray<{ readonly card: string; readonly reason: string }>
@@ -151,11 +152,16 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
       }
 
       const merged = mergeCard(existing, incoming)
+      let earnSet: ReadonlyArray<EarnRate> | undefined
       if (merged.rewards) {
         const loyalty = (product.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
         const plan = planRewards(merged.rewards as Card["rewards"], loyalty)
-        if (plan._tag === "Set") rewardsSet.push({ card: key, earn: plan.earn })
-        else if (plan._tag === "Review") rewardsReview.push({ card: key, reason: plan.reason })
+        if (plan._tag === "Set") {
+          merged.rewards = { ...merged.rewards, earn: plan.earn, earn_source: "parser", earn_text_hash: plan.hash }
+          earnSet = plan.earn
+        } else if (plan._tag === "Review") {
+          rewardsReview.push({ card: key, reason: plan.reason })
+        }
       }
       const decoded = yield* decodeCard(merged).pipe(Effect.result)
       if (decoded._tag === "Failure") {
@@ -170,6 +176,7 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
         continue
       }
       writes.set(key, decoded.success)
+      if (earnSet) rewardsSet.push({ card: key, earn: earnSet })
       if (existing) updated.push({ card: key, changes })
       else added.push(key)
     }
@@ -237,7 +244,7 @@ export const summariseReport = (r: SyncReport): string => {
   if (r.updated.length) {
     lines.push("Updated:")
     for (const u of r.updated) {
-      const shown = u.changes.filter((c) => c.path !== "cdr" && c.path !== "description")
+      const shown = u.changes.filter((c) => !["cdr", "description", "rewards.earn_source", "rewards.earn_text_hash"].includes(c.path))
       lines.push(`- ${u.card}: ${shown.map((c) => `${c.path} ${fmt(c.before)} → ${fmt(c.after)}`).join("; ") || "metadata"}`)
     }
     lines.push("")
@@ -246,8 +253,20 @@ export const summariseReport = (r: SyncReport): string => {
   if (r.held.length) lines.push("Held for review:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")
   if (r.newPrograms.length) lines.push("New fallback programs (add aliases or rename):", ...r.newPrograms.map((p) => `- ${p}`), "")
   if (r.rewards.set.length || r.rewards.review.length) {
-    lines.push(`Earn rates (report only): ${r.rewards.set.length} parsed, ${r.rewards.review.length} need review`, "")
+    lines.push(`Earn rates: ${r.rewards.set.length} set by parser, ${r.rewards.review.length} need review`, "")
   }
   if (r.brandErrors.length) lines.push("Brand errors:", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")
   return lines.join("\n")
 }
+
+// Body of the rewards-review issue: the cards the parser could not read.
+export const summariseRewardsReview = (r: SyncReport): string =>
+  [
+    `${r.rewards.review.length} cards have earn rates the parser could not read (sync ${r.date}).`,
+    "",
+    "To resolve them locally, run `bun run cli rewards todo` (optionally `--issuer <slug>`), set",
+    "`rewards.earn` from the CDR text it prints, then `bun run cli rewards stamp <issuer/card>...`.",
+    "See \"Earn rates\" in the README.",
+    "",
+    ...r.rewards.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
+  ].join("\n")

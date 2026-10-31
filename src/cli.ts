@@ -5,7 +5,7 @@ import { toApi, validate } from "./build/build.ts"
 import { CdrClient } from "./cdr/CdrClient.ts"
 import { formatQueue, reviewQueue, stamp } from "./rewards/review.ts"
 import { Store } from "./store/Store.ts"
-import { summariseReport, syncCdr } from "./sync/Sync.ts"
+import { summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
 
 const DATA_DIR = "data"
 
@@ -27,6 +27,7 @@ const sync = Command.make(
     const summary = summariseReport(report)
     yield* writeFile(`${reportDir}/sync-report.json`, JSON.stringify(report, null, 2))
     yield* writeFile(`${reportDir}/sync-summary.md`, summary)
+    yield* writeFile(`${reportDir}/rewards-review.md`, summariseRewardsReview(report))
     yield* Console.log(summary)
   })
 ).pipe(Command.withDescription("Pull CDR product data and update data/"))

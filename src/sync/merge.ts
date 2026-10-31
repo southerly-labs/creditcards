@@ -67,11 +67,14 @@ const withoutTimestamp = (path: string, value: unknown) => {
 }
 
 export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<FieldChange> => {
-  const paths = [...CDR_OWNED_PATHS, "status", "discontinued"]
+  const paths = [...CDR_OWNED_PATHS, "status", "discontinued", ...EARN_PATHS]
   return paths
     .map((path) => ({ path, before: before ? getPath(before as Obj, path) : undefined, after: getPath(after, path) }))
     .filter((c) => !equal(withoutTimestamp(c.path, c.before), withoutTimestamp(c.path, c.after)))
 }
+
+// Written by the earn-rate parser (src/rewards), not the CDR merge.
+export const EARN_PATHS = ["rewards.earn", "rewards.earn_source", "rewards.earn_text_hash"] as const
 
 // ---- Guardrails ---------------------------------------------------------------
 // Auto-merge is only safe if implausible changes are held back for a human.
@@ -83,6 +86,12 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<
   for (const { path, before, after } of changes) {
     if (KEY_FIELDS.includes(path) && before !== undefined && after === undefined) {
       reasons.push(`${path} disappeared (was ${before})`)
+      continue
+    }
+    if (path === "rewards.earn" && Array.isArray(before) && Array.isArray(after)) {
+      const base = (earn: ReadonlyArray<{ rate: number; category?: string }>) => earn.find((e) => !e.category)?.rate
+      const [b, a] = [base(before), base(after)]
+      if (b !== undefined && a !== undefined && Math.abs(a - b) > 1) reasons.push(`base earn rate ${b} → ${a}`)
       continue
     }
     if (typeof before !== "number" || typeof after !== "number") continue

@@ -19,11 +19,28 @@ The schema lives in `src/model/schema.ts`. Percentages are stored as percent (`2
 
 ### Editing data by hand
 
-The sync only owns the fields listed in `CDR_OWNED_PATHS` (`src/sync/merge.ts`). Other fields, such as `rewards.earn`, are never touched by the sync. To stop the sync from overwriting a CDR-derived field you have corrected, add it to `locked`:
+The CDR sync only owns the fields listed in `CDR_OWNED_PATHS` (`src/sync/merge.ts`); earn rates are handled separately (see below). To stop the sync from overwriting a CDR-derived field you have corrected, add it to `locked`:
 
 ```toml
 locked = [ "fees.foreign_txn_pct" ]
 ```
+
+### Earn rates
+
+Banks publish earn rates as prose, so they are filled in two ways:
+
+- **Parser.** During the sync, a conservative rule-based parser (`src/rewards/parse.ts`) sets `rewards.earn` for simple cases: a single rate or spend tiers. These cards have `earn_source = "parser"`.
+- **Review.** Everything else (category rates, bonuses, exclusions, cashback) is listed in the `rewards-review` issue. Resolve it locally, by hand or in a Claude Code session:
+
+  ```sh
+  bun run cli rewards todo --issuer anz          # cards to review, with their CDR text
+  # edit rewards.earn in the card's TOML file
+  bun run cli rewards stamp anz/business-black   # mark it reviewed (--none if no fixed rate)
+  ```
+
+  Stamped cards have `earn_source = "manual"` and are never overwritten. If the bank's loyalty text changes, the card goes back on the review list.
+
+No LLM runs in CI and no API key is needed.
 
 ### Sync guardrails
 
@@ -33,6 +50,7 @@ Updates auto-merge. Changes that look wrong are held back and reported in a `syn
 - an annual fee jumping by more than 50% and $100, a rate moving more than 5 points, or a key field disappearing
 - records that fail schema validation
 - more than half of an issuer's cards vanishing at once
+- a parsed base earn rate moving by more than 1 point per dollar
 
 Cards that disappear from CDR are marked `status = "discontinued"`, not deleted.
 

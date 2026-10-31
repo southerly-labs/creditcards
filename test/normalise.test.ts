@@ -135,5 +135,7 @@ describe("merge and guardrails", () => {
     expect(holdReasons([{ path: "fees.annual", before: 100, after: 120 }])).toHaveLength(0)
     expect(holdReasons([{ path: "rates.purchase", before: 20, after: 9 }])).toHaveLength(1)
     expect(holdReasons([{ path: "rates.purchase", before: 20, after: undefined }])).toHaveLength(1)
+    expect(holdReasons([{ path: "rewards.earn", before: [{ rate: 1 }], after: [{ rate: 3 }] }])).toHaveLength(1)
+    expect(holdReasons([{ path: "rewards.earn", before: [{ rate: 1 }], after: [{ rate: 1.5 }] }])).toHaveLength(0)
   })
 })

@@ -57,3 +57,22 @@ jobs:
           else
             gh issue create --title "CDR sync: changes held for review" --label sync-held --body-file .cache/sync-summary.md
           fi
+
+      - name: Update earn-rate review issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          count=$(jq '.rewards.review | length' .cache/sync-report.json)
+          number=$(gh issue list --label rewards-review --state open --json number --jq '.[0].number')
+          if [ "$count" -eq 0 ]; then
+            if [ -n "$number" ]; then
+              gh issue close "$number" --comment "All earn rates are resolved."
+            fi
+            exit 0
+          fi
+          gh label create rewards-review --color 0E8A16 --description "Earn rates the parser could not read" --force
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --body-file .cache/rewards-review.md
+          else
+            gh issue create --title "Earn rates to review" --label rewards-review --body-file .cache/rewards-review.md
+          fi
