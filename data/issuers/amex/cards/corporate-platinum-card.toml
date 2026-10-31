@@ -1,0 +1,27 @@
+name = "American Express® Corporate Platinum Card"
+type = "corporate"
+network = "amex"
+status = "active"
+description = "Corporate Charge Card for consolidating employee expenses that provides improved cash flow and increased visibility and control, while offering employees a range of premium rewards and travel benefits."
+url = "https://www.americanexpress.com/en-au/business/corporate-credit-cards/platinum-corporate-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAURGPL00000S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "70ad0bdd-7a5c-4a6c-ae29-47138b2717e0"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 800
+foreign_txn_pct = 3.5
+cash_advance_pct = 3.5
+
+[rates]
+[limits]
+[rewards]
+program = "amex-membership-rewards"
+
+[perks]
+insurance = [ "International & Domestic Travel Insurance" ]
+lounge_access = true
+

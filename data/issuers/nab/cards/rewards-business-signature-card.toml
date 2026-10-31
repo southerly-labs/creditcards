@@ -1,0 +1,33 @@
+name = "NAB Rewards Business Signature Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "With a business credit card, earn and redeem NAB Rewards Points."
+url = "https://www.nab.com.au/business/business-cards/nab-rewards-business-signature-card"
+image = "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "ff87d1af-392d-421a-903e-20b9517ea13e"
+last_updated = "2026-08-03T13:59:59Z"
+
+[fees]
+annual = 175
+foreign_txn_pct = 3
+
+[rates]
+purchase = 19.5
+cash_advance = 21.74
+interest_free_days = 44
+
+[limits]
+min_credit = 5000
+max_credit = 18000000
+
+[rewards]
+program = "nab-rewards"
+bonus_points = 200000
+
+[perks]
+insurance = [ "Unauthorised Transaction Insurance", "Transit Accident Insurance" ]
+

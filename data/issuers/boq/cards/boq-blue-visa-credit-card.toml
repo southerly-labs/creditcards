@@ -1,0 +1,38 @@
+name = "BOQ Blue Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our Blue Visa Credit Card rewards you when you buy - earning you 1 Q Rewards® credit card point for every dollar of eligible spend, which you can put towards just about anything."
+url = "https://application.boq.com.au/boq-forms/boq-card/boq-card-apply?"
+image = "https://marvel-b1-cdn.bc0a.com/f00000000185299/www.boq.com.au/content/dam/boq/images/cards/visa-cc-blue.png"
+
+[cdr]
+brand = "Bank of Queensland Limited"
+product_id = "a0f3781e-102c-ee11-9966-002248e1d7d5"
+last_updated = "2026-10-05T00:05:19Z"
+
+[fees]
+annual = 89
+foreign_txn_pct = 3.3
+cash_advance_pct = 3.5
+cash_advance_min = 3.5
+late_payment = 30
+
+[rates]
+purchase = 21.99
+cash_advance = 21.99
+balance_transfer = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 2000
+max_credit = 50000
+min_income = 25000
+
+[rewards]
+program = "boq-rewards"
+bonus_points = 50000
+
+[perks]
+insurance = [ "Extended Warranty Insurance", "Purchase Protection Insurance" ]
+

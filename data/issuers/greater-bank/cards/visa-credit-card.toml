@@ -1,0 +1,32 @@
+name = "Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Low rate, low fee, personal credit card"
+url = "https://www.greater.com.au/personal/credit-cards/"
+image = "https://www.greater.com.au/globalassets/images/gb-cards/gb_visa_credit_card.png"
+
+[cdr]
+brand = "Greater Bank"
+product_id = "3220"
+last_updated = "2026-09-23T14:00:00Z"
+
+[fees]
+annual = 49
+foreign_txn_pct = 3
+cash_advance_pct = 2
+late_payment = 20
+
+[rates]
+purchase = 9.95
+cash_advance = 9.95
+balance_transfer = 9.95
+interest_free_days = 55
+
+[limits]
+min_credit = 1000
+max_credit = 25000
+min_income = 20000
+
+[perks]
+

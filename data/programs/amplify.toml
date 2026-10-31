@@ -1,0 +1,3 @@
+name = "Amplify Rewards"
+type = "bank"
+aliases = [ 'amplify' ]

@@ -1,0 +1,27 @@
+name = "LOW RATE VISA CREDIT CARD"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A low rate credit card"
+
+[cdr]
+brand = "Auswide Bank Ltd"
+product_id = "02ef924b-4492-49bf-b248-5571909c10c1"
+last_updated = "2026-06-24T16:11:08.000+10:00"
+
+[fees]
+annual = 50
+foreign_txn_pct = 3
+
+[rates]
+purchase = 9.74
+cash_advance = 9.74
+balance_transfer = 0
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+max_credit = 50000
+
+[perks]
+

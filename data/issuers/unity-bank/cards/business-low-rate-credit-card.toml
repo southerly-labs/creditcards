@@ -1,0 +1,27 @@
+name = "Business  - Low Rate Credit Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "Our Business Low Rate Visa Credit Card features one of the lowest ongoing purchase rates in the market. And with up to 50 days interest free and a low annual fee, it all adds up to great value."
+url = "https://www.unitybank.com.au/forms/loan-enquiry-form/"
+
+[cdr]
+brand = "Unity Bank"
+product_id = "S79_BUSINESS_LOW_RATE_CREDIT_CARD"
+last_updated = "2026-09-30T10:27:11.000+10:00"
+
+[fees]
+annual = 50
+foreign_txn_pct = 3
+
+[rates]
+purchase = 12.49
+cash_advance = 19.49
+interest_free_days = 50
+
+[limits]
+min_credit = 1000
+max_credit = 100000
+
+[perks]
+

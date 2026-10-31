@@ -1,0 +1,34 @@
+name = "MyCard Premier Qantas"
+type = "personal"
+status = "active"
+description = "The Product is a premium rewards credit card that provides individuals with a line of credit facility, the ability to earn Qantas Frequent Flyer Points (Qantas Points) and access to ancillary benefits and complimentary insurances"
+url = "https://www.mycard.com.au/credit-cards/premier-card-qantas"
+image = "https://www.mycard.com.au/credit-cards/premier-card-qantas/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1762786581973/mycard-premier-digital-card-1536x969.png"
+
+[cdr]
+brand = "MyCard"
+product_id = "df13d083-6e71-4a4f-a855-4389ec0e07e1"
+last_updated = "2026-08-24T00:00:00Z"
+
+[fees]
+annual = 350
+additional_card = 0
+foreign_txn_pct = 3.5
+cash_advance_pct = 3.5
+late_payment = 30
+
+[rates]
+purchase = 22.49
+cash_advance = 22.99
+interest_free_days = 44
+
+[limits]
+min_credit = 10000
+max_credit = 100000
+
+[rewards]
+program = "qantas"
+
+[perks]
+insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Mobile phone insurance" ]
+

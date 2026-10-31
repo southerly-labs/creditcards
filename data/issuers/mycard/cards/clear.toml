@@ -1,0 +1,30 @@
+name = "MyCard Clear"
+type = "personal"
+status = "active"
+description = "The Product is a low interest rate credit card that provides individuals with a line of credit facility that has a low rate."
+image = "https://www.mycard.com.au/credit-cards/clear-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1762859319006/mycard-clear-digital-card-1536x969.png"
+
+[cdr]
+brand = "MyCard"
+product_id = "bbf2b66e-203b-45a9-b40b-520e3ff4d2e4"
+last_updated = "2026-08-24T00:00:00Z"
+
+[fees]
+annual = 149
+additional_card = 0
+foreign_txn_pct = 3.5
+cash_advance_pct = 3.5
+late_payment = 30
+
+[rates]
+purchase = 14.99
+cash_advance = 22.24
+interest_free_days = 44
+
+[limits]
+min_credit = 2000
+max_credit = 100000
+
+[perks]
+insurance = [ "Purchase Protection Insurance", "Extended Warranty Insurance", "Mobile phone insurance" ]
+

@@ -1,0 +1,29 @@
+name = "BusinessChoice Everyday"
+type = "business"
+status = "active"
+description = "Keep all your everyday business purchase records in one place, with a BusinessChoice Everyday."
+image = "https://www.westpac.com.au/content/dam/public/wbc/images/business/credit-cards/wbc_fc_b_credit-cards_bus-choice-everyday-visa_232x146.png"
+
+[cdr]
+brand = "Westpac"
+product_id = "CCBusLowRate"
+last_updated = "2026-10-29T02:41:55Z"
+
+[fees]
+annual = 135
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 0
+
+[rates]
+purchase = 14.25
+cash_advance = 19.96
+interest_free_days = 55
+
+[limits]
+min_credit = 2000
+max_credit = 250000
+
+[perks]
+insurance = [ "Complimentary insurance", "Interstate Flight Inconvenience insurance", "Cardholder's Transit Accident insurance", "Account holder's Unauthorised Transaction insurance" ]
+

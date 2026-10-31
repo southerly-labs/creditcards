@@ -1,0 +1,27 @@
+name = "Low Rate Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our award-winning Low Rate Visa Credit Card features one of the lowest ongoing purchase rates in the market. And with up to 50 days interest free and a low annual fee, it all adds up to great value."
+
+[cdr]
+brand = "Unity Bank"
+product_id = "S80_LOW_RATE_CREDIT_CARD"
+last_updated = "2026-09-14T10:49:01.000+10:00"
+
+[fees]
+annual = 50
+foreign_txn_pct = 3
+
+[rates]
+purchase = 7.49
+cash_advance = 15.49
+balance_transfer = 0
+interest_free_days = 50
+
+[limits]
+min_credit = 1000
+max_credit = 75000
+
+[perks]
+

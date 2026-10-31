@@ -1,0 +1,26 @@
+name = "Low Rate Credit Card (New)"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A VISA credit card with a low rate and a low monthly fee."
+url = "https://apply.greatsouthernbank.com.au/integatecus/frmIntegate.aspx?company=CUA&merchant=250&operator=WEB&Product=CC&ccProductId=1&ccCardDesign=1&ccProductName=Low%20Rate%20Credit%20Card&ccPromoCode=&encp=3PbPtkh51DQ5EnhM38OwPPF6jX0oem/KmPj0zQrDv80=a1RV/y24aquBKZoqpcE8gLiWGIMvYN6z&_gl=1*1lywldp*_gcl_au*NTQ1MDkxOTQ1LjE3NTQ0NDUxNzU."
+image = "https://www.greatsouthernbank.com.au/media/jthn/low-rate.webp"
+
+[cdr]
+brand = "Great Southern Bank"
+product_id = "2691-0100"
+last_updated = "2026-04-01T14:01:00.00000Z"
+
+[fees]
+annual = 60
+
+[rates]
+purchase = 11.99
+cash_advance = 21.74
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+
+[perks]
+

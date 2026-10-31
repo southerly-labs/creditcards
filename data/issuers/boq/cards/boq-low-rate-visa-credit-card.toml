@@ -1,0 +1,33 @@
+name = "BOQ Low Rate Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "If paying down your balance each month is keeping you up, our Low Rate Visa Credit Card can help you keep costs down."
+url = "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card"
+image = "https://marvel-b1-cdn.bc0a.com/f00000000185299/www.boq.com.au/content/dam/boq/images/cards/visa-cc-low-rate.png"
+
+[cdr]
+brand = "Bank of Queensland Limited"
+product_id = "9af3781e-102c-ee11-9966-002248e1d7d5"
+last_updated = "2026-09-01T01:55:01Z"
+
+[fees]
+annual = 65
+foreign_txn_pct = 3.3
+cash_advance_pct = 3.5
+cash_advance_min = 3.5
+late_payment = 30
+
+[rates]
+purchase = 13.99
+cash_advance = 21.99
+balance_transfer = 21.99
+interest_free_days = 55
+
+[limits]
+min_credit = 2000
+max_credit = 30000
+min_income = 25000
+
+[perks]
+

@@ -1,0 +1,31 @@
+name = "Bendigo Ready Credit Card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "Bendigo Ready Credit Card lets you enjoy a $0 annual fee - this year and beyond. Also, save with $0 international transaction fees, a range of added insurances, purchase protections, plus access to Mastercard Priceless Cities exclusive experiences and special offers - it's the only card you'll need. Plus you'll receive up to 55 days interest free on purchases."
+image = "https://www.bendigobank.com.au/siteassets/personal/creditcards/bendigoreadycreditcard/promoexploretiles/highlightsection-ready.jpg"
+
+[cdr]
+brand = "Bendigo Bank"
+product_id = "c9e36d80-661e-4aad-87d5-90521d174882"
+last_updated = "2026-10-26T04:53:22.959Z"
+
+[fees]
+annual = 0
+foreign_txn_pct = 0
+cash_advance_pct = 3
+late_payment = 15
+
+[rates]
+purchase = 19.99
+cash_advance = 19.99
+balance_transfer = 19.99
+interest_free_days = 55
+
+[limits]
+min_credit = 3000
+max_credit = 50000
+
+[perks]
+insurance = [ "International Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess Insurance" ]
+

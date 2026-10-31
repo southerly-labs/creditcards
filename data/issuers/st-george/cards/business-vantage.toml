@@ -1,0 +1,25 @@
+name = "Business Vantage"
+type = "business"
+status = "active"
+description = "A low interest rate on purchases to help manage your business cash flow"
+image = "https://www.stgeorge.com.au/content/dam/stg/images/business/credit-cards/BusinessVantage-Credit-Card_261x166.jpg"
+
+[cdr]
+brand = "St.George Bank"
+product_id = "STGCCBusBusinessVantage"
+last_updated = "2026-10-29T01:03:02Z"
+
+[fees]
+annual = 55
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 0
+
+[rates]
+purchase = 9.99
+cash_advance = 17.15
+interest_free_days = 55
+
+[limits]
+[perks]
+

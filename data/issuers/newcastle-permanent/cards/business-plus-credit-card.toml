@@ -1,0 +1,29 @@
+name = "Business Plus Credit Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "A business credit card designed to help separate company and business expenses, manage spending, and simplify bookkeeping."
+
+[cdr]
+brand = "Newcastle Permanent"
+product_id = "CC_businesspluscc"
+last_updated = "2026-08-25T00:00:00+10:00"
+
+[fees]
+annual = 55
+foreign_txn_pct = 3
+cash_advance_pct = 2
+late_payment = 5
+
+[rates]
+purchase = 11.99
+cash_advance = 11.99
+balance_transfer = 11.99
+interest_free_days = 44
+
+[limits]
+min_credit = 500
+max_credit = 50000
+
+[perks]
+

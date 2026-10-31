@@ -1,0 +1,37 @@
+name = "Altitude Black Rewards World Mastercard"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "Our premium Altitude Rewards credit card gets you our highest Points earn rate, flexibility in how you redeem with Pay with Points, complimentary airport lounge access, insurances and more."
+url = "https://www.westpac.com.au/credit-cards/reward/altitude-black/summary"
+image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Black%20Mastercard_232x146_black.jpg"
+
+[cdr]
+brand = "Westpac"
+product_id = "CCAltBlackRewards"
+last_updated = "2026-10-29T02:41:55Z"
+
+[fees]
+annual = 370
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 23.98
+cash_advance = 23.99
+interest_free_days = 45
+
+[limits]
+min_credit = 6000
+max_credit = 75000
+min_income = 75000
+
+[rewards]
+program = "westpac-altitude"
+bonus_points = 150000
+
+[perks]
+insurance = [ "Complimentary insurance", "Complimentary travel insurances" ]
+lounge_access = true
+

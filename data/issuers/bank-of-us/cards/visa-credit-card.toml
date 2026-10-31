@@ -1,0 +1,27 @@
+name = "Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A Bank of us Visa Credit Card gives you all the features you'd expect from a credit card accepted at more than 24 million outlets worldwide. With card limits from as little of $500, you'll get the ext"
+url = "https://bankofus.com.au/online-application?refer=bank-accounts"
+image = "https://secureapps.bankofus.com.au/ibank3/Images/OBCreditCard.png"
+
+[cdr]
+brand = "Bank of us"
+product_id = "Visa_Credit_Card"
+last_updated = "2026-04-13T22:42:12.000+10:00"
+
+[fees]
+annual = 39
+foreign_txn_pct = 2.5
+
+[rates]
+purchase = 9.99
+cash_advance = 9.99
+
+[limits]
+min_credit = 500
+max_credit = 50000
+
+[perks]
+

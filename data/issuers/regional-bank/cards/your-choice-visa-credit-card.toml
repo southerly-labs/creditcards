@@ -1,0 +1,28 @@
+name = "Your Choice Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Versatile and competitive no frills credit card with low rates, low annual fee and great discounts for home loan borrowers."
+url = "https://apply.regionalaustraliabank.com.au/cip/rab/p/community/personalcredit/application.html?OfficeUseApplicationType=Credit%20card&SelectCreditCardType=Your%20Choice%20Visa"
+image = "https://regionalaustraliabank-prod.imgix.net/getContentAsset/76e93286-ba9c-4671-a273-76cfa028b41c/3beffb48-3dfa-48f3-8905-aded8557907a/Visa-Your-Choice-regional-australia-bank.png?auto=format&w=800"
+
+[cdr]
+brand = "Regional Australia Bank"
+product_id = "8d097100-9251-4174-a9e5-8af00812ca87"
+last_updated = "2026-06-29T04:05:39.586605Z"
+
+[fees]
+annual = 40
+additional_card = 0
+foreign_txn_pct = 3
+
+[rates]
+purchase = 14.69
+cash_advance = 14.69
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+
+[perks]
+

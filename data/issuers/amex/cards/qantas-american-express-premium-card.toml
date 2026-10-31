@@ -1,0 +1,32 @@
+name = "The Qantas American Express Premium Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "The Qantas American Express Premium Card comes with excellent benefits. Enjoy airport lounge access, complimentary Qantas Wine Premium Membership, complimentary travel insurance and earn Qantas Points with every dollar spent."
+url = "https://www.americanexpress.com/en-au/credit-cards/qantas-premium-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG54100000S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "58a96cd8-b900-462f-bf5d-78a3671b4b49"
+last_updated = "2026-07-09T05:00:00.000Z"
+
+[fees]
+annual = 249
+additional_card = 0
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+interest_free_days = 44
+
+[limits]
+min_credit = 2000
+
+[rewards]
+program = "qantas"
+
+[perks]
+insurance = [ "Complimentary Travel Insurance", "Card Purchase Cover", "Card Refund Cover" ]
+lounge_access = true
+

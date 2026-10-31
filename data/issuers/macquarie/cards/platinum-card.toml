@@ -1,0 +1,33 @@
+name = "Macquarie Platinum Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "The Macquarie Platinum Rewards Credit Card is designed for customers who are willing to consider incurring (and are in a financial position to pay) a higher annual fee and/or interest rates in order to obtain the additional benefits of a rewards credit card."
+url = "https://www.macquarie.com.au/everyday-banking/credit-cards.html"
+image = "https://www.macquarie.com.au/assets/bfs/images/open-banking/credit-cards/Macquarie_VISA_PLATINUM_front_Master_Masked_CDR.png"
+
+[cdr]
+brand = "Macquarie Bank Limited"
+product_id = "498415VGSGLD"
+last_updated = "2026-03-13T00:01:00.001Z"
+
+[fees]
+annual = 149
+foreign_txn_pct = 0
+cash_advance_pct = 3
+late_payment = 20
+
+[rates]
+purchase = 20.7
+cash_advance = 20.7
+interest_free_days = 55
+
+[limits]
+min_credit = 6000
+min_income = 50000
+
+[rewards]
+program = "macquarie-rewards"
+
+[perks]
+

@@ -1,0 +1,67 @@
+:root {
+  --bg: #fff;
+  --fg: #1a1a1a;
+  --muted: #6b6b6b;
+  --line: #e6e6e6;
+  --head: #fafafa;
+  --accent: #0b6bcb;
+  --good: #1a7f37;
+  color-scheme: light dark;
+  font: 14px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111;
+    --fg: #e8e8e8;
+    --muted: #9a9a9a;
+    --line: #2a2a2a;
+    --head: #181818;
+    --accent: #5aa9ff;
+    --good: #4cc26b;
+  }
+}
+
+body { margin: 0; background: var(--bg); color: var(--fg); }
+header { padding: 20px 24px 8px; }
+h1 { margin: 0; font-size: 20px; }
+.sub { margin: 4px 0 0; color: var(--muted); }
+
+.controls {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  padding: 12px 24px; position: sticky; top: 0; background: var(--bg);
+  border-bottom: 1px solid var(--line); z-index: 2;
+}
+.controls input[type="search"] { width: 280px; }
+.controls input, .controls select {
+  font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--fg);
+}
+.controls label { display: flex; gap: 4px; align-items: center; color: var(--muted); }
+#count { margin-left: auto; color: var(--muted); }
+
+main { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { padding: 8px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+th {
+  position: sticky; top: 57px; background: var(--head); font-weight: 600; font-size: 12px;
+  color: var(--muted); cursor: pointer; user-select: none; z-index: 1;
+}
+th.num, td.num { text-align: right; }
+th[data-dir="asc"]::after { content: " ↑"; }
+th[data-dir="desc"]::after { content: " ↓"; }
+tbody tr:hover { background: var(--head); }
+
+.card { display: flex; gap: 10px; align-items: center; min-width: 280px; white-space: normal; }
+.card img { width: 48px; height: 30px; object-fit: contain; flex: none; }
+.card .ph { width: 48px; height: 30px; border-radius: 4px; background: var(--line); flex: none; }
+.card a { color: var(--fg); text-decoration: none; font-weight: 500; }
+.card a:hover { color: var(--accent); }
+.issuer { color: var(--muted); font-size: 12px; }
+.dim { color: var(--muted); }
+.zero { color: var(--good); font-weight: 500; }
+.tag {
+  display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 12px;
+  background: var(--head); border: 1px solid var(--line);
+}
+.disc { opacity: 0.5; }

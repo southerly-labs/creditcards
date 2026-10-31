@@ -1,0 +1,39 @@
+name = "VISA Platinum Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Earn Qantas Points* on your everyday purchases and enjoy a host of other exceptional features with our Visa Platinum Credit Card."
+url = "https://apply.qudosbank.com.au/Apply/credit-card"
+image = "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b434aae6516cad1ecd0_visa-platinum-credit-card.png"
+
+[cdr]
+brand = "Qudos Bank"
+product_id = "9a6f5620-e93c-4e0c-bc23-d7f979b97f69"
+last_updated = "2026-02-27T04:23:05.703Z"
+
+[fees]
+annual = 189
+foreign_txn_pct = 3
+cash_advance_min = 5
+late_payment = 0
+
+[rates]
+purchase = 18.99
+cash_advance = 18.99
+balance_transfer = 18.99
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "both"
+rate = 4.99
+months = 5
+
+[limits]
+min_credit = 6000
+max_credit = 20000
+
+[rewards]
+program = "qantas"
+
+[perks]
+

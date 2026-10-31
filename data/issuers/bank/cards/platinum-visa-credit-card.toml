@@ -1,0 +1,31 @@
+name = "Platinum Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Be rewarded for your spending with Qantas Points. Great for those who pay their card in full each month and are a Qantas Frequent Flyer member."
+image = "https://cdn.bfldr.com/1R31Y8GR/at/8pjw5xj3k6637fhx8gw7tb/1_Platinum.png?auto=webp&format=png"
+
+[cdr]
+brand = "Bank Australia"
+product_id = "f23e4849-212b-4a22-beb1-a088654d73e5"
+last_updated = "2026-04-10T05:29:20.096Z"
+
+[fees]
+annual = 189
+additional_card = 0
+foreign_txn_pct = 3
+cash_advance_min = 5
+
+[rates]
+purchase = 20.24
+cash_advance = 20.24
+interest_free_days = 55
+
+[limits]
+min_credit = 1000
+
+[rewards]
+program = "qantas"
+
+[perks]
+

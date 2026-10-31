@@ -1,0 +1,23 @@
+name = "Zip Money"
+type = "personal"
+status = "active"
+description = "Larger-purchase account with flexible repayments and promotional interest-free periods at eligible merchants."
+url = "https://zip.co/au/zip-money"
+
+[cdr]
+brand = "Zip"
+product_id = "zip-money"
+last_updated = "2026-08-04T00:00:00+00:00"
+
+[fees]
+annual = 119.4
+foreign_txn_pct = 3
+late_payment = 15
+
+[rates]
+[limits]
+min_credit = 1000
+max_credit = 5000
+
+[perks]
+

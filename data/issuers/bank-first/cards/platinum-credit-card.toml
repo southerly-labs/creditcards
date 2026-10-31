@@ -1,0 +1,30 @@
+name = "Platinum Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Platinum Credit Card Account"
+url = "https://apply.bankfirst.com.au/Integate/frmIntegate.aspx?company=VTMB&merchant=VTMB&operator=WEB&encp=DCVQRsiMd4t5HMKYD2ht0jlNCxa%2b09p7HVdilWCCsu4%3d5egBQlp30a4TpwxSkFA8jw%3d%3d&product=AU"
+image = "https://cdn.intelligencebank.com/au/share/e3Gq6M/23KlN/KPAAz/original/visa-platinum-credit"
+
+[cdr]
+brand = "Bank First"
+product_id = "22e0e7ff-db3f-4934-9c47-730ac3a1b980"
+last_updated = "2026-06-15T23:24:20.344287Z"
+
+[fees]
+annual = 129
+foreign_txn_pct = 0
+cash_advance_min = 2.5
+late_payment = 20
+
+[rates]
+purchase = 11.49
+cash_advance = 19.59
+balance_transfer = 11.49
+interest_free_days = 55
+
+[limits]
+min_credit = 6000
+
+[perks]
+

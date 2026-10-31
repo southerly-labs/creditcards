@@ -1,0 +1,36 @@
+name = "David Jones Prestige Credit Card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "Embrace a world of luxury with the David Jones Prestige Credit Card. A world of unforgettable benefits is always at your fingertips when you shop with the David Jones Prestige credit card. Unlock exclusive experiences, irresistible offers, extraordinary travel rewards and airport lounge access. Plus, earn and redeem David Jones Points when you shop."
+url = "https://cards.latitudefinancial.com/davidjonesprestige"
+image = "https://www.davidjones.com/images/assetimages/2024/CreditCard/card_Prestige.png"
+
+[cdr]
+brand = "Latitude Credit Cards"
+product_id = "2276afae-ea3e-4a8b-98c2-889e876aab89"
+last_updated = "2026-09-07T04:06:47.981Z"
+
+[fees]
+annual = 345
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 35
+
+[rates]
+purchase = 24.99
+cash_advance = 25.99
+balance_transfer = 25.99
+interest_free_days = 44
+
+[limits]
+min_credit = 6000
+min_income = 30000
+
+[rewards]
+program = "david-jones-rewards"
+
+[perks]
+insurance = [ "E-commerce Insurance", "Complimentary Travel Insurance", "Purchase Protection Insurance" ]
+lounge_access = true
+

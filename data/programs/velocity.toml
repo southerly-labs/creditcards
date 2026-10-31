@@ -1,0 +1,5 @@
+name = "Velocity Frequent Flyer"
+type = "airline"
+aliases = [ 'velocity' ]
+priority = 10
+website = "https://www.velocityfrequentflyer.com"

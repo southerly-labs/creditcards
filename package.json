@@ -1,0 +1,23 @@
+{
+  "name": "creditcards",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cli": "bun run src/cli.ts",
+    "sync": "bun run src/cli.ts sync",
+    "validate": "bun run src/cli.ts validate",
+    "build": "bun run src/cli.ts build",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "dev": "bun run build && bun run web/server.ts"
+  },
+  "dependencies": {
+    "@effect/platform-bun": "4.1.0",
+    "effect": "4.1.0",
+    "smol-toml": "^1.9.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "typescript": "^7.0.2"
+  }
+}

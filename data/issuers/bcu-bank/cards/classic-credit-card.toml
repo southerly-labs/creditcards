@@ -1,0 +1,29 @@
+name = "Classic Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our Classic Credit Card offers a competitive rate, up to 52 days interest free, and is protected by Visa's Zero Liability policy."
+image = "https://digital.pnbank.com.au/globalassets/internet-banking/onboarding/products/bcu-visa-credit-classic_oct25.png"
+
+[cdr]
+brand = "BCU Bank"
+product_id = "162"
+last_updated = "2026-07-10T14:00:53.0189421Z"
+
+[fees]
+annual = 45
+foreign_txn_pct = 0
+late_payment = 5
+
+[rates]
+purchase = 11.95
+cash_advance = 14.8
+balance_transfer = 11.99
+interest_free_days = 52
+
+[limits]
+min_credit = 500
+max_credit = 100000
+
+[perks]
+

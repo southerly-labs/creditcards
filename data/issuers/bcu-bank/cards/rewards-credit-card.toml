@@ -1,0 +1,29 @@
+name = "Rewards Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Get cashback on eligible purchases with a BCU Rewards Credit Card, as well as features such as fraud monitoring and Verified by Visa protection."
+image = "https://digital.pnbank.com.au/globalassets/internet-banking/onboarding/products/bcu-visa-credit-rewards_oct25.png"
+
+[cdr]
+brand = "BCU Bank"
+product_id = "164"
+last_updated = "2026-07-10T14:00:53.0189421Z"
+
+[fees]
+annual = 89
+foreign_txn_pct = 0
+late_payment = 5
+
+[rates]
+purchase = 13.05
+cash_advance = 14.8
+balance_transfer = 11.99
+interest_free_days = 52
+
+[limits]
+min_credit = 500
+max_credit = 100000
+
+[perks]
+

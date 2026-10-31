@@ -1,0 +1,36 @@
+name = "Smart credit card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "Enjoy new lifestyle and travel benefits with the Smart credit card, designed to help you get more value. Plus, enjoy a new points experience if you're eligible for CommBank Yello."
+url = "https://www.commbank.com.au/credit-cards/smart.html"
+image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-smart-credit-card.png"
+
+[cdr]
+brand = "CommBank"
+product_id = "ff7e709bc7f8414da253f9c10308fe24"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+annual = 228
+additional_card = 0
+foreign_txn_pct = 3.5
+cash_advance_pct = 3
+late_payment = 20
+
+[rates]
+purchase = 20.99
+cash_advance = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 2000
+
+[rewards]
+program = "commbank-yello"
+bonus_points = 60000
+
+[perks]
+insurance = [ "Cracked Screen Cover", "International travel insurance" ]
+lounge_access = true
+

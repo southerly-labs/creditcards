@@ -1,0 +1,37 @@
+name = "Virgin Australia Velocity Flyer Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Go places faster with our award-winning Virgin Australia Velocity Flyer credit card. Turn your everyday spend into flights, accommodation and more. The sky's the limit."
+url = "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/virginmoney-card-apply?"
+image = "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/flyer-credit-card.png"
+
+[cdr]
+brand = "Virgin Money"
+product_id = "76126e21-102c-ee11-9966-002248e1dc43"
+last_updated = "2026-10-21T04:44:27Z"
+
+[fees]
+annual = 169
+foreign_txn_pct = 3.3
+cash_advance_pct = 2.7
+cash_advance_min = 2.7
+late_payment = 30
+
+[rates]
+purchase = 21.99
+cash_advance = 21.99
+balance_transfer = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 6000
+min_income = 35000
+
+[rewards]
+program = "velocity"
+bonus_points = 70000
+
+[perks]
+insurance = [ "Mobile Phone Insurance", "Purchase Protection Insurance", "Extended Warranty Insurance" ]
+

@@ -1,0 +1,40 @@
+name = "Bankwest Qantas Platinum Mastercard"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "A credit card for earning unlimited Qantas Points."
+url = "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer"
+image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-qantas-platinum.png"
+
+[cdr]
+brand = "Bankwest"
+product_id = "ff24e3061b6a4de3b91c101607c3f15f"
+last_updated = "2026-10-09T11:08:30.000Z"
+
+[fees]
+annual = 199
+foreign_txn_pct = 0
+cash_advance_pct = 3
+late_payment = 25
+
+[rates]
+purchase = 19.99
+cash_advance = 21.99
+balance_transfer = 19.99
+interest_free_days = 44
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 2.99
+months = 9
+
+[limits]
+min_credit = 1000
+
+[rewards]
+program = "qantas"
+bonus_points = 40000
+
+[perks]
+insurance = [ "Complimentary Overseas Travel Insurance" ]
+

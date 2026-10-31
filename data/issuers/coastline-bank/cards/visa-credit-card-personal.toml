@@ -1,0 +1,23 @@
+name = "Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Visa Credit Card"
+url = "https://apply.coastline.com.au/cip/coastline/p/coastline/consumercredit/application.html?a=UDIYMN06R7P6YVQ7&s=APPLICATION::UDIYMN06R7P6YVQ7"
+
+[cdr]
+brand = "Coastline Bank"
+product_id = "25"
+last_updated = "2026-10-14T14:00:14.4205168Z"
+
+[fees]
+[rates]
+purchase = 10.24
+cash_advance = 10.24
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+
+[perks]
+

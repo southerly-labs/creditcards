@@ -1,0 +1,37 @@
+name = "Police Student Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "This product is suitable for members who are an active student at the Tasmania Rokeby Academy, or at session 2 of the NSW Goulburn Academy, or have graduated from either Academy within the last 6 months and are looking for a low-cost credit card for everyday purchases, unexpected expenses, travel, bill management, international transactions, or online payments."
+url = "https://www.policebank.com.au/academy"
+image = "https://www.policebank.com.au/wp-content/uploads/2026/01/PB_D-CUSCAL-LS-3472549-Police-Bank-V145HC_512x321.png"
+
+[cdr]
+brand = "Police Bank"
+product_id = "4b04816d-c585-4702-88f8-19f928de57a0"
+last_updated = "2026-07-28T22:48:33.717Z"
+
+[fees]
+annual = 30
+foreign_txn_pct = 3
+cash_advance_min = 3.8
+late_payment = 10
+
+[rates]
+purchase = 10.76
+cash_advance = 10.76
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 3
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 7.99
+months = 9
+
+[limits]
+[perks]
+

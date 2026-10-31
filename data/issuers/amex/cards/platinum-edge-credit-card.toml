@@ -1,0 +1,32 @@
+name = "American Express® Platinum Edge Credit Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "Earn higher rewards on everyday spending at select supermarkets and petrol stations."
+url = "https://www.americanexpress.com/au/credit-cards/platinum-edge-credit-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUP07400010S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "e0118b95-48c6-47dc-9f76-545330338cde"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 195
+additional_card = 0
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+interest_free_days = 55
+
+[limits]
+min_credit = 3000
+
+[rewards]
+program = "amex-membership-rewards"
+
+[perks]
+insurance = [ "International & Domestic Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Smartphone Front Screen Cover Insurance", "Buyer's Advantage Cover" ]
+lounge_access = true
+

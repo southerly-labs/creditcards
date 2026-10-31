@@ -1,0 +1,34 @@
+name = "Latitude Low Rate Mastercard"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "Latitude Low Rate Mastercard with a low purchase rate of 13.99% p.a., up to 55 days interest free on general purchases, and access to Latitude Rewards discounts and offers."
+url = "https://www.latitudefinancial.com.au/credit-cards/low-rate/"
+image = "https://images.ctfassets.net/w0q68lqdeo57/GlKmCLDJ2z1Xd52kge2dE/ed4c3987aabeabad1733f88218cde8c6/cc-lr_1.jpg"
+
+[cdr]
+brand = "Latitude Credit Cards"
+product_id = "fc9d7803-dad4-45a2-9b1b-cebf3bf65653"
+last_updated = "2026-10-12T07:48:57.375Z"
+
+[fees]
+annual = 69
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 45
+
+[rates]
+purchase = 13.99
+cash_advance = 29.99
+balance_transfer = 29.99
+interest_free_days = 55
+
+[limits]
+min_credit = 1000
+min_income = 20000
+
+[rewards]
+program = "latitude-rewards"
+
+[perks]
+

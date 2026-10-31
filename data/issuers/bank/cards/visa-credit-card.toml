@@ -1,0 +1,28 @@
+name = "Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "No annual fee and interest fee days to reduce your card costs. Great for those who pay off their card in full each month."
+image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
+
+[cdr]
+brand = "Bank Australia"
+product_id = "7f413f78-bbd6-4cd7-836b-04887d0e15dc"
+last_updated = "2026-10-27T22:30:45.766Z"
+
+[fees]
+annual = 0
+additional_card = 0
+foreign_txn_pct = 3
+cash_advance_min = 3.5
+
+[rates]
+purchase = 19.74
+cash_advance = 19.74
+interest_free_days = 55
+
+[limits]
+min_credit = 1000
+
+[perks]
+

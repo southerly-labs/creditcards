@@ -1,0 +1,40 @@
+name = "Bankwest Zero Platinum Mastercard"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "A credit card for everyday spending with no annual fee."
+url = "https://www.bankwest.com.au/credit-cards/no-annual-fee"
+image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-zero-platinum.png"
+
+[cdr]
+brand = "Bankwest"
+product_id = "1fd24bada54f4bcebdac39458c282f35"
+last_updated = "2026-10-09T11:08:30.000Z"
+
+[fees]
+annual = 0
+foreign_txn_pct = 0
+cash_advance_pct = 3
+late_payment = 25
+
+[rates]
+purchase = 18.99
+cash_advance = 21.99
+balance_transfer = 18.99
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 6
+
+[[rates.intro]]
+applies_to = "purchase"
+rate = 0
+months = 6
+
+[limits]
+min_credit = 1000
+
+[perks]
+

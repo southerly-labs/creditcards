@@ -1,0 +1,30 @@
+name = "MyCard Simplicity"
+type = "personal"
+status = "active"
+description = "The product is a low fee credit card that provides individuals with a line of credit facility."
+url = "https://www.mycard.com.au/credit-cards/simplicity-card"
+image = "https://www.mycard.com.au/credit-cards/simplicity-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1759891922057/mycard-simplicity-digital-card-1536x969.png"
+
+[cdr]
+brand = "MyCard"
+product_id = "7916a828-1572-43bb-9a1f-c0af9b082f17"
+last_updated = "2026-08-24T00:00:00Z"
+
+[fees]
+annual = 49
+additional_card = 0
+foreign_txn_pct = 3.5
+cash_advance_pct = 3.5
+
+[rates]
+purchase = 22.49
+cash_advance = 22.99
+interest_free_days = 44
+
+[limits]
+min_credit = 2000
+max_credit = 100000
+
+[perks]
+insurance = [ "Extended Warranty Insurance", "Purchase Protection Insurance", "Mobile Phone Insurance" ]
+

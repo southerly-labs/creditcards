@@ -1,0 +1,36 @@
+name = "Virgin Money Anytime Rewards Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our highest Virgin Money Points earning credit card. Earn Virgin Money Points for every $1 you spend on the card, with no limit to the points you can rack up."
+url = "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/virginmoney-card-apply?"
+image = "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/anytime-rewards-credit-card.png"
+
+[cdr]
+brand = "Virgin Money"
+product_id = "085dd673-e910-ef11-9f89-002248921877"
+last_updated = "2026-09-30T05:31:22Z"
+
+[fees]
+annual = 169
+foreign_txn_pct = 0
+cash_advance_pct = 2.7
+cash_advance_min = 2.7
+late_payment = 30
+
+[rates]
+purchase = 21.99
+cash_advance = 21.99
+balance_transfer = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 6000
+min_income = 35000
+
+[rewards]
+program = "virgin-money-rewards"
+bonus_points = 60000
+
+[perks]
+

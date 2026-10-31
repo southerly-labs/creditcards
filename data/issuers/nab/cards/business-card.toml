@@ -1,0 +1,29 @@
+name = "NAB Business Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "Manage your employee's business expenses by giving them their own charge card."
+url = "https://www.nab.com.au/business/business-cards/nab-business-card"
+image = "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "5f5dfdb4-43b1-41e6-923e-546bb801e026"
+last_updated = "2026-06-01T13:59:59Z"
+
+[fees]
+annual = 108
+foreign_txn_pct = 3
+
+[rates]
+purchase = 16.5
+cash_advance = 16.5
+interest_free_days = 35
+
+[limits]
+min_credit = 5000
+max_credit = 18000000
+
+[perks]
+insurance = [ "Unauthorised Transaction Insurance" ]
+

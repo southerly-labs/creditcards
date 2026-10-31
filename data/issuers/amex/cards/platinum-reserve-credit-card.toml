@@ -1,0 +1,32 @@
+name = "American Express® Platinum Reserve Credit Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "The American Express Platinum Reserve Credit Card is the ideal companion to your Charge Card, giving you the flexibility of a Credit Card, complimentary Travel Insurance and Membership Rewards points."
+url = "https://www.americanexpress.com/au/credit-cards/platinum-reserve-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUP07100010S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "fee5ec63-439a-481b-89db-d56145715a33"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 395
+additional_card = 0
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+interest_free_days = 55
+
+[limits]
+min_credit = 3000
+
+[rewards]
+program = "amex-membership-rewards"
+
+[perks]
+insurance = [ "International & Domestic Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Smartphone Front Screen Cover Insurance", "Buyer's Advantage Cover" ]
+lounge_access = true
+

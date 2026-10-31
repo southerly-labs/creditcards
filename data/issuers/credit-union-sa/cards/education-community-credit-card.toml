@@ -1,0 +1,32 @@
+name = "Education Community Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our Education Community Credit Card includes no annual fee, a 0% pa introductory rate for the first six months on purchases, balance transfers and cash advances as well as a low ongoing interest rate after the first 6 months.  You’ll have the ability to make fast payments with Google Pay, Apple Pay, Samsung Pay, Garmin Pay and Visa payWave. It’s also highly secure, with microchip technology, 24/7 fraud monitoring, Visa’s Zero Liability policy and Visa Secure for online purchases from participating merchants and payWave. You’ll also be able to temporarily lock your card (if you misplace it), plus block payWave, international and online transactions whenever you need to – using the Mobile Banking App or Internet Banking. This is exclusive to current or retired employees of the South Australian education community, students carrying out studies in education, and their eligible immediate family members."
+url = "https://apply.creditunionsa.com.au/cusa/servlet/SmartForm.html?formCode=joint-credit-card"
+image = "https://cms.creditunionsa.com.au/assets/images/20220112_SecondaryPageBanners_EducationCommunityCard.jpg"
+
+[cdr]
+brand = "Credit Union SA"
+product_id = "CREDITUNIONSA_OD_550"
+last_updated = "2026-06-29T00:00:00.000+10:00"
+
+[fees]
+annual = 0
+foreign_txn_pct = 3
+
+[rates]
+purchase = 11.49
+cash_advance = 11.49
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 6
+
+[limits]
+min_credit = 1000
+max_credit = 20000
+
+[perks]
+

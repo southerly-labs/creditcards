@@ -1,0 +1,29 @@
+name = "Unsecured Business Visa Credit Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "Business Credit card gives business owners access to a credit card facility, plus the option of having more than one card to cover monthly fuel, accommodation and other business expenses."
+image = "https://www.heritage.com.au/inbound/open-banking/card-art/business-visa"
+
+[cdr]
+brand = "People First and Heritage Bank"
+product_id = "59c9ee22-c20e-4f97-bb8c-692b7fa4ad99"
+last_updated = "2026-06-04T00:02:48.231Z"
+
+[fees]
+annual = 45
+foreign_txn_pct = 3
+
+[rates]
+purchase = 12.95
+cash_advance = 12.95
+interest_free_days = 40
+
+[limits]
+min_credit = 1000
+
+[rewards]
+program = "people-first-and-heritage-bank-rewards"
+
+[perks]
+

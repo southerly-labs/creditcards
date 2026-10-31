@@ -1,0 +1,32 @@
+name = "Interest-Free Days credit card"
+type = "business"
+network = "mastercard"
+status = "active"
+description = "Designed for those looking for a card with a competitive interest-free period to help with business cash flow."
+url = "https://www.commbank.com.au/business/business-credit-cards/business-interest-free-days-credit-card.html"
+image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/personal-liability/mastercard-business-interest-free-credit-card.png"
+
+[cdr]
+brand = "CommBank"
+product_id = "5b47845a7f0044e58db616bb734e8350"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+annual = 60
+additional_card = 60
+foreign_txn_pct = 3
+cash_advance_pct = 1.5
+late_payment = 20
+
+[rates]
+purchase = 17.57
+cash_advance = 17.57
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+max_credit = 50000
+
+[perks]
+insurance = [ "Transit Accident Insurance", "Unauthorised Transaction Insurance" ]
+

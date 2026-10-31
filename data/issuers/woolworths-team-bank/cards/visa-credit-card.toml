@@ -1,0 +1,20 @@
+name = "Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Visa Credit Card"
+url = "https://woolworthsteambank.com.au/loan/"
+
+[cdr]
+brand = "Woolworths Team Bank"
+product_id = "S90"
+last_updated = "2025-08-26T11:59:05.000+10:00"
+
+[fees]
+[rates]
+purchase = 13.45
+cash_advance = 13.45
+
+[limits]
+[perks]
+

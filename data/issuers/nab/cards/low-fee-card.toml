@@ -1,0 +1,34 @@
+name = "NAB Low Fee Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Enjoy our lowest annual card fee of only $30 and our special cashback offer."
+url = "https://www.nab.com.au/personal/banking/credit-cards/nab-low-fee-card"
+image = "https://www.nab.com.au/personal/credit-cards/low-fee-cards"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "fbce13b1-77db-4226-9f55-9028ee31884f"
+last_updated = "2026-10-01T13:59:59Z"
+
+[fees]
+annual = 49
+foreign_txn_pct = 3.5
+cash_advance_pct = 3.5
+
+[rates]
+purchase = 22.49
+cash_advance = 22.99
+interest_free_days = 44
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
+[limits]
+min_credit = 1000
+
+[perks]
+insurance = [ "Purchase Protection Insurance" ]
+

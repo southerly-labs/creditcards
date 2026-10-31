@@ -1,0 +1,24 @@
+name = "Visa Value"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our most popular card: no mess, no fuss, and no nasty surprises."
+url = "https://www.humebank.com.au/everyday/hume-value-visa-credit-card/"
+
+[cdr]
+brand = "Hume Bank"
+product_id = "S31V1"
+last_updated = "2026-05-01T11:46:38.000+10:00"
+
+[fees]
+[rates]
+purchase = 11.95
+cash_advance = 19.95
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+max_credit = 20000
+
+[perks]
+

@@ -1,0 +1,34 @@
+name = "ANZ Rewards Black"
+type = "personal"
+status = "active"
+description = "Our highest Reward Points earning potential"
+url = "https://www.anz.com.au/personal/credit-cards/rewards/black/"
+image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/rewards-black-2016.jpg"
+
+[cdr]
+brand = "ANZ"
+product_id = "6396b1bd-1c47-9c28-59b8-6847f208a9a7"
+last_updated = "2026-10-27T22:00:00.000Z"
+
+[fees]
+annual = 375
+additional_card = 65
+foreign_txn_pct = 3.5
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 22.49
+cash_advance = 23.49
+balance_transfer = 23.49
+interest_free_days = 44
+
+[limits]
+min_credit = 15000
+
+[rewards]
+program = "anz-rewards"
+
+[perks]
+insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess in Australia Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance" ]
+

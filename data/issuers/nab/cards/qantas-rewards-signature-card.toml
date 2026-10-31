@@ -1,0 +1,38 @@
+name = "NAB Qantas Rewards Signature Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "The Qantas Rewards Signature card gives customers the opportunity to be rewarded for the purchases they make by earning Qantas Frequent Flyer points at the fastest rate.\r\nIncludes Signature benefits, including complimentary insurances."
+url = "https://www.nab.com.au/personal/credit-cards/qantas-rewards/nab-qantas-rewards-signature-card"
+image = "https://www.nab.com.au/personal/credit-cards/qantas-rewards/nab-qantas-rewards-signature-card"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "8a47c774-0065-4850-992c-42d73253f3eb"
+last_updated = "2026-10-01T13:59:59Z"
+
+[fees]
+annual = 449
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 22.49
+cash_advance = 22.99
+balance_transfer = 22.99
+interest_free_days = 44
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
+[limits]
+min_credit = 15000
+
+[rewards]
+program = "qantas"
+bonus_points = 90000
+
+[perks]
+insurance = [ "Complimentary International Travel Insurance", "Complimentary Domestic Travel Insurance", "Complimentary Purchase Protection Insurance", "Complimentary Extended Warranty Insurance", "Complimentary Rental Vehicle Excess Insurance in Australia" ]
+

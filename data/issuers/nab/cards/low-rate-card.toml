@@ -1,0 +1,33 @@
+name = "NAB Low Rate Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A simple low interest rate credit card with your choice of offers: get a promotional balance transfer or select our cash back offer"
+url = "https://www.nab.com.au/personal/credit-cards/low-rate/nab-low-rate-card"
+image = "https://www.nab.com.au/content/experience-fragments/nab/en/featured_banner/product/personal_credit_card/nab-low-rate-product-cards/master"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "0c2ca397-dc24-4eb0-8fb9-e098c582ebd5"
+last_updated = "2026-10-01T13:59:59Z"
+
+[fees]
+annual = 99
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 13.99
+cash_advance = 22.99
+balance_transfer = 22.99
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 24
+
+[limits]
+min_credit = 1000
+
+[perks]
+

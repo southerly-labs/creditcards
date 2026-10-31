@@ -1,0 +1,35 @@
+name = "Orange One Rewards Platinum"
+type = "personal"
+network = "visa"
+status = "active"
+description = "The credit card that comes with up to $30 a month cashback on your spend, and no ING international transaction fees when you shop overseas or online."
+image = "https://www.ing.com.au/img/OO/OO_Visa%20Platinum.png"
+
+[cdr]
+brand = "ING BANK (Australia) Ltd"
+product_id = "a4ea7460-9e69-499d-84dd-f281c7a04130"
+last_updated = "2026-08-11T06:21:03.003Z"
+
+[fees]
+annual = 149
+additional_card = 10
+foreign_txn_pct = 0
+cash_advance_pct = 3
+late_payment = 30
+
+[rates]
+purchase = 16.99
+cash_advance = 16.99
+interest_free_days = 45
+
+[limits]
+min_credit = 6000
+max_credit = 30000
+min_income = 36000
+
+[rewards]
+program = "cashback"
+
+[perks]
+insurance = [ "Travel insurance" ]
+

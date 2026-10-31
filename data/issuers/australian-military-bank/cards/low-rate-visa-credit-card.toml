@@ -1,0 +1,28 @@
+name = "Low Rate Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "With a low annual fee and a low ongoing interest rate for purchases, the Low Rate Visa Credit Card is the only credit card you'll ever need.\nPlus, with our competitive 12-month balance transfer rate, you can also transfer your outstanding balances from other credit or store cards to Australian Military Bank for 0.00% p.a (introductory rate)."
+url = "https://ib.australianmilitarybank.com.au/AMBInternetBanking/?pd=AMBCC"
+image = "https://www.australianmilitarybank.com.au/sites/default/files/AMBCredit.png"
+
+[cdr]
+brand = "Australian Military Bank"
+product_id = "e1f63c50-20bb-457a-8fee-da684c281a0a"
+last_updated = "2026-09-30T14:00:00.323756Z"
+
+[fees]
+annual = 49
+foreign_txn_pct = 2.95
+
+[rates]
+purchase = 11.99
+cash_advance = 19.99
+interest_free_days = 55
+
+[limits]
+min_credit = 2000
+max_credit = 50000
+
+[perks]
+

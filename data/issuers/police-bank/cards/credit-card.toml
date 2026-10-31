@@ -1,0 +1,27 @@
+name = "Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A Low Rate VISA Credit Card with a low annual fee and up to 55 days interest free period on purchases."
+url = "https://www.policebank.com.au/visa-cards/visa-credit-card/"
+image = "https://www.policebank.com.au/wp-content/uploads/2026/01/PB_D-CUSCAL-LS-3472549-Police-Bank-V145HC_512x321.png"
+
+[cdr]
+brand = "Police Bank"
+product_id = "c2455d26-e138-4804-b59f-eccfef6df1ee"
+last_updated = "2026-07-28T22:48:34.353Z"
+
+[fees]
+annual = 30
+foreign_txn_pct = 3
+cash_advance_min = 3.8
+late_payment = 10
+
+[rates]
+purchase = 10.76
+cash_advance = 10.76
+interest_free_days = 55
+
+[limits]
+[perks]
+

@@ -1,0 +1,31 @@
+name = "Platinum Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Premium credit card including Qantas Points on eligible purchases and access to concierge services wherever you are in the world"
+url = "https://campaign.mpowerdigitalonboarding.com.au/newapplication?hide_back=false&lang=en&utm_source=UB&utm_medium=gncfmCpLP9Ze&utm_campaign=website&utm_term=PVCC"
+
+[cdr]
+brand = "Unity Bank"
+product_id = "S78_PLATINUM_VISA_CREDIT_CARD"
+last_updated = "2026-09-14T10:49:01.000+10:00"
+
+[fees]
+annual = 299
+foreign_txn_pct = 3
+
+[rates]
+purchase = 19.99
+cash_advance = 21.99
+balance_transfer = 0
+interest_free_days = 50
+
+[limits]
+min_credit = 6000
+max_credit = 75000
+
+[rewards]
+program = "qantas"
+
+[perks]
+

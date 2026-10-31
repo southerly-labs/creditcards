@@ -1,0 +1,34 @@
+name = "MyCard Premier"
+type = "personal"
+status = "active"
+description = "The Product is a premium rewards credit card that provides individuals with a line of credit facility, the ability to earn MyCard Reward Points (Reward Points) and access to ancillary benefits and complimentary insurances"
+url = "https://mycard.com.au/credit-cards/premier-card"
+image = "https://www.mycard.com.au/credit-cards/premier-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1762874647410/mycard-premier-digital-card-1536x969.png"
+
+[cdr]
+brand = "MyCard"
+product_id = "1c178978-1bac-4858-894a-eec4b71b1d68"
+last_updated = "2026-08-24T00:00:00Z"
+
+[fees]
+annual = 300
+additional_card = 0
+foreign_txn_pct = 3.5
+cash_advance_pct = 3.5
+late_payment = 30
+
+[rates]
+purchase = 22.49
+cash_advance = 22.99
+interest_free_days = 44
+
+[limits]
+min_credit = 10000
+max_credit = 100000
+
+[rewards]
+program = "mycard-rewards"
+
+[perks]
+insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Mobile phone insurance" ]
+

@@ -1,0 +1,34 @@
+name = "Coles No Annual Fee  Mastercard"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "The Product is a no annual fee credit card that provides individuals with a line of credit facility and the ability to earn fluybuys point without paying an annual fee."
+url = "https://www.coles.com.au/credit-cards/no-annual-fee"
+image = "https://www.coles.com.au/credit-cards/no-annual-fee"
+
+[cdr]
+brand = "Coles Credit Cards"
+product_id = "d2f29089-d0ee-44bc-bd6f-05f6419841b7"
+last_updated = "2026-09-16T00:12:00Z"
+
+[fees]
+annual = 0
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 30
+
+[rates]
+purchase = 21.99
+cash_advance = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 1000
+max_credit = 60000
+
+[rewards]
+program = "flybuys"
+
+[perks]
+insurance = [ "Complimentary insurance" ]
+

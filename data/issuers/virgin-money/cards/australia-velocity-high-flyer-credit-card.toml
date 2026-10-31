@@ -1,0 +1,38 @@
+name = "Virgin Australia Velocity High Flyer Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "If you love to travel, the Virgin Australia Velocity High Flyer Card is for you. Earn Velocity Points on your everyday spend, plus enjoy exclusive flight benefits and a range of complimentary insurances. It's a seriously rewarding credit card."
+url = "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/virginmoney-card-apply?"
+image = "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/high-flyer-credit-card.png"
+
+[cdr]
+brand = "Virgin Money"
+product_id = "9bf3781e-102c-ee11-9966-002248e1d7d5"
+last_updated = "2026-09-30T03:46:28Z"
+
+[fees]
+annual = 349
+foreign_txn_pct = 3.3
+cash_advance_pct = 2.7
+cash_advance_min = 2.7
+late_payment = 30
+
+[rates]
+purchase = 21.99
+cash_advance = 21.99
+balance_transfer = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 15000
+min_income = 75000
+
+[rewards]
+program = "velocity"
+bonus_points = 100000
+
+[perks]
+insurance = [ "Mobile Phone Insurance", "International Travel Insurance", "Domestic Travel Insurance", "Purchase Protection Insurance", "Rental Vehicle Excess Insurance in Australia", "Purchase Cover", "Extended Warranty Insurance", "Transit Accident Insurance" ]
+lounge_access = true
+

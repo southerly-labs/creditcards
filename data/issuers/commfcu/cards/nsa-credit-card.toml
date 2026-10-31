@@ -1,0 +1,28 @@
+name = "NSA CREDIT CARD"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A low rate credit card with up to 55 days interest free on purchases. Half the annual fee goes to National Seniors Australia to help with their work on advocacy and financial literacy"
+url = "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card"
+image = "https://cms.communityfirst.com.au/wp-content/uploads/2026/05/National-Seniors-Visa-Card.png"
+
+[cdr]
+brand = "CommFCU"
+product_id = "S53-NSA-LRCC"
+last_updated = "2026-10-06T15:34:19.000+11:00"
+
+[fees]
+annual = 50
+foreign_txn_pct = 3
+cash_advance_min = 2
+late_payment = 25
+
+[rates]
+purchase = 9.99
+cash_advance = 9.99
+balance_transfer = 4.99
+interest_free_days = 55
+
+[limits]
+[perks]
+

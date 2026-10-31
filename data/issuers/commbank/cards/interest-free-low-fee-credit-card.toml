@@ -1,0 +1,27 @@
+name = "Interest-free Low Fee credit card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "CommBank's simplest credit card yet with no interest and no late fees. Just a simple monthly fee."
+url = "https://www.commbank.com.au/credit-cards/interest-free-low-fee.html"
+image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-IFLF-credit-card.png"
+
+[cdr]
+brand = "CommBank"
+product_id = "d34e453e721640f983c03922f567463a"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+annual = 120
+foreign_txn_pct = 0
+late_payment = 0
+
+[rates]
+purchase = 0
+
+[limits]
+min_credit = 400
+max_credit = 1500
+
+[perks]
+

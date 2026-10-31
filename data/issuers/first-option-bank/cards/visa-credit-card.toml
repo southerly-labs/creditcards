@@ -1,0 +1,26 @@
+name = "VISA CREDIT CARD"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Low Rate Visa Credit Card"
+url = "https://www.firstoptionbank.com.au/credit-card-enquiry/"
+image = "https://firstoptionbank.com.au/wp-content/uploads/2020/11/Credit-Card-Mockup_blue-8.png"
+
+[cdr]
+brand = "First Option Bank"
+product_id = "VISA_CREDIT_CARD"
+last_updated = "2026-06-02T12:56:29.000+10:00"
+
+[fees]
+annual = 48
+
+[rates]
+purchase = 10.49
+cash_advance = 17.99
+interest_free_days = 45
+
+[limits]
+min_credit = 500
+
+[perks]
+

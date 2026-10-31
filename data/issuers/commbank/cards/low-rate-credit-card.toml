@@ -1,0 +1,30 @@
+name = "Low Rate credit card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "With a low interest rate on purchases, our Low Rate credit card makes it easier to pay off purchases over time."
+url = "https://www.commbank.com.au/credit-cards/low-rate.html"
+image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-low-rate-credit-card.png"
+
+[cdr]
+brand = "CommBank"
+product_id = "67b2f138050940d8977cbbaebbfcc636"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+annual = 72
+additional_card = 0
+foreign_txn_pct = 3.5
+cash_advance_pct = 3
+late_payment = 20
+
+[rates]
+purchase = 13.99
+cash_advance = 21.99
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+
+[perks]
+

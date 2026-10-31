@@ -1,0 +1,4 @@
+name = "Flybuys"
+type = "retail"
+aliases = [ 'flybuys' ]
+priority = 5

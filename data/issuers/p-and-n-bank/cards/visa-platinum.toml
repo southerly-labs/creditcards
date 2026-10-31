@@ -1,0 +1,31 @@
+name = "P&N Bank Visa Platinum"
+type = "personal"
+network = "visa"
+status = "active"
+description = "P&N Bank's Visa Platinum Credit Card offers flexible access to credit, up to 45 days interest free on purchases and other lifestyle features and benefits including insurance."
+image = "https://digital.pnbank.com.au/globalassets/internet-banking/onboarding/products/pn-platinum-visa-credit_oct25.png"
+
+[cdr]
+brand = "P&N Bank"
+product_id = "40"
+last_updated = "2026-06-28T16:00:22.3851793Z"
+
+[fees]
+annual = 99
+foreign_txn_pct = 0
+cash_advance_min = 5
+late_payment = 5
+
+[rates]
+purchase = 11.99
+cash_advance = 19.99
+balance_transfer = 11.99
+interest_free_days = 45
+
+[limits]
+min_credit = 6000
+max_credit = 100000
+
+[perks]
+insurance = [ "Receive complimentary travel insurance. Terms and conditions apply." ]
+

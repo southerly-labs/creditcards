@@ -1,0 +1,37 @@
+name = "Altitude Rewards Platinum"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "Enjoy Platinum Card benefits and the flexibility of Altitude Rewards. Choose from gift cards, merchandise or our unique 'Pay with Points' feature."
+url = "https://www.westpac.com.au/credit-cards/reward/altitude-platinum/summary"
+image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Rewards%20Platinum_232x146_grey.jpg"
+
+[cdr]
+brand = "Westpac"
+product_id = "CCAltPlatRewards"
+last_updated = "2026-10-29T02:41:55Z"
+
+[fees]
+annual = 250
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 23.98
+cash_advance = 23.99
+interest_free_days = 45
+
+[limits]
+min_credit = 3000
+max_credit = 50000
+min_income = 30000
+
+[rewards]
+program = "westpac-altitude"
+bonus_points = 90000
+
+[perks]
+insurance = [ "Complimentary insurance", "Complimentary travel insurances" ]
+lounge_access = true
+

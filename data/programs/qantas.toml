@@ -1,0 +1,5 @@
+name = "Qantas Frequent Flyer"
+type = "airline"
+aliases = [ 'qantas' ]
+priority = 10
+website = "https://www.qantas.com/au/en/frequent-flyer.html"

@@ -1,0 +1,35 @@
+name = "ANZ Frequent Flyer Black"
+type = "personal"
+status = "active"
+description = "Our most rewarding Qantas experience"
+url = "https://www.anz.com.au/personal/credit-cards/frequent-flyer/black/"
+image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/frequent-flyer-black-2016.jpg"
+
+[cdr]
+brand = "ANZ"
+product_id = "325e19d1-2a52-53c6-073e-4b01e86e6936"
+last_updated = "2026-10-27T22:00:00.000Z"
+
+[fees]
+annual = 425
+additional_card = 65
+foreign_txn_pct = 3.5
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 22.49
+cash_advance = 23.49
+balance_transfer = 23.49
+interest_free_days = 44
+
+[limits]
+min_credit = 15000
+
+[rewards]
+program = "qantas"
+bonus_points = 100000
+
+[perks]
+insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess in Australia Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance" ]
+

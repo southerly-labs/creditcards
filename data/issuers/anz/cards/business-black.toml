@@ -1,0 +1,35 @@
+name = "ANZ Business Black"
+type = "business"
+network = "visa"
+status = "active"
+description = "A credit card facility for businesses where you can earn rewards on eligible transactions and receive domestic and international travel insurance"
+url = "https://www.anz.com.au/business/credit-cards/business-black/"
+image = "https://www.anz.com.au/content/dam/anzcomau/images/business/products/ANZ-Business-Black-Credit-Card_Product.png"
+
+[cdr]
+brand = "ANZ"
+product_id = "9836ae54-5aa3-54cf-e1df-9c7aec8ddb08"
+last_updated = "2026-10-04T23:00:00.000Z"
+
+[fees]
+annual = 375
+foreign_txn_pct = 3
+cash_advance_pct = 1.5
+late_payment = 35
+
+[rates]
+purchase = 20.24
+cash_advance = 21.74
+interest_free_days = 44
+
+[limits]
+min_credit = 5000
+max_credit = 50000
+
+[rewards]
+program = "anz-rewards"
+bonus_points = 150000
+
+[perks]
+insurance = [ "Unauthorised Transactions Insurance", "Domestic Travel Insurance", "International Travel Insurance" ]
+

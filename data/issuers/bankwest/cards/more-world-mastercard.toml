@@ -1,0 +1,41 @@
+name = "Bankwest More World Mastercard"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "A credit card for earning points to redeem for digital vouchers or cashback."
+url = "https://www.bankwest.com.au/credit-cards/rewards"
+image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-more-world.png"
+
+[cdr]
+brand = "Bankwest"
+product_id = "2c63479dd51441b1b4d388d8bc186840"
+last_updated = "2026-10-09T11:08:30.000Z"
+
+[fees]
+annual = 270
+foreign_txn_pct = 0
+cash_advance_pct = 3
+late_payment = 25
+
+[rates]
+purchase = 14.99
+cash_advance = 21.99
+balance_transfer = 14.99
+interest_free_days = 44
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 6
+
+[limits]
+min_credit = 6000
+
+[rewards]
+program = "bankwest-rewards"
+bonus_points = 50000
+
+[perks]
+insurance = [ "Complimentary Overseas Travel Insurance" ]
+lounge_access = true
+

@@ -1,0 +1,22 @@
+name = "Procurement Management Account"
+type = "corporate"
+status = "active"
+description = "A Procurement Management Account is a corporate card 'account' (16 digit card number) assigned to an organisation or business unit, which allows multiple authorised users to transact on the account. It is primarily used for a large volume of transactions (e.g. high volumes of travel bookings) or high value procurement transactions (e.g. strategic suppliers)."
+
+[cdr]
+brand = "CommBank"
+product_id = "926fd37a329f4a28977ad5c2a943a05e"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+annual = 715
+foreign_txn_pct = 2.5
+
+[rates]
+purchase = 17.99
+cash_advance = 17.99
+
+[limits]
+[perks]
+insurance = [ "Transit Accident Insurance", "Unauthorised Transactions Insurance" ]
+

@@ -1,0 +1,36 @@
+name = "Altitude Velocity Black"
+type = "personal"
+status = "active"
+description = "Our premier Velocity credit card gets you our highest Velocity Points earn rate as well as complimentary airport lounge access, seat upgrades, insurances and concierge."
+url = "https://www.westpac.com.au/credit-cards/reward/altitude-velocity-black/summary"
+image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Velocity%20Black%20Card_232x146_velocity_black.jpg"
+
+[cdr]
+brand = "Westpac"
+product_id = "CCAltBlackVelocity"
+last_updated = "2026-10-29T02:41:55Z"
+
+[fees]
+annual = 450
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 23.98
+cash_advance = 23.99
+interest_free_days = 45
+
+[limits]
+min_credit = 6000
+max_credit = 75000
+min_income = 75000
+
+[rewards]
+program = "velocity"
+bonus_points = 150000
+
+[perks]
+insurance = [ "Complimentary insurance", "Complimentary travel insurances" ]
+lounge_access = true
+

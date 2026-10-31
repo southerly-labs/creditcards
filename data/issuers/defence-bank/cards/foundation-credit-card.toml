@@ -1,0 +1,27 @@
+name = "Defence Bank Foundation Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A Visa credit card that gives back. Half of the annual $45 card fee is donated to the Defence Bank Foundation - a charity whose sole beneficiary is Defence Community Dogs."
+url = "https://www.defencebank.com.au/creditcard"
+
+[cdr]
+brand = "Defence Bank"
+product_id = "552"
+last_updated = "2026-03-16T00:00:00.000+11:00"
+
+[fees]
+annual = 45
+foreign_txn_pct = 3
+
+[rates]
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 3.99
+months = 6
+
+[limits]
+[perks]
+

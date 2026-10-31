@@ -1,0 +1,38 @@
+name = "NAB Qantas Rewards Premium Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Earn Qantas Points and enjoy platinum services and complimentary insurances"
+url = "https://www.nab.com.au/personal/credit-cards/qantas-rewards/nab-qantas-rewards-premium-card"
+image = "https://www.nab.com.au/personal/credit-cards/qantas-rewards"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "263a9294-f2d8-4f5e-885c-363e1c2010b9"
+last_updated = "2026-10-01T13:59:59Z"
+
+[fees]
+annual = 295
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 22.49
+cash_advance = 22.99
+balance_transfer = 22.99
+interest_free_days = 44
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
+[limits]
+min_credit = 6000
+
+[rewards]
+program = "qantas"
+bonus_points = 60000
+
+[perks]
+insurance = [ "Complimentary International Travel Insurance", "Complimentary Domestic Travel Insurance", "Complimentary Purchase Protection Insurance", "Complimentary Extended Warranty Insurance", "Complimentary Rental Vehicle Excess Insurance in Australia" ]
+

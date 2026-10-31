@@ -1,0 +1,32 @@
+name = "The American Express Velocity Escape Plus Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "The American Express Velocity Escape Plus Card offers Velocity Points for every dollar spent."
+url = "https://www.americanexpress.com/en-au/credit-cards/velocity-escape-plus-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG55155200S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "3f291709-5f70-4b5a-8a57-212b715844d2"
+last_updated = "2026-07-09T05:00:00.000Z"
+
+[fees]
+annual = 95
+additional_card = 0
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+interest_free_days = 55
+
+[limits]
+min_credit = 2000
+
+[rewards]
+program = "velocity"
+
+[perks]
+insurance = [ "Complimentary Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Buyer’s Advantage Cover" ]
+lounge_access = true
+

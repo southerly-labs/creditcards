@@ -1,0 +1,32 @@
+name = "The American Express Velocity Platinum Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "The American Express Velocity Platinum Card has a suite of airline benefits including a complimentary domestic return flight on VA each year, travel insurance and earn Velocity Points with every dollar spent."
+url = "https://www.americanexpress.com/en-au/credit-cards/velocity-platinum-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUP58100000S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "7e02379f-2d16-492d-a271-3a273f2187d3"
+last_updated = "2026-07-09T05:00:00.000Z"
+
+[fees]
+annual = 440
+additional_card = 0
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+interest_free_days = 55
+
+[limits]
+min_credit = 3000
+
+[rewards]
+program = "velocity"
+
+[perks]
+insurance = [ "Complimentary Travel insurance", "Card Purchase Cover", "Card Refund Cover" ]
+lounge_access = true
+

@@ -1,0 +1,33 @@
+name = "Kogan Money Black Credit Card"
+type = "personal"
+status = "active"
+description = "The Product is a rewards credit card that provides individuals with a line of credit facility, the ability to earn Kogan Money Credit Card Rewards Points (Reward Points) and access to ancillary Kogan.com benefits, with up to 44 days interest free on retail purchases and no annual fee."
+url = "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/"
+image = "https://koganmoney.com.au/credit-cards/kogan-money-black-card/"
+
+[cdr]
+brand = "Kogan Money Credit Cards"
+product_id = "229ba4a9-71f0-4339-b447-e00a6b524b90"
+last_updated = "2026-04-23T00:12:00Z"
+
+[fees]
+annual = 0
+foreign_txn_pct = 3.4
+cash_advance_pct = 3.5
+late_payment = 30
+
+[rates]
+purchase = 21.99
+cash_advance = 22.74
+interest_free_days = 44
+
+[limits]
+min_credit = 6000
+max_credit = 30000
+min_income = 35000
+
+[rewards]
+program = "kogan-money-rewards"
+
+[perks]
+

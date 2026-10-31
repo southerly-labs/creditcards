@@ -1,0 +1,31 @@
+name = "Value Plus Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A personal credit card with up to 55 days interest free on purchases, a low annual fee and competitive interest rate."
+url = "https://www.newcastlepermanent.com.au/tools-and-services/apply-for-a-product"
+
+[cdr]
+brand = "Newcastle Permanent"
+product_id = "CC_valuepluscc"
+last_updated = "2026-08-25T00:00:00+10:00"
+
+[fees]
+annual = 49
+foreign_txn_pct = 3
+cash_advance_pct = 2
+late_payment = 5
+
+[rates]
+purchase = 11.99
+cash_advance = 11.99
+balance_transfer = 11.99
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+max_credit = 20000
+min_income = 20000
+
+[perks]
+

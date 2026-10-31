@@ -1,0 +1,31 @@
+name = "Orange One Low Rate"
+type = "personal"
+network = "visa"
+status = "active"
+description = "The credit card that gives you a low interest rate plus no ING international transaction fees when you shop overseas or online."
+image = "https://www.ing.com.au/img/OO/OO_Visa.png"
+
+[cdr]
+brand = "ING BANK (Australia) Ltd"
+product_id = "5031dc6b-6993-4de1-8e0b-a96de30c2f28"
+last_updated = "2026-08-11T06:21:03.003Z"
+
+[fees]
+annual = 48
+additional_card = 10
+foreign_txn_pct = 0
+cash_advance_pct = 3
+late_payment = 30
+
+[rates]
+purchase = 12.99
+cash_advance = 12.99
+interest_free_days = 45
+
+[limits]
+min_credit = 1000
+max_credit = 30000
+min_income = 36000
+
+[perks]
+

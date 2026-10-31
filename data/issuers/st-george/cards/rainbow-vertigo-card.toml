@@ -1,0 +1,31 @@
+name = "Rainbow Vertigo Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "An everyday card with a low rate on purchases, and a low monthly card fee."
+image = "https://www.stgeorge.com.au/content/dam/public/open-banking/stg-vertigo-rainbowcard-art-232x146.jpg"
+
+[cdr]
+brand = "St.George Bank"
+product_id = "STGCCVertigoRainbowcard"
+last_updated = "2026-10-29T01:03:01Z"
+
+[fees]
+annual = 84
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 13.99
+cash_advance = 21.99
+balance_transfer = 0
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+max_credit = 80000
+
+[perks]
+lounge_access = true
+

@@ -1,0 +1,28 @@
+name = "Visa Credit My Rewards"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our Visa My Rewards Credit Card comes with a competitive low interest rate, rewards program, low annual fee and up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date"
+image = "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visacreditmyrewards.jpg"
+
+[cdr]
+brand = "Queensland Country Bank"
+product_id = "55"
+last_updated = "2026-10-30T08:00:23.9411380Z"
+
+[fees]
+annual = 89
+foreign_txn_pct = 3.65
+
+[rates]
+purchase = 14.99
+cash_advance = 14.99
+balance_transfer = 14.99
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+max_credit = 60000
+
+[perks]
+

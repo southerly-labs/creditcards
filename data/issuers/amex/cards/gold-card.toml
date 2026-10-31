@@ -1,0 +1,26 @@
+name = "American Express® Gold Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "Charge Card with Membership Rewards and travel benefits."
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGGL00010S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "8c378df3-bb99-4271-85cd-ad7d29385418"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 130
+additional_card = 65
+foreign_txn_pct = 3.5
+
+[rates]
+[limits]
+[rewards]
+program = "amex-membership-rewards"
+
+[perks]
+insurance = [ "Complimentary Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Buyer’s Advantage Cover" ]
+lounge_access = true
+

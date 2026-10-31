@@ -1,0 +1,31 @@
+name = "Low Rate Card"
+type = "personal"
+status = "active"
+description = "Our Low Rate Card provides a lower interest rate on purchases, plus a lower monthly card fee to help reduce your credit card costs."
+image = "https://www.westpac.com.au/content/dam/public/wbc/images/personal/credit-cards/wbc_pp_p_credit-cards_low%20rate_232x146.png"
+
+[cdr]
+brand = "Westpac"
+product_id = "CCLowRate"
+last_updated = "2026-10-29T02:41:54Z"
+
+[fees]
+annual = 84
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 13.74
+cash_advance = 21.99
+balance_transfer = 0
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+max_credit = 50000
+min_income = 30000
+
+[perks]
+lounge_access = true
+

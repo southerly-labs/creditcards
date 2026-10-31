@@ -1,0 +1,37 @@
+name = "Ultimate credit card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "Enjoy new lifestyle and travel benefits with the Ultimate credit card, designed to help you get more value. Plus, enjoy a new points experience if you're eligible for CommBank Yello."
+url = "https://www.commbank.com.au/credit-cards/ultimate.html"
+image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-ultimate-credit-card.png"
+
+[cdr]
+brand = "CommBank"
+product_id = "eecdf5a04ec94565974b3a8aa3263257"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+annual = 420
+additional_card = 0
+foreign_txn_pct = 0
+cash_advance_pct = 3
+late_payment = 20
+
+[rates]
+purchase = 20.99
+cash_advance = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 6000
+
+[rewards]
+program = "commbank-yello"
+partners = [ "qantas" ]
+bonus_points = 100000
+
+[perks]
+insurance = [ "Cracked Screen Cover", "International travel insurance" ]
+lounge_access = true
+

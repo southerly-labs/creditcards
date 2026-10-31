@@ -1,0 +1,32 @@
+name = "American Express Essential® Rewards Credit Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "Expect extra with the American Express Essential Rewards Credit Card."
+url = "https://www.americanexpress.com/en-au/credit-cards/essential-rewards-credit-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUW52100000S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "1900b334-218c-4285-b5a2-b59d1ecb3bb1"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 108
+additional_card = 0
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+interest_free_days = 55
+
+[limits]
+min_credit = 2000
+
+[rewards]
+program = "amex-membership-rewards"
+
+[perks]
+insurance = [ "Card Purchase Cover", "Card Refund Cover", "Smartphone Front Screen Cover Insurance", "Buyer's Advantage Cover" ]
+lounge_access = true
+

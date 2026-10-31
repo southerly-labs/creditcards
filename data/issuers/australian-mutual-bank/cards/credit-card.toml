@@ -1,0 +1,35 @@
+name = "Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Use your credit card for shopping, travelling overseas or even to consolidate other credit or store card debt."
+url = "https://australianmutual.bank/cards/credit-card/"
+image = "https://www.tmbank.com.au/content/dam/channels/websites/common-assets/open-banking/amb-mozo.jpg"
+
+[cdr]
+brand = "Australian Mutual Bank LTD"
+product_id = "c61cd5c4-1e71-11f1-8077-325096b39f47"
+last_updated = "2026-09-09T15:14:27.000+10:00"
+
+[fees]
+foreign_txn_pct = 2.9
+cash_advance_min = 4
+late_payment = 10
+
+[rates]
+purchase = 11.5
+cash_advance = 11.5
+balance_transfer = 7.9
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "both"
+rate = 7.9
+months = 6
+
+[limits]
+min_credit = 1000
+max_credit = 25000
+
+[perks]
+

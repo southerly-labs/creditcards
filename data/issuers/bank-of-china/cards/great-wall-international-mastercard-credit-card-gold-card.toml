@@ -1,0 +1,31 @@
+name = "Bank of China Great Wall International MasterCard Credit Card (Gold Card)"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "The Bank of China Great Wall International Credit Card (Credit Card) can be used for making purchases and at any ATM in Australia and overseas displaying a MasterCard logo or for cash withdrawals at any Bank of China retail branches in Australia. You will enjoy up to 55 days of Interest-free period on purchases. The Credit Card also provides you with other features such as Smart Interest Free Instalment Plan and maximum Monthly Usage Limit for additional cardholders."
+image = "http://pic.bankofchina.com/branches/australia/201801/W020180125416819652038.jpg"
+
+[cdr]
+brand = "Bank of China"
+product_id = "MAUGMAU1"
+last_updated = "2024-09-25T04:00:00.000+10:00"
+
+[fees]
+annual = 100
+foreign_txn_pct = 1.5
+cash_advance_pct = 1.5
+cash_advance_min = 0
+late_payment = 15
+
+[rates]
+purchase = 19.99
+interest_free_days = 50
+
+[limits]
+min_credit = 4000
+
+[rewards]
+program = "bank-of-china-rewards"
+
+[perks]
+

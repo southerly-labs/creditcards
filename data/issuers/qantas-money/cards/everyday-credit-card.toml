@@ -1,0 +1,36 @@
+name = "Qantas Money Everyday Credit Card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "The Product is a low annual fee rewards credit card that provides Individuals with a line of credit facility, the ability to earn Qantas Frequent Flyer Points (Qantas Points) and access to complimentary insurances, with up to 44 days interest free on retail purchases and an annual fee."
+url = "https://www.qantasmoney.com/credit-cards"
+image = "https://www.qantasmoney.com/credit-cards/everyday#everyday"
+
+[cdr]
+brand = "Qantas Money Credit Cards"
+product_id = "3c2e5891-989b-4722-bc22-c30cb30137b6"
+last_updated = "2026-04-27T00:12:00Z"
+
+[fees]
+annual = 99
+additional_card = 25
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 30
+
+[rates]
+purchase = 20.99
+cash_advance = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 4000
+max_credit = 30000
+min_income = 35000
+
+[rewards]
+program = "qantas"
+
+[perks]
+insurance = [ "Complimentary Travel Insurance" ]
+

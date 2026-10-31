@@ -1,0 +1,28 @@
+name = "American Express® Business Gold Plus Card"
+type = "business"
+network = "amex"
+status = "active"
+description = "Make big plans with the metal Card that turns your business purchases into rich rewards."
+url = "https://www.americanexpress.com/en-au/credit-cards/business-gold-plus-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG821XYZ00S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "6b78ce86-e85e-44f4-999b-bc2bb5b2392b"
+last_updated = "2026-07-27T05:00:00.000Z"
+
+[fees]
+annual = 470
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+
+[limits]
+[rewards]
+program = "amex-membership-rewards"
+
+[perks]
+insurance = [ "International & Domestic Travel Insurance" ]
+lounge_access = true
+

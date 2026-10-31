@@ -1,0 +1,27 @@
+name = "MoneyMe Cashback Rewards Card"
+type = "personal"
+status = "active"
+description = "Digital credit card with cashback rewards. Purchase and cash advance rates are personalised to your Equifax OneScore credit band. Credit limits up to $20,000."
+url = "https://www.moneyme.com.au/credit-card"
+image = "https://cdn.moneyme.com.au/images/assets/cards/cashback-rewards-card.png"
+
+[cdr]
+brand = "MoneyMe"
+product_id = "moneyme-credit-card"
+last_updated = "2026-10-08T00:00:00Z"
+
+[fees]
+annual = 149
+foreign_txn_pct = 3
+
+[rates]
+purchase = 19.99
+cash_advance = 22.99
+
+[limits]
+min_credit = 1000
+max_credit = 2000
+min_income = 30000
+
+[perks]
+

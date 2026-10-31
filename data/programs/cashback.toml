@@ -1,0 +1,3 @@
+name = "Cashback"
+type = "cashback"
+aliases = [ '^cash ?back$' ]

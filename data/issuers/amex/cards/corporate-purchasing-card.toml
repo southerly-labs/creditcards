@@ -1,0 +1,21 @@
+name = "American Express® Corporate Purchasing Card"
+type = "corporate"
+network = "amex"
+status = "active"
+description = "Corporate Charge Card for consolidating business spend in one statement, providing visibility and securing spend through customised controls."
+url = "https://www.americanexpress.com/au/business/payment-solutions/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAURGOT00000S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "0f3233bb-96d2-4228-bd0d-34bc4a0bbcb1"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 206
+foreign_txn_pct = 3.5
+
+[rates]
+[limits]
+[perks]
+

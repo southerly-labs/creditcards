@@ -1,0 +1,35 @@
+name = "Lifestyle"
+type = "personal"
+network = "visa"
+status = "active"
+description = "If you're after a low rate with no annual fee, the Lifestyle Credit Card may be the everyday credit card for you."
+url = "https://apply.qudosbank.com.au/Apply/credit-card"
+image = "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b43c551b6f4a8c20ec8_lifestyle-card-no-border.png"
+
+[cdr]
+brand = "Qudos Bank"
+product_id = "9be8ebbe-7ed3-4ae2-bc1e-c794f5730339"
+last_updated = "2026-02-27T04:23:05.801Z"
+
+[fees]
+annual = 0
+foreign_txn_pct = 3
+cash_advance_min = 3.5
+late_payment = 0
+
+[rates]
+purchase = 12.34
+cash_advance = 12.34
+balance_transfer = 12.34
+
+[[rates.intro]]
+applies_to = "both"
+rate = 4.99
+months = 5
+
+[limits]
+min_credit = 1000
+max_credit = 20000
+
+[perks]
+

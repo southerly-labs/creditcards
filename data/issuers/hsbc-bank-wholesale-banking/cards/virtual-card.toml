@@ -1,0 +1,22 @@
+name = "HSBC Virtual Card"
+type = "corporate"
+status = "active"
+description = "Single and multi use virtual cards for corporate expenditure"
+url = "https://www.business.hsbc.com.au/en-au/solutions/corporate-card"
+image = "https://www.business.hsbc.com.au/en-au/solutions/virtual-card"
+
+[cdr]
+brand = "HSBC Bank Australia Limited – Wholesale Banking"
+product_id = "CR3"
+last_updated = "2025-12-02T07:09:54.418Z"
+
+[fees]
+foreign_txn_pct = 3
+
+[rates]
+interest_free_days = 55
+
+[limits]
+[perks]
+insurance = [ "Complimentary unauthorised transaction insurance" ]
+

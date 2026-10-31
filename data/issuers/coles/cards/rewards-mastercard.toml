@@ -1,0 +1,33 @@
+name = "Coles Rewards  Mastercard"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "The Product is rewards credit card that provides individuals with a line of credit facility, the ability to earn Fluybuys Points and access to complimentary Mobile Phone insurance."
+url = "https://www.coles.com.au/credit-cards/rewards"
+image = "https://www.coles.com.au/credit-cards/rewards"
+
+[cdr]
+brand = "Coles Credit Cards"
+product_id = "52d7855f-39b1-4dd4-af37-e1d3d2da67e4"
+last_updated = "2026-09-16T00:12:00Z"
+
+[fees]
+annual = 99
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 30
+
+[rates]
+purchase = 21.99
+cash_advance = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 1000
+max_credit = 60000
+
+[rewards]
+program = "flybuys"
+
+[perks]
+

@@ -1,0 +1,27 @@
+name = "American Express® Platinum Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "American Express's top tier card with a suite of elevated benefits including travel insurance."
+url = "https://www.americanexpress.com/au/credit-cards/the-platinum-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGPL00001S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "f6754d9e-0000-4ac6-a101-43cd474eed1f"
+last_updated = "2026-10-01T23:00:00.000Z"
+
+[fees]
+annual = 1450
+additional_card = 0
+foreign_txn_pct = 3.5
+
+[rates]
+[limits]
+[rewards]
+program = "amex-membership-rewards"
+
+[perks]
+insurance = [ "International & Domestic Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Smartphone Front Screen Cover Insurance", "Buyer’s Advantage Cover", "Loss Damage Waiver Cover", "Legal, Roadside, and Home Assistance" ]
+lounge_access = true
+

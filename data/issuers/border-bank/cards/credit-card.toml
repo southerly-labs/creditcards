@@ -1,0 +1,27 @@
+name = "Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A Low Rate and low Annual Fee Credit  card"
+url = "https://www.borderbank.com.au/forms/visa-cards"
+image = "https://www.borderbank.com.au/wp-content/uploads/2026/01/BB_D-Cuscal_3168716_PB_Border-Bank_V903_PW-Visa-Credit-HOR-digital-artwork_521x323.png"
+
+[cdr]
+brand = "Border Bank"
+product_id = "911351e1-56ff-47b2-a31f-2e2730db41ef"
+last_updated = "2026-07-29T00:55:44.876Z"
+
+[fees]
+annual = 30
+foreign_txn_pct = 3
+cash_advance_min = 3.8
+late_payment = 10
+
+[rates]
+purchase = 10.76
+cash_advance = 10.76
+interest_free_days = 55
+
+[limits]
+[perks]
+

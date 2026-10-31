@@ -1,0 +1,32 @@
+name = "The American Express® Explorer Credit Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "Turn everyday spend into extraordinary adventures with your new travel companion."
+url = "https://www.americanexpress.com/au/credit-cards/explorer-credit-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUP0725VC00S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "f9d70d2d-6dff-488a-8623-c0ec0afd7044"
+last_updated = "2026-07-09T05:00:00.000Z"
+
+[fees]
+annual = 395
+additional_card = 0
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+interest_free_days = 55
+
+[limits]
+min_credit = 3000
+
+[rewards]
+program = "amex-membership-rewards"
+
+[perks]
+insurance = [ "International & Domestic Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Smartphone Front Screen Cover Insurance", "Buyer's Advantage Cover" ]
+lounge_access = true
+

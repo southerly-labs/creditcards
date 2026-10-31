@@ -1,0 +1,31 @@
+name = "Revolut Credit Card"
+type = "personal"
+status = "active"
+description = "A Revolut credit card with interest-free periods on purchases and variable interest rates. Features and fees vary depending on your plan. See our website for details."
+
+[cdr]
+brand = "Revolut"
+product_id = "550e8400-e29b-41d4-a716-446655440005"
+last_updated = "2026-07-08T14:04:01.589894Z"
+
+[fees]
+foreign_txn_pct = 1.5
+cash_advance_pct = 3
+late_payment = 30
+
+[rates]
+purchase = 20.99
+cash_advance = 23.99
+interest_free_days = 44
+
+[limits]
+min_credit = 1000
+max_credit = 35000
+min_income = 2000
+
+[rewards]
+program = "revolut-rewards"
+
+[perks]
+insurance = [ "Everyday Protection and/or Travel Insurance" ]
+

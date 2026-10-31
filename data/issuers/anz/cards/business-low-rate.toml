@@ -1,0 +1,30 @@
+name = "ANZ Business Low Rate"
+type = "business"
+network = "visa"
+status = "active"
+description = "A credit card facility for businesses with a low interest ongoing interest rate"
+url = "https://www.anz.com.au/business/credit-cards/low-rate/"
+image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-003-anz-au.jpg"
+
+[cdr]
+brand = "ANZ"
+product_id = "ca69da6f-d4e9-ba91-1aba-41fa429f031e"
+last_updated = "2026-03-15T13:00:00.000Z"
+
+[fees]
+annual = 100
+foreign_txn_pct = 3
+cash_advance_pct = 1.5
+late_payment = 35
+
+[rates]
+purchase = 12.99
+cash_advance = 14.49
+
+[limits]
+min_credit = 1000
+max_credit = 50000
+
+[perks]
+insurance = [ "Unauthorised Transactions Insurance" ]
+

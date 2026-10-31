@@ -1,0 +1,37 @@
+name = "Qantas Money Platinum Credit Card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "The Product is a rewards credit card that provides individuals with a line of credit facility, the ability to earn Qantas Frequent Flyer Points (Qantas Points) and access to ancillary Qantas benefits and complimentary travel insurance, with up to 44 days interest free on retail purchases and an annual fee."
+url = "https://www.qantasmoney.com/credit-cards"
+image = "https://www.qantasmoney.com/credit-cards"
+
+[cdr]
+brand = "Qantas Money Credit Cards"
+product_id = "9da83225-c177-4d60-9475-fb0d2c7a74b4"
+last_updated = "2026-04-27T00:12:00Z"
+
+[fees]
+annual = 399
+additional_card = 50
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 30
+
+[rates]
+purchase = 20.99
+cash_advance = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 6000
+max_credit = 100000
+min_income = 35000
+
+[rewards]
+program = "qantas"
+
+[perks]
+insurance = [ "Complimentary Travel Insurance" ]
+lounge_access = true
+

@@ -1,0 +1,30 @@
+name = "Visa Business My Rewards"
+type = "business"
+network = "visa"
+status = "active"
+description = "Our Business Visa Credit Card comes with a competitive low interest rate, low annual fee and up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date, and is linked to our free rewards program, Business Rewarder"
+image = "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visabusiness-reward.jpg"
+
+[cdr]
+brand = "Queensland Country Bank"
+product_id = "19"
+last_updated = "2026-10-30T08:00:23.9411380Z"
+
+[fees]
+annual = 85
+foreign_txn_pct = 3.65
+
+[rates]
+purchase = 14.99
+cash_advance = 14.99
+balance_transfer = 14.99
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+
+[rewards]
+program = "queensland-country-bank-rewards"
+
+[perks]
+

@@ -1,0 +1,22 @@
+name = "Low Rate Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Benefit from a low interest rate on purchases."
+url = "https://application.summerland.com.au/nPortal__SelfRegistration?product=a0uOm000005EqqbIAC&core=es5&_gl=1*cy7mzo*_gcl_au*MTYyNjUxNDAwNi4xNzQwNjkxMDQ1"
+
+[cdr]
+brand = "Summerland Bank"
+product_id = "74"
+last_updated = "2026-10-30T08:00:40.8225022Z"
+
+[fees]
+annual = 49
+
+[rates]
+balance_transfer = 0
+interest_free_days = 55
+
+[limits]
+[perks]
+

@@ -1,0 +1,28 @@
+name = "Westpac Lite Card"
+type = "personal"
+status = "active"
+description = "Our Lite credit card has 0% foreign transaction fee, a lower purchase rate and lower monthly fee - designed for all things international."
+url = "https://www.westpac.com.au/credit-cards/low-rate-cards/westpac-lite-card/summary"
+image = "https://www.westpac.com.au/content/dam/public/open-banking/Westpac%20Lite%20Card_232x146_purple.jpg"
+
+[cdr]
+brand = "Westpac"
+product_id = "CCLite"
+last_updated = "2026-10-29T02:41:55Z"
+
+[fees]
+annual = 108
+foreign_txn_pct = 0
+
+[rates]
+purchase = 9.9
+interest_free_days = 45
+
+[limits]
+min_credit = 1000
+max_credit = 20000
+min_income = 30000
+
+[perks]
+lounge_access = true
+

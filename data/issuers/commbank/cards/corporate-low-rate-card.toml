@@ -1,0 +1,22 @@
+name = "Corporate Low Rate card"
+type = "corporate"
+status = "active"
+description = "Designed for medium businesses wishing to manage their cash flow by paying down larger items over time. Options to monitor employee expenses, set limits and access expense reports in order to minimise costs."
+image = "https://www.commbank.com.au/content/dam/commbank/assets/business/cards/corp-credit-card-thumb6.jpg"
+
+[cdr]
+brand = "CommBank"
+product_id = "d44d38acc5b34c5bb76117f290d97134"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+foreign_txn_pct = 2.5
+
+[rates]
+purchase = 14.55
+cash_advance = 14.55
+
+[limits]
+[perks]
+insurance = [ "Transit Accident Insurance", "Unauthorised Transaction Insurance" ]
+

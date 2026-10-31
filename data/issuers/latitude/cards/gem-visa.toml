@@ -1,0 +1,34 @@
+name = "Latitude Gem Visa"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Latitude Gem Visa gives you flexible ways to pay—enjoy 0% interest from 6–60 months at leading retailers or 6 months on general purchases $250+ - selected within 30 days of purchase, plus up to 55 days interest free on general purchases. Latitude Gem Visa also lets you earn 3% back in Latitude Rewards on eligible spend across groceries, dining, theatre, and cinema when you spend at least $1,000 per statement cycle."
+url = "https://www.latitudefinancial.com.au/credit-cards/gem-visa/"
+image = "https://images.ctfassets.net/w0q68lqdeo57/36zO0PpVXQ6EmGzLrYLv5/ab9ca7780ee536ec210a5d73959f567f/cc-gem_1.jpg"
+
+[cdr]
+brand = "Latitude Credit Cards"
+product_id = "01fbc1c8-d7e1-4403-ab17-b555a054eba3"
+last_updated = "2026-09-10T07:10:11.831Z"
+
+[fees]
+annual = 143.4
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 45
+
+[rates]
+purchase = 28.99
+cash_advance = 29.99
+balance_transfer = 29.99
+interest_free_days = 55
+
+[limits]
+min_credit = 1000
+min_income = 20000
+
+[rewards]
+program = "latitude-rewards"
+
+[perks]
+

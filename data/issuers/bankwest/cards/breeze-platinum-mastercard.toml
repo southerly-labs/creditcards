@@ -1,0 +1,36 @@
+name = "Bankwest Breeze Platinum Mastercard"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "A credit card with our lowest ongoing rate."
+url = "https://www.bankwest.com.au/credit-cards/low-rate"
+image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-breeze-platinum.png"
+
+[cdr]
+brand = "Bankwest"
+product_id = "9ce7236b194f4294b5cf84452e9025c2"
+last_updated = "2026-10-09T11:08:30.000Z"
+
+[fees]
+annual = 59
+foreign_txn_pct = 0
+cash_advance_pct = 3
+late_payment = 25
+
+[rates]
+purchase = 12.99
+cash_advance = 21.99
+balance_transfer = 12.99
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 24
+
+[limits]
+min_credit = 1000
+
+[perks]
+insurance = [ "Complimentary Overseas Travel Insurance" ]
+

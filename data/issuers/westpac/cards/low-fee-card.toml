@@ -1,0 +1,31 @@
+name = "Low Fee Card"
+type = "personal"
+status = "active"
+description = "A simple credit card with no annual card fee ($5k p.a. minimum spend applies) and up to 55 days interest?free on purchases."
+url = "https://www.westpac.com.au/credit-cards/low-fee/summary"
+image = "https://www.westpac.com.au/content/dam/public/open-banking/Low%20Fee%20Card_232x146_dark.jpg"
+
+[cdr]
+brand = "Westpac"
+product_id = "CCLowFee"
+last_updated = "2026-10-29T02:41:55Z"
+
+[fees]
+annual = 30
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 20.99
+cash_advance = 21.99
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+max_credit = 50000
+min_income = 30000
+
+[perks]
+lounge_access = true
+

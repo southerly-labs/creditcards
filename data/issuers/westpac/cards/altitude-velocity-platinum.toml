@@ -1,0 +1,36 @@
+name = "Altitude Velocity Platinum"
+type = "personal"
+status = "active"
+description = "Earn Velocity Points directly into your Velocity Frequent Flyer account and enjoy Platinum credit card benefits."
+url = "https://www.westpac.com.au/credit-cards/reward/altitude-velocity-platinum/summary"
+image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Velocity%20Platinum_232x146_velocity.jpg"
+
+[cdr]
+brand = "Westpac"
+product_id = "CCAltPlatVelocity"
+last_updated = "2026-10-29T02:41:55Z"
+
+[fees]
+annual = 300
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 23.98
+cash_advance = 23.99
+interest_free_days = 45
+
+[limits]
+min_credit = 3000
+max_credit = 50000
+min_income = 30000
+
+[rewards]
+program = "velocity"
+bonus_points = 50000
+
+[perks]
+insurance = [ "Complimentary insurance", "Complimentary travel insurances" ]
+lounge_access = true
+

@@ -1,0 +1,23 @@
+name = "Zip Plus"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Higher-limit everyday account with a Zip Visa Card and conditional interest-free balance treatment."
+url = "https://zip.co/au/zip-plus"
+
+[cdr]
+brand = "Zip"
+product_id = "zip-plus"
+last_updated = "2026-08-04T00:00:00+00:00"
+
+[fees]
+annual = 119.4
+late_payment = 15
+
+[rates]
+[limits]
+min_credit = 2000
+max_credit = 20000
+
+[perks]
+

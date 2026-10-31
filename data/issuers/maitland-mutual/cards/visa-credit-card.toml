@@ -1,0 +1,27 @@
+name = "Mutual Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A low interest rate credit card."
+url = "https://themutual.apply-online.com.au/#/d632e613-271c-4718-95ae-9dhw9dh2rm"
+
+[cdr]
+brand = "Maitland Mutual Limited"
+product_id = "Mutual_Visa_Credit_Card"
+last_updated = "2026-07-15T07:46:22.000+10:00"
+
+[fees]
+annual = 49
+foreign_txn_pct = 3
+
+[rates]
+purchase = 12.49
+cash_advance = 12.49
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+max_credit = 20000
+
+[perks]
+

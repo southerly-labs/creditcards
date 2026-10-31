@@ -1,0 +1,22 @@
+name = "American Express® Corporate Meeting Card"
+type = "corporate"
+network = "amex"
+status = "active"
+description = "Corporate Charge Card for consolidating meeting and event-related spend in one statement, providing visibility and streamlining reconciliation."
+url = "https://www.americanexpress.com/au/business/payment-solutions/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG710CMC01S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "16fa9ae1-0fc1-4a6c-a785-d2f6a5d14712"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 206
+foreign_txn_pct = 3.5
+
+[rates]
+[limits]
+[perks]
+insurance = [ "International & Domestic Travel Insurance" ]
+

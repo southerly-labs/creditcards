@@ -1,0 +1,25 @@
+name = "HSBC Corporate or Purchasing Card"
+type = "corporate"
+status = "active"
+description = "Corporate or Purchasing cards for corporate expenditure including T&E and  Procurement spend"
+url = "https://www.business.hsbc.com.au/en-au/cards-email-us"
+image = "https://www.business.hsbc.com.au/-/jssmedia/media/australia/images/campaigns/au-corporate-cardface-img.jpg?h=516&iar=0&w=800&hash=64E0EE07E5471A3DC30D08CD12733021"
+
+[cdr]
+brand = "HSBC Bank Australia Limited – Wholesale Banking"
+product_id = "CR2"
+last_updated = "2025-12-02T07:07:11.406Z"
+
+[fees]
+annual = 40
+foreign_txn_pct = 3
+cash_advance_min = 2.5
+
+[rates]
+cash_advance = 15.75
+interest_free_days = 55
+
+[limits]
+[perks]
+insurance = [ "Complimentary travel & unauthorised transaction insurance" ]
+

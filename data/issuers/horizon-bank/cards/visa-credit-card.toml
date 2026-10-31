@@ -1,0 +1,28 @@
+name = "VISA CREDIT CARD"
+type = "personal"
+network = "visa"
+status = "active"
+description = "VISA CREDIT CARD"
+url = "https://forms.unpz.au/form?id=0e59f9ae8f4709bdb38e0606359b4f09:d46ce3a8-1726-4fd2-b451-23157ea36e6a"
+
+[cdr]
+brand = "Horizon Bank"
+product_id = "S97_S970001"
+last_updated = "2025-10-23T15:35:57.000+11:00"
+
+[fees]
+[rates]
+purchase = 12.95
+cash_advance = 12.95
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 7.96
+months = 5
+
+[limits]
+min_credit = 500
+
+[perks]
+

@@ -1,0 +1,20 @@
+name = "American Express® Business Travel Account"
+type = "business"
+network = "amex"
+status = "active"
+description = "Enable employees and non-employees to make travel purchases and reconcile all spend in a central billing Account."
+url = "https://www.americanexpress.com/au/business/payment-solutions/"
+
+[cdr]
+brand = "American Express"
+product_id = "0c0e45b1-b3ff-4284-a3f2-56f7b7043a8f"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+foreign_txn_pct = 3.5
+
+[rates]
+[limits]
+[perks]
+insurance = [ "American Express® Business Travel Account Insurance" ]
+

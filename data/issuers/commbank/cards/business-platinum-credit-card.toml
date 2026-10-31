@@ -1,0 +1,36 @@
+name = "Business Platinum credit card"
+type = "business"
+network = "mastercard"
+status = "active"
+description = "Earn flexible rewards and enjoy up to 55 days interest-free to keep your cashflow in check."
+url = "https://www.commbank.com.au/business/business-credit-cards/business-awards-credit-cards/business-awards-platinum-credit-card.html"
+image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/personal-liability/mastercard-business-platinum-credit-card.png"
+
+[cdr]
+brand = "CommBank"
+product_id = "8df91527a5774d7bb795eebe2509f941"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+annual = 300
+additional_card = 75
+foreign_txn_pct = 3
+cash_advance_pct = 1.5
+late_payment = 20
+
+[rates]
+purchase = 20.74
+cash_advance = 21.74
+interest_free_days = 55
+
+[limits]
+min_credit = 6000
+max_credit = 50000
+
+[rewards]
+program = "qantas"
+partners = [ "commbank-yello" ]
+
+[perks]
+insurance = [ "Transit Accident Insurance", "International travel insurance", "Unauthorised Transactions Insurance" ]
+

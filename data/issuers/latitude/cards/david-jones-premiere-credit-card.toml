@@ -1,0 +1,36 @@
+name = "David Jones Premiere Credit Card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "Elevate your everyday spending with the David Jones Premiere Credit Card. The David Jones Premiere credit card unlocks a stylish new world of benefits. Enjoy exclusive access to complimentary store services, events and offers. Discover a credit card that turns general purchases into a luxury experience."
+url = "https://cards.latitudefinancial.com/davidjonespremiere"
+image = "https://www.davidjones.com/images/assetimages/2024/CreditCard/card_Premiere.png"
+
+[cdr]
+brand = "Latitude Credit Cards"
+product_id = "59ad92b9-5500-40b3-8da6-3b9580b6c13c"
+last_updated = "2026-10-06T06:29:28.323Z"
+
+[fees]
+annual = 149
+additional_card = 24
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 35
+
+[rates]
+purchase = 24.99
+cash_advance = 25.99
+balance_transfer = 25.99
+interest_free_days = 44
+
+[limits]
+min_credit = 1000
+min_income = 20000
+
+[rewards]
+program = "david-jones-rewards"
+
+[perks]
+insurance = [ "E-commerce Insurance" ]
+

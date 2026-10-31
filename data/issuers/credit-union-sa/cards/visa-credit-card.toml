@@ -1,0 +1,27 @@
+name = "Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our Visa Credit Card offers 6 months of 0% pa on balance transfers. Afterwards you’ll still enjoy a low ongoing interest rate, with the same low rate applying for all purchases and cash advances. You’ll have the ability to make fast payments with Google Pay, Apple Pay, Samsung Pay, Garmin Pay and Visa payWave. It’s also highly secure, with microchip technology, 24/7 fraud monitoring, Visa’s Zero Liability policy and Visa Secure for online purchases from participating merchants and payWave. You’ll also be able to temporarily lock your card (if you misplace it), plus block payWave, international and online transactions whenever you need to – using the Mobile Banking App or Internet Banking."
+url = "https://apply.creditunionsa.com.au/cusa/servlet/SmartForm.html?formCode=joint-credit-card"
+image = "https://cms.creditunionsa.com.au/assets/images/20220112_SecondaryPageBanners_Cards_VisaCreditCard.jpg"
+
+[cdr]
+brand = "Credit Union SA"
+product_id = "CREDITUNIONSA_OD_500"
+last_updated = "2026-06-29T00:00:00.000+10:00"
+
+[fees]
+annual = 59
+foreign_txn_pct = 3
+
+[rates]
+purchase = 11.99
+cash_advance = 11.99
+
+[limits]
+min_credit = 1000
+max_credit = 20000
+
+[perks]
+

@@ -1,0 +1,3 @@
+name = "Westpac Altitude"
+type = "bank"
+aliases = [ 'altitude' ]

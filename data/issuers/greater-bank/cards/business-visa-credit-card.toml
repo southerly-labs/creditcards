@@ -1,0 +1,28 @@
+name = "Business Visa Credit Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "Credit card for small business"
+image = "https://www.greater.com.au/globalassets/images/gb-cards/gb_visa_credit_card.png"
+
+[cdr]
+brand = "Greater Bank"
+product_id = "3215"
+last_updated = "2026-09-23T14:00:00Z"
+
+[fees]
+annual = 69
+foreign_txn_pct = 3
+
+[rates]
+purchase = 6.96
+cash_advance = 6.96
+balance_transfer = 6.96
+interest_free_days = 55
+
+[limits]
+min_credit = 1000
+max_credit = 100000
+
+[perks]
+

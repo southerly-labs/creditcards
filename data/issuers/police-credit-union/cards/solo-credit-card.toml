@@ -1,0 +1,21 @@
+name = "SoLo Credit Card"
+type = "personal"
+status = "active"
+description = "Low Rate Credit Card"
+url = "https://www.policecu.com.au/PCUDocuments/Credit_Application_Form_Car_Loans_Personal%20Loans_&_Credit_Cards.pdf"
+
+[cdr]
+brand = "Police Credit Union Ltd"
+product_id = "SoLo_Credit_Card"
+last_updated = "2026-04-27T11:33:53.000+09:30"
+
+[fees]
+[rates]
+purchase = 8.74
+cash_advance = 8.74
+
+[limits]
+min_credit = 1000
+
+[perks]
+

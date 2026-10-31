@@ -1,0 +1,27 @@
+name = "American Express® Corporate Gold Card"
+type = "corporate"
+network = "amex"
+status = "active"
+description = "Corporate Charge Card for consolidating employee expenses that provides improved cash flow and increased visibility and control, while offering employees a range of rewards and travel benefits."
+url = "https://www.americanexpress.com/en-au/business/corporate-credit-cards/gold-corporate-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAURGGL00000S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "55458aed-63df-4c58-8fc6-e197b0b6de2a"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 459
+foreign_txn_pct = 3.5
+cash_advance_pct = 3.5
+
+[rates]
+[limits]
+[rewards]
+program = "amex-membership-rewards"
+
+[perks]
+insurance = [ "International & Domestic Travel Insurance" ]
+lounge_access = true
+

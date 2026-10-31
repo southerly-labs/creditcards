@@ -1,0 +1,33 @@
+name = "Qantas Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "For Police Association of Victoria, Australian Federal Police Association, Northern Territory Police Association, Victorian Ambulance Union and United Firefighters Union members"
+url = "https://www.bankvic.com.au/apply-for-credit"
+
+[cdr]
+brand = "BankVic"
+product_id = "S17_QANTAS_CREDIT_CARD"
+last_updated = "2026-08-13T15:52:02.000+10:00"
+
+[fees]
+[rates]
+purchase = 18.95
+cash_advance = 18.95
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 9.96
+months = 6
+
+[limits]
+min_credit = 5000
+max_credit = 20000
+
+[rewards]
+program = "qantas"
+
+[perks]
+insurance = [ "Complimentary International Travel Insurance**" ]
+

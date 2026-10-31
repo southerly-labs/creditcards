@@ -1,0 +1,30 @@
+name = "Low Fee credit card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "Enjoy the flexibility and convenience of a credit card with a low monthly fee."
+url = "https://www.commbank.com.au/credit-cards/low-fee.html"
+image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-low-fee-credit-card.png"
+
+[cdr]
+brand = "CommBank"
+product_id = "76d24ebc94e94b368f829e343dce4b49"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+annual = 36
+additional_card = 0
+foreign_txn_pct = 3.5
+cash_advance_pct = 3
+late_payment = 20
+
+[rates]
+purchase = 20.99
+cash_advance = 21.99
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+
+[perks]
+

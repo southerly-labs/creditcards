@@ -1,0 +1,29 @@
+name = "MoneyMe Luxury Escapes Card"
+type = "personal"
+status = "active"
+description = "Digital credit card with Luxury Escapes loyalty benefits. Purchase and cash advance rates are personalised to your Equifax OneScore credit band. Credit limits up to $30,000."
+url = "https://www.moneyme.com.au/credit-card"
+image = "https://www.moneyme.com.au/assets/cards/luxury-escapes-card.png"
+
+[cdr]
+brand = "MoneyMe"
+product_id = "moneyme-luxury-escapes-credit-card"
+last_updated = "2026-10-08T00:00:00Z"
+
+[fees]
+annual = 149
+foreign_txn_pct = 3
+
+[rates]
+purchase = 18.99
+cash_advance = 21.99
+
+[limits]
+max_credit = 2000
+min_income = 30000
+
+[rewards]
+program = "moneyme-rewards"
+
+[perks]
+

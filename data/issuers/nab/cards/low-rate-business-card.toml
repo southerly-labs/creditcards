@@ -1,0 +1,34 @@
+name = "NAB Low Rate Business Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "If you’re a small business, our low rate business credit card can help you manage your cash flow."
+url = "https://www.nab.com.au/business/business-cards/nab-low-rate-business-card"
+image = "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "aea04112-8a33-4d90-991a-b30ad00699a8"
+last_updated = "2026-06-01T13:59:59Z"
+
+[fees]
+annual = 60
+foreign_txn_pct = 3
+
+[rates]
+purchase = 13.99
+cash_advance = 13.99
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "purchase"
+rate = 0
+months = 12
+
+[limits]
+min_credit = 5000
+max_credit = 18000000
+
+[perks]
+insurance = [ "Unauthorised Transaction Insurance" ]
+

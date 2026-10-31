@@ -1,0 +1,23 @@
+name = "Business Visa"
+type = "business"
+network = "visa"
+status = "active"
+description = "Hume Bank's Business credit card is a great business solution giving you freedom in managing your cash flow."
+url = "https://www.humebank.com.au/business/business-visa-credit-card/"
+
+[cdr]
+brand = "Hume Bank"
+product_id = "S5V2"
+last_updated = "2026-05-01T11:51:28.000+10:00"
+
+[fees]
+annual = 60
+
+[rates]
+interest_free_days = 55
+
+[limits]
+min_credit = 5000
+
+[perks]
+

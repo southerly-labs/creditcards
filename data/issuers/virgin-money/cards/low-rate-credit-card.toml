@@ -1,0 +1,35 @@
+name = "Virgin Money Low Rate Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "At 12.99% p.a. lower your interest, not your standards."
+url = "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/virginmoney-card-apply?"
+image = "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/low-rate-credit-card.png"
+
+[cdr]
+brand = "Virgin Money"
+product_id = "8cb23721-102c-ee11-9965-002248e1d56c"
+last_updated = "2026-08-05T03:56:39Z"
+
+[fees]
+annual = 99
+foreign_txn_pct = 3.3
+cash_advance_pct = 2.7
+cash_advance_min = 2.7
+late_payment = 30
+
+[rates]
+purchase = 12.99
+cash_advance = 21.69
+balance_transfer = 21.69
+interest_free_days = 55
+
+[limits]
+min_credit = 2000
+min_income = 35000
+
+[rewards]
+program = "virgin-money-rewards"
+
+[perks]
+

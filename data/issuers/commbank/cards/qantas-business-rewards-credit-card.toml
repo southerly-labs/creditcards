@@ -1,0 +1,34 @@
+name = "CommBank Qantas Business Rewards Credit Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "Be rewarded for essential business spend and save on business travel. Take advantage of offers and partner discounts whilst purchasing with confidence and convenience knowing you are backed by two of Australia's largest brands"
+
+[cdr]
+brand = "CommBank"
+product_id = "e15ed5da59354af78c9e8aa0f4f841cf"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+annual = 0
+foreign_txn_pct = 3
+cash_advance_pct = 3
+cash_advance_min = 3
+late_payment = 20
+
+[rates]
+purchase = 19.99
+cash_advance = 21.99
+interest_free_days = 44
+
+[limits]
+min_credit = 5000
+max_credit = 100000
+
+[rewards]
+program = "qantas"
+bonus_points = 170000
+
+[perks]
+insurance = [ "Insurance provided by Cover Genius" ]
+

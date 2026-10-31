@@ -1,0 +1,22 @@
+name = "Business Access Plus"
+type = "business"
+status = "active"
+description = "Business Access Plus"
+url = "https://www.coastline.com.au/business/visa-business-credit-card"
+
+[cdr]
+brand = "Coastline Bank"
+product_id = "66"
+last_updated = "2026-03-24T04:00:14.5359085Z"
+
+[fees]
+[rates]
+purchase = 14.05
+cash_advance = 14.05
+interest_free_days = 55
+
+[limits]
+min_credit = 500
+
+[perks]
+

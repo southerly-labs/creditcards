@@ -1,0 +1,25 @@
+name = "Visa Credit Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "Visa Credit Card"
+url = "https://swscu.apply-online.com.au/#/b7f0c6a4-2f6a-49c2-9912-3f8eb4a40b5a"
+
+[cdr]
+brand = "SWSbank"
+product_id = "S3_VC"
+last_updated = "2025-09-15T11:05:37.000+10:00"
+
+[fees]
+annual = 2.5
+
+[rates]
+purchase = 13.45
+cash_advance = 13.45
+
+[limits]
+min_credit = 500
+max_credit = 20000
+
+[perks]
+

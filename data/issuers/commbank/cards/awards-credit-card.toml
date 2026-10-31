@@ -1,0 +1,27 @@
+name = "Awards credit card"
+type = "personal"
+network = "mastercard"
+status = "active"
+description = "For customers who want a lower monthly fee and credit limit but still like to earn Awards points."
+url = "https://www.commbank.com.au/credit-cards/awards.html"
+image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-awards-credit-card.png"
+
+[cdr]
+brand = "CommBank"
+product_id = "6512302188d8496baba2fbfd7dbba9a7"
+last_updated = "2026-10-30T02:15:38.000Z"
+
+[fees]
+[rates]
+interest_free_days = 44
+
+[limits]
+min_credit = 500
+
+[rewards]
+program = "qantas"
+partners = [ "commbank-awards" ]
+
+[perks]
+insurance = [ "Extended warranty insurance", "Purchase security insurance" ]
+

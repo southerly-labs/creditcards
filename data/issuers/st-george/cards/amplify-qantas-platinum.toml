@@ -1,0 +1,34 @@
+name = "Amplify Qantas Platinum"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Our mid-tier credit card for Qantas point lovers"
+image = "https://www.stgeorge.com.au/content/dam/public/open-banking/STG-Amplify-Platinum-Card-Art-232x146.png"
+
+[cdr]
+brand = "St.George Bank"
+product_id = "STGCCAmplifyPlatinumcardFrequentFlyer"
+last_updated = "2026-10-29T01:03:01Z"
+
+[fees]
+annual = 300
+foreign_txn_pct = 3
+cash_advance_pct = 3.5
+late_payment = 20
+
+[rates]
+purchase = 23.98
+cash_advance = 23.99
+interest_free_days = 45
+
+[limits]
+min_credit = 6000
+max_credit = 80000
+
+[rewards]
+program = "qantas"
+bonus_points = 30000
+
+[perks]
+lounge_access = true
+

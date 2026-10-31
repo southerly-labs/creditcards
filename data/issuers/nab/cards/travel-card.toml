@@ -1,0 +1,39 @@
+name = "NAB Travel Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "The new NAB Rewards Signature Card allows you to earn points with premium  services and complimentary insurances."
+url = "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-signature-card"
+image = "https://www.nab.com.au/personal/credit-cards/nab-rewards-cards"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "e10279eb-1172-48dd-b6d2-08bed9605c5d"
+last_updated = "2026-10-01T13:59:59Z"
+
+[fees]
+annual = 395
+foreign_txn_pct = 0
+
+[rates]
+purchase = 22.49
+cash_advance = 22.99
+balance_transfer = 21.74
+interest_free_days = 44
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
+[limits]
+min_credit = 15000
+
+[rewards]
+program = "nab-rewards"
+bonus_points = 80000
+
+[perks]
+insurance = [ "Complimentary International Travel Insurance", "Complimentary Domestic Travel Insurance", "Complimentary Purchase Protection Insurance", "Complimentary Extended Warranty Insurance", "Complimentary Rental Vehicle Excess Insurance in Australia", "Mobile phone insurance" ]
+lounge_access = true
+

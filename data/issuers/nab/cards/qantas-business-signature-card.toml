@@ -1,0 +1,33 @@
+name = "NAB Qantas Business Signature Card"
+type = "business"
+network = "visa"
+status = "active"
+description = "Get more from your business credit card purchases. Maximise your Qantas Points."
+url = "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card"
+image = "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "2bd0b7d2-4a66-4e34-a7ca-566c6e24bf80"
+last_updated = "2026-08-03T13:59:59Z"
+
+[fees]
+annual = 295
+foreign_txn_pct = 3
+
+[rates]
+purchase = 19.5
+cash_advance = 21.74
+interest_free_days = 44
+
+[limits]
+min_credit = 5000
+max_credit = 18000000
+
+[rewards]
+program = "qantas"
+bonus_points = 200000
+
+[perks]
+insurance = [ "Unauthorised Transaction Insurance", "Transit Accident Insurance" ]
+

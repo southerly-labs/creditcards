@@ -1,0 +1,31 @@
+name = "Bluey Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Use your low rate Bluey VISA credit card for shopping, travelling overseas or even to consolidate other credit or store card debt."
+url = "https://www.qbank.com.au/apply-online"
+
+[cdr]
+brand = "QBANK"
+product_id = "S25_Bluey"
+last_updated = "2026-10-19T06:10:22.000+10:00"
+
+[fees]
+foreign_txn_pct = 3.65
+
+[rates]
+purchase = 12.74
+cash_advance = 12.74
+balance_transfer = 0
+interest_free_days = 55
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 12.739
+months = 12
+
+[limits]
+min_credit = 1000
+
+[perks]
+

@@ -1,0 +1,28 @@
+name = "The American Express® Qantas Business Rewards Card"
+type = "business"
+network = "amex"
+status = "active"
+description = "The American Express Qantas Business Rewards Card - the Business Card that moves with you. Earn Qantas Points on your Business spend"
+url = "https://www.americanexpress.com/en-au/credit-cards/qantas-business-rewards-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG870QBR17S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "29422ec1-d2ad-479f-a41b-9686b29c2bf9"
+last_updated = "2026-07-09T05:00:00.000Z"
+
+[fees]
+annual = 450
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+
+[limits]
+[rewards]
+program = "qantas"
+
+[perks]
+insurance = [ "Complimentary Travel Insurance" ]
+lounge_access = true
+

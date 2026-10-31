@@ -1,0 +1,32 @@
+name = "The Qantas American Express Discovery Card"
+type = "personal"
+network = "amex"
+status = "active"
+description = "The Qantas American Express Discovery Card has no annual fee and offers Qantas Points for every dollar spent."
+url = "https://www.americanexpress.com/en-au/credit-cards/qantas-discovery-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUB441R5400S3.gif"
+
+[cdr]
+brand = "American Express"
+product_id = "59416429-117a-411f-b687-5cf3db3aed46"
+last_updated = "2026-07-09T05:00:00.000Z"
+
+[fees]
+annual = 0
+additional_card = 0
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 23.99
+interest_free_days = 44
+
+[limits]
+min_credit = 2000
+
+[rewards]
+program = "qantas"
+
+[perks]
+insurance = [ "Card Purchase Cover", "Card Refund Cover" ]
+lounge_access = true
+

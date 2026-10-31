@@ -1,0 +1,27 @@
+name = "Low Rate Visa Credit Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "A lower interest rate to reduce your borrowing costs. Great for those who have a carryover balance each month."
+image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
+
+[cdr]
+brand = "Bank Australia"
+product_id = "a3e1054a-73da-469f-863e-0f3418967627"
+last_updated = "2026-04-10T05:29:19.363Z"
+
+[fees]
+annual = 0
+foreign_txn_pct = 3
+cash_advance_min = 3.5
+
+[rates]
+purchase = 12.99
+cash_advance = 12.99
+balance_transfer = 0
+
+[limits]
+min_credit = 1000
+
+[perks]
+

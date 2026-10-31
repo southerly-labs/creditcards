@@ -1,0 +1,38 @@
+name = "NAB Rewards Card"
+type = "personal"
+network = "visa"
+status = "active"
+description = "Earn NAB Rewards Points and enjoy platinum services and complimentary insurances"
+url = "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card"
+image = "https://www.nab.com.au/personal/credit-cards/nab-rewards-cards"
+
+[cdr]
+brand = "NATIONAL AUSTRALIA BANK"
+product_id = "c43ad795-9db1-4e1f-a7f5-845714ecedfd"
+last_updated = "2026-10-01T13:59:59Z"
+
+[fees]
+annual = 195
+foreign_txn_pct = 3.5
+
+[rates]
+purchase = 22.49
+cash_advance = 22.99
+balance_transfer = 21.74
+interest_free_days = 44
+
+[[rates.intro]]
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
+[limits]
+min_credit = 6000
+
+[rewards]
+program = "nab-rewards"
+bonus_points = 80000
+
+[perks]
+insurance = [ "Complimentary International Travel Insurance", "Complimentary Domestic Travel Insurance", "Complimentary Purchase Protection Insurance", "Complimentary Extended Warranty Insurance", "Complimentary Rental Vehicle Excess Insurance in Australia" ]
+

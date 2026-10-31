@@ -1,0 +1,34 @@
+name = "Qantas Platinum Credit Card"
+type = "personal"
+status = "active"
+description = "With one of the lowest annual fees in the market, and a competitive interest rate, make every day purchases using your Qantas Platinum Credit Card and watch your points soar. Plus, you will also receive up to 55 days interest fee on purchase."
+url = "https://applynow.bendigobank.com.au/apply/#/apply/new/creditCards/loanDetails/productSelection?productCode=RCA-M1-PFF-PFF"
+image = "https://www.bendigobank.com.au/siteassets/personal/creditcards/qantasplatinum/promoexploretiles/highlightsection-qantas.jpg"
+
+[cdr]
+brand = "Bendigo Bank"
+product_id = "f2476015-6ff3-4165-8d89-c8ca7fe76735"
+last_updated = "2026-10-28T05:19:01.570Z"
+
+[fees]
+annual = 149
+foreign_txn_pct = 3
+cash_advance_pct = 3
+late_payment = 15
+
+[rates]
+purchase = 19.99
+cash_advance = 21.99
+balance_transfer = 21.99
+interest_free_days = 55
+
+[limits]
+min_credit = 3000
+max_credit = 50000
+
+[rewards]
+program = "qantas"
+
+[perks]
+insurance = [ "International Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess Insurance" ]
+

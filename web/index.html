@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Australian credit cards</title>
+    <link rel="icon" href="../assets/icon.svg" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Australian credit cards</h1>
+      <p class="sub">Fees, rates and rewards for every card published under the Consumer Data Right.</p>
+    </header>
+    <section class="controls">
+      <input id="search" type="search" placeholder="Search cards, issuers, programs…" autofocus />
+      <select id="type">
+        <option value="personal">Personal</option>
+        <option value="business">Business</option>
+        <option value="corporate">Corporate</option>
+        <option value="">All types</option>
+      </select>
+      <select id="program">
+        <option value="">Any rewards</option>
+        <option value="airline">Airline points</option>
+        <option value="bank">Bank points</option>
+        <option value="retail">Retail points</option>
+        <option value="cashback">Cashback</option>
+        <option value="none">No rewards</option>
+      </select>
+      <label><input id="nofx" type="checkbox" /> No FX fee</label>
+      <label><input id="nofee" type="checkbox" /> No annual fee</label>
+      <label><input id="discontinued" type="checkbox" /> Show discontinued</label>
+      <span id="count"></span>
+    </section>
+    <main>
+      <table>
+        <thead><tr id="head"></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </main>
+    <script type="module" src="./app.ts"></script>
+  </body>
+</html>
