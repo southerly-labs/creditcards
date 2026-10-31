@@ -2,12 +2,12 @@
 // created. After that, data/issuers/<slug>/issuer.toml is the source of truth.
 export const ISSUER_SEEDS: Record<string, { readonly slug: string; readonly name: string }> = {
   "American Express": { slug: "amex", name: "American Express" },
-  "ANZ": { slug: "anz", name: "ANZ" },
+  ANZ: { slug: "anz", name: "ANZ" },
   "Bank of Melbourne": { slug: "bank-of-melbourne", name: "Bank of Melbourne" },
   "Bank of Queensland Limited": { slug: "boq", name: "Bank of Queensland" },
-  "BankSA": { slug: "banksa", name: "BankSA" },
+  BankSA: { slug: "banksa", name: "BankSA" },
   "Coles Credit Cards": { slug: "coles", name: "Coles" },
-  "CommBank": { slug: "commbank", name: "CommBank" },
+  CommBank: { slug: "commbank", name: "CommBank" },
   "ING BANK (Australia) Ltd": { slug: "ing", name: "ING" },
   "Kogan Money Credit Cards": { slug: "kogan-money", name: "Kogan Money" },
   "Latitude Credit Cards": { slug: "latitude", name: "Latitude" },
@@ -15,12 +15,17 @@ export const ISSUER_SEEDS: Record<string, { readonly slug: string; readonly name
   "NATIONAL AUSTRALIA BANK": { slug: "nab", name: "NAB" },
   "Qantas Money Credit Cards": { slug: "qantas-money", name: "Qantas Money" },
   "St.George Bank": { slug: "st-george", name: "St.George" },
-  "Westpac": { slug: "westpac", name: "Westpac" }
+  Westpac: { slug: "westpac", name: "Westpac" }
 }
 
 export const slugify = (s: string) =>
-  s.normalize("NFKD").replace(/[®™©]/g, "").toLowerCase().replace(/&/g, " and ")
-    .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
+  s
+    .normalize("NFKD")
+    .replace(/[®™©]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
 
 const CORPORATE_SUFFIX = /\b(limited|ltd|pty|australia|bank of australia)\b/gi
 

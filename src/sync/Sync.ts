@@ -42,7 +42,7 @@ interface BrandFetch {
 
 const decodeCard = Schema.decodeUnknownEffect(Card)
 
-export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun: boolean }) {
+export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRun: boolean }) {
   const cdr = yield* CdrClient
   const store = yield* Store
   const date = DateTime.formatIsoDateUtc(yield* DateTime.now)
@@ -57,36 +57,55 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
   const brands = yield* cdr.brands
   const activeByBrand = new Map<string, number>()
   for (const card of cards.values()) {
-    if (card.status === "active" && card.cdr) activeByBrand.set(card.cdr.brand, (activeByBrand.get(card.cdr.brand) ?? 0) + 1)
+    if (card.status === "active" && card.cdr)
+      activeByBrand.set(card.cdr.brand, (activeByBrand.get(card.cdr.brand) ?? 0) + 1)
   }
-  const fetched = yield* Effect.forEach(brands, (brand) =>
-    Effect.gen(function*() {
-      // Some data holders' CDNs serve a stale empty list for particular
-      // request headers. When we expect cards, try the other header variants.
-      const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
-      const list = Effect.fnUntraced(function*(variant: number): Effect.fn.Return<ReadonlyArray<ProductSummary>, CdrError> {
-        const products = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY, variant)
-        return products.length === 0 && expectsCards && variant + 1 < REQUEST_VARIANTS.length
-          ? yield* list(variant + 1)
-          : products
-      })
-      const listed = yield* list(0).pipe(Effect.result)
-      if (listed._tag === "Failure") {
-        return { brand: brand.brandName, products: [], listError: listed.failure.message, productErrors: [] } satisfies BrandFetch
-      }
-      const productErrors: Array<string> = []
-      const products = yield* Effect.forEach(listed.success, (summary) =>
-        cdr.getProduct(brand.publicBaseUri, summary.productId).pipe(
-          Effect.map((p) => p.detail),
-          Effect.catchTag("CdrError", (e) => Effect.sync(() => (productErrors.push(`${summary.name}: ${e.message}`), undefined)))
-        ), { concurrency: 4 })
-      return {
-        brand: brand.brandName,
-        products: products.filter((p) => p !== undefined),
-        listError: productErrors.length > 0 && productErrors.length === listed.success.length ? productErrors[0] : undefined,
-        productErrors
-      } satisfies BrandFetch
-    }), { concurrency: 16 })
+  const fetched = yield* Effect.forEach(
+    brands,
+    (brand) =>
+      Effect.gen(function* () {
+        // Some data holders' CDNs serve a stale empty list for particular
+        // request headers. When we expect cards, try the other header variants.
+        const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
+        const list = Effect.fnUntraced(function* (
+          variant: number
+        ): Effect.fn.Return<ReadonlyArray<ProductSummary>, CdrError> {
+          const products = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY, variant)
+          return products.length === 0 && expectsCards && variant + 1 < REQUEST_VARIANTS.length
+            ? yield* list(variant + 1)
+            : products
+        })
+        const listed = yield* list(0).pipe(Effect.result)
+        if (listed._tag === "Failure") {
+          return {
+            brand: brand.brandName,
+            products: [],
+            listError: listed.failure.message,
+            productErrors: []
+          } satisfies BrandFetch
+        }
+        const productErrors: Array<string> = []
+        const products = yield* Effect.forEach(
+          listed.success,
+          (summary) =>
+            cdr.getProduct(brand.publicBaseUri, summary.productId).pipe(
+              Effect.map((p) => p.detail),
+              Effect.catchTag("CdrError", (e) =>
+                Effect.sync(() => (productErrors.push(`${summary.name}: ${e.message}`), undefined))
+              )
+            ),
+          { concurrency: 4 }
+        )
+        return {
+          brand: brand.brandName,
+          products: products.filter((p) => p !== undefined),
+          listError:
+            productErrors.length > 0 && productErrors.length === listed.success.length ? productErrors[0] : undefined,
+          productErrors
+        } satisfies BrandFetch
+      }),
+    { concurrency: 16 }
+  )
 
   // ---- Global guardrail ------------------------------------------------------
   const cardsSeen = fetched.reduce((n, b) => n + b.products.length, 0)
@@ -133,7 +152,11 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
     const issuerSlug = resolveIssuer(brand)
     const issuerName = issuers.get(issuerSlug)!.name
     for (const product of products) {
-      const { card: incoming, fallbackProgram } = normalise(product, { issuerSlug, brandName: brand, programs: programIndex })
+      const { card: incoming, fallbackProgram } = normalise(product, {
+        issuerSlug,
+        brandName: brand,
+        programs: programIndex
+      })
       if (fallbackProgram && !programs.has(fallbackProgram)) {
         const program: Program = { name: `${issuerName} Rewards`, type: "bank" }
         programs.set(fallbackProgram, program)
@@ -144,9 +167,12 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
       const existing = key ? cards.get(key) : undefined
       if (!key) {
         const base = cardSlug(incoming.name, issuerName)
-        let slug = cards.has(cardKey(issuerSlug, base)) || writes.has(cardKey(issuerSlug, base))
-          ? `${base}-${incoming.type}` : base
-        for (let i = 2; cards.has(cardKey(issuerSlug, slug)) || writes.has(cardKey(issuerSlug, slug)); i++) slug = `${base}-${i}`
+        let slug =
+          cards.has(cardKey(issuerSlug, base)) || writes.has(cardKey(issuerSlug, base))
+            ? `${base}-${incoming.type}`
+            : base
+        for (let i = 2; cards.has(cardKey(issuerSlug, slug)) || writes.has(cardKey(issuerSlug, slug)); i++)
+          slug = `${base}-${i}`
         key = cardKey(issuerSlug, slug)
         keyByCdrId.set(`${brand}|${product.productId}`, key)
       }
@@ -197,7 +223,8 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
   for (const [brand, keys] of missingByBrand) {
     const active = [...cards.values()].filter((c) => c.status === "active" && c.cdr?.brand === brand).length
     if (keys.length / active > MAX_DISCONTINUED_SHARE && keys.length > 1) {
-      for (const key of keys) held.push({ card: key, reasons: [`${keys.length}/${active} ${brand} cards vanished at once`] })
+      for (const key of keys)
+        held.push({ card: key, reasons: [`${keys.length}/${active} ${brand} cards vanished at once`] })
       continue
     }
     for (const key of keys) {
@@ -225,33 +252,38 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
     held,
     newIssuers: [...new Set(newIssuers)],
     newPrograms,
-    brandErrors: fetched.filter((b) => b.listError !== undefined && !/HTTP 4\d\d/.test(b.listError))
+    brandErrors: fetched
+      .filter((b) => b.listError !== undefined && !/HTTP 4\d\d/.test(b.listError))
       .map((b) => ({ brand: b.brand, error: b.listError! })),
     rewards: { set: rewardsSet, review: rewardsReview }
   } satisfies SyncReport
 })
-
 
 // Markdown summary used for the commit message body and the held-changes issue.
 export const summariseReport = (r: SyncReport): string => {
   const fmt = (v: unknown) => (v === undefined ? "—" : typeof v === "object" ? JSON.stringify(v) : String(v))
   const lines = [
     `CDR sync ${r.date}: ${r.cardsSeen} cards seen, ${r.added.length} added, ${r.updated.length} updated, ` +
-    `${r.discontinued.length} discontinued, ${r.held.length} held`,
+      `${r.discontinued.length} discontinued, ${r.held.length} held`,
     ""
   ]
   if (r.added.length) lines.push("Added:", ...r.added.map((c) => `- ${c}`), "")
   if (r.updated.length) {
     lines.push("Updated:")
     for (const u of r.updated) {
-      const shown = u.changes.filter((c) => !["cdr", "description", "rewards.earn_source", "rewards.earn_text_hash"].includes(c.path))
-      lines.push(`- ${u.card}: ${shown.map((c) => `${c.path} ${fmt(c.before)} → ${fmt(c.after)}`).join("; ") || "metadata"}`)
+      const shown = u.changes.filter(
+        (c) => !["cdr", "description", "rewards.earn_source", "rewards.earn_text_hash"].includes(c.path)
+      )
+      lines.push(
+        `- ${u.card}: ${shown.map((c) => `${c.path} ${fmt(c.before)} → ${fmt(c.after)}`).join("; ") || "metadata"}`
+      )
     }
     lines.push("")
   }
   if (r.discontinued.length) lines.push("Discontinued:", ...r.discontinued.map((c) => `- ${c}`), "")
   if (r.held.length) lines.push("Held for review:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")
-  if (r.newPrograms.length) lines.push("New fallback programs (add aliases or rename):", ...r.newPrograms.map((p) => `- ${p}`), "")
+  if (r.newPrograms.length)
+    lines.push("New fallback programs (add aliases or rename):", ...r.newPrograms.map((p) => `- ${p}`), "")
   if (r.rewards.set.length || r.rewards.review.length) {
     lines.push(`Earn rates: ${r.rewards.set.length} set by parser, ${r.rewards.review.length} need review`, "")
   }
@@ -266,7 +298,7 @@ export const summariseRewardsReview = (r: SyncReport): string =>
     "",
     "To resolve them locally, run `bun run cli rewards todo` (optionally `--issuer <slug>`), set",
     "`rewards.earn` from the CDR text it prints, then `bun run cli rewards stamp <issuer/card>...`.",
-    "See \"Earn rates\" in the README.",
+    'See "Earn rates" in the README.',
     "",
     ...r.rewards.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
   ].join("\n")

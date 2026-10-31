@@ -24,11 +24,16 @@ export const planRewards = (
   }
   const parsed = parseEarn(features)
   if (parsed._tag === "Parsed") {
-    const same = current?.earn_source === "parser" && current.earn_text_hash === hash && equal(current.earn, parsed.earn)
+    const same =
+      current?.earn_source === "parser" && current.earn_text_hash === hash && equal(current.earn, parsed.earn)
     return same ? { _tag: "Unchanged" } : { _tag: "Set", earn: parsed.earn, hash }
   }
   if (current?.earn_source === "parser") {
-    return { _tag: "Review", reason: `loyalty text changed and the parser can no longer read it (${parsed.reason})`, hash }
+    return {
+      _tag: "Review",
+      reason: `loyalty text changed and the parser can no longer read it (${parsed.reason})`,
+      hash
+    }
   }
   return { _tag: "Review", reason: parsed.reason, hash }
 }

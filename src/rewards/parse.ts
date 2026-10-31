@@ -31,13 +31,49 @@ const PER_DOLLAR = /per \$\s?1\b|per dollar|for every (?:AU)?\$\s?[\d.]+|for eve
 const DIVISOR = /for every (?:AU)?\$\s?(\d+(?:\.\d+)?)/i
 
 // Signals of spend categories, bonuses or conditions the parser does not model.
-const COMPLEX = new RegExp([
-  "qantas products", "virgin australia", "international", "overseas", "government", "grocer", "dining",
-  "supermarket", "petrol", "webjet", "selected", "taxation", "utilit", "eats", "streaming", "retailer",
-  "david jones", "travel", "airline", "hotel", "online", "foreign", "business spend", "\\btax\\b",
-  "except", "excluding", "bonus", "extra", "additional", "cash ?back", "%", "\\bup to [\\d.]+k?\\s+(?:\\w+\\s+)?points",
-  "capped at [\\d,]+ (?:points|per)", "calendar year", "per year", "annual", "\\bor\\b \\d", "opt[- ]in"
-].join("|"), "i")
+const COMPLEX = new RegExp(
+  [
+    "qantas products",
+    "virgin australia",
+    "international",
+    "overseas",
+    "government",
+    "grocer",
+    "dining",
+    "supermarket",
+    "petrol",
+    "webjet",
+    "selected",
+    "taxation",
+    "utilit",
+    "eats",
+    "streaming",
+    "retailer",
+    "david jones",
+    "travel",
+    "airline",
+    "hotel",
+    "online",
+    "foreign",
+    "business spend",
+    "\\btax\\b",
+    "except",
+    "excluding",
+    "bonus",
+    "extra",
+    "additional",
+    "cash ?back",
+    "%",
+    "\\bup to [\\d.]+k?\\s+(?:\\w+\\s+)?points",
+    "capped at [\\d,]+ (?:points|per)",
+    "calendar year",
+    "per year",
+    "annual",
+    "\\bor\\b \\d",
+    "opt[- ]in"
+  ].join("|"),
+  "i"
+)
 
 const NEXT_TIER = /\b(?:over|above) \$|thereafter|further|once you spend|after spending/i
 const CAP_HERE = /\b(?:up to(?: and including)?|on the first|first) \$\s?([\d,]+)/i

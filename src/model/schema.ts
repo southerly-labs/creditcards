@@ -59,11 +59,13 @@ export const Card = Schema.Struct({
   image: Schema.optionalKey(Schema.String),
   // Dotted field paths the automated sync must not overwrite.
   locked: Schema.optionalKey(Schema.Array(Schema.String)),
-  cdr: Schema.optionalKey(Schema.Struct({
-    brand: Schema.String,
-    product_id: Schema.String,
-    last_updated: Schema.optionalKey(Schema.String)
-  })),
+  cdr: Schema.optionalKey(
+    Schema.Struct({
+      brand: Schema.String,
+      product_id: Schema.String,
+      last_updated: Schema.optionalKey(Schema.String)
+    })
+  ),
   fees: Schema.Struct({
     annual: Schema.optionalKey(between(0, 5000)),
     annual_first_year: Schema.optionalKey(between(0, 5000)),
@@ -85,17 +87,19 @@ export const Card = Schema.Struct({
     max_credit: Schema.optionalKey(Aud),
     min_income: Schema.optionalKey(Aud)
   }),
-  rewards: Schema.optionalKey(Schema.Struct({
-    program: Slug,
-    partners: Schema.optionalKey(Schema.Array(Slug)),
-    earn: Schema.optionalKey(Schema.Array(EarnRate)),
-    // Who wrote `earn`: the rule-based parser, or a person (never overwritten).
-    earn_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
-    // Hash of the CDR loyalty text `earn` was derived from, to detect changes.
-    earn_text_hash: Schema.optionalKey(Schema.String),
-    earn_check: Schema.optionalKey(Schema.Array(EarnCheck)),
-    bonus_points: Schema.optionalKey(between(0, 1_000_000))
-  })),
+  rewards: Schema.optionalKey(
+    Schema.Struct({
+      program: Slug,
+      partners: Schema.optionalKey(Schema.Array(Slug)),
+      earn: Schema.optionalKey(Schema.Array(EarnRate)),
+      // Who wrote `earn`: the rule-based parser, or a person (never overwritten).
+      earn_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
+      // Hash of the CDR loyalty text `earn` was derived from, to detect changes.
+      earn_text_hash: Schema.optionalKey(Schema.String),
+      earn_check: Schema.optionalKey(Schema.Array(EarnCheck)),
+      bonus_points: Schema.optionalKey(between(0, 1_000_000))
+    })
+  ),
   perks: Schema.Struct({
     insurance: Schema.optionalKey(Schema.Array(Schema.String)),
     lounge_access: Schema.optionalKey(Schema.Boolean)

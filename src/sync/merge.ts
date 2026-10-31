@@ -4,13 +4,33 @@ import type { NormalisedCard } from "../cdr/normalise.ts"
 // Field paths the CDR sync owns. Anything else (e.g. rewards.earn) is curated
 // by hand or by other extractors and is never touched by the CDR sync.
 export const CDR_OWNED_PATHS = [
-  "name", "type", "network", "description", "url", "image", "cdr",
-  "fees.annual", "fees.annual_first_year", "fees.additional_card", "fees.foreign_txn_pct",
-  "fees.cash_advance_pct", "fees.cash_advance_min", "fees.late_payment",
-  "rates.purchase", "rates.cash_advance", "rates.balance_transfer", "rates.interest_free_days", "rates.intro",
-  "limits.min_credit", "limits.max_credit", "limits.min_income",
-  "rewards.program", "rewards.partners", "rewards.bonus_points",
-  "perks.insurance", "perks.lounge_access"
+  "name",
+  "type",
+  "network",
+  "description",
+  "url",
+  "image",
+  "cdr",
+  "fees.annual",
+  "fees.annual_first_year",
+  "fees.additional_card",
+  "fees.foreign_txn_pct",
+  "fees.cash_advance_pct",
+  "fees.cash_advance_min",
+  "fees.late_payment",
+  "rates.purchase",
+  "rates.cash_advance",
+  "rates.balance_transfer",
+  "rates.interest_free_days",
+  "rates.intro",
+  "limits.min_credit",
+  "limits.max_credit",
+  "limits.min_income",
+  "rewards.program",
+  "rewards.partners",
+  "rewards.bonus_points",
+  "perks.insurance",
+  "perks.lounge_access"
 ] as const
 
 type Obj = Record<string, unknown>

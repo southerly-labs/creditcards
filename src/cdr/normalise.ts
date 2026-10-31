@@ -7,7 +7,11 @@ type Mutable<T> = { -readonly [K in keyof T]: T[K] extends object ? Mutable<T[K]
 export type NormalisedCard = Mutable<Card>
 
 export interface ProgramIndex {
-  readonly programs: ReadonlyArray<{ readonly id: string; readonly program: Program; readonly patterns: ReadonlyArray<RegExp> }>
+  readonly programs: ReadonlyArray<{
+    readonly id: string
+    readonly program: Program
+    readonly patterns: ReadonlyArray<RegExp>
+  }>
 }
 
 export const makeProgramIndex = (programs: Record<string, Program>): ProgramIndex => ({
@@ -55,10 +59,14 @@ export const timesPerYear = (period: string | null | undefined, name: string): n
     const n = Number(iso[1])
     if (n === 0) return undefined
     switch (iso[2]!.toUpperCase()) {
-      case "Y": return 1 / n
-      case "M": return 12 / n
-      case "W": return 52 / n
-      default: return undefined // daily periodic fees are not annual/monthly card fees
+      case "Y":
+        return 1 / n
+      case "M":
+        return 12 / n
+      case "W":
+        return 52 / n
+      default:
+        return undefined // daily periodic fees are not annual/monthly card fees
     }
   }
   const text = `${period ?? ""} ${name}`
@@ -75,11 +83,13 @@ export const isoMonths = (value: string | null | undefined): number | undefined 
 }
 
 const fixedAmount = (fee: Fee) => parseNumber(fee.fixedAmount?.amount ?? fee.amount)
-const feeRate = (fee: Fee) => toPercent(fee.rateBased?.rate ?? fee.transactionRate ?? fee.balanceRate ?? fee.accruedRate)
+const feeRate = (fee: Fee) =>
+  toPercent(fee.rateBased?.rate ?? fee.transactionRate ?? fee.balanceRate ?? fee.accruedRate)
 
 // ---- Fees --------------------------------------------------------------------
 
-const NOT_CARD_FEE = /additional|supplementary|secondary|companion|direct|optional|opt[- ]?in|paper|statement|replacement|late/i
+const NOT_CARD_FEE =
+  /additional|supplementary|secondary|companion|direct|optional|opt[- ]?in|paper|statement|replacement|late/i
 const ADDITIONAL_CARD = /additional|supplementary|secondary/i
 
 const annualised = (fees: ReadonlyArray<Fee>) => {
@@ -100,10 +110,15 @@ export const additionalCardFee = (fees: ReadonlyArray<Fee>) =>
   annualised(fees.filter((f) => f.feeType === "PERIODIC" && ADDITIONAL_CARD.test(f.name ?? "")))
 
 export const firstYearFee = (fees: ReadonlyArray<Fee>): number | undefined => {
-  const discounted = fees.some((f) =>
-    f.feeType === "PERIODIC" && !NOT_CARD_FEE.test(f.name ?? "") &&
-    ((f as { discounts?: ReadonlyArray<{ description?: string | null }> }).discounts ?? [])
-      .some((d) => /first year free|\$0 (annual fee )?(in|for) the first year|no annual fee (in|for) the first year/i.test(d.description ?? ""))
+  const discounted = fees.some(
+    (f) =>
+      f.feeType === "PERIODIC" &&
+      !NOT_CARD_FEE.test(f.name ?? "") &&
+      ((f as { discounts?: ReadonlyArray<{ description?: string | null }> }).discounts ?? []).some((d) =>
+        /first year free|\$0 (annual fee )?(in|for) the first year|no annual fee (in|for) the first year/i.test(
+          d.description ?? ""
+        )
+      )
   )
   return discounted ? 0 : undefined
 }
@@ -112,12 +127,14 @@ const FX_NAME = /international|overseas|foreign|currency conversion|cross[- ]bor
 const NOT_FX = /replacement|atm|cash|withdraw|deposit|emergency|card fee|statement|travel\/procurement/i
 
 export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefined => {
-  const candidates = fees.filter((f) =>
-    !["CASH_ADVANCE", "REPLACEMENT", "WITHDRAWAL", "DEPOSIT", "PERIODIC"].includes(f.feeType) &&
-    !NOT_FX.test(f.name ?? "") &&
-    (FX_NAME.test(f.name ?? "") || FX_NAME.test(f.additionalInfo ?? ""))
+  const candidates = fees.filter(
+    (f) =>
+      !["CASH_ADVANCE", "REPLACEMENT", "WITHDRAWAL", "DEPOSIT", "PERIODIC"].includes(f.feeType) &&
+      !NOT_FX.test(f.name ?? "") &&
+      (FX_NAME.test(f.name ?? "") || FX_NAME.test(f.additionalInfo ?? ""))
   )
-  const rates = candidates.map((f) => feeRate(f) ?? (fixedAmount(f) === 0 ? 0 : undefined))
+  const rates = candidates
+    .map((f) => feeRate(f) ?? (fixedAmount(f) === 0 ? 0 : undefined))
     .filter((r): r is number => r !== undefined)
   // Take the highest when several apply (e.g. single vs multi-currency).
   return rates.length > 0 ? Math.max(...rates) : undefined
@@ -126,12 +143,18 @@ export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefi
 export const cashAdvanceFee = (fees: ReadonlyArray<Fee>) => {
   const cash = fees.filter((f) => f.feeType === "CASH_ADVANCE" && !/overseas|international/i.test(f.name ?? ""))
   const pct = cash.map(feeRate).find((r) => r !== undefined)
-  const min = cash.map((f) => f.fixedAmount?.amount ?? f.amount).map(parseNumber).find((r) => r !== undefined)
+  const min = cash
+    .map((f) => f.fixedAmount?.amount ?? f.amount)
+    .map(parseNumber)
+    .find((r) => r !== undefined)
   return { pct, min }
 }
 
 export const latePaymentFee = (fees: ReadonlyArray<Fee>) =>
-  fees.filter((f) => f.feeType === "LATE_PAYMENT").map(fixedAmount).find((r) => r !== undefined)
+  fees
+    .filter((f) => f.feeType === "LATE_PAYMENT")
+    .map(fixedAmount)
+    .find((r) => r !== undefined)
 
 // ---- Rates -------------------------------------------------------------------
 
@@ -147,7 +170,8 @@ const ongoingRate = (rates: ReadonlyArray<LendingRate>, type: string, exclude?: 
 export const introOffers = (rates: ReadonlyArray<LendingRate>): Array<IntroOffer> => {
   const offers: Array<IntroOffer> = []
   for (const r of rates) {
-    const promo = r.lendingRateType === "INTRODUCTORY" ||
+    const promo =
+      r.lendingRateType === "INTRODUCTORY" ||
       (["BALANCE_TRANSFER", "PURCHASE"].includes(r.lendingRateType) && isoMonths(r.additionalValue) !== undefined)
     if (!promo) continue
     const rate = toPercent(r.rate)
@@ -179,8 +203,10 @@ export const interestFreeDays = (p: ProductDetail): number | undefined => {
 // ---- Classification -----------------------------------------------------------
 
 export const cardType = (p: ProductDetail): CardType => {
-  if (/corporate|procurement|purchasing|commercial|virtual card|travel (and|&) expense/i.test(p.name)) return "corporate"
-  const business = /business/i.test(p.name) ||
+  if (/corporate|procurement|purchasing|commercial|virtual card|travel (and|&) expense/i.test(p.name))
+    return "corporate"
+  const business =
+    /business/i.test(p.name) ||
     (p.eligibility ?? []).some((e) => e.eligibilityType === "BUSINESS" || e.eligibilityType === "MIN_TURNOVER")
   return business ? "business" : "personal"
 }
@@ -197,8 +223,9 @@ export const network = (p: ProductDetail, brandName: string): Network | undefine
   const fromName = NETWORKS.filter(([, re]) => re.test(p.name))
   if (fromName.length === 1) return fromName[0]![0]
   const text = [p.description, ...(p.features ?? []).flatMap((f) => [f.additionalValue, f.additionalInfo])].join(" ")
-  const counts = NETWORKS.map(([n, re]) => [n, (text.match(new RegExp(re, "gi")) ?? []).length] as const)
-    .filter(([n, c]) => c > 0 && n !== "amex")
+  const counts = NETWORKS.map(([n, re]) => [n, (text.match(new RegExp(re, "gi")) ?? []).length] as const).filter(
+    ([n, c]) => c > 0 && n !== "amex"
+  )
   return counts.length === 1 ? counts[0]![0] : undefined
 }
 
@@ -219,8 +246,10 @@ const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
     const resolved = id ?? (fallback = issuerProgramId(ctx.issuerSlug))
     if (!ids.includes(resolved)) ids.push(resolved)
   }
-  const bonus = (p.features ?? []).filter((f) => f.featureType === "BONUS_REWARDS")
-    .map((f) => parseNumber(f.additionalValue)).find((n) => n !== undefined && n > 0)
+  const bonus = (p.features ?? [])
+    .filter((f) => f.featureType === "BONUS_REWARDS")
+    .map((f) => parseNumber(f.additionalValue))
+    .find((n) => n !== undefined && n > 0)
   const [program, ...partners] = ids
   return {
     rewards: {
@@ -236,8 +265,14 @@ const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
 
 const perks = (p: ProductDetail): NormalisedCard["perks"] => {
   const features = p.features ?? []
-  const insurance = [...new Set(features.filter((f) => f.featureType === "INSURANCE")
-    .map((f) => f.additionalValue?.trim()).filter((v): v is string => !!v && v.length < 80))]
+  const insurance = [
+    ...new Set(
+      features
+        .filter((f) => f.featureType === "INSURANCE")
+        .map((f) => f.additionalValue?.trim())
+        .filter((v): v is string => !!v && v.length < 80)
+    )
+  ]
   const lounge = features.some((f) => /lounge/i.test(`${f.additionalValue ?? ""} ${f.additionalInfo ?? ""}`))
   return {
     ...(insurance.length > 0 ? { insurance } : {}),
@@ -248,9 +283,9 @@ const perks = (p: ProductDetail): NormalisedCard["perks"] => {
 // ---- Card --------------------------------------------------------------------------
 
 // Drop undefined-valued keys so optional fields are absent (TOML has no null).
-type Defined<T> =
-  & { [K in keyof T as undefined extends T[K] ? never : K]: T[K] }
-  & { [K in keyof T as undefined extends T[K] ? K : never]?: Exclude<T[K], undefined> }
+type Defined<T> = { [K in keyof T as undefined extends T[K] ? never : K]: T[K] } & {
+  [K in keyof T as undefined extends T[K] ? K : never]?: Exclude<T[K], undefined>
+}
 
 const defined = <T extends object>(obj: T): Defined<T> =>
   Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== undefined)) as Defined<T>
@@ -261,8 +296,10 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
   const cash = cashAdvanceFee(fees)
   const constraint = (type: string) =>
     parseNumber((p.constraints ?? []).find((c) => c.constraintType === type)?.additionalValue)
-  const minIncome = (p.eligibility ?? []).filter((e) => e.eligibilityType === "MIN_INCOME")
-    .map((e) => parseNumber(e.additionalValue)).find((n) => n !== undefined)
+  const minIncome = (p.eligibility ?? [])
+    .filter((e) => e.eligibilityType === "MIN_INCOME")
+    .map((e) => parseNumber(e.additionalValue))
+    .find((n) => n !== undefined)
   const intro = introOffers(rates)
   const { rewards: rewardsValue, fallback } = rewards(p, ctx)
   const net = network(p, ctx.brandName)

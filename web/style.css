@@ -7,7 +7,12 @@
   --accent: #0b6bcb;
   --good: #1a7f37;
   color-scheme: light dark;
-  font: 14px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font:
+    14px/1.4 ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,64 +27,194 @@
   }
 }
 
-body { margin: 0; background: var(--bg); color: var(--fg); }
-header { padding: 20px 24px 8px; }
-h1 { margin: 0; font-size: 20px; }
-.sub { margin: 4px 0 0; color: var(--muted); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+header {
+  padding: 20px 24px 8px;
+}
+h1 {
+  margin: 0;
+  font-size: 20px;
+}
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
 
 .controls {
-  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
-  padding: 12px 24px; position: sticky; top: 0; background: var(--bg);
-  border-bottom: 1px solid var(--line); z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 24px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  z-index: 2;
 }
-.controls input[type="search"] { width: 280px; }
-.controls input, .controls select {
-  font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px;
-  background: var(--bg); color: var(--fg);
+.controls input[type="search"] {
+  width: 280px;
 }
-.controls label { display: flex; gap: 4px; align-items: center; color: var(--muted); }
-#count { margin-left: auto; color: var(--muted); }
+.controls input,
+.controls select {
+  font: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+}
+.controls label {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: var(--muted);
+}
+#count {
+  margin-left: auto;
+  color: var(--muted);
+}
 
-main { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
-th, td { padding: 8px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+main {
+  overflow-x: auto;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+th,
+td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
 th {
-  position: sticky; top: 57px; background: var(--head); font-weight: 600; font-size: 12px;
-  color: var(--muted); cursor: pointer; user-select: none; z-index: 1;
+  position: sticky;
+  top: 57px;
+  background: var(--head);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  z-index: 1;
 }
-th.num, td.num { text-align: right; }
-th[data-dir="asc"]::after { content: " ↑"; }
-th[data-dir="desc"]::after { content: " ↓"; }
-tbody tr:hover { background: var(--head); }
+th.num,
+td.num {
+  text-align: right;
+}
+th[data-dir="asc"]::after {
+  content: " ↑";
+}
+th[data-dir="desc"]::after {
+  content: " ↓";
+}
+tbody tr:hover {
+  background: var(--head);
+}
 
-.card { display: flex; gap: 10px; align-items: center; min-width: 280px; white-space: normal; }
-.card img { width: 48px; height: 30px; object-fit: contain; flex: none; }
-.card .ph { width: 48px; height: 30px; border-radius: 4px; background: var(--line); flex: none; }
-.card a { color: var(--fg); text-decoration: none; font-weight: 500; }
-.card a:hover { color: var(--accent); }
-.issuer { color: var(--muted); font-size: 12px; }
-.dim { color: var(--muted); }
-.zero { color: var(--good); font-weight: 500; }
+.card {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 280px;
+  white-space: normal;
+}
+.card img {
+  width: 48px;
+  height: 30px;
+  object-fit: contain;
+  flex: none;
+}
+.card .ph {
+  width: 48px;
+  height: 30px;
+  border-radius: 4px;
+  background: var(--line);
+  flex: none;
+}
+.card a {
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 500;
+}
+.card a:hover {
+  color: var(--accent);
+}
+.issuer {
+  color: var(--muted);
+  font-size: 12px;
+}
+.dim {
+  color: var(--muted);
+}
+.zero {
+  color: var(--good);
+  font-weight: 500;
+}
 .tag {
-  display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 12px;
-  background: var(--head); border: 1px solid var(--line);
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  background: var(--head);
+  border: 1px solid var(--line);
 }
-.disc { opacity: 0.5; }
+.disc {
+  opacity: 0.5;
+}
 
-.values { padding: 8px 24px 12px; border-bottom: 1px solid var(--line); }
-.values summary { cursor: pointer; font-weight: 600; }
-.value-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 6px 16px; margin: 10px 0;
+.values {
+  padding: 8px 24px 12px;
+  border-bottom: 1px solid var(--line);
 }
-.value-grid label { display: flex; gap: 6px; align-items: center; }
-.value-grid label > span:first-child { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.values summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px 16px;
+  margin: 10px 0;
+}
+.value-grid label {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.value-grid label > span:first-child {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .value-grid input {
-  width: 70px; font: inherit; padding: 3px 6px; border: 1px solid var(--line); border-radius: 6px;
-  background: var(--bg); color: var(--fg); text-align: right;
+  width: 70px;
+  font: inherit;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  text-align: right;
 }
 .values button {
-  font: inherit; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px;
-  background: var(--head); color: var(--fg); cursor: pointer;
+  font: inherit;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--head);
+  color: var(--fg);
+  cursor: pointer;
 }
-.custom { color: var(--accent); font-style: italic; }
+.custom {
+  color: var(--accent);
+  font-style: italic;
+}

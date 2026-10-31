@@ -35,21 +35,28 @@ export interface VersionedProduct {
   readonly detail: ProductDetail
 }
 
-export class CdrClient extends Context.Service<CdrClient, {
-  readonly brands: Effect.Effect<ReadonlyArray<DataHolderBrand>, CdrError>
-  listProducts(baseUri: string, category: string, variant?: number): Effect.Effect<ReadonlyArray<ProductSummary>, CdrError>
-  getProduct(baseUri: string, productId: string): Effect.Effect<VersionedProduct, CdrError>
-}>()("creditcards/cdr/CdrClient") {
+export class CdrClient extends Context.Service<
+  CdrClient,
+  {
+    readonly brands: Effect.Effect<ReadonlyArray<DataHolderBrand>, CdrError>
+    listProducts(
+      baseUri: string,
+      category: string,
+      variant?: number
+    ): Effect.Effect<ReadonlyArray<ProductSummary>, CdrError>
+    getProduct(baseUri: string, productId: string): Effect.Effect<VersionedProduct, CdrError>
+  }
+>()("creditcards/cdr/CdrClient") {
   static readonly layer = Layer.effect(
     CdrClient,
-    Effect.gen(function*() {
+    Effect.gen(function* () {
       const client = (yield* HttpClient.HttpClient).pipe(
         HttpClient.retryTransient({ schedule: Schedule.exponential("500 millis"), times: 2 })
       )
 
       // GET with CDR version negotiation. Not every data holder honours
       // x-min-v, so on a 406 fall back to probing each version downwards.
-      const getVersioned = Effect.fnUntraced(function*(url: string, maxVersion: number, variant = 0) {
+      const getVersioned = Effect.fnUntraced(function* (url: string, maxVersion: number, variant = 0) {
         const attempt = (headers: Record<string, string>) =>
           client.get(url, { headers: { ...REQUEST_VARIANTS[variant % REQUEST_VARIANTS.length], ...headers } }).pipe(
             Effect.timeout("20 seconds"),
@@ -73,7 +80,7 @@ export class CdrClient extends Context.Service<CdrClient, {
       const schemaError = (url: string) => (error: Schema.SchemaError) =>
         new CdrError({ url, message: `Schema: ${error.message}` })
 
-      const brands = Effect.gen(function*() {
+      const brands = Effect.gen(function* () {
         const response = yield* client.get(REGISTER_URL, { headers: { "x-v": "2" } }).pipe(
           Effect.flatMap(HttpClientResponse.filterStatusOk),
           Effect.flatMap(HttpClientResponse.schemaBodyJson(RegisterResponse)),
@@ -82,7 +89,11 @@ export class CdrClient extends Context.Service<CdrClient, {
         return response.data.filter((brand) => brand.industries.some((i) => LENDING_INDUSTRIES.has(i)))
       }).pipe(Effect.withSpan("CdrClient.brands"))
 
-      const listProducts = Effect.fn("CdrClient.listProducts")(function*(baseUri: string, category: string, variant = 0) {
+      const listProducts = Effect.fn("CdrClient.listProducts")(function* (
+        baseUri: string,
+        category: string,
+        variant = 0
+      ) {
         const products: Array<ProductSummary> = []
         // Fetch unfiltered and filter locally: some data holders mishandle
         // product-category (e.g. Westpac returns nothing when it is combined
@@ -90,7 +101,9 @@ export class CdrClient extends Context.Service<CdrClient, {
         let url: string | null | undefined = `${trimSlash(baseUri)}/cds-au/v1/banking/products?page-size=100`
         for (let page = 0; url && page < 20; page++) {
           const { body }: { body: unknown } = yield* getVersioned(url, PRODUCTS_MAX_VERSION, variant)
-          const decoded: typeof ProductsPage.Type = yield* decodeProductsPage(body).pipe(Effect.mapError(schemaError(url)))
+          const decoded: typeof ProductsPage.Type = yield* decodeProductsPage(body).pipe(
+            Effect.mapError(schemaError(url))
+          )
           products.push(...decoded.data.products.filter((p) => p.productCategory === category))
           const next: string | null | undefined = decoded.links?.next
           url = next && next !== url ? next : undefined
@@ -98,7 +111,7 @@ export class CdrClient extends Context.Service<CdrClient, {
         return products
       })
 
-      const getProduct = Effect.fn("CdrClient.getProduct")(function*(baseUri: string, productId: string) {
+      const getProduct = Effect.fn("CdrClient.getProduct")(function* (baseUri: string, productId: string) {
         const url = `${trimSlash(baseUri)}/cds-au/v1/banking/products/${encodeURIComponent(productId)}`
         const { body, version } = yield* getVersioned(url, PRODUCT_DETAIL_MAX_VERSION)
         const raw = (body as { data?: unknown }).data

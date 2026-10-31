@@ -26,7 +26,7 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
   return problems
 }
 
-export const validate = Effect.gen(function*() {
+export const validate = Effect.gen(function* () {
   const dataset = yield* (yield* Store).load
   const problems = checkReferences(dataset)
   if (problems.length > 0) return yield* new ValidationError({ problems })
@@ -38,11 +38,16 @@ type PublicCard = Omit<Card, "locked">
 
 export interface Api {
   readonly programs: Record<string, PublicProgram>
-  readonly issuers: Record<string, { readonly name: string; readonly website?: string; readonly cards: Record<string, PublicCard> }>
+  readonly issuers: Record<
+    string,
+    { readonly name: string; readonly website?: string; readonly cards: Record<string, PublicCard> }
+  >
 }
 
 export const toApi = (dataset: Dataset): Api => {
-  const programs = Object.fromEntries([...dataset.programs].map(([id, { aliases: _a, priority: _p, ...rest }]) => [id, rest]))
+  const programs = Object.fromEntries(
+    [...dataset.programs].map(([id, { aliases: _a, priority: _p, ...rest }]) => [id, rest])
+  )
   const issuers: Record<string, { name: string; website?: string; cards: Record<string, PublicCard> }> = {}
   for (const [slug, issuer] of dataset.issuers) {
     issuers[slug] = { name: issuer.name, ...(issuer.website ? { website: issuer.website } : {}), cards: {} }

@@ -22,7 +22,7 @@ export class RewardsError extends Schema.TaggedError<RewardsError>()("RewardsErr
   message: Schema.String
 }) {}
 
-const loyaltyFeatures = Effect.fnUntraced(function*(card: Card, baseUris: ReadonlyMap<string, string>) {
+const loyaltyFeatures = Effect.fnUntraced(function* (card: Card, baseUris: ReadonlyMap<string, string>) {
   const cdr = yield* CdrClient
   if (!card.cdr) return yield* new RewardsError({ message: `${card.name} has no CDR source` })
   const baseUri = baseUris.get(card.cdr.brand)
@@ -31,30 +31,40 @@ const loyaltyFeatures = Effect.fnUntraced(function*(card: Card, baseUris: Readon
   return (detail.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
 })
 
-const registerBaseUris = Effect.gen(function*() {
+const registerBaseUris = Effect.gen(function* () {
   const brands = yield* (yield* CdrClient).brands
   return new Map(brands.map((b) => [b.brandName, b.publicBaseUri]))
 })
 
 // Active rewards cards whose earn rates need a person, with their CDR text.
-export const reviewQueue = Effect.fn("reviewQueue")(function*(issuer: string | undefined) {
+export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | undefined) {
   const dataset = yield* (yield* Store).load
   const baseUris = yield* registerBaseUris
-  const candidates = [...dataset.cards].filter(([key, card]) =>
-    card.status === "active" && card.rewards && card.cdr && (!issuer || splitCardKey(key).issuer === issuer)
+  const candidates = [...dataset.cards].filter(
+    ([key, card]) =>
+      card.status === "active" && card.rewards && card.cdr && (!issuer || splitCardKey(key).issuer === issuer)
   )
-  const items = yield* Effect.forEach(candidates, ([key, card]) =>
-    loyaltyFeatures(card, baseUris).pipe(
-      Effect.map((features): ReviewItem | undefined => {
-        const plan = planRewards(card.rewards, features)
-        if (plan._tag !== "Review") return undefined
-        return {
-          card: key, name: card.name, program: card.rewards?.program, reason: plan.reason,
-          hash: plan.hash, text: loyaltyText(features), earn: card.rewards?.earn
-        }
-      }),
-      Effect.catch((e) => Effect.logWarning(`${key}: ${e.message}`).pipe(Effect.as(undefined)))
-    ), { concurrency: 8 })
+  const items = yield* Effect.forEach(
+    candidates,
+    ([key, card]) =>
+      loyaltyFeatures(card, baseUris).pipe(
+        Effect.map((features): ReviewItem | undefined => {
+          const plan = planRewards(card.rewards, features)
+          if (plan._tag !== "Review") return undefined
+          return {
+            card: key,
+            name: card.name,
+            program: card.rewards?.program,
+            reason: plan.reason,
+            hash: plan.hash,
+            text: loyaltyText(features),
+            earn: card.rewards?.earn
+          }
+        }),
+        Effect.catch((e) => Effect.logWarning(`${key}: ${e.message}`).pipe(Effect.as(undefined)))
+      ),
+    { concurrency: 8 }
+  )
   return items.filter((i) => i !== undefined)
 })
 
@@ -84,7 +94,7 @@ export const formatQueue = (items: ReadonlyArray<ReviewItem>): string =>
 
 // Marks cards' current earn rates as manually reviewed against the current
 // CDR loyalty text, so the sync stops flagging them until the text changes.
-export const stamp = Effect.fn("stamp")(function*(keys: ReadonlyArray<string>, none: boolean) {
+export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, none: boolean) {
   const store = yield* Store
   const dataset = yield* store.load
   const baseUris = yield* registerBaseUris

@@ -12,8 +12,10 @@
     "test": "bun test",
     "typecheck": "tsrs --noEmit",
     "dev": "bun run build && bun run web/server.ts",
-    "check": "tsrs --noEmit && bun test && bun run validate && bun run build",
-    "prepare": "git config core.hooksPath .githooks || true"
+    "check": "bun run format:check && tsrs --noEmit && bun test && bun run validate && bun run build",
+    "prepare": "git config core.hooksPath .githooks || true",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check ."
   },
   "dependencies": {
     "@effect/platform-bun": "4.1.0",

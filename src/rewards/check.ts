@@ -15,8 +15,23 @@ export class PageError extends Schema.TaggedError<PageError>()("PageError", {
 }) {}
 
 const NAMED_ENTITIES: Record<string, string> = {
-  amp: "&", lt: "<", gt: ">", quot: "\"", apos: "'", nbsp: " ", ndash: "-", mdash: "-",
-  lsquo: "'", rsquo: "'", ldquo: "\"", rdquo: "\"", hellip: "...", deg: "°", reg: "®", trade: "™", dollar: "$"
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+  ndash: "-",
+  mdash: "-",
+  lsquo: "'",
+  rsquo: "'",
+  ldquo: '"',
+  rdquo: '"',
+  hellip: "...",
+  deg: "°",
+  reg: "®",
+  trade: "™",
+  dollar: "$"
 }
 
 const decodeEntities = (s: string) =>
@@ -51,10 +66,11 @@ export const pdfText = (url: string, bytes: Uint8Array) =>
 // Folds the differences that don't change meaning: case, whitespace, curly
 // quotes, dashes, and line wrapping (common in PDFs).
 export const normaliseText = (s: string): string =>
-  s.normalize("NFKC")
+  s
+    .normalize("NFKC")
     .toLowerCase()
     .replace(/[‘’‚′]/g, "'")
-    .replace(/[“”„″]/g, "\"")
+    .replace(/[“”„″]/g, '"')
     .replace(/[‐-―−]/g, "-")
     .replace(/[\s ​]+/g, " ")
     .trim()
@@ -73,18 +89,20 @@ const isPdf = (bytes: Uint8Array, contentType: string | undefined) =>
 const USER_AGENT = "Mozilla/5.0 (compatible; creditcards-earn-check)"
 
 // Fetches a page and returns its text, from HTML or PDF.
-export const pageText = Effect.fn("pageText")(function*(url: string) {
+export const pageText = Effect.fn("pageText")(function* (url: string) {
   const client = (yield* HttpClient.HttpClient).pipe(
     HttpClient.retryTransient({ schedule: Schedule.exponential("1 second"), times: 2 })
   )
-  const response = yield* client.get(url, { headers: { "user-agent": USER_AGENT, accept: "text/html,application/pdf,*/*" } }).pipe(
-    Effect.timeout("30 seconds"),
-    Effect.mapError((cause) => new PageError({ url, message: String(cause) }))
-  )
+  const response = yield* client
+    .get(url, { headers: { "user-agent": USER_AGENT, accept: "text/html,application/pdf,*/*" } })
+    .pipe(
+      Effect.timeout("30 seconds"),
+      Effect.mapError((cause) => new PageError({ url, message: String(cause) }))
+    )
   if (response.status !== 200) return yield* new PageError({ url, message: `HTTP ${response.status}` })
-  const bytes = new Uint8Array(yield* response.arrayBuffer.pipe(
-    Effect.mapError((cause) => new PageError({ url, message: String(cause) }))
-  ))
+  const bytes = new Uint8Array(
+    yield* response.arrayBuffer.pipe(Effect.mapError((cause) => new PageError({ url, message: String(cause) })))
+  )
   if (isPdf(bytes, response.headers["content-type"])) return yield* pdfText(url, bytes)
   return htmlText(new TextDecoder().decode(bytes))
 })
@@ -99,16 +117,22 @@ export interface CheckResult {
 }
 
 // Checks every card with `rewards.earn_check`, fetching each URL once.
-export const checkEarnPages = Effect.fn("checkEarnPages")(function*(cards: ReadonlyMap<string, Card>) {
+export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: ReadonlyMap<string, Card>) {
   const checks = [...cards].flatMap(([card, c]) =>
     c.status === "active" ? (c.rewards?.earn_check ?? []).map((check) => ({ card, ...check })) : []
   )
   const urls = [...new Set(checks.map((c) => c.url))]
-  const texts = new Map(yield* Effect.forEach(urls, (url) =>
-    pageText(url).pipe(
-      Effect.result,
-      Effect.map((r) => [url, r] as const)
-    ), { concurrency: 4 }))
+  const texts = new Map(
+    yield* Effect.forEach(
+      urls,
+      (url) =>
+        pageText(url).pipe(
+          Effect.result,
+          Effect.map((r) => [url, r] as const)
+        ),
+      { concurrency: 4 }
+    )
+  )
   return checks.map(({ card, url, expect }): CheckResult => {
     const text = texts.get(url)!
     return text._tag === "Failure"
@@ -135,6 +159,7 @@ export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {
     }
     lines.push("")
   }
-  if (failed.length) lines.push("Unreadable (not checked this run):", ...failed.map((r) => `- \`${r.card}\` — ${r.url}: ${r.error}`), "")
+  if (failed.length)
+    lines.push("Unreadable (not checked this run):", ...failed.map((r) => `- \`${r.card}\` — ${r.url}: ${r.error}`), "")
   return lines.join("\n")
 }

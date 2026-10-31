@@ -25,16 +25,19 @@ export class StoreError extends Schema.TaggedError<StoreError>()("StoreError", {
   message: Schema.String
 }) {}
 
-export class Store extends Context.Service<Store, {
-  readonly load: Effect.Effect<Dataset, StoreError>
-  writeCard(issuer: string, card: string, value: Card): Effect.Effect<boolean, StoreError>
-  writeIssuer(issuer: string, value: Issuer): Effect.Effect<boolean, StoreError>
-  writeProgram(id: string, value: Program): Effect.Effect<boolean, StoreError>
-}>()("creditcards/store/Store") {
+export class Store extends Context.Service<
+  Store,
+  {
+    readonly load: Effect.Effect<Dataset, StoreError>
+    writeCard(issuer: string, card: string, value: Card): Effect.Effect<boolean, StoreError>
+    writeIssuer(issuer: string, value: Issuer): Effect.Effect<boolean, StoreError>
+    writeProgram(id: string, value: Program): Effect.Effect<boolean, StoreError>
+  }
+>()("creditcards/store/Store") {
   static readonly layer = (dataDir: string) =>
     Layer.effect(
       Store,
-      Effect.gen(function*() {
+      Effect.gen(function* () {
         const fs = yield* FileSystem.FileSystem
         const path = yield* Path.Path
         const fail = (file: string) => (cause: unknown) =>
@@ -57,7 +60,7 @@ export class Store extends Context.Service<Store, {
         const tomlFiles = (dir: string) =>
           listDir(dir).pipe(Effect.map((names) => names.filter((n) => n.endsWith(".toml")).map((n) => n.slice(0, -5))))
 
-        const load = Effect.gen(function*() {
+        const load = Effect.gen(function* () {
           const programs = new Map<string, Program>()
           for (const id of yield* tomlFiles(path.join(dataDir, "programs"))) {
             programs.set(id, yield* readToml(Program, path.join(dataDir, "programs", `${id}.toml`)))
@@ -76,7 +79,7 @@ export class Store extends Context.Service<Store, {
 
         // Writes only when the encoded content differs; returns whether it wrote.
         const writeToml = <S extends Schema.Codec<any, any>>(schema: S, file: string, value: S["Type"]) =>
-          Effect.gen(function*() {
+          Effect.gen(function* () {
             const encoded = yield* Schema.encodeUnknownEffect(schema)(value).pipe(Effect.mapError(fail(file)))
             const text = `${Toml.stringify(encoded)}\n`
             const current = yield* fs.readFileString(file).pipe(Effect.orElseSucceed(() => undefined))
@@ -90,7 +93,8 @@ export class Store extends Context.Service<Store, {
           load,
           writeCard: (issuer, card, value) =>
             writeToml(Card, path.join(dataDir, "issuers", issuer, "cards", `${card}.toml`), value),
-          writeIssuer: (issuer, value) => writeToml(Issuer, path.join(dataDir, "issuers", issuer, "issuer.toml"), value),
+          writeIssuer: (issuer, value) =>
+            writeToml(Issuer, path.join(dataDir, "issuers", issuer, "issuer.toml"), value),
           writeProgram: (id, value) => writeToml(Program, path.join(dataDir, "programs", `${id}.toml`), value)
         })
       })

@@ -22,7 +22,7 @@ The schema lives in `src/model/schema.ts`. Percentages are stored as percent (`2
 The CDR sync only owns the fields listed in `CDR_OWNED_PATHS` (`src/sync/merge.ts`); earn rates are handled separately (see below). To stop the sync from overwriting a CDR-derived field you have corrected, add it to `locked`:
 
 ```toml
-locked = [ "fees.foreign_txn_pct" ]
+locked = ["fees.foreign_txn_pct"]
 ```
 
 ### Earn rates
@@ -45,7 +45,7 @@ Banks publish earn rates as prose, so they are filled in two ways:
   ```toml
   [[rewards.earn_check]]
   url = "https://www.qantasmoney.com/credit-cards/everyday"
-  expect = [ "0.75 qantas points per whole au$1 on domestic spend up to and including au$3,000 each statement period" ]
+  expect = ["0.75 qantas points per whole au$1 on domestic spend up to and including au$3,000 each statement period"]
   ```
 
   After each sync, `bun run cli rewards check` fetches every source and lists cards whose quotes no longer appear in the `rewards-review` issue. Matching ignores case and whitespace. The check is report-only and needs no LLM. When a card is flagged, re-read the page, update `earn` and `expect`, and stamp the card again. To pick quotes, use `bun run cli rewards check --show <url>`, which prints the same normalised text the check searches.

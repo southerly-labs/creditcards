@@ -18,7 +18,8 @@ describe("page text", () => {
 })
 
 describe("missing quotes", () => {
-  const page = "Earn rate for the Qantas Money Everyday credit card: 1 Qantas Point per whole AU$1 equivalent on\nInternational Spend; 0.75 Qantas Points per whole AU$1 on Domestic Spend"
+  const page =
+    "Earn rate for the Qantas Money Everyday credit card: 1 Qantas Point per whole AU$1 equivalent on\nInternational Spend; 0.75 Qantas Points per whole AU$1 on Domestic Spend"
 
   test("matches regardless of case and line wrapping", () => {
     expect(missingQuotes(page, ["1 qantas point per whole AU$1 equivalent on international spend"])).toEqual([])
@@ -26,14 +27,21 @@ describe("missing quotes", () => {
 
   test("reports a quote whose rate changed", () => {
     const changed = page.replace("0.75", "0.6")
-    expect(missingQuotes(changed, ["0.75 Qantas Points per whole AU$1 on Domestic Spend", "on International Spend"]))
-      .toEqual(["0.75 Qantas Points per whole AU$1 on Domestic Spend"])
+    expect(
+      missingQuotes(changed, ["0.75 Qantas Points per whole AU$1 on Domestic Spend", "on International Spend"])
+    ).toEqual(["0.75 Qantas Points per whole AU$1 on Domestic Spend"])
   })
 })
 
 describe("checkEarnPages", () => {
   const card = (url: string, quote: string, status: Card["status"] = "active"): Card => ({
-    name: "Card", type: "personal", status, fees: {}, rates: {}, limits: {}, perks: {},
+    name: "Card",
+    type: "personal",
+    status,
+    fees: {},
+    rates: {},
+    limits: {},
+    perks: {},
     rewards: { program: "qantas", earn: [{ rate: 1 }], earn_source: "manual", earn_check: [{ url, expect: [quote] }] }
   })
   const pages: Record<string, Response> = {
@@ -50,12 +58,14 @@ describe("checkEarnPages", () => {
 
   test("checks each card, fetching each page once, and skips discontinued cards", async () => {
     fetches = 0
-    const results = await run(new Map([
-      ["x/ok", card("https://a.example/card", "1 point per $1")],
-      ["x/changed", card("https://a.example/card", "2 points per $1")],
-      ["x/gone", card("https://a.example/missing", "1 point per $1")],
-      ["x/old", card("https://a.example/card", "3 points per $1", "discontinued")]
-    ]))
+    const results = await run(
+      new Map([
+        ["x/ok", card("https://a.example/card", "1 point per $1")],
+        ["x/changed", card("https://a.example/card", "2 points per $1")],
+        ["x/gone", card("https://a.example/missing", "1 point per $1")],
+        ["x/old", card("https://a.example/card", "3 points per $1", "discontinued")]
+      ])
+    )
     expect(fetches).toBe(2)
     expect(results).toEqual([
       { card: "x/ok", url: "https://a.example/card", missing: [] },
