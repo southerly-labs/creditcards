@@ -29,6 +29,9 @@ min_credit = 6000
 [rewards]
 program = "commbank-yello"
 partners = [ "qantas" ]
+earn = []
+earn_source = "manual"
+earn_text_hash = "334f7843975c090a"
 bonus_points = 100000
 
 [perks]

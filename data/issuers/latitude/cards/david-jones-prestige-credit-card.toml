@@ -29,6 +29,15 @@ min_income = 30000
 
 [rewards]
 program = "david-jones-rewards"
+earn_source = "manual"
+earn_text_hash = "1831fd998e573e26"
+
+[[rewards.earn]]
+rate = 1
+
+[[rewards.earn]]
+rate = 3
+category = "David Jones"
 
 [perks]
 insurance = [ "E-commerce Insurance", "Complimentary Travel Insurance", "Purchase Protection Insurance" ]

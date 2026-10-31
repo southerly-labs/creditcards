@@ -31,7 +31,20 @@ min_credit = 6000
 
 [rewards]
 program = "nab-rewards"
+earn_source = "manual"
+earn_text_hash = "fead6d041b6c661d"
 bonus_points = 80000
+
+[[rewards.earn]]
+rate = 1
+
+[[rewards.earn]]
+rate = 2
+category = "Webjet via the NAB Rewards Store or webjet.com.au"
+
+[[rewards.earn]]
+rate = 1.5
+category = "grocery stores (MCC 5411)"
 
 [perks]
 insurance = [ "Complimentary International Travel Insurance", "Complimentary Domestic Travel Insurance", "Complimentary Purchase Protection Insurance", "Complimentary Extended Warranty Insurance", "Complimentary Rental Vehicle Excess Insurance in Australia" ]

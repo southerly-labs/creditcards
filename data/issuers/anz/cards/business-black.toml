@@ -28,7 +28,20 @@ max_credit = 50000
 
 [rewards]
 program = "anz-rewards"
+earn_source = "manual"
+earn_text_hash = "9896b62ac6cac1ad"
 bonus_points = 150000
+
+[[rewards.earn]]
+rate = 1.5
+cap_monthly = 10000
+
+[[rewards.earn]]
+rate = 1
+
+[[rewards.earn]]
+rate = 0.5
+category = "taxation payments"
 
 [perks]
 insurance = [ "Unauthorised Transactions Insurance", "Domestic Travel Insurance", "International Travel Insurance" ]

@@ -31,7 +31,20 @@ min_credit = 15000
 
 [rewards]
 program = "nab-rewards"
+earn_source = "manual"
+earn_text_hash = "8f68f8958d69c208"
 bonus_points = 80000
+
+[[rewards.earn]]
+rate = 1.5
+cap_monthly = 15000
+
+[[rewards.earn]]
+rate = 0.5
+
+[[rewards.earn]]
+rate = 3
+category = "Webjet via the NAB Rewards Store or webjet.com.au"
 
 [perks]
 insurance = [ "Complimentary International Travel Insurance", "Complimentary Domestic Travel Insurance", "Complimentary Purchase Protection Insurance", "Complimentary Extended Warranty Insurance", "Complimentary Rental Vehicle Excess Insurance in Australia", "Mobile phone insurance" ]

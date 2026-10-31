@@ -2,10 +2,10 @@ name = "Awards credit card"
 type = "personal"
 network = "mastercard"
 status = "active"
-locked = [ "rewards.program", "rewards.partners" ]
 description = "For customers who want a lower monthly fee and credit limit but still like to earn Awards points."
 url = "https://www.commbank.com.au/credit-cards/awards.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-awards-credit-card.png"
+locked = [ "rewards.program", "rewards.partners" ]
 
 [cdr]
 brand = "CommBank"
@@ -22,6 +22,15 @@ min_credit = 500
 [rewards]
 program = "commbank-awards"
 partners = [ "qantas" ]
+earn_source = "manual"
+earn_text_hash = "1b346b64d67f9c7b"
+
+[[rewards.earn]]
+rate = 1
+cap_monthly = 2000
+
+[[rewards.earn]]
+rate = 0.5
 
 [perks]
 insurance = [ "Extended warranty insurance", "Purchase security insurance" ]

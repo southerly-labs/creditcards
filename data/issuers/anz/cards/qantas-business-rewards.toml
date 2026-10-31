@@ -28,7 +28,20 @@ max_credit = 50000
 
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "41f07e5cadd417c1"
 bonus_points = 150000
+
+[[rewards.earn]]
+rate = 0.75
+cap_monthly = 15000
+
+[[rewards.earn]]
+rate = 0.5
+
+[[rewards.earn]]
+rate = 0.5
+category = "taxation payments and government charges"
 
 [perks]
 insurance = [ "Unauthorised Transactions Insurance", "Domestic Travel Insurance", "International Travel Insurance" ]

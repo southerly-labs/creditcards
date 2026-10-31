@@ -29,6 +29,9 @@ min_income = 20000
 
 [rewards]
 program = "latitude-rewards"
+earn = []
+earn_source = "manual"
+earn_text_hash = "bb4416768ffb7649"
 
 [perks]
 

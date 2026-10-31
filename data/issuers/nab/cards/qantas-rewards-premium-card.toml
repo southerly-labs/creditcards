@@ -31,7 +31,14 @@ min_credit = 6000
 
 [rewards]
 program = "qantas"
+earn_source = "manual"
+earn_text_hash = "4834ff3e91a8963e"
 bonus_points = 60000
+
+[[rewards.earn]]
+rate = 1
+category = "eligible Qantas services"
+note = "bonus points"
 
 [perks]
 insurance = [ "Complimentary International Travel Insurance", "Complimentary Domestic Travel Insurance", "Complimentary Purchase Protection Insurance", "Complimentary Extended Warranty Insurance", "Complimentary Rental Vehicle Excess Insurance in Australia" ]
