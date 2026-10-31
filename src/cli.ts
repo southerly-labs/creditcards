@@ -1,8 +1,10 @@
 import { BunRuntime, BunServices } from "@effect/platform-bun"
 import { Console, Effect, FileSystem, Layer, Option, Path } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
+import { FetchHttpClient } from "effect/http"
 import { toApi, validate } from "./build/build.ts"
 import { CdrClient } from "./cdr/CdrClient.ts"
+import { checkEarnPages, formatCheck, normaliseText, pageText } from "./rewards/check.ts"
 import { formatQueue, reviewQueue, stamp } from "./rewards/review.ts"
 import { Store } from "./store/Store.ts"
 import { summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
@@ -77,12 +79,28 @@ const rewardsStamp = Command.make(
   })
 ).pipe(Command.withDescription("Mark cards' earn rates as manually reviewed against the current CDR text"))
 
+const rewardsCheck = Command.make(
+  "check",
+  {
+    show: Flag.String("show").pipe(Flag.withDescription("Print the normalised text of one page, for picking quotes"), Flag.optional),
+    reportDir: Flag.String("report-dir").pipe(Flag.withDescription("Where to write the report"), Flag.withDefault(".cache"))
+  },
+  Effect.fn(function*({ show, reportDir }) {
+    if (Option.isSome(show)) return yield* Console.log(normaliseText(yield* pageText(show.value)))
+    const results = yield* checkEarnPages((yield* (yield* Store).load).cards)
+    const report = formatCheck(results)
+    yield* writeFile(`${reportDir}/earn-check.json`, JSON.stringify(results, null, 2))
+    yield* writeFile(`${reportDir}/earn-check.md`, report)
+    yield* Console.log(report)
+  })
+).pipe(Command.withDescription("Check manual earn rates against the issuer pages in rewards.earn_check (report only)"))
+
 const rewards = Command.make("rewards").pipe(
   Command.withDescription("Review earn rates the parser cannot read"),
-  Command.withSubcommands([rewardsTodo, rewardsStamp])
+  Command.withSubcommands([rewardsTodo, rewardsStamp, rewardsCheck])
 )
 
-const MainLayer = Layer.mergeAll(CdrClient.layer, Store.layer(DATA_DIR)).pipe(
+const MainLayer = Layer.mergeAll(CdrClient.layer, Store.layer(DATA_DIR), FetchHttpClient.layer).pipe(
   Layer.provideMerge(BunServices.layer)
 )
 
