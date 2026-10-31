@@ -1,6 +1,6 @@
 import type { Api } from "../src/build/build.ts"
 import { required } from "../src/util/required.ts"
-import { decodeApi, decodePointValues } from "../src/model/api.ts"
+import { decodeApi, loadPointValues } from "../src/model/api.ts"
 import type { Card, Program } from "../src/model/schema.ts"
 
 interface Row {
@@ -69,7 +69,7 @@ const describeEarn = (earn: Earn) => {
 
 const OVERRIDES_KEY = "creditcards.pointValues"
 
-const loadOverrides = () => decodePointValues(localStorage.getItem(OVERRIDES_KEY) ?? "{}")
+const loadOverrides = () => loadPointValues(() => localStorage.getItem(OVERRIDES_KEY))
 
 const overrides: Record<string, number> = loadOverrides()
 const saveOverrides = () => {

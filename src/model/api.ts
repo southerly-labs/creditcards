@@ -1,4 +1,4 @@
-import { Option, Predicate, Schema } from "effect"
+import { Option, Predicate, Result, Schema } from "effect"
 import type { Api } from "../build/build.ts"
 import { Card, Program } from "./schema.ts"
 
@@ -28,3 +28,9 @@ export const decodePointValues = (text: string): Record<string, number> => {
   }
   return values
 }
+
+export const loadPointValues = (read: () => string | null): Record<string, number> =>
+  Result.match(Result.try(read), {
+    onFailure: () => ({}),
+    onSuccess: (text) => decodePointValues(text ?? "{}")
+  })
