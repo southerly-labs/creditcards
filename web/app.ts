@@ -52,6 +52,35 @@ const describeEarn = (earn: Earn) => {
   }).join("\n")
 }
 
+// ---- Point values -------------------------------------------------------------
+// Defaults come from each program's cents_per_point; users can override any
+// program, and overrides persist in localStorage.
+
+const OVERRIDES_KEY = "creditcards.pointValues"
+
+const loadOverrides = (): Record<string, number> => {
+  try {
+    const parsed: unknown = JSON.parse(localStorage.getItem(OVERRIDES_KEY) ?? "{}")
+    return parsed && typeof parsed === "object"
+      ? Object.fromEntries(Object.entries(parsed).filter(([, v]) => typeof v === "number" && Number.isFinite(v) && v >= 0))
+      : {}
+  } catch {
+    return {}
+  }
+}
+
+const overrides: Record<string, number> = loadOverrides()
+const saveOverrides = () => localStorage.setItem(OVERRIDES_KEY, JSON.stringify(overrides))
+
+const centsPerPoint = (r: Row) => (r.program ? overrides[r.program.id] ?? r.program.cents_per_point : undefined)
+
+// Cents back per $1 of everyday spend.
+const earnValue = (r: Row) => {
+  const earn = baseEarn(r)
+  const cents = centsPerPoint(r)
+  return earn === undefined || cents === undefined ? undefined : Math.round(earn * cents * 1000) / 1000
+}
+
 const columns: ReadonlyArray<Column> = [
   {
     label: "Card",
@@ -82,6 +111,22 @@ const columns: ReadonlyArray<Column> = [
       if (!earn || base === undefined) return dash
       const more = earn.length > 1 ? '<span class="dim">+</span>' : ""
       return `<span title="${esc(describeEarn(earn))}">${base}${more}</span>`
+    }
+  },
+  {
+    label: "Value /$",
+    num: true,
+    sort: earnValue,
+    render: (r) => {
+      const value = earnValue(r)
+      if (value === undefined) {
+        return baseEarn(r) !== undefined && r.program
+          ? `<span class="dim" title="No point value for ${esc(r.program.name)}; set one under Point values">?</span>`
+          : dash
+      }
+      const custom = r.program !== undefined && overrides[r.program.id] !== undefined
+      const title = `${baseEarn(r)} points per $1 × ${centsPerPoint(r)}c per point${custom ? " (your value)" : ""}`
+      return `<span class="${custom ? "custom" : ""}" title="${esc(title)}">${value.toFixed(2)}¢</span>`
     }
   },
   { label: "Bonus pts", num: true, sort: (r) => r.card.rewards?.bonus_points, render: (r) => int(r.card.rewards?.bonus_points) },
@@ -160,6 +205,44 @@ const render = () => {
     .join("")
   $("count").textContent = `${visible.length} of ${rows.length} cards`
 }
+
+const renderValueGrid = () => {
+  const counts = new Map<string, number>()
+  for (const r of rows) if (r.program) counts.set(r.program.id, (counts.get(r.program.id) ?? 0) + 1)
+  const programs = [...counts.keys()]
+    .map((id) => ({ id, ...api.programs[id]! }))
+    .sort((a, b) => (counts.get(b.id)! - counts.get(a.id)!) || a.name.localeCompare(b.name))
+  $("value-grid").innerHTML = programs.map((p) => {
+    const basis = [p.value_basis, p.value_source, p.value_updated && `Updated ${p.value_updated}`].filter(Boolean).join("\n")
+    const fallback = p.cents_per_point === undefined ? "no default" : `default ${p.cents_per_point}c`
+    return `<label title="${esc(basis || "No default value for this program")}">
+      <span>${esc(p.name)}</span>
+      <input type="number" min="0" max="10" step="0.01" inputmode="decimal" data-program="${esc(p.id)}"
+        placeholder="${p.cents_per_point ?? ""}" value="${overrides[p.id] ?? ""}" />
+      <span class="dim">c · ${fallback}</span>
+    </label>`
+  }).join("")
+}
+
+$("value-grid").addEventListener("input", (e) => {
+  const input = e.target as HTMLInputElement
+  const id = input.dataset.program
+  if (!id) return
+  const value = input.value.trim() === "" ? NaN : Number(input.value)
+  if (Number.isFinite(value) && value >= 0) overrides[id] = value
+  else delete overrides[id]
+  saveOverrides()
+  render()
+})
+
+$("value-reset").addEventListener("click", () => {
+  for (const id of Object.keys(overrides)) delete overrides[id]
+  saveOverrides()
+  renderValueGrid()
+  render()
+})
+
+renderValueGrid()
 
 for (const id of ["search", "type", "program", "nofx", "nofee", "discontinued"]) {
   $(id).addEventListener("input", render)

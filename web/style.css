@@ -65,3 +65,21 @@ tbody tr:hover { background: var(--head); }
   background: var(--head); border: 1px solid var(--line);
 }
 .disc { opacity: 0.5; }
+
+.values { padding: 8px 24px 12px; border-bottom: 1px solid var(--line); }
+.values summary { cursor: pointer; font-weight: 600; }
+.value-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px 16px; margin: 10px 0;
+}
+.value-grid label { display: flex; gap: 6px; align-items: center; }
+.value-grid label > span:first-child { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.value-grid input {
+  width: 70px; font: inherit; padding: 3px 6px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--fg); text-align: right;
+}
+.values button {
+  font: inherit; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--head); color: var(--fg); cursor: pointer;
+}
+.custom { color: var(--accent); font-style: italic; }
