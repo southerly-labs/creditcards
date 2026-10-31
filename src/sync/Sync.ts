@@ -1,3 +1,4 @@
+import { encodeJson } from "../util/json.ts"
 import { required } from "../util/required.ts"
 import { DateTime, Effect, Schema } from "effect"
 import { CdrClient, type CdrError, REQUEST_VARIANTS } from "../cdr/CdrClient.ts"
@@ -68,7 +69,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         // Some data holders' CDNs serve a stale empty list for particular
         // request headers. When we expect cards, try the other header variants.
         const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
-        const list = Effect.fnUntraced(function* (
+        const list = Effect.fn("CdrClient.listWithFallback")(function* (
           variant: number
         ): Effect.fn.Return<ReadonlyArray<ProductSummary>, CdrError> {
           const products = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY, variant)
@@ -269,7 +270,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 // Markdown summary used for the commit message body and the held-changes issue.
 export const summariseReport = (r: SyncReport): string => {
   const fmt = (v: unknown) =>
-    v === undefined ? "—" : typeof v === "object" ? JSON.stringify(v) : typeof v === "string" ? v : JSON.stringify(v)
+    v === undefined ? "—" : typeof v === "object" ? encodeJson(v) : typeof v === "string" ? v : encodeJson(v)
   const lines = [
     `CDR sync ${r.date}: ${r.cardsSeen} cards seen, ${r.added.length} added, ${r.updated.length} updated, ` +
       `${r.discontinued.length} discontinued, ${r.held.length} held`,

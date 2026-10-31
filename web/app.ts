@@ -1,5 +1,5 @@
 import { required } from "../src/util/required.ts"
-import { decodeApi } from "../src/model/api.ts"
+import { decodeApi, decodePointValues } from "../src/model/api.ts"
 import type { Card, Program } from "../src/model/schema.ts"
 
 interface Row {
@@ -69,18 +69,7 @@ const describeEarn = (earn: Earn) => {
 
 const OVERRIDES_KEY = "creditcards.pointValues"
 
-const loadOverrides = (): Record<string, number> => {
-  try {
-    const parsed: unknown = JSON.parse(localStorage.getItem(OVERRIDES_KEY) ?? "{}")
-    return parsed !== null && typeof parsed === "object"
-      ? Object.fromEntries(
-          Object.entries(parsed).filter(([, v]) => typeof v === "number" && Number.isFinite(v) && v >= 0)
-        )
-      : {}
-  } catch {
-    return {}
-  }
-}
+const loadOverrides = () => decodePointValues(localStorage.getItem(OVERRIDES_KEY) ?? "{}")
 
 const overrides: Record<string, number> = loadOverrides()
 const saveOverrides = () => {

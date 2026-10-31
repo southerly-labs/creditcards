@@ -1,3 +1,4 @@
+import { encodeJson } from "../util/json.ts"
 import { Effect, Schema } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
 import type { Card, EarnRate } from "../model/schema.ts"
@@ -22,7 +23,10 @@ export class RewardsError extends Schema.TaggedError<RewardsError>()("RewardsErr
   message: Schema.String
 }) {}
 
-const loyaltyFeatures = Effect.fnUntraced(function* (card: Card, baseUris: ReadonlyMap<string, string>) {
+const warnReviewFailure = (key: string, error: { readonly message: string }) =>
+  Effect.logWarning(`${key}: ${error.message}`).pipe(Effect.map(() => undefined))
+
+const loyaltyFeatures = Effect.fn("loyaltyFeatures")(function* (card: Card, baseUris: ReadonlyMap<string, string>) {
   const cdr = yield* CdrClient
   if (!card.cdr) return yield* new RewardsError({ message: `${card.name} has no CDR source` })
   const baseUri = baseUris.get(card.cdr.brand)
@@ -65,7 +69,7 @@ export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | 
             earn: card.rewards?.earn
           }
         }),
-        Effect.catch((e) => Effect.logWarning(`${key}: ${e.message}`).pipe(Effect.as(undefined)))
+        Effect.catch((e) => warnReviewFailure(key, e))
       ),
     { concurrency: 8 }
   )
@@ -87,7 +91,7 @@ export const formatQueue = (items: ReadonlyArray<ReviewItem>): string =>
       `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
       `- Program: ${i.program ?? "—"}`,
       `- Reason: ${i.reason}`,
-      `- Current earn: ${i.earn ? JSON.stringify(i.earn) : "—"}`,
+      `- Current earn: ${i.earn ? encodeJson(i.earn) : "—"}`,
       "",
       "```text",
       i.text || "(no loyalty text)",

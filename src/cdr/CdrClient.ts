@@ -56,7 +56,11 @@ export class CdrClient extends Context.Service<
 
       // GET with CDR version negotiation. Not every data holder honours
       // x-min-v, so on a 406 fall back to probing each version downwards.
-      const getVersioned = Effect.fnUntraced(function* (url: string, maxVersion: number, variant = 0) {
+      const getVersioned = Effect.fn("CdrClient.getVersioned")(function* (
+        url: string,
+        maxVersion: number,
+        variant = 0
+      ) {
         const attempt = (headers: Record<string, string>) =>
           client.get(url, { headers: { ...REQUEST_VARIANTS[variant % REQUEST_VARIANTS.length], ...headers } }).pipe(
             Effect.timeout("20 seconds"),

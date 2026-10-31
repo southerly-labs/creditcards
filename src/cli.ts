@@ -1,3 +1,4 @@
+import { encodeJson } from "./util/json.ts"
 import { BunRuntime, BunServices } from "@effect/platform-bun"
 import { Console, Effect, FileSystem, Layer, Option, Path } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
@@ -11,7 +12,7 @@ import { summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts
 
 const DATA_DIR = "data"
 
-const writeFile = Effect.fnUntraced(function* (file: string, content: string) {
+const writeFile = Effect.fn("writeFile")(function* (file: string, content: string) {
   const fs = yield* FileSystem.FileSystem
   const path = yield* Path.Path
   yield* fs.makeDirectory(path.dirname(file), { recursive: true })
@@ -33,7 +34,7 @@ const sync = Command.make(
   Effect.fn(function* ({ dryRun, reportDir }) {
     const report = yield* syncCdr({ dryRun })
     const summary = summariseReport(report)
-    yield* writeFile(`${reportDir}/sync-report.json`, JSON.stringify(report, null, 2))
+    yield* writeFile(`${reportDir}/sync-report.json`, encodeJson(report, 2))
     yield* writeFile(`${reportDir}/sync-summary.md`, summary)
     yield* writeFile(`${reportDir}/rewards-review.md`, summariseRewardsReview(report))
     yield* Console.log(summary)
@@ -56,7 +57,7 @@ const build = Command.make(
   { out: Flag.String("out").pipe(Flag.withDefault("dist")) },
   Effect.fn(function* ({ out }) {
     const dataset = yield* validate
-    yield* writeFile(`${out}/api.json`, JSON.stringify(toApi(dataset)))
+    yield* writeFile(`${out}/api.json`, encodeJson(toApi(dataset)))
     yield* Console.log(`Wrote ${out}/api.json (${dataset.cards.size} cards)`)
   })
 ).pipe(Command.withDescription("Build dist/api.json from data/"))
@@ -106,7 +107,7 @@ const rewardsCheck = Command.make(
     if (Option.isSome(show)) return yield* Console.log(normaliseText(yield* pageText(show.value)))
     const results = yield* checkEarnPages((yield* (yield* Store).load).cards)
     const report = formatCheck(results)
-    yield* writeFile(`${reportDir}/earn-check.json`, JSON.stringify(results, null, 2))
+    yield* writeFile(`${reportDir}/earn-check.json`, encodeJson(results, 2))
     yield* writeFile(`${reportDir}/earn-check.md`, report)
     return yield* Console.log(report)
   })

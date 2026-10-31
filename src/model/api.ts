@@ -1,4 +1,4 @@
-import { Schema } from "effect"
+import { Option, Predicate, Schema } from "effect"
 import type { Api } from "../build/build.ts"
 import { Card, Program } from "./schema.ts"
 
@@ -16,3 +16,15 @@ const PublicApi = Schema.Struct({
 })
 
 export const decodeApi = (value: unknown): Api => Schema.decodeUnknownSync(PublicApi)(value)
+
+// Invalid entries are ignored individually so a malformed override cannot hide
+// valid values saved alongside it.
+export const decodePointValues = (text: string): Record<string, number> => {
+  const parsed = Schema.decodeUnknownOption(Schema.fromJsonString(Schema.Unknown))(text)
+  const values: Record<string, number> = {}
+  if (Option.isNone(parsed) || !Predicate.isObjectOrArray(parsed.value)) return values
+  for (const [id, value] of Object.entries(parsed.value)) {
+    if (typeof value === "number" && Number.isFinite(value) && value >= 0) values[id] = value
+  }
+  return values
+}

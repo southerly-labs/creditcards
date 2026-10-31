@@ -1,3 +1,4 @@
+import { encodeJson } from "../util/json.ts"
 import { Predicate } from "effect"
 import { required } from "../util/required.ts"
 import type { Card } from "../model/schema.ts"
@@ -60,7 +61,8 @@ const setPath = (obj: Obj, path: string, value: unknown) => {
 const isLocked = (locked: ReadonlyArray<string>, path: string) =>
   locked.some((l) => path === l || path.startsWith(`${l}.`) || l.startsWith(`${path}.`))
 
-const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b)
+const equal = (a: unknown, b: unknown) =>
+  a === undefined || b === undefined ? a === b : encodeJson(a) === encodeJson(b)
 
 export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard): Obj => {
   if (!existing) return structuredClone(incoming)
@@ -113,7 +115,7 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<
   const reasons: Array<string> = []
   for (const { path, before, after } of changes) {
     if (KEY_FIELDS.has(path) && before !== undefined && after === undefined) {
-      reasons.push(`${path} disappeared (was ${JSON.stringify(before)})`)
+      reasons.push(`${path} disappeared (was ${encodeJson(before)})`)
       continue
     }
     if (path === "rewards.earn" && Array.isArray(before) && Array.isArray(after)) {

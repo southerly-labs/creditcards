@@ -80,16 +80,19 @@ export class Store extends Context.Service<
         }).pipe(Effect.withSpan("Store.load"))
 
         // Writes only when the encoded content differs; returns whether it wrote.
-        const writeToml = <A, I>(schema: Schema.Codec<A, I>, file: string, value: A) =>
-          Effect.gen(function* () {
-            const encoded = yield* Schema.encodeUnknownEffect(schema)(value).pipe(Effect.mapError(fail(file)))
-            const text = `${Toml.stringify(encoded)}\n`
-            const current = yield* fs.readFileString(file).pipe(Effect.orElseSucceed(() => {}))
-            if (current === text) return false
-            yield* fs.makeDirectory(path.dirname(file), { recursive: true }).pipe(Effect.mapError(fail(file)))
-            yield* fs.writeFileString(file, text).pipe(Effect.mapError(fail(file)))
-            return true
-          })
+        const writeToml = Effect.fn("Store.writeToml")(function* <A, I>(
+          schema: Schema.Codec<A, I>,
+          file: string,
+          value: A
+        ) {
+          const encoded = yield* Schema.encodeUnknownEffect(schema)(value).pipe(Effect.mapError(fail(file)))
+          const text = `${Toml.stringify(encoded)}\n`
+          const current = yield* fs.readFileString(file).pipe(Effect.orElseSucceed(() => {}))
+          if (current === text) return false
+          yield* fs.makeDirectory(path.dirname(file), { recursive: true }).pipe(Effect.mapError(fail(file)))
+          yield* fs.writeFileString(file, text).pipe(Effect.mapError(fail(file)))
+          return true
+        })
 
         return Store.of({
           load,
