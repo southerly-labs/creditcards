@@ -34,3 +34,22 @@ export const loadPointValues = (read: () => string | null): Record<string, numbe
     onFailure: () => ({}),
     onSuccess: (text) => decodePointValues(text ?? "{}")
   })
+
+export const decodeColumnVisibility = (text: string): Record<string, boolean> => {
+  const parsed = Schema.decodeUnknownOption(Schema.fromJsonString(Schema.Unknown))(text)
+  const values: Record<string, boolean> = {}
+
+  if (Option.isNone(parsed) || !Predicate.isObjectOrArray(parsed.value)) return values
+
+  for (const [id, value] of Object.entries(parsed.value)) {
+    if (typeof value === "boolean") values[id] = value
+  }
+
+  return values
+}
+
+export const loadColumnVisibility = (read: () => string | null): Record<string, boolean> =>
+  Result.match(Result.try(read), {
+    onFailure: () => ({}),
+    onSuccess: (text) => decodeColumnVisibility(text ?? "{}")
+  })
