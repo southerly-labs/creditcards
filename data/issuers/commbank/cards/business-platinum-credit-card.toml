@@ -43,6 +43,15 @@ rate = 2
 category = "international spend"
 note = "all Yello tiers"
 
+[[rewards.earn_check]]
+url = "https://www.commbank.com.au/commbank-yello/terms-and-conditions/commbank-product-offer-terms.html"
+expect = [
+  "business gold awards credit card) 1.5 2.0 commbank yello gold tier",
+  "business gold awards credit card) 1.25 2.0 commbank yello plus tier",
+  "business gold awards credit card) 1.0 2.0 commbank yello tier card type",
+  "business gold awards credit card) 1.0 2.0 key things to know",
+]
+
 [perks]
 insurance = [ "Transit Accident Insurance", "International travel insurance", "Unauthorised Transactions Insurance" ]
 

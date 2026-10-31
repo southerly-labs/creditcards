@@ -49,6 +49,12 @@ rate = 1.75
 category = "Qantas products and services"
 note = "1 bonus point per $1 on top of the domestic rate"
 
+[[rewards.earn_check]]
+url = "https://www.qantasmoney.com/credit-cards/everyday"
+expect = [
+  "earn rate for the qantas money everyday credit card: 1 qantas point per whole au$1 equivalent on international spend; 0.75 qantas points per whole au$1 on domestic spend up to and including au$3,000 each statement period, 0.4 qantas points per whole au$1 spent above au$3,000 each statement period: plus 1 additional qantas point per whole au$1 on qantas spend",
+]
+
 [perks]
 insurance = [ "Complimentary Travel Insurance" ]
 

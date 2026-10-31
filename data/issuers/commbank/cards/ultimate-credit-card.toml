@@ -42,6 +42,21 @@ rate = 2
 category = "international spend"
 note = "all Yello tiers"
 
+[[rewards.earn_check]]
+url = "https://www.commbank.com.au/credit-cards/ultimate.html"
+expect = [
+  "2 2 2 2 all other eligible transactions",
+]
+
+[[rewards.earn_check]]
+url = "https://www.commbank.com.au/commbank-yello/terms-and-conditions/commbank-product-offer-terms.html"
+expect = [
+  "smart credit card / ultimate credit card 1.5 2.0 awards credit cards",
+  "smart credit card / ultimate credit card 1.0 2.0 awards credit cards",
+  "smart credit card / ultimate credit card 0.75 2.0 awards credit cards",
+  "smart credit card / ultimate credit card 0.5 2.0 awards credit cards",
+]
+
 [perks]
 insurance = [ "Cracked Screen Cover", "International travel insurance" ]
 lounge_access = true

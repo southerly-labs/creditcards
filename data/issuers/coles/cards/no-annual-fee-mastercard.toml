@@ -36,6 +36,12 @@ rate = 0.5
 cap_monthly = 5000
 note = "no points on spend above $5,000 a statement period"
 
+[[rewards.earn_check]]
+url = "https://www.coles.com.au/content/dam/coles/coles-financial-services/credit-cards/documents-and-forms/pdfs/coles-mastercard-rewards-terms-and-conditions.pdf"
+expect = [
+  "coles no annual fee mastercard® 1 flybuys point per $2 on each eligible transaction points are capped at the first $5,000 of eligible transactions in each statement period",
+]
+
 [perks]
 insurance = [ "Complimentary insurance" ]
 

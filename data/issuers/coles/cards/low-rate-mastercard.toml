@@ -36,6 +36,12 @@ rate = 0.5
 category = "Coles Supermarkets"
 note = "earns no points elsewhere"
 
+[[rewards.earn_check]]
+url = "https://www.coles.com.au/content/dam/coles/coles-financial-services/credit-cards/documents-and-forms/pdfs/coles-mastercard-rewards-terms-and-conditions.pdf"
+expect = [
+  "coles low rate mastercard® 1 flybuys point per $2 dollar of coles spend",
+]
+
 [perks]
 insurance = [ "Complimentary Insurance" ]
 

@@ -32,5 +32,17 @@ earn_text_hash = "de215437106e7bee"
 [[rewards.earn]]
 rate = 1
 
+[[rewards.earn_check]]
+url = "https://pic.bankofchina.com/bocappd/australia/202606/P020260629600267043909.pdf"
+expect = [
+  "mastercard gold card 2 points per aud $1 spent mastercard low interest card 1 point per aud $1 spent unionpay rewards card 5 points per aud $1 spent",
+]
+
+[[rewards.earn_check]]
+url = "https://www.bankofchina.com/au/en/bocinfo/bi3/201505/t20150508_11210829.html"
+expect = [
+  "rewards program term and conditions (effective from 2 july 2026)",
+]
+
 [perks]
 

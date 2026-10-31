@@ -43,6 +43,14 @@ note = "overseas, or online with a merchant based overseas"
 rate = 2
 category = "travel booked direct with airlines, hotels, taxis, rideshare and cruise lines"
 
+[[rewards.earn_check]]
+url = "https://www.mycard.com.au/credit-cards/premier-card"
+expect = [
+  "international spend number of points 2 points spend eligibility on eligible transactions made overseas or online with a merchant that is based overseas",
+  "domestic spend number of points 2 points spend eligibility on eligible transactions on travel, being transactions booked directly with an airline, hotel, taxi, rideshare and cruise liner",
+  "domestic spend number of points 1.5 points spend eligibility on all other eligible transactions",
+]
+
 [perks]
 insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Mobile phone insurance" ]
 

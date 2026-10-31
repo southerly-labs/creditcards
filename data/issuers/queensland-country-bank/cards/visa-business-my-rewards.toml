@@ -34,5 +34,18 @@ rate = 0.667
 cap_monthly = 21000
 note = "$1 cashback per $150, up to $140 a month"
 
+[[rewards.earn_check]]
+url = "https://www.queenslandcountry.bank/business-banking/business-finance/business-visa-credit-card/"
+expect = [
+  "earning one reward dollar for every $150 australian dollars you spend on eligible purchases",
+]
+
+[[rewards.earn_check]]
+url = "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_My_Rewards_TCs.pdf"
+expect = [
+  "every aud $150 charged to your my rewards card for eligible transactions will result in $1 of reward dollars",
+  "$140 per month ($1,680 annually) for business my rewards card holders",
+]
+
 [perks]
 

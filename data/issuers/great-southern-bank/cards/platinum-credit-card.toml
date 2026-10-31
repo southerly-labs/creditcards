@@ -31,6 +31,13 @@ earn_text_hash = "a0b0c5b83e9750f9"
 rate = 0.5
 note = "0.5% cashback, uncapped"
 
+[[rewards.earn_check]]
+url = "https://www.greatsouthernbank.com.au/credit-cards/platinum"
+expect = [
+  "earn 0.50% on every eligible dollar spent",
+  "no caps. no points to accrue",
+]
+
 [perks]
 insurance = [ "Travel Insurance", "Purchase Protection" ]
 

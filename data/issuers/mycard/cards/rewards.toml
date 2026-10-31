@@ -42,6 +42,14 @@ note = "overseas, or online with a merchant based overseas"
 rate = 2
 category = "supermarkets and petrol"
 
+[[rewards.earn_check]]
+url = "https://www.mycard.com.au/credit-cards/rewards-card"
+expect = [
+  "international spend number of points 2 points spend eligibility on eligible transactions made overseas or online with a merchant that is based overseas",
+  "domestic spend number of points 2 points spend eligibility on eligible transactions made directly with supermarkets or petrol outlets",
+  "domestic spend number of points 1.5 points spend eligibility on eligible transactions. what you get",
+]
+
 [perks]
 insurance = [ "Extended Warranty Insurance", "Purchase Protection Insurance", "Mobile phone insurance" ]
 
