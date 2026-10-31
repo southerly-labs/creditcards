@@ -109,6 +109,7 @@ const rewardsCheck = Command.make(
     const report = formatCheck(results)
     yield* writeFile(`${reportDir}/earn-check.json`, encodeJson(results, 2))
     yield* writeFile(`${reportDir}/earn-check.md`, report)
+
     return yield* Console.log(report)
   })
 ).pipe(Command.withDescription("Check manual earn rates against the issuer pages in rewards.earn_check (report only)"))

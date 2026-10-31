@@ -28,6 +28,7 @@ export const ProductSummary = Schema.Struct({
   lastUpdated: OptString,
   isTailored: Schema.optional(Schema.NullOr(Schema.Boolean))
 })
+
 export type ProductSummary = typeof ProductSummary.Type
 
 export const ProductsPage = Schema.Struct({
@@ -51,6 +52,7 @@ export const Fee = Schema.Struct({
   additionalValue: OptString,
   additionalInfo: OptString
 })
+
 export type Fee = typeof Fee.Type
 
 export const LendingRate = Schema.Struct({
@@ -92,4 +94,5 @@ export const ProductDetail = Schema.Struct({
   eligibility: Schema.optional(Schema.NullOr(Schema.Array(Eligibility))),
   constraints: Schema.optional(Schema.NullOr(Schema.Array(Constraint)))
 })
+
 export type ProductDetail = typeof ProductDetail.Type

@@ -58,10 +58,12 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   // ---- Fetch ---------------------------------------------------------------
   const brands = yield* cdr.brands
   const activeByBrand = new Map<string, number>()
+
   for (const card of cards.values()) {
     if (card.status === "active" && card.cdr)
       activeByBrand.set(card.cdr.brand, (activeByBrand.get(card.cdr.brand) ?? 0) + 1)
   }
+
   const fetched = yield* Effect.forEach(
     brands,
     (brand) =>
@@ -69,15 +71,19 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         // Some data holders' CDNs serve a stale empty list for particular
         // request headers. When we expect cards, try the other header variants.
         const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
+
         const list = Effect.fn("CdrClient.listWithFallback")(function* (
           variant: number
         ): Effect.fn.Return<ReadonlyArray<ProductSummary>, CdrError> {
           const products = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY, variant)
+
           return products.length === 0 && expectsCards && variant + 1 < REQUEST_VARIANTS.length
             ? yield* list(variant + 1)
             : products
         })
+
         const listed = yield* list(0).pipe(Effect.result)
+
         if (Result.isFailure(listed)) {
           return {
             brand: brand.brandName,
@@ -86,7 +92,9 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
             productErrors: []
           } satisfies BrandFetch
         }
+
         const productErrors: Array<string> = []
+
         const products = yield* Effect.forEach(
           listed.success,
           (summary) =>
@@ -98,6 +106,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
             ),
           { concurrency: 4 }
         )
+
         return {
           brand: brand.brandName,
           products: products.filter((p) => p !== undefined),
@@ -112,6 +121,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   // ---- Global guardrail ------------------------------------------------------
   const cardsSeen = fetched.reduce((n, b) => n + b.products.length, 0)
   const activeCdrCards = [...cards.values()].filter((c) => c.status === "active" && c.cdr !== undefined).length
+
   if (activeCdrCards > 0 && cardsSeen < activeCdrCards * MIN_SEEN_SHARE) {
     return yield* new SyncAborted({
       message: `Only ${cardsSeen} cards returned vs ${activeCdrCards} active; refusing to sync (likely CDR outage)`
@@ -120,23 +130,30 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   // ---- Resolve issuers --------------------------------------------------------
   const issuerByBrand = new Map<string, string>()
+
   for (const [slug, issuer] of issuers) for (const b of issuer.cdr_brands) issuerByBrand.set(b, slug)
   const newIssuers: Array<string> = []
+
   const resolveIssuer = (brand: string) => {
     const existing = issuerByBrand.get(brand)
+
     if (existing != null && existing !== "") return existing
     const seed = issuerSeed(brand)
     const current = issuers.get(seed.slug)
+
     const issuer: Issuer = current
       ? { ...current, cdr_brands: [...current.cdr_brands, brand] }
       : { name: seed.name, cdr_brands: [brand] }
+
     issuers.set(seed.slug, issuer)
     issuerByBrand.set(brand, seed.slug)
     newIssuers.push(seed.slug)
+
     return seed.slug
   }
 
   const keyByCdrId = new Map<string, string>()
+
   for (const [key, card] of cards) if (card.cdr) keyByCdrId.set(`${card.cdr.brand}|${card.cdr.product_id}`, key)
 
   const added: Array<string> = []
@@ -153,12 +170,14 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     if (products.length === 0) continue
     const issuerSlug = resolveIssuer(brand)
     const issuerName = required(issuers.get(issuerSlug)).name
+
     for (const product of products) {
       const { card: incoming, fallbackProgram } = normalise(product, {
         issuerSlug,
         brandName: brand,
         programs: programIndex
       })
+
       if (fallbackProgram != null && fallbackProgram !== "" && !programs.has(fallbackProgram)) {
         const program: Program = { name: `${issuerName} Rewards`, type: "bank" }
         programs.set(fallbackProgram, program)
@@ -167,12 +186,15 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
       let key = keyByCdrId.get(`${brand}|${product.productId}`)
       const existing = key != null && key !== "" ? cards.get(key) : undefined
+
       if (key == null || key === "") {
         const base = cardSlug(incoming.name, issuerName)
+
         let slug =
           cards.has(cardKey(issuerSlug, base)) || writes.has(cardKey(issuerSlug, base))
             ? `${base}-${incoming.type}`
             : base
+
         for (let i = 2; cards.has(cardKey(issuerSlug, slug)) || writes.has(cardKey(issuerSlug, slug)); i++)
           slug = `${base}-${i}`
         key = cardKey(issuerSlug, slug)
@@ -182,9 +204,11 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       const merged = mergeCard(existing, incoming)
       let earnSet: ReadonlyArray<EarnRate> | undefined
       const mergedRewards = merged["rewards"]
+
       if (mergedRewards !== undefined && Schema.is(Card.fields.rewards)(mergedRewards)) {
         const loyalty = (product.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
         const plan = planRewards(mergedRewards, loyalty)
+
         if (RewardsPlan.$is("Set")(plan)) {
           merged["rewards"] = {
             ...mergedRewards,
@@ -197,20 +221,28 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
           rewardsReview.push({ card: key, reason: plan.reason })
         }
       }
+
       const decoded = yield* decodeCard(merged).pipe(Effect.result)
+
       if (Result.isFailure(decoded)) {
         held.push({ card: key, reasons: [`invalid: ${decoded.failure.message.split("\n").slice(0, 3).join(" ")}`] })
         continue
       }
+
       const changes = diffCard(existing, merged)
+
       if (changes.length === 0) continue
       const reasons = existing ? holdReasons(changes) : []
+
       if (reasons.length > 0) {
         held.push({ card: key, reasons })
         continue
       }
+
       writes.set(key, decoded.success)
+
       if (earnSet) rewardsSet.push({ card: key, earn: earnSet })
+
       if (existing) updated.push({ card: key, changes })
       else added.push(key)
     }
@@ -220,21 +252,27 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const seenIds = new Set(fetched.flatMap((b) => b.products.map((p) => `${b.brand}|${p.productId}`)))
   const brandStatus = new Map(fetched.map((b) => [b.brand, b]))
   const missingByBrand = new Map<string, Array<string>>()
+
   for (const [key, card] of cards) {
     if (card.status !== "active" || !card.cdr || seenIds.has(`${card.cdr.brand}|${card.cdr.product_id}`)) continue
+
     if ((card.locked ?? []).includes("status")) continue
     const status = brandStatus.get(card.cdr.brand)
+
     // The brand left the register or its listing failed: unknown, not gone.
     if (!status || status.listError !== undefined) continue
     missingByBrand.set(card.cdr.brand, [...(missingByBrand.get(card.cdr.brand) ?? []), key])
   }
+
   for (const [brand, keys] of missingByBrand) {
     const active = [...cards.values()].filter((c) => c.status === "active" && c.cdr?.brand === brand).length
+
     if (keys.length / active > MAX_DISCONTINUED_SHARE && keys.length > 1) {
       for (const key of keys)
         held.push({ card: key, reasons: [`${keys.length}/${active} ${brand} cards vanished at once`] })
       continue
     }
+
     for (const key of keys) {
       const missingCard = required(cards.get(key))
       writes.set(key, { ...missingCard, status: "discontinued", discontinued: date })
@@ -245,7 +283,9 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   // ---- Write --------------------------------------------------------------------------
   if (!options.dryRun) {
     for (const slug of new Set(newIssuers)) yield* store.writeIssuer(slug, required(issuers.get(slug)))
+
     for (const id of newPrograms) yield* store.writeProgram(id, required(programs.get(id)))
+
     for (const [key, card] of writes) {
       const { issuer, card: slug } = splitCardKey(key)
       yield* store.writeCard(issuer, slug, card)
@@ -272,33 +312,45 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 export const summariseReport = (r: SyncReport): string => {
   const fmt = (v: unknown) =>
     v === undefined ? "—" : typeof v === "object" ? encodeJson(v) : typeof v === "string" ? v : encodeJson(v)
+
   const lines = [
     `CDR sync ${r.date}: ${r.cardsSeen} cards seen, ${r.added.length} added, ${r.updated.length} updated, ` +
       `${r.discontinued.length} discontinued, ${r.held.length} held`,
     ""
   ]
+
   if (r.added.length > 0) lines.push("Added:", ...r.added.map((c) => `- ${c}`), "")
+
   if (r.updated.length > 0) {
     lines.push("Updated:")
+
     for (const u of r.updated) {
       const shown = u.changes.filter(
         (c) => !["cdr", "description", "rewards.earn_source", "rewards.earn_text_hash"].includes(c.path)
       )
+
       lines.push(
         `- ${u.card}: ${shown.map((c) => `${c.path} ${fmt(c.before)} → ${fmt(c.after)}`).join("; ") || "metadata"}`
       )
     }
+
     lines.push("")
   }
+
   if (r.discontinued.length > 0) lines.push("Discontinued:", ...r.discontinued.map((c) => `- ${c}`), "")
+
   if (r.held.length > 0)
     lines.push("Held for review:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")
+
   if (r.newPrograms.length > 0)
     lines.push("New fallback programs (add aliases or rename):", ...r.newPrograms.map((p) => `- ${p}`), "")
+
   if (r.rewards.set.length > 0 || r.rewards.review.length > 0) {
     lines.push(`Earn rates: ${r.rewards.set.length} set by parser, ${r.rewards.review.length} need review`, "")
   }
+
   if (r.brandErrors.length > 0) lines.push("Brand errors:", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")
+
   return lines.join("\n")
 }
 

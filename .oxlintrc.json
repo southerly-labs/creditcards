@@ -66,7 +66,8 @@
     "anti-slop-effect/no-manual-effect-error-tag": "error",
     "anti-slop-effect/no-manual-tag-comparison": "error",
     "anti-slop-effect/no-manual-tagged-construction": "error",
-    "anti-slop-effect/prefer-effect-match": "error"
+    "anti-slop-effect/prefer-effect-match": "error",
+    "anti-slop/require-readable-spacing": "error"
   },
   "ignorePatterns": ["dist/**", "tools/oxlint/anti-slop/**"],
   "extends": ["./node_modules/@shekohex/oxc-effect/configs/full.jsonc"],

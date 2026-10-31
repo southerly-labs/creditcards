@@ -22,22 +22,28 @@ export const planRewards = (
   features: ReadonlyArray<LoyaltyFeature>
 ): RewardsPlan => {
   const hash = loyaltyTextHash(features)
+
   if (current?.earn_source === "manual") {
     return current.earn_text_hash === hash
       ? RewardsPlan.Unchanged()
       : RewardsPlan.Review({ reason: "loyalty text changed since manual review", hash })
   }
+
   const parsed = parseEarn(features)
+
   if (ParseResult.$is("Parsed")(parsed)) {
     const same =
       current?.earn_source === "parser" && current.earn_text_hash === hash && equal(current.earn, parsed.earn)
+
     return same ? RewardsPlan.Unchanged() : RewardsPlan.Set({ earn: parsed.earn, hash })
   }
+
   if (current?.earn_source === "parser") {
     return RewardsPlan.Review({
       reason: `loyalty text changed and the parser can no longer read it (${parsed.reason})`,
       hash
     })
   }
+
   return RewardsPlan.Review({ reason: parsed.reason, hash })
 }

@@ -12,9 +12,11 @@ const Percent = between(0, 50)
 const Slug = Schema.String.pipe(Schema.check(Schema.isPattern(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u)))
 
 export const CardType = Schema.Literals(["personal", "business", "corporate"])
+
 export type CardType = typeof CardType.Type
 
 export const Network = Schema.Literals(["visa", "mastercard", "amex", "unionpay", "eftpos"])
+
 export type Network = typeof Network.Type
 
 export const IntroOffer = Schema.Struct({
@@ -22,6 +24,7 @@ export const IntroOffer = Schema.Struct({
   rate: Percent,
   months: Schema.optionalKey(between(1, 60))
 })
+
 export type IntroOffer = typeof IntroOffer.Type
 
 // Points per AUD spent. Entries without a category are the base earn rate,
@@ -36,6 +39,7 @@ export const EarnRate = Schema.Struct({
   cap_annual: Schema.optionalKey(Aud),
   note: Schema.optionalKey(Schema.String)
 })
+
 export type EarnRate = typeof EarnRate.Type
 
 // An issuer page (HTML or PDF) that states a card's earn rates, with short
@@ -46,6 +50,7 @@ export const EarnCheck = Schema.Struct({
   url: Schema.String.pipe(Schema.check(Schema.isPattern(/^https:\/\//u))),
   expect: Schema.NonEmptyArray(Schema.NonEmptyString)
 })
+
 export type EarnCheck = typeof EarnCheck.Type
 
 export const Card = Schema.Struct({
@@ -105,6 +110,7 @@ export const Card = Schema.Struct({
     lounge_access: Schema.optionalKey(Schema.Boolean)
   })
 })
+
 export type Card = typeof Card.Type
 
 export const Issuer = Schema.Struct({
@@ -113,6 +119,7 @@ export const Issuer = Schema.Struct({
   // CDR Register brand names whose products belong to this issuer.
   cdr_brands: Schema.Array(Schema.String)
 })
+
 export type Issuer = typeof Issuer.Type
 
 export const Program = Schema.Struct({
@@ -132,4 +139,5 @@ export const Program = Schema.Struct({
   value_updated: Schema.optionalKey(Schema.String),
   website: Schema.optionalKey(Schema.String)
 })
+
 export type Program = typeof Program.Type

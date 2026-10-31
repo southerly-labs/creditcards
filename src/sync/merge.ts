@@ -44,8 +44,10 @@ const getPath = (obj: Obj, path: string): unknown =>
 const setPath = (obj: Obj, path: string, value: unknown) => {
   const keys = path.split(".")
   let target = obj
+
   for (const k of keys.slice(0, -1)) {
     const next = target[k]
+
     if (Predicate.isObject(next)) target = next
     else {
       const child: Obj = {}
@@ -53,7 +55,9 @@ const setPath = (obj: Obj, path: string, value: unknown) => {
       target = child
     }
   }
+
   const last = required(keys.at(-1))
+
   if (value === undefined) delete target[last]
   else target[last] = value
 }
@@ -68,17 +72,21 @@ export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard):
   if (!existing) return structuredClone(incoming)
   const merged: Obj = structuredClone(existing)
   const locked = existing.locked ?? []
+
   for (const path of CDR_OWNED_PATHS) {
     if (isLocked(locked, path)) continue
     setPath(merged, path, structuredClone(getPath(incoming, path)))
   }
+
   merged["status"] = "active"
   delete merged["discontinued"]
   // A rewards table without a program is invalid: the card no longer has a
   // loyalty program, so drop the table unless a human has locked it.
   const rewards = merged["rewards"]
+
   if (Predicate.isObject(rewards) && rewards["program"] === undefined && !isLocked(locked, "rewards"))
     delete merged["rewards"]
+
   return merged
 }
 
@@ -93,11 +101,13 @@ export interface FieldChange {
 const withoutTimestamp = (path: string, value: unknown) => {
   if (path !== "cdr" || !Predicate.isObject(value)) return value
   const { last_updated: _, ...rest } = value
+
   return rest
 }
 
 export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<FieldChange> => {
   const paths = [...CDR_OWNED_PATHS, "status", "discontinued", ...EARN_PATHS]
+
   return paths
     .values()
     .map((path) => ({ path, before: before ? getPath(before, path) : undefined, after: getPath(after, path) }))
@@ -115,20 +125,26 @@ const KEY_FIELDS = new Set(["fees.annual", "rates.purchase", "fees.foreign_txn_p
 
 export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<string> => {
   const reasons: Array<string> = []
+
   for (const { path, before, after } of changes) {
     if (KEY_FIELDS.has(path) && before !== undefined && after === undefined) {
       reasons.push(`${path} disappeared (was ${encodeJson(before)})`)
       continue
     }
+
     if (path === "rewards.earn" && Array.isArray(before) && Array.isArray(after)) {
       const base = (earn: ReadonlyArray<{ rate: number; category?: string }>) =>
         earn.find((e) => e.category == null || e.category === "")?.rate
+
       const [b, a] = [base(before), base(after)]
+
       if (b !== undefined && a !== undefined && Math.abs(a - b) > 1) reasons.push(`base earn rate ${b} → ${a}`)
       continue
     }
+
     if (typeof before !== "number" || typeof after !== "number") continue
     const delta = Math.abs(after - before)
+
     if (path === "fees.annual" && delta > 100 && delta / Math.max(before, 1) > 0.5) {
       reasons.push(`${path} ${before} → ${after}`)
     } else if (path.startsWith("rates.") && path !== "rates.interest_free_days" && delta > 5) {
@@ -137,11 +153,13 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<
       reasons.push(`${path} ${before}% → ${after}%`)
     }
   }
+
   return reasons
 }
 
 // Share of an issuer's active cards that may vanish in one run before the
 // discontinuations are held as a probable data-holder outage.
 export const MAX_DISCONTINUED_SHARE = 0.5
+
 // Minimum share of previously active CDR cards a run must see to proceed at all.
 export const MIN_SEEN_SHARE = 0.8

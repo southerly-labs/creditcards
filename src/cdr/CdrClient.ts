@@ -68,16 +68,21 @@ export class CdrClient extends Context.Service<
           )
 
         let response = yield* attempt({ "x-v": String(maxVersion), "x-min-v": "1" })
+
         for (let v = maxVersion; response.status === 406 && v >= 1; v--) {
           response = yield* attempt({ "x-v": String(v) })
         }
+
         if (response.status !== 200) {
           return yield* new CdrError({ url, status: response.status, message: `HTTP ${response.status}` })
         }
+
         const body = yield* response.json.pipe(
           Effect.mapError((cause) => new CdrError({ url, message: `Invalid JSON: ${String(cause)}` }))
         )
+
         const version = Number(response.headers["x-v"] ?? NaN)
+
         return { body, version }
       })
 
@@ -90,6 +95,7 @@ export class CdrClient extends Context.Service<
           Effect.flatMap(HttpClientResponse.schemaBodyJson(RegisterResponse)),
           Effect.mapError((cause) => new CdrError({ url: REGISTER_URL, message: String(cause) }))
         )
+
         return response.data.filter((brand) => brand.industries.some((i) => LENDING_INDUSTRIES.has(i)))
       }).pipe(Effect.withSpan("CdrClient.brands"))
 
@@ -103,15 +109,19 @@ export class CdrClient extends Context.Service<
         // product-category (e.g. Westpac returns nothing when it is combined
         // with page-size).
         let url: string | null | undefined = `${trimSlash(baseUri)}/cds-au/v1/banking/products?page-size=100`
+
         for (let page = 0; url != null && url !== "" && page < 20; page++) {
           const { body }: { body: unknown } = yield* getVersioned(url, PRODUCTS_MAX_VERSION, variant)
+
           const decoded: typeof ProductsPage.Type = yield* decodeProductsPage(body).pipe(
             Effect.mapError(schemaError(url))
           )
+
           products.push(...decoded.data.products.filter((p) => p.productCategory === category))
           const next: string | null | undefined = decoded.links?.next
           url = next != null && next !== "" && next !== url ? next : undefined
         }
+
         return products
       })
 
@@ -120,6 +130,7 @@ export class CdrClient extends Context.Service<
         const { body, version } = yield* getVersioned(url, PRODUCT_DETAIL_MAX_VERSION)
         const raw = Predicate.isObject(body) ? body["data"] : undefined
         const detail = yield* decodeProductDetail(raw).pipe(Effect.mapError(schemaError(url)))
+
         return { version, raw, detail }
       })
 

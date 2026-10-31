@@ -22,10 +22,13 @@ export const decodeApi = (value: unknown): Api => Schema.decodeUnknownSync(Publi
 export const decodePointValues = (text: string): Record<string, number> => {
   const parsed = Schema.decodeUnknownOption(Schema.fromJsonString(Schema.Unknown))(text)
   const values: Record<string, number> = {}
+
   if (Option.isNone(parsed) || !Predicate.isObjectOrArray(parsed.value)) return values
+
   for (const [id, value] of Object.entries(parsed.value)) {
     if (typeof value === "number" && Number.isFinite(value) && value >= 0) values[id] = value
   }
+
   return values
 }
 

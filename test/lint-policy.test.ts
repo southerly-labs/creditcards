@@ -10,11 +10,14 @@ const lintReport = Schema.fromJsonString(
 const lintSource = async (source: string) => {
   const file = `/tmp/creditcards-lint-${crypto.randomUUID()}.ts`
   await Bun.write(file, source)
+
   try {
     const result = Bun.spawnSync({
       cmd: ["./node_modules/.bin/oxlint", "-c", ".oxlintrc.json", "--format", "json", file]
     })
+
     const report = Schema.decodeUnknownSync(lintReport)(result.stdout.toString())
+
     return { exitCode: result.exitCode, diagnostics: report.diagnostics }
   } finally {
     await Bun.file(file).delete()
@@ -35,6 +38,7 @@ test("the existing Effect plugin remains active beside anti-slop", async () => {
   const result = await lintSource(
     'import { Effect } from "effect"\nexport const operation = Effect.fnUntraced(function* () { yield* Effect.void })\n'
   )
+
   assert.notStrictEqual(result.exitCode, 0)
   assert.isTrue(result.diagnostics.some((diagnostic) => diagnostic.code === "effect(no-effect-fn-untraced)"))
 })
@@ -51,6 +55,7 @@ test("anti-slop rejects adjacent eager array passes", async () => {
   const result = await lintSource(
     "export const values = [1, 2].filter((value) => value > 0).map((value) => value * 2)\n"
   )
+
   assert.notStrictEqual(result.exitCode, 0)
   assert.isTrue(result.diagnostics.some((diagnostic) => diagnostic.code === "anti-slop(no-array-filter-map)"))
 })

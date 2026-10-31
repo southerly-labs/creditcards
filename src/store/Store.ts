@@ -15,10 +15,13 @@ export interface Dataset {
 }
 
 export const cardKey = (issuer: string, card: string) => `${issuer}/${card}`
+
 export const splitCardKey = (key: string) => {
   const [issuer, card] = key.split("/")
+
   if (issuer === undefined || issuer === "" || card === undefined || card === "")
     throw new Error(`Invalid card key: ${key}`)
+
   return { issuer, card }
 }
 
@@ -42,6 +45,7 @@ export class Store extends Context.Service<
       Effect.gen(function* () {
         const fs = yield* FileSystem.FileSystem
         const path = yield* Path.Path
+
         const fail = (file: string) => (cause: unknown) =>
           new StoreError({ file, message: cause instanceof Error ? cause.message : String(cause) })
 
@@ -64,18 +68,23 @@ export class Store extends Context.Service<
 
         const load = Effect.gen(function* () {
           const programs = new Map<string, Program>()
+
           for (const id of yield* tomlFiles(path.join(dataDir, "programs"))) {
             programs.set(id, yield* readToml(Program, path.join(dataDir, "programs", `${id}.toml`)))
           }
+
           const issuers = new Map<string, Issuer>()
           const cards = new Map<string, Card>()
+
           for (const issuer of yield* listDir(path.join(dataDir, "issuers"))) {
             const dir = path.join(dataDir, "issuers", issuer)
             issuers.set(issuer, yield* readToml(Issuer, path.join(dir, "issuer.toml")))
+
             for (const card of yield* tomlFiles(path.join(dir, "cards"))) {
               cards.set(cardKey(issuer, card), yield* readToml(Card, path.join(dir, "cards", `${card}.toml`)))
             }
           }
+
           return { programs, issuers, cards } satisfies Dataset
         }).pipe(Effect.withSpan("Store.load"))
 
@@ -88,9 +97,11 @@ export class Store extends Context.Service<
           const encoded = yield* Schema.encodeUnknownEffect(schema)(value).pipe(Effect.mapError(fail(file)))
           const text = `${Toml.stringify(encoded)}\n`
           const current = yield* fs.readFileString(file).pipe(Effect.orElseSucceed(() => {}))
+
           if (current === text) return false
           yield* fs.makeDirectory(path.dirname(file), { recursive: true }).pipe(Effect.mapError(fail(file)))
           yield* fs.writeFileString(file, text).pipe(Effect.mapError(fail(file)))
+
           return true
         })
 

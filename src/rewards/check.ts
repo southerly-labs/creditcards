@@ -38,8 +38,10 @@ const NAMED_ENTITIES: Record<string, string> = {
 const decodeEntity = (match: string, name: string): string => {
   if (name[0] === "#") {
     const code = name[1] === "x" || name[1] === "X" ? parseInt(name.slice(2), 16) : Math.trunc(Number(name.slice(1)))
+
     return Number.isFinite(code) ? String.fromCodePoint(code) : match
   }
+
   return NAMED_ENTITIES[name.toLowerCase()] ?? match
 }
 
@@ -79,6 +81,7 @@ export const normaliseText = (s: string): string =>
 
 export const missingQuotes = (text: string, expect: ReadonlyArray<string>): ReadonlyArray<string> => {
   const haystack = normaliseText(text)
+
   return expect.filter((quote) => !haystack.includes(normaliseText(quote)))
 }
 
@@ -95,17 +98,22 @@ export const pageText = Effect.fn("pageText")(function* (url: string) {
   const client = (yield* HttpClient.HttpClient).pipe(
     HttpClient.retryTransient({ schedule: Schedule.exponential("1 second"), times: 2 })
   )
+
   const response = yield* client
     .get(url, { headers: { "user-agent": USER_AGENT, accept: "text/html,application/pdf,*/*" } })
     .pipe(
       Effect.timeout("30 seconds"),
       Effect.mapError((cause) => new PageError({ url, message: String(cause) }))
     )
+
   if (response.status !== 200) return yield* new PageError({ url, message: `HTTP ${response.status}` })
+
   const bytes = new Uint8Array(
     yield* response.arrayBuffer.pipe(Effect.mapError((cause) => new PageError({ url, message: String(cause) })))
   )
+
   if (isPdf(bytes, response.headers["content-type"])) return yield* pdfText(url, bytes)
+
   return htmlText(new TextDecoder().decode(bytes))
 })
 
@@ -125,7 +133,9 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
       ? (c.rewards?.earn_check ?? []).map((check) => ({ card, url: check.url, expect: check.expect }))
       : []
   )
+
   const urls = [...new Set(checks.map((c) => c.url))]
+
   const texts = new Map(
     yield* Effect.forEach(
       urls,
@@ -137,34 +147,43 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
       { concurrency: 4 }
     )
   )
+
   const toCheckResult = ({ card, url, expect }: (typeof checks)[number]): CheckResult => {
     const text = required(texts.get(url))
+
     return Result.isFailure(text)
       ? { card, url, missing: [], error: text.failure.message }
       : { card, url, missing: missingQuotes(text.success, expect) }
   }
+
   return checks.map((check) => toCheckResult(check))
 })
 
 export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {
   const changed = results.filter((r) => r.missing.length > 0)
   const failed = results.filter((r) => r.error !== undefined)
+
   const lines = [
     `Issuer earn pages: ${results.length} checked, ${changed.length} changed, ${failed.length} unreadable.`,
     ""
   ]
+
   if (changed.length > 0) {
     lines.push(
       "These pages no longer contain the quoted earn wording. Re-read the page, update `rewards.earn` and",
       "`rewards.earn_check.expect` in the card's file, then `bun run cli rewards stamp <issuer/card>`.",
       ""
     )
+
     for (const r of changed) {
       lines.push(`- [ ] \`${r.card}\` — ${r.url}`, ...r.missing.map((q) => `  - missing: "${q}"`))
     }
+
     lines.push("")
   }
+
   if (failed.length > 0)
     lines.push("Unreadable (not checked this run):", ...failed.map((r) => `- \`${r.card}\` — ${r.url}: ${r.error}`), "")
+
   return lines.join("\n")
 }

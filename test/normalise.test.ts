@@ -52,6 +52,7 @@ describe("fees", () => {
       { name: "Replacement card fee (overseas)", feeType: "REPLACEMENT", fixedAmount: { amount: "175" } },
       { name: "International Transaction Fee", feeType: "TRANSACTION", rateBased: { rate: "0.03" } }
     ]
+
     expect(foreignTransactionFee(fees)).toBe(3)
   })
 
@@ -119,6 +120,7 @@ describe("classification", () => {
       qantas: { name: "Qantas", type: "airline", aliases: ["qantas"], priority: 10 },
       amplify: { name: "Amplify", type: "bank", aliases: ["amplify"] }
     })
+
     expect(matchProgram(index, "Amplify Signature Qantas")).toBe("qantas")
     expect(matchProgram(index, "Amplify Rewards")).toBe("amplify")
     expect(matchProgram(index, "Heritage Credits")).toBeUndefined()
@@ -159,6 +161,7 @@ describe("merge and guardrails", () => {
         perks: {}
       })
     )
+
     expect(merged.fees).toEqual({ annual: 120, foreign_txn_pct: 0 })
     expect(merged.rewards?.earn).toEqual([{ rate: 1 }])
   })

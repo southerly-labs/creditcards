@@ -28,22 +28,28 @@ const warnReviewFailure = (key: string, error: { readonly message: string }) =>
 
 const loyaltyFeatures = Effect.fn("loyaltyFeatures")(function* (card: Card, baseUris: ReadonlyMap<string, string>) {
   const cdr = yield* CdrClient
+
   if (!card.cdr) return yield* new RewardsError({ message: `${card.name} has no CDR source` })
   const baseUri = baseUris.get(card.cdr.brand)
+
   if (baseUri === undefined || baseUri === "")
     return yield* new RewardsError({ message: `${card.cdr.brand} is not in the CDR Register` })
   const { detail } = yield* cdr.getProduct(baseUri, card.cdr.product_id)
+
   return (detail.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
 })
 
 const registerBaseUris = Effect.gen(function* () {
   const brands = yield* (yield* CdrClient).brands
+
   return new Map(brands.map((b) => [b.brandName, b.publicBaseUri]))
 })
 
 const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFeature>): ReviewItem | undefined => {
   const plan = planRewards(card.rewards, features)
+
   if (!RewardsPlan.$is("Review")(plan)) return undefined
+
   return {
     card: key,
     name: card.name,
@@ -59,6 +65,7 @@ const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFe
 export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | undefined) {
   const dataset = yield* (yield* Store).load
   const baseUris = yield* registerBaseUris
+
   const candidates = [...dataset.cards].filter(
     ([key, card]) =>
       card.status === "active" &&
@@ -66,6 +73,7 @@ export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | 
       card.cdr !== undefined &&
       (issuer === undefined || issuer === "" || splitCardKey(key).issuer === issuer)
   )
+
   const items = yield* Effect.forEach(
     candidates,
     ([key, card]) =>
@@ -75,6 +83,7 @@ export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | 
       ),
     { concurrency: 8 }
   )
+
   return items.filter((i) => i !== undefined)
 })
 
@@ -108,11 +117,15 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
   const store = yield* Store
   const dataset = yield* store.load
   const baseUris = yield* registerBaseUris
+
   for (const key of keys) {
     const card = dataset.cards.get(key)
+
     if (!card) return yield* new RewardsError({ message: `Unknown card ${key}` })
+
     if (!card.rewards) return yield* new RewardsError({ message: `${key} has no rewards program` })
     const earn = none ? [] : card.rewards.earn
+
     if (!earn) return yield* new RewardsError({ message: `${key} has no rewards.earn; set it first or pass --none` })
     const hash = loyaltyTextHash(yield* loyaltyFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
@@ -122,5 +135,6 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
     })
     yield* Effect.logInfo(`Stamped ${key} (${hash})`)
   }
+
   return undefined
 })

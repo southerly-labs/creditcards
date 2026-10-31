@@ -93,6 +93,7 @@ describe("leaves anything complex for review", () => {
       "1 Qantas Point or 1 Velocity Frequent Flyer Point for every $1 spent on eligible purchases in Australia up to $7,500"
     ]
   ]
+
   for (const [name, value, info] of cases) {
     test(name, () => {
       expect(parse(value, info)._tag).toBe("Review")
@@ -126,9 +127,11 @@ test("text hash is stable and whitespace-insensitive", () => {
 
 describe("planRewards", () => {
   const simple = [feature("Bendigo Bank Rewards", "Earn 1.5 Bendigo Bank Rewards points for every dollar spent")]
+
   const complex = [
     feature("Membership Rewards", "2 points per $1 spent on all purchases, excluding government bodies.")
   ]
+
   const hash = loyaltyTextHash(simple)
 
   test("parser sets earn for new cards and leaves unchanged ones alone", () => {

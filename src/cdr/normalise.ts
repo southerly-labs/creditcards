@@ -6,6 +6,7 @@ import type { Fee, ProductDetail } from "./schema.ts"
 // Pure mapping from CDR product detail to the CDR-owned fields of a Card.
 
 type Mutable<T> = { -readonly [K in keyof T]: T[K] extends object ? Mutable<T[K]> : T[K] }
+
 export type NormalisedCard = Mutable<Card>
 
 export interface ProgramIndex {
@@ -39,15 +40,19 @@ export interface NormaliseResult {
 export const parseNumber = (value: string | null | undefined): number | undefined => {
   if (value == null) return undefined
   const cleaned = value.replaceAll(/[$,\s]/gu, "")
+
   if (cleaned === "") return undefined
   const n = Number(cleaned)
+
   return Number.isFinite(n) ? n : undefined
 }
 
 // CDR rates are decimals (0.2099). A few data holders publish percentages.
 export const toPercent = (value: string | null | undefined): number | undefined => {
   const n = parseNumber(value)
+
   if (n === undefined) return undefined
+
   return round(n > 1 ? n : n * 100, 4)
 }
 
@@ -57,28 +62,38 @@ const round = (n: number, dp: number) => Math.round(n * 10 ** dp) / 10 ** dp
 // duration or the free text some data holders put in additionalValue.
 export const timesPerYear = (period: string | null | undefined, name: string): number | undefined => {
   const iso = period?.trim().match(/^P(\d+)([YMWD])$/iu)
+
   if (iso) {
     const n = Number(iso[1])
+
     if (n === 0) return undefined
     const periods: Record<string, number> = { Y: 1, M: 12, W: 52 }
     const perYear = periods[required(iso[2]).toUpperCase()]
+
     // Daily periodic fees are not annual/monthly card fees.
     return perYear === undefined ? undefined : perYear / n
   }
+
   const text = `${period ?? ""} ${name}`
+
   if (/month/iu.test(text)) return 12
+
   if (/annual|year/iu.test(text)) return 1
+
   return undefined
 }
 
 export const isoMonths = (value: string | null | undefined): number | undefined => {
   const iso = value?.trim().match(/^P(\d+)([YM])$/iu)
+
   if (iso) return Number(iso[1]) * (required(iso[2]).toUpperCase() === "Y" ? 12 : 1)
   const text = value?.match(/(\d+)\s*months?/iu)
+
   return text ? Number(text[1]) : undefined
 }
 
 const fixedAmount = (fee: Fee) => parseNumber(fee.fixedAmount?.amount ?? fee.amount)
+
 const feeRate = (fee: Fee) =>
   toPercent(fee.rateBased?.rate ?? fee.transactionRate ?? fee.balanceRate ?? fee.accruedRate)
 
@@ -86,16 +101,20 @@ const feeRate = (fee: Fee) =>
 
 const NOT_CARD_FEE =
   /additional|supplementary|secondary|companion|direct|optional|opt[- ]?in|paper|statement|replacement|late/iu
+
 const ADDITIONAL_CARD = /additional|supplementary|secondary/iu
 
 const annualised = (fees: ReadonlyArray<Fee>) => {
   let total: number | undefined
+
   for (const fee of fees) {
     const amount = fixedAmount(fee)
     const times = timesPerYear(fee.additionalValue, fee.name ?? "")
+
     if (amount === undefined || times === undefined) continue
     total = round((total ?? 0) + amount * times, 2)
   }
+
   return total
 }
 
@@ -122,6 +141,7 @@ export const firstYearFee = (fees: ReadonlyArray<Fee>): number | undefined => {
         )
       )
   )
+
   return discounted ? 0 : undefined
 }
 
@@ -135,11 +155,13 @@ export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefi
       !NOT_FX.test(f.name ?? "") &&
       (FX_NAME.test(f.name ?? "") || FX_NAME.test(f.additionalInfo ?? ""))
   )
+
   const rates = candidates
     .values()
     .map((f) => feeRate(f) ?? (fixedAmount(f) === 0 ? 0 : undefined))
     .filter((r): r is number => r !== undefined)
     .toArray()
+
   // Take the highest when several apply (e.g. single vs multi-currency).
   return rates.length > 0 ? Math.max(...rates) : undefined
 }
@@ -147,10 +169,12 @@ export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefi
 export const cashAdvanceFee = (fees: ReadonlyArray<Fee>) => {
   const cash = fees.filter((f) => f.feeType === "CASH_ADVANCE" && !/overseas|international/iu.test(f.name ?? ""))
   const pct = cash.map((fee) => feeRate(fee)).find((r) => r !== undefined)
+
   const min = cash
     .map((f) => f.fixedAmount?.amount ?? f.amount)
     .map((value) => parseNumber(value))
     .find((r) => r !== undefined)
+
   return { pct, min }
 }
 
@@ -175,12 +199,15 @@ const ongoingRate = (rates: ReadonlyArray<LendingRate>, type: string, exclude?: 
 
 export const introOffers = (rates: ReadonlyArray<LendingRate>): Array<IntroOffer> => {
   const offers: Array<IntroOffer> = []
+
   for (const r of rates) {
     const promo =
       r.lendingRateType === "INTRODUCTORY" ||
       (["BALANCE_TRANSFER", "PURCHASE"].includes(r.lendingRateType) && isoMonths(r.additionalValue) !== undefined)
+
     if (!promo) continue
     const rate = toPercent(r.rate)
+
     if (rate === undefined) continue
     const text = `${r.additionalInfo ?? ""} ${r.additionalValue ?? ""}`.toLowerCase()
     const bt = r.lendingRateType === "BALANCE_TRANSFER" || text.includes("balance transfer")
@@ -188,10 +215,12 @@ export const introOffers = (rates: ReadonlyArray<LendingRate>): Array<IntroOffer
     const applies_to = bt && purchase ? "both" : purchase ? "purchase" : "balance_transfer"
     const months = isoMonths(r.additionalValue) ?? isoMonths(r.additionalInfo)
     const offer = { applies_to, rate, ...(months !== undefined && months <= 60 ? { months } : {}) } as const
+
     if (!offers.some((o) => o.applies_to === offer.applies_to && o.rate === offer.rate && o.months === months)) {
       offers.push(offer)
     }
   }
+
   return offers
 }
 
@@ -199,12 +228,16 @@ export const interestFreeDays = (p: ProductDetail): number | undefined => {
   for (const f of p.features ?? []) {
     if (f.featureType !== "INTEREST_FREE") continue
     const iso = f.additionalValue?.match(/^P(\d+)D$/u)
+
     if (iso) return Number(iso[1])
+
     const text = `${f.additionalValue ?? ""} ${f.additionalInfo ?? ""}`.match(
       /up to (\d+) (?:interest[- ]free )?days/iu
     )
+
     if (text) return Number(text[1])
   }
+
   return undefined
 }
 
@@ -213,9 +246,11 @@ export const interestFreeDays = (p: ProductDetail): number | undefined => {
 export const cardType = (p: ProductDetail): CardType => {
   if (/corporate|procurement|purchasing|commercial|virtual card|travel (and|&) expense/iu.test(p.name))
     return "corporate"
+
   const business =
     /business/iu.test(p.name) ||
     (p.eligibility ?? []).some((e) => e.eligibilityType === "BUSINESS" || e.eligibilityType === "MIN_TURNOVER")
+
   return business ? "business" : "personal"
 }
 
@@ -229,12 +264,15 @@ const NETWORKS: ReadonlyArray<readonly [Network, RegExp]> = [
 export const network = (p: ProductDetail, brandName: string): Network | undefined => {
   if (/american express/iu.test(brandName)) return "amex"
   const fromName = NETWORKS.filter(([, re]) => re.test(p.name))
+
   if (fromName.length === 1) return required(fromName[0])[0]
   const text = [p.description, ...(p.features ?? []).flatMap((f) => [f.additionalValue, f.additionalInfo])].join(" ")
+
   const counts = NETWORKS.values()
     .map(([n, re]) => [n, (text.match(new RegExp(re, "giu")) ?? []).length] as const)
     .filter(([n, c]) => c > 0 && n !== "amex")
     .toArray()
+
   return counts.length === 1 ? required(counts[0])[0] : undefined
 }
 
@@ -247,19 +285,25 @@ export const issuerProgramId = (issuerSlug: string) => `${issuerSlug}-rewards`
 
 const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
   const loyalty = (p.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
+
   if (loyalty.length === 0) return { rewards: undefined, fallback: undefined }
   let fallback: string | undefined
   const ids: Array<string> = []
+
   for (const f of loyalty) {
     const id = matchProgram(ctx.programs, f.additionalValue ?? "") ?? matchProgram(ctx.programs, f.additionalInfo ?? "")
     const resolved = id ?? (fallback = issuerProgramId(ctx.issuerSlug))
+
     if (!ids.includes(resolved)) ids.push(resolved)
   }
+
   const bonus = (p.features ?? [])
     .filter((f) => f.featureType === "BONUS_REWARDS")
     .map((f) => parseNumber(f.additionalValue))
     .find((n) => n !== undefined && n > 0)
+
   const [program, ...partners] = ids
+
   return {
     rewards: {
       program: required(program),
@@ -274,6 +318,7 @@ const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
 
 const perks = (p: ProductDetail): NormalisedCard["perks"] => {
   const features = p.features ?? []
+
   const insurance = [
     ...new Set(
       features
@@ -282,7 +327,9 @@ const perks = (p: ProductDetail): NormalisedCard["perks"] => {
         .filter((v): v is string => !(v == null || v === "") && v.length < 80)
     )
   ]
+
   const lounge = features.some((f) => /lounge/iu.test(`${f.additionalValue ?? ""} ${f.additionalInfo ?? ""}`))
+
   return {
     ...(insurance.length > 0 ? { insurance } : {}),
     ...(lounge ? { lounge_access: true } : {})
@@ -305,12 +352,15 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
   const fees = p.fees ?? []
   const rates = p.lendingRates ?? []
   const cash = cashAdvanceFee(fees)
+
   const constraint = (type: string) =>
     parseNumber((p.constraints ?? []).find((c) => c.constraintType === type)?.additionalValue)
+
   const minIncome = (p.eligibility ?? [])
     .filter((e) => e.eligibilityType === "MIN_INCOME")
     .map((e) => parseNumber(e.additionalValue))
     .find((n) => n !== undefined)
+
   const intro = introOffers(rates)
   const { rewards: rewardsValue, fallback } = rewards(p, ctx)
   const net = network(p, ctx.brandName)
@@ -349,5 +399,6 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
     rewards: rewardsValue,
     perks: perks(p)
   })
+
   return { card, fallbackProgram: fallback }
 }

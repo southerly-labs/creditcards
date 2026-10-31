@@ -8,6 +8,7 @@ describe("page text", () => {
   test("drops scripts, styles and comments, and separates elements", () => {
     const html = `<html><head><style>.a{}</style><script>var earn = "9 points"</script></head>
       <body><!-- 9 points --><p>1 PT</p><p>Per whole AU&#36;1 on&nbsp;International&#x20;Spend &amp; more</p></body></html>`
+
     const text = normaliseText(htmlText(html))
     expect(text).toBe("1 pt per whole au$1 on international spend & more")
   })
@@ -44,21 +45,27 @@ describe("checkEarnPages", () => {
     perks: {},
     rewards: { program: "qantas", earn: [{ rate: 1 }], earn_source: "manual", earn_check: [{ url, expect: [quote] }] }
   })
+
   const pages: Record<string, Response> = {
     "https://a.example/card": new Response("<p>Earn 1 point per $1</p>", { headers: { "content-type": "text/html" } })
   }
+
   let fetches = 0
+
   const respond: Parameters<typeof HttpClient.make>[0] = (request, url) => {
     fetches++
     const page = pages[url.toString()]
+
     return Effect.succeed(HttpClientResponse.fromWeb(request, page?.clone() ?? new Response("gone", { status: 404 })))
   }
+
   const client = HttpClient.make(respond)
 
   layer(Layer.succeed(HttpClient.HttpClient, client))((it) => {
     it.effect("checks each card, fetching each page once, and skips discontinued cards", () =>
       Effect.gen(function* () {
         fetches = 0
+
         const results = yield* checkEarnPages(
           new Map([
             ["x/ok", card("https://a.example/card", "1 point per $1")],
@@ -67,6 +74,7 @@ describe("checkEarnPages", () => {
             ["x/old", card("https://a.example/card", "3 points per $1", "discontinued")]
           ])
         )
+
         assert.strictEqual(fetches, 2)
         assert.deepStrictEqual(results, [
           { card: "x/ok", url: "https://a.example/card", missing: [] },
