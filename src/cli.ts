@@ -1,8 +1,9 @@
 import { BunRuntime, BunServices } from "@effect/platform-bun"
-import { Console, Effect, FileSystem, Layer, Path } from "effect"
-import { Command, Flag } from "effect/cli"
+import { Console, Effect, FileSystem, Layer, Option, Path } from "effect"
+import { Argument, Command, Flag } from "effect/cli"
 import { toApi, validate } from "./build/build.ts"
 import { CdrClient } from "./cdr/CdrClient.ts"
+import { formatQueue, reviewQueue, stamp } from "./rewards/review.ts"
 import { Store } from "./store/Store.ts"
 import { summariseReport, syncCdr } from "./sync/Sync.ts"
 
@@ -49,12 +50,43 @@ const build = Command.make(
   })
 ).pipe(Command.withDescription("Build dist/api.json from data/"))
 
+const rewardsTodo = Command.make(
+  "todo",
+  {
+    issuer: Flag.String("issuer").pipe(Flag.withDescription("Only this issuer"), Flag.optional),
+    out: Flag.String("out").pipe(Flag.withDefault(".cache/rewards-todo.md"))
+  },
+  Effect.fn(function*({ issuer, out }) {
+    const items = yield* reviewQueue(Option.getOrUndefined(issuer))
+    const text = formatQueue(items)
+    yield* writeFile(out, text)
+    yield* Console.log(text)
+    yield* Console.log(`Wrote ${out}`)
+  })
+).pipe(Command.withDescription("List cards whose earn rates need review, with their CDR loyalty text"))
+
+const rewardsStamp = Command.make(
+  "stamp",
+  {
+    cards: Argument.String("card").pipe(Argument.withDescription("issuer/card keys"), Argument.atLeast(1)),
+    none: Flag.Boolean("none").pipe(Flag.withDescription("Record that the card has no fixed earn rate"), Flag.withDefault(false))
+  },
+  Effect.fn(function*({ cards, none }) {
+    yield* stamp(cards, none)
+  })
+).pipe(Command.withDescription("Mark cards' earn rates as manually reviewed against the current CDR text"))
+
+const rewards = Command.make("rewards").pipe(
+  Command.withDescription("Review earn rates the parser cannot read"),
+  Command.withSubcommands([rewardsTodo, rewardsStamp])
+)
+
 const MainLayer = Layer.mergeAll(CdrClient.layer, Store.layer(DATA_DIR)).pipe(
   Layer.provideMerge(BunServices.layer)
 )
 
 Command.make("creditcards").pipe(
-  Command.withSubcommands([sync, validateCommand, build]),
+  Command.withSubcommands([sync, validateCommand, build, rewards]),
   Command.run({ version: "0.1.0" }),
   Effect.provide(MainLayer),
   BunRuntime.runMain
