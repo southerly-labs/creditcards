@@ -2,7 +2,8 @@ import { DateTime, Effect, Schema } from "effect"
 import { CdrClient, type CdrError, REQUEST_VARIANTS } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
 import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
-import { Card, type Issuer, type Program } from "../model/schema.ts"
+import { Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
+import { planRewards } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
 import { diffCard, type FieldChange, holdReasons, MAX_DISCONTINUED_SHARE, mergeCard, MIN_SEEN_SHARE } from "./merge.ts"
@@ -19,6 +20,11 @@ export interface SyncReport {
   readonly newIssuers: ReadonlyArray<string>
   readonly newPrograms: ReadonlyArray<string>
   readonly brandErrors: ReadonlyArray<{ readonly brand: string; readonly error: string }>
+  // Earn-rate extraction, report-only for now: nothing here is written.
+  readonly rewards: {
+    readonly set: ReadonlyArray<{ readonly card: string; readonly earn: ReadonlyArray<EarnRate> }>
+    readonly review: ReadonlyArray<{ readonly card: string; readonly reason: string }>
+  }
 }
 
 export class SyncAborted extends Schema.TaggedError<SyncAborted>()("SyncAborted", {
@@ -117,6 +123,8 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
   const discontinued: Array<string> = []
   const newPrograms: Array<string> = []
   const writes = new Map<string, Card>()
+  const rewardsSet: Array<{ card: string; earn: ReadonlyArray<EarnRate> }> = []
+  const rewardsReview: Array<{ card: string; reason: string }> = []
 
   // ---- Upsert seen cards ----------------------------------------------------------
   for (const { brand, products } of fetched) {
@@ -143,6 +151,12 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
       }
 
       const merged = mergeCard(existing, incoming)
+      if (merged.rewards) {
+        const loyalty = (product.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
+        const plan = planRewards(merged.rewards as Card["rewards"], loyalty)
+        if (plan._tag === "Set") rewardsSet.push({ card: key, earn: plan.earn })
+        else if (plan._tag === "Review") rewardsReview.push({ card: key, reason: plan.reason })
+      }
       const decoded = yield* decodeCard(merged).pipe(Effect.result)
       if (decoded._tag === "Failure") {
         held.push({ card: key, reasons: [`invalid: ${decoded.failure.message.split("\n").slice(0, 3).join(" ")}`] })
@@ -205,7 +219,8 @@ export const syncCdr = Effect.fn("syncCdr")(function*(options: { readonly dryRun
     newIssuers: [...new Set(newIssuers)],
     newPrograms,
     brandErrors: fetched.filter((b) => b.listError !== undefined && !/HTTP 4\d\d/.test(b.listError))
-      .map((b) => ({ brand: b.brand, error: b.listError! }))
+      .map((b) => ({ brand: b.brand, error: b.listError! })),
+    rewards: { set: rewardsSet, review: rewardsReview }
   } satisfies SyncReport
 })
 
@@ -230,6 +245,9 @@ export const summariseReport = (r: SyncReport): string => {
   if (r.discontinued.length) lines.push("Discontinued:", ...r.discontinued.map((c) => `- ${c}`), "")
   if (r.held.length) lines.push("Held for review:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")
   if (r.newPrograms.length) lines.push("New fallback programs (add aliases or rename):", ...r.newPrograms.map((p) => `- ${p}`), "")
+  if (r.rewards.set.length || r.rewards.review.length) {
+    lines.push(`Earn rates (report only): ${r.rewards.set.length} parsed, ${r.rewards.review.length} need review`, "")
+  }
   if (r.brandErrors.length) lines.push("Brand errors:", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")
   return lines.join("\n")
 }

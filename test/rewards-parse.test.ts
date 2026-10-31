@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import { loyaltyTextHash, parseEarn } from "../src/rewards/parse.ts"
+import { planRewards } from "../src/rewards/plan.ts"
 
 // Real CDR LOYALTY_PROGRAM text (value — info).
 const feature = (additionalValue: string, additionalInfo = "") => ({ additionalValue, additionalInfo })
@@ -66,4 +67,26 @@ describe("leaves anything complex for review", () => {
 test("text hash is stable and whitespace-insensitive", () => {
   expect(loyaltyTextHash([feature("Qantas", "Earn  1 point\n per $1")])).toBe(loyaltyTextHash([feature("Qantas", "Earn 1 point per $1")]))
   expect(loyaltyTextHash([feature("Qantas", "Earn 1 point per $1")])).not.toBe(loyaltyTextHash([feature("Qantas", "Earn 2 points per $1")]))
+})
+
+describe("planRewards", () => {
+  const simple = [feature("Bendigo Bank Rewards", "Earn 1.5 Bendigo Bank Rewards points for every dollar spent")]
+  const complex = [feature("Membership Rewards", "2 points per $1 spent on all purchases, excluding government bodies.")]
+  const hash = loyaltyTextHash(simple)
+
+  test("parser sets earn for new cards and leaves unchanged ones alone", () => {
+    expect(planRewards({ program: "x" }, simple)).toEqual({ _tag: "Set", earn: [{ rate: 1.5 }], hash })
+    expect(planRewards({ program: "x", earn: [{ rate: 1.5 }], earn_source: "parser", earn_text_hash: hash }, simple))
+      .toEqual({ _tag: "Unchanged" })
+  })
+
+  test("complex text goes to review", () => {
+    expect(planRewards({ program: "x" }, complex)._tag).toBe("Review")
+  })
+
+  test("manual earn is never replaced, only re-reviewed when the text changes", () => {
+    const manual = { program: "x", earn: [{ rate: 9 }], earn_source: "manual" as const, earn_text_hash: hash }
+    expect(planRewards(manual, simple)).toEqual({ _tag: "Unchanged" })
+    expect(planRewards(manual, complex)._tag).toBe("Review")
+  })
 })
