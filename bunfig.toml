@@ -1,0 +1,5 @@
+[install]
+# Save exact versions, never ^ranges.
+exact = true
+# Supply-chain guard: never resolve a version published less than 72 hours ago.
+minimumReleaseAge = 259200

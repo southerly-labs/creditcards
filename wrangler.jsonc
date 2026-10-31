@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "creditcards",
+  "compatibility_date": "2026-10-23",
+  "build": {
+    "command": "bun run build"
+  },
+  // Static site only, no Worker script. Unknown paths return 404.
+  "assets": {
+    "directory": "./dist"
+  }
+}

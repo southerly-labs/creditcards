@@ -68,6 +68,19 @@ Bring a new source in at its own pace, in this order:
 
 Add the new module next to the old one and move callers over a few at a time, one commit per step. Delete the old code in the final commit. Never leave a gap where neither the old code nor the new code works.
 
+## Dependencies
+
+Every dependency is pinned to an exact version, and nothing published less than 72 hours ago gets installed.
+
+- **npm packages.** `bunfig.toml` sets `exact = true` and `minimumReleaseAge = 259200` (72 hours), so `bun add` saves exact versions and won't pick anything newer than 72 hours. Never write `^` or `~` ranges in `package.json`, and don't weaken or bypass these settings. If you need a version that is too new, wait until it's old enough.
+- **Bun.** The version is in `packageManager` in `package.json`. CI reads it from there. Cloudflare's build reads `BUN_VERSION`, which is set in the dashboard, so keep the two in sync.
+- **GitHub Actions.** Pin each action to a full commit SHA, with the version in a comment, for example `actions/checkout@<sha> # v4.4.0`. Check that the release is more than 72 hours old.
+- **Upgrades.** Do them on purpose, one dependency per commit, and check the publish date (`npm view <pkg> time`) first. `tsrs` is a beta, so read its changelog before you upgrade it.
+
+## Deploys
+
+`wrangler.jsonc` configures the Cloudflare Worker that serves `dist/` as a static site. Cloudflare builds and deploys every push to `main`. Files in `dist/assets/` have content-hashed names and are cached for a year (`dist/_headers`, written by `web/build.ts`). Anything a page loads should go through the bundler, so it gets a hashed name in `assets/`. Never give an unhashed file long-term caching.
+
 ## Working as an agent here
 
 - Agents do the bookkeeping that used to make trunk-based work tedious: splitting work into steps, temporary dual-shape support and step-by-step migrations. Plan multi-step work as a numbered list of pushable commits before you start, then push each one as soon as it passes the checks.
