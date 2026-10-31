@@ -24,7 +24,8 @@
     "typescript/no-floating-promises": [
       "error",
       {
-        "ignoreVoid": false
+        "ignoreVoid": false,
+        "checkThenables": true
       }
     ],
     "typescript/no-misused-promises": "error",
@@ -33,7 +34,25 @@
     "unicorn/no-useless-undefined": "off",
     "no-negated-condition": "off",
     "unicorn/no-negated-condition": "off",
-    "import/max-dependencies": "off"
+    "import/max-dependencies": "off",
+    "effect/no-effect-succeed-variable": "error",
+    "effect/no-flatmap-ladder": "error",
+    "effect/no-match-tag-neutral-fallback": "error",
+    "effect/no-option-effect-branch": "error",
+    "effect/prefer-effect-async": "error",
+    "effect/prefer-assert-in-effect-test": "error",
+    "effect/prefer-effect-cache": "error",
+    "effect/prefer-effect-child-process": "error",
+    "effect/prefer-effect-date-time": "error",
+    "effect/prefer-effect-http-client": "error",
+    "effect/prefer-effect-scheduling": "error",
+    "effect/prefer-match-value-tags": "error",
+    "effect/prefer-effect-test-layer": "error",
+    "effect/prefer-schema-json": "error",
+    "effect/no-return-in-arrow": "error",
+    "effect/no-return-in-callback": "error",
+    "effect/warn-effect-sync-wrapper": "error"
   },
-  "ignorePatterns": ["dist/**"]
+  "ignorePatterns": ["dist/**"],
+  "extends": ["./node_modules/@shekohex/oxc-effect/configs/full.jsonc"]
 }

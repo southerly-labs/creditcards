@@ -292,7 +292,7 @@ type Defined<T> = { [K in keyof T as undefined extends T[K] ? never : K]: T[K] }
 }
 
 const defined = <T extends object>(obj: T): Defined<T> =>
-  // TypeScript cannot infer a conditional mapped type from Object.fromEntries.
+  // TypeScript cannot infer a conditional mapped type from Record.filter.
   // oxlint-disable-next-line typescript/no-unsafe-type-assertion
   EffectRecord.filter(obj, (value) => value !== undefined) as Defined<T>
 

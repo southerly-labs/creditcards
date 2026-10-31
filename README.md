@@ -86,6 +86,12 @@ optional-property and control-flow checks. Oxlint enables correctness, suspiciou
 and performance rules, including type-aware unsafe-value and promise checks. Generated
 `dist/` output is excluded. Both lint and formatting run in `check`, the commit hook and CI.
 
+The complete `@shekohex/oxc-effect` Effect v4 preset is enabled, with every warning
+promoted to an error and no Effect rules disabled. It checks composition, tracing,
+error handling, Schema boundaries and Effect test services. Effect tests use scoped
+`@effect/vitest` layers; Vitest runs under Bun. The Effect plugin uses syntax analysis;
+type-aware safety checks come from Oxlint/tsgolint rather than a type-aware Effect plugin.
+
 The native lint exceptions are intentional: file/function size limits, class counts, inline
 comments, underscore names, import counts, function placement and negated conditions are style choices;
 `no-redeclare` incorrectly flags Schema value/type pairs; `prefer-readonly-parameter-types`
