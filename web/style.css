@@ -96,7 +96,7 @@ td {
 }
 th {
   position: sticky;
-  top: 57px;
+  top: 0;
   background: var(--head);
   font-weight: 600;
   font-size: 12px;
