@@ -12,10 +12,12 @@
     "test": "bun test",
     "typecheck": "tsrs --noEmit",
     "dev": "bun run build && bun run web/server.ts",
-    "check": "bun run format:check && tsrs --noEmit && bun test && bun run validate && bun run build",
+    "check": "bun run format:check && tsrs --noEmit && bun run lint && bun test && bun run validate && bun run build",
     "prepare": "git config core.hooksPath .githooks || true",
     "format": "oxfmt --write .",
-    "format:check": "oxfmt --check ."
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint --deny-warnings --report-unused-disable-directives .",
+    "lint:fix": "bun run lint --fix"
   },
   "dependencies": {
     "@effect/platform-bun": "4.1.0",
@@ -24,12 +26,14 @@
     "unpdf": "1.9.1"
   },
   "devDependencies": {
+    "@effect/vitest": "4.0.7",
     "@shekohex/oxc-effect": "0.2.1",
     "@types/bun": "1.4.4",
     "oxfmt": "0.75.0",
     "oxlint": "1.90.0",
     "oxlint-tsgolint": "7.0.2005",
     "tsrs": "0.20.0-ts7.1.0-beta",
+    "vitest": "5.0.5",
     "wrangler": "4.154.0"
   }
 }

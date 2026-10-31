@@ -75,8 +75,24 @@ bun run sync                # pull CDR data and write data/
 bun run validate            # check every file in data/
 bun run build               # write the static site and api.json to dist/
 bun test
+bun run lint               # strict, type-aware Oxlint; warnings fail
+bun run format             # apply Oxfmt
+bun run format:check       # check formatting without writing
 bun run check               # everything CI runs; also the pre-commit hook
 ```
+
+TypeScript enables strict mode and the additional unused-code, return, override, index-access,
+optional-property and control-flow checks. Oxlint enables correctness, suspicious, pedantic
+and performance rules, including type-aware unsafe-value and promise checks. Generated
+`dist/` output is excluded. Both lint and formatting run in `check`, the commit hook and CI.
+
+The native lint exceptions are intentional: file/function size limits, class counts, inline
+comments, underscore names, function placement and negated conditions are style choices;
+`no-redeclare` incorrectly flags Schema value/type pairs; `prefer-readonly-parameter-types`
+rejects library types and deliberately mutable working models; `no-useless-undefined` conflicts
+with explicit return checking and required Effect arguments. One local assertion reconstructs
+a conditional mapped type after removing undefined keys, which TypeScript cannot infer.
+`skipLibCheck` stays enabled because unpdf declarations reference an optional canvas dependency.
 
 ## Hosting
 
