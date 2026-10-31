@@ -36,6 +36,7 @@ export const EarnRate = Schema.Struct({
   cap_annual: Schema.optionalKey(Aud),
   note: Schema.optionalKey(Schema.String)
 })
+export type EarnRate = typeof EarnRate.Type
 
 export const Card = Schema.Struct({
   name: Schema.NonEmptyString,
