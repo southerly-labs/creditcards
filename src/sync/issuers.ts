@@ -1,7 +1,5 @@
 import { required } from "../util/required.ts"
 
-// Friendly slugs and names for CDR brands, used only when an issuer is first
-// created. After that, data/issuers/<slug>/issuer.toml is the source of truth.
 export const ISSUER_SEEDS: Record<string, { readonly slug: string; readonly name: string }> = {
   "American Express": { slug: "amex", name: "American Express" },
   ANZ: { slug: "anz", name: "ANZ" },
@@ -37,7 +35,6 @@ export const issuerSeed = (brandName: string) =>
     name: brandName.replace(/\s+(Limited|Ltd\.?)$/iu, "").trim()
   }
 
-// Card slug from the product name, without the issuer's own name.
 export const cardSlug = (cardName: string, issuerName: string) => {
   const issuerWords = new Set(slugify(issuerName).split("-"))
   const words = slugify(cardName).split("-")

@@ -4,8 +4,6 @@ import { required } from "../util/required.ts"
 import type { Card } from "../model/schema.ts"
 import type { NormalisedCard } from "../cdr/normalise.ts"
 
-// Field paths the CDR sync owns. Anything else (e.g. rewards.earn) is curated
-// by hand or by other extractors and is never touched by the CDR sync.
 export const CDR_OWNED_PATHS = [
   "name",
   "type",
@@ -80,8 +78,7 @@ export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard):
 
   merged["status"] = "active"
   delete merged["discontinued"]
-  // A rewards table without a program is invalid: the card no longer has a
-  // loyalty program, so drop the table unless a human has locked it.
+
   const rewards = merged["rewards"]
 
   if (Predicate.isObject(rewards) && rewards["program"] === undefined && !isLocked(locked, "rewards"))
@@ -96,8 +93,6 @@ export interface FieldChange {
   readonly after: unknown
 }
 
-// Some data holders bump cdr.last_updated on every request, so it alone is
-// not a change. It is still written whenever something else changes.
 const withoutTimestamp = (path: string, value: unknown) => {
   if (path !== "cdr" || !Predicate.isObject(value)) return value
   const { last_updated: _, ...rest } = value
@@ -115,11 +110,7 @@ export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<Fi
     .toArray()
 }
 
-// Written by the earn-rate parser (src/rewards), not the CDR merge.
 export const EARN_PATHS = ["rewards.earn", "rewards.earn_source", "rewards.earn_text_hash"] as const
-
-// ---- Guardrails ---------------------------------------------------------------
-// Auto-merge is only safe if implausible changes are held back for a human.
 
 const KEY_FIELDS = new Set(["fees.annual", "rates.purchase", "fees.foreign_txn_pct"])
 
@@ -157,9 +148,6 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<
   return reasons
 }
 
-// Share of an issuer's active cards that may vanish in one run before the
-// discontinuations are held as a probable data-holder outage.
 export const MAX_DISCONTINUED_SHARE = 0.5
 
-// Minimum share of previously active CDR cards a run must see to proceed at all.
 export const MIN_SEEN_SHARE = 0.8

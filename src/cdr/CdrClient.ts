@@ -4,11 +4,8 @@ import { DataHolderBrand, ProductDetail, ProductsPage, RegisterResponse, type Pr
 
 const REGISTER_URL = "https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary"
 
-// Industries whose data holders publish banking product APIs.
 const LENDING_INDUSTRIES = new Set(["banking", "non-bank-lending"])
 
-// Highest endpoint versions we will ask for. Data holders reply with the
-// highest version they support between x-min-v and x-v.
 const PRODUCTS_MAX_VERSION = 6
 const PRODUCT_DETAIL_MAX_VERSION = 8
 
@@ -18,10 +15,6 @@ export class CdrError extends Schema.TaggedError<CdrError>()("CdrError", {
   message: Schema.String
 }) {}
 
-// Westpac group's CloudFront caches a response per Accept/Accept-Encoding
-// combination, and some of those copies are stale and list no products.
-// Which combination is broken varies by brand and over time, so callers that
-// expect products can retry the listing with another variant.
 export const REQUEST_VARIANTS: ReadonlyArray<Readonly<Record<string, string>>> = [
   { accept: "application/json", "accept-encoding": "identity" },
   { accept: "application/json", "accept-encoding": "gzip" },
@@ -54,8 +47,6 @@ export class CdrClient extends Context.Service<
         HttpClient.retryTransient({ schedule: Schedule.exponential("500 millis"), times: 2 })
       )
 
-      // GET with CDR version negotiation. Not every data holder honours
-      // x-min-v, so on a 406 fall back to probing each version downwards.
       const getVersioned = Effect.fn("CdrClient.getVersioned")(function* (
         url: string,
         maxVersion: number,
@@ -105,9 +96,7 @@ export class CdrClient extends Context.Service<
         variant = 0
       ) {
         const products: Array<ProductSummary> = []
-        // Fetch unfiltered and filter locally: some data holders mishandle
-        // product-category (e.g. Westpac returns nothing when it is combined
-        // with page-size).
+
         let url: string | null | undefined = `${trimSlash(baseUri)}/cds-au/v1/banking/products?page-size=100`
 
         for (let page = 0; url != null && url !== "" && page < 20; page++) {

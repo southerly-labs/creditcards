@@ -4,8 +4,6 @@ import { required } from "../util/required.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
 import type { Fee, ProductDetail } from "./schema.ts"
 
-// Pure mapping from CDR product detail to the CDR-owned fields of a Card.
-
 type Mutable<T> = { -readonly [K in keyof T]: T[K] extends object ? Mutable<T[K]> : T[K] }
 
 export type NormalisedCard = Mutable<Card>
@@ -32,11 +30,9 @@ export interface NormaliseContext {
 
 export interface NormaliseResult {
   readonly card: NormalisedCard
-  // Loyalty programs that fell back to the issuer's own program.
+
   readonly fallbackProgram: string | undefined
 }
-
-// ---- Primitive parsers -------------------------------------------------------
 
 export const parseNumber = (value: string | null | undefined): number | undefined => {
   if (value == null) return undefined
@@ -48,7 +44,6 @@ export const parseNumber = (value: string | null | undefined): number | undefine
   return Number.isFinite(n) ? n : undefined
 }
 
-// CDR rates are decimals (0.2099). A few data holders publish percentages.
 export const toPercent = (value: string | null | undefined): number | undefined => {
   const n = parseNumber(value)
 
@@ -59,8 +54,6 @@ export const toPercent = (value: string | null | undefined): number | undefined 
 
 const round = (n: number, dp: number) => Math.round(n * 10 ** dp) / 10 ** dp
 
-// Number of times per year a periodic fee is charged, from an ISO 8601
-// duration or the free text some data holders put in additionalValue.
 export const timesPerYear = (period: string | null | undefined, name: string): number | undefined => {
   const iso = period?.trim().match(/^P(\d+)([YMWD])$/iu)
 
@@ -71,7 +64,6 @@ export const timesPerYear = (period: string | null | undefined, name: string): n
     const periods: Record<string, number> = { Y: 1, M: 12, W: 52 }
     const perYear = periods[required(iso[2]).toUpperCase()]
 
-    // Daily periodic fees are not annual/monthly card fees.
     return perYear === undefined ? undefined : perYear / n
   }
 
@@ -97,8 +89,6 @@ const fixedAmount = (fee: Fee) => parseNumber(fee.fixedAmount?.amount ?? fee.amo
 
 const feeRate = (fee: Fee) =>
   toPercent(fee.rateBased?.rate ?? fee.transactionRate ?? fee.balanceRate ?? fee.accruedRate)
-
-// ---- Fees --------------------------------------------------------------------
 
 const NOT_CARD_FEE =
   /additional|supplementary|secondary|companion|direct|optional|opt[- ]?in|paper|statement|replacement|late/iu
@@ -163,7 +153,6 @@ export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefi
     .filter((r): r is number => r !== undefined)
     .toArray()
 
-  // Take the highest when several apply (e.g. single vs multi-currency).
   return rates.length > 0 ? Math.max(...rates) : undefined
 }
 
@@ -185,8 +174,6 @@ export const latePaymentFee = (fees: ReadonlyArray<Fee>) =>
     .filter((f) => f.feeType === "LATE_PAYMENT")
     .map((fee) => fixedAmount(fee))
     .find((r) => r !== undefined)
-
-// ---- Rates -------------------------------------------------------------------
 
 type LendingRate = NonNullable<ProductDetail["lendingRates"]>[number]
 
@@ -242,8 +229,6 @@ export const interestFreeDays = (p: ProductDetail): number | undefined => {
   return undefined
 }
 
-// ---- Classification -----------------------------------------------------------
-
 export const cardType = (p: ProductDetail): CardType => {
   if (/corporate|procurement|purchasing|commercial|virtual card|travel (and|&) expense/iu.test(p.name))
     return "corporate"
@@ -276,8 +261,6 @@ export const network = (p: ProductDetail, brandName: string): Network | undefine
 
   return counts.length === 1 ? required(counts[0])[0] : undefined
 }
-
-// ---- Rewards -------------------------------------------------------------------
 
 export const matchProgram = (index: ProgramIndex, text: string): string | undefined =>
   index.programs.find((p) => p.patterns.some((re) => re.test(text)))?.id
@@ -315,8 +298,6 @@ const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
   }
 }
 
-// ---- Perks -----------------------------------------------------------------------
-
 const perks = (p: ProductDetail): NormalisedCard["perks"] => {
   const features = p.features ?? []
 
@@ -337,9 +318,6 @@ const perks = (p: ProductDetail): NormalisedCard["perks"] => {
   }
 }
 
-// ---- Card --------------------------------------------------------------------------
-
-// Drop undefined-valued keys so optional fields are absent (TOML has no null).
 export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult => {
   const fees = p.fees ?? []
   const rates = p.lendingRates ?? []

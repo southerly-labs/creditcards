@@ -25,5 +25,5 @@
     "moduleDetection": "force",
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src", "test", "web"]
+  "include": ["src", "test", "web", "tools/oxlint/local"]
 }

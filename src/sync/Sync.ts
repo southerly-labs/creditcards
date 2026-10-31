@@ -22,8 +22,7 @@ export interface SyncReport {
   readonly newIssuers: ReadonlyArray<string>
   readonly newPrograms: ReadonlyArray<string>
   readonly brandErrors: ReadonlyArray<{ readonly brand: string; readonly error: string }>
-  // Earn rates the parser set (unless the card was held), and cards a person
-  // needs to review with `bun run cli rewards todo`.
+
   readonly rewards: {
     readonly set: ReadonlyArray<{ readonly card: string; readonly earn: ReadonlyArray<EarnRate> }>
     readonly review: ReadonlyArray<{ readonly card: string; readonly reason: string }>
@@ -37,7 +36,7 @@ export class SyncAborted extends Schema.TaggedError<SyncAborted>()("SyncAborted"
 interface BrandFetch {
   readonly brand: string
   readonly products: ReadonlyArray<ProductDetail>
-  // Set when the product list itself failed: treat the brand as unknown, not empty.
+
   readonly listError: string | undefined
   readonly productErrors: ReadonlyArray<string>
 }
@@ -55,7 +54,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const cards = new Map(dataset.cards)
   const programIndex = makeProgramIndex(Object.fromEntries(programs))
 
-  // ---- Fetch ---------------------------------------------------------------
   const brands = yield* cdr.brands
   const activeByBrand = new Map<string, number>()
 
@@ -68,8 +66,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     brands,
     (brand) =>
       Effect.gen(function* () {
-        // Some data holders' CDNs serve a stale empty list for particular
-        // request headers. When we expect cards, try the other header variants.
         const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
 
         const list = Effect.fn("CdrClient.listWithFallback")(function* (
@@ -118,7 +114,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     { concurrency: 16 }
   )
 
-  // ---- Global guardrail ------------------------------------------------------
   const cardsSeen = fetched.reduce((n, b) => n + b.products.length, 0)
   const activeCdrCards = [...cards.values()].filter((c) => c.status === "active" && c.cdr !== undefined).length
 
@@ -128,7 +123,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     })
   }
 
-  // ---- Resolve issuers --------------------------------------------------------
   const issuerByBrand = new Map<string, string>()
 
   for (const [slug, issuer] of issuers) for (const b of issuer.cdr_brands) issuerByBrand.set(b, slug)
@@ -165,7 +159,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const rewardsSet: Array<{ card: string; earn: ReadonlyArray<EarnRate> }> = []
   const rewardsReview: Array<{ card: string; reason: string }> = []
 
-  // ---- Upsert seen cards ----------------------------------------------------------
   for (const { brand, products } of fetched) {
     if (products.length === 0) continue
     const issuerSlug = resolveIssuer(brand)
@@ -248,7 +241,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
-  // ---- Discontinue cards no longer returned -------------------------------------------
   const seenIds = new Set(fetched.flatMap((b) => b.products.map((p) => `${b.brand}|${p.productId}`)))
   const brandStatus = new Map(fetched.map((b) => [b.brand, b]))
   const missingByBrand = new Map<string, Array<string>>()
@@ -259,7 +251,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     if ((card.locked ?? []).includes("status")) continue
     const status = brandStatus.get(card.cdr.brand)
 
-    // The brand left the register or its listing failed: unknown, not gone.
     if (!status || status.listError !== undefined) continue
     missingByBrand.set(card.cdr.brand, [...(missingByBrand.get(card.cdr.brand) ?? []), key])
   }
@@ -280,7 +271,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
-  // ---- Write --------------------------------------------------------------------------
   if (!options.dryRun) {
     for (const slug of new Set(newIssuers)) yield* store.writeIssuer(slug, required(issuers.get(slug)))
 
@@ -308,7 +298,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   } satisfies SyncReport
 })
 
-// Markdown summary used for the commit message body and the held-changes issue.
 export const summariseReport = (r: SyncReport): string => {
   const fmt = (v: unknown) =>
     v === undefined ? "—" : typeof v === "object" ? encodeJson(v) : typeof v === "string" ? v : encodeJson(v)
@@ -354,7 +343,6 @@ export const summariseReport = (r: SyncReport): string => {
   return lines.join("\n")
 }
 
-// Body of the rewards-review issue: the cards the parser could not read.
 export const summariseRewardsReview = (r: SyncReport): string =>
   [
     `${r.rewards.review.length} cards have earn rates the parser could not read (sync ${r.date}).`,

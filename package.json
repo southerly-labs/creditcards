@@ -16,8 +16,9 @@
     "prepare": "git config core.hooksPath .githooks || true",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
-    "lint": "oxlint --deny-warnings --report-unused-disable-directives .",
-    "lint:fix": "bun run lint --fix"
+    "lint": "bun run comments:check && oxlint --deny-warnings --report-unused-disable-directives .",
+    "lint:fix": "oxlint --fix --deny-warnings --report-unused-disable-directives . && bun run comments:check",
+    "comments:check": "bun tools/oxlint/local/check-comments.ts"
   },
   "dependencies": {
     "@effect/platform-bun": "4.1.0",

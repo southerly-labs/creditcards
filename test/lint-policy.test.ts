@@ -59,3 +59,21 @@ test("anti-slop rejects adjacent eager array passes", async () => {
   assert.notStrictEqual(result.exitCode, 0)
   assert.isTrue(result.diagnostics.some((diagnostic) => diagnostic.code === "anti-slop(no-array-filter-map)"))
 })
+
+test("the local Oxlint rule rejects code comments", async () => {
+  const result = await lintSource("// explanation\nexport const value = 1\n")
+  assert.notStrictEqual(result.exitCode, 0)
+  assert.isTrue(
+    result.diagnostics.some(
+      (diagnostic) => diagnostic.code === "project(no-code-comments)" && diagnostic.severity === "error"
+    )
+  )
+})
+
+test("non-const assertions need an invariant outside the isolated utility", async () => {
+  const result = await lintSource("export const date = {} as Date\n")
+  assert.notStrictEqual(result.exitCode, 0)
+  assert.isTrue(
+    result.diagnostics.some((diagnostic) => diagnostic.code === "anti-slop(require-safety-comment-for-type-assertion)")
+  )
+})

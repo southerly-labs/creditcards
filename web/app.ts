@@ -52,7 +52,6 @@ const intro = (r: Row) => {
 
 type Earn = NonNullable<NonNullable<Card["rewards"]>["earn"]>
 
-// Points per dollar on the first tier of everyday (uncategorised) spend.
 const baseEarn = (r: Row) => r.card.rewards?.earn?.find((e) => e.category == null || e.category === "")?.rate
 
 const describeEarn = (earn: Earn) => {
@@ -76,10 +75,6 @@ const describeEarn = (earn: Earn) => {
   return earn.map((e) => describeTier(e)).join("\n")
 }
 
-// ---- Point values -------------------------------------------------------------
-// Defaults come from each program's cents_per_point; users can override any
-// program, and overrides persist in localStorage.
-
 const OVERRIDES_KEY = "creditcards.pointValues"
 
 const loadOverrides = () => loadPointValues(() => localStorage.getItem(OVERRIDES_KEY))
@@ -92,7 +87,6 @@ const saveOverrides = () => {
 
 const centsPerPoint = (r: Row) => (r.program ? (overrides[r.program.id] ?? r.program.cents_per_point) : undefined)
 
-// Cents back per $1 of everyday spend.
 const earnValue = (r: Row) => {
   const earn = baseEarn(r)
   const cents = centsPerPoint(r)
@@ -257,7 +251,6 @@ const sortHead = (e: MouseEvent) => {
 head.addEventListener("click", sortHead)
 
 const compare = (a: Value, b: Value) => {
-  // Missing values always sort last, whatever the direction.
   if (a === undefined) return b === undefined ? 0 : 1
 
   if (b === undefined) return -1

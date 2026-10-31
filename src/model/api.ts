@@ -2,7 +2,6 @@ import { Option, Predicate, Result, Schema } from "effect"
 import type { Api } from "../build/build.ts"
 import { Card, Program } from "./schema.ts"
 
-// Decode the public API at the browser boundary instead of trusting response.json().
 const PublicApi = Schema.Struct({
   programs: Schema.Record(Schema.String, Program),
   issuers: Schema.Record(
@@ -17,8 +16,6 @@ const PublicApi = Schema.Struct({
 
 export const decodeApi = (value: unknown): Api => Schema.decodeUnknownSync(PublicApi)(value)
 
-// Invalid entries are ignored individually so a malformed override cannot hide
-// valid values saved alongside it.
 export const decodePointValues = (text: string): Record<string, number> => {
   const parsed = Schema.decodeUnknownOption(Schema.fromJsonString(Schema.Unknown))(text)
   const values: Record<string, number> = {}

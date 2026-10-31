@@ -2,15 +2,10 @@ import { Context, Effect, FileSystem, Layer, Path, Schema } from "effect"
 import * as Toml from "smol-toml"
 import { Card, Issuer, Program } from "../model/schema.ts"
 
-// Reads and writes the TOML dataset under data/:
-//   programs/<id>.toml
-//   issuers/<issuer>/issuer.toml
-//   issuers/<issuer>/cards/<card>.toml
-
 export interface Dataset {
   readonly programs: ReadonlyMap<string, Program>
   readonly issuers: ReadonlyMap<string, Issuer>
-  // Keyed by "<issuer>/<card>"
+
   readonly cards: ReadonlyMap<string, Card>
 }
 
@@ -88,7 +83,6 @@ export class Store extends Context.Service<
           return { programs, issuers, cards } satisfies Dataset
         }).pipe(Effect.withSpan("Store.load"))
 
-        // Writes only when the encoded content differs; returns whether it wrote.
         const writeToml = Effect.fn("Store.writeToml")(function* <A, I>(
           schema: Schema.Codec<A, I>,
           file: string,

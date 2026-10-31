@@ -2,7 +2,6 @@ import { describe, expect, test } from "@effect/vitest"
 import { loyaltyTextHash, ParseResult, parseEarn } from "../src/rewards/parse.ts"
 import { planRewards, RewardsPlan } from "../src/rewards/plan.ts"
 
-// Real CDR LOYALTY_PROGRAM text (value — info).
 const feature = (additionalValue: string, additionalInfo = "") => ({ additionalValue, additionalInfo })
 const parse = (value: string, info?: string) => parseEarn([feature(value, info)])
 

@@ -7,7 +7,6 @@ export class ValidationError extends Schema.TaggedError<ValidationError>()("Vali
   problems: Schema.Array(Schema.String)
 }) {}
 
-// Cross-file checks the per-file schemas cannot express.
 export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
   const problems: Array<string> = []
   const cdrIds = new Map<string, string>()

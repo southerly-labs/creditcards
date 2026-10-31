@@ -3,10 +3,6 @@ import { Data } from "effect"
 import type { Card, EarnRate } from "../model/schema.ts"
 import { type LoyaltyFeature, loyaltyTextHash, ParseResult, parseEarn } from "./parse.ts"
 
-// Decides what to do with a card's earn rates given its current CDR loyalty
-// text. Manual earn rates are never replaced; a change in their source text
-// only flags them for review.
-
 export type RewardsPlan =
   | { readonly _tag: "Unchanged" }
   | { readonly _tag: "Set"; readonly earn: ReadonlyArray<EarnRate>; readonly hash: string }

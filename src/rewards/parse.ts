@@ -3,11 +3,6 @@ import { required } from "../util/required.ts"
 import { createHash } from "node:crypto"
 import type { EarnRate } from "../model/schema.ts"
 
-// Conservative rule-based extraction of earn rates from CDR LOYALTY_PROGRAM
-// text. It only accepts a single base rate or simple spend tiers; anything
-// else (category rates, bonuses, exclusions, cashback, points caps) is left
-// for a person to review. A wrong earn rate is worse than a missing one.
-
 export interface LoyaltyFeature {
   readonly additionalValue?: string | null | undefined
   readonly additionalInfo?: string | null | undefined
@@ -29,12 +24,10 @@ export const loyaltyTextHash = (features: ReadonlyArray<LoyaltyFeature>): string
 
 const review = (reason: string): ParseResult => ParseResult.Review({ reason })
 
-// "1.5 Reward Points", "0.75 Qantas Points", "1 Amplify point", "2 points"
 const MENTION = /(?<![\d.,$])(\d+(?:\.\d+)?)\s+(?:[A-Za-z&]+\s+){0,3}?points?\b/giu
 const PER_DOLLAR = /per \$\s?1\b|per dollar|for every (?:AU)?\$\s?[\d.]+|for every dollar|per (?:AU)?\$\s?1\.00\b/iu
 const DIVISOR = /for every (?:AU)?\$\s?(\d+(?:\.\d+)?)/iu
 
-// Signals of spend categories, bonuses or conditions the parser does not model.
 const COMPLEX = new RegExp(
   [
     "qantas products",
@@ -83,8 +76,6 @@ const NEXT_TIER = /\b(?:over|above) \$|thereafter|further|once you spend|after s
 const CAP_HERE = /\b(?:up to(?: and including)?|on the first|first) \$\s?([\d,]+)/iu
 const THRESHOLD = /\b(?:over|above|once you spend|after spending) \$\s?([\d,]+)/iu
 
-// "Qantas Points are capped at $50,000 per card per statement period": a spend
-// cap on the last tier. (Points caps like "capped at 20,000 points" are COMPLEX.)
 const SPEND_CAP = /capped at \$\s?([\d,]+)/iu
 
 const amount = (s: string) => Number(s.replaceAll(",", ""))

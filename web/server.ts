@@ -1,4 +1,3 @@
-// Local dev server: serves the table page and the built dist/api.json.
 import index from "./index.html"
 
 const server = Bun.serve({

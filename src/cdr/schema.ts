@@ -1,9 +1,5 @@
 import { Schema } from "effect"
 
-// Lenient decoders for CDR banking product reference data. Data holders vary a
-// lot in how strictly they follow the standard, so almost everything beyond the
-// identifiers is optional and nullable.
-
 const OptString = Schema.optional(Schema.NullOr(Schema.String))
 
 export class DataHolderBrand extends Schema.Class<DataHolderBrand>("cdr/DataHolderBrand")({
@@ -39,12 +35,12 @@ export const ProductsPage = Schema.Struct({
 export const Fee = Schema.Struct({
   name: OptString,
   feeType: Schema.String,
-  // Pre-v7 shape: amount/rate fields at the top level
+
   amount: OptString,
   balanceRate: OptString,
   transactionRate: OptString,
   accruedRate: OptString,
-  // v7+ shape: discriminated by feeMethodUType
+
   feeMethodUType: OptString,
   fixedAmount: Schema.optional(Schema.NullOr(Schema.Struct({ amount: OptString }))),
   rateBased: Schema.optional(Schema.NullOr(Schema.Struct({ rateType: OptString, rate: OptString }))),

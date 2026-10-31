@@ -6,9 +6,6 @@ import { splitCardKey, Store } from "../store/Store.ts"
 import { loyaltyText, loyaltyTextHash, type LoyaltyFeature } from "./parse.ts"
 import { planRewards, RewardsPlan } from "./plan.ts"
 
-// Local tooling for the human (or Claude Code session) that resolves earn
-// rates the parser cannot read.
-
 export interface ReviewItem {
   readonly card: string
   readonly name: string
@@ -61,7 +58,6 @@ const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFe
   }
 }
 
-// Active rewards cards whose earn rates need a person, with their CDR text.
 export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | undefined) {
   const dataset = yield* (yield* Store).load
   const baseUris = yield* registerBaseUris
@@ -92,7 +88,7 @@ export const formatQueue = (items: ReadonlyArray<ReviewItem>): string =>
     `# Earn rates to review (${items.length})`,
     "",
     "For each card, set `rewards.earn` in its TOML file from the text below (see the",
-    "EarnRate comment in src/model/schema.ts for how tiers and categories work), then run",
+    "docs/data-model.md for how tiers and categories work), then run",
     "`bun run cli rewards stamp <issuer/card>...` to mark it manually reviewed.",
     "Use `--none` when the text has no fixed earn rate.",
     "",
@@ -111,8 +107,6 @@ export const formatQueue = (items: ReadonlyArray<ReviewItem>): string =>
     ])
   ].join("\n")
 
-// Marks cards' current earn rates as manually reviewed against the current
-// CDR loyalty text, so the sync stops flagging them until the text changes.
 export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, none: boolean) {
   const store = yield* Store
   const dataset = yield* store.load

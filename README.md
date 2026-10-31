@@ -92,13 +92,21 @@ error handling, Schema boundaries and Effect test services. Effect tests use sco
 `@effect/vitest` layers; Vitest runs under Bun. The Effect plugin uses syntax analysis;
 type-aware safety checks come from Oxlint/tsgolint rather than a type-aware Effect plugin.
 
-The native lint exceptions are intentional: file/function size limits, class counts, inline
-comments, underscore names, import counts, function placement and negated conditions are style choices;
-`no-redeclare` incorrectly flags Schema value/type pairs; `prefer-readonly-parameter-types`
-rejects library types and deliberately mutable working models; `no-useless-undefined` conflicts
-with explicit return checking and required Effect arguments. One local assertion reconstructs
-a conditional mapped type after removing undefined keys, which TypeScript cannot infer.
-`skipLibCheck` stays enabled because unpdf declarations reference an optional canvas dependency.
+Vendored [anti-slop](https://github.com/dmmulroy/anti-slop) adds safety, collection,
+tagged-value and spacing rules. Authored JS/TS, CSS and HTML code comments are banned;
+`bun run lint` runs an independent comment check before Oxlint so lint directives
+cannot bypass the ban. Third-party source and required notices remain intact.
+See [code policy](docs/code-policy.md) for enabled rules, scoped exceptions and the
+vendor update process, and [data model notes](docs/data-model.md) for domain semantics.
+
+The native lint exceptions are intentional: file/function size limits, class counts,
+underscore names, import counts, function placement and negated conditions are style
+choices; `no-redeclare` incorrectly flags Schema value/type pairs;
+`prefer-readonly-parameter-types` rejects library types and deliberately mutable working
+models; `no-useless-undefined` conflicts with explicit return checking and required
+Effect arguments. One isolated utility reconstructs a conditional mapped type after
+removing undefined keys, with its rationale in the code policy. `skipLibCheck` stays
+enabled because unpdf declarations reference an optional canvas dependency.
 
 ## Hosting
 

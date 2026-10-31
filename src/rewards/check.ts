@@ -4,12 +4,6 @@ import { HttpClient } from "effect/http"
 import { extractText, getDocumentProxy } from "unpdf"
 import type { Card } from "../model/schema.ts"
 
-// Checks manual earn rates against the issuer pages they were read from.
-// Each card's `rewards.earn_check` lists pages with short quotes; if a quote
-// no longer appears, the issuer has probably changed the card's earn rates
-// and the card needs a person to review it. Deterministic: plain fetches and
-// substring matching, no LLM.
-
 export class PageError extends Schema.TaggedError<PageError>()("PageError", {
   url: Schema.String,
   message: Schema.String
@@ -47,8 +41,6 @@ const decodeEntity = (match: string, name: string): string => {
 
 const decodeEntities = (s: string) => s.replaceAll(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/giu, decodeEntity)
 
-// Visible text of an HTML page. Script and style bodies are dropped, tags
-// become spaces so adjacent elements don't run together.
 export const htmlText = (html: string): string =>
   decodeEntities(
     html
@@ -59,7 +51,6 @@ export const htmlText = (html: string): string =>
 
 export const pdfText = (url: string, bytes: Uint8Array) =>
   Effect.tryPromise({
-    // verbosity 0: pdf.js otherwise logs font warnings that don't affect the text.
     try: () =>
       getDocumentProxy(new Uint8Array(bytes), { verbosity: 0 })
         .then((pdf) => extractText(pdf, { mergePages: true }))
@@ -67,8 +58,6 @@ export const pdfText = (url: string, bytes: Uint8Array) =>
     catch: (cause) => new PageError({ url, message: `PDF: ${cause instanceof Error ? cause.message : String(cause)}` })
   })
 
-// Folds the differences that don't change meaning: case, whitespace, curly
-// quotes, dashes, and line wrapping (common in PDFs).
 export const normaliseText = (s: string): string =>
   s
     .normalize("NFKC")
@@ -87,13 +76,10 @@ export const missingQuotes = (text: string, expect: ReadonlyArray<string>): Read
 
 const isPdf = (bytes: Uint8Array, contentType: string | undefined) =>
   contentType?.includes("application/pdf") === true ||
-  (bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46) // %PDF
+  (bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46)
 
-// Identifies the checker honestly. Some issuers' bot filters (Qantas Money)
-// drop requests whose user agent contains a URL, so it carries none.
 const USER_AGENT = "Mozilla/5.0 (compatible; creditcards-earn-check)"
 
-// Fetches a page and returns its text, from HTML or PDF.
 export const pageText = Effect.fn("pageText")(function* (url: string) {
   const client = (yield* HttpClient.HttpClient).pipe(
     HttpClient.retryTransient({ schedule: Schedule.exponential("1 second"), times: 2 })
@@ -120,13 +106,12 @@ export const pageText = Effect.fn("pageText")(function* (url: string) {
 export interface CheckResult {
   readonly card: string
   readonly url: string
-  // Quotes that no longer appear on the page. Empty when the page still matches.
+
   readonly missing: ReadonlyArray<string>
-  // Set when the page could not be read; the quotes were not checked.
+
   readonly error?: string
 }
 
-// Checks every card with `rewards.earn_check`, fetching each URL once.
 export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: ReadonlyMap<string, Card>) {
   const checks = [...cards].flatMap(([card, c]) =>
     c.status === "active"
