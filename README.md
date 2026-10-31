@@ -45,7 +45,11 @@ bun install
 bun run sync -- --dry-run   # pull CDR data and report changes
 bun run sync                # pull CDR data and write data/
 bun run validate            # check every file in data/
-bun run build               # write dist/api.json
+bun run build               # write the static site and api.json to dist/
 bun test
 bun run check               # everything CI runs; also the pre-commit hook
 ```
+
+## Hosting
+
+`bun run build` writes a fully static site to `dist/` (`index.html`, hashed JS/CSS and `api.json`). It is meant for Cloudflare Pages connected to this repo: build command `bun run build`, output directory `dist`. Every push to `main`, including the daily sync, then redeploys.

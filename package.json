@@ -6,12 +6,12 @@
     "cli": "bun run src/cli.ts",
     "sync": "bun run src/cli.ts sync",
     "validate": "bun run src/cli.ts validate",
-    "build": "bun run src/cli.ts build",
+    "build": "bun run src/cli.ts build && bun run web/build.ts",
     "test": "bun test",
     "typecheck": "tsrs --noEmit",
     "dev": "bun run build && bun run web/server.ts",
     "check": "tsrs --noEmit && bun test && bun run validate && bun run build",
-    "prepare": "git config core.hooksPath .githooks"
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
     "@effect/platform-bun": "4.1.0",
