@@ -81,6 +81,8 @@ Every dependency is pinned to an exact version, and nothing published less than 
 
 `wrangler.jsonc` configures the Cloudflare Worker that serves `dist/` as a static site. Cloudflare builds and deploys every push to `main`. Files in `dist/assets/` have content-hashed names and are cached for a year (`dist/_headers`, written by `web/build.ts`). Anything a page loads should go through the bundler, so it gets a hashed name in `assets/`. Never give an unhashed file long-term caching.
 
+Cloudflare's build settings live in the dashboard, not the repo: there's no build command (wrangler runs `bun run build` itself), the deploy command is `bunx wrangler deploy`, and the build variable `BUN_VERSION` must match `packageManager`. To inspect or change them, or to read build logs, use the `cf` CLI (`cf builds ...`) with `CLOUDFLARE_ACCOUNT_ID=59be782473bda4cbd48bbae56df8ce68`. The Worker is `creditcards`.
+
 ## Working as an agent here
 
 - Agents do the bookkeeping that used to make trunk-based work tedious: splitting work into steps, temporary dual-shape support and step-by-step migrations. Plan multi-step work as a numbered list of pushable commits before you start, then push each one as soon as it passes the checks.
