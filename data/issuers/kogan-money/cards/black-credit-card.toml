@@ -28,9 +28,16 @@ min_income = 35000
 
 [rewards]
 program = "kogan-money-rewards"
-earn = []
 earn_source = "manual"
 earn_text_hash = "1c0e0dbcbd7920cb"
+
+[[rewards.earn]]
+rate = 1
+
+[[rewards.earn]]
+rate = 2
+category = "Kogan.com"
+note = "excludes Kogan Essentials (Mobile, Internet, Energy) and other Kogan-owned sites"
 
 [perks]
 

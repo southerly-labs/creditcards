@@ -28,9 +28,13 @@ max_credit = 100000
 
 [rewards]
 program = "qantas"
-earn = []
 earn_source = "manual"
 earn_text_hash = "ef462de0d11c82c5"
+
+[[rewards.earn]]
+rate = 0.5
+cap_monthly = 7000
+note = "no points on spend above $7,000 a statement period"
 
 [perks]
 insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Mobile phone insurance" ]
