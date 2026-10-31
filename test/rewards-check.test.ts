@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test"
+import { describe, expect, layer, test } from "@effect/vitest"
 import { Effect, Layer } from "effect"
 import { HttpClient, HttpClientResponse } from "effect/http"
 import type { Card } from "../src/model/schema.ts"
@@ -53,28 +53,30 @@ describe("checkEarnPages", () => {
     const page = pages[url.toString()]
     return Effect.succeed(HttpClientResponse.fromWeb(request, page?.clone() ?? new Response("gone", { status: 404 })))
   })
-  const run = (cards: Map<string, Card>) =>
-    Effect.runPromise(checkEarnPages(cards).pipe(Effect.provide(Layer.succeed(HttpClient.HttpClient, client))))
 
-  test("checks each card, fetching each page once, and skips discontinued cards", async () => {
-    fetches = 0
-    const results = await run(
-      new Map([
-        ["x/ok", card("https://a.example/card", "1 point per $1")],
-        ["x/changed", card("https://a.example/card", "2 points per $1")],
-        ["x/gone", card("https://a.example/missing", "1 point per $1")],
-        ["x/old", card("https://a.example/card", "3 points per $1", "discontinued")]
-      ])
+  layer(Layer.succeed(HttpClient.HttpClient, client))((it) => {
+    it.effect("checks each card, fetching each page once, and skips discontinued cards", () =>
+      Effect.gen(function* () {
+        fetches = 0
+        const results = yield* checkEarnPages(
+          new Map([
+            ["x/ok", card("https://a.example/card", "1 point per $1")],
+            ["x/changed", card("https://a.example/card", "2 points per $1")],
+            ["x/gone", card("https://a.example/missing", "1 point per $1")],
+            ["x/old", card("https://a.example/card", "3 points per $1", "discontinued")]
+          ])
+        )
+        expect(fetches).toBe(2)
+        expect(results).toEqual([
+          { card: "x/ok", url: "https://a.example/card", missing: [] },
+          { card: "x/changed", url: "https://a.example/card", missing: ["2 points per $1"] },
+          { card: "x/gone", url: "https://a.example/missing", missing: [], error: "HTTP 404" }
+        ])
+        const report = formatCheck(results)
+        expect(report).toContain("3 checked, 1 changed, 1 unreadable")
+        expect(report).toContain("- [ ] `x/changed` — https://a.example/card")
+        expect(report).toContain("`x/gone` — https://a.example/missing: HTTP 404")
+      })
     )
-    expect(fetches).toBe(2)
-    expect(results).toEqual([
-      { card: "x/ok", url: "https://a.example/card", missing: [] },
-      { card: "x/changed", url: "https://a.example/card", missing: ["2 points per $1"] },
-      { card: "x/gone", url: "https://a.example/missing", missing: [], error: "HTTP 404" }
-    ])
-    const report = formatCheck(results)
-    expect(report).toContain("3 checked, 1 changed, 1 unreadable")
-    expect(report).toContain("- [ ] `x/changed` — https://a.example/card")
-    expect(report).toContain("`x/gone` — https://a.example/missing: HTTP 404")
   })
 })

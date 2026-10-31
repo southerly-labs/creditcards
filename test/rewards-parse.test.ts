@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test"
+import { describe, expect, test } from "@effect/vitest"
 import { loyaltyTextHash, parseEarn } from "../src/rewards/parse.ts"
 import { planRewards } from "../src/rewards/plan.ts"
 

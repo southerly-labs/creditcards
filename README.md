@@ -74,7 +74,7 @@ bun run sync -- --dry-run   # pull CDR data and report changes
 bun run sync                # pull CDR data and write data/
 bun run validate            # check every file in data/
 bun run build               # write the static site and api.json to dist/
-bun test
+bun run test               # Vitest, with Effect test services
 bun run lint               # strict, type-aware Oxlint; warnings fail
 bun run format             # apply Oxfmt
 bun run format:check       # check formatting without writing

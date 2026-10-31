@@ -1,5 +1,5 @@
 import { required } from "../src/util/required.ts"
-import { describe, expect, test } from "bun:test"
+import { describe, expect, test } from "@effect/vitest"
 import { Schema } from "effect"
 import {
   annualFee,
