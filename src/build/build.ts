@@ -19,7 +19,7 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
     if (card.cdr) {
       const cdrId = `${card.cdr.brand}|${card.cdr.product_id}`
       const other = cdrIds.get(cdrId)
-      if (other) problems.push(`${key}: same CDR product as ${other}`)
+      if (other != null && other !== "") problems.push(`${key}: same CDR product as ${other}`)
       cdrIds.set(cdrId, key)
     }
   }
@@ -50,7 +50,11 @@ export const toApi = (dataset: Dataset): Api => {
   )
   const issuers: Record<string, { name: string; website?: string; cards: Record<string, PublicCard> }> = {}
   for (const [slug, issuer] of dataset.issuers) {
-    issuers[slug] = { name: issuer.name, ...(issuer.website ? { website: issuer.website } : {}), cards: {} }
+    issuers[slug] = {
+      name: issuer.name,
+      ...(issuer.website != null && issuer.website !== "" ? { website: issuer.website } : {}),
+      cards: {}
+    }
   }
   for (const [key, { locked: _l, ...card }] of dataset.cards) {
     const { issuer, card: slug } = splitCardKey(key)

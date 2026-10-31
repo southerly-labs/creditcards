@@ -15,7 +15,7 @@ export type ParseResult =
   | { readonly _tag: "Parsed"; readonly earn: ReadonlyArray<EarnRate> }
   | { readonly _tag: "Review"; readonly reason: string }
 
-const clean = (s: string | null | undefined) => (s ?? "").replaceAll(/\s+/g, " ").trim()
+const clean = (s: string | null | undefined) => (s ?? "").replaceAll(/\s+/gu, " ").trim()
 
 export const loyaltyText = (features: ReadonlyArray<LoyaltyFeature>): string =>
   features.map((f) => [clean(f.additionalValue), clean(f.additionalInfo)].filter(Boolean).join(" — ")).join("\n")
@@ -26,9 +26,9 @@ export const loyaltyTextHash = (features: ReadonlyArray<LoyaltyFeature>): string
 const review = (reason: string): ParseResult => ({ _tag: "Review", reason })
 
 // "1.5 Reward Points", "0.75 Qantas Points", "1 Amplify point", "2 points"
-const MENTION = /(?<![\d.,$])(\d+(?:\.\d+)?)\s+(?:[A-Za-z&]+\s+){0,3}?points?\b/gi
-const PER_DOLLAR = /per \$\s?1\b|per dollar|for every (?:AU)?\$\s?[\d.]+|for every dollar|per (?:AU)?\$\s?1\.00\b/i
-const DIVISOR = /for every (?:AU)?\$\s?(\d+(?:\.\d+)?)/i
+const MENTION = /(?<![\d.,$])(\d+(?:\.\d+)?)\s+(?:[A-Za-z&]+\s+){0,3}?points?\b/giu
+const PER_DOLLAR = /per \$\s?1\b|per dollar|for every (?:AU)?\$\s?[\d.]+|for every dollar|per (?:AU)?\$\s?1\.00\b/iu
+const DIVISOR = /for every (?:AU)?\$\s?(\d+(?:\.\d+)?)/iu
 
 // Signals of spend categories, bonuses or conditions the parser does not model.
 const COMPLEX = new RegExp(
@@ -75,18 +75,18 @@ const COMPLEX = new RegExp(
   "i"
 )
 
-const NEXT_TIER = /\b(?:over|above) \$|thereafter|further|once you spend|after spending/i
-const CAP_HERE = /\b(?:up to(?: and including)?|on the first|first) \$\s?([\d,]+)/i
-const THRESHOLD = /\b(?:over|above|once you spend|after spending) \$\s?([\d,]+)/i
+const NEXT_TIER = /\b(?:over|above) \$|thereafter|further|once you spend|after spending/iu
+const CAP_HERE = /\b(?:up to(?: and including)?|on the first|first) \$\s?([\d,]+)/iu
+const THRESHOLD = /\b(?:over|above|once you spend|after spending) \$\s?([\d,]+)/iu
 // "Qantas Points are capped at $50,000 per card per statement period": a spend
 // cap on the last tier. (Points caps like "capped at 20,000 points" are COMPLEX.)
-const SPEND_CAP = /capped at \$\s?([\d,]+)/i
+const SPEND_CAP = /capped at \$\s?([\d,]+)/iu
 
 const amount = (s: string) => Number(s.replaceAll(",", ""))
 
 export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult => {
   const text = loyaltyText(features)
-  if (!/\d/.test(text)) return review("no earn rate in text")
+  if (!/\d/u.test(text)) return review("no earn rate in text")
   if (COMPLEX.test(text)) return review("category, bonus or conditional earn")
   if (!PER_DOLLAR.test(text)) return review("no per-dollar earn rate")
 
@@ -105,11 +105,12 @@ export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult 
     const capHere = clause.slice(mentions[i]![0].length).match(CAP_HERE)?.[1]
     const capNext = clauses[i + 1]?.match(THRESHOLD)?.[1]
     const cap = capHere ?? capNext
-    tiers.push({ rate, ...(cap ? { cap_monthly: amount(cap) } : {}) })
+    tiers.push({ rate, ...(cap != null && cap !== "" ? { cap_monthly: amount(cap) } : {}) })
   }
   const spendCap = text.match(SPEND_CAP)?.[1]
   const last = tiers.at(-1)!
-  if (spendCap && last.cap_monthly === undefined) tiers[tiers.length - 1] = { ...last, cap_monthly: amount(spendCap) }
+  if (spendCap != null && spendCap !== "" && last.cap_monthly === undefined)
+    tiers[tiers.length - 1] = { ...last, cap_monthly: amount(spendCap) }
   for (let i = 1; i < tiers.length; i++) {
     const prev = tiers[i - 1]!.cap_monthly
     const cap = tiers[i]!.cap_monthly

@@ -35,7 +35,7 @@ const NAMED_ENTITIES: Record<string, string> = {
 }
 
 const decodeEntities = (s: string) =>
-  s.replaceAll(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/gi, (match, name: string) => {
+  s.replaceAll(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/giu, (match, name: string) => {
     if (name[0] === "#") {
       const code = name[1] === "x" || name[1] === "X" ? parseInt(name.slice(2), 16) : parseInt(name.slice(1), 10)
       return Number.isFinite(code) ? String.fromCodePoint(code) : match
@@ -48,9 +48,9 @@ const decodeEntities = (s: string) =>
 export const htmlText = (html: string): string =>
   decodeEntities(
     html
-      .replaceAll(/<!--[\s\S]*?-->/g, " ")
-      .replaceAll(/<(script|style|noscript|template)\b[\s\S]*?<\/\1\s*>/gi, " ")
-      .replaceAll(/<[^>]+>/g, " ")
+      .replaceAll(/<!--[\s\S]*?-->/gu, " ")
+      .replaceAll(/<(script|style|noscript|template)\b[\s\S]*?<\/\1\s*>/giu, " ")
+      .replaceAll(/<[^>]+>/gu, " ")
   )
 
 export const pdfText = (url: string, bytes: Uint8Array) =>
@@ -69,10 +69,10 @@ export const normaliseText = (s: string): string =>
   s
     .normalize("NFKC")
     .toLowerCase()
-    .replaceAll(/[‘’‚′]/g, "'")
-    .replaceAll(/[“”„″]/g, '"')
-    .replaceAll(/[‐-―−]/g, "-")
-    .replaceAll(/[\s ​]+/g, " ")
+    .replaceAll(/[‘’‚′]/gu, "'")
+    .replaceAll(/[“”„″]/gu, '"')
+    .replaceAll(/[‐-―−]/gu, "-")
+    .replaceAll(/[\s ​]+/gu, " ")
     .trim()
 
 export const missingQuotes = (text: string, expect: ReadonlyArray<string>): ReadonlyArray<string> => {
@@ -81,7 +81,7 @@ export const missingQuotes = (text: string, expect: ReadonlyArray<string>): Read
 }
 
 const isPdf = (bytes: Uint8Array, contentType: string | undefined) =>
-  contentType?.includes("application/pdf") ||
+  contentType?.includes("application/pdf") === true ||
   (bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46) // %PDF
 
 // Identifies the checker honestly. Some issuers' bot filters (Qantas Money)

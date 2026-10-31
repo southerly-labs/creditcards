@@ -18,7 +18,7 @@ interface Column {
 }
 
 const esc = (s: string) =>
-  s.replaceAll(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!)
+  s.replaceAll(/[&<>"']/gu, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!)
 
 const dash = '<span class="dim">—</span>'
 const money = (n: number | undefined) =>
@@ -28,7 +28,7 @@ const money = (n: number | undefined) =>
       ? '<span class="zero">$0</span>'
       : `$${n.toLocaleString("en-AU", { maximumFractionDigits: 2 })}`
 const pct = (n: number | undefined) =>
-  n === undefined ? dash : n === 0 ? '<span class="zero">0%</span>' : `${n.toFixed(2).replace(/\.?0+$/, "")}%`
+  n === undefined ? dash : n === 0 ? '<span class="zero">0%</span>' : `${n.toFixed(2).replace(/\.?0+$/u, "")}%`
 const int = (n: number | undefined) => (n === undefined ? dash : n.toLocaleString("en-AU"))
 
 const intro = (r: Row) => {
@@ -36,27 +36,28 @@ const intro = (r: Row) => {
   if (!offer) return
   const what =
     offer.applies_to === "balance_transfer" ? "BT" : offer.applies_to === "purchase" ? "purchases" : "BT + purchases"
-  return `${pct(offer.rate)} ${what}${offer.months ? ` ${offer.months}m` : ""}`
+  return `${pct(offer.rate)} ${what}${(offer.months ?? 0) !== 0 ? ` ${offer.months}m` : ""}`
 }
 
 type Earn = NonNullable<NonNullable<Card["rewards"]>["earn"]>
 
 // Points per dollar on the first tier of everyday (uncategorised) spend.
-const baseEarn = (r: Row) => r.card.rewards?.earn?.find((e) => !e.category)?.rate
+const baseEarn = (r: Row) => r.card.rewards?.earn?.find((e) => e.category == null || e.category === "")?.rate
 
 const describeEarn = (earn: Earn) => {
   let previousCap: number | undefined
   return earn
     .map((e) => {
-      const where = e.category
-        ? ` on ${e.category}`
-        : e.cap_monthly === undefined
-          ? previousCap !== undefined
-            ? " thereafter"
-            : ""
-          : ` up to ${money(e.cap_monthly).replace(/<[^>]+>/g, "")} a month`
-      if (!e.category && e.cap_monthly !== undefined) previousCap = e.cap_monthly
-      return `${e.rate} per $1${where}${e.note ? ` (${e.note})` : ""}`
+      const where =
+        e.category != null && e.category !== ""
+          ? ` on ${e.category}`
+          : e.cap_monthly === undefined
+            ? previousCap !== undefined
+              ? " thereafter"
+              : ""
+            : ` up to ${money(e.cap_monthly).replace(/<[^>]+>/gu, "")} a month`
+      if ((e.category == null || e.category === "") && e.cap_monthly !== undefined) previousCap = e.cap_monthly
+      return `${e.rate} per $1${where}${e.note != null && e.note !== "" ? ` (${e.note})` : ""}`
     })
     .join("\n")
 }
@@ -99,10 +100,14 @@ const columns: ReadonlyArray<Column> = [
     label: "Card",
     sort: (r) => r.card.name.toLowerCase(),
     render: (r) => {
-      const img = r.card.image ? `<img src="${esc(r.card.image)}" alt="" loading="lazy" />` : '<span class="ph"></span>'
-      const name = r.card.url
-        ? `<a href="${esc(r.card.url)}" target="_blank" rel="noopener">${esc(r.card.name)}</a>`
-        : esc(r.card.name)
+      const img =
+        r.card.image != null && r.card.image !== ""
+          ? `<img src="${esc(r.card.image)}" alt="" loading="lazy" />`
+          : '<span class="ph"></span>'
+      const name =
+        r.card.url != null && r.card.url !== ""
+          ? `<a href="${esc(r.card.url)}" target="_blank" rel="noopener">${esc(r.card.name)}</a>`
+          : esc(r.card.name)
       return `<div class="card">${img}<div>${name}<div class="issuer">${esc(r.issuer)}</div></div></div>`
     }
   },
@@ -181,11 +186,11 @@ const columns: ReadonlyArray<Column> = [
   },
   {
     label: "Perks",
-    sort: (r) => (r.card.perks.lounge_access ? 100 : 0) + (r.card.perks.insurance?.length ?? 0),
+    sort: (r) => (r.card.perks.lounge_access === true ? 100 : 0) + (r.card.perks.insurance?.length ?? 0),
     render: (r) =>
       [
-        r.card.perks.lounge_access ? '<span class="tag">Lounge</span>' : "",
-        r.card.perks.insurance?.length
+        r.card.perks.lounge_access === true ? '<span class="tag">Lounge</span>' : "",
+        r.card.perks.insurance !== undefined && r.card.perks.insurance.length > 0
           ? `<span class="tag" title="${esc(r.card.perks.insurance.join("\n"))}">${r.card.perks.insurance.length} insurance</span>`
           : ""
       ].join(" ") || dash
@@ -199,7 +204,10 @@ const api: Api = await fetch("/api.json").then((r) => r.json())
 const rows: ReadonlyArray<Row> = Object.entries(api.issuers).flatMap(([issuerId, issuer]) =>
   Object.entries(issuer.cards).map(([cardId, card]) => {
     const programId = card.rewards?.program
-    const program = programId && api.programs[programId] ? { id: programId, ...api.programs[programId] } : undefined
+    const program =
+      programId != null && programId !== "" && api.programs[programId]
+        ? { id: programId, ...api.programs[programId] }
+        : undefined
     return { id: `${issuerId}/${cardId}`, issuer: issuer.name, card, program }
   })
 )
@@ -208,7 +216,9 @@ let sortIndex = 2
 let sortDir: "asc" | "desc" = "asc"
 
 const head = $("head")
-head.innerHTML = columns.map((c, i) => `<th class="${c.num ? "num" : ""}" data-i="${i}">${c.label}</th>`).join("")
+head.innerHTML = columns
+  .map((c, i) => `<th class="${c.num === true ? "num" : ""}" data-i="${i}">${c.label}</th>`)
+  .join("")
 head.addEventListener("click", (e) => {
   const th = (e.target as HTMLElement).closest("th")
   if (!th) return
@@ -253,7 +263,7 @@ const render = () => {
   $("rows").innerHTML = visible
     .map(
       (r) =>
-        `<tr class="${r.card.status === "active" ? "" : "disc"}">${columns.map((c) => `<td class="${c.num ? "num" : ""}">${c.render(r)}</td>`).join("")}</tr>`
+        `<tr class="${r.card.status === "active" ? "" : "disc"}">${columns.map((c) => `<td class="${c.num === true ? "num" : ""}">${c.render(r)}</td>`).join("")}</tr>`
     )
     .join("")
   $("count").textContent = `${visible.length} of ${rows.length} cards`
@@ -267,7 +277,11 @@ const renderValueGrid = () => {
     .sort((a, b) => counts.get(b.id)! - counts.get(a.id)! || a.name.localeCompare(b.name))
   $("value-grid").innerHTML = programs
     .map((p) => {
-      const basis = [p.value_basis, p.value_source, p.value_updated && `Updated ${p.value_updated}`]
+      const basis = [
+        p.value_basis,
+        p.value_source,
+        p.value_updated != null && p.value_updated !== "" && `Updated ${p.value_updated}`
+      ]
         .filter(Boolean)
         .join("\n")
       const fallback = p.cents_per_point === undefined ? "no default" : `default ${p.cents_per_point}c`
@@ -284,7 +298,7 @@ const renderValueGrid = () => {
 $("value-grid").addEventListener("input", (e) => {
   const input = e.target as HTMLInputElement
   const id = input.dataset["program"]
-  if (!id) return
+  if (id == null || id === "") return
   const value = input.value.trim() === "" ? NaN : Number(input.value)
   if (Number.isFinite(value) && value >= 0) overrides[id] = value
   else delete overrides[id]

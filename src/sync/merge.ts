@@ -109,7 +109,8 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<
       continue
     }
     if (path === "rewards.earn" && Array.isArray(before) && Array.isArray(after)) {
-      const base = (earn: ReadonlyArray<{ rate: number; category?: string }>) => earn.find((e) => !e.category)?.rate
+      const base = (earn: ReadonlyArray<{ rate: number; category?: string }>) =>
+        earn.find((e) => e.category == null || e.category === "")?.rate
       const [b, a] = [base(before), base(after)]
       if (b !== undefined && a !== undefined && Math.abs(a - b) > 1) reasons.push(`base earn rate ${b} → ${a}`)
       continue

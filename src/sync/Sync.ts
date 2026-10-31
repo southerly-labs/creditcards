@@ -122,7 +122,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const newIssuers: Array<string> = []
   const resolveIssuer = (brand: string) => {
     const existing = issuerByBrand.get(brand)
-    if (existing) return existing
+    if (existing != null && existing !== "") return existing
     const seed = issuerSeed(brand)
     const current = issuers.get(seed.slug)
     const issuer: Issuer = current
@@ -157,15 +157,15 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         brandName: brand,
         programs: programIndex
       })
-      if (fallbackProgram && !programs.has(fallbackProgram)) {
+      if (fallbackProgram != null && fallbackProgram !== "" && !programs.has(fallbackProgram)) {
         const program: Program = { name: `${issuerName} Rewards`, type: "bank" }
         programs.set(fallbackProgram, program)
         newPrograms.push(fallbackProgram)
       }
 
       let key = keyByCdrId.get(`${brand}|${product.productId}`)
-      const existing = key ? cards.get(key) : undefined
-      if (!key) {
+      const existing = key != null && key !== "" ? cards.get(key) : undefined
+      if (key == null || key === "") {
         const base = cardSlug(incoming.name, issuerName)
         let slug =
           cards.has(cardKey(issuerSlug, base)) || writes.has(cardKey(issuerSlug, base))
@@ -258,7 +258,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     newIssuers: [...new Set(newIssuers)],
     newPrograms,
     brandErrors: fetched
-      .filter((b) => b.listError !== undefined && !/HTTP 4\d\d/.test(b.listError))
+      .filter((b) => b.listError !== undefined && !/HTTP 4\d\d/u.test(b.listError))
       .map((b) => ({ brand: b.brand, error: b.listError! })),
     rewards: { set: rewardsSet, review: rewardsReview }
   } satisfies SyncReport

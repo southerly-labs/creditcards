@@ -9,7 +9,7 @@ const between = (minimum: number, maximum: number) =>
 
 const Aud = between(0, 100_000_000)
 const Percent = between(0, 50)
-const Slug = Schema.String.pipe(Schema.check(Schema.isPattern(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)))
+const Slug = Schema.String.pipe(Schema.check(Schema.isPattern(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u)))
 
 export const CardType = Schema.Literals(["personal", "business", "corporate"])
 export type CardType = typeof CardType.Type
@@ -43,7 +43,7 @@ export type EarnRate = typeof EarnRate.Type
 // quote no longer appears, so manual earn rates notice issuer changes that
 // the CDR text does not carry. Matching ignores case and whitespace.
 export const EarnCheck = Schema.Struct({
-  url: Schema.String.pipe(Schema.check(Schema.isPattern(/^https:\/\//))),
+  url: Schema.String.pipe(Schema.check(Schema.isPattern(/^https:\/\//u))),
   expect: Schema.NonEmptyArray(Schema.NonEmptyString)
 })
 export type EarnCheck = typeof EarnCheck.Type

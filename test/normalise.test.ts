@@ -19,7 +19,7 @@ const fixed = (name: string, amount: string, period?: string): Fee => ({
   feeType: "PERIODIC",
   feeMethodUType: "fixedAmount",
   fixedAmount: { amount },
-  ...(period ? { additionalValue: period } : {})
+  ...(period != null && period !== "" ? { additionalValue: period } : {})
 })
 
 describe("fees", () => {

@@ -26,7 +26,8 @@ const loyaltyFeatures = Effect.fnUntraced(function* (card: Card, baseUris: Reado
   const cdr = yield* CdrClient
   if (!card.cdr) return yield* new RewardsError({ message: `${card.name} has no CDR source` })
   const baseUri = baseUris.get(card.cdr.brand)
-  if (!baseUri) return yield* new RewardsError({ message: `${card.cdr.brand} is not in the CDR Register` })
+  if (baseUri === undefined || baseUri === "")
+    return yield* new RewardsError({ message: `${card.cdr.brand} is not in the CDR Register` })
   const { detail } = yield* cdr.getProduct(baseUri, card.cdr.product_id)
   return (detail.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
 })
@@ -42,7 +43,10 @@ export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | 
   const baseUris = yield* registerBaseUris
   const candidates = [...dataset.cards].filter(
     ([key, card]) =>
-      card.status === "active" && card.rewards && card.cdr && (!issuer || splitCardKey(key).issuer === issuer)
+      card.status === "active" &&
+      card.rewards !== undefined &&
+      card.cdr !== undefined &&
+      (issuer === undefined || issuer === "" || splitCardKey(key).issuer === issuer)
   )
   const items = yield* Effect.forEach(
     candidates,

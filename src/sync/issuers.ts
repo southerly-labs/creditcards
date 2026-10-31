@@ -21,18 +21,18 @@ export const ISSUER_SEEDS: Record<string, { readonly slug: string; readonly name
 export const slugify = (s: string) =>
   s
     .normalize("NFKD")
-    .replaceAll(/[®™©]/g, "")
+    .replaceAll(/[®™©]/gu, "")
     .toLowerCase()
     .replaceAll("&", " and ")
-    .replaceAll(/[^a-z0-9]+/g, "-")
-    .replaceAll(/^-|-$/g, "")
+    .replaceAll(/[^a-z0-9]+/gu, "-")
+    .replaceAll(/^-|-$/gu, "")
 
-const CORPORATE_SUFFIX = /\b(limited|ltd|pty|australia|bank of australia)\b/gi
+const CORPORATE_SUFFIX = /\b(limited|ltd|pty|australia|bank of australia)\b/giu
 
 export const issuerSeed = (brandName: string) =>
   ISSUER_SEEDS[brandName] ?? {
     slug: slugify(brandName.replaceAll(CORPORATE_SUFFIX, "")),
-    name: brandName.replace(/\s+(Limited|Ltd\.?)$/i, "").trim()
+    name: brandName.replace(/\s+(Limited|Ltd\.?)$/iu, "").trim()
   }
 
 // Card slug from the product name, without the issuer's own name.

@@ -99,14 +99,14 @@ export class CdrClient extends Context.Service<
         // product-category (e.g. Westpac returns nothing when it is combined
         // with page-size).
         let url: string | null | undefined = `${trimSlash(baseUri)}/cds-au/v1/banking/products?page-size=100`
-        for (let page = 0; url && page < 20; page++) {
+        for (let page = 0; url != null && url !== "" && page < 20; page++) {
           const { body }: { body: unknown } = yield* getVersioned(url, PRODUCTS_MAX_VERSION, variant)
           const decoded: typeof ProductsPage.Type = yield* decodeProductsPage(body).pipe(
             Effect.mapError(schemaError(url))
           )
           products.push(...decoded.data.products.filter((p) => p.productCategory === category))
           const next: string | null | undefined = decoded.links?.next
-          url = next && next !== url ? next : undefined
+          url = next != null && next !== "" && next !== url ? next : undefined
         }
         return products
       })
@@ -127,4 +127,4 @@ export class CdrClient extends Context.Service<
 const decodeProductsPage = Schema.decodeUnknownEffect(ProductsPage)
 const decodeProductDetail = Schema.decodeUnknownEffect(ProductDetail)
 
-const trimSlash = (uri: string) => uri.replace(/\/+$/, "")
+const trimSlash = (uri: string) => uri.replace(/\/+$/u, "")
