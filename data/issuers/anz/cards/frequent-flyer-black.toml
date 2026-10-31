@@ -28,7 +28,17 @@ min_credit = 15000
 
 [rewards]
 program = "qantas"
+earn_source = "parser"
+earn_text_hash = "32ddb1497debe067"
 bonus_points = 100000
+
+[[rewards.earn]]
+rate = 1
+cap_monthly = 7500
+
+[[rewards.earn]]
+rate = 0.5
+cap_monthly = 50000
 
 [perks]
 insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess in Australia Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance" ]

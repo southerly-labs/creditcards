@@ -27,6 +27,11 @@ max_credit = 20000
 
 [rewards]
 program = "qantas"
+earn_source = "parser"
+earn_text_hash = "e775fa5444f0f356"
+
+[[rewards.earn]]
+rate = 0.5
 
 [perks]
 insurance = [ "Complimentary International Travel Insurance**" ]

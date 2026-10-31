@@ -26,7 +26,13 @@ max_credit = 18000000
 
 [rewards]
 program = "qantas"
+earn_source = "parser"
+earn_text_hash = "8c328cd48e1e97f4"
 bonus_points = 200000
+
+[[rewards.earn]]
+rate = 0.6667
+cap_monthly = 50000
 
 [perks]
 insurance = [ "Unauthorised Transaction Insurance", "Transit Accident Insurance" ]

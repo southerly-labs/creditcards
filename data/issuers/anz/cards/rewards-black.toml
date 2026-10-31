@@ -28,6 +28,16 @@ min_credit = 15000
 
 [rewards]
 program = "anz-rewards"
+earn_source = "parser"
+earn_text_hash = "f3d5ec4300bcff57"
+
+[[rewards.earn]]
+rate = 2
+cap_monthly = 5000
+
+[[rewards.earn]]
+rate = 1
+cap_monthly = 50000
 
 [perks]
 insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess in Australia Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance" ]

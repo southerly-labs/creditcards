@@ -33,7 +33,16 @@ min_credit = 1000
 
 [rewards]
 program = "qantas"
+earn_source = "parser"
+earn_text_hash = "bbd7b1dc953eb4fc"
 bonus_points = 40000
+
+[[rewards.earn]]
+rate = 0.6
+cap_monthly = 2500
+
+[[rewards.earn]]
+rate = 0.15
 
 [perks]
 insurance = [ "Complimentary Overseas Travel Insurance" ]

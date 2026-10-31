@@ -30,7 +30,16 @@ min_income = 75000
 
 [rewards]
 program = "velocity"
+earn_source = "parser"
+earn_text_hash = "d5677f03c96c5847"
 bonus_points = 100000
+
+[[rewards.earn]]
+rate = 0.75
+cap_monthly = 5000
+
+[[rewards.earn]]
+rate = 0.25
 
 [perks]
 insurance = [ "Mobile Phone Insurance", "International Travel Insurance", "Domestic Travel Insurance", "Purchase Protection Insurance", "Rental Vehicle Excess Insurance in Australia", "Purchase Cover", "Extended Warranty Insurance", "Transit Accident Insurance" ]

@@ -29,6 +29,11 @@ max_credit = 50000
 
 [rewards]
 program = "bendigo-bank-rewards"
+earn_source = "parser"
+earn_text_hash = "5be5c402c0cb10af"
+
+[[rewards.earn]]
+rate = 1.5
 
 [perks]
 insurance = [ "International Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess Insurance" ]
