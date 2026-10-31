@@ -34,6 +34,24 @@ const intro = (r: Row) => {
   return `${pct(offer.rate)} ${what}${offer.months ? ` ${offer.months}m` : ""}`
 }
 
+type Earn = NonNullable<NonNullable<Card["rewards"]>["earn"]>
+
+// Points per dollar on the first tier of everyday (uncategorised) spend.
+const baseEarn = (r: Row) => r.card.rewards?.earn?.find((e) => !e.category)?.rate
+
+const describeEarn = (earn: Earn) => {
+  let previousCap: number | undefined
+  return earn.map((e) => {
+    const where = e.category
+      ? ` on ${e.category}`
+      : e.cap_monthly !== undefined
+        ? ` up to ${money(e.cap_monthly).replace(/<[^>]+>/g, "")} a month`
+        : previousCap !== undefined ? " thereafter" : ""
+    if (!e.category && e.cap_monthly !== undefined) previousCap = e.cap_monthly
+    return `${e.rate} per $1${where}${e.note ? ` (${e.note})` : ""}`
+  }).join("\n")
+}
+
 const columns: ReadonlyArray<Column> = [
   {
     label: "Card",
@@ -54,6 +72,18 @@ const columns: ReadonlyArray<Column> = [
   { label: "Int. free days", num: true, sort: (r) => r.card.rates.interest_free_days, render: (r) => int(r.card.rates.interest_free_days) },
   { label: "FX fee", num: true, sort: (r) => r.card.fees.foreign_txn_pct, render: (r) => pct(r.card.fees.foreign_txn_pct) },
   { label: "Rewards", sort: (r) => r.program?.name, render: (r) => (r.program ? esc(r.program.name) : dash) },
+  {
+    label: "Earn /$",
+    num: true,
+    sort: (r) => baseEarn(r),
+    render: (r) => {
+      const earn = r.card.rewards?.earn
+      const base = baseEarn(r)
+      if (!earn || base === undefined) return dash
+      const more = earn.length > 1 ? '<span class="dim">+</span>' : ""
+      return `<span title="${esc(describeEarn(earn))}">${base}${more}</span>`
+    }
+  },
   { label: "Bonus pts", num: true, sort: (r) => r.card.rewards?.bonus_points, render: (r) => int(r.card.rewards?.bonus_points) },
   { label: "Min credit", num: true, sort: (r) => r.card.limits.min_credit, render: (r) => money(r.card.limits.min_credit) },
   { label: "Min income", num: true, sort: (r) => r.card.limits.min_income, render: (r) => money(r.card.limits.min_income) },
