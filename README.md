@@ -40,6 +40,16 @@ Banks publish earn rates as prose, so they are filled in two ways:
 
   Stamped cards have `earn_source = "manual"` and are never overwritten. If the bank's loyalty text changes, the card goes back on the review list.
 
+- **Issuer pages.** Some cards' CDR text has no earn rate, so the rate was read from the issuer's own page or terms PDF. These cards list that source under `rewards.earn_check`, with short quotes of the earn wording:
+
+  ```toml
+  [[rewards.earn_check]]
+  url = "https://www.qantasmoney.com/credit-cards/everyday"
+  expect = [ "0.75 qantas points per whole au$1 on domestic spend up to and including au$3,000 each statement period" ]
+  ```
+
+  After each sync, `bun run cli rewards check` fetches every source and lists cards whose quotes no longer appear in the `rewards-review` issue. Matching ignores case and whitespace. The check is report-only and needs no LLM. When a card is flagged, re-read the page, update `earn` and `expect`, and stamp the card again. To pick quotes, use `bun run cli rewards check --show <url>`, which prints the same normalised text the check searches.
+
 No LLM runs in CI and no API key is needed.
 
 ### Sync guardrails
