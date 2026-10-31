@@ -8,16 +8,17 @@ image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?
 [cdr]
 brand = "Bank Australia"
 product_id = "a3e1054a-73da-469f-863e-0f3418967627"
-last_updated = "2026-04-10T05:29:19.363Z"
+last_updated = "2026-10-31T21:00:23.444Z"
 
 [fees]
 annual = 0
+additional_card = 0
 foreign_txn_pct = 3
 cash_advance_min = 3.5
 
 [rates]
-purchase = 12.99
-cash_advance = 12.99
+purchase = 12.34
+cash_advance = 12.34
 balance_transfer = 0
 
 [limits]

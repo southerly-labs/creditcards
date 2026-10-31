@@ -9,7 +9,7 @@ image = "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b434aa
 [cdr]
 brand = "Qudos Bank"
 product_id = "9a6f5620-e93c-4e0c-bc23-d7f979b97f69"
-last_updated = "2026-02-27T04:23:05.703Z"
+last_updated = "2026-10-31T21:58:08.869Z"
 
 [fees]
 annual = 189
@@ -18,15 +18,10 @@ cash_advance_min = 5
 late_payment = 0
 
 [rates]
-purchase = 18.99
-cash_advance = 18.99
-balance_transfer = 18.99
+purchase = 20.99
+cash_advance = 20.99
+balance_transfer = 20.99
 interest_free_days = 55
-
-[[rates.intro]]
-applies_to = "both"
-rate = 4.99
-months = 5
 
 [limits]
 min_credit = 6000

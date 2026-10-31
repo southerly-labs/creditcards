@@ -8,7 +8,7 @@ image = "https://cdn.bfldr.com/1R31Y8GR/at/8pjw5xj3k6637fhx8gw7tb/1_Platinum.png
 [cdr]
 brand = "Bank Australia"
 product_id = "f23e4849-212b-4a22-beb1-a088654d73e5"
-last_updated = "2026-04-10T05:29:20.096Z"
+last_updated = "2026-10-31T21:00:24.184Z"
 
 [fees]
 annual = 189
@@ -17,8 +17,8 @@ foreign_txn_pct = 3
 cash_advance_min = 5
 
 [rates]
-purchase = 20.24
-cash_advance = 20.24
+purchase = 20.99
+cash_advance = 20.99
 interest_free_days = 55
 
 [limits]
@@ -40,15 +40,11 @@ note = "5,000-point cap per calendar month (from 1 Nov 2026)"
 
 [[rewards.earn_check]]
 url = "https://www.bankaust.com.au/credit-card-updates"
-expect = [
-  "you will earn 0.75 qantas points per $1 spent on eligible transactions up to and including $3,000 per calendar month; you will earn 0.35 qantas points per $1 spent on eligible transactions above $3,000 per calendar month; and a maximum of 5,000 qantas points may be earned from eligible transactions in each calendar month",
-]
+expect = [ "you will earn 0.75 qantas points per $1 spent on eligible transactions up to and including $3,000 per calendar month; you will earn 0.35 qantas points per $1 spent on eligible transactions above $3,000 per calendar month; and a maximum of 5,000 qantas points may be earned from eligible transactions in each calendar month" ]
 
 [[rewards.earn_check]]
 url = "https://www.bankaust.com.au/banking/credit-cards/platinum-rewards-credit-card"
-expect = [
-  "earn 0.75 qantas points for every $1 spent",
-]
+expect = [ "earn 0.75 qantas points for every $1 spent" ]
 
 [perks]
 
