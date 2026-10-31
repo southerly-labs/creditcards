@@ -4,7 +4,13 @@ See README.md for what this is, the data layout and the sync guardrails.
 
 ## How changes land: trunk-based, push to main
 
-There are no feature branches or PRs in this repo. Every change is a small commit pushed straight to `main`. The daily sync bot already works this way, and so do people and agents.
+Every change lands as a small commit pushed straight to `main`, without a PR. The daily sync bot already works this way, and so do people and agents. Temporary branches in separate worktrees are allowed to isolate concurrent threads; they are not long-lived feature branches.
+
+### Concurrent threads
+
+Use a separate worktree for each editing thread. `t3.json` defaults new threads to worktrees and runs `bun install --frozen-lockfile` before the agent starts, installing dependencies and enabling the pre-commit hook. Existing threads keep their current checkout.
+
+Stay on your worktree's temporary branch when landing changes. Rebase it onto `origin/main` and push `HEAD:main` using the commands below; do not switch to or modify another thread's checkout. Push each small, shippable commit promptly. If another thread or the sync bot wins the push race, repeat the rebase, resolve conflicts, rerun `bun run check`, and retry the push. Never force-push `main`.
 
 ### Before every push
 
@@ -18,10 +24,12 @@ git pull --rebase origin main && git push origin HEAD:main
 
 The sync bot commits to `data/` every day at 20:00 UTC, so always rebase before you push. Never force-push `main`.
 
+If the rebase changes the tree you checked, run `bun run check` again before pushing.
+
 ### Keep commits small and shippable
 
 - Each commit must pass the checks above on its own and leave the site and `dist/api.json` working. Unused code is fine; broken code is not.
-- If a change seems to need a branch, split it into steps. Push each step on its own (see the patterns below).
+- If a change seems to need a long-lived branch, split it into steps. Push each step on its own (see the patterns below).
 - Aim for commits that take minutes to review in `git log -p`. If a commit mixes a refactor with a behaviour change, split it into two commits.
 - Keep hand edits to `data/` in separate commits from code changes, so either one can be reverted cleanly.
 

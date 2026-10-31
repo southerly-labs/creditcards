@@ -1,8 +1,15 @@
 {
   "$schema": "https://t3.codes/schema/t3.json",
   "iconPath": "assets/icon.svg",
-  "defaultThreadEnvMode": "local",
+  "defaultThreadEnvMode": "worktree",
   "scripts": [
+    {
+      "name": "Setup worktree",
+      "command": "bun install --frozen-lockfile",
+      "icon": "configure",
+      "runOnWorktreeCreate": true,
+      "async": false
+    },
     {
       "name": "Check",
       "command": "bun run check",
