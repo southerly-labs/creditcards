@@ -30,9 +30,24 @@ min_income = 35000
 
 [rewards]
 program = "qantas"
-earn = []
 earn_source = "manual"
 earn_text_hash = "cd2235b1a67c0222"
+
+[[rewards.earn]]
+rate = 1
+cap_monthly = 10000
+
+[[rewards.earn]]
+rate = 0.5
+
+[[rewards.earn]]
+rate = 1.5
+category = "international spend"
+
+[[rewards.earn]]
+rate = 2
+category = "Qantas products and services"
+note = "1 bonus point per $1 on top of the domestic rate"
 
 [perks]
 insurance = [ "Complimentary Travel Insurance" ]

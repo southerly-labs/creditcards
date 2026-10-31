@@ -28,9 +28,13 @@ max_credit = 60000
 
 [rewards]
 program = "flybuys"
-earn = []
 earn_source = "manual"
 earn_text_hash = "06c03d7ec6690764"
+
+[[rewards.earn]]
+rate = 0.5
+cap_monthly = 5000
+note = "no points on spend above $5,000 a statement period"
 
 [perks]
 insurance = [ "Complimentary insurance" ]

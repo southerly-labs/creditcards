@@ -28,9 +28,13 @@ max_credit = 60000
 
 [rewards]
 program = "flybuys"
-earn = []
 earn_source = "manual"
 earn_text_hash = "06c03d7ec6690764"
+
+[[rewards.earn]]
+rate = 0.5
+category = "Coles Supermarkets"
+note = "earns no points elsewhere"
 
 [perks]
 insurance = [ "Complimentary Insurance" ]

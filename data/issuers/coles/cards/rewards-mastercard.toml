@@ -28,9 +28,18 @@ max_credit = 60000
 
 [rewards]
 program = "flybuys"
-earn = []
 earn_source = "manual"
 earn_text_hash = "06c03d7ec6690764"
+
+[[rewards.earn]]
+rate = 1
+cap_monthly = 8000
+note = "no points on spend above $8,000 a statement period"
+
+[[rewards.earn]]
+rate = 2
+category = "Coles Supermarkets"
+note = "counts towards the same $8,000 cap"
 
 [perks]
 
