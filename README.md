@@ -50,6 +50,36 @@ Banks publish earn rates as prose, so they are filled in two ways:
 
   After each sync, `bun run cli rewards check` fetches every source and lists cards whose quotes no longer appear in the `rewards-review` issue. Matching ignores case and whitespace. The check is report-only and needs no LLM. When a card is flagged, re-read the page, update `earn` and `expect`, and stamp the card again. To pick quotes, use `bun run cli rewards check --show <url>`, which prints the same normalised text the check searches.
 
+### Signup bonuses
+
+Bonus offers are often paid in two parts: points for meeting a spend target in the first months, then more points in the second year for keeping the card or spending again. `rewards.bonus` stores each part as its own tranche:
+
+```toml
+[[rewards.bonus]]
+points = 80000
+year = 1
+min_spend = 3000
+spend_days = 90
+
+[[rewards.bonus]]
+points = 20000
+year = 2
+keep_months = 12
+```
+
+- **Parser.** During the sync, `src/rewards/bonus.ts` reads the CDR `BONUS_REWARDS` text. It sets `rewards.bonus` only when every amount maps to a clear year and the amounts agree with any "up to" total and with the CDR value. These cards have `bonus_source = "parser"`. When the offer ends, or changes into text the parser can't read, the parsed bonus is removed rather than left stale.
+- **Review.** Alternative offers, end dates, cashback, per-month awards and offers with no details in CDR are listed in the `rewards-review` issue:
+
+  ```sh
+  bun run cli rewards bonus-todo --issuer anz      # cards to review, with their CDR bonus text
+  # edit rewards.bonus in the card's TOML file
+  bun run cli rewards bonus-stamp anz/rewards-platinum   # --none if there is no current points offer
+  ```
+
+  Stamped cards have `bonus_source = "manual"` and are never overwritten. If the bank's bonus text changes, the card goes back on the review list.
+
+`bonus_points` is still the raw CDR value. It is sometimes the total and sometimes only the first part, so prefer `bonus`.
+
 No LLM runs in CI and no API key is needed.
 
 ### Sync guardrails

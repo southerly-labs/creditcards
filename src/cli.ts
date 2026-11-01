@@ -6,7 +6,7 @@ import { FetchHttpClient } from "effect/http"
 import { toApi, validate } from "./build/build.ts"
 import { CdrClient } from "./cdr/CdrClient.ts"
 import { checkEarnPages, formatCheck, normaliseText, pageText } from "./rewards/check.ts"
-import { formatQueue, reviewQueue, stamp } from "./rewards/review.ts"
+import { bonusReviewQueue, formatBonusQueue, formatQueue, reviewQueue, stamp, stampBonus } from "./rewards/review.ts"
 import { Store } from "./store/Store.ts"
 import { summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
 
@@ -91,6 +91,34 @@ const rewardsStamp = Command.make(
   })
 ).pipe(Command.withDescription("Mark cards' earn rates as manually reviewed against the current CDR text"))
 
+const bonusTodo = Command.make(
+  "bonus-todo",
+  {
+    issuer: Flag.String("issuer").pipe(Flag.withDescription("Only this issuer"), Flag.optional),
+    out: Flag.String("out").pipe(Flag.withDefault(".cache/bonus-todo.md"))
+  },
+  Effect.fn(function* ({ issuer, out }) {
+    const text = formatBonusQueue(yield* bonusReviewQueue(Option.getOrUndefined(issuer)))
+    yield* writeFile(out, text)
+    yield* Console.log(text)
+    yield* Console.log(`Wrote ${out}`)
+  })
+).pipe(Command.withDescription("List cards whose signup bonuses need review, with their CDR bonus text"))
+
+const bonusStamp = Command.make(
+  "bonus-stamp",
+  {
+    cards: Argument.String("card").pipe(Argument.withDescription("issuer/card keys"), Argument.atLeast(1)),
+    none: Flag.Boolean("none").pipe(
+      Flag.withDescription("Record that the card has no current points offer"),
+      Flag.withDefault(false)
+    )
+  },
+  Effect.fn(function* ({ cards, none }) {
+    yield* stampBonus(cards, none)
+  })
+).pipe(Command.withDescription("Mark cards' signup bonuses as manually reviewed against the current CDR text"))
+
 const rewardsCheck = Command.make(
   "check",
   {
@@ -115,8 +143,8 @@ const rewardsCheck = Command.make(
 ).pipe(Command.withDescription("Check manual earn rates against the issuer pages in rewards.earn_check (report only)"))
 
 const rewards = Command.make("rewards").pipe(
-  Command.withDescription("Review earn rates the parser cannot read"),
-  Command.withSubcommands([rewardsTodo, rewardsStamp, rewardsCheck])
+  Command.withDescription("Review earn rates and signup bonuses the parsers cannot read"),
+  Command.withSubcommands([rewardsTodo, rewardsStamp, bonusTodo, bonusStamp, rewardsCheck])
 )
 
 const MainLayer = Layer.mergeAll(CdrClient.layer, Store.layer(DATA_DIR), FetchHttpClient.layer).pipe(

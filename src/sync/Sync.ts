@@ -385,5 +385,16 @@ export const summariseRewardsReview = (r: SyncReport): string =>
     "`rewards.earn` from the CDR text it prints, then `bun run cli rewards stamp <issuer/card>...`.",
     'See "Earn rates" in the README.',
     "",
-    ...r.rewards.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
+    ...r.rewards.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`),
+    ...(r.bonus.review.length === 0
+      ? []
+      : [
+          "",
+          `${r.bonus.review.length} cards have signup bonuses the parser could not split by year.`,
+          "",
+          "Run `bun run cli rewards bonus-todo`, set `rewards.bonus` from the CDR text it prints, then",
+          '`bun run cli rewards bonus-stamp <issuer/card>...`. See "Signup bonuses" in the README.',
+          "",
+          ...r.bonus.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
+        ])
   ].join("\n")

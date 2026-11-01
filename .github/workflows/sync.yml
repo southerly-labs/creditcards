@@ -71,7 +71,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          count=$(jq '.rewards.review | length' .cache/sync-report.json)
+          count=$(jq '(.rewards.review | length) + (.bonus.review | length)' .cache/sync-report.json)
           changed=0
           if [ -f .cache/earn-check.json ]; then
             changed=$(jq '[.[] | select(.missing | length > 0)] | length' .cache/earn-check.json)
@@ -81,13 +81,13 @@ jobs:
           number=$(gh issue list --label rewards-review --state open --json number --jq '.[0].number')
           if [ "$count" -eq 0 ] && [ "$changed" -eq 0 ]; then
             if [ -n "$number" ]; then
-              gh issue close "$number" --comment "All earn rates are resolved."
+              gh issue close "$number" --comment "All earn rates and signup bonuses are resolved."
             fi
             exit 0
           fi
-          gh label create rewards-review --color 0E8A16 --description "Earn rates the parser could not read" --force
+          gh label create rewards-review --color 0E8A16 --description "Earn rates and signup bonuses the parsers could not read" --force
           if [ -n "$number" ]; then
             gh issue edit "$number" --body-file .cache/rewards-review.md
           else
-            gh issue create --title "Earn rates to review" --label rewards-review --body-file .cache/rewards-review.md
+            gh issue create --title "Earn rates and signup bonuses to review" --label rewards-review --body-file .cache/rewards-review.md
           fi
