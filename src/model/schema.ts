@@ -67,7 +67,7 @@ const CardFields = Schema.Struct({
   type: CardType,
   network: Schema.optionalKey(Network),
   status: Schema.Literals(["active", "closed", "discontinued"]),
-  first_seen: Schema.optionalKey(CalendarDate),
+  first_seen: CalendarDate,
   closed: Schema.optionalKey(CalendarDate),
   discontinued: Schema.optionalKey(CalendarDate),
   description: Schema.optionalKey(Schema.String),

@@ -7,7 +7,7 @@ import type { Fee, ProductDetail } from "./schema.ts"
 
 type Mutable<T> = { -readonly [K in keyof T]: T[K] extends object ? Mutable<T[K]> : T[K] }
 
-export type NormalisedCard = Mutable<Card>
+export type NormalisedCard = Mutable<Omit<Card, "first_seen">>
 
 export interface ProgramIndex {
   readonly programs: ReadonlyArray<{

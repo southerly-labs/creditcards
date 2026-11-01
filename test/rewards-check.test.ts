@@ -38,6 +38,7 @@ describe("checkEarnPages", () => {
   const card = (url: string, quote: string, status: Card["status"] = "active"): Card => ({
     name: "Card",
     type: "personal",
+    first_seen: "2026-10-31",
     status,
     fees: {},
     rates: {},

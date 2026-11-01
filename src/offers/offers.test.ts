@@ -16,6 +16,7 @@ const card = Schema.decodeUnknownSync(Card)({
   name: "Test",
   type: "personal",
   status: "active",
+  first_seen: "2026-10-31",
   fees: {},
   rates: {},
   limits: {},

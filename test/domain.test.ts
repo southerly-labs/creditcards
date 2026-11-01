@@ -4,7 +4,17 @@ import { Card } from "../src/model/schema.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "../src/model/domain.ts"
 
 test("credit limits and count fields reject impossible values", () => {
-  const card = { name: "Test", type: "personal", status: "active", fees: {}, rates: {}, limits: {}, perks: {} }
+  const card = {
+    name: "Test",
+    type: "personal",
+    status: "active",
+    first_seen: "2026-10-31",
+    fees: {},
+    rates: {},
+    limits: {},
+    perks: {}
+  }
+
   assert.isTrue(Schema.is(Card)(card))
   assert.isFalse(Schema.is(Card)({ ...card, limits: { min_credit: 1000, max_credit: 500 } }))
   assert.isFalse(Schema.is(Card)({ ...card, rates: { interest_free_days: 1.5 } }))

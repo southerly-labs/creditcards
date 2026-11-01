@@ -140,6 +140,7 @@ describe("merge and guardrails", () => {
     name: "Card",
     type: "personal",
     status: "active",
+    first_seen: "2026-10-31",
     locked: ["fees.foreign_txn_pct"],
     fees: { annual: 100, foreign_txn_pct: 0 },
     rates: { purchase: 20 },

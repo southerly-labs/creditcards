@@ -9,6 +9,7 @@ test("section corrections and provenance survive CDR merging", () => {
     name: "Card",
     type: "personal",
     status: "active",
+    first_seen: "2026-10-31",
     fees: { annual: 25 },
     rates: {},
     limits: {},
@@ -40,6 +41,7 @@ test("a hand-set closed status survives CDR merging", () => {
     name: "Card",
     type: "personal",
     status: "closed",
+    first_seen: "2026-10-31",
     closed: "2025-06-01",
     fees: {},
     rates: {},
@@ -69,6 +71,7 @@ test("lifecycle dates must agree with the status", () => {
     Schema.decodeUnknownSync(Card)({
       ...card,
       status: "discontinued",
+      first_seen: "2026-10-31",
       closed: "2025-01-01",
       discontinued: "2026-01-01"
     })

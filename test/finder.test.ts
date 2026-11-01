@@ -8,6 +8,7 @@ const base: PublicCard = {
   name: "Card",
   type: "personal",
   status: "active",
+  first_seen: "2026-10-31",
   fees: {},
   rates: {},
   limits: {},
