@@ -4,13 +4,15 @@ import { DateTime, Effect, Result, Schema } from "effect"
 import { CdrClient, type CdrError, REQUEST_VARIANTS } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
 import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
-import { Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
-import { planRewards, RewardsPlan } from "../rewards/plan.ts"
+import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
+import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
 import { diffCard, type FieldChange, holdReasons, MAX_DISCONTINUED_SHARE, mergeCard, MIN_SEEN_SHARE } from "./merge.ts"
 
 const CATEGORY = "CRED_AND_CHRG_CARDS"
+
+const bonusFeatures = (p: ProductDetail) => (p.features ?? []).filter((f) => f.featureType === "BONUS_REWARDS")
 
 export interface SyncReport {
   readonly date: string
@@ -25,6 +27,11 @@ export interface SyncReport {
 
   readonly rewards: {
     readonly set: ReadonlyArray<{ readonly card: string; readonly earn: ReadonlyArray<EarnRate> }>
+    readonly review: ReadonlyArray<{ readonly card: string; readonly reason: string }>
+  }
+
+  readonly bonus: {
+    readonly set: ReadonlyArray<{ readonly card: string; readonly bonus: ReadonlyArray<BonusTranche> }>
     readonly review: ReadonlyArray<{ readonly card: string; readonly reason: string }>
   }
 }
@@ -158,6 +165,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const writes = new Map<string, Card>()
   const rewardsSet: Array<{ card: string; earn: ReadonlyArray<EarnRate> }> = []
   const rewardsReview: Array<{ card: string; reason: string }> = []
+  const bonusSet: Array<{ card: string; bonus: ReadonlyArray<BonusTranche> }> = []
+  const bonusReview: Array<{ card: string; reason: string }> = []
 
   for (const { brand, products } of fetched) {
     if (products.length === 0) continue
@@ -215,6 +224,16 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         }
       }
 
+      const withEarn = merged["rewards"]
+      let bonusPlan: BonusPlan = BonusPlan.Unchanged()
+
+      if (withEarn !== undefined && Schema.is(Card.fields.rewards)(withEarn)) {
+        bonusPlan = planBonus(withEarn, bonusFeatures(product))
+        merged["rewards"] = applyBonusPlan(withEarn, bonusPlan)
+      }
+
+      if (BonusPlan.$is("Review")(bonusPlan)) bonusReview.push({ card: key, reason: bonusPlan.reason })
+
       const decoded = yield* decodeCard(merged).pipe(Effect.result)
 
       if (Result.isFailure(decoded)) {
@@ -235,6 +254,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       writes.set(key, decoded.success)
 
       if (earnSet) rewardsSet.push({ card: key, earn: earnSet })
+
+      if (BonusPlan.$is("Set")(bonusPlan)) bonusSet.push({ card: key, bonus: bonusPlan.bonus })
 
       if (existing) updated.push({ card: key, changes })
       else added.push(key)
@@ -294,7 +315,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     brandErrors: fetched
       .filter((b) => b.listError !== undefined && !/HTTP 4\d\d/u.test(b.listError))
       .map((b) => ({ brand: b.brand, error: required(b.listError) })),
-    rewards: { set: rewardsSet, review: rewardsReview }
+    rewards: { set: rewardsSet, review: rewardsReview },
+    bonus: { set: bonusSet, review: bonusReview }
   } satisfies SyncReport
 })
 
@@ -315,7 +337,15 @@ export const summariseReport = (r: SyncReport): string => {
 
     for (const u of r.updated) {
       const shown = u.changes.filter(
-        (c) => !["cdr", "description", "rewards.earn_source", "rewards.earn_text_hash"].includes(c.path)
+        (c) =>
+          ![
+            "cdr",
+            "description",
+            "rewards.earn_source",
+            "rewards.earn_text_hash",
+            "rewards.bonus_source",
+            "rewards.bonus_text_hash"
+          ].includes(c.path)
       )
 
       lines.push(
@@ -336,6 +366,10 @@ export const summariseReport = (r: SyncReport): string => {
 
   if (r.rewards.set.length > 0 || r.rewards.review.length > 0) {
     lines.push(`Earn rates: ${r.rewards.set.length} set by parser, ${r.rewards.review.length} need review`, "")
+  }
+
+  if (r.bonus.set.length > 0 || r.bonus.review.length > 0) {
+    lines.push(`Signup bonuses: ${r.bonus.set.length} set by parser, ${r.bonus.review.length} need review`, "")
   }
 
   if (r.brandErrors.length > 0) lines.push("Brand errors:", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")

@@ -1,5 +1,6 @@
 import { describe, expect, test } from "@effect/vitest"
 import { BonusResult, bonusTextHash, parseBonus } from "../src/rewards/bonus.ts"
+import { applyBonusPlan, BonusPlan, planBonus } from "../src/rewards/plan.ts"
 
 const feature = (additionalValue: string, additionalInfo = "") => ({ additionalValue, additionalInfo })
 const parse = (value: string, info?: string) => parseBonus([feature(value, info)])
@@ -189,4 +190,41 @@ test("the text hash changes with the offer", () => {
   expect(bonusTextHash([feature("80000", "80,000 points")])).not.toBe(
     bonusTextHash([feature("90000", "90,000 points")])
   )
+})
+
+describe("plans bonus updates", () => {
+  const split = [feature("80000", "80,000 points when you spend $3,000 within 90 days of account opening.")]
+  const unclear = [feature("40000", "Earn up to 40,000 points when you keep your card open for over 15 months.")]
+  const parsed = [{ points: 80000, year: 1 as const, min_spend: 3000, spend_days: 90 }]
+
+  test("sets parsed tranches", () => {
+    const plan = planBonus({ program: "nab-rewards" }, split)
+    expect(plan).toEqual(BonusPlan.Set({ bonus: parsed, hash: bonusTextHash(split) }))
+    expect(applyBonusPlan({ program: "nab-rewards" }, plan)).toEqual({
+      program: "nab-rewards",
+      bonus: parsed,
+      bonus_source: "parser",
+      bonus_text_hash: bonusTextHash(split)
+    })
+  })
+
+  test("clears a stale parsed bonus the parser can no longer read", () => {
+    const current = { program: "qantas", bonus: parsed, bonus_source: "parser" as const, bonus_text_hash: "old" }
+    const plan = planBonus(current, unclear)
+    expect(plan).toEqual(BonusPlan.Review({ reason: "only an 'up to' total, no tranches", clear: true }))
+    expect(applyBonusPlan(current, plan)).toEqual({ program: "qantas" })
+  })
+
+  test("keeps a manual bonus but asks for review when the text changes", () => {
+    const current = { program: "qantas", bonus: parsed, bonus_source: "manual" as const, bonus_text_hash: "old" }
+    expect(planBonus(current, unclear)).toEqual(
+      BonusPlan.Review({ reason: "bonus text changed since manual review", clear: false })
+    )
+    expect(planBonus({ ...current, bonus_text_hash: bonusTextHash(unclear) }, unclear)).toEqual(BonusPlan.Unchanged())
+  })
+
+  test("removes a parsed bonus when the offer ends", () => {
+    const current = { program: "qantas", bonus: parsed, bonus_source: "parser" as const, bonus_text_hash: "old" }
+    expect(planBonus(current, [])).toEqual(BonusPlan.Clear())
+  })
 })
