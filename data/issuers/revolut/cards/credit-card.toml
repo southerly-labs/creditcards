@@ -1,6 +1,7 @@
 name = "Revolut Credit Card"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "A Revolut credit card with interest-free periods on purchases and variable interest rates. Features and fees vary depending on your plan. See our website for details."
 
 [cdr]

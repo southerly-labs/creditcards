@@ -2,6 +2,7 @@ name = "Platinum Visa Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Be rewarded for your spending with Qantas Points. Great for those who pay their card in full each month and are a Qantas Frequent Flyer member."
 image = "https://cdn.bfldr.com/1R31Y8GR/at/8pjw5xj3k6637fhx8gw7tb/1_Platinum.png?auto=webp&format=png"
 

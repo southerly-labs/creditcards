@@ -2,6 +2,7 @@ name = "Visa Credit My Rewards"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our Visa My Rewards Credit Card comes with a competitive low interest rate, rewards program, low annual fee and up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date"
 image = "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visacreditmyrewards.jpg"
 

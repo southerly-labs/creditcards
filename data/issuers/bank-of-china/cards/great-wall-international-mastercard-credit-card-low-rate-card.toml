@@ -2,6 +2,7 @@ name = "Bank of China Great Wall International MasterCard Credit Card (Low rate 
 type = "personal"
 network = "mastercard"
 status = "active"
+first_seen = "2026-10-31"
 description = "The Bank of China Great Wall International Credit Card (Credit Card) can be used for making purchases and at any ATM in Australia and overseas displaying a MasterCard logo or for cash withdrawals at any Bank of China retail branches in Australia. You will enjoy up to 55 days of Interest-free period on purchases. The Credit Card also provides you with other features such as Smart Interest Free Instalment Plan and maximum Monthly Usage Limit for additional cardholders."
 image = "http://pic.bankofchina.com/branches/australia/201801/W020180125416583778464.jpg"
 

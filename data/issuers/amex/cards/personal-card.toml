@@ -2,6 +2,7 @@ name = "American Express® Personal Card"
 type = "personal"
 network = "amex"
 status = "active"
+first_seen = "2026-10-31"
 description = "Charge Card with Membership Rewards"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGGR00001S3.gif"
 

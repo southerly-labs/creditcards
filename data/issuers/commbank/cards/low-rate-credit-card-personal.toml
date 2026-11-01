@@ -1,6 +1,7 @@
 name = "Low Rate credit card"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Ideal for small business owners looking for a line of credit with a competitive interest rate and no annual fee. Note, this product does not include an interest free day period."
 url = "https://www.commbank.com.au/business/business-credit-cards/business-low-rate-credit-card.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/personal-liability/mastercard-business-low-rate-credit-card.png"

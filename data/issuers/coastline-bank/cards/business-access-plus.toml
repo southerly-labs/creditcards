@@ -1,6 +1,7 @@
 name = "Business Access Plus"
 type = "business"
 status = "active"
+first_seen = "2026-10-31"
 description = "Business Access Plus"
 url = "https://www.coastline.com.au/business/visa-business-credit-card"
 

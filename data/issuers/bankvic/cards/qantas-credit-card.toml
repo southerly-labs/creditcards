@@ -2,6 +2,7 @@ name = "Qantas Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "For Police Association of Victoria, Australian Federal Police Association, Northern Territory Police Association, Victorian Ambulance Union and United Firefighters Union members"
 url = "https://www.bankvic.com.au/apply-for-credit"
 

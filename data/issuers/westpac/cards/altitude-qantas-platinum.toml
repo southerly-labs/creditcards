@@ -1,6 +1,7 @@
 name = "Altitude Qantas Platinum"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Earn Qantas Points directly to your Qantas Frequent Flyer account and enjoy Platinum credit card benefits."
 url = "https://www.westpac.com.au/credit-cards/reward/altitude-qantas-platinum/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Rewards%20Platinum_232x146_grey.jpg"

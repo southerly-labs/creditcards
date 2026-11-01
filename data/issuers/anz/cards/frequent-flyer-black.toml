@@ -1,6 +1,7 @@
 name = "ANZ Frequent Flyer Black"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our most rewarding Qantas experience"
 url = "https://www.anz.com.au/personal/credit-cards/frequent-flyer/black/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/frequent-flyer-black-2016.jpg"

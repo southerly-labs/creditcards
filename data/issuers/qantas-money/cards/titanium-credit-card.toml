@@ -1,6 +1,7 @@
 name = "Qantas Money Titanium Credit Card"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "The Product is a rewards credit card that provides individuals with a line of credit facility, the ability to earn Qantas Frequent Flyer Points (Qantas Points) and access to ancillary Qantas benefits and complimentary insurances, with up to 44 days interest free on retail purchases and an annual fee."
 url = "https://www.qantasmoney.com/credit-cards"
 image = "https://www.qantasmoney.com/credit-cards/titanium"

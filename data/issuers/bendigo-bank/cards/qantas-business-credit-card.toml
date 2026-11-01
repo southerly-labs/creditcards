@@ -1,6 +1,7 @@
 name = "Qantas Business Credit Card"
 type = "business"
 status = "active"
+first_seen = "2026-10-31"
 description = "With one of the lowest annual fees in the market, and a range of insurances, the Qantas Business Credit Card will help your points soar. You will also receive up to 55 days interest free on purchases."
 image = "https://www.bendigobank.com.au/siteassets/business/cards-for-business/qantasbusinesscreditcard/exploreimage-businessrewardscard.png"
 

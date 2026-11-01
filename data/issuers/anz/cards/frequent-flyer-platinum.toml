@@ -1,6 +1,7 @@
 name = "ANZ Frequent Flyer Platinum"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Earn Qantas Points on everyday purchases with complimentary insurances (conditions and exclusions apply) and Personal Concierge"
 url = "https://www.anz.com.au/personal/credit-cards/frequent-flyer/platinum/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-010-anz-au.jpg"

@@ -2,6 +2,7 @@ name = "Rainbow Vertigo Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "An everyday card with a low rate on purchases, and a low monthly card fee."
 image = "https://www.stgeorge.com.au/content/dam/public/open-banking/stg-vertigo-rainbowcard-art-232x146.jpg"
 

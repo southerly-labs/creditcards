@@ -1,6 +1,7 @@
 name = "MyCard Clear"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "The Product is a low interest rate credit card that provides individuals with a line of credit facility that has a low rate."
 image = "https://www.mycard.com.au/credit-cards/clear-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1762859319006/mycard-clear-digital-card-1536x969.png"
 

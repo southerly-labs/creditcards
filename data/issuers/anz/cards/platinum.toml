@@ -1,6 +1,7 @@
 name = "ANZ Platinum"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our low fee, platinum credit card  with  complimentary insurances (conditions and exclusions apply)"
 url = "https://www.anz.com.au/personal/credit-cards/low-annual-fee/platinum/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-012-anz-au.jpg"

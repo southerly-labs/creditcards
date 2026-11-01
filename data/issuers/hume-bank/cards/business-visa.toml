@@ -2,6 +2,7 @@ name = "Business Visa"
 type = "business"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Hume Bank's Business credit card is a great business solution giving you freedom in managing your cash flow."
 url = "https://www.humebank.com.au/business/business-visa-credit-card/"
 

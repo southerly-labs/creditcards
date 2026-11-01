@@ -2,6 +2,7 @@ name = "VISA Business"
 type = "business"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "A low interest rate on purchases to help manage your business cash flow"
 image = "https://www.banksa.com.au/content/dam/bsa/images/business/credit-cards/BSA_VISA-business-credit-card_261x166.jpg"
 

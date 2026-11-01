@@ -2,6 +2,7 @@ name = "American Express® Business Travel Account"
 type = "business"
 network = "amex"
 status = "active"
+first_seen = "2026-10-31"
 description = "Enable employees and non-employees to make travel purchases and reconcile all spend in a central billing Account."
 url = "https://www.americanexpress.com/au/business/payment-solutions/"
 

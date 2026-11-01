@@ -1,6 +1,7 @@
 name = "Altitude Qantas Black"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our premier Qantas credit card gets you a high Qantas Points earn rate as well as complimentary airport lounge access, insurances and concierge."
 url = "https://www.westpac.com.au/credit-cards/reward/altitude-qantas-black/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Black%20Mastercard_232x146_black.jpg"

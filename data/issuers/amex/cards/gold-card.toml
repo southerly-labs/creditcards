@@ -2,6 +2,7 @@ name = "American Express® Gold Card"
 type = "personal"
 network = "amex"
 status = "active"
+first_seen = "2026-10-31"
 description = "Charge Card with Membership Rewards and travel benefits."
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGGL00010S3.gif"
 

@@ -2,6 +2,7 @@ name = "Low Rate Visa Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "A lower interest rate to reduce your borrowing costs. Great for those who have a carryover balance each month."
 image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
 

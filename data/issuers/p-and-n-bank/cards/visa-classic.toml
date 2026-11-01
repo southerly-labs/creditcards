@@ -2,6 +2,7 @@ name = "P&N Bank Visa Classic"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "If you're looking for a low-cost credit card the Visa Classic Credit Card could be the right fit. With a minimum credit limit of $1,000, it's a great option for first time credit card holders, or if you want to keep your spending habits under control."
 image = "https://digital.pnbank.com.au/globalassets/internet-banking/onboarding/products/pn-visa-credit_oct25.png"
 

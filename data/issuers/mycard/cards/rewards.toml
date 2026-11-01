@@ -1,6 +1,7 @@
 name = "MyCard Rewards"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "The Product is a rewards credit card that provides individuals with a line of credit facility, the ability to earn MyCard Reward Points (Reward Points) and access to ancillary benefits and complimentary insurances.\n\nThe product is intended for everyday spend and to provide everyday benefits and discounts through its rewards program."
 image = "https://www.mycard.com.au/credit-cards/rewards-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1762796325453/mycard-rewards-digital-card-1536x969.png"
 

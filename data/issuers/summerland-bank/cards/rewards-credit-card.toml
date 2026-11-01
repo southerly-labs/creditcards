@@ -2,6 +2,7 @@ name = "Rewards Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Earn Rewards points on your everyday spend."
 url = "https://application.summerland.com.au/nPortal__SelfRegistration?product=a0uOm000005EqqcIAC&core=es5&_gl=1*199l32e*_gcl_au*MTYyNjUxNDAwNi4xNzQwNjkxMDQ1"
 

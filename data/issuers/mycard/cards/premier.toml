@@ -1,6 +1,7 @@
 name = "MyCard Premier"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "The Product is a premium rewards credit card that provides individuals with a line of credit facility, the ability to earn MyCard Reward Points (Reward Points) and access to ancillary benefits and complimentary insurances"
 url = "https://mycard.com.au/credit-cards/premier-card"
 image = "https://www.mycard.com.au/credit-cards/premier-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1762874647410/mycard-premier-digital-card-1536x969.png"

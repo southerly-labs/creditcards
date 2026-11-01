@@ -2,6 +2,7 @@ name = "Visa Debit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Visa Debit Card"
 url = "https://www.coastline.com.au/personal/personal-and-car-loans"
 

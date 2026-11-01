@@ -1,6 +1,7 @@
 name = "Business Vantage"
 type = "business"
 status = "active"
+first_seen = "2026-10-31"
 description = "A low interest rate on purchases to help manage your business cash flow"
 image = "https://www.stgeorge.com.au/content/dam/stg/images/business/credit-cards/BusinessVantage-Credit-Card_261x166.jpg"
 

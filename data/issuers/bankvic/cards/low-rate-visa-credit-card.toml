@@ -2,6 +2,7 @@ name = "Low Rate Visa Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "A basic credit card for everyday banking"
 url = "https://www.bankvic.com.au/apply-for-credit"
 

@@ -2,6 +2,7 @@ name = "Value Plus Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "A personal credit card with up to 55 days interest free on purchases, a low annual fee and competitive interest rate."
 url = "https://www.newcastlepermanent.com.au/tools-and-services/apply-for-a-product"
 

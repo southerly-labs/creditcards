@@ -1,6 +1,7 @@
 name = "ANZ Low Rate"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "A credit card with a low ongoing interest rate for your everyday purchases"
 url = "https://www.anz.com.au/personal/credit-cards/low-interest-rate/low-rate-card/"
 image = "https://www.anz.com.au/content/dam/anzcomau/images/credit-cards/card-images/cc-lowrate-card-finder-awards-2026.jpg"

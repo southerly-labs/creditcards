@@ -1,6 +1,7 @@
 name = "Altitude Business Platinum"
 type = "business"
 status = "active"
+first_seen = "2026-10-31"
 description = "Get uncapped rewards points for eligible purchases and tax payments, plus complimentary extended insurance."
 image = "https://www.westpac.com.au/content/dam/public/wbc/images/business/credit-cards/wbc_fc_b_credit-cards_alt-business-platinum-visa_232x146.png"
 

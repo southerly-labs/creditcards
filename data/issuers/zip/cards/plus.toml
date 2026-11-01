@@ -2,6 +2,7 @@ name = "Zip Plus"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Higher-limit everyday account with a Zip Visa Card and conditional interest-free balance treatment."
 url = "https://zip.co/au/zip-plus"
 

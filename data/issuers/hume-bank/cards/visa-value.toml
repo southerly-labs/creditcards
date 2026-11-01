@@ -2,6 +2,7 @@ name = "Visa Value"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our most popular card: no mess, no fuss, and no nasty surprises."
 url = "https://www.humebank.com.au/everyday/hume-value-visa-credit-card/"
 

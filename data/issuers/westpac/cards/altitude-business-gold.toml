@@ -1,6 +1,7 @@
 name = "Altitude Business Gold"
 type = "business"
 status = "active"
+first_seen = "2026-10-31"
 description = "Receive flexible rewards points for eligible purchases and tax payments, plus complimentary insurance."
 image = "https://www.westpac.com.au/content/dam/public/wbc/images/business/credit-cards/wbc_fc_b_credit-cards_alt-business-gold-visa_232x146.png"
 

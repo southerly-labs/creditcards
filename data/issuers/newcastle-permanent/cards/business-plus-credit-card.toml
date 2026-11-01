@@ -2,6 +2,7 @@ name = "Business Plus Credit Card"
 type = "business"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "A business credit card designed to help separate company and business expenses, manage spending, and simplify bookkeeping."
 
 [cdr]

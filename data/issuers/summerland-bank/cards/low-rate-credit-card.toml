@@ -2,6 +2,7 @@ name = "Low Rate Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Benefit from a low interest rate on purchases."
 url = "https://application.summerland.com.au/nPortal__SelfRegistration?product=a0uOm000005EqqbIAC&core=es5&_gl=1*cy7mzo*_gcl_au*MTYyNjUxNDAwNi4xNzQwNjkxMDQ1"
 

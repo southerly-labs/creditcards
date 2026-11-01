@@ -1,6 +1,7 @@
 name = "Classic Credit Card"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Use your credit card for shopping, online purchasing, travelling overseas or even to consolidate other credit or store card debt."
 url = "https://www.nicu.com.au/banking/banking-enquiry"
 

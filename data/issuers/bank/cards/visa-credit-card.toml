@@ -2,6 +2,7 @@ name = "Visa Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "No annual fee and interest fee days to reduce your card costs. Great for those who pay off their card in full each month."
 image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
 

@@ -1,6 +1,7 @@
 name = "ANZ Rewards Black"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our highest Reward Points earning potential"
 url = "https://www.anz.com.au/personal/credit-cards/rewards/black/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/rewards-black-2016.jpg"

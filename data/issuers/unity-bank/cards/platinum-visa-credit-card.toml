@@ -2,6 +2,7 @@ name = "Platinum Visa Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Premium credit card including Qantas Points on eligible purchases and access to concierge services wherever you are in the world"
 url = "https://campaign.mpowerdigitalonboarding.com.au/newapplication?hide_back=false&lang=en&utm_source=UB&utm_medium=gncfmCpLP9Ze&utm_campaign=website&utm_term=PVCC"
 

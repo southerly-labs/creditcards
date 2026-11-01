@@ -2,6 +2,7 @@ name = "CommBank Qantas Business Rewards Credit Card"
 type = "business"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Be rewarded for essential business spend and save on business travel. Take advantage of offers and partner discounts whilst purchasing with confidence and convenience knowing you are backed by two of Australia's largest brands"
 
 [signup_review]

@@ -1,6 +1,7 @@
 name = "extralite Credit Card"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Interest free day Credit Card"
 url = "https://www.policecu.com.au/PCUDocuments/Credit_Application_Form_Car_Loans_Personal%20Loans_&_Credit_Cards.pdf"
 

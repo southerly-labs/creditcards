@@ -1,6 +1,7 @@
 name = "Corporate Low Rate card"
 type = "corporate"
 status = "active"
+first_seen = "2026-10-31"
 description = "Designed for medium businesses wishing to manage their cash flow by paying down larger items over time. Options to monitor employee expenses, set limits and access expense reports in order to minimise costs."
 image = "https://www.commbank.com.au/content/dam/commbank/assets/business/cards/corp-credit-card-thumb6.jpg"
 

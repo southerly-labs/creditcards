@@ -2,6 +2,7 @@ name = "Visa Business My Rewards"
 type = "business"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our Business Visa Credit Card comes with a competitive low interest rate, low annual fee and up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date, and is linked to our free rewards program, Business Rewarder"
 image = "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visabusiness-reward.jpg"
 locked = [ "rewards.program", "rewards.partners" ]

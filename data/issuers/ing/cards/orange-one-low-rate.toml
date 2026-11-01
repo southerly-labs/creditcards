@@ -2,6 +2,7 @@ name = "Orange One Low Rate"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "The credit card that gives you a low interest rate plus no ING international transaction fees when you shop overseas or online."
 image = "https://www.ing.com.au/img/OO/OO_Visa.png"
 

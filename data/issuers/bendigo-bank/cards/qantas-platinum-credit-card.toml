@@ -1,6 +1,7 @@
 name = "Qantas Platinum Credit Card"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "With one of the lowest annual fees in the market, and a competitive interest rate, make every day purchases using your Qantas Platinum Credit Card and watch your points soar. Plus, you will also receive up to 55 days interest fee on purchase."
 url = "https://applynow.bendigobank.com.au/apply/#/apply/new/creditCards/loanDetails/productSelection?productCode=RCA-M1-PFF-PFF"
 image = "https://www.bendigobank.com.au/siteassets/personal/creditcards/qantasplatinum/promoexploretiles/highlightsection-qantas.jpg"

@@ -2,6 +2,7 @@ name = "Visa Credit Card"
 type = "business"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Visa Credit Card"
 url = "https://swscu.apply-online.com.au/#/b7f0c6a4-2f6a-49c2-9912-3f8eb4a40b5a"
 

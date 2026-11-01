@@ -1,6 +1,7 @@
 name = "Westpac Lite Card"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our Lite credit card has 0% foreign transaction fee, a lower purchase rate and lower monthly fee - designed for all things international."
 url = "https://www.westpac.com.au/credit-cards/low-rate-cards/westpac-lite-card/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Westpac%20Lite%20Card_232x146_purple.jpg"

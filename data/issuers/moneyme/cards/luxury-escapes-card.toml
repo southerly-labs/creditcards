@@ -1,6 +1,7 @@
 name = "MoneyMe Luxury Escapes Card"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Digital credit card with Luxury Escapes loyalty benefits. Purchase and cash advance rates are personalised to your Equifax OneScore credit band. Credit limits up to $30,000."
 url = "https://www.moneyme.com.au/credit-card"
 image = "https://www.moneyme.com.au/assets/cards/luxury-escapes-card.png"

@@ -2,6 +2,7 @@ name = "American Express vPayment"
 type = "business"
 network = "amex"
 status = "active"
+first_seen = "2026-10-31"
 description = "Control supplier payments and help minimise fraud risk with Virtual Account Numbers and limits assigned per transaction."
 url = "https://www.americanexpress.com/au/business/payment-solutions/"
 

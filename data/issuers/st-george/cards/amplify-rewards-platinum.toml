@@ -2,6 +2,7 @@ name = "Amplify Rewards Platinum"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our mid-tier credit card that lets you earn Amplify points"
 image = "https://www.stgeorge.com.au/content/dam/public/open-banking/STG-Amplify-Platinum-Card-Art-232x146.png"
 

@@ -1,6 +1,7 @@
 name = "Corporate charge card"
 type = "corporate"
 status = "active"
+first_seen = "2026-10-31"
 description = "Ideal for large organisations with significant expenses. You can set spending limits and access expense reports to monitor spending and forecast costs."
 image = "https://www.commbank.com.au/business/business-credit-cards.html"
 

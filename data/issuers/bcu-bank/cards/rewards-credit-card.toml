@@ -2,6 +2,7 @@ name = "Rewards Credit Card"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Get cashback on eligible purchases with a BCU Rewards Credit Card, as well as features such as fraud monitoring and Verified by Visa protection."
 image = "https://digital.pnbank.com.au/globalassets/internet-banking/onboarding/products/bcu-visa-credit-rewards_oct25.png"
 

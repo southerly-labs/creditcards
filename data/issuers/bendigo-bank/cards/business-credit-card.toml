@@ -1,6 +1,7 @@
 name = "Business Credit Card"
 type = "business"
 status = "active"
+first_seen = "2026-10-31"
 description = "As a business owner, keeping track of expenses is important and can be time consuming. Get visibility of your expenses and stay in control with the Business Credit Card. You will also receive up to 44 days interest free on purchases."
 image = "https://www.bendigobank.com.au/siteassets/business/cards-for-business/business-credit-card/exploreimage-businesscreditcard.png"
 

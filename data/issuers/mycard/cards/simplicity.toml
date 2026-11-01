@@ -1,6 +1,7 @@
 name = "MyCard Simplicity"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "The product is a low fee credit card that provides individuals with a line of credit facility."
 url = "https://www.mycard.com.au/credit-cards/simplicity-card"
 image = "https://www.mycard.com.au/credit-cards/simplicity-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1759891922057/mycard-simplicity-digital-card-1536x969.png"

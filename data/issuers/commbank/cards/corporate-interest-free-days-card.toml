@@ -1,6 +1,7 @@
 name = "Corporate Interest Free Days card"
 type = "corporate"
 status = "active"
+first_seen = "2026-10-31"
 description = "Designed for medium to large businesses wanting to maximise cash flow with interest free days on purchases, monitor employee expenses, set transaction limits and access expense reports in order to track, analyse and forecast expenses."
 image = "https://www.commbank.com.au/content/dam/commbank/assets/business/cards/corp-credit-card-thumb6.jpg"
 

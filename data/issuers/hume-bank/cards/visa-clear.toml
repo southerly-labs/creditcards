@@ -2,6 +2,7 @@ name = "Visa Clear"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "One for the everyday spenders who make good use of their plastic."
 url = "https://www.humebank.com.au/everyday/hume-clear-visa-credit-card/"
 

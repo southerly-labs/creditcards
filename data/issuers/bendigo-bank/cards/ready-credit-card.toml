@@ -2,6 +2,7 @@ name = "Bendigo Ready Credit Card"
 type = "personal"
 network = "mastercard"
 status = "active"
+first_seen = "2026-10-31"
 description = "Bendigo Ready Credit Card lets you enjoy a $0 annual fee - this year and beyond. Also, save with $0 international transaction fees, a range of added insurances, purchase protections, plus access to Mastercard Priceless Cities exclusive experiences and special offers - it's the only card you'll need. Plus you'll receive up to 55 days interest free on purchases."
 image = "https://www.bendigobank.com.au/siteassets/personal/creditcards/bendigoreadycreditcard/promoexploretiles/highlightsection-ready.jpg"
 

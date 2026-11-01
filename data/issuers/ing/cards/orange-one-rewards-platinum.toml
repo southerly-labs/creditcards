@@ -2,6 +2,7 @@ name = "Orange One Rewards Platinum"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "The credit card that comes with up to $30 a month cashback on your spend, and no ING international transaction fees when you shop overseas or online."
 image = "https://www.ing.com.au/img/OO/OO_Visa%20Platinum.png"
 

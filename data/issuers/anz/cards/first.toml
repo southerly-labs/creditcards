@@ -1,6 +1,7 @@
 name = "ANZ First"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "A simple everyday credit card with a low ongoing annual fee"
 url = "https://www.anz.com.au/personal/credit-cards/low-annual-fee/first/"
 image = "https://www.anz.com.au/content/dam/anzcomau/images/credit-cards/ANZ/cc-angle-anz-first-card-hero-banner.jpg"

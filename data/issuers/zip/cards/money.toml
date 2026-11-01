@@ -1,6 +1,7 @@
 name = "Zip Money"
 type = "personal"
 status = "active"
+first_seen = "2026-10-31"
 description = "Larger-purchase account with flexible repayments and promotional interest-free periods at eligible merchants."
 url = "https://zip.co/au/zip-money"
 

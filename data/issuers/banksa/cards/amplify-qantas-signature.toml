@@ -2,6 +2,7 @@ name = "Amplify Qantas Signature"
 type = "personal"
 network = "visa"
 status = "active"
+first_seen = "2026-10-31"
 description = "Our top-tier credit card for Qantas point lovers"
 image = "https://www.banksa.com.au/content/dam/public/open-banking/BSA-Amplify-Signature-Card-Art-232x146.png"
 
