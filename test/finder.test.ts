@@ -111,6 +111,32 @@ describe("card finder valuation", () => {
     assert.strictEqual(high.firstYear, 360 + 500)
   })
 
+  test("an unverified CDR signup total counts towards bonus points but not year one", () => {
+    const e = entry(
+      "raw",
+      {
+        fees: { annual: 0 },
+        rewards: { program: "qff", earn: [{ rate: 1 }] },
+        offers: [
+          { id: "signup", source: "cdr", components: [{ kind: "signup_points", program: "qff", points: 150_000 }] }
+        ]
+      },
+      1
+    )
+
+    const v = valued(e).valuation
+
+    assert.strictEqual(v.bonusPoints, 150_000)
+    assert.strictEqual(v.firstYearBonusPoints, undefined)
+    assert.strictEqual(v.firstYear, 240)
+  })
+
+  test("a confirmed no-bonus card ignores the raw CDR total", () => {
+    const e = entry("none", { rewards: { program: "qff", bonus: [], bonus_points: 170_000 } }, 1)
+
+    assert.strictEqual(valued(e).valuation.bonusPoints, undefined)
+  })
+
   test("expired offers are ignored", () => {
     const e = entry("expired", {
       fees: { annual: 100 },

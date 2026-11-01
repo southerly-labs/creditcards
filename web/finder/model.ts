@@ -58,10 +58,11 @@ export const transferOffer = (card: PublicCard, today: string): IntroRate | unde
     .filter((r) => r.applies_to !== "purchase")
     .toSorted((a, b) => (b.months ?? 0) - (a.months ?? 0) || a.rate - b.rate)[0]
 
+const signupOffer = (card: PublicCard, today: string) =>
+  currentOffers(card, today).find((o) => o.components.some(isSignupPoints))
+
 export const signupTranches = (card: PublicCard, today: string): ReadonlyArray<SignupPoints> =>
-  currentOffers(card, today)
-    .find((o) => o.components.some(isSignupPoints))
-    ?.components.filter(isSignupPoints) ?? []
+  signupOffer(card, today)?.components.filter(isSignupPoints) ?? []
 
 export const isBaseRate = (category: string | undefined) => category === undefined || category === ""
 
@@ -108,8 +109,13 @@ export const value = (
 
   const earnValue = program === undefined ? 0 : dollars(yearlyPoints, cents)
   const tranches = signupTranches(card, today)
-  const bonusPoints = sumPoints(tranches) ?? (tranches.length === 0 ? card.rewards?.bonus_points : undefined)
-  const firstYearTranches = tranches.filter((t) => (t.year ?? 1) === 1)
+
+  const unsplitTotal =
+    tranches.length === 0 && card.rewards?.bonus === undefined ? card.rewards?.bonus_points : undefined
+
+  const bonusPoints = sumPoints(tranches) ?? unsplitTotal
+  const unverified = signupOffer(card, today)?.source === "cdr"
+  const firstYearTranches = unverified ? [] : tranches.filter((t) => (t.year ?? 1) === 1)
   const firstYearBonusPoints = sumPoints(firstYearTranches)
   const earnedBonusPoints = sumPoints(firstYearTranches.filter((t) => meetsSpendTarget(monthlySpend, t)))
   const fee = card.fees.annual

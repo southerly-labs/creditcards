@@ -132,10 +132,14 @@ const earnValue = (r: Row) => {
   return earn === undefined || cents === undefined ? undefined : Math.round(earn * cents * 1000) / 1000
 }
 
-const tranches = (r: Row): ReadonlyArray<Tranche> | undefined => {
-  const offer = currentOffers(r).find((o) => o.components.some(isTranche))
+const signup = (r: Row) => currentOffers(r).find((o) => o.components.some(isTranche))
 
-  return offer?.components.filter(isTranche)
+const tranches = (r: Row): ReadonlyArray<Tranche> | undefined => signup(r)?.components.filter(isTranche)
+
+const splitKnown = (r: Row) => {
+  const offer = signup(r)
+
+  return offer !== undefined && offer.source !== "cdr"
 }
 
 const unsplitTotal = (r: Row) => (r.card.rewards?.bonus === undefined ? r.card.rewards?.bonus_points : undefined)
@@ -162,9 +166,7 @@ const describeTranche = (t: Tranche) => {
 }
 
 const describeBonus = (r: Row) => {
-  const bonus = tranches(r)
-
-  if (bonus) return bonus.map((t) => describeTranche(t)).join("\n")
+  if (splitKnown(r)) return (tranches(r) ?? []).map((t) => describeTranche(t)).join("\n")
 
   return "The issuer's CDR data doesn't say how this bonus is split across years"
 }
@@ -178,7 +180,7 @@ const pointsValue = (r: Row, points: number | undefined) => {
 const bonusValue = (r: Row) => pointsValue(r, bonusPoints(r))
 
 const yearValue = (r: Row, year: 1 | 2) => {
-  const points = tranches(r) === undefined ? undefined : bonusPoints(r, year)
+  const points = splitKnown(r) ? bonusPoints(r, year) : undefined
 
   return points === undefined ? [] : [`Year ${year}: ${plain(money(pointsValue(r, points)))}`]
 }
@@ -201,7 +203,7 @@ const firstYearFee = (r: Row) =>
     .flatMap((o) => o.components.filter(isFeeDiscount))
     .find((c) => c.fee === "annual" && (c.months ?? 12) >= 12)?.payable ?? r.card.fees.annual
 
-const firstYearTranches = (r: Row) => (tranches(r) ?? []).filter((t) => (t.year ?? 1) === 1)
+const firstYearTranches = (r: Row) => (splitKnown(r) ? (tranches(r) ?? []) : []).filter((t) => (t.year ?? 1) === 1)
 
 const benefit = (r: Row, firstYear: boolean): Benefit => {
   if (monthlySpend === undefined) return { kind: "none" }
@@ -400,12 +402,11 @@ const columns: ReadonlyArray<Column> = [
       if (total === undefined) return dash
       const second = bonusPoints(r, 2)
 
-      const split =
-        tranches(r) === undefined
-          ? '<div class="split">split unknown</div>'
-          : second === undefined
-            ? ""
-            : `<div class="split">${int(bonusPoints(r, 1) ?? 0)} yr 1 · ${int(second)} yr 2</div>`
+      const split = !splitKnown(r)
+        ? '<div class="split">split unknown</div>'
+        : second === undefined
+          ? ""
+          : `<div class="split">${int(bonusPoints(r, 1) ?? 0)} yr 1 · ${int(second)} yr 2</div>`
 
       return `<span title="${esc(describeBonus(r))}">${int(total)}</span>${split}`
     }
@@ -415,10 +416,10 @@ const columns: ReadonlyArray<Column> = [
     label: "Bonus yr 1",
     hiddenByDefault: true,
     num: true,
-    sortValue: (r) => (tranches(r) === undefined ? undefined : bonusPoints(r, 1)),
+    sortValue: (r) => (splitKnown(r) ? bonusPoints(r, 1) : undefined),
     render: (r) =>
-      tranches(r) === undefined
-        ? unsplitTotal(r) === undefined
+      !splitKnown(r)
+        ? bonusPoints(r) === undefined
           ? dash
           : `<span class="dim" title="${esc(describeBonus(r))}">?</span>`
         : int(bonusPoints(r, 1))
