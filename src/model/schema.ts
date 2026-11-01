@@ -1,5 +1,6 @@
 import { Provenance } from "../provenance/schema.ts"
 import { Schema } from "effect"
+import { EarnRule } from "./earn.ts"
 
 const between = (minimum: number, maximum: number) =>
   Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum, maximum })))
@@ -97,6 +98,7 @@ export const Card = Schema.Struct({
       program: Slug,
       partners: Schema.optionalKey(Schema.Array(Slug)),
       earn: Schema.optionalKey(Schema.Array(EarnRate)),
+      earn_rules: Schema.optionalKey(Schema.Array(EarnRule)),
 
       earn_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
 

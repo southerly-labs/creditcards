@@ -79,3 +79,4 @@ assets have content-hashed names and a one-year cache lifetime; HTML and API out
 keep the default revalidation behavior. See the root README for deployment details.
 
 See [section provenance](provenance.md) for source observations and manual corrections.
+Explicit earn rules and calculator assumptions: [earn rules](earn-rules.md).

@@ -177,7 +177,7 @@ const benefit = (r: Row): Benefit => {
   const feeText = `${plain(money(fee))} annual fee`
 
   if (!r.program) return { kind: "value", value: -fee, title: `No rewards, minus ${feeText}` }
-  const points = annualPoints(r.card.rewards?.earn ?? [], monthlySpend)
+  const points = annualPoints(r.card.rewards?.earn ?? [], monthlySpend, r.card.rewards?.earn_rules)
 
   if (points === undefined) return { kind: "unknown", title: `No base earn rate for ${r.program.name}` }
   const cents = centsPerPoint(r)
