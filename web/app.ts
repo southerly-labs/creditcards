@@ -8,7 +8,9 @@ import {
   loadPointValues
 } from "../src/model/api.ts"
 import { annualPoints } from "../src/model/benefit.ts"
-import type { Card, IntroOffer, Program } from "../src/model/schema.ts"
+import type { Card, Program } from "../src/model/schema.ts"
+import { offerStatus } from "../src/offers/project.ts"
+import type { OfferComponent } from "../src/offers/schema.ts"
 
 interface Row {
   readonly id: string
@@ -49,12 +51,27 @@ const plain = (html: string) => html.replaceAll(/<[^>]+>/gu, "")
 const int = (n: number | undefined) => (n === undefined ? dash : n.toLocaleString("en-AU"))
 
 const introTargets = { purchase: "purchases", balance_transfer: "BT", both: "BT + purchases" } satisfies Record<
-  IntroOffer["applies_to"],
+  IntroRate["applies_to"],
   string
 >
 
+const today = new Date().toLocaleDateString("en-CA", { timeZone: "Australia/Sydney" })
+
+const currentOffers = (r: Row) =>
+  (r.card.offers ?? []).filter((o) => ["within_window", "undated"].includes(offerStatus(o, today)))
+
+type IntroRate = Extract<OfferComponent, { readonly kind: "intro_rate" }>
+
+type Tranche = Extract<OfferComponent, { readonly kind: "signup_points" }>
+
+const isIntroRate = (c: OfferComponent): c is IntroRate => c.kind === "intro_rate"
+
+const isTranche = (c: OfferComponent): c is Tranche => c.kind === "signup_points"
+
+const introRate = (r: Row) => currentOffers(r).flatMap((o) => o.components.filter(isIntroRate))[0]
+
 const intro = (r: Row) => {
-  const offer = r.card.rates.intro?.[0]
+  const offer = introRate(r)
 
   if (!offer) return undefined
   const what = introTargets[offer.applies_to]
@@ -111,12 +128,18 @@ const earnValue = (r: Row) => {
   return earn === undefined || cents === undefined ? undefined : Math.round(earn * cents * 1000) / 1000
 }
 
-type Tranche = NonNullable<NonNullable<Card["rewards"]>["bonus"]>[number]
+const tranches = (r: Row): ReadonlyArray<Tranche> | undefined => {
+  const offer = currentOffers(r).find((o) => o.components.some(isTranche))
+
+  return offer?.components.filter(isTranche)
+}
+
+const unsplitTotal = (r: Row) => (r.card.rewards?.bonus === undefined ? r.card.rewards?.bonus_points : undefined)
 
 const bonusPoints = (r: Row, year?: Tranche["year"]) => {
-  const bonus = r.card.rewards?.bonus
+  const bonus = tranches(r)
 
-  if (!bonus) return year === undefined || year === 1 ? r.card.rewards?.bonus_points : undefined
+  if (!bonus) return year === undefined || year === 1 ? unsplitTotal(r) : undefined
   const points = bonus.filter((t) => year === undefined || t.year === year).reduce((sum, t) => sum + t.points, 0)
 
   return points === 0 ? undefined : points
@@ -131,11 +154,11 @@ const describeTranche = (t: Tranche) => {
     t.note ?? ""
   ].filter(Boolean)
 
-  return `Year ${t.year}: ${int(t.points)} points${conditions.length > 0 ? ` (${conditions.join(", ")})` : ""}`
+  return `${t.year === undefined ? "" : `Year ${t.year}: `}${int(t.points)} points${conditions.length > 0 ? ` (${conditions.join(", ")})` : ""}`
 }
 
 const describeBonus = (r: Row) => {
-  const bonus = r.card.rewards?.bonus
+  const bonus = tranches(r)
 
   if (bonus) return bonus.map((t) => describeTranche(t)).join("\n")
 
@@ -150,8 +173,8 @@ const pointsValue = (r: Row, points: number | undefined) => {
 
 const bonusValue = (r: Row) => pointsValue(r, bonusPoints(r))
 
-const yearValue = (r: Row, year: Tranche["year"]) => {
-  const points = r.card.rewards?.bonus === undefined ? undefined : bonusPoints(r, year)
+const yearValue = (r: Row, year: 1 | 2) => {
+  const points = tranches(r) === undefined ? undefined : bonusPoints(r, year)
 
   return points === undefined ? [] : [`Year ${year}: ${plain(money(pointsValue(r, points)))}`]
 }
@@ -250,7 +273,7 @@ const columns: ReadonlyArray<Column> = [
     id: "intro",
     label: "Intro offer",
     hiddenByDefault: true,
-    sortValue: (r) => r.card.rates.intro?.[0]?.months,
+    sortValue: (r) => introRate(r)?.months,
     render: (r) => intro(r) ?? dash
   },
   {
@@ -354,7 +377,7 @@ const columns: ReadonlyArray<Column> = [
       const second = bonusPoints(r, 2)
 
       const split =
-        r.card.rewards?.bonus === undefined
+        tranches(r) === undefined
           ? '<div class="split">split unknown</div>'
           : second === undefined
             ? ""
@@ -368,10 +391,10 @@ const columns: ReadonlyArray<Column> = [
     label: "Bonus yr 1",
     hiddenByDefault: true,
     num: true,
-    sortValue: (r) => (r.card.rewards?.bonus === undefined ? undefined : bonusPoints(r, 1)),
+    sortValue: (r) => (tranches(r) === undefined ? undefined : bonusPoints(r, 1)),
     render: (r) =>
-      r.card.rewards?.bonus === undefined
-        ? r.card.rewards?.bonus_points === undefined
+      tranches(r) === undefined
+        ? unsplitTotal(r) === undefined
           ? dash
           : `<span class="dim" title="${esc(describeBonus(r))}">?</span>`
         : int(bonusPoints(r, 1))

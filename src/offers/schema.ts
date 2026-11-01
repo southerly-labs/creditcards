@@ -44,6 +44,8 @@ export const OfferComponent = Schema.Union([
   })
 ])
 
+export type OfferComponent = typeof OfferComponent.Type
+
 export const Offer = Schema.Struct({
   components: Schema.NonEmptyArray(OfferComponent),
   valid_from: Schema.optionalKey(OfferDate),
