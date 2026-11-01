@@ -1,6 +1,7 @@
 import { Provenance } from "../provenance/schema.ts"
 import { Schema } from "effect"
 import { EarnRule } from "./earn.ts"
+import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "./domain.ts"
 
 const between = (minimum: number, maximum: number) =>
   Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum, maximum })))
@@ -20,7 +21,7 @@ export type Network = typeof Network.Type
 export const IntroOffer = Schema.Struct({
   applies_to: Schema.Literals(["purchase", "balance_transfer", "both"]),
   rate: Percent,
-  months: Schema.optionalKey(between(1, 60))
+  months: Schema.optionalKey(between(1, 60).check(Schema.isInt()))
 })
 
 export type IntroOffer = typeof IntroOffer.Type
@@ -36,32 +37,32 @@ export const EarnRate = Schema.Struct({
 export type EarnRate = typeof EarnRate.Type
 
 export const BonusTranche = Schema.Struct({
-  points: between(1, 1_000_000),
+  points: between(1, 1_000_000).check(Schema.isInt()),
   year: Schema.Literals([1, 2]),
   min_spend: Schema.optionalKey(Aud),
-  spend_days: Schema.optionalKey(between(1, 730)),
-  keep_months: Schema.optionalKey(between(1, 60)),
+  spend_days: Schema.optionalKey(between(1, 730).check(Schema.isInt())),
+  keep_months: Schema.optionalKey(between(1, 60).check(Schema.isInt())),
   note: Schema.optionalKey(Schema.String)
 })
 
 export type BonusTranche = typeof BonusTranche.Type
 
 export const EarnCheck = Schema.Struct({
-  url: Schema.String.pipe(Schema.check(Schema.isPattern(/^https:\/\//u))),
+  url: WebUrl,
   expect: Schema.NonEmptyArray(Schema.NonEmptyString)
 })
 
 export type EarnCheck = typeof EarnCheck.Type
 
-export const Card = Schema.Struct({
+const CardFields = Schema.Struct({
   name: Schema.NonEmptyString,
   type: CardType,
   network: Schema.optionalKey(Network),
   status: Schema.Literals(["active", "discontinued"]),
-  discontinued: Schema.optionalKey(Schema.String),
+  discontinued: Schema.optionalKey(CalendarDate),
   description: Schema.optionalKey(Schema.String),
-  url: Schema.optionalKey(Schema.String),
-  image: Schema.optionalKey(Schema.String),
+  url: Schema.optionalKey(WebUrl),
+  image: Schema.optionalKey(WebUrl),
 
   provenance: Schema.optionalKey(Provenance),
   locked: Schema.optionalKey(Schema.Array(Schema.String)),
@@ -69,7 +70,7 @@ export const Card = Schema.Struct({
     Schema.Struct({
       brand: Schema.String,
       product_id: Schema.String,
-      last_updated: Schema.optionalKey(Schema.String)
+      last_updated: Schema.optionalKey(Timestamp)
     })
   ),
   fees: Schema.Struct({
@@ -85,7 +86,7 @@ export const Card = Schema.Struct({
     purchase: Schema.optionalKey(Percent),
     cash_advance: Schema.optionalKey(Percent),
     balance_transfer: Schema.optionalKey(Percent),
-    interest_free_days: Schema.optionalKey(between(0, 120)),
+    interest_free_days: Schema.optionalKey(between(0, 120).check(Schema.isInt())),
     intro: Schema.optionalKey(Schema.Array(IntroOffer))
   }),
   limits: Schema.Struct({
@@ -104,7 +105,7 @@ export const Card = Schema.Struct({
 
       earn_text_hash: Schema.optionalKey(Schema.String),
       earn_check: Schema.optionalKey(Schema.Array(EarnCheck)),
-      bonus_points: Schema.optionalKey(between(0, 1_000_000)),
+      bonus_points: Schema.optionalKey(between(0, 1_000_000).check(Schema.isInt())),
       bonus: Schema.optionalKey(Schema.Array(BonusTranche)),
 
       bonus_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
@@ -118,11 +119,29 @@ export const Card = Schema.Struct({
   })
 })
 
+export const Card = CardFields.check(
+  Schema.makeFilter(
+    (card) =>
+      card.limits.min_credit === undefined ||
+      card.limits.max_credit === undefined ||
+      card.limits.min_credit <= card.limits.max_credit ||
+      "Minimum credit exceeds maximum credit"
+  ),
+  Schema.makeFilter(
+    (card) =>
+      orderedTiers(card.rewards?.earn ?? []) ||
+      "Earn tier ceilings must increase within each category and period; uncapped tiers must be last"
+  ),
+  Schema.makeFilter(
+    (card) => (card.locked ?? []).every((path) => recognizesLock(CardFields.ast, path)) || "Unrecognized lock path"
+  )
+)
+
 export type Card = typeof Card.Type
 
 export const Issuer = Schema.Struct({
   name: Schema.NonEmptyString,
-  website: Schema.optionalKey(Schema.String),
+  website: Schema.optionalKey(WebUrl),
 
   cdr_brands: Schema.Array(Schema.String)
 })
@@ -140,9 +159,9 @@ export const Program = Schema.Struct({
   cents_per_point: Schema.optionalKey(between(0, 10)),
 
   value_basis: Schema.optionalKey(Schema.String),
-  value_source: Schema.optionalKey(Schema.String),
-  value_updated: Schema.optionalKey(Schema.String),
-  website: Schema.optionalKey(Schema.String)
+  value_source: Schema.optionalKey(WebUrl),
+  value_updated: Schema.optionalKey(CalendarDate),
+  website: Schema.optionalKey(WebUrl)
 })
 
 export type Program = typeof Program.Type

@@ -80,3 +80,4 @@ keep the default revalidation behavior. See the root README for deployment detai
 
 See [section provenance](provenance.md) for source observations and manual corrections.
 Explicit earn rules and calculator assumptions: [earn rules](earn-rules.md).
+See [domain validation](domain-validation.md) for cross-field constraints and lock paths.
