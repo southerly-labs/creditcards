@@ -37,6 +37,10 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
     }
   }
 
+  for (const key of dataset.observations?.keys() ?? []) {
+    if (!dataset.cards.has(key)) problems.push(`cdr-observations: unknown card ${key}`)
+  }
+
   return problems
 }
 
@@ -66,7 +70,10 @@ export const toApi = (dataset: Dataset, generatedAt?: string): Api => {
 
   for (const [key, { locked: _l, ...card }] of dataset.cards) {
     const { issuer, card: slug } = splitCardKey(key)
-    required(issuers[issuer]).cards[slug] = card
+    const observedAt = dataset.observations?.get(key)
+
+    required(issuers[issuer]).cards[slug] =
+      observedAt === undefined ? card : { ...card, provenance: { ...card.provenance, cdr_observed_at: observedAt } }
   }
 
   return {

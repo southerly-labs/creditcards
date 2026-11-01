@@ -1,4 +1,5 @@
 import { Schema } from "effect"
+import { Timestamp } from "../model/domain.ts"
 
 export const ProvenanceSection = Schema.Literals(["fees", "rates", "limits", "perks"])
 
@@ -16,3 +17,5 @@ export const Provenance = Schema.Struct({
     )
   )
 })
+
+export const CdrObservations = Schema.Record(Schema.String, Timestamp)

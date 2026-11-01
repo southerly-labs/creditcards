@@ -53,12 +53,15 @@ const decodeCard = Schema.decodeUnknownEffect(Card)
 export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRun: boolean }) {
   const cdr = yield* CdrClient
   const store = yield* Store
-  const date = DateTime.formatIsoDateUtc(yield* DateTime.now)
+  const now = yield* DateTime.now
+  const date = DateTime.formatIsoDateUtc(now)
+  const observedAt = DateTime.formatIso(now)
 
   const dataset = yield* store.load
   const issuers = new Map(dataset.issuers)
   const programs = new Map(dataset.programs)
   const cards = new Map(dataset.cards)
+  const observations = new Map(dataset.observations)
   const programIndex = makeProgramIndex(Object.fromEntries(programs))
 
   const brands = yield* cdr.brands
@@ -256,12 +259,11 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         continue
       }
 
-      writes.set(key, {
-        ...decoded.success,
-        provenance: { ...decoded.success.provenance, cdr_observed_at: DateTime.formatIso(yield* DateTime.now) }
-      })
+      observations.set(key, observedAt)
 
       if (changes.length === 0) continue
+
+      writes.set(key, decoded.success)
 
       if (earnSet) rewardsSet.push({ card: key, earn: earnSet })
 
@@ -311,6 +313,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       const { issuer, card: slug } = splitCardKey(key)
       yield* store.writeCard(issuer, slug, card)
     }
+
+    yield* store.writeObservations(observations)
   }
 
   return {

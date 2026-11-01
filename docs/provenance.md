@@ -1,8 +1,11 @@
 # Section provenance
 
-Optional `card.provenance` separates successful CDR observation
-(`cdr_observed_at`, UTC timestamp) from the holder's `cdr.last_updated`.
-Neither is a human review or a guarantee that corrected values match CDR.
+Successful CDR observations live in `data/cdr-observations.toml`, one
+`"issuer/card" = <UTC timestamp>` line per card, rather than in card files, so
+the daily sync touches one file instead of every card. The build publishes each
+timestamp as `provenance.cdr_observed_at` on the public card. It is separate
+from the holder's `cdr.last_updated`. Neither is a human review or a guarantee
+that corrected values match CDR.
 
 `sections` maps fees, rates, limits, perks or rewards to `source_urls`,
 `reviewed_at` and `correction_reason`. These describe a human's review of the

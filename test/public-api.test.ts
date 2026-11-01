@@ -87,3 +87,20 @@ test("offer signup programs must reference known programs", () => {
 
   assert.deepStrictEqual(checkReferences(dataset), ["bank/card: unknown program missing"])
 })
+
+test("CDR observations publish on cards and must reference known cards", () => {
+  const dataset: Dataset = {
+    issuers: new Map([["bank", { name: "Bank", cdr_brands: [] }]]),
+    programs: new Map(),
+    cards: new Map([["bank/card", card]]),
+    observations: new Map([
+      ["bank/card", "2026-11-01T20:00:00Z"],
+      ["bank/gone", "2026-11-01T20:00:00Z"]
+    ])
+  }
+
+  const api = toApi(dataset)
+  assert.deepStrictEqual(decodeApi(api), api)
+  assert.strictEqual(api.issuers["bank"]?.cards["card"]?.provenance?.cdr_observed_at, "2026-11-01T20:00:00Z")
+  assert.deepStrictEqual(checkReferences(dataset), ["cdr-observations: unknown card bank/gone"])
+})

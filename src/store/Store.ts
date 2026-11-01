@@ -1,13 +1,18 @@
 import { Context, Effect, FileSystem, Layer, Path, Schema } from "effect"
 import * as Toml from "smol-toml"
 import { Card, Issuer, Program } from "../model/schema.ts"
+import { CdrObservations } from "../provenance/schema.ts"
 
 export interface Dataset {
   readonly programs: ReadonlyMap<string, Program>
   readonly issuers: ReadonlyMap<string, Issuer>
 
   readonly cards: ReadonlyMap<string, Card>
+
+  readonly observations?: ReadonlyMap<string, string>
 }
+
+export const OBSERVATIONS_FILE = "cdr-observations.toml"
 
 export const cardKey = (issuer: string, card: string) => `${issuer}/${card}`
 
@@ -32,6 +37,7 @@ export class Store extends Context.Service<
     writeCard(issuer: string, card: string, value: Card): Effect.Effect<boolean, StoreError>
     writeIssuer(issuer: string, value: Issuer): Effect.Effect<boolean, StoreError>
     writeProgram(id: string, value: Program): Effect.Effect<boolean, StoreError>
+    writeObservations(value: ReadonlyMap<string, string>): Effect.Effect<boolean, StoreError>
   }
 >()("creditcards/store/Store") {
   static readonly layer = (dataDir: string) =>
@@ -80,7 +86,13 @@ export class Store extends Context.Service<
             }
           }
 
-          return { programs, issuers, cards } satisfies Dataset
+          const observationsFile = path.join(dataDir, OBSERVATIONS_FILE)
+
+          const observations = (yield* fs.exists(observationsFile).pipe(Effect.mapError(fail(observationsFile))))
+            ? new Map(Object.entries(yield* readToml(CdrObservations, observationsFile)))
+            : new Map<string, string>()
+
+          return { programs, issuers, cards, observations } satisfies Dataset
         }).pipe(Effect.withSpan("Store.load"))
 
         const writeToml = Effect.fn("Store.writeToml")(function* <A, I>(
@@ -105,7 +117,13 @@ export class Store extends Context.Service<
             writeToml(Card, path.join(dataDir, "issuers", issuer, "cards", `${card}.toml`), value),
           writeIssuer: (issuer, value) =>
             writeToml(Issuer, path.join(dataDir, "issuers", issuer, "issuer.toml"), value),
-          writeProgram: (id, value) => writeToml(Program, path.join(dataDir, "programs", `${id}.toml`), value)
+          writeProgram: (id, value) => writeToml(Program, path.join(dataDir, "programs", `${id}.toml`), value),
+          writeObservations: (value) =>
+            writeToml(
+              CdrObservations,
+              path.join(dataDir, OBSERVATIONS_FILE),
+              Object.fromEntries([...value].toSorted(([a], [b]) => a.localeCompare(b)))
+            )
         })
       })
     )
