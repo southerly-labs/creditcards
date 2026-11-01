@@ -112,6 +112,23 @@ describe("syncCdr", () => {
       })
     )
 
+    it.effect("never marks a listed card missing when only its detail request fails", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const flaky = { ...seeded, failing: new Set(["p1"]) }
+
+        for (const day of [2, 3]) {
+          const report = yield* syncOn(day, flaky)
+          assert.deepStrictEqual(report.missing, [])
+          assert.deepStrictEqual(report.discontinued, [])
+        }
+
+        const card = yield* storedCard("example-bank/card-p1")
+        assert.strictEqual(card.status, "active")
+        assert.isUndefined(card.missing_since)
+      })
+    )
+
     it.effect("discontinues an unlisted card only after a later day still misses it", () =>
       Effect.gen(function* () {
         yield* syncOn(1)

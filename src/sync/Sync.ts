@@ -59,6 +59,7 @@ export class SyncAborted extends Schema.TaggedError<SyncAborted>()("SyncAborted"
 interface BrandFetch {
   readonly brand: string
   readonly products: ReadonlyArray<VersionedProduct>
+  readonly listed: ReadonlyArray<string>
 
   readonly listError: string | undefined
   readonly productErrors: ReadonlyArray<string>
@@ -111,6 +112,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
           return {
             brand: brand.brandName,
             products: [],
+            listed: [],
             listError: listed.failure.message,
             productErrors: []
           } satisfies BrandFetch
@@ -134,6 +136,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         return {
           brand: brand.brandName,
           products: products.filter((p) => p !== undefined),
+          listed: listed.success.map((summary) => summary.productId),
           listError:
             productErrors.length > 0 && productErrors.length === listed.success.length ? productErrors[0] : undefined,
           productErrors
@@ -333,7 +336,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
-  const seenIds = new Set(fetched.flatMap((b) => b.products.map((p) => `${b.brand}|${p.detail.productId}`)))
+  const seenIds = new Set(fetched.flatMap((b) => b.listed.map((id) => `${b.brand}|${id}`)))
   const brandStatus = new Map(fetched.map((b) => [b.brand, b]))
   const missingByBrand = new Map<string, Array<string>>()
 
