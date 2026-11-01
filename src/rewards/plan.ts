@@ -1,6 +1,7 @@
 import { encodeJson } from "../util/json.ts"
 import { Data } from "effect"
 import type { BonusTranche, Card, EarnRate } from "../model/schema.ts"
+import type { SignupReview } from "../offers/schema.ts"
 import { BonusResult, bonusTextHash, parseBonus } from "./bonus.ts"
 import { type LoyaltyFeature, loyaltyTextHash, ParseResult, parseEarn } from "./parse.ts"
 
@@ -56,48 +57,43 @@ export type BonusPlan =
 
 export const BonusPlan = Data.taggedEnum<BonusPlan>()
 
-type Rewards = NonNullable<Card["rewards"]>
+export interface SignupState {
+  readonly review: SignupReview | undefined
+  readonly parsed: ReadonlyArray<BonusTranche> | undefined
+}
 
-const withoutBonus = ({ bonus: _bonus, bonus_source: _source, bonus_text_hash: _hash, ...rest }: Rewards): Rewards => ({
-  ...rest,
-  bonus_review: { state: "unknown" }
-})
+const cleared: SignupState = { review: { state: "unknown" }, parsed: undefined }
 
-export const applyBonusPlan = (rewards: Rewards, plan: BonusPlan): Rewards =>
+export const applyBonusPlan = (current: SignupState, plan: BonusPlan): SignupState =>
   BonusPlan.$match(plan, {
-    Unchanged: () => rewards,
+    Unchanged: () => current,
     Set: ({ bonus, hash }) => ({
-      ...rewards,
-      bonus,
-      bonus_source: "parser" as const,
-      bonus_text_hash: hash,
-      bonus_review: { state: "present" as const }
+      review: { state: "present" as const, source: "parser" as const, text_hash: hash },
+      parsed: bonus
     }),
-    Clear: () => withoutBonus(rewards),
-    Review: ({ clear }) => (clear ? withoutBonus(rewards) : rewards)
+    Clear: () => cleared,
+    Review: ({ clear }) => (clear ? cleared : current)
   })
 
-export const planBonus = (current: Rewards | undefined, features: ReadonlyArray<LoyaltyFeature>): BonusPlan => {
+export const planBonus = (current: SignupState, features: ReadonlyArray<LoyaltyFeature>): BonusPlan => {
   const hash = bonusTextHash(features)
+  const review = current.review
 
-  if (current?.bonus_source === "manual") {
-    return current.bonus_text_hash === hash
+  if (review?.source === "manual") {
+    return review.text_hash === hash
       ? BonusPlan.Unchanged()
       : BonusPlan.Review({ reason: "bonus text changed since manual review", clear: false })
   }
 
   const parsed = parseBonus(features)
-  const hasParsed = current?.bonus_source === "parser"
+  const hasParsed = review?.source === "parser"
 
   if (BonusResult.$is("Review")(parsed)) return BonusPlan.Review({ reason: parsed.reason, clear: hasParsed })
 
   if (parsed.bonus.length === 0) return hasParsed ? BonusPlan.Clear() : BonusPlan.Unchanged()
 
   const same =
-    hasParsed &&
-    current.bonus_review?.state === "present" &&
-    current.bonus_text_hash === hash &&
-    equal(current.bonus, parsed.bonus)
+    hasParsed && review.state === "present" && review.text_hash === hash && equal(current.parsed, parsed.bonus)
 
   return same ? BonusPlan.Unchanged() : BonusPlan.Set({ bonus: parsed.bonus, hash })
 }

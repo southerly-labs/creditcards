@@ -6,7 +6,7 @@ import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
 import { type CdrSnapshot, Snapshots } from "../history/Snapshots.ts"
 import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
-import { withOffers } from "../offers/build.ts"
+import { applyOffers, signupState } from "../offers/build.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
@@ -189,7 +189,11 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         snapshot: { brand, version: Number.isFinite(version) ? version : null, product: raw }
       })
 
-      const { card: incoming, fallbackProgram } = normalise(product, {
+      const {
+        card: incoming,
+        offers: offerInputs,
+        fallbackProgram
+      } = normalise(product, {
         issuerSlug,
         brandName: brand,
         programs: programIndex
@@ -245,13 +249,10 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         }
       }
 
-      const withEarn = merged["rewards"]
-      let bonusPlan: BonusPlan = BonusPlan.Unchanged()
+      const currentSignup = signupState(existing)
 
-      if (withEarn !== undefined && Schema.is(Card.fields.rewards)(withEarn)) {
-        bonusPlan = planBonus(withEarn, bonusFeatures(product))
-        merged["rewards"] = applyBonusPlan(withEarn, bonusPlan)
-      }
+      const bonusPlan: BonusPlan =
+        merged["rewards"] === undefined ? BonusPlan.Unchanged() : planBonus(currentSignup, bonusFeatures(product))
 
       if (BonusPlan.$is("Review")(bonusPlan)) bonusReview.push({ card: key, reason: bonusPlan.reason })
 
@@ -262,7 +263,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         continue
       }
 
-      const card = withOffers(decoded.success)
+      const card = applyOffers(decoded.success, offerInputs, applyBonusPlan(currentSignup, bonusPlan))
       const changes = diffCard(existing, card)
 
       const reasons = existing ? holdReasons(changes) : []
@@ -371,14 +372,7 @@ export const summariseReport = (r: SyncReport): string => {
     for (const u of r.updated) {
       const shown = u.changes.filter(
         (c) =>
-          ![
-            "cdr",
-            "description",
-            "rewards.earn_source",
-            "rewards.earn_text_hash",
-            "rewards.bonus_source",
-            "rewards.bonus_text_hash"
-          ].includes(c.path)
+          !["cdr", "description", "rewards.earn_source", "rewards.earn_text_hash", "signup_review"].includes(c.path)
       )
 
       lines.push(
@@ -425,7 +419,7 @@ const earnReviewSection = (r: SyncReport) => [
 const bonusReviewSection = (r: SyncReport) => [
   `${r.bonus.review.length} cards have signup bonuses the parser could not split by year (sync ${r.date}).`,
   "",
-  "Run `bun run cli rewards bonus-todo`, set `rewards.bonus` from the CDR text it prints, then",
+  "Run `bun run cli rewards bonus-todo`, write a manual signup offer from the CDR text it prints, then",
   '`bun run cli rewards bonus-stamp <issuer/card>...`. See "Signup bonuses" in the README.',
   "",
   ...r.bonus.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)

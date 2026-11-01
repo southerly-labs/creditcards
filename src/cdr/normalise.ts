@@ -1,6 +1,7 @@
 import { defined } from "../util/defined.ts"
 import { Schema } from "effect"
 import { required } from "../util/required.ts"
+import type { CdrOfferInputs } from "../offers/build.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
 import type { Fee, ProductDetail } from "./schema.ts"
 
@@ -30,6 +31,7 @@ export interface NormaliseContext {
 
 export interface NormaliseResult {
   readonly card: NormalisedCard
+  readonly offers: CdrOfferInputs
 
   readonly fallbackProgram: string | undefined
 }
@@ -281,22 +283,16 @@ const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
     if (!ids.includes(resolved)) ids.push(resolved)
   }
 
-  const bonus = (p.features ?? [])
-    .filter((f) => f.featureType === "BONUS_REWARDS")
-    .map((f) => parseNumber(f.additionalValue))
-    .find((n) => n !== undefined && n > 0)
-
   const [program, ...partners] = ids
 
   return {
-    rewards: {
-      program: required(program),
-      ...(partners.length > 0 ? { partners } : {}),
-      ...(bonus === undefined ? {} : { bonus_points: bonus })
-    },
+    rewards: { program: required(program), ...(partners.length > 0 ? { partners } : {}) },
     fallback
   }
 }
+
+export const rawBonusPoints = (features: ReadonlyArray<{ readonly additionalValue?: string | null | undefined }>) =>
+  features.map((f) => parseNumber(f.additionalValue)).find((n) => n !== undefined && n > 0)
 
 const perks = (p: ProductDetail): NormalisedCard["perks"] => {
   const features = p.features ?? []
@@ -347,7 +343,6 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
     cdr: defined({ brand: ctx.brandName, product_id: p.productId, last_updated: p.lastUpdated ?? undefined }),
     fees: defined({
       annual: annualFee(fees),
-      annual_first_year: firstYearFee(fees),
       additional_card: additionalCardFee(fees),
       foreign_txn_pct: foreignTransactionFee(fees),
       cash_advance_pct: cash.pct,
@@ -358,8 +353,7 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
       purchase: ongoingRate(rates, "PURCHASE", /cash|balance|business secured/iu),
       cash_advance: ongoingRate(rates, "CASH_ADVANCE"),
       balance_transfer: ongoingRate(rates, "BALANCE_TRANSFER"),
-      interest_free_days: interestFreeDays(p),
-      intro: intro.length > 0 ? intro : undefined
+      interest_free_days: interestFreeDays(p)
     }),
     limits: defined({
       min_credit: constraint("MIN_LIMIT"),
@@ -370,5 +364,14 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
     perks: perks(p)
   })
 
-  return { card, fallbackProgram: fallback }
+  const offers: CdrOfferInputs = {
+    intro,
+    annualFirstYear: firstYearFee(fees),
+    bonusPoints:
+      rewardsValue === undefined
+        ? undefined
+        : rawBonusPoints((p.features ?? []).filter((f) => f.featureType === "BONUS_REWARDS"))
+  }
+
+  return { card, offers, fallbackProgram: fallback }
 }

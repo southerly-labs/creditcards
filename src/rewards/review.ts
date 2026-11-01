@@ -1,8 +1,10 @@
 import { encodeJson } from "../util/json.ts"
 import { DateTime, Effect, Schema } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
-import type { BonusTranche, Card, EarnRate } from "../model/schema.ts"
-import { withOffers } from "../offers/build.ts"
+import type { Card, EarnRate } from "../model/schema.ts"
+import { signupState } from "../offers/build.ts"
+import type { Offer } from "../offers/schema.ts"
+import { rawBonusPoints } from "../cdr/normalise.ts"
 import { splitCardKey, Store } from "../store/Store.ts"
 import { loyaltyText, loyaltyTextHash, type LoyaltyFeature } from "./parse.ts"
 import { bonusText, bonusTextHash } from "./bonus.ts"
@@ -162,7 +164,7 @@ export interface BonusReviewItem {
   readonly program: string | undefined
   readonly reason: string
   readonly text: string
-  readonly bonus: ReadonlyArray<BonusTranche> | undefined
+  readonly signup: Offer | undefined
   readonly bonusPoints: number | undefined
 }
 
@@ -171,7 +173,7 @@ const toBonusReviewItem = (
   card: Card,
   features: ReadonlyArray<LoyaltyFeature>
 ): BonusReviewItem | undefined => {
-  const plan = planBonus(card.rewards, features)
+  const plan = planBonus(signupState(card), features)
 
   if (!BonusPlan.$is("Review")(plan)) return undefined
 
@@ -181,8 +183,8 @@ const toBonusReviewItem = (
     program: card.rewards?.program,
     reason: plan.reason,
     text: bonusText(features),
-    bonus: card.rewards?.bonus,
-    bonusPoints: card.rewards?.bonus_points
+    signup: card.offers?.find((offer) => offer.id === "signup"),
+    bonusPoints: rawBonusPoints(features)
   }
 }
 
@@ -207,9 +209,10 @@ export const formatBonusQueue = (items: ReadonlyArray<BonusReviewItem>): string 
   [
     `# Signup bonuses to review (${items.length})`,
     "",
-    "For each card, set `rewards.bonus` in its TOML file from the text below, one",
-    "`[[rewards.bonus]]` table per tranche with `points`, `year` (1 or 2) and any of",
-    "`min_spend`, `spend_days`, `keep_months` and `note` (see docs/data-model.md), then run",
+    "For each card, write the signup offer in its TOML file from the text below: an",
+    '`[[offers]]` table with `id = "signup"` and `source = "manual"`, and one `signup_points`',
+    "component per tranche with `program`, `points`, `year` (1 or 2) and any of `min_spend`,",
+    "`spend_days`, `keep_months` and `note` (see docs/offers.md). Then run",
     "`bun run cli rewards bonus-stamp <issuer/card>...`. Use `--none` when there is no",
     "current points offer, for example when it has expired or is cashback only.",
     "",
@@ -219,8 +222,8 @@ export const formatBonusQueue = (items: ReadonlyArray<BonusReviewItem>): string 
       `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
       `- Program: ${i.program ?? "—"}`,
       `- Reason: ${i.reason}`,
-      `- CDR bonus_points: ${i.bonusPoints ?? "—"}`,
-      `- Current bonus: ${i.bonus ? encodeJson(i.bonus) : "—"}`,
+      `- CDR bonus total: ${i.bonusPoints ?? "—"}`,
+      `- Current signup offer: ${i.signup ? encodeJson(i.signup) : "—"}`,
       "",
       "```text",
       i.text || "(no bonus text)",
@@ -240,28 +243,28 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
     if (!card) return yield* new RewardsError({ message: `Unknown card ${key}` })
 
     if (!card.rewards) return yield* new RewardsError({ message: `${key} has no rewards program` })
-    const bonus = none ? [] : card.rewards.bonus
+    const others = (card.offers ?? []).filter((offer) => offer.id !== "signup")
+    const signup = card.offers?.find((offer) => offer.id === "signup")
 
-    if (!bonus) return yield* new RewardsError({ message: `${key} has no rewards.bonus; set it first or pass --none` })
+    if (!none && !signup) {
+      return yield* new RewardsError({ message: `${key} has no signup offer; write one first or pass --none` })
+    }
+
+    const offers = none || !signup ? others : [...others, { ...signup, source: "manual" as const }]
     const hash = bonusTextHash(yield* bonusFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
-    yield* store.writeCard(
-      issuer,
-      slug,
-      withOffers({
-        ...card,
-        rewards: {
-          ...card.rewards,
-          bonus,
-          bonus_source: "manual",
-          bonus_text_hash: hash,
-          bonus_review: {
-            state: bonus.length === 0 ? "none" : "present",
-            reviewed_at: DateTime.formatIsoDateUtc(yield* DateTime.now)
-          }
-        }
-      })
-    )
+    const { offers: _offers, ...rest } = card
+
+    yield* store.writeCard(issuer, slug, {
+      ...rest,
+      ...(offers.length === 0 ? {} : { offers }),
+      signup_review: {
+        state: none ? "none" : "present",
+        source: "manual",
+        text_hash: hash,
+        reviewed_at: DateTime.formatIsoDateUtc(yield* DateTime.now)
+      }
+    })
     yield* Effect.logInfo(`Stamped bonus for ${key} (${hash})`)
   }
 

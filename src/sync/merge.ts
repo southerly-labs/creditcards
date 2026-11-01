@@ -13,7 +13,6 @@ export const CDR_OWNED_PATHS = [
   "image",
   "cdr",
   "fees.annual",
-  "fees.annual_first_year",
   "fees.additional_card",
   "fees.foreign_txn_pct",
   "fees.cash_advance_pct",
@@ -23,13 +22,11 @@ export const CDR_OWNED_PATHS = [
   "rates.cash_advance",
   "rates.balance_transfer",
   "rates.interest_free_days",
-  "rates.intro",
   "limits.min_credit",
   "limits.max_credit",
   "limits.min_income",
   "rewards.program",
   "rewards.partners",
-  "rewards.bonus_points",
   "perks.insurance",
   "perks.lounge_access"
 ] as const
@@ -101,7 +98,7 @@ const withoutTimestamp = (path: string, value: unknown) => {
 }
 
 export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<FieldChange> => {
-  const paths = [...CDR_OWNED_PATHS, "status", "discontinued", ...EARN_PATHS, ...BONUS_PATHS, ...OFFER_PATHS]
+  const paths = [...CDR_OWNED_PATHS, "status", "discontinued", ...EARN_PATHS, ...OFFER_PATHS]
 
   return paths
     .values()
@@ -113,8 +110,6 @@ export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<Fi
 export const EARN_PATHS = ["rewards.earn", "rewards.earn_source", "rewards.earn_text_hash"] as const
 
 export const OFFER_PATHS = ["offers", "signup_review"] as const
-
-export const BONUS_PATHS = ["rewards.bonus", "rewards.bonus_source", "rewards.bonus_text_hash"] as const
 
 const KEY_FIELDS = new Set(["fees.annual", "rates.purchase", "fees.foreign_txn_pct"])
 

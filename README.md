@@ -57,33 +57,42 @@ Banks publish earn rates as prose, so they are filled in two ways:
 
 ### Signup bonuses
 
-Bonus offers are often paid in two parts: points for meeting a spend target in the first months, then more points in the second year for keeping the card or spending again. `rewards.bonus` stores each part as its own tranche:
+Signup bonuses, intro rates and first-year fee discounts are stored as `[[offers]]` (see [docs/offers.md](docs/offers.md)). Each offer has an `id` and a `source`: `cdr` and `parser` offers are rebuilt by every sync, and `manual` offers are never touched. A manual offer replaces a generated one with the same `id`. Bonus offers are often paid in two parts, so the signup offer holds one `signup_points` component per tranche:
 
 ```toml
-[[rewards.bonus]]
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
 points = 80000
 year = 1
 min_spend = 3000
 spend_days = 90
 
-[[rewards.bonus]]
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
 points = 20000
 year = 2
 keep_months = 12
 ```
 
-- **Parser.** During the sync, `src/rewards/bonus.ts` reads the CDR `BONUS_REWARDS` text. It sets `rewards.bonus` only when every amount maps to a clear year and the amounts agree with any "up to" total and with the CDR value. These cards have `bonus_source = "parser"`. When the offer ends, or changes into text the parser can't read, the parsed bonus is removed rather than left stale.
+- **Parser.** During the sync, `src/rewards/bonus.ts` reads the CDR `BONUS_REWARDS` text. It writes a `parser` signup offer only when every amount maps to a clear year and the amounts agree with any "up to" total and with the CDR value. When the offer ends, or changes into text the parser can't read, the parsed offer is removed rather than left stale.
+- **Raw total.** When nothing better is known, the sync writes the CDR bonus total as a `cdr` signup offer with no `year`. It is sometimes the total and sometimes only the first part, so the site shows it as "split unknown" and never counts it as a first-year bonus.
 - **Review.** Alternative offers, end dates, cashback, per-month awards and offers with no details in CDR are listed in the `rewards-review` issue:
 
   ```sh
   bun run cli rewards bonus-todo --issuer anz      # cards to review, with their CDR bonus text
-  # edit rewards.bonus in the card's TOML file
+  # write the [[offers]] entry with id = "signup" in the card's TOML file
   bun run cli rewards bonus-stamp anz/rewards-platinum   # --none if there is no current points offer
   ```
 
-  Stamped cards have `bonus_source = "manual"` and are never overwritten. If the bank's bonus text changes, the card goes back on the review list.
+  Stamping marks the signup offer `manual` and records `signup_review` (`state`, `source = "manual"`, the CDR text hash and the date). `--none` records `state = "none"` and removes the signup offer, so the raw CDR total is not shown either. If the bank's bonus text changes, the card goes back on the review list.
 
-`bonus_points` is still the raw CDR value. It is sometimes the total and sometimes only the first part, so prefer `bonus`.
+To freeze all of a card's offers, add `"offers"` to its `locked` list.
 
 No LLM runs in CI and no API key is needed.
 
