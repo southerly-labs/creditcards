@@ -1,6 +1,13 @@
 import type { Api } from "../src/build/build.ts"
 import { required } from "../src/util/required.ts"
-import { decodeApi, loadColumnVisibility, loadPointValues } from "../src/model/api.ts"
+import {
+  decodeApi,
+  decodeMonthlySpend,
+  loadColumnVisibility,
+  loadMonthlySpend,
+  loadPointValues
+} from "../src/model/api.ts"
+import { annualPoints } from "../src/model/benefit.ts"
 import type { Card, IntroOffer, Program } from "../src/model/schema.ts"
 
 interface Row {
@@ -151,6 +158,45 @@ const yearValue = (r: Row, year: Tranche["year"]) => {
 
 const yearValues = (r: Row) => [...yearValue(r, 1), ...yearValue(r, 2)]
 
+const SPEND_KEY = "creditcards.monthlySpend"
+
+let monthlySpend = loadMonthlySpend(() => localStorage.getItem(SPEND_KEY))
+
+const signedMoney = (n: number) => (n < 0 ? `−${money(-n)}` : money(n))
+
+type Benefit =
+  | { readonly kind: "value"; readonly value: number; readonly title: string }
+  | { readonly kind: "unknown"; readonly title: string }
+  | { readonly kind: "none" }
+
+const benefit = (r: Row): Benefit => {
+  if (monthlySpend === undefined) return { kind: "none" }
+  const fee = r.card.fees.annual
+
+  if (fee === undefined) return { kind: "unknown", title: "Annual fee unknown" }
+  const feeText = `${plain(money(fee))} annual fee`
+
+  if (!r.program) return { kind: "value", value: -fee, title: `No rewards, minus ${feeText}` }
+  const points = annualPoints(r.card.rewards?.earn ?? [], monthlySpend)
+
+  if (points === undefined) return { kind: "unknown", title: `No base earn rate for ${r.program.name}` }
+  const cents = centsPerPoint(r)
+
+  if (cents === undefined) {
+    return { kind: "unknown", title: `No point value for ${r.program.name}; set one under Point values` }
+  }
+
+  const custom = overrides[r.program.id] !== undefined
+
+  const title = [
+    `${int(points)} points a year on ${plain(money(monthlySpend))} a month × ${cents}c per point${custom ? " (your value)" : ""}`,
+    `minus ${feeText}`,
+    "Base earn rate only; excludes category rates and signup bonuses"
+  ].join("\n")
+
+  return { kind: "value", value: Math.round((points * cents) / 100 - fee), title }
+}
+
 const columns: ReadonlyArray<Column> = [
   {
     id: "card",
@@ -273,6 +319,27 @@ const columns: ReadonlyArray<Column> = [
       const title = `${baseEarn(r)} points per $1 × ${centsPerPoint(r)}c per point${custom ? " (your value)" : ""}`
 
       return `<span class="${custom ? "custom" : ""}" title="${esc(title)}">${value.toFixed(2)}¢</span>`
+    }
+  },
+  {
+    id: "annual-benefit",
+    label: "Annual benefit",
+    num: true,
+    sortValue: (r) => {
+      const b = benefit(r)
+
+      return b.kind === "value" ? b.value : undefined
+    },
+    render: (r) => {
+      const b = benefit(r)
+
+      if (b.kind === "none") return `<span class="dim" title="Enter your monthly spend to see this">—</span>`
+
+      if (b.kind === "unknown") return `<span class="dim" title="${esc(b.title)}">?</span>`
+      const custom = r.program !== undefined && overrides[r.program.id] !== undefined
+      const tone = b.value < 0 ? "negative" : custom ? "custom" : ""
+
+      return `<span class="${tone}" title="${esc(b.title)}">${signedMoney(b.value)}</span>`
     }
   },
   {
@@ -577,6 +644,18 @@ $("value-reset").addEventListener("click", () => {
   for (const id of Object.keys(overrides)) delete overrides[id]
   saveOverrides()
   renderValueGrid()
+  render()
+})
+
+const spendInput = element("spend", HTMLInputElement)
+
+spendInput.value = monthlySpend === undefined ? "" : String(monthlySpend)
+
+spendInput.addEventListener("input", () => {
+  monthlySpend = decodeMonthlySpend(spendInput.value)
+
+  if (monthlySpend === undefined) localStorage.removeItem(SPEND_KEY)
+  else localStorage.setItem(SPEND_KEY, String(monthlySpend))
   render()
 })
 

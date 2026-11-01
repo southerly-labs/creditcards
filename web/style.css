@@ -6,6 +6,7 @@
   --head: #fafafa;
   --accent: #0b6bcb;
   --good: #1a7f37;
+  --bad: #c62828;
   color-scheme: light dark;
   font:
     14px/1.4 ui-sans-serif,
@@ -24,6 +25,7 @@
     --head: #181818;
     --accent: #5aa9ff;
     --good: #4cc26b;
+    --bad: #ff6b6b;
   }
 }
 
@@ -58,6 +60,9 @@ h1 {
 }
 .controls input[type="search"] {
   width: 280px;
+}
+.controls input[type="number"] {
+  width: 90px;
 }
 .controls input,
 .controls select {
@@ -267,4 +272,7 @@ tbody tr:hover {
 .custom {
   color: var(--accent);
   font-style: italic;
+}
+.negative {
+  color: var(--bad);
 }
