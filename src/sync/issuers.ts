@@ -27,11 +27,11 @@ export const slugify = (s: string) =>
     .replaceAll(/[^a-z0-9]+/gu, "-")
     .replaceAll(/^-|-$/gu, "")
 
-const CORPORATE_SUFFIX = /\b(limited|ltd|pty|australia|bank of australia)\b/giu
+const CORPORATE_TAIL = /(?:\s+\(?australia\)?)?(?:\s+(?:limited|ltd|pty)\.?)+$/iu
 
 export const issuerSeed = (brandName: string) =>
   ISSUER_SEEDS[brandName] ?? {
-    slug: slugify(brandName.replaceAll(CORPORATE_SUFFIX, "")),
+    slug: slugify(brandName.replace(CORPORATE_TAIL, "")),
     name: brandName.replace(/\s+(Limited|Ltd\.?)$/iu, "").trim()
   }
 
