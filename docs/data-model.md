@@ -1,7 +1,7 @@
 # Data model and normalization
 
 The canonical schemas are in `src/model/schema.ts`; they define the TOML dataset
-and public API. Money is AUD. Percentages use percent units: `20.99` means 20.99%
+storage. The [public API contract](public-api.md) defines public projections and freshness metadata. Money is AUD. Percentages use percent units: `20.99` means 20.99%
 p.a. CDR source rates normally use decimal units such as `0.2099`; normalization
 accepts the occasional percentage representation too.
 

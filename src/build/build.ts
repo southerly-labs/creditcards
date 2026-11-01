@@ -1,6 +1,10 @@
 import { required } from "../util/required.ts"
 import { Effect, Schema } from "effect"
-import type { Card, Program } from "../model/schema.ts"
+import { type Api, type PublicCard } from "../api/contract.ts"
+import { datasetFreshness } from "../api/freshness.ts"
+
+export type { Api } from "../api/contract.ts"
+
 import { type Dataset, splitCardKey, Store } from "../store/Store.ts"
 
 export class ValidationError extends Schema.TaggedError<ValidationError>()("ValidationError", {
@@ -41,19 +45,7 @@ export const validate = Effect.gen(function* () {
   return dataset
 }).pipe(Effect.withSpan("validate"))
 
-type PublicProgram = Omit<Program, "aliases" | "priority">
-
-type PublicCard = Omit<Card, "locked">
-
-export interface Api {
-  readonly programs: Record<string, PublicProgram>
-  readonly issuers: Record<
-    string,
-    { readonly name: string; readonly website?: string; readonly cards: Record<string, PublicCard> }
-  >
-}
-
-export const toApi = (dataset: Dataset): Api => {
+export const toApi = (dataset: Dataset, generatedAt?: string): Api => {
   const programs = Object.fromEntries(
     [...dataset.programs].map(([id, { aliases: _a, priority: _p, ...rest }]) => [id, rest])
   )
@@ -73,5 +65,11 @@ export const toApi = (dataset: Dataset): Api => {
     required(issuers[issuer]).cards[slug] = card
   }
 
-  return { programs, issuers }
+  return {
+    schema_version: 1,
+    ...(generatedAt === undefined ? {} : { generated_at: generatedAt }),
+    freshness: datasetFreshness(dataset),
+    programs,
+    issuers
+  }
 }

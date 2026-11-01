@@ -1,3 +1,4 @@
+import { Clock } from "effect"
 import { encodeJson } from "./util/json.ts"
 import { BunRuntime, BunServices } from "@effect/platform-bun"
 import { Console, Effect, FileSystem, Layer, Option, Path } from "effect"
@@ -57,7 +58,10 @@ const build = Command.make(
   { out: Flag.String("out").pipe(Flag.withDefault("dist")) },
   Effect.fn(function* ({ out }) {
     const dataset = yield* validate
-    yield* writeFile(`${out}/api.json`, encodeJson(toApi(dataset)))
+    yield* writeFile(
+      `${out}/api.json`,
+      encodeJson(toApi(dataset, new Date(yield* Clock.currentTimeMillis).toISOString()))
+    )
     yield* Console.log(`Wrote ${out}/api.json (${dataset.cards.size} cards)`)
   })
 ).pipe(Command.withDescription("Build dist/api.json from data/"))

@@ -1,4 +1,4 @@
-import type { Api } from "../src/build/build.ts"
+import type { Api } from "../src/api/contract.ts"
 import { required } from "../src/util/required.ts"
 import {
   decodeApi,
