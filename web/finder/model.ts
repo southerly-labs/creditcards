@@ -109,11 +109,7 @@ export const value = (
 
   const earnValue = program === undefined ? 0 : dollars(yearlyPoints, cents)
   const tranches = signupTranches(card, today)
-
-  const unsplitTotal =
-    tranches.length === 0 && card.rewards?.bonus === undefined ? card.rewards?.bonus_points : undefined
-
-  const bonusPoints = sumPoints(tranches) ?? unsplitTotal
+  const bonusPoints = sumPoints(tranches)
   const unverified = signupOffer(card, today)?.source === "cdr"
   const firstYearTranches = unverified ? [] : tranches.filter((t) => (t.year ?? 1) === 1)
   const firstYearBonusPoints = sumPoints(firstYearTranches)

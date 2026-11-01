@@ -2,7 +2,6 @@ import { required } from "../util/required.ts"
 import { Effect, Schema } from "effect"
 import { type Api, type PublicCard } from "../api/contract.ts"
 import { datasetFreshness } from "../api/freshness.ts"
-import { projectOffers } from "../offers/project.ts"
 
 export type { Api } from "../api/contract.ts"
 
@@ -72,11 +71,9 @@ export const toApi = (dataset: Dataset, generatedAt?: string): Api => {
   for (const [key, { locked: _l, ...stored }] of dataset.cards) {
     const { issuer, card: slug } = splitCardKey(key)
     const observedAt = dataset.observations?.get(key)
-    const offers = projectOffers(stored)
 
     const card = {
       ...stored,
-      ...(offers.length === 0 ? {} : { offers }),
       ...(observedAt === undefined ? {} : { provenance: { ...stored.provenance, cdr_observed_at: observedAt } })
     }
 

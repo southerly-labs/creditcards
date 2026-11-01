@@ -142,12 +142,10 @@ const splitKnown = (r: Row) => {
   return offer !== undefined && offer.source !== "cdr"
 }
 
-const unsplitTotal = (r: Row) => (r.card.rewards?.bonus === undefined ? r.card.rewards?.bonus_points : undefined)
-
 const bonusPoints = (r: Row, year?: Tranche["year"]) => {
   const bonus = tranches(r)
 
-  if (!bonus) return year === undefined || year === 1 ? unsplitTotal(r) : undefined
+  if (!bonus) return undefined
   const points = bonus.filter((t) => year === undefined || t.year === year).reduce((sum, t) => sum + t.points, 0)
 
   return points === 0 ? undefined : points

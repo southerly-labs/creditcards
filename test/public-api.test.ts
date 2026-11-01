@@ -1,6 +1,7 @@
 import { assert, test } from "@effect/vitest"
 import { checkReferences, toApi } from "../src/build/build.ts"
 import { decodeApi } from "../src/api/contract.ts"
+import type { Offer } from "../src/offers/schema.ts"
 import type { Dataset } from "../src/store/Store.ts"
 
 test("public output round trips and requires version and freshness", () => {
@@ -109,20 +110,22 @@ test("CDR observations publish on cards and must reference known cards", () => {
   assert.deepStrictEqual(checkReferences(dataset), ["cdr-observations: unknown card bank/gone"])
 })
 
-test("public cards publish projected legacy offers", () => {
+test("public cards publish stored offers as they are", () => {
+  const offers: ReadonlyArray<Offer> = [
+    {
+      id: "intro-purchase",
+      source: "cdr",
+      components: [{ kind: "intro_rate", applies_to: "purchase", rate: 0, months: 12 }]
+    }
+  ]
+
   const dataset: Dataset = {
     issuers: new Map([["bank", { name: "Bank", cdr_brands: [] }]]),
     programs: new Map(),
-    cards: new Map([["bank/card", { ...card, rates: { intro: [{ applies_to: "purchase", rate: 0, months: 12 }] } }]])
+    cards: new Map([["bank/card", { ...card, offers }]])
   }
 
   const api = toApi(dataset)
   assert.deepStrictEqual(decodeApi(api), api)
-  assert.deepStrictEqual(api.issuers["bank"]?.cards["card"]?.offers, [
-    { components: [{ kind: "intro_rate", applies_to: "purchase", rate: 0, months: 12 }] }
-  ])
-  assert.strictEqual(
-    toApi({ ...dataset, cards: new Map([["bank/card", card]]) }).issuers["bank"]?.cards["card"]?.offers,
-    undefined
-  )
+  assert.deepStrictEqual(api.issuers["bank"]?.cards["card"]?.offers, offers)
 })
