@@ -55,16 +55,19 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          held=$(jq '.held | length' .cache/sync-report.json)
-          if [ "$held" -eq 0 ]; then
+          pending=$(jq '(.held | length) + ([.holds[] | select(has("decision") | not)] | length)' .cache/sync-report.json)
+          number=$(gh issue list --label sync-held --state open --json number --jq '.[0].number')
+          if [ "$pending" -eq 0 ]; then
+            if [ -n "$number" ]; then
+              gh issue close "$number" --comment "No changes are held."
+            fi
             exit 0
           fi
           gh label create sync-held --color D93F0B --description "Data changes held back by sync guardrails" --force
-          number=$(gh issue list --label sync-held --state open --json number --jq '.[0].number')
           if [ -n "$number" ]; then
-            gh issue comment "$number" --body-file .cache/sync-summary.md
+            gh issue edit "$number" --body-file .cache/sync-held.md
           else
-            gh issue create --title "CDR sync: changes held for review" --label sync-held --body-file .cache/sync-summary.md
+            gh issue create --title "CDR sync: changes held for review" --label sync-held --body-file .cache/sync-held.md
           fi
 
       - name: Update earn-rate review issue

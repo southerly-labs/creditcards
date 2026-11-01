@@ -37,6 +37,15 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
     }
   }
 
+  const holdIds = new Set<string>()
+
+  for (const hold of dataset.holds ?? []) {
+    if (!dataset.cards.has(hold.card)) problems.push(`sync-holds: unknown card ${hold.card}`)
+
+    if (holdIds.has(hold.id)) problems.push(`sync-holds: duplicate id ${hold.id}`)
+    holdIds.add(hold.id)
+  }
+
   for (const key of dataset.observations?.keys() ?? []) {
     if (!dataset.cards.has(key)) problems.push(`cdr-observations: unknown card ${key}`)
   }

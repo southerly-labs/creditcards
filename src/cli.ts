@@ -1,5 +1,6 @@
 import { Clock } from "effect"
 import { provenanceCommand } from "./provenance/commands.ts"
+import { heldCommand } from "./sync/heldCommand.ts"
 import { encodeJson } from "./util/json.ts"
 import { BunRuntime, BunServices } from "@effect/platform-bun"
 import { Console, Effect, FileSystem, Layer, Option, Path } from "effect"
@@ -11,7 +12,7 @@ import { checkEarnPages, formatCheck, normaliseText, pageText } from "./rewards/
 import { bonusReviewQueue, formatBonusQueue, formatQueue, reviewQueue, stamp, stampBonus } from "./rewards/review.ts"
 import { Snapshots } from "./history/Snapshots.ts"
 import { splitCardKey, Store } from "./store/Store.ts"
-import { summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
+import { summariseHolds, summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
 
 const DATA_DIR = "data"
 const HISTORY_DIR = "history"
@@ -41,6 +42,7 @@ const sync = Command.make(
     yield* writeFile(`${reportDir}/sync-report.json`, encodeJson(report, 2))
     yield* writeFile(`${reportDir}/sync-summary.md`, summary)
     yield* writeFile(`${reportDir}/rewards-review.md`, summariseRewardsReview(report))
+    yield* writeFile(`${reportDir}/sync-held.md`, [`Sync ${report.date}`, "", ...summariseHolds(report)].join("\n"))
     yield* Console.log(summary)
   })
 ).pipe(Command.withDescription("Pull CDR product data and update data/"))
@@ -174,7 +176,7 @@ const MainLayer = Layer.mergeAll(
 ).pipe(Layer.provideMerge(BunServices.layer))
 
 Command.make("creditcards").pipe(
-  Command.withSubcommands([sync, validateCommand, build, rewards, provenanceCommand]),
+  Command.withSubcommands([sync, validateCommand, build, rewards, provenanceCommand, heldCommand]),
   Command.run({ version: "0.1.0" }),
   Effect.provide(MainLayer),
   (program) => {

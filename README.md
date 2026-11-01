@@ -98,13 +98,23 @@ No LLM runs in CI and no API key is needed.
 
 ### Sync guardrails
 
-Updates auto-merge. Changes that look wrong are held back and reported in a `sync-held` issue instead:
+Updates auto-merge. Changes that look wrong are held back and listed in a `sync-held` issue, which each sync rewrites and closes when nothing is held:
 
 - the whole run aborts if far fewer cards come back than are active (likely outage)
 - an annual fee jumping by more than 50% and $100, a rate moving more than 5 points, or a key field disappearing
+- a parsed base earn rate moving by more than 1 point per dollar
 - records that fail schema validation
 - more than half of an issuer's cards vanishing at once
-- a parsed base earn rate moving by more than 1 point per dollar
+
+For the first three, only the suspicious field is held: the rest of the card still updates. Each held change is recorded in `data/sync-holds.toml` with a stable id, the current and proposed values, the date it was first held and the card's `history/` folder, so the issuer's raw CDR responses can be compared. A reviewer decides each one:
+
+```sh
+bun run cli held list
+bun run cli held approve <id> --evidence "BONUS_REWARDS text now says 150,000 points"
+bun run cli held reject <id> --evidence "text unchanged; the parser misread it"
+```
+
+The next sync applies an approved change and drops its entry. A rejected change keeps the current value for as long as CDR proposes that exact value; a different proposal is held afresh. Invalid records and vanished issuers still hold the whole card.
 
 Cards that disappear from CDR are marked `status = "discontinued"`, not deleted. The first sync that misses a card records `missing_since`; it is discontinued, dated `missing_since`, only if a sync on a later day still misses it, so one bad response from a data holder can't discontinue it. A card the issuer no longer sells but still lists in CDR is marked `status = "closed"` by hand, with a `closed` date when it is known; the sync keeps that status.
 

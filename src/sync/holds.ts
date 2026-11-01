@@ -1,5 +1,8 @@
+import { createHash } from "node:crypto"
 import { Schema } from "effect"
+import type { Hold } from "../model/holds.ts"
 import { Card } from "../model/schema.ts"
+import { encodeJson } from "../util/json.ts"
 import { diffCard, getPath, heldFields, setPath } from "./merge.ts"
 
 export type HoldKind = "approve" | "confirm"
@@ -52,4 +55,61 @@ export const revertChange = (card: Card, existing: Card, change: string): Card |
     setPath(reverted, path, structuredClone(getPath(existing, path)))
 
   return isCard(reverted) ? reverted : undefined
+}
+
+export const holdId = (card: string, change: string, proposed: unknown): string =>
+  createHash("sha256")
+    .update(encodeJson([card, change, proposed ?? null]))
+    .digest("hex")
+    .slice(0, 12)
+
+export interface Resolution {
+  readonly apply: ReadonlyArray<HoldCandidate>
+  readonly revert: ReadonlyArray<HoldCandidate>
+  readonly holds: ReadonlyArray<Hold>
+}
+
+const asJson = (value: unknown) => (value === undefined ? undefined : encodeJson(value))
+
+export const resolveHolds = (input: {
+  readonly card: string
+  readonly candidates: ReadonlyArray<HoldCandidate>
+  readonly entries: ReadonlyArray<Hold>
+  readonly date: string
+  readonly history?: string | undefined
+}): Resolution => {
+  const apply: Array<HoldCandidate> = []
+  const revert: Array<HoldCandidate> = []
+  const holds: Array<Hold> = []
+
+  for (const candidate of input.candidates) {
+    const id = holdId(input.card, candidate.change, candidate.proposed)
+    const entry = input.entries.find((hold) => hold.id === id)
+    const confirmed = candidate.kind === "confirm" && entry !== undefined && entry.since < input.date
+
+    if (entry?.decision === "approve" || (confirmed && entry.decision === undefined)) {
+      apply.push(candidate)
+      continue
+    }
+
+    revert.push(candidate)
+    const current = asJson(candidate.current)
+    const proposed = asJson(candidate.proposed)
+
+    holds.push(
+      entry ?? {
+        id,
+        card: input.card,
+        change: candidate.change,
+        kind: candidate.kind,
+        reason: candidate.reason,
+        ...(current === undefined ? {} : { current }),
+        ...(proposed === undefined ? {} : { proposed }),
+        since: input.date,
+        ...(input.history === undefined ? {} : { history: input.history })
+      }
+    )
+  }
+
+  return { apply, revert, holds }
 }

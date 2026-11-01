@@ -3,11 +3,12 @@ import { required } from "../util/required.ts"
 import { DateTime, Effect, Result, Schema } from "effect"
 import { CdrClient, type CdrError, REQUEST_VARIANTS, type VersionedProduct } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
-import { type CdrSnapshot, Snapshots } from "../history/Snapshots.ts"
+import { type CdrSnapshot, productDir, Snapshots } from "../history/Snapshots.ts"
 import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
 import { applyOffers, signupState } from "../offers/build.ts"
-import { holdCandidates, revertChange } from "./holds.ts"
+import { holdCandidates, holdId, resolveHolds, revertChange } from "./holds.ts"
+import type { Hold } from "../model/holds.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
@@ -33,6 +34,8 @@ export interface SyncReport {
   readonly discontinued: ReadonlyArray<string>
   readonly missing: ReadonlyArray<string>
   readonly held: ReadonlyArray<{ readonly card: string; readonly reasons: ReadonlyArray<string> }>
+  readonly holds: ReadonlyArray<Hold>
+  readonly released: ReadonlyArray<{ readonly id: string; readonly card: string; readonly change: string }>
   readonly newIssuers: ReadonlyArray<string>
   readonly newPrograms: ReadonlyArray<string>
   readonly brandErrors: ReadonlyArray<{ readonly brand: string; readonly error: string }>
@@ -178,6 +181,10 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const added: Array<string> = []
   const updated: Array<{ card: string; changes: ReadonlyArray<FieldChange> }> = []
   const held: Array<{ card: string; reasons: ReadonlyArray<string> }> = []
+  const priorHolds = dataset.holds ?? []
+  const holds: Array<Hold> = []
+  const released: Array<{ id: string; card: string; change: string }> = []
+  const evaluated = new Set<string>()
   const discontinued: Array<string> = []
   const missing: Array<string> = []
   const newPrograms: Array<string> = []
@@ -280,15 +287,32 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       const candidates = existing ? holdCandidates(existing, proposed) : []
       let card = proposed
 
-      if (existing && candidates.length > 0) {
-        held.push({ card: key, reasons: candidates.map((candidate) => candidate.reason) })
+      if (existing) evaluated.add(key)
 
-        const reverted = candidates.reduce<Card | undefined>(
+      if (existing && candidates.length > 0) {
+        const resolution = resolveHolds({
+          card: key,
+          candidates,
+          entries: priorHolds.filter((hold) => hold.card === key),
+          date,
+          history: existing.cdr && `history/cdr/${productDir(issuerSlug, existing.cdr.product_id)}/`
+        })
+
+        holds.push(...resolution.holds)
+
+        for (const { change, proposed: value } of resolution.apply)
+          released.push({ id: holdId(key, change, value), card: key, change })
+
+        const reverted = resolution.revert.reduce<Card | undefined>(
           (next, candidate) => next && revertChange(next, existing, candidate.change),
           proposed
         )
 
-        if (reverted === undefined) continue
+        if (reverted === undefined) {
+          held.push({ card: key, reasons: resolution.revert.map((candidate) => candidate.reason) })
+          continue
+        }
+
         card = reverted
       }
 
@@ -351,6 +375,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
+  holds.push(...priorHolds.filter((hold) => !evaluated.has(hold.card) && cards.has(hold.card)))
+
   let snapshotsSaved = 0
 
   if (!options.dryRun) {
@@ -367,6 +393,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
 
     yield* store.writeObservations(observations)
+    yield* store.writeHolds(holds)
   }
 
   return {
@@ -377,6 +404,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     discontinued,
     missing,
     held,
+    holds,
+    released,
     newIssuers: [...new Set(newIssuers)],
     newPrograms,
     brandErrors: fetched
@@ -394,7 +423,7 @@ export const summariseReport = (r: SyncReport): string => {
 
   const lines = [
     `CDR sync ${r.date}: ${r.cardsSeen} cards seen, ${r.added.length} added, ${r.updated.length} updated, ` +
-      `${r.discontinued.length} discontinued, ${r.held.length} held`,
+      `${r.discontinued.length} discontinued, ${r.held.length + r.holds.filter((hold) => hold.decision === undefined).length} held`,
     ""
   ]
 
@@ -423,8 +452,7 @@ export const summariseReport = (r: SyncReport): string => {
     lines.push("Not seen (discontinued if still missing on a later day):", ...r.missing.map((c) => `- ${c}`), "")
   }
 
-  if (r.held.length > 0)
-    lines.push("Held for review:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")
+  lines.push(...summariseHolds(r))
 
   if (r.newPrograms.length > 0)
     lines.push("New fallback programs (add aliases or rename):", ...r.newPrograms.map((p) => `- ${p}`), "")
@@ -472,4 +500,44 @@ export const summariseRewardsReview = (r: SyncReport): string => {
   if (sections.length === 0) return `No earn rates or signup bonuses need review (sync ${r.date}).`
 
   return sections.map((lines) => lines.join("\n")).join("\n\n")
+}
+
+const holdLine = (hold: Hold) =>
+  `- \`${hold.id}\` ${hold.card} ${hold.change}: ${hold.reason} (since ${hold.since}${hold.history === undefined ? "" : `, ${hold.history}`})`
+
+export const summariseHolds = (r: SyncReport): ReadonlyArray<string> => {
+  const pending = r.holds.filter((hold) => hold.decision === undefined)
+  const review = pending.filter((hold) => hold.kind === "approve")
+  const confirm = pending.filter((hold) => hold.kind === "confirm")
+  const lines: Array<string> = []
+
+  if (review.length > 0) {
+    lines.push(
+      "Held for review (`bun run cli held approve <id> --evidence ...` or `held reject`):",
+      ...review.map((hold) => holdLine(hold)),
+      ""
+    )
+  }
+
+  if (confirm.length > 0) {
+    lines.push(
+      "Waiting to confirm (applied if still proposed on a later day):",
+      ...confirm.map((hold) => holdLine(hold)),
+      ""
+    )
+  }
+
+  if (r.held.length > 0) {
+    lines.push("Whole cards held:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")
+  }
+
+  if (r.released.length > 0) {
+    lines.push(
+      "Applied after review or confirmation:",
+      ...r.released.map((h) => `- \`${h.id}\` ${h.card} ${h.change}`),
+      ""
+    )
+  }
+
+  return lines
 }

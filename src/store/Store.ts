@@ -2,6 +2,7 @@ import { Context, Effect, FileSystem, Layer, Path, Schema } from "effect"
 import * as Toml from "smol-toml"
 import { Card, Issuer, Program } from "../model/schema.ts"
 import { CdrObservations } from "../provenance/schema.ts"
+import { type Hold, SyncHolds } from "../model/holds.ts"
 
 export interface Dataset {
   readonly programs: ReadonlyMap<string, Program>
@@ -12,9 +13,13 @@ export interface Dataset {
   readonly observations?: ReadonlyMap<string, string>
 
   readonly changes?: ReadonlyMap<string, string>
+
+  readonly holds?: ReadonlyArray<Hold>
 }
 
 export const OBSERVATIONS_FILE = "cdr-observations.toml"
+
+export const HOLDS_FILE = "sync-holds.toml"
 
 export const cardKey = (issuer: string, card: string) => `${issuer}/${card}`
 
@@ -40,6 +45,7 @@ export class Store extends Context.Service<
     writeIssuer(issuer: string, value: Issuer): Effect.Effect<boolean, StoreError>
     writeProgram(id: string, value: Program): Effect.Effect<boolean, StoreError>
     writeObservations(value: ReadonlyMap<string, string>): Effect.Effect<boolean, StoreError>
+    writeHolds(value: ReadonlyArray<Hold>): Effect.Effect<boolean, StoreError>
   }
 >()("creditcards/store/Store") {
   static readonly layer = (dataDir: string) =>
@@ -94,7 +100,13 @@ export class Store extends Context.Service<
             ? new Map(Object.entries(yield* readToml(CdrObservations, observationsFile)))
             : new Map<string, string>()
 
-          return { programs, issuers, cards, observations } satisfies Dataset
+          const holdsFile = path.join(dataDir, HOLDS_FILE)
+
+          const holds = (yield* fs.exists(holdsFile).pipe(Effect.mapError(fail(holdsFile))))
+            ? ((yield* readToml(SyncHolds, holdsFile)).hold ?? [])
+            : []
+
+          return { programs, issuers, cards, observations, holds } satisfies Dataset
         }).pipe(Effect.withSpan("Store.load"))
 
         const writeToml = Effect.fn("Store.writeToml")(function* <A, I>(
@@ -113,7 +125,19 @@ export class Store extends Context.Service<
           return true
         })
 
+        const writeHolds = Effect.fn("Store.writeHolds")(function* (value: ReadonlyArray<Hold>) {
+          const file = path.join(dataDir, HOLDS_FILE)
+
+          if (value.length > 0) return yield* writeToml(SyncHolds, file, { hold: value })
+
+          if (!(yield* fs.exists(file).pipe(Effect.mapError(fail(file))))) return false
+          yield* fs.remove(file).pipe(Effect.mapError(fail(file)))
+
+          return true
+        })
+
         return Store.of({
+          writeHolds,
           load,
           writeCard: (issuer, card, value) =>
             writeToml(Card, path.join(dataDir, "issuers", issuer, "cards", `${card}.toml`), value),
