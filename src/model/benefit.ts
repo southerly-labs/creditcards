@@ -26,3 +26,13 @@ export const annualPoints = (
 
   return Math.round(points * 12)
 }
+
+export const meetsSpendTarget = (
+  monthlySpend: number,
+  target: { readonly min_spend?: number; readonly spend_days?: number }
+): boolean => {
+  if (target.min_spend === undefined) return true
+  const days = target.spend_days ?? 365
+
+  return (monthlySpend * 12 * days) / 365 >= target.min_spend
+}

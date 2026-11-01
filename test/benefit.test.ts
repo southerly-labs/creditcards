@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@effect/vitest"
-import { annualPoints } from "../src/model/benefit.ts"
+import { annualPoints, meetsSpendTarget } from "../src/model/benefit.ts"
 
 describe("annual points from monthly spend", () => {
   test("single uncapped rate", () => {
@@ -32,5 +32,21 @@ describe("annual points from monthly spend", () => {
 
   test("no base rate means unknown", () => {
     expect(annualPoints([{ rate: 2, category: "dining" }], 1000)).toBeUndefined()
+  })
+})
+
+describe("bonus spend targets", () => {
+  test("no target is always met", () => {
+    expect(meetsSpendTarget(0, {})).toBe(true)
+  })
+
+  test("spend over the window must reach the target", () => {
+    expect(meetsSpendTarget(1000, { min_spend: 3000, spend_days: 90 })).toBe(false)
+    expect(meetsSpendTarget(1100, { min_spend: 3000, spend_days: 90 })).toBe(true)
+  })
+
+  test("a target without a window allows a year", () => {
+    expect(meetsSpendTarget(500, { min_spend: 6000 })).toBe(true)
+    expect(meetsSpendTarget(400, { min_spend: 6000 })).toBe(false)
   })
 })
