@@ -4,6 +4,7 @@ status = "active"
 description = "Digital credit card with cashback rewards. Purchase and cash advance rates are personalised to your Equifax OneScore credit band. Credit limits up to $20,000."
 url = "https://www.moneyme.com.au/credit-card"
 image = "https://cdn.moneyme.com.au/images/assets/cards/cashback-rewards-card.png"
+locked = [ "rewards.program" ]
 
 [cdr]
 brand = "MoneyMe"
@@ -22,6 +23,19 @@ cash_advance = 22.99
 min_credit = 1000
 max_credit = 2000
 min_income = 30000
+
+[rewards]
+program = "cashback"
+earn_source = "manual"
+earn_text_hash = "e3b0c44298fc1c14"
+
+[[rewards.earn]]
+rate = 1
+note = "1% cashback on eligible purchases, capped at 1% of your credit limit each month. Requires the minimum repayment by the due date."
+
+[[rewards.earn_check]]
+url = "https://www.moneyme.com.au/credit-card"
+expect = [ "Get 1% cashback on everyday spending", "Cashback is capped at 1% of your credit limit each month.", "Make at least the minimum repayment shown on your statement by the due date" ]
 
 [perks]
 
