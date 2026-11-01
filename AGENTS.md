@@ -22,7 +22,7 @@ Then rebase onto the remote and push:
 git pull --rebase origin main && git push origin HEAD:main
 ```
 
-The sync bot commits to `data/` every day at 20:00 UTC, so always rebase before you push. Never force-push `main`.
+The sync bot commits to `data/` every day at about 20:17 UTC, so always rebase before you push. Never force-push `main`.
 
 If the rebase changes the tree you checked, run `bun run check` again before pushing.
 
