@@ -223,6 +223,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       }
 
       const merged = mergeCard(existing, incoming)
+
+      if (!existing) merged["first_seen"] = date
       let earnSet: ReadonlyArray<EarnRate> | undefined
       const mergedRewards = merged["rewards"]
 
