@@ -114,7 +114,7 @@ export interface CheckResult {
 
 export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: ReadonlyMap<string, Card>) {
   const checks = [...cards].flatMap(([card, c]) =>
-    c.status === "active"
+    c.status !== "discontinued"
       ? (c.rewards?.earn_check ?? []).map((check) => ({ card, url: check.url, expect: check.expect }))
       : []
   )

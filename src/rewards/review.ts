@@ -75,7 +75,7 @@ const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFe
 const reviewCandidates = (cards: ReadonlyMap<string, Card>, issuer: string | undefined) =>
   [...cards].filter(
     ([key, card]) =>
-      card.status === "active" &&
+      card.status !== "discontinued" &&
       card.rewards !== undefined &&
       card.cdr !== undefined &&
       (issuer === undefined || issuer === "" || splitCardKey(key).issuer === issuer)
