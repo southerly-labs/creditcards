@@ -104,3 +104,21 @@ test("CDR observations publish on cards and must reference known cards", () => {
   assert.strictEqual(api.issuers["bank"]?.cards["card"]?.provenance?.cdr_observed_at, "2026-11-01T20:00:00Z")
   assert.deepStrictEqual(checkReferences(dataset), ["cdr-observations: unknown card bank/gone"])
 })
+
+test("public cards publish projected legacy offers", () => {
+  const dataset: Dataset = {
+    issuers: new Map([["bank", { name: "Bank", cdr_brands: [] }]]),
+    programs: new Map(),
+    cards: new Map([["bank/card", { ...card, rates: { intro: [{ applies_to: "purchase", rate: 0, months: 12 }] } }]])
+  }
+
+  const api = toApi(dataset)
+  assert.deepStrictEqual(decodeApi(api), api)
+  assert.deepStrictEqual(api.issuers["bank"]?.cards["card"]?.offers, [
+    { components: [{ kind: "intro_rate", applies_to: "purchase", rate: 0, months: 12 }] }
+  ])
+  assert.strictEqual(
+    toApi({ ...dataset, cards: new Map([["bank/card", card]]) }).issuers["bank"]?.cards["card"]?.offers,
+    undefined
+  )
+})

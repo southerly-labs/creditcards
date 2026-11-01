@@ -30,6 +30,8 @@ undated entries and exclude upcoming/expired entries; callers should label unkno
 validity. Expired explicit entries never fall back to legacy data. Nothing is deleted
 on expiry, and application-window expiry does not revoke an existing customer's reward.
 
-This module does not change sync ownership, ingest offers automatically, or alter
-existing web calculations. Consumers can opt into the projection without double
-counting legacy fields. No schema fields are removed.
+The build publishes this projection as `offers` on each public card in
+`dist/api.json`, omitted when empty. It includes expired explicit offers with
+their dates, so consumers must filter with `offerStatus` for their own date.
+The legacy keys are still published alongside it. The projection does not change
+sync ownership or ingest offers automatically. No schema fields are removed.
