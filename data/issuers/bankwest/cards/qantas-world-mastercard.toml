@@ -36,6 +36,8 @@ program = "qantas"
 earn_source = "parser"
 earn_text_hash = "29076c1fbd38a43a"
 bonus_points = 40000
+bonus_source = "manual"
+bonus_text_hash = "fab9865e7aa5f535"
 
 [[rewards.earn]]
 rate = 1
@@ -43,6 +45,14 @@ cap_monthly = 3000
 
 [[rewards.earn]]
 rate = 0.2
+
+[[rewards.bonus]]
+points = 40000
+year = 2
+min_spend = 4000
+spend_days = 120
+keep_months = 15
+note = "paid once both conditions are met"
 
 [perks]
 insurance = [ "Complimentary Overseas Travel Insurance" ]

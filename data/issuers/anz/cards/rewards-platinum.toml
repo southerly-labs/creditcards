@@ -31,6 +31,8 @@ program = "anz-rewards"
 earn_source = "parser"
 earn_text_hash = "cb0bec3f5007e57e"
 bonus_points = 125000
+bonus_source = "manual"
+bonus_text_hash = "893b4cfc115c7f55"
 
 [[rewards.earn]]
 rate = 1.5
@@ -39,6 +41,18 @@ cap_monthly = 2000
 [[rewards.earn]]
 rate = 0.5
 cap_monthly = 25000
+
+[[rewards.bonus]]
+points = 85000
+year = 1
+min_spend = 3500
+spend_days = 90
+note = "plus $50 back"
+
+[[rewards.bonus]]
+points = 40000
+year = 2
+keep_months = 15
 
 [perks]
 insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess in Australia Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance" ]

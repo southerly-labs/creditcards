@@ -33,6 +33,8 @@ program = "velocity"
 earn_source = "parser"
 earn_text_hash = "d5677f03c96c5847"
 bonus_points = 100000
+bonus_source = "manual"
+bonus_text_hash = "eb06502653fe6523"
 
 [[rewards.earn]]
 rate = 0.75
@@ -40,6 +42,25 @@ cap_monthly = 5000
 
 [[rewards.earn]]
 rate = 0.25
+
+[[rewards.bonus]]
+points = 40000
+year = 1
+min_spend = 3500
+spend_days = 30
+note = "first month"
+
+[[rewards.bonus]]
+points = 40000
+year = 1
+min_spend = 3500
+spend_days = 30
+note = "second month"
+
+[[rewards.bonus]]
+points = 20000
+year = 2
+keep_months = 12
 
 [perks]
 insurance = [ "Mobile Phone Insurance", "International Travel Insurance", "Domestic Travel Insurance", "Purchase Protection Insurance", "Rental Vehicle Excess Insurance in Australia", "Purchase Cover", "Extended Warranty Insurance", "Transit Accident Insurance" ]

@@ -31,6 +31,9 @@ earn = []
 earn_source = "manual"
 earn_text_hash = "7b736c16a85bde5d"
 bonus_points = 170000
+bonus = []
+bonus_source = "manual"
+bonus_text_hash = "aefca5b2cd75f78d"
 
 [perks]
 insurance = [ "Insurance provided by Cover Genius" ]
