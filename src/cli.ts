@@ -1,4 +1,5 @@
 import { Clock } from "effect"
+import { provenanceCommand } from "./provenance/commands.ts"
 import { encodeJson } from "./util/json.ts"
 import { BunRuntime, BunServices } from "@effect/platform-bun"
 import { Console, Effect, FileSystem, Layer, Option, Path } from "effect"
@@ -156,7 +157,7 @@ const MainLayer = Layer.mergeAll(CdrClient.layer, Store.layer(DATA_DIR), FetchHt
 )
 
 Command.make("creditcards").pipe(
-  Command.withSubcommands([sync, validateCommand, build, rewards]),
+  Command.withSubcommands([sync, validateCommand, build, rewards, provenanceCommand]),
   Command.run({ version: "0.1.0" }),
   Effect.provide(MainLayer),
   (program) => {

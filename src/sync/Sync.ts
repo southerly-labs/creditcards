@@ -249,7 +249,6 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
       const changes = diffCard(existing, merged)
 
-      if (changes.length === 0) continue
       const reasons = existing ? holdReasons(changes) : []
 
       if (reasons.length > 0) {
@@ -257,7 +256,12 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         continue
       }
 
-      writes.set(key, decoded.success)
+      writes.set(key, {
+        ...decoded.success,
+        provenance: { ...decoded.success.provenance, cdr_observed_at: DateTime.formatIso(yield* DateTime.now) }
+      })
+
+      if (changes.length === 0) continue
 
       if (earnSet) rewardsSet.push({ card: key, earn: earnSet })
 

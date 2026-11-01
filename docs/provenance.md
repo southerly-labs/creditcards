@@ -7,12 +7,17 @@ Neither is a human review or a guarantee that corrected values match CDR.
 `sections` maps fees, rates, limits, perks or rewards to `source_urls`,
 `reviewed_at` and `correction_reason`. These describe a human's review of the
 section, not a fetch performed by a build. Omission means unknown.
-No historical dates are inferred.
+No historical dates are inferred. Optional section `observed_at` records an actual
+source observation when known; the manual correction command leaves it absent.
+Sync records observations only for accepted card updates (including unchanged
+cards), not held, failed or missing products. Dry runs write nothing.
 
 After editing a section, run `bun run cli provenance correct issuer/card
 --section fees --url https://issuer.example/terms --reason "Explanation"`.
 This records the current review and locks the entire section against CDR.
-Existing locks are retained. Rewards review stamps remain a separate workflow.
+Existing locks are retained. The command supports fees, rates, limits and perks.
+Rewards review stamps remain a separate workflow because rewards parsers have
+their own manual ownership rules.
 
 `bun run cli provenance inspect` reports locks with no section review or a review
 at least 90 days old. This is report-only; it never unlocks corrections.
