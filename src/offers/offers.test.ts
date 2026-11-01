@@ -27,6 +27,14 @@ describe("offers", () => {
     expect(offerStatus(offer, "2026-01-31")).toBe("within_window")
     expect(offerStatus(offer, "2026-02-01")).toBe("expired")
   })
+  it("rejects duplicate offer ids within a card", () => {
+    const signup = { id: "signup", source: "parser", components: [{ kind: "cash_credit", amount: 100 }] }
+
+    expect(() => Schema.decodeUnknownSync(Card)({ ...card, offers: [signup, signup] })).toThrow()
+    expect(() =>
+      Schema.decodeUnknownSync(Card)({ ...card, offers: [signup, { ...signup, id: "other" }] })
+    ).not.toThrow()
+  })
   it("rejects invalid and reversed calendar dates", () => {
     expect(() => Schema.decodeUnknownSync(Offer)({ ...offer, valid_until: "2026-02-30" })).toThrow()
     expect(() => Schema.decodeUnknownSync(Offer)({ ...offer, valid_until: "2025-01-01" })).toThrow()

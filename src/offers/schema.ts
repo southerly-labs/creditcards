@@ -46,7 +46,11 @@ export const OfferComponent = Schema.Union([
 
 export type OfferComponent = typeof OfferComponent.Type
 
+export const OfferSource = Schema.Literals(["cdr", "parser", "manual"])
+
 export const Offer = Schema.Struct({
+  id: Schema.optionalKey(Schema.String.pipe(Schema.check(Schema.isPattern(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u)))),
+  source: Schema.optionalKey(OfferSource),
   components: Schema.NonEmptyArray(OfferComponent),
   valid_from: Schema.optionalKey(OfferDate),
   valid_until: Schema.optionalKey(OfferDate),
@@ -63,3 +67,16 @@ export const Offer = Schema.Struct({
 )
 
 export type Offer = typeof Offer.Type
+
+export const SignupReview = Schema.Struct({
+  state: Schema.Literals(["unknown", "present", "none"]),
+  source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
+  text_hash: Schema.optionalKey(Schema.String),
+  reviewed_at: Schema.optionalKey(OfferDate)
+})
+
+export const uniqueOfferIds = (offers: ReadonlyArray<{ readonly id?: string }>): boolean => {
+  const ids = offers.flatMap((offer) => (offer.id === undefined ? [] : [offer.id]))
+
+  return new Set(ids).size === ids.length
+}

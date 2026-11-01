@@ -2,7 +2,7 @@ import { Provenance } from "../provenance/schema.ts"
 import { Schema } from "effect"
 import { EarnRule } from "./earn.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "./domain.ts"
-import { Offer } from "../offers/schema"
+import { Offer, SignupReview, uniqueOfferIds } from "../offers/schema"
 
 const between = (minimum: number, maximum: number) =>
   Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum, maximum })))
@@ -74,6 +74,7 @@ const CardFields = Schema.Struct({
 
   provenance: Schema.optionalKey(Provenance),
   offers: Schema.optionalKey(Schema.Array(Offer)),
+  signup_review: Schema.optionalKey(SignupReview),
   locked: Schema.optionalKey(Schema.Array(Schema.String)),
   cdr: Schema.optionalKey(
     Schema.Struct({
@@ -149,6 +150,7 @@ export const earnTierOrder = Schema.makeFilter(
 export const Card = CardFields.check(
   creditRange,
   earnTierOrder,
+  Schema.makeFilter((card) => uniqueOfferIds(card.offers ?? []) || "Offer ids must be unique within a card"),
   Schema.makeFilter(
     (card) => (card.locked ?? []).every((path) => recognizesLock(CardFields.ast, path)) || "Unrecognized lock path"
   )

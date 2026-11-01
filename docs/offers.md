@@ -9,6 +9,15 @@ together; separate offers must not be assumed stackable. Fee payable is the
 resulting fee, not the discount amount. Duration starts according to issuer terms,
 not the application window. Unknown conditions remain unknown.
 
+Each offer may carry an `id`, a slug unique within the card, and a `source`:
+`cdr` (rebuilt from CDR on each sync), `parser` (rebuilt by the bonus parser) or
+`manual` (never touched by the sync; a manual offer replaces a generated one with
+the same id). `card.signup_review` records the signup bonus review: `state`
+(`present`, `none` or `unknown`), `source` (`parser` or `manual`), the CDR
+`text_hash` it was based on, and `reviewed_at` for manual reviews. A manual
+`none` means a person confirmed the card has no signup bonus. These fields are
+optional while the sync moves over to writing them.
+
 Optional `valid_from` and `valid_until` are real ISO calendar dates, inclusive,
 and describe the application window. They do not describe reward payout dates.
 `eligibility`, `application_channel` and `conditions` retain source wording.
