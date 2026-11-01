@@ -5,6 +5,31 @@ description = "Earn Qantas Points directly to your Qantas Frequent Flyer account
 url = "https://www.westpac.com.au/credit-cards/reward/altitude-qantas-platinum/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Rewards%20Platinum_232x146_grey.jpg"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 30000
+year = 1
+min_spend = 6000
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 20000
+year = 2
+min_spend = 6000
+spend_days = 90
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "ae4882d204900bdc"
+
 [cdr]
 brand = "Westpac"
 product_id = "CCAltPlatQantas"

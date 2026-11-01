@@ -5,6 +5,16 @@ status = "active"
 description = "Use your low rate Bluey VISA credit card for shopping, travelling overseas or even to consolidate other credit or store card debt."
 url = "https://www.qbank.com.au/apply-online"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 12.739
+months = 12
+
 [cdr]
 brand = "QBANK"
 product_id = "S25_Bluey"

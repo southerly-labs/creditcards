@@ -6,6 +6,40 @@ description = "If you love to travel, the Virgin Australia Velocity High Flyer C
 url = "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/virginmoney-card-apply?"
 image = "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/high-flyer-credit-card.png"
 
+[[offers]]
+id = "signup"
+source = "manual"
+
+[[offers.components]]
+kind = "signup_points"
+program = "velocity"
+points = 40000
+year = 1
+min_spend = 3500
+spend_days = 30
+note = "first month"
+
+[[offers.components]]
+kind = "signup_points"
+program = "velocity"
+points = 40000
+year = 1
+min_spend = 3500
+spend_days = 30
+note = "second month"
+
+[[offers.components]]
+kind = "signup_points"
+program = "velocity"
+points = 20000
+year = 2
+keep_months = 12
+
+[signup_review]
+state = "present"
+source = "manual"
+text_hash = "eb06502653fe6523"
+
 [cdr]
 brand = "Virgin Money"
 product_id = "9bf3781e-102c-ee11-9966-002248e1d7d5"

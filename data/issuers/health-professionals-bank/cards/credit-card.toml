@@ -6,6 +6,16 @@ description = "Use your credit card for shopping, travelling overseas or even to
 url = "https://www.hpbank.com.au/banking/credit-card"
 image = "https://www.hpbank.com.au/content/dam/channels/websites/common-assets/open-banking/hpb-mozo.jpg"
 
+[[offers]]
+id = "intro-both"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "both"
+rate = 7.9
+months = 6
+
 [cdr]
 brand = "Health Professionals Bank"
 product_id = "a6b1d3e9-de46-421f-a05e-84e40d3238d9"

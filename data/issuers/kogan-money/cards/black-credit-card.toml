@@ -41,9 +41,7 @@ note = "excludes Kogan Essentials (Mobile, Internet, Energy) and other Kogan-own
 
 [[rewards.earn_check]]
 url = "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/"
-expect = [
-  "2 rewards points per $1 spent on eligible purchases made at kogan.com. 1 rewards point per $1 spent on eligible purchases everywhere else",
-]
+expect = [ "2 rewards points per $1 spent on eligible purchases made at kogan.com. 1 rewards point per $1 spent on eligible purchases everywhere else" ]
 
 [perks]
 

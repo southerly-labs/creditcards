@@ -5,6 +5,30 @@ description = "Our most rewarding Qantas experience"
 url = "https://www.anz.com.au/personal/credit-cards/frequent-flyer/black/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/frequent-flyer-black-2016.jpg"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 50000
+year = 1
+min_spend = 6000
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 50000
+year = 2
+keep_months = 12
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "90db95e59cb0f220"
+
 [cdr]
 brand = "ANZ"
 product_id = "325e19d1-2a52-53c6-073e-4b01e86e6936"

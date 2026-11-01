@@ -4,6 +4,16 @@ network = "visa"
 status = "active"
 description = "The People's Choice Credit Union Visa Credit card offers you the flexibility of more interest free days than most other cards. You can use it for anything from day to day purchases to paying bills or even withdrawing cash."
 
+[[offers]]
+id = "intro-both"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "both"
+rate = 2.99
+months = 6
+
 [cdr]
 brand = "People First and Heritage Bank"
 product_id = "ef54bfdb-5db3-4ce7-b678-25492785377a"

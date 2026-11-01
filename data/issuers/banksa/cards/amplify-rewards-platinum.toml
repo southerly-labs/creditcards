@@ -5,6 +5,23 @@ status = "active"
 description = "Our mid-tier credit card that lets you earn Amplify points"
 image = "https://www.banksa.com.au/content/dam/public/open-banking/BSA-Amplify-Platinum-Card-Art-232x146.png"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "amplify"
+points = 50000
+year = 1
+min_spend = 6000
+spend_days = 90
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "b2f3afd75fa90136"
+
 [cdr]
 brand = "BankSA"
 product_id = "BSACCAmplifyPlatinumcardRewards"

@@ -6,6 +6,16 @@ description = "Our Workplace Benefits Credit Card includes no annual fee, a 0%
 url = "https://apply.creditunionsa.com.au/cusa/servlet/SmartForm.html?formCode=joint-credit-card"
 image = "https://cms.creditunionsa.com.au/assets/images/20220112_SecondaryPageBanners_Cards_VisaCreditCard.jpg"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 6
+
 [cdr]
 brand = "Credit Union SA"
 product_id = "CREDITUNIONSA_OD_570"

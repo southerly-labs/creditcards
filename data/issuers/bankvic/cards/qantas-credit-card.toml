@@ -5,6 +5,16 @@ status = "active"
 description = "For Police Association of Victoria, Australian Federal Police Association, Northern Territory Police Association, Victorian Ambulance Union and United Firefighters Union members"
 url = "https://www.bankvic.com.au/apply-for-credit"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 9.96
+months = 6
+
 [cdr]
 brand = "BankVic"
 product_id = "S17_QANTAS_CREDIT_CARD"

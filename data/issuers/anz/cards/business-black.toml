@@ -6,6 +6,30 @@ description = "A credit card facility for businesses where you can earn rewards 
 url = "https://www.anz.com.au/business/credit-cards/business-black/"
 image = "https://www.anz.com.au/content/dam/anzcomau/images/business/products/ANZ-Business-Black-Credit-Card_Product.png"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "anz-rewards"
+points = 100000
+year = 1
+min_spend = 6000
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "anz-rewards"
+points = 50000
+year = 2
+keep_months = 15
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "686f08102fd1bd86"
+
 [cdr]
 brand = "ANZ"
 product_id = "9836ae54-5aa3-54cf-e1df-9c7aec8ddb08"

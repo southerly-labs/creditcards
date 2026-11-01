@@ -6,6 +6,23 @@ description = "Our highest Virgin Money Points earning credit card. Earn Virgin 
 url = "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/virginmoney-card-apply?"
 image = "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/anytime-rewards-credit-card.png"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "virgin-money-rewards"
+points = 60000
+year = 1
+min_spend = 3000
+spend_days = 90
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "d5413ae24dba1271"
+
 [cdr]
 brand = "Virgin Money"
 product_id = "085dd673-e910-ef11-9f89-002248921877"

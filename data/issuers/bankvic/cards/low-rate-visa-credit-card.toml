@@ -5,6 +5,16 @@ status = "active"
 description = "A basic credit card for everyday banking"
 url = "https://www.bankvic.com.au/apply-for-credit"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 4.96
+months = 6
+
 [cdr]
 brand = "BankVic"
 product_id = "S15_VISA_CLASSIC_CREDIT_CA"

@@ -5,6 +5,23 @@ status = "active"
 description = "Our mid-tier credit card for Qantas point lovers"
 image = "https://www.bankofmelbourne.com.au/content/dam/public/open-banking/bom_p_credit-cards_amplify-platinum.png"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 30000
+year = 1
+min_spend = 6000
+spend_days = 90
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "d4779dfb7c511d6e"
+
 [cdr]
 brand = "Bank of Melbourne"
 product_id = "BOMCCAmplifyPlatinumcardFrequentFlyer"

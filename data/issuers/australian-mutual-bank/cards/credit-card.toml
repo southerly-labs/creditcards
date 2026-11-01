@@ -6,6 +6,16 @@ description = "Use your credit card for shopping, travelling overseas or even to
 url = "https://australianmutual.bank/cards/credit-card/"
 image = "https://www.tmbank.com.au/content/dam/channels/websites/common-assets/open-banking/amb-mozo.jpg"
 
+[[offers]]
+id = "intro-both"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "both"
+rate = 7.9
+months = 6
+
 [cdr]
 brand = "Australian Mutual Bank LTD"
 product_id = "c61cd5c4-1e71-11f1-8077-325096b39f47"

@@ -6,6 +6,35 @@ description = "A credit card for earning points to redeem for digital vouchers o
 url = "https://www.bankwest.com.au/credit-cards/rewards"
 image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-more-world.png"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 6
+
+[[offers]]
+id = "signup"
+source = "manual"
+
+[[offers.components]]
+kind = "signup_points"
+program = "bankwest-rewards"
+points = 50000
+year = 2
+min_spend = 10000
+spend_days = 90
+keep_months = 15
+note = "paid once both conditions are met"
+
+[signup_review]
+state = "present"
+source = "manual"
+text_hash = "851b6303edf123fd"
+
 [cdr]
 brand = "Bankwest"
 product_id = "2c63479dd51441b1b4d388d8bc186840"

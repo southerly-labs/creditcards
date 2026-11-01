@@ -6,6 +6,16 @@ description = "Use your credit card for shopping, travelling overseas or even to
 url = "https://www.tmbank.com.au/banking/credit-card"
 image = "https://www.tmbank.com.au/content/dam/channels/websites/common-assets/open-banking/tmb-mozo.jpg"
 
+[[offers]]
+id = "intro-both"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "both"
+rate = 7.9
+months = 6
+
 [cdr]
 brand = "Teachers Mutual Bank"
 product_id = "5aee7d43-7685-43c7-849b-d1cdba21c895"

@@ -6,6 +6,40 @@ description = "The Qantas Rewards Signature card gives customers the opportunity
 url = "https://www.nab.com.au/personal/credit-cards/qantas-rewards/nab-qantas-rewards-signature-card"
 image = "https://www.nab.com.au/personal/credit-cards/qantas-rewards/nab-qantas-rewards-signature-card"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 90000
+year = 1
+min_spend = 5000
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 30000
+year = 2
+keep_months = 12
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "cc62304f68a14db6"
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "8a47c774-0065-4850-992c-42d73253f3eb"

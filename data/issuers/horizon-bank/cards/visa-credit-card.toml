@@ -5,6 +5,16 @@ status = "active"
 description = "VISA CREDIT CARD"
 url = "https://forms.unpz.au/form?id=0e59f9ae8f4709bdb38e0606359b4f09:d46ce3a8-1726-4fd2-b451-23157ea36e6a"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 7.96
+months = 5
+
 [cdr]
 brand = "Horizon Bank"
 product_id = "S97_S970001"

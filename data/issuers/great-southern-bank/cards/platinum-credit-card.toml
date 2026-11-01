@@ -33,9 +33,7 @@ note = "0.5% cashback, uncapped"
 
 [[rewards.earn_check]]
 url = "https://www.greatsouthernbank.com.au/credit-cards"
-expect = [
-  "earn uncapped cashback at 0.50% on every eligible dollar.",
-]
+expect = [ "earn uncapped cashback at 0.50% on every eligible dollar." ]
 
 [perks]
 insurance = [ "Travel Insurance", "Purchase Protection" ]

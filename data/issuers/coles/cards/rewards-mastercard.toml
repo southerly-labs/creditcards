@@ -43,9 +43,7 @@ note = "counts towards the same $8,000 cap"
 
 [[rewards.earn_check]]
 url = "https://www.coles.com.au/content/dam/coles/coles-financial-services/credit-cards/documents-and-forms/pdfs/coles-mastercard-rewards-terms-and-conditions.pdf"
-expect = [
-  "coles rewards mastercard® 2 flybuys points per $1 on each coles spend 1 flybuys point per $1 on each eligible transaction everywhere else points are capped at the first $8,000 of eligible transactions in each statement period",
-]
+expect = [ "coles rewards mastercard® 2 flybuys points per $1 on each coles spend 1 flybuys point per $1 on each eligible transaction everywhere else points are capped at the first $8,000 of eligible transactions in each statement period" ]
 
 [perks]
 

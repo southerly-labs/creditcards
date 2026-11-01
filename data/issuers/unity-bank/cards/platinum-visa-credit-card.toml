@@ -5,6 +5,11 @@ status = "active"
 description = "Premium credit card including Qantas Points on eligible purchases and access to concierge services wherever you are in the world"
 url = "https://campaign.mpowerdigitalonboarding.com.au/newapplication?hide_back=false&lang=en&utm_source=UB&utm_medium=gncfmCpLP9Ze&utm_campaign=website&utm_term=PVCC"
 
+[signup_review]
+state = "none"
+source = "manual"
+text_hash = "8cbf8ea47c3eb87f"
+
 [cdr]
 brand = "Unity Bank"
 product_id = "S78_PLATINUM_VISA_CREDIT_CARD"

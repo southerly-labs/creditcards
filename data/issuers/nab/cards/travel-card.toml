@@ -6,6 +6,40 @@ description = "The new NAB Rewards Signature Card allows you to earn points with
 url = "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-signature-card"
 image = "https://www.nab.com.au/personal/credit-cards/nab-rewards-cards"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "nab-rewards"
+points = 80000
+year = 1
+min_spend = 5000
+spend_days = 60
+
+[[offers.components]]
+kind = "signup_points"
+program = "nab-rewards"
+points = 30000
+year = 2
+keep_months = 12
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "722c5ba25ebd4d2b"
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "e10279eb-1172-48dd-b6d2-08bed9605c5d"

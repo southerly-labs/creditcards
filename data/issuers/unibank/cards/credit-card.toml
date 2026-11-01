@@ -6,6 +6,16 @@ description = "Use your credit card for shopping, travelling overseas or even to
 url = "https://www.unibank.com.au/banking/credit-card"
 image = "https://www.unibank.com.au/content/dam/channels/websites/common-assets/open-banking/ub-mozo.jpg"
 
+[[offers]]
+id = "intro-both"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "both"
+rate = 7.9
+months = 6
+
 [cdr]
 brand = "UniBank"
 product_id = "43087eca-5a54-4c91-81c3-9849af36008d"

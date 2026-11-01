@@ -6,6 +6,26 @@ description = "A credit card for everyday spending with no annual fee."
 url = "https://www.bankwest.com.au/credit-cards/no-annual-fee"
 image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-zero-platinum.png"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 6
+
+[[offers]]
+id = "intro-purchase"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "purchase"
+rate = 0
+months = 6
+
 [cdr]
 brand = "Bankwest"
 product_id = "1fd24bada54f4bcebdac39458c282f35"

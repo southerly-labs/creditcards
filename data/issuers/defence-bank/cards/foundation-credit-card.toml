@@ -5,6 +5,16 @@ status = "active"
 description = "A Visa credit card that gives back. Half of the annual $45 card fee is donated to the Defence Bank Foundation - a charity whose sole beneficiary is Defence Community Dogs."
 url = "https://www.defencebank.com.au/creditcard"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 3.99
+months = 6
+
 [cdr]
 brand = "Defence Bank"
 product_id = "552"

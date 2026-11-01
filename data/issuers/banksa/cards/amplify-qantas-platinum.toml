@@ -5,6 +5,23 @@ status = "active"
 description = "Our mid-tier credit card for Qantas point lovers"
 image = "https://www.banksa.com.au/content/dam/public/open-banking/BSA-Amplify-Platinum-Card-Art-232x146.png"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 30000
+year = 1
+min_spend = 6000
+spend_days = 90
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "d4779dfb7c511d6e"
+
 [cdr]
 brand = "BankSA"
 product_id = "BSACCAmplifyPlatinumcardFrequentFlyer"

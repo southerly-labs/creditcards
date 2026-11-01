@@ -50,9 +50,7 @@ note = "2 bonus points per $1 on top of the domestic rate"
 
 [[rewards.earn_check]]
 url = "https://www.qantasmoney.com/credit-cards/titanium"
-expect = [
-  "earn rate for the qantas money titanium credit card: 2 qantas points per whole au$1 equivalent on international spend; 1.25 qantas points per whole au$1 on domestic spend up to and including au$12,500 each statement period, 0.5 qantas points per whole au$1 spent above au$12,500 each statement period: plus 2 additional qantas points per whole au$1 on qantas spend",
-]
+expect = [ "earn rate for the qantas money titanium credit card: 2 qantas points per whole au$1 equivalent on international spend; 1.25 qantas points per whole au$1 on domestic spend up to and including au$12,500 each statement period, 0.5 qantas points per whole au$1 spent above au$12,500 each statement period: plus 2 additional qantas points per whole au$1 on qantas spend" ]
 
 [perks]
 insurance = [ "Complimentary Travel Insurance" ]

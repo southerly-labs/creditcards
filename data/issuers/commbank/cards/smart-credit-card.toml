@@ -6,6 +6,30 @@ description = "Enjoy new lifestyle and travel benefits with the Smart credit car
 url = "https://www.commbank.com.au/credit-cards/smart.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-smart-credit-card.png"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "commbank-yello"
+points = 30000
+year = 1
+min_spend = 4500
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "commbank-yello"
+points = 30000
+year = 2
+keep_months = 12
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "afb248138194b514"
+
 [cdr]
 brand = "CommBank"
 product_id = "ff7e709bc7f8414da253f9c10308fe24"

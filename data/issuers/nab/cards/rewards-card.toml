@@ -6,6 +6,40 @@ description = "Earn NAB Rewards Points and enjoy platinum services and complimen
 url = "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card"
 image = "https://www.nab.com.au/personal/credit-cards/nab-rewards-cards"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "nab-rewards"
+points = 80000
+year = 1
+min_spend = 3000
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "nab-rewards"
+points = 20000
+year = 2
+keep_months = 12
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "d41fdaa4314cc2cd"
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "c43ad795-9db1-4e1f-a7f5-845714ecedfd"

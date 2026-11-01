@@ -5,6 +5,31 @@ description = "Be rewarded for your everyday purchases and access a flexible Rew
 url = "https://www.anz.com.au/personal/credit-cards/rewards/platinum/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-011-anz-au.jpg"
 
+[[offers]]
+id = "signup"
+source = "manual"
+
+[[offers.components]]
+kind = "signup_points"
+program = "anz-rewards"
+points = 85000
+year = 1
+min_spend = 3500
+spend_days = 90
+note = "plus $50 back"
+
+[[offers.components]]
+kind = "signup_points"
+program = "anz-rewards"
+points = 40000
+year = 2
+keep_months = 15
+
+[signup_review]
+state = "present"
+source = "manual"
+text_hash = "893b4cfc115c7f55"
+
 [cdr]
 brand = "ANZ"
 product_id = "f60fb83e-bbfb-abe3-07e2-f70acf7e30ca"

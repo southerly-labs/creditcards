@@ -6,6 +6,31 @@ description = "Our premium Altitude Rewards credit card gets you our highest Poi
 url = "https://www.westpac.com.au/credit-cards/reward/altitude-black/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Black%20Mastercard_232x146_black.jpg"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "westpac-altitude"
+points = 90000
+year = 1
+min_spend = 9000
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "westpac-altitude"
+points = 60000
+year = 2
+min_spend = 9000
+spend_days = 90
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "f6f66837df334641"
+
 [cdr]
 brand = "Westpac"
 product_id = "CCAltBlackRewards"

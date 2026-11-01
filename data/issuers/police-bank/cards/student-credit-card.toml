@@ -6,6 +6,26 @@ description = "This product is suitable for members who are an active student at
 url = "https://www.policebank.com.au/academy"
 image = "https://www.policebank.com.au/wp-content/uploads/2026/01/PB_D-CUSCAL-LS-3472549-Police-Bank-V145HC_512x321.png"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 3
+
+[[offers]]
+id = "intro-balance-transfer-2"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 7.99
+months = 9
+
 [cdr]
 brand = "Police Bank"
 product_id = "4b04816d-c585-4702-88f8-19f928de57a0"

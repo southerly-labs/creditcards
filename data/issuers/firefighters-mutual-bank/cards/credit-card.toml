@@ -6,6 +6,16 @@ description = "Use your credit card for shopping, travelling overseas or even to
 url = "https://www.fmbank.com.au/banking/credit-card"
 image = "https://www.fmbank.com.au/content/dam/channels/websites/common-assets/open-banking/fmb-mozo.jpg"
 
+[[offers]]
+id = "intro-both"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "both"
+rate = 7.9
+months = 6
+
 [cdr]
 brand = "Firefighters Mutual Bank"
 product_id = "5d479361-d2b4-42e6-83d4-7e5a2d7dcde5"

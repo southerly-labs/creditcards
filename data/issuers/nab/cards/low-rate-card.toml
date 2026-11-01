@@ -6,6 +6,16 @@ description = "A simple low interest rate credit card with your choice of offers
 url = "https://www.nab.com.au/personal/credit-cards/low-rate/nab-low-rate-card"
 image = "https://www.nab.com.au/content/experience-fragments/nab/en/featured_banner/product/personal_credit_card/nab-low-rate-product-cards/master"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 24
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "0c2ca397-dc24-4eb0-8fb9-e098c582ebd5"

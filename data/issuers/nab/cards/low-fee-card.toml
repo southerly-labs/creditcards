@@ -6,6 +6,16 @@ description = "Enjoy our lowest annual card fee of only $30 and our special cash
 url = "https://www.nab.com.au/personal/banking/credit-cards/nab-low-fee-card"
 image = "https://www.nab.com.au/personal/credit-cards/low-fee-cards"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "fbce13b1-77db-4226-9f55-9028ee31884f"

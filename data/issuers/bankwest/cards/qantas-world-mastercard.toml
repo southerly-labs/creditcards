@@ -6,6 +6,35 @@ description = "A credit card for earning unlimited Qantas Points."
 url = "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer"
 image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-qantas-world.png"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 2.99
+months = 9
+
+[[offers]]
+id = "signup"
+source = "manual"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 40000
+year = 2
+min_spend = 4000
+spend_days = 120
+keep_months = 15
+note = "paid once both conditions are met"
+
+[signup_review]
+state = "present"
+source = "manual"
+text_hash = "fab9865e7aa5f535"
+
 [cdr]
 brand = "Bankwest"
 product_id = "cb71b15aa8b3455080d370ee41f7df25"

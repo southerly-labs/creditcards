@@ -6,6 +6,16 @@ description = "If you're after a low rate with no annual fee, the Lifestyle Cred
 url = "https://apply.qudosbank.com.au/Apply/credit-card"
 image = "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b43c551b6f4a8c20ec8_lifestyle-card-no-border.png"
 
+[[offers]]
+id = "intro-both"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "both"
+rate = 4.99
+months = 5
+
 [cdr]
 brand = "Qudos Bank"
 product_id = "9be8ebbe-7ed3-4ae2-bc1e-c794f5730339"

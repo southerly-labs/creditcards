@@ -6,6 +6,30 @@ description = "Enjoy new lifestyle and travel benefits with the Ultimate credit 
 url = "https://www.commbank.com.au/credit-cards/ultimate.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-ultimate-credit-card.png"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "commbank-yello"
+points = 50000
+year = 1
+min_spend = 9000
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "commbank-yello"
+points = 50000
+year = 2
+keep_months = 12
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "b02ae990a3b0fc6d"
+
 [cdr]
 brand = "CommBank"
 product_id = "eecdf5a04ec94565974b3a8aa3263257"

@@ -6,6 +6,40 @@ description = "Go places faster with our award-winning Virgin Australia Velocity
 url = "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/virginmoney-card-apply?"
 image = "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/flyer-credit-card.png"
 
+[[offers]]
+id = "signup"
+source = "manual"
+
+[[offers.components]]
+kind = "signup_points"
+program = "velocity"
+points = 25000
+year = 1
+min_spend = 1500
+spend_days = 30
+note = "first month"
+
+[[offers.components]]
+kind = "signup_points"
+program = "velocity"
+points = 25000
+year = 1
+min_spend = 1500
+spend_days = 30
+note = "second month"
+
+[[offers.components]]
+kind = "signup_points"
+program = "velocity"
+points = 20000
+year = 2
+keep_months = 12
+
+[signup_review]
+state = "present"
+source = "manual"
+text_hash = "3a5ff197ec65e884"
+
 [cdr]
 brand = "Virgin Money"
 product_id = "76126e21-102c-ee11-9966-002248e1dc43"

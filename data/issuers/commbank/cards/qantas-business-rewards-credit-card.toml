@@ -4,6 +4,11 @@ network = "visa"
 status = "active"
 description = "Be rewarded for essential business spend and save on business travel. Take advantage of offers and partner discounts whilst purchasing with confidence and convenience knowing you are backed by two of Australia's largest brands"
 
+[signup_review]
+state = "none"
+source = "manual"
+text_hash = "aefca5b2cd75f78d"
+
 [cdr]
 brand = "CommBank"
 product_id = "e15ed5da59354af78c9e8aa0f4f841cf"

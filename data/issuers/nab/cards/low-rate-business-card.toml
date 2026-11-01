@@ -6,6 +6,16 @@ description = "If you’re a small business, our low rate business credit card c
 url = "https://www.nab.com.au/business/business-cards/nab-low-rate-business-card"
 image = "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
 
+[[offers]]
+id = "intro-purchase"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "purchase"
+rate = 0
+months = 12
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "aea04112-8a33-4d90-991a-b30ad00699a8"

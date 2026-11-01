@@ -6,6 +6,40 @@ description = "Earn Qantas Points and enjoy platinum services and complimentary 
 url = "https://www.nab.com.au/personal/credit-cards/qantas-rewards/nab-qantas-rewards-premium-card"
 image = "https://www.nab.com.au/personal/credit-cards/qantas-rewards"
 
+[[offers]]
+id = "intro-balance-transfer"
+source = "cdr"
+
+[[offers.components]]
+kind = "intro_rate"
+applies_to = "balance_transfer"
+rate = 0
+months = 12
+
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 60000
+year = 1
+min_spend = 3000
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 20000
+year = 2
+keep_months = 12
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "ddbf8ad4d5634393"
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "263a9294-f2d8-4f5e-885c-363e1c2010b9"

@@ -6,6 +6,30 @@ description = "With a business credit card, earn and redeem NAB Rewards Points."
 url = "https://www.nab.com.au/business/business-cards/nab-rewards-business-signature-card"
 image = "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "nab-rewards"
+points = 200000
+year = 1
+min_spend = 8000
+spend_days = 90
+
+[[offers.components]]
+kind = "signup_points"
+program = "nab-rewards"
+points = 50000
+year = 2
+keep_months = 15
+
+[signup_review]
+state = "present"
+source = "parser"
+text_hash = "8f3694bd93fa160d"
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "ff87d1af-392d-421a-903e-20b9517ea13e"

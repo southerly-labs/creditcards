@@ -38,9 +38,7 @@ note = "no points on spend above $7,000 a statement period"
 
 [[rewards.earn_check]]
 url = "https://www.mycard.com.au/credit-cards/premier-card-qantas"
-expect = [
-  "international and domestic spend number of points 0.5 points spend eligibility on eligible transactions capped at $7,000 spend per statement period",
-]
+expect = [ "international and domestic spend number of points 0.5 points spend eligibility on eligible transactions capped at $7,000 spend per statement period" ]
 
 [perks]
 insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Mobile phone insurance" ]
