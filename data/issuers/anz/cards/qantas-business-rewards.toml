@@ -31,6 +31,8 @@ program = "qantas"
 earn_source = "manual"
 earn_text_hash = "41f07e5cadd417c1"
 bonus_points = 150000
+bonus_source = "parser"
+bonus_text_hash = "336a8e9bc8219fca"
 
 [[rewards.earn]]
 rate = 0.75
@@ -42,6 +44,17 @@ rate = 0.5
 [[rewards.earn]]
 rate = 0.5
 category = "taxation payments and government charges"
+
+[[rewards.bonus]]
+points = 100000
+year = 1
+min_spend = 6000
+spend_days = 90
+
+[[rewards.bonus]]
+points = 50000
+year = 2
+keep_months = 15
 
 [perks]
 insurance = [ "Unauthorised Transactions Insurance", "Domestic Travel Insurance", "International Travel Insurance" ]

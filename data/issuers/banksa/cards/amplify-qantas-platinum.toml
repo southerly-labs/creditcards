@@ -30,6 +30,8 @@ program = "qantas"
 earn_source = "manual"
 earn_text_hash = "53c9b1030208d183"
 bonus_points = 30000
+bonus_source = "parser"
+bonus_text_hash = "d4779dfb7c511d6e"
 
 [[rewards.earn]]
 rate = 0.33
@@ -47,6 +49,12 @@ note = "until $5,000 total spend in a statement cycle, then 0.2 per $1"
 rate = 0.75
 category = "international spend"
 note = "until $5,000 total spend in a statement cycle, then 0.2 per $1"
+
+[[rewards.bonus]]
+points = 30000
+year = 1
+min_spend = 6000
+spend_days = 90
 
 [perks]
 lounge_access = true

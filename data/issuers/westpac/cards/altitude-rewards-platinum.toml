@@ -32,6 +32,8 @@ program = "westpac-altitude"
 earn_source = "manual"
 earn_text_hash = "3b087a4bd440f85e"
 bonus_points = 90000
+bonus_source = "parser"
+bonus_text_hash = "408eee129198a0b6"
 
 [[rewards.earn]]
 rate = 1
@@ -49,6 +51,18 @@ note = "until $5,000 total spend in a statement cycle, then 0.5 per $1"
 rate = 2
 category = "international spend"
 note = "until $5,000 total spend in a statement cycle, then 0.5 per $1"
+
+[[rewards.bonus]]
+points = 60000
+year = 1
+min_spend = 6000
+spend_days = 90
+
+[[rewards.bonus]]
+points = 30000
+year = 2
+min_spend = 6000
+spend_days = 90
 
 [perks]
 insurance = [ "Complimentary insurance", "Complimentary travel insurances" ]

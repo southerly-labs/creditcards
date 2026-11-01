@@ -33,6 +33,8 @@ program = "virgin-money-rewards"
 earn_source = "manual"
 earn_text_hash = "6b396e6b0d9311f2"
 bonus_points = 60000
+bonus_source = "parser"
+bonus_text_hash = "d5413ae24dba1271"
 
 [[rewards.earn]]
 rate = 0.5
@@ -40,6 +42,12 @@ rate = 0.5
 [[rewards.earn]]
 rate = 1
 category = "grocery and dining"
+
+[[rewards.bonus]]
+points = 60000
+year = 1
+min_spend = 3000
+spend_days = 90
 
 [perks]
 

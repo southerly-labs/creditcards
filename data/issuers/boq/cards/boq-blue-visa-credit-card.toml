@@ -34,9 +34,17 @@ program = "boq-rewards"
 earn_source = "manual"
 earn_text_hash = "41a34bbc7ba58c25"
 bonus_points = 50000
+bonus_source = "parser"
+bonus_text_hash = "c10673c7f6226686"
 
 [[rewards.earn]]
 rate = 1
+
+[[rewards.bonus]]
+points = 50000
+year = 1
+min_spend = 3500
+spend_days = 90
 
 [perks]
 insurance = [ "Extended Warranty Insurance", "Purchase Protection Insurance" ]
