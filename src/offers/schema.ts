@@ -49,8 +49,8 @@ export type OfferComponent = typeof OfferComponent.Type
 export const OfferSource = Schema.Literals(["cdr", "parser", "manual"])
 
 export const Offer = Schema.Struct({
-  id: Schema.optionalKey(Schema.String.pipe(Schema.check(Schema.isPattern(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u)))),
-  source: Schema.optionalKey(OfferSource),
+  id: Schema.String.pipe(Schema.check(Schema.isPattern(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u))),
+  source: OfferSource,
   components: Schema.NonEmptyArray(OfferComponent),
   valid_from: Schema.optionalKey(OfferDate),
   valid_until: Schema.optionalKey(OfferDate),
@@ -77,8 +77,5 @@ export const SignupReview = Schema.Struct({
   reviewed_at: Schema.optionalKey(OfferDate)
 })
 
-export const uniqueOfferIds = (offers: ReadonlyArray<{ readonly id?: string }>): boolean => {
-  const ids = offers.flatMap((offer) => (offer.id === undefined ? [] : [offer.id]))
-
-  return new Set(ids).size === ids.length
-}
+export const uniqueOfferIds = (offers: ReadonlyArray<{ readonly id: string }>): boolean =>
+  new Set(offers.map((offer) => offer.id)).size === offers.length

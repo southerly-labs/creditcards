@@ -87,12 +87,6 @@ describe("combining offers", () => {
     ])
   })
 
-  it("keeps offers without a source, since a person wrote them", () => {
-    const legacy: Offer = { components: [{ kind: "cash_credit", amount: 100 }] }
-
-    expect(combineOffers({ existing: [legacy], generated: [intro], locked: false })).toEqual([intro, legacy])
-  })
-
   it("leaves everything alone when offers are locked", () => {
     expect(combineOffers({ existing: [cashback], generated: [intro, signup], locked: true })).toEqual([cashback])
   })

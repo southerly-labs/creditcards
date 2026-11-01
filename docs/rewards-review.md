@@ -1,16 +1,16 @@
 # Rewards section review states
 
-Optional rewards.earn_review and rewards.bonus_review objects carry state:
-unknown, present, or none. Absence of an object is unknown review status, never
-evidence of reviewed absence. Existing earn/bonus arrays and source/hash metadata
-remain unchanged and supported.
+Optional rewards.earn_review and signup_review objects carry state: unknown,
+present, or none. Absence of an object is unknown review status, never evidence
+of reviewed absence. signup_review also carries its source and text hash; see
+[offers](offers.md).
 
 Parser success writes present without reviewed_at. Failed earn parsing writes
 unknown while retaining the existing legacy rates. Removing a parser bonus writes
 unknown: missing CDR text does not prove that no offer exists.
 
-Manual stamp commands record present for nonempty arrays or none for empty arrays
-(including --none), with reviewed_at set to the actual UTC date of stamping.
+Manual stamp commands record present for a nonempty earn array or a signup offer,
+or none for an empty earn array or --none, with reviewed_at set to the actual UTC date of stamping.
 None means no fixed earn rate or no current points signup offer, respectively;
 it does not assert absence of cashback or other benefits. Dates are never inferred
 from sync timestamps, source updates, or legacy manual flags.

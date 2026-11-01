@@ -85,7 +85,6 @@ const CardFields = Schema.Struct({
   ),
   fees: Schema.Struct({
     annual: Schema.optionalKey(between(0, 5000)),
-    annual_first_year: Schema.optionalKey(between(0, 5000)),
     additional_card: Schema.optionalKey(between(0, 1000)),
     foreign_txn_pct: Schema.optionalKey(between(0, 10)),
     cash_advance_pct: Schema.optionalKey(between(0, 10)),
@@ -96,8 +95,7 @@ const CardFields = Schema.Struct({
     purchase: Schema.optionalKey(Percent),
     cash_advance: Schema.optionalKey(Percent),
     balance_transfer: Schema.optionalKey(Percent),
-    interest_free_days: Schema.optionalKey(between(0, 120).check(Schema.isInt())),
-    intro: Schema.optionalKey(Schema.Array(IntroOffer))
+    interest_free_days: Schema.optionalKey(between(0, 120).check(Schema.isInt()))
   }),
   limits: Schema.Struct({
     min_credit: Schema.optionalKey(Aud),
@@ -115,14 +113,7 @@ const CardFields = Schema.Struct({
       earn_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
 
       earn_text_hash: Schema.optionalKey(Schema.String),
-      earn_check: Schema.optionalKey(Schema.Array(EarnCheck)),
-      bonus_points: Schema.optionalKey(between(0, 1_000_000).check(Schema.isInt())),
-      bonus: Schema.optionalKey(Schema.Array(BonusTranche)),
-
-      bonus_review: Schema.optionalKey(RewardsReview),
-      bonus_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
-
-      bonus_text_hash: Schema.optionalKey(Schema.String)
+      earn_check: Schema.optionalKey(Schema.Array(EarnCheck))
     })
   ),
   perks: Schema.Struct({

@@ -73,12 +73,11 @@ export const combineOffers = (input: {
   const existing = input.existing ?? []
 
   if (input.locked) return existing
-  const manual = existing.filter((offer) => offer.source === undefined || offer.source === "manual")
-  const manualById = new Map(manual.flatMap((offer) => (offer.id === undefined ? [] : [[offer.id, offer] as const])))
+  const manual = existing.filter((offer) => offer.source === "manual")
+  const manualById = new Map(manual.map((offer) => [offer.id, offer] as const))
   const offers: Array<Offer> = []
 
-  for (const offer of input.generated)
-    offers.push((offer.id === undefined ? undefined : manualById.get(offer.id)) ?? offer)
+  for (const offer of input.generated) offers.push(manualById.get(offer.id) ?? offer)
 
   return [...offers, ...manual.filter((offer) => !offers.includes(offer))]
 }

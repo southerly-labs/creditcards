@@ -69,8 +69,14 @@ describe("card finder valuation", () => {
         fees: { annual: 400 },
         rewards: { program: "qff", earn: [{ rate: 1 }] },
         offers: [
-          { components: [{ kind: "fee_discount", fee: "annual", payable: 0, months: 12 }] },
           {
+            id: "offer-1",
+            source: "manual",
+            components: [{ kind: "fee_discount", fee: "annual", payable: 0, months: 12 }]
+          },
+          {
+            id: "offer-2",
+            source: "manual",
             components: [
               { kind: "signup_points", program: "qff", points: 80_000, year: 1, min_spend: 3000 },
               { kind: "signup_points", program: "qff", points: 20_000, year: 2 }
@@ -96,7 +102,11 @@ describe("card finder valuation", () => {
         fees: { annual: 0 },
         rewards: { program: "qff", earn: [{ rate: 1 }] },
         offers: [
-          { components: [{ kind: "signup_points", program: "qff", points: 50_000, min_spend: 6000, spend_days: 90 }] }
+          {
+            id: "offer-3",
+            source: "manual",
+            components: [{ kind: "signup_points", program: "qff", points: 50_000, min_spend: 6000, spend_days: 90 }]
+          }
         ]
       },
       1
@@ -131,16 +141,17 @@ describe("card finder valuation", () => {
     assert.strictEqual(v.firstYear, 240)
   })
 
-  test("a confirmed no-bonus card ignores the raw CDR total", () => {
-    const e = entry("none", { rewards: { program: "qff", bonus: [], bonus_points: 170_000 } }, 1)
-
-    assert.strictEqual(valued(e).valuation.bonusPoints, undefined)
-  })
-
   test("expired offers are ignored", () => {
     const e = entry("expired", {
       fees: { annual: 100 },
-      offers: [{ components: [{ kind: "fee_discount", fee: "annual", payable: 0 }], valid_until: "2026-01-01" }]
+      offers: [
+        {
+          id: "offer-4",
+          source: "manual",
+          components: [{ kind: "fee_discount", fee: "annual", payable: 0 }],
+          valid_until: "2026-01-01"
+        }
+      ]
     })
 
     assert.strictEqual(valued(e).valuation.firstYearFee, 100)
@@ -166,7 +177,13 @@ describe("card finder goals", () => {
       entry("transfer", {
         fees: { annual: 50 },
         rates: { purchase: 19 },
-        offers: [{ components: [{ kind: "intro_rate", applies_to: "balance_transfer", rate: 0, months: 24 }] }]
+        offers: [
+          {
+            id: "offer-5",
+            source: "manual",
+            components: [{ kind: "intro_rate", applies_to: "balance_transfer", rate: 0, months: 24 }]
+          }
+        ]
       })
     )
   ]

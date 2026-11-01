@@ -85,7 +85,16 @@ test("offer signup programs must reference known programs", () => {
     cards: new Map([
       [
         "bank/card",
-        { ...card, offers: [{ components: [{ kind: "signup_points", program: "missing", points: 100_000 }] }] }
+        {
+          ...card,
+          offers: [
+            {
+              id: "offer-1",
+              source: "manual",
+              components: [{ kind: "signup_points", program: "missing", points: 100_000 }]
+            }
+          ]
+        }
       ]
     ])
   }
