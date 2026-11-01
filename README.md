@@ -18,7 +18,7 @@ history/
   cdr/<issuer>/<product_id>/<date>.json   raw CDR product response, saved on the days it changed
 ```
 
-The sync writes `history/` and nothing else does. A snapshot is saved only when the response differs from the product's latest one (keys are sorted first), so each file marks a change the issuer published. The files keep the raw response rather than the normalised card, so a timeline can be rebuilt with the current normalisers and a parser fix never shows up as a change.
+The sync writes `history/` and nothing else does. A snapshot is saved only when the response differs from the product's latest one (keys are sorted first, and a different negotiated API `version` alone doesn't count), so each file marks a change the issuer published. Folders are keyed by issuer slug, so moving a brand to another issuer starts a new folder. The files keep the raw response rather than the normalised card, so a timeline can be rebuilt with the current normalisers and a parser fix never shows up as a change.
 
 The schema lives in `src/model/schema.ts`. Percentages are stored as percent (`20.99`) and money in AUD.
 

@@ -13,9 +13,9 @@ const TempHistory = Layer.unwrap(
   })
 ).pipe(Layer.provideMerge(BunServices.layer))
 
-const snapshot = (annualFee: number) => ({
+const snapshot = (annualFee: number, version = 4) => ({
   brand: "Bank",
-  version: 4,
+  version,
   product: { productId: "p", fees: [{ name: "Annual", amount: String(annualFee) }] }
 })
 
@@ -36,6 +36,16 @@ describe("CDR snapshots", () => {
         assert.isFalse(yield* snapshots.record("bank", "p1", "2026-11-02", snapshot(99)))
         assert.isTrue(yield* snapshots.record("bank", "p1", "2026-11-03", snapshot(129)))
         assert.deepStrictEqual(yield* listed("p1"), ["2026-11-01.json", "2026-11-03.json"])
+      })
+    )
+
+    it.effect("ignores a different negotiated API version for the same product", () =>
+      Effect.gen(function* () {
+        const snapshots = yield* Snapshots
+        yield* snapshots.record("bank", "p3", "2026-11-01", snapshot(99, 4))
+        assert.isFalse(yield* snapshots.record("bank", "p3", "2026-11-02", snapshot(99, 3)))
+        assert.isTrue(yield* snapshots.record("bank", "p3", "2026-11-03", snapshot(129, 3)))
+        assert.deepStrictEqual(yield* listed("p3"), ["2026-11-01.json", "2026-11-03.json"])
       })
     )
 

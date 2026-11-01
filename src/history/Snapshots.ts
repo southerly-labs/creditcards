@@ -28,6 +28,8 @@ const sortKeys = (value: unknown): unknown => {
 export const encodeSnapshot = (snapshot: CdrSnapshot): string =>
   `${encodeJson(sortKeys({ brand: snapshot.brand, version: snapshot.version, product: snapshot.product }), 2)}\n`
 
+const SavedVersion = Schema.fromJsonString(Schema.Struct({ version: Schema.NullOr(Schema.Number) }))
+
 const SNAPSHOT_FILE = /^\d{4}-\d{2}-\d{2}\.json$/u
 
 export const productDir = (issuer: string, productId: string): string => {
@@ -78,7 +80,11 @@ export class Snapshots extends Context.Service<
             const latestFile = path.join(dir, latest)
             const current = yield* fs.readFileString(latestFile).pipe(Effect.mapError(fail(latestFile)))
 
-            if (current === text) return false
+            const saved = yield* Schema.decodeUnknownEffect(SavedVersion)(current).pipe(
+              Effect.mapError(fail(latestFile))
+            )
+
+            if (current === encodeSnapshot({ ...snapshot, version: saved.version })) return false
           }
 
           const file = path.join(dir, `${date}.json`)
