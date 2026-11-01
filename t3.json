@@ -5,24 +5,24 @@
   "scripts": [
     {
       "name": "Setup worktree",
-      "command": "bun install --frozen-lockfile",
+      "command": "if command -v bun >/dev/null 2>&1; then bun install --frozen-lockfile; else nix shell nixpkgs#bun -c bun install --frozen-lockfile; fi",
       "icon": "configure",
       "runOnWorktreeCreate": true,
       "async": false
     },
     {
       "name": "Check",
-      "command": "bun run check",
+      "command": "if command -v bun >/dev/null 2>&1; then bun run check; else nix shell nixpkgs#bun -c bun run check; fi",
       "icon": "test"
     },
     {
       "name": "Dev",
-      "command": "bun run dev",
+      "command": "if command -v bun >/dev/null 2>&1; then bun run dev; else nix shell nixpkgs#bun -c bun run dev; fi",
       "icon": "play"
     },
     {
       "name": "Sync dry run",
-      "command": "bun run sync -- --dry-run",
+      "command": "if command -v bun >/dev/null 2>&1; then bun run sync -- --dry-run; else nix shell nixpkgs#bun -c bun run sync -- --dry-run; fi",
       "icon": "debug"
     }
   ]
