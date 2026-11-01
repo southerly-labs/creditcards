@@ -89,6 +89,28 @@ describe("card finder valuation", () => {
     assert.strictEqual(v.firstYear, 240 + 800)
   })
 
+  test("a bonus whose spend target the monthly spend misses is not counted", () => {
+    const e = entry(
+      "target",
+      {
+        fees: { annual: 0 },
+        rewards: { program: "qff", earn: [{ rate: 1 }] },
+        offers: [
+          { components: [{ kind: "signup_points", program: "qff", points: 50_000, min_spend: 6000, spend_days: 90 }] }
+        ]
+      },
+      1
+    )
+
+    const low = valued(e, 1000).valuation
+    const high = valued(e, 3000).valuation
+
+    assert.strictEqual(low.bonusMissed, true)
+    assert.strictEqual(low.firstYear, 120)
+    assert.strictEqual(high.bonusMissed, false)
+    assert.strictEqual(high.firstYear, 360 + 500)
+  })
+
   test("expired offers are ignored", () => {
     const e = entry("expired", {
       fees: { annual: 100 },

@@ -685,12 +685,19 @@ const breakdown = (r: Ranked) => {
     `<div class="total"><dt>Each year</dt><dd>${v.ongoing === undefined ? "?" : signed(v.ongoing)}</dd></div>`
   ]
 
+  const bonusText =
+    v.firstYearBonusPoints === undefined
+      ? ""
+      : v.bonusMissed
+        ? `, without the ${whole(v.firstYearBonusPoints)} bonus points (spend target not met)`
+        : `, with ${whole(v.firstYearBonusPoints)} bonus points`
+
+  const feeText = v.firstYearFee !== undefined && v.firstYearFee !== v.fee ? ` and a ${money(v.firstYearFee)} fee` : ""
+
   const yearOne =
     v.firstYearBonusPoints === undefined && v.firstYearFee === v.fee
       ? ""
-      : `<div class="total"><dt>Year one${
-          v.firstYearBonusPoints === undefined ? "" : `, with ${whole(v.firstYearBonusPoints)} bonus points`
-        }${v.firstYearFee !== undefined && v.firstYearFee !== v.fee ? ` and a ${money(v.firstYearFee)} fee` : ""}</dt><dd>${
+      : `<div class="total"><dt>Year one${bonusText}${feeText}</dt><dd>${
           v.firstYear === undefined ? "?" : signed(v.firstYear)
         }</dd></div>`
 

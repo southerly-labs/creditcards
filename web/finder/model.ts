@@ -1,5 +1,5 @@
 import type { Api } from "../../src/api/contract.ts"
-import { annualPoints } from "../../src/model/benefit.ts"
+import { annualPoints, meetsSpendTarget } from "../../src/model/benefit.ts"
 import type { Card, Program } from "../../src/model/schema.ts"
 import { offerStatus } from "../../src/offers/project.ts"
 import type { Offer, OfferComponent } from "../../src/offers/schema.ts"
@@ -26,7 +26,8 @@ const isIntroRate = (c: OfferComponent): c is IntroRate => c.kind === "intro_rat
 
 const isSignupPoints = (c: OfferComponent): c is SignupPoints => c.kind === "signup_points"
 
-const isAnnualFeeDiscount = (c: OfferComponent): c is FeeDiscount => c.kind === "fee_discount" && c.fee === "annual"
+const isYearLongFeeDiscount = (c: OfferComponent): c is FeeDiscount =>
+  c.kind === "fee_discount" && c.fee === "annual" && (c.months ?? 12) >= 12
 
 const makeEntry = (api: Api, issuerId: string, issuer: string, cardId: string, card: PublicCard): Entry => {
   const programId = card.rewards?.program
@@ -72,6 +73,7 @@ export interface Valuation {
   readonly earnValue: number | undefined
   readonly bonusPoints: number | undefined
   readonly firstYearBonusPoints: number | undefined
+  readonly bonusMissed: boolean
   readonly bonusValue: number | undefined
   readonly firstYearBonusValue: number | undefined
   readonly fee: number | undefined
@@ -90,9 +92,7 @@ const sumPoints = (tranches: ReadonlyArray<SignupPoints>) => {
 }
 
 export const firstYearFee = (card: PublicCard, today: string) =>
-  currentOffers(card, today).flatMap((o) => o.components.filter(isAnnualFeeDiscount))[0]?.payable ??
-  card.fees.annual_first_year ??
-  card.fees.annual
+  currentOffers(card, today).flatMap((o) => o.components.filter(isYearLongFeeDiscount))[0]?.payable ?? card.fees.annual
 
 export const value = (
   entry: Entry,
@@ -108,12 +108,13 @@ export const value = (
 
   const earnValue = program === undefined ? 0 : dollars(yearlyPoints, cents)
   const tranches = signupTranches(card, today)
-  const unsplit = tranches.length === 0 ? card.rewards?.bonus_points : undefined
-  const bonusPoints = sumPoints(tranches) ?? unsplit
-  const firstYearBonusPoints = sumPoints(tranches.filter((t) => t.year !== 2)) ?? unsplit
+  const bonusPoints = sumPoints(tranches) ?? (tranches.length === 0 ? card.rewards?.bonus_points : undefined)
+  const firstYearTranches = tranches.filter((t) => (t.year ?? 1) === 1)
+  const firstYearBonusPoints = sumPoints(firstYearTranches)
+  const earnedBonusPoints = sumPoints(firstYearTranches.filter((t) => meetsSpendTarget(monthlySpend, t)))
   const fee = card.fees.annual
   const feeYearOne = firstYearFee(card, today)
-  const firstYearBonusValue = dollars(firstYearBonusPoints, cents) ?? 0
+  const firstYearBonusValue = dollars(earnedBonusPoints, cents) ?? 0
   const ongoing = earnValue === undefined || fee === undefined ? undefined : earnValue - fee
 
   return {
@@ -122,6 +123,7 @@ export const value = (
     earnValue,
     bonusPoints,
     firstYearBonusPoints,
+    bonusMissed: firstYearBonusPoints !== undefined && earnedBonusPoints !== firstYearBonusPoints,
     bonusValue: dollars(bonusPoints, cents),
     firstYearBonusValue,
     fee,
