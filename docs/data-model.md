@@ -30,6 +30,18 @@ loyalty text. `priority` determines precedence when multiple programs match.
 Issuer `cdr_brands` lists the Register brands whose products belong to the issuer.
 A card's `locked` entries are dotted paths the automated sync must not overwrite.
 
+## Signup bonuses
+
+`rewards.bonus` lists a signup offer as tranches of points, each paid in `year`
+1 or 2 of holding the card. A first-year tranche usually needs `min_spend` AUD
+within `spend_days` of approval; months in the source are stored as 30 days each.
+A second-year tranche is paid for keeping the card open `keep_months`, or for
+spending again around the first anniversary. `bonus_source` and
+`bonus_text_hash` work like their earn counterparts, over the CDR
+`BONUS_REWARDS` text. Alternative offers, expiring offers and cashback are left
+to human review. `bonus_points` is the raw CDR value, which is sometimes the
+total and sometimes only the first tranche; prefer `bonus` when it is present.
+
 ## CDR and sync behavior
 
 CDR decoders are deliberately lenient: beyond identifiers, most input fields are

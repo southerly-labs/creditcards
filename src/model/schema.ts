@@ -33,6 +33,17 @@ export const EarnRate = Schema.Struct({
 
 export type EarnRate = typeof EarnRate.Type
 
+export const BonusTranche = Schema.Struct({
+  points: between(1, 1_000_000),
+  year: Schema.Literals([1, 2]),
+  min_spend: Schema.optionalKey(Aud),
+  spend_days: Schema.optionalKey(between(1, 730)),
+  keep_months: Schema.optionalKey(between(1, 60)),
+  note: Schema.optionalKey(Schema.String)
+})
+
+export type BonusTranche = typeof BonusTranche.Type
+
 export const EarnCheck = Schema.Struct({
   url: Schema.String.pipe(Schema.check(Schema.isPattern(/^https:\/\//u))),
   expect: Schema.NonEmptyArray(Schema.NonEmptyString)
@@ -89,7 +100,12 @@ export const Card = Schema.Struct({
 
       earn_text_hash: Schema.optionalKey(Schema.String),
       earn_check: Schema.optionalKey(Schema.Array(EarnCheck)),
-      bonus_points: Schema.optionalKey(between(0, 1_000_000))
+      bonus_points: Schema.optionalKey(between(0, 1_000_000)),
+      bonus: Schema.optionalKey(Schema.Array(BonusTranche)),
+
+      bonus_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
+
+      bonus_text_hash: Schema.optionalKey(Schema.String)
     })
   ),
   perks: Schema.Struct({
