@@ -1,12 +1,17 @@
 name = "Awards credit card"
 type = "personal"
 network = "mastercard"
-status = "active"
+status = "closed"
 first_seen = "2026-10-31"
 description = "For customers who want a lower monthly fee and credit limit but still like to earn Awards points."
 url = "https://www.commbank.com.au/credit-cards/awards.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-awards-credit-card.png"
 locked = [ "rewards.program", "rewards.partners" ]
+
+[provenance.sections.rewards]
+source_urls = [ "https://www.commbank.com.au/commbank-yello/terms-and-conditions/commbank-product-offer-terms.html" ]
+reviewed_at = "2026-11-01T07:35:38.300Z"
+correction_reason = "The CommBank Yello terms list the Awards credit card as a Yello Earn Card (no longer available for sale) with Yello earn rates of 0.5/0.75/1.0 points per $1 by tier and 2.0 internationally. CDR still describes CommBank Awards points and lists Qantas first, and its own text says Qantas opt-in closed for this card on 25 Aug 2023, so the qantas partner is dropped."
 
 [cdr]
 brand = "CommBank"
@@ -21,17 +26,22 @@ interest_free_days = 44
 min_credit = 500
 
 [rewards]
-program = "commbank-awards"
-partners = [ "qantas" ]
+program = "commbank-yello"
 earn_source = "manual"
 earn_text_hash = "1b346b64d67f9c7b"
 
 [[rewards.earn]]
-rate = 1
-cap_monthly = 2000
+rate = 0.5
+note = "Yello and Yello Plus tiers; 0.75 Gold, 1.0 Diamond"
 
 [[rewards.earn]]
-rate = 0.5
+rate = 2
+category = "international spend"
+note = "all Yello tiers"
+
+[[rewards.earn_check]]
+url = "https://www.commbank.com.au/commbank-yello/terms-and-conditions/commbank-product-offer-terms.html"
+expect = [ "diamond awards credit card) 1.0 2.0 business credit cards", "diamond awards credit card) 0.75 2.0 business credit cards", "diamond awards credit card) 0.5 2.0 business credit cards", "awards credit card (no longer available for sale)" ]
 
 [perks]
 insurance = [ "Extended warranty insurance", "Purchase security insurance" ]
