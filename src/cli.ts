@@ -9,10 +9,12 @@ import { toApi, validate } from "./build/build.ts"
 import { CdrClient } from "./cdr/CdrClient.ts"
 import { checkEarnPages, formatCheck, normaliseText, pageText } from "./rewards/check.ts"
 import { bonusReviewQueue, formatBonusQueue, formatQueue, reviewQueue, stamp, stampBonus } from "./rewards/review.ts"
+import { Snapshots } from "./history/Snapshots.ts"
 import { Store } from "./store/Store.ts"
 import { summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
 
 const DATA_DIR = "data"
+const HISTORY_DIR = "history"
 
 const writeFile = Effect.fn("writeFile")(function* (file: string, content: string) {
   const fs = yield* FileSystem.FileSystem
@@ -152,9 +154,12 @@ const rewards = Command.make("rewards").pipe(
   Command.withSubcommands([rewardsTodo, rewardsStamp, bonusTodo, bonusStamp, rewardsCheck])
 )
 
-const MainLayer = Layer.mergeAll(CdrClient.layer, Store.layer(DATA_DIR), FetchHttpClient.layer).pipe(
-  Layer.provideMerge(BunServices.layer)
-)
+const MainLayer = Layer.mergeAll(
+  CdrClient.layer,
+  Store.layer(DATA_DIR),
+  Snapshots.layer(HISTORY_DIR),
+  FetchHttpClient.layer
+).pipe(Layer.provideMerge(BunServices.layer))
 
 Command.make("creditcards").pipe(
   Command.withSubcommands([sync, validateCommand, build, rewards, provenanceCommand]),

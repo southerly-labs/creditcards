@@ -13,7 +13,12 @@ data/
   programs/<program>.toml              loyalty programs (aliases match CDR text)
   issuers/<issuer>/issuer.toml         issuer name and the CDR brands it covers
   issuers/<issuer>/cards/<card>.toml   one file per card
+
+history/
+  cdr/<issuer>/<product_id>/<date>.json   raw CDR product response, saved on the days it changed
 ```
+
+The sync writes `history/` and nothing else does. A snapshot is saved only when the response differs from the product's latest one (keys are sorted first), so each file marks a change the issuer published. The files keep the raw response rather than the normalised card, so a timeline can be rebuilt with the current normalisers and a parser fix never shows up as a change.
 
 The schema lives in `src/model/schema.ts`. Percentages are stored as percent (`20.99`) and money in AUD.
 

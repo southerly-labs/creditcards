@@ -11,6 +11,7 @@ const report = (earn: number, bonus: number): SyncReport => ({
   newIssuers: [],
   newPrograms: [],
   brandErrors: [],
+  snapshotsSaved: 0,
   rewards: { set: [], review: Array.from({ length: earn }, (_, i) => ({ card: `a/earn-${i}`, reason: "r" })) },
   bonus: { set: [], review: Array.from({ length: bonus }, (_, i) => ({ card: `a/bonus-${i}`, reason: "r" })) }
 })

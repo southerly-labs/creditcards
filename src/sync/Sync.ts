@@ -1,8 +1,9 @@
 import { encodeJson } from "../util/json.ts"
 import { required } from "../util/required.ts"
 import { DateTime, Effect, Result, Schema } from "effect"
-import { CdrClient, type CdrError, REQUEST_VARIANTS } from "../cdr/CdrClient.ts"
+import { CdrClient, type CdrError, REQUEST_VARIANTS, type VersionedProduct } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
+import { type CdrSnapshot, Snapshots } from "../history/Snapshots.ts"
 import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
@@ -24,6 +25,7 @@ export interface SyncReport {
   readonly newIssuers: ReadonlyArray<string>
   readonly newPrograms: ReadonlyArray<string>
   readonly brandErrors: ReadonlyArray<{ readonly brand: string; readonly error: string }>
+  readonly snapshotsSaved: number
 
   readonly rewards: {
     readonly set: ReadonlyArray<{ readonly card: string; readonly earn: ReadonlyArray<EarnRate> }>
@@ -42,7 +44,7 @@ export class SyncAborted extends Schema.TaggedError<SyncAborted>()("SyncAborted"
 
 interface BrandFetch {
   readonly brand: string
-  readonly products: ReadonlyArray<ProductDetail>
+  readonly products: ReadonlyArray<VersionedProduct>
 
   readonly listError: string | undefined
   readonly productErrors: ReadonlyArray<string>
@@ -53,6 +55,7 @@ const decodeCard = Schema.decodeUnknownEffect(Card)
 export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRun: boolean }) {
   const cdr = yield* CdrClient
   const store = yield* Store
+  const snapshots = yield* Snapshots
   const now = yield* DateTime.now
   const date = DateTime.formatIsoDateUtc(now)
   const observedAt = DateTime.formatIso(now)
@@ -104,12 +107,13 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         const products = yield* Effect.forEach(
           listed.success,
           (summary) =>
-            cdr.getProduct(brand.publicBaseUri, summary.productId).pipe(
-              Effect.map((p) => p.detail),
-              Effect.catchTag("CdrError", (e) =>
-                Effect.sync(() => (productErrors.push(`${summary.name}: ${e.message}`), undefined))
-              )
-            ),
+            cdr
+              .getProduct(brand.publicBaseUri, summary.productId)
+              .pipe(
+                Effect.catchTag("CdrError", (e) =>
+                  Effect.sync(() => (productErrors.push(`${summary.name}: ${e.message}`), undefined))
+                )
+              ),
           { concurrency: 4 }
         )
 
@@ -170,13 +174,20 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const rewardsReview: Array<{ card: string; reason: string }> = []
   const bonusSet: Array<{ card: string; bonus: ReadonlyArray<BonusTranche> }> = []
   const bonusReview: Array<{ card: string; reason: string }> = []
+  const snapshotWrites: Array<{ issuer: string; productId: string; snapshot: CdrSnapshot }> = []
 
   for (const { brand, products } of fetched) {
     if (products.length === 0) continue
     const issuerSlug = resolveIssuer(brand)
     const issuerName = required(issuers.get(issuerSlug)).name
 
-    for (const product of products) {
+    for (const { detail: product, raw, version } of products) {
+      snapshotWrites.push({
+        issuer: issuerSlug,
+        productId: product.productId,
+        snapshot: { brand, version: Number.isFinite(version) ? version : null, product: raw }
+      })
+
       const { card: incoming, fallbackProgram } = normalise(product, {
         issuerSlug,
         brandName: brand,
@@ -274,7 +285,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
-  const seenIds = new Set(fetched.flatMap((b) => b.products.map((p) => `${b.brand}|${p.productId}`)))
+  const seenIds = new Set(fetched.flatMap((b) => b.products.map((p) => `${b.brand}|${p.detail.productId}`)))
   const brandStatus = new Map(fetched.map((b) => [b.brand, b]))
   const missingByBrand = new Map<string, Array<string>>()
 
@@ -304,7 +315,12 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
+  let snapshotsSaved = 0
+
   if (!options.dryRun) {
+    for (const { issuer, productId, snapshot } of snapshotWrites)
+      if (yield* snapshots.record(issuer, productId, date, snapshot)) snapshotsSaved++
+
     for (const slug of new Set(newIssuers)) yield* store.writeIssuer(slug, required(issuers.get(slug)))
 
     for (const id of newPrograms) yield* store.writeProgram(id, required(programs.get(id)))
@@ -329,6 +345,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     brandErrors: fetched
       .filter((b) => b.listError !== undefined && !/HTTP 4\d\d/u.test(b.listError))
       .map((b) => ({ brand: b.brand, error: required(b.listError) })),
+    snapshotsSaved,
     rewards: { set: rewardsSet, review: rewardsReview },
     bonus: { set: bonusSet, review: bonusReview }
   } satisfies SyncReport
@@ -385,6 +402,8 @@ export const summariseReport = (r: SyncReport): string => {
   if (r.bonus.set.length > 0 || r.bonus.review.length > 0) {
     lines.push(`Signup bonuses: ${r.bonus.set.length} set by parser, ${r.bonus.review.length} need review`, "")
   }
+
+  if (r.snapshotsSaved > 0) lines.push(`History: saved ${r.snapshotsSaved} changed CDR product responses`, "")
 
   if (r.brandErrors.length > 0) lines.push("Brand errors:", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")
 
