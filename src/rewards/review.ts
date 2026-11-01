@@ -2,6 +2,7 @@ import { encodeJson } from "../util/json.ts"
 import { DateTime, Effect, Schema } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
 import type { BonusTranche, Card, EarnRate } from "../model/schema.ts"
+import { withOffers } from "../offers/build.ts"
 import { splitCardKey, Store } from "../store/Store.ts"
 import { loyaltyText, loyaltyTextHash, type LoyaltyFeature } from "./parse.ts"
 import { bonusText, bonusTextHash } from "./bonus.ts"
@@ -244,19 +245,23 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
     if (!bonus) return yield* new RewardsError({ message: `${key} has no rewards.bonus; set it first or pass --none` })
     const hash = bonusTextHash(yield* bonusFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
-    yield* store.writeCard(issuer, slug, {
-      ...card,
-      rewards: {
-        ...card.rewards,
-        bonus,
-        bonus_source: "manual",
-        bonus_text_hash: hash,
-        bonus_review: {
-          state: bonus.length === 0 ? "none" : "present",
-          reviewed_at: DateTime.formatIsoDateUtc(yield* DateTime.now)
+    yield* store.writeCard(
+      issuer,
+      slug,
+      withOffers({
+        ...card,
+        rewards: {
+          ...card.rewards,
+          bonus,
+          bonus_source: "manual",
+          bonus_text_hash: hash,
+          bonus_review: {
+            state: bonus.length === 0 ? "none" : "present",
+            reviewed_at: DateTime.formatIsoDateUtc(yield* DateTime.now)
+          }
         }
-      }
-    })
+      })
+    )
     yield* Effect.logInfo(`Stamped bonus for ${key} (${hash})`)
   }
 

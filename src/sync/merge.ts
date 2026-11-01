@@ -101,7 +101,7 @@ const withoutTimestamp = (path: string, value: unknown) => {
 }
 
 export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<FieldChange> => {
-  const paths = [...CDR_OWNED_PATHS, "status", "discontinued", ...EARN_PATHS, ...BONUS_PATHS]
+  const paths = [...CDR_OWNED_PATHS, "status", "discontinued", ...EARN_PATHS, ...BONUS_PATHS, ...OFFER_PATHS]
 
   return paths
     .values()
@@ -111,6 +111,8 @@ export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<Fi
 }
 
 export const EARN_PATHS = ["rewards.earn", "rewards.earn_source", "rewards.earn_text_hash"] as const
+
+export const OFFER_PATHS = ["offers", "signup_review"] as const
 
 export const BONUS_PATHS = ["rewards.bonus", "rewards.bonus_source", "rewards.bonus_text_hash"] as const
 

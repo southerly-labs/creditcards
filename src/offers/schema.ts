@@ -68,6 +68,8 @@ export const Offer = Schema.Struct({
 
 export type Offer = typeof Offer.Type
 
+export type SignupReview = typeof SignupReview.Type
+
 export const SignupReview = Schema.Struct({
   state: Schema.Literals(["unknown", "present", "none"]),
   source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),

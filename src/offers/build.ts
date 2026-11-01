@@ -1,13 +1,11 @@
-import type { BonusTranche, IntroOffer } from "../model/schema"
-import type { Offer } from "./schema"
-
-type SignupReview = { readonly state: "unknown" | "present" | "none" }
+import type { BonusTranche, Card, IntroOffer } from "../model/schema"
+import type { Offer, SignupReview } from "./schema"
 
 const introIds = { purchase: "intro-purchase", balance_transfer: "intro-balance-transfer", both: "intro-both" } as const
 
 export const cdrOffers = (input: {
-  readonly intro?: ReadonlyArray<IntroOffer>
-  readonly annualFirstYear?: number
+  readonly intro?: ReadonlyArray<IntroOffer> | undefined
+  readonly annualFirstYear?: number | undefined
 }): Array<Offer> => {
   const used = new Map<string, number>()
   const offers: Array<Offer> = []
@@ -37,8 +35,9 @@ export const cdrOffers = (input: {
 export const signupOffer = (input: {
   readonly program: string
   readonly tranches: ReadonlyArray<BonusTranche> | undefined
+  readonly source?: "parser" | "manual"
   readonly rawTotal: number | undefined
-  readonly review: SignupReview | undefined
+  readonly review: Pick<SignupReview, "state"> | undefined
 }): Offer | undefined => {
   if (input.review?.state === "none") return undefined
   const [first, ...rest] = input.tranches ?? []
@@ -46,7 +45,7 @@ export const signupOffer = (input: {
   if (first !== undefined) {
     return {
       id: "signup",
-      source: "parser",
+      source: input.source ?? "parser",
       components: [
         { kind: "signup_points", program: input.program, ...first },
         ...rest.map((tranche) => Object.assign({ kind: "signup_points" as const, program: input.program }, tranche))
@@ -79,4 +78,59 @@ export const combineOffers = (input: {
     offers.push((offer.id === undefined ? undefined : manualById.get(offer.id)) ?? offer)
 
   return [...offers, ...manual.filter((offer) => !offers.includes(offer))]
+}
+
+type Rewards = NonNullable<Card["rewards"]>
+
+const manualBonusState = (rewards: Rewards) => ((rewards.bonus?.length ?? 0) === 0 ? "none" : "present")
+
+export const legacySignupReview = (rewards: Rewards | undefined): SignupReview | undefined => {
+  if (rewards === undefined) return undefined
+  const { bonus_source: source, bonus_review: review, bonus_text_hash: hash } = rewards
+
+  const fallback = source === "manual" ? manualBonusState(rewards) : undefined
+  const state = review?.state ?? (source === "parser" ? "present" : fallback)
+
+  if (state === undefined) return undefined
+
+  return {
+    state,
+    ...(source === undefined ? {} : { source }),
+    ...(hash === undefined ? {} : { text_hash: hash }),
+    ...(review?.reviewed_at === undefined ? {} : { reviewed_at: review.reviewed_at })
+  }
+}
+
+export const withOffers = (card: Card): Card => {
+  const { offers: stored, signup_review: _review, ...rest } = card
+  const rewards = card.rewards
+  const review = legacySignupReview(rewards)
+  const locked = (card.locked ?? []).includes("offers")
+  const manualBonus = rewards?.bonus_source === "manual"
+
+  const signup =
+    rewards === undefined
+      ? undefined
+      : signupOffer({
+          program: rewards.program,
+          tranches: rewards.bonus,
+          source: manualBonus ? "manual" : "parser",
+          rawTotal: rewards.bonus_points,
+          review
+        })
+
+  const offers = combineOffers({
+    existing: locked || !manualBonus ? stored : stored?.filter((offer) => offer.id !== "signup"),
+    generated: [
+      ...cdrOffers({ intro: card.rates.intro, annualFirstYear: card.fees.annual_first_year }),
+      ...(signup === undefined ? [] : [signup])
+    ],
+    locked
+  })
+
+  return {
+    ...rest,
+    ...(offers.length === 0 ? {} : { offers }),
+    ...(review === undefined ? {} : { signup_review: review })
+  }
 }

@@ -6,6 +6,7 @@ import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
 import { type CdrSnapshot, Snapshots } from "../history/Snapshots.ts"
 import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
+import { withOffers } from "../offers/build.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
@@ -261,7 +262,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         continue
       }
 
-      const changes = diffCard(existing, merged)
+      const card = withOffers(decoded.success)
+      const changes = diffCard(existing, card)
 
       const reasons = existing ? holdReasons(changes) : []
 
@@ -274,7 +276,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
       if (changes.length === 0) continue
 
-      writes.set(key, decoded.success)
+      writes.set(key, card)
 
       if (earnSet) rewardsSet.push({ card: key, earn: earnSet })
 

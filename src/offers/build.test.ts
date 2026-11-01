@@ -1,6 +1,9 @@
 import { describe, expect, it } from "@effect/vitest"
+import { Schema } from "effect"
+import { Card } from "../model/schema"
+import { required } from "../util/required"
 import type { Offer } from "./schema"
-import { cdrOffers, combineOffers, signupOffer } from "./build"
+import { cdrOffers, combineOffers, signupOffer, withOffers } from "./build"
 
 const tranches = [
   { points: 100_000, year: 1 as const, min_spend: 6000, spend_days: 90 },
@@ -93,5 +96,59 @@ describe("combining offers", () => {
 
   it("leaves everything alone when offers are locked", () => {
     expect(combineOffers({ existing: [cashback], generated: [intro, signup], locked: true })).toEqual([cashback])
+  })
+})
+
+describe("deriving offers from legacy card fields", () => {
+  const card = Schema.decodeUnknownSync(Card)({
+    name: "Card",
+    type: "personal",
+    status: "active",
+    fees: { annual_first_year: 0 },
+    rates: { intro: [{ applies_to: "purchase", rate: 0, months: 12 }] },
+    limits: {},
+    perks: {},
+    rewards: { program: "qantas", bonus_points: 170_000 }
+  })
+
+  const rewards = required(card.rewards)
+  const signupOf = (derived: Card) => derived.offers?.find((offer) => offer.id === "signup")
+
+  it("writes CDR offers and the raw total when nothing has been reviewed", () => {
+    const derived = withOffers(card)
+
+    expect(derived.offers?.map((offer) => [offer.id, offer.source])).toEqual([
+      ["intro-purchase", "cdr"],
+      ["first-year-fee", "cdr"],
+      ["signup", "cdr"]
+    ])
+    expect(derived.signup_review).toBeUndefined()
+  })
+
+  it("records a manual no-bonus review and writes no signup offer", () => {
+    const derived = withOffers({
+      ...card,
+      rewards: { ...rewards, bonus: [], bonus_source: "manual", bonus_text_hash: "abc" }
+    })
+
+    expect(derived.signup_review).toEqual({ state: "none", source: "manual", text_hash: "abc" })
+    expect(signupOf(derived)).toBeUndefined()
+  })
+
+  it("follows a re-stamped manual bonus rather than the previously written offer", () => {
+    const manual = { ...rewards, bonus: [{ points: 90_000, year: 1 as const }], bonus_source: "manual" as const }
+    const first = withOffers({ ...card, rewards: manual })
+    const second = withOffers({ ...first, rewards: { ...manual, bonus: [{ points: 60_000, year: 1 as const }] } })
+
+    expect(signupOf(first)?.source).toBe("manual")
+    expect(signupOf(second)?.components).toEqual([
+      { kind: "signup_points", program: "qantas", points: 60_000, year: 1 }
+    ])
+  })
+
+  it("is stable when applied twice", () => {
+    const once = withOffers(card)
+
+    expect(withOffers(once)).toEqual(once)
   })
 })
