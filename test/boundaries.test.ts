@@ -2,8 +2,10 @@ import { assert, test } from "@effect/vitest"
 import {
   decodeApi,
   decodeColumnVisibility,
+  decodeMonthlySpend,
   decodePointValues,
   loadColumnVisibility,
+  loadMonthlySpend,
   loadPointValues
 } from "../src/model/api.ts"
 import { encodeJson } from "../src/util/json.ts"
@@ -40,6 +42,14 @@ test("column visibility keeps only boolean choices", () => {
   })
   assert.deepStrictEqual(decodeColumnVisibility("not json"), {})
   assert.deepStrictEqual(loadColumnVisibility(unavailableStorage), {})
+})
+
+test("monthly spend keeps only non-negative numbers", () => {
+  assert.strictEqual(decodeMonthlySpend("2500"), 2500)
+  assert.strictEqual(decodeMonthlySpend(""), undefined)
+  assert.strictEqual(decodeMonthlySpend("-1"), undefined)
+  assert.strictEqual(decodeMonthlySpend("lots"), undefined)
+  assert.strictEqual(loadMonthlySpend(unavailableStorage), undefined)
 })
 
 test("Schema serialization preserves optional report fields and pretty output", () => {

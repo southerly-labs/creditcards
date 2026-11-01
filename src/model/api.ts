@@ -53,3 +53,16 @@ export const loadColumnVisibility = (read: () => string | null): Record<string, 
     onFailure: () => ({}),
     onSuccess: (text) => decodeColumnVisibility(text ?? "{}")
   })
+
+export const decodeMonthlySpend = (text: string | null): number | undefined => {
+  if (text === null || text.trim() === "") return undefined
+  const value = Number(text)
+
+  return Number.isFinite(value) && value >= 0 ? value : undefined
+}
+
+export const loadMonthlySpend = (read: () => string | null): number | undefined =>
+  Result.match(Result.try(read), {
+    onFailure: () => undefined,
+    onSuccess: decodeMonthlySpend
+  })
