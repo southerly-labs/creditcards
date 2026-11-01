@@ -106,7 +106,7 @@ Updates auto-merge. Changes that look wrong are held back and reported in a `syn
 - more than half of an issuer's cards vanishing at once
 - a parsed base earn rate moving by more than 1 point per dollar
 
-Cards that disappear from CDR are marked `status = "discontinued"`, not deleted.
+Cards that disappear from CDR are marked `status = "discontinued"` with a `discontinued` date, not deleted. A card the issuer no longer sells but still lists in CDR is marked `status = "closed"` by hand, with a `closed` date when it is known; the sync keeps that status.
 
 ## Development
 

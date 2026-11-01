@@ -66,7 +66,9 @@ const CardFields = Schema.Struct({
   name: Schema.NonEmptyString,
   type: CardType,
   network: Schema.optionalKey(Network),
-  status: Schema.Literals(["active", "discontinued"]),
+  status: Schema.Literals(["active", "closed", "discontinued"]),
+  first_seen: Schema.optionalKey(CalendarDate),
+  closed: Schema.optionalKey(CalendarDate),
   discontinued: Schema.optionalKey(CalendarDate),
   description: Schema.optionalKey(Schema.String),
   url: Schema.optionalKey(WebUrl),
@@ -139,6 +141,16 @@ export const earnTierOrder = Schema.makeFilter(
 )
 
 export const Card = CardFields.check(
+  Schema.makeFilter(
+    (card) =>
+      card.discontinued === undefined ||
+      card.status === "discontinued" ||
+      "A discontinued date needs status discontinued"
+  ),
+  Schema.makeFilter(
+    (card) =>
+      card.closed === undefined || card.status !== "active" || "A closed date needs status closed or discontinued"
+  ),
   creditRange,
   earnTierOrder,
   Schema.makeFilter((card) => uniqueOfferIds(card.offers ?? []) || "Offer ids must be unique within a card"),

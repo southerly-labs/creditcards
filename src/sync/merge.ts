@@ -73,7 +73,7 @@ export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard):
     setPath(merged, path, structuredClone(getPath(incoming, path)))
   }
 
-  merged["status"] = "active"
+  merged["status"] = existing.status === "closed" ? "closed" : "active"
   delete merged["discontinued"]
 
   const rewards = merged["rewards"]

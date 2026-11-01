@@ -72,7 +72,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const activeByBrand = new Map<string, number>()
 
   for (const card of cards.values()) {
-    if (card.status === "active" && card.cdr)
+    if (card.status !== "discontinued" && card.cdr)
       activeByBrand.set(card.cdr.brand, (activeByBrand.get(card.cdr.brand) ?? 0) + 1)
   }
 
@@ -130,7 +130,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   )
 
   const cardsSeen = fetched.reduce((n, b) => n + b.products.length, 0)
-  const activeCdrCards = [...cards.values()].filter((c) => c.status === "active" && c.cdr !== undefined).length
+  const activeCdrCards = [...cards.values()].filter((c) => c.status !== "discontinued" && c.cdr !== undefined).length
 
   if (activeCdrCards > 0 && cardsSeen < activeCdrCards * MIN_SEEN_SHARE) {
     return yield* new SyncAborted({
@@ -293,7 +293,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const missingByBrand = new Map<string, Array<string>>()
 
   for (const [key, card] of cards) {
-    if (card.status !== "active" || !card.cdr || seenIds.has(`${card.cdr.brand}|${card.cdr.product_id}`)) continue
+    if (card.status === "discontinued" || !card.cdr || seenIds.has(`${card.cdr.brand}|${card.cdr.product_id}`)) continue
 
     if ((card.locked ?? []).includes("status")) continue
     const status = brandStatus.get(card.cdr.brand)
@@ -303,7 +303,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   }
 
   for (const [brand, keys] of missingByBrand) {
-    const active = [...cards.values()].filter((c) => c.status === "active" && c.cdr?.brand === brand).length
+    const active = [...cards.values()].filter((c) => c.status !== "discontinued" && c.cdr?.brand === brand).length
 
     if (keys.length / active > MAX_DISCONTINUED_SHARE && keys.length > 1) {
       for (const key of keys)
