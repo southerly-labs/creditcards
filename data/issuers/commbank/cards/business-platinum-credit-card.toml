@@ -7,6 +7,11 @@ url = "https://www.commbank.com.au/business/business-credit-cards/business-award
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/personal-liability/mastercard-business-platinum-credit-card.png"
 locked = [ "rewards.program", "rewards.partners" ]
 
+[provenance.sections.rewards]
+source_urls = [ "https://www.commbank.com.au/business/business-credit-cards/business-platinum-credit-card.html" ]
+reviewed_at = "2026-11-01T07:23:22.414Z"
+correction_reason = "Earns CommBank Yello points (card page: 'Turn business spending into CommBank Yello points'; Yello terms list Business Platinum as a Yello Earn Card). CDR lists the Qantas Frequent Flyer Program first, so the normaliser would pick qantas; Qantas is only an opt-in conversion of Yello points on selected cards from 1 Oct 2026."
+
 [cdr]
 brand = "CommBank"
 product_id = "8df91527a5774d7bb795eebe2509f941"

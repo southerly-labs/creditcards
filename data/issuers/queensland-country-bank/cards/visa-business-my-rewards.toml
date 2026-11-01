@@ -4,7 +4,12 @@ network = "visa"
 status = "active"
 description = "Our Business Visa Credit Card comes with a competitive low interest rate, low annual fee and up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date, and is linked to our free rewards program, Business Rewarder"
 image = "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visabusiness-reward.jpg"
-locked = [ "rewards.program" ]
+locked = [ "rewards.program", "rewards.partners" ]
+
+[provenance.sections.rewards]
+source_urls = [ "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_My_Rewards_TCs.pdf" ]
+reviewed_at = "2026-11-01T07:23:23.263Z"
+correction_reason = "My Rewards terms (effective 10 Aug 2026) pay cash back: $1 of reward dollars per $150, credited to the card account monthly, capped at $140 a month for business cards. CDR describes it as a points program, which the normaliser maps to queensland-country-bank-rewards."
 
 [cdr]
 brand = "Queensland Country Bank"

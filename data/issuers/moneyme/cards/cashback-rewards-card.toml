@@ -4,7 +4,12 @@ status = "active"
 description = "Digital credit card with cashback rewards. Purchase and cash advance rates are personalised to your Equifax OneScore credit band. Credit limits up to $20,000."
 url = "https://www.moneyme.com.au/credit-card"
 image = "https://cdn.moneyme.com.au/images/assets/cards/cashback-rewards-card.png"
-locked = [ "rewards.program" ]
+locked = [ "rewards.program", "rewards.partners" ]
+
+[provenance.sections.rewards]
+source_urls = [ "https://www.moneyme.com.au/credit-card" ]
+reviewed_at = "2026-11-01T07:23:22.838Z"
+correction_reason = "1% cashback credited to the card account each month, capped at 1% of the credit limit. CDR publishes it as a CASHBACK_OFFER with no LOYALTY_PROGRAM feature, so without the lock the sync would remove the rewards table."
 
 [cdr]
 brand = "MoneyMe"
