@@ -40,10 +40,11 @@ export class CdrClient extends Context.Service<
     getProduct(baseUri: string, productId: string): Effect.Effect<VersionedProduct, CdrError>
   }
 >()("creditcards/cdr/CdrClient") {
-  static readonly layer = Layer.effect(
+  static readonly layerNoDeps = Layer.effect(
     CdrClient,
     Effect.gen(function* () {
       const client = (yield* HttpClient.HttpClient).pipe(
+        HttpClient.transformResponse((response) => Effect.timeout(response, "20 seconds")),
         HttpClient.retryTransient({ schedule: Schedule.exponential("500 millis"), times: 2 })
       )
 
@@ -53,10 +54,9 @@ export class CdrClient extends Context.Service<
         variant = 0
       ) {
         const attempt = (headers: Record<string, string>) =>
-          client.get(url, { headers: { ...REQUEST_VARIANTS[variant % REQUEST_VARIANTS.length], ...headers } }).pipe(
-            Effect.timeout("20 seconds"),
-            Effect.mapError((cause) => new CdrError({ url, message: String(cause) }))
-          )
+          client
+            .get(url, { headers: { ...REQUEST_VARIANTS[variant % REQUEST_VARIANTS.length], ...headers } })
+            .pipe(Effect.mapError((cause) => new CdrError({ url, message: String(cause) })))
 
         let response = yield* attempt({ "x-v": String(maxVersion), "x-min-v": "1" })
 
@@ -90,14 +90,14 @@ export class CdrClient extends Context.Service<
         return response.data.filter((brand) => brand.industries.some((i) => LENDING_INDUSTRIES.has(i)))
       }).pipe(Effect.withSpan("CdrClient.brands"))
 
-      const listProducts = Effect.fn("CdrClient.listProducts")(function* (
-        baseUri: string,
+      const listPages = Effect.fn("CdrClient.listPages")(function* (
+        firstUrl: string,
         category: string,
-        variant = 0
+        variant: number
       ) {
         const products: Array<ProductSummary> = []
 
-        let url: string | null | undefined = `${trimSlash(baseUri)}/cds-au/v1/banking/products?page-size=100`
+        let url: string | null | undefined = firstUrl
 
         for (let page = 0; url != null && url !== "" && page < 20; page++) {
           const { body }: { body: unknown } = yield* getVersioned(url, PRODUCTS_MAX_VERSION, variant)
@@ -114,6 +114,22 @@ export class CdrClient extends Context.Service<
         return products
       })
 
+      const listProducts = (baseUri: string, category: string, variant = 0) => {
+        const products = `${trimSlash(baseUri)}/cds-au/v1/banking/products`
+
+        return listPages(
+          `${products}?product-category=${encodeURIComponent(category)}&page-size=100`,
+          category,
+          variant
+        ).pipe(
+          Effect.catchIf(
+            (error) => error.status === 400 || error.status === 422,
+            () => listPages(`${products}?page-size=100`, category, variant)
+          ),
+          Effect.withSpan("CdrClient.listProducts")
+        )
+      }
+
       const getProduct = Effect.fn("CdrClient.getProduct")(function* (baseUri: string, productId: string) {
         const url = `${trimSlash(baseUri)}/cds-au/v1/banking/products/${encodeURIComponent(productId)}`
         const { body, version } = yield* getVersioned(url, PRODUCT_DETAIL_MAX_VERSION)
@@ -125,7 +141,9 @@ export class CdrClient extends Context.Service<
 
       return CdrClient.of({ brands, listProducts, getProduct })
     })
-  ).pipe(Layer.provide(FetchHttpClient.layer))
+  )
+
+  static readonly layer = CdrClient.layerNoDeps.pipe(Layer.provide(FetchHttpClient.layer))
 }
 
 const decodeProductsPage = Schema.decodeUnknownEffect(ProductsPage)
