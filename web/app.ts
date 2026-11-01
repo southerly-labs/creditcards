@@ -7,7 +7,7 @@ import {
   loadMonthlySpend,
   loadPointValues
 } from "../src/model/api.ts"
-import { annualPoints } from "../src/model/benefit.ts"
+import { annualPoints, meetsSpendTarget } from "../src/model/benefit.ts"
 import type { Card, Program } from "../src/model/schema.ts"
 import { offerStatus } from "../src/offers/project.ts"
 import type { OfferComponent } from "../src/offers/schema.ts"
@@ -64,9 +64,13 @@ type IntroRate = Extract<OfferComponent, { readonly kind: "intro_rate" }>
 
 type Tranche = Extract<OfferComponent, { readonly kind: "signup_points" }>
 
+type FeeDiscount = Extract<OfferComponent, { readonly kind: "fee_discount" }>
+
 const isIntroRate = (c: OfferComponent): c is IntroRate => c.kind === "intro_rate"
 
 const isTranche = (c: OfferComponent): c is Tranche => c.kind === "signup_points"
+
+const isFeeDiscount = (c: OfferComponent): c is FeeDiscount => c.kind === "fee_discount"
 
 const introRate = (r: Row) => currentOffers(r).flatMap((o) => o.components.filter(isIntroRate))[0]
 
@@ -192,15 +196,23 @@ type Benefit =
   | { readonly kind: "unknown"; readonly title: string }
   | { readonly kind: "none" }
 
-const benefit = (r: Row): Benefit => {
+const firstYearFee = (r: Row) =>
+  currentOffers(r)
+    .flatMap((o) => o.components.filter(isFeeDiscount))
+    .find((c) => c.fee === "annual" && (c.months ?? 12) >= 12)?.payable ?? r.card.fees.annual
+
+const firstYearTranches = (r: Row) => (tranches(r) ?? []).filter((t) => (t.year ?? 1) === 1)
+
+const benefit = (r: Row, firstYear: boolean): Benefit => {
   if (monthlySpend === undefined) return { kind: "none" }
-  const fee = r.card.fees.annual
+  const spend = monthlySpend
+  const fee = firstYear ? firstYearFee(r) : r.card.fees.annual
 
   if (fee === undefined) return { kind: "unknown", title: "Annual fee unknown" }
-  const feeText = `${plain(money(fee))} annual fee`
+  const feeText = `minus ${plain(money(fee))} ${firstYear ? "first-year" : "annual"} fee`
 
-  if (!r.program) return { kind: "value", value: -fee, title: `No rewards, minus ${feeText}` }
-  const points = annualPoints(r.card.rewards?.earn ?? [], monthlySpend, r.card.rewards?.earn_rules)
+  if (!r.program) return { kind: "value", value: -fee, title: `No rewards, ${feeText}` }
+  const points = annualPoints(r.card.rewards?.earn ?? [], spend, r.card.rewards?.earn_rules)
 
   if (points === undefined) return { kind: "unknown", title: `No base earn rate for ${r.program.name}` }
   const cents = centsPerPoint(r)
@@ -210,15 +222,46 @@ const benefit = (r: Row): Benefit => {
   }
 
   const custom = overrides[r.program.id] !== undefined
+  const offered = firstYear ? firstYearTranches(r) : []
+  const earned = offered.filter((t) => meetsSpendTarget(spend, t))
+  const missed = offered.filter((t) => !meetsSpendTarget(spend, t))
+  const bonus = earned.reduce((sum, t) => sum + t.points, 0)
 
   const title = [
-    `${int(points)} points a year on ${plain(money(monthlySpend))} a month × ${cents}c per point${custom ? " (your value)" : ""}`,
-    `minus ${feeText}`,
-    "Base earn rate only; excludes category rates and signup bonuses"
+    `${int(points)} points a year on ${plain(money(spend))} a month`,
+    ...earned.map((t) => `+ ${describeTranche(t)}`),
+    ...missed.map((t) => `Not reached: ${describeTranche(t)}`),
+    `× ${cents}c per point${custom ? " (your value)" : ""}`,
+    feeText,
+    firstYear
+      ? "Base earn rate only; excludes category rates and year 2 bonuses"
+      : "Base earn rate only; excludes category rates and signup bonuses"
   ].join("\n")
 
-  return { kind: "value", value: Math.round((points * cents) / 100 - fee), title }
+  return { kind: "value", value: Math.round(((points + bonus) * cents) / 100 - fee), title }
 }
+
+const benefitColumn = (id: string, label: string, firstYear: boolean): Column => ({
+  id,
+  label,
+  num: true,
+  sortValue: (r) => {
+    const b = benefit(r, firstYear)
+
+    return b.kind === "value" ? b.value : undefined
+  },
+  render: (r) => {
+    const b = benefit(r, firstYear)
+
+    if (b.kind === "none") return `<span class="dim" title="Enter your monthly spend to see this">—</span>`
+
+    if (b.kind === "unknown") return `<span class="dim" title="${esc(b.title)}">?</span>`
+    const custom = r.program !== undefined && overrides[r.program.id] !== undefined
+    const tone = b.value < 0 ? "negative" : custom ? "custom" : ""
+
+    return `<span class="${tone}" title="${esc(b.title)}">${signedMoney(b.value)}</span>`
+  }
+})
 
 const columns: ReadonlyArray<Column> = [
   {
@@ -344,27 +387,8 @@ const columns: ReadonlyArray<Column> = [
       return `<span class="${custom ? "custom" : ""}" title="${esc(title)}">${value.toFixed(2)}¢</span>`
     }
   },
-  {
-    id: "annual-benefit",
-    label: "Annual benefit",
-    num: true,
-    sortValue: (r) => {
-      const b = benefit(r)
-
-      return b.kind === "value" ? b.value : undefined
-    },
-    render: (r) => {
-      const b = benefit(r)
-
-      if (b.kind === "none") return `<span class="dim" title="Enter your monthly spend to see this">—</span>`
-
-      if (b.kind === "unknown") return `<span class="dim" title="${esc(b.title)}">?</span>`
-      const custom = r.program !== undefined && overrides[r.program.id] !== undefined
-      const tone = b.value < 0 ? "negative" : custom ? "custom" : ""
-
-      return `<span class="${tone}" title="${esc(b.title)}">${signedMoney(b.value)}</span>`
-    }
-  },
+  benefitColumn("first-year-value", "First-year value", true),
+  benefitColumn("annual-benefit", "Ongoing value", false),
   {
     id: "bonus-points",
     label: "Bonus pts",
