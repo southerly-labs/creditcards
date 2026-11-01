@@ -186,6 +186,12 @@ tbody tr:hover {
   color: var(--muted);
   font-size: 12px;
 }
+.split {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
 .dim {
   color: var(--muted);
 }

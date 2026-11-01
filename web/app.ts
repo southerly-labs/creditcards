@@ -37,6 +37,8 @@ const money = (n: number | undefined) =>
 const pct = (n: number | undefined) =>
   n === undefined ? dash : n === 0 ? '<span class="zero">0%</span>' : `${n.toFixed(2).replace(/\.?0+$/u, "")}%`
 
+const plain = (html: string) => html.replaceAll(/<[^>]+>/gu, "")
+
 const int = (n: number | undefined) => (n === undefined ? dash : n.toLocaleString("en-AU"))
 
 const introTargets = { purchase: "purchases", balance_transfer: "BT", both: "BT + purchases" } satisfies Record<
@@ -73,7 +75,7 @@ const describeEarn = (earn: Earn) => {
           ? previousCap !== undefined
             ? " thereafter"
             : ""
-          : ` up to ${money(e.cap_monthly).replaceAll(/<[^>]+>/gu, "")} a month`
+          : ` up to ${plain(money(e.cap_monthly))} a month`
 
     if ((e.category == null || e.category === "") && e.cap_monthly !== undefined) previousCap = e.cap_monthly
 
@@ -102,12 +104,52 @@ const earnValue = (r: Row) => {
   return earn === undefined || cents === undefined ? undefined : Math.round(earn * cents * 1000) / 1000
 }
 
-const bonusValue = (r: Row) => {
-  const points = r.card.rewards?.bonus_points
+type Tranche = NonNullable<NonNullable<Card["rewards"]>["bonus"]>[number]
+
+const bonusPoints = (r: Row, year?: Tranche["year"]) => {
+  const bonus = r.card.rewards?.bonus
+
+  if (!bonus) return year === undefined || year === 1 ? r.card.rewards?.bonus_points : undefined
+  const points = bonus.filter((t) => year === undefined || t.year === year).reduce((sum, t) => sum + t.points, 0)
+
+  return points === 0 ? undefined : points
+}
+
+const describeTranche = (t: Tranche) => {
+  const conditions = [
+    t.min_spend === undefined
+      ? ""
+      : `spend ${plain(money(t.min_spend))}${t.spend_days === undefined ? "" : ` in ${t.spend_days} days`}`,
+    t.keep_months === undefined ? "" : `keep the card ${t.keep_months} months`,
+    t.note ?? ""
+  ].filter(Boolean)
+
+  return `Year ${t.year}: ${int(t.points)} points${conditions.length > 0 ? ` (${conditions.join(", ")})` : ""}`
+}
+
+const describeBonus = (r: Row) => {
+  const bonus = r.card.rewards?.bonus
+
+  if (bonus) return bonus.map((t) => describeTranche(t)).join("\n")
+
+  return "The issuer's CDR data doesn't say how this bonus is split across years"
+}
+
+const pointsValue = (r: Row, points: number | undefined) => {
   const cents = centsPerPoint(r)
 
   return points === undefined || cents === undefined ? undefined : (points * cents) / 100
 }
+
+const bonusValue = (r: Row) => pointsValue(r, bonusPoints(r))
+
+const yearValue = (r: Row, year: Tranche["year"]) => {
+  const points = r.card.rewards?.bonus === undefined ? undefined : bonusPoints(r, year)
+
+  return points === undefined ? [] : [`Year ${year}: ${plain(money(pointsValue(r, points)))}`]
+}
+
+const yearValues = (r: Row) => [...yearValue(r, 1), ...yearValue(r, 2)]
 
 const columns: ReadonlyArray<Column> = [
   {
@@ -237,8 +279,35 @@ const columns: ReadonlyArray<Column> = [
     id: "bonus-points",
     label: "Bonus pts",
     num: true,
-    sortValue: (r) => r.card.rewards?.bonus_points,
-    render: (r) => int(r.card.rewards?.bonus_points)
+    sortValue: (r) => bonusPoints(r),
+    render: (r) => {
+      const total = bonusPoints(r)
+
+      if (total === undefined) return dash
+      const second = bonusPoints(r, 2)
+
+      const split =
+        r.card.rewards?.bonus === undefined
+          ? '<div class="split">split unknown</div>'
+          : second === undefined
+            ? ""
+            : `<div class="split">${int(bonusPoints(r, 1) ?? 0)} yr 1 · ${int(second)} yr 2</div>`
+
+      return `<span title="${esc(describeBonus(r))}">${int(total)}</span>${split}`
+    }
+  },
+  {
+    id: "bonus-first-year",
+    label: "Bonus yr 1",
+    hiddenByDefault: true,
+    num: true,
+    sortValue: (r) => (r.card.rewards?.bonus === undefined ? undefined : bonusPoints(r, 1)),
+    render: (r) =>
+      r.card.rewards?.bonus === undefined
+        ? r.card.rewards?.bonus_points === undefined
+          ? dash
+          : `<span class="dim" title="${esc(describeBonus(r))}">?</span>`
+        : int(bonusPoints(r, 1))
   },
   {
     id: "bonus-value",
@@ -249,13 +318,15 @@ const columns: ReadonlyArray<Column> = [
       const value = bonusValue(r)
 
       if (value === undefined) {
-        return r.card.rewards?.bonus_points !== undefined && r.program
+        return bonusPoints(r) !== undefined && r.program
           ? `<span class="dim" title="No point value for ${esc(r.program.name)}; set one under Point values">?</span>`
           : dash
       }
 
       const custom = r.program !== undefined && overrides[r.program.id] !== undefined
-      const title = `${r.card.rewards?.bonus_points} bonus points × ${centsPerPoint(r)}c per point${custom ? " (your value)" : ""}; before annual fees`
+      const cents = `${centsPerPoint(r)}c per point${custom ? " (your value)" : ""}`
+
+      const title = [`${int(bonusPoints(r))} bonus points × ${cents}; before annual fees`, ...yearValues(r)].join("\n")
 
       return `<span class="${custom ? "custom" : ""}" title="${esc(title)}">${money(value)}</span>`
     }
