@@ -33,10 +33,10 @@ export const CDR_OWNED_PATHS = [
 
 type Obj = Record<string, unknown>
 
-const getPath = (obj: Obj, path: string): unknown =>
+export const getPath = (obj: Obj, path: string): unknown =>
   path.split(".").reduce<unknown>((o, k) => (Predicate.isObject(o) ? o[k] : undefined), obj)
 
-const setPath = (obj: Obj, path: string, value: unknown) => {
+export const setPath = (obj: Obj, path: string, value: unknown) => {
   const keys = path.split(".")
   let target = obj
 
@@ -114,12 +114,17 @@ export const OFFER_PATHS = ["offers", "signup_review"] as const
 
 const KEY_FIELDS = new Set(["fees.annual", "rates.purchase", "fees.foreign_txn_pct"])
 
-export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<string> => {
-  const reasons: Array<string> = []
+export interface HeldField {
+  readonly path: string
+  readonly reason: string
+}
+
+export const heldFields = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<HeldField> => {
+  const reasons: Array<HeldField> = []
 
   for (const { path, before, after } of changes) {
     if (KEY_FIELDS.has(path) && before !== undefined && after === undefined) {
-      reasons.push(`${path} disappeared (was ${encodeJson(before)})`)
+      reasons.push({ path, reason: `${path} disappeared (was ${encodeJson(before)})` })
       continue
     }
 
@@ -129,7 +134,8 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<
 
       const [b, a] = [base(before), base(after)]
 
-      if (b !== undefined && a !== undefined && Math.abs(a - b) > 1) reasons.push(`base earn rate ${b} → ${a}`)
+      if (b !== undefined && a !== undefined && Math.abs(a - b) > 1)
+        reasons.push({ path, reason: `base earn rate ${b} → ${a}` })
       continue
     }
 
@@ -137,16 +143,19 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<
     const delta = Math.abs(after - before)
 
     if (path === "fees.annual" && delta > 100 && delta / Math.max(before, 1) > 0.5) {
-      reasons.push(`${path} ${before} → ${after}`)
+      reasons.push({ path, reason: `${path} ${before} → ${after}` })
     } else if (path.startsWith("rates.") && path !== "rates.interest_free_days" && delta > 5) {
-      reasons.push(`${path} ${before}% → ${after}%`)
+      reasons.push({ path, reason: `${path} ${before}% → ${after}%` })
     } else if (path === "fees.foreign_txn_pct" && delta > 2) {
-      reasons.push(`${path} ${before}% → ${after}%`)
+      reasons.push({ path, reason: `${path} ${before}% → ${after}%` })
     }
   }
 
   return reasons
 }
+
+export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<string> =>
+  heldFields(changes).map((held) => held.reason)
 
 export const MAX_DISCONTINUED_SHARE = 0.5
 

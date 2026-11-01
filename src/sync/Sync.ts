@@ -7,13 +7,13 @@ import { type CdrSnapshot, Snapshots } from "../history/Snapshots.ts"
 import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
 import { applyOffers, signupState } from "../offers/build.ts"
+import { holdCandidates, revertChange } from "./holds.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
 import {
   diffCard,
   type FieldChange,
-  holdReasons,
   MAX_DISCONTINUED_SHARE,
   mergeCard,
   MissingStep,
@@ -276,15 +276,23 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         continue
       }
 
-      const card = applyOffers(decoded.success, offerInputs, applyBonusPlan(currentSignup, bonusPlan))
-      const changes = diffCard(existing, card)
+      const proposed = applyOffers(decoded.success, offerInputs, applyBonusPlan(currentSignup, bonusPlan))
+      const candidates = existing ? holdCandidates(existing, proposed) : []
+      let card = proposed
 
-      const reasons = existing ? holdReasons(changes) : []
+      if (existing && candidates.length > 0) {
+        held.push({ card: key, reasons: candidates.map((candidate) => candidate.reason) })
 
-      if (reasons.length > 0) {
-        held.push({ card: key, reasons })
-        continue
+        const reverted = candidates.reduce<Card | undefined>(
+          (next, candidate) => next && revertChange(next, existing, candidate.change),
+          proposed
+        )
+
+        if (reverted === undefined) continue
+        card = reverted
       }
+
+      const changes = diffCard(existing, card)
 
       observations.set(key, observedAt)
 
