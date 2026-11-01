@@ -6,6 +6,7 @@ import {
   cardType,
   foreignTransactionFee,
   introOffers,
+  latePaymentFee,
   makeProgramIndex,
   matchProgram,
   timesPerYear,
@@ -62,6 +63,29 @@ describe("fees", () => {
         { name: "Foreign Transaction Fee", feeType: "TRANSACTION", fixedAmount: { amount: "0.00" } }
       ])
     ).toBe(0)
+  })
+})
+
+describe("late payment fee", () => {
+  const event = (name: string, amount: string): Fee => ({ name, feeType: "EVENT", fixedAmount: { amount } })
+
+  test("reads the LATE_PAYMENT fee type", () => {
+    expect(latePaymentFee([{ name: "Late fee", feeType: "LATE_PAYMENT", fixedAmount: { amount: "20.00" } }])).toBe(20)
+  })
+
+  test("reads late fees published as events, including coded names", () => {
+    expect(latePaymentFee([event("Late Payment Fee", "30.00")])).toBe(30)
+    expect(latePaymentFee([event("LATE_PAYMENT_FEE_-_QANTAS_CREDIT_CARD", "15.00")])).toBe(15)
+    expect(latePaymentFee([event("FEELATEPAY", "20.00")])).toBe(20)
+    expect(latePaymentFee([event("LATE/MISSED_PAYMENT", "8.00")])).toBe(8)
+    expect(latePaymentFee([event("Missed payment fee", "25.00")])).toBe(25)
+  })
+
+  test("ignores other event fees, reminder fees and late fees with no fixed amount", () => {
+    expect(latePaymentFee([event("FEECARDREP", "10.00"), event("Late Payment Reminder Fee", "40.00")])).toBeUndefined()
+    expect(
+      latePaymentFee([{ name: "Late Payment Fee", feeType: "EVENT", additionalInfo: "3% or $20" }])
+    ).toBeUndefined()
   })
 })
 

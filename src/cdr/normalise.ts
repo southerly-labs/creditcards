@@ -170,10 +170,18 @@ export const cashAdvanceFee = (fees: ReadonlyArray<Fee>) => {
   return { pct, min }
 }
 
+const feeName = (fee: Fee) => (fee.name ?? "").replaceAll("_", " ")
+
+const LATE_NAME = /late\s*pay|missed\s*payment/iu
+
+const isLateFee = (fee: Fee) =>
+  fee.feeType === "LATE_PAYMENT" ||
+  (["EVENT", "OTHER"].includes(fee.feeType) && LATE_NAME.test(feeName(fee)) && !/reminder/iu.test(feeName(fee)))
+
 export const latePaymentFee = (fees: ReadonlyArray<Fee>) =>
   fees
     .values()
-    .filter((f) => f.feeType === "LATE_PAYMENT")
+    .filter((fee) => isLateFee(fee))
     .map((fee) => fixedAmount(fee))
     .find((r) => r !== undefined)
 
