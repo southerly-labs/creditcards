@@ -1,3 +1,4 @@
+import { Provenance } from "../provenance/schema.ts"
 import { Schema } from "effect"
 
 const between = (minimum: number, maximum: number) =>
@@ -61,6 +62,7 @@ export const Card = Schema.Struct({
   url: Schema.optionalKey(Schema.String),
   image: Schema.optionalKey(Schema.String),
 
+  provenance: Schema.optionalKey(Provenance),
   locked: Schema.optionalKey(Schema.Array(Schema.String)),
   cdr: Schema.optionalKey(
     Schema.Struct({

@@ -77,3 +77,5 @@ because some issuer bot filters reject user agents containing one.
 The browser always sorts missing values last, in either direction. Generated site
 assets have content-hashed names and a one-year cache lifetime; HTML and API output
 keep the default revalidation behavior. See the root README for deployment details.
+
+See [section provenance](provenance.md) for source observations and manual corrections.
