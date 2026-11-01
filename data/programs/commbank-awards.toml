@@ -1,3 +1,0 @@
-name = "CommBank Awards"
-type = "bank"
-aliases = [ 'commbank awards', '^awards points' ]
