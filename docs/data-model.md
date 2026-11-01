@@ -82,3 +82,4 @@ See [section provenance](provenance.md) for source observations and manual corre
 Explicit earn rules and calculator assumptions: [earn rules](earn-rules.md).
 See [domain validation](domain-validation.md) for cross-field constraints and lock paths.
 See [rewards review states](rewards-review.md) for section status and review dates.
+See [offers](offers.md) for additive promotions, legacy projection and expiry semantics.

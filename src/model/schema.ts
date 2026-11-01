@@ -2,6 +2,7 @@ import { Provenance } from "../provenance/schema.ts"
 import { Schema } from "effect"
 import { EarnRule } from "./earn.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "./domain.ts"
+import { Offer } from "../offers/schema"
 
 const between = (minimum: number, maximum: number) =>
   Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum, maximum })))
@@ -72,6 +73,7 @@ const CardFields = Schema.Struct({
   image: Schema.optionalKey(WebUrl),
 
   provenance: Schema.optionalKey(Provenance),
+  offers: Schema.optionalKey(Schema.Array(Offer)),
   locked: Schema.optionalKey(Schema.Array(Schema.String)),
   cdr: Schema.optionalKey(
     Schema.Struct({
