@@ -4,5 +4,13 @@
   "printWidth": 120,
   "trailingComma": "none",
   "sortPackageJson": false,
-  "ignorePatterns": ["data/**", "dist/**", "bun.lock", "AGENTS.md", "CLAUDE.md", "tools/oxlint/anti-slop/**"]
+  "ignorePatterns": [
+    "data/**",
+    "history/**",
+    "dist/**",
+    "bun.lock",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "tools/oxlint/anti-slop/**"
+  ]
 }
