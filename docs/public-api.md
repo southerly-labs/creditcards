@@ -8,8 +8,9 @@ issuers expose name, website and cards. All other existing fields, including
 CDR identifiers, review hashes, source labels and earn_check evidence, remain
 public. These are descriptive evidence, not a guarantee of verification.
 
-New builds emit schema_version 1. The decoder also accepts legacy documents
-without version or metadata. generated_at is the build serialization time,
+Builds emit schema_version 1 and freshness, and the decoder requires both.
+The web app is deployed with the api.json it reads, so it never needs to decode
+an older document. generated_at is the build serialization time,
 not source freshness or the time of a successful sync.
 
 freshness.cdr_latest_product_updated_at is the latest parseable, timezone-qualified

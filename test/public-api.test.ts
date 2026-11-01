@@ -3,13 +3,15 @@ import { checkReferences, toApi } from "../src/build/build.ts"
 import { decodeApi } from "../src/api/contract.ts"
 import type { Dataset } from "../src/store/Store.ts"
 
-test("public output round trips and legacy envelopes remain readable", () => {
+test("public output round trips and requires version and freshness", () => {
   const dataset: Dataset = { cards: new Map(), programs: new Map(), issuers: new Map() }
   const api = toApi(dataset)
   assert.deepStrictEqual(decodeApi(api), api)
   assert.strictEqual(api.schema_version, 1)
   assert.deepStrictEqual(api.freshness, { card_count: 0, cdr_products_with_known_updated_at: 0 })
-  assert.deepStrictEqual(decodeApi({ programs: {}, issuers: {} }), { programs: {}, issuers: {} })
+  assert.throws(() => {
+    decodeApi({ programs: {}, issuers: {} })
+  })
 })
 
 test("public projection retains review evidence and excludes storage controls", () => {
@@ -61,6 +63,8 @@ const card = {
 
 test("public cards keep card-level domain checks", () => {
   const api = (limits: { readonly min_credit: number; readonly max_credit: number }) => ({
+    schema_version: 1,
+    freshness: { card_count: 1, cdr_products_with_known_updated_at: 0 },
     programs: {},
     issuers: { bank: { name: "Bank", cards: { card: { ...card, limits } } } }
   })

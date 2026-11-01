@@ -17,9 +17,9 @@ export const DatasetFreshness = Schema.Struct({
 })
 
 export const PublicApi = Schema.Struct({
-  schema_version: Schema.optionalKey(Schema.Literal(1)),
+  schema_version: Schema.Literal(1),
   generated_at: Schema.optionalKey(Schema.String),
-  freshness: Schema.optionalKey(DatasetFreshness),
+  freshness: DatasetFreshness,
   programs: Schema.Record(Schema.String, PublicProgram),
   issuers: Schema.Record(
     Schema.String,

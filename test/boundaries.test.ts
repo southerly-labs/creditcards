@@ -10,11 +10,18 @@ import {
 } from "../src/model/api.ts"
 import { encodeJson } from "../src/util/json.ts"
 
+const empty = {
+  schema_version: 1,
+  freshness: { card_count: 0, cdr_products_with_known_updated_at: 0 },
+  programs: {},
+  issuers: {}
+}
+
 test("the public API boundary rejects malformed card data", () => {
   assert.throws(() => {
-    decodeApi({ programs: {}, issuers: { bank: { name: "Bank", cards: { card: { name: "Card" } } } } })
+    decodeApi({ ...empty, issuers: { bank: { name: "Bank", cards: { card: { name: "Card" } } } } })
   })
-  assert.deepStrictEqual(decodeApi({ programs: {}, issuers: {} }), { programs: {}, issuers: {} })
+  assert.deepStrictEqual(decodeApi(empty), empty)
 })
 
 test("point values preserve valid entries alongside invalid ones", () => {
