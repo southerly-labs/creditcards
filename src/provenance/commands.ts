@@ -2,7 +2,7 @@ import { Console, DateTime, Effect, Option, Schema } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import { splitCardKey, Store, StoreError } from "../store/Store.ts"
 import { Card } from "../model/schema.ts"
-import { ProvenanceSection } from "./schema.ts"
+import { ProvenanceSection, sectionLocks } from "./schema.ts"
 
 const correct = Command.make(
   "correct",
@@ -23,7 +23,7 @@ const correct = Command.make(
 
     const updated = yield* Schema.decodeUnknownEffect(Card)({
       ...card,
-      locked: [...new Set([...(card.locked ?? []), selected])],
+      locked: [...new Set([...(card.locked ?? []), ...sectionLocks(selected)])],
       provenance: {
         ...card.provenance,
         sections: {

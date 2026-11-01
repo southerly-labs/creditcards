@@ -18,9 +18,11 @@ cards), not held, failed or missing products. Dry runs write nothing.
 After editing a section, run `bun run cli provenance correct issuer/card
 --section fees --url https://issuer.example/terms --reason "Explanation"`.
 This records the current review and locks the entire section against CDR.
-Existing locks are retained. The command supports fees, rates, limits and perks.
-Rewards review stamps remain a separate workflow because rewards parsers have
-their own manual ownership rules.
+Existing locks are retained. The command supports fees, rates, limits, perks and
+rewards. For rewards it locks only the fields CDR owns, `rewards.program` and
+`rewards.partners`; earn rates and offers keep their own manual workflow
+(`rewards stamp`, `rewards bonus-stamp`, `source = "manual"` offers), so the lock
+never blocks the parsers.
 
 `bun run cli provenance inspect` reports locks with no section review or a review
 at least 90 days old. This is report-only; it never unlocks corrections.

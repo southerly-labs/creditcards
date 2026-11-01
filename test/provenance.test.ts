@@ -1,6 +1,7 @@
 import { assert, test } from "@effect/vitest"
 import { Schema } from "effect"
 import { Card } from "../src/model/schema.ts"
+import { sectionLocks } from "../src/provenance/schema.ts"
 import { mergeCard } from "../src/sync/merge.ts"
 
 test("section corrections and provenance survive CDR merging", () => {
@@ -27,4 +28,9 @@ test("section corrections and provenance survive CDR merging", () => {
   const merged = mergeCard(existing, { ...existing, fees: { annual: 100 } })
   assert.deepStrictEqual(merged["fees"], { annual: 25 })
   assert.deepStrictEqual(merged["provenance"], existing.provenance)
+})
+
+test("a rewards correction locks only the CDR-owned rewards fields", () => {
+  assert.deepStrictEqual(sectionLocks("rewards"), ["rewards.program", "rewards.partners"])
+  assert.deepStrictEqual(sectionLocks("fees"), ["fees"])
 })

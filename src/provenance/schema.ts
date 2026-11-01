@@ -1,7 +1,12 @@
 import { Schema } from "effect"
 import { Timestamp } from "../model/domain.ts"
 
-export const ProvenanceSection = Schema.Literals(["fees", "rates", "limits", "perks"])
+export const ProvenanceSection = Schema.Literals(["fees", "rates", "limits", "perks", "rewards"])
+
+export type ProvenanceSection = typeof ProvenanceSection.Type
+
+export const sectionLocks = (section: ProvenanceSection): ReadonlyArray<string> =>
+  section === "rewards" ? ["rewards.program", "rewards.partners"] : [section]
 
 export const Provenance = Schema.Struct({
   cdr_observed_at: Schema.optionalKey(Schema.String),
