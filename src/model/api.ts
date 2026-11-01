@@ -52,3 +52,5 @@ export const loadMonthlySpend = (read: () => string | null): number | undefined 
     onFailure: () => undefined,
     onSuccess: decodeMonthlySpend
   })
+
+export const attempt = (write: () => void): boolean => Result.isSuccess(Result.try(write))
