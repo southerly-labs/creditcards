@@ -130,19 +130,25 @@ const CardFields = Schema.Struct({
   })
 })
 
+type CardLimitsAndRewards = Pick<typeof CardFields.Type, "limits" | "rewards">
+
+export const creditRange = Schema.makeFilter(
+  (card: CardLimitsAndRewards) =>
+    card.limits.min_credit === undefined ||
+    card.limits.max_credit === undefined ||
+    card.limits.min_credit <= card.limits.max_credit ||
+    "Minimum credit exceeds maximum credit"
+)
+
+export const earnTierOrder = Schema.makeFilter(
+  (card: CardLimitsAndRewards) =>
+    orderedTiers(card.rewards?.earn ?? []) ||
+    "Earn tier ceilings must increase within each category and period; uncapped tiers must be last"
+)
+
 export const Card = CardFields.check(
-  Schema.makeFilter(
-    (card) =>
-      card.limits.min_credit === undefined ||
-      card.limits.max_credit === undefined ||
-      card.limits.min_credit <= card.limits.max_credit ||
-      "Minimum credit exceeds maximum credit"
-  ),
-  Schema.makeFilter(
-    (card) =>
-      orderedTiers(card.rewards?.earn ?? []) ||
-      "Earn tier ceilings must increase within each category and period; uncapped tiers must be last"
-  ),
+  creditRange,
+  earnTierOrder,
   Schema.makeFilter(
     (card) => (card.locked ?? []).every((path) => recognizesLock(CardFields.ast, path)) || "Unrecognized lock path"
   )

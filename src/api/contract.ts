@@ -1,10 +1,10 @@
 import { Schema } from "effect"
-import { Card, Program } from "../model/schema.ts"
+import { Card, creditRange, earnTierOrder, Program } from "../model/schema.ts"
 
 const { locked: _locked, ...cardFields } = Card.fields
 const { aliases: _aliases, priority: _priority, ...programFields } = Program.fields
 
-export const PublicCard = Schema.Struct(cardFields)
+export const PublicCard = Schema.Struct(cardFields).check(creditRange, earnTierOrder)
 
 export type PublicCard = typeof PublicCard.Type
 

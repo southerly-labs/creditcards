@@ -20,7 +20,11 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
 
     if (!dataset.issuers.has(issuer)) problems.push(`${key}: unknown issuer ${issuer}`)
 
-    for (const id of [card.rewards?.program, ...(card.rewards?.partners ?? [])]) {
+    const offerPrograms = (card.offers ?? []).flatMap((offer) =>
+      offer.components.flatMap((component) => (component.kind === "signup_points" ? [component.program] : []))
+    )
+
+    for (const id of [card.rewards?.program, ...(card.rewards?.partners ?? []), ...offerPrograms]) {
       if (id !== undefined && !dataset.programs.has(id)) problems.push(`${key}: unknown program ${id}`)
     }
 

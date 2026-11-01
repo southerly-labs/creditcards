@@ -1,5 +1,5 @@
 import { assert, test } from "@effect/vitest"
-import { toApi } from "../src/build/build.ts"
+import { checkReferences, toApi } from "../src/build/build.ts"
 import { decodeApi } from "../src/api/contract.ts"
 import type { Dataset } from "../src/store/Store.ts"
 
@@ -47,4 +47,43 @@ test("public projection retains review evidence and excludes storage controls", 
   assert.strictEqual(JSON.stringify(api).includes('"locked"'), false)
   assert.strictEqual(JSON.stringify(api).includes('"aliases"'), false)
   assert.strictEqual(JSON.stringify(api).includes('"earn_text_hash":"hash"'), true)
+})
+
+const card = {
+  name: "Card",
+  type: "personal",
+  status: "active",
+  fees: {},
+  rates: {},
+  limits: {},
+  perks: {}
+} as const
+
+test("public cards keep card-level domain checks", () => {
+  const api = (limits: { readonly min_credit: number; readonly max_credit: number }) => ({
+    programs: {},
+    issuers: { bank: { name: "Bank", cards: { card: { ...card, limits } } } }
+  })
+
+  assert.throws(() => {
+    decodeApi(api({ min_credit: 10_000, max_credit: 1000 }))
+  })
+  assert.doesNotThrow(() => {
+    decodeApi(api({ min_credit: 1000, max_credit: 10_000 }))
+  })
+})
+
+test("offer signup programs must reference known programs", () => {
+  const dataset: Dataset = {
+    issuers: new Map([["bank", { name: "Bank", cdr_brands: [] }]]),
+    programs: new Map(),
+    cards: new Map([
+      [
+        "bank/card",
+        { ...card, offers: [{ components: [{ kind: "signup_points", program: "missing", points: 100_000 }] }] }
+      ]
+    ])
+  }
+
+  assert.deepStrictEqual(checkReferences(dataset), ["bank/card: unknown program missing"])
 })
