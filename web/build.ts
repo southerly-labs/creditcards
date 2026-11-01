@@ -1,7 +1,12 @@
+import { rm } from "node:fs/promises"
+
+await rm("dist/assets", { recursive: true, force: true })
+
 const result = await Bun.build({
   entrypoints: ["web/index.html", "web/table.html"],
   outdir: "dist",
   minify: true,
+  splitting: true,
 
   naming: { chunk: "assets/[name]-[hash].[ext]", asset: "assets/[name]-[hash].[ext]" }
 })
