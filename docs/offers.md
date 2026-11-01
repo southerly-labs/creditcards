@@ -23,7 +23,9 @@ Every offer has an `id`, a slug unique within the card, and a `source`:
 - `manual`: written by a person and never touched by the sync. A manual offer
   replaces a generated one with the same `id`, in the same position.
 
-Generated offers the sync no longer produces are dropped. Adding `"offers"` to a
+Generated offers the sync no longer produces are dropped once a sync on a later
+day still doesn't produce them, and a signup offer whose points rise by more than
+50% waits for approval (see "Sync guardrails" in the README). Adding `"offers"` to a
 card's `locked` list freezes the whole list.
 
 The raw CDR bonus total is ambiguous: it is sometimes the full bonus and sometimes

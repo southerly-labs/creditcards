@@ -103,10 +103,12 @@ Updates auto-merge. Changes that look wrong are held back and listed in a `sync-
 - the whole run aborts if far fewer cards come back than are active (likely outage)
 - an annual fee jumping by more than 50% and $100, a rate moving more than 5 points, or a key field disappearing
 - a parsed base earn rate moving by more than 1 point per dollar
+- a signup offer's total points rising by more than 50%
+- an offer the sync generated (from CDR or the bonus parser) disappearing: this one needs no reviewer and is applied if a sync on a later day still doesn't see the offer
 - records that fail schema validation
 - more than half of an issuer's cards vanishing at once
 
-For the first three, only the suspicious field is held: the rest of the card still updates. Each held change is recorded in `data/sync-holds.toml` with a stable id, the current and proposed values, the date it was first held and the card's `history/` folder, so the issuer's raw CDR responses can be compared. A reviewer decides each one:
+For the field and offer rules, only the suspicious field or offer is held: the rest of the card still updates. Each held change is recorded in `data/sync-holds.toml` with a stable id, the current and proposed values, the date it was first held and the card's `history/` folder, so the issuer's raw CDR responses can be compared. A reviewer decides each one:
 
 ```sh
 bun run cli held list

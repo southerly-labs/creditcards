@@ -2,6 +2,7 @@ import { createHash } from "node:crypto"
 import { Schema } from "effect"
 import type { Hold } from "../model/holds.ts"
 import { Card } from "../model/schema.ts"
+import type { Offer } from "../offers/schema.ts"
 import { encodeJson } from "../util/json.ts"
 import { diffCard, getPath, heldFields, setPath } from "./merge.ts"
 
@@ -21,14 +22,55 @@ const REVERTED_WITH: Readonly<Record<string, ReadonlyArray<string>>> = {
 
 const OFFER_PREFIX = "offers."
 
-export const holdCandidates = (existing: Card, proposed: Card): ReadonlyArray<HoldCandidate> =>
-  heldFields(diffCard(existing, proposed)).map(({ path, reason }) => ({
+export const SIGNUP_INCREASE_HOLD = 1.5
+
+const signupPoints = (offer: Offer | undefined) =>
+  offer?.components.reduce((sum, component) => sum + (component.kind === "signup_points" ? component.points : 0), 0) ??
+  0
+
+const offerCandidates = (existing: Card, proposed: Card): ReadonlyArray<HoldCandidate> => {
+  const candidates: Array<HoldCandidate> = []
+
+  for (const before of existing.offers ?? []) {
+    const after = proposed.offers?.find((offer) => offer.id === before.id)
+
+    if (after === undefined && before.source !== "manual") {
+      candidates.push({
+        change: `${OFFER_PREFIX}${before.id}`,
+        reason: `offer ${before.id} is no longer in CDR`,
+        kind: "confirm",
+        current: before,
+        proposed: undefined
+      })
+      continue
+    }
+
+    const [was, now] = [signupPoints(before), signupPoints(after)]
+
+    if (was > 0 && now > was * SIGNUP_INCREASE_HOLD) {
+      candidates.push({
+        change: `${OFFER_PREFIX}${before.id}`,
+        reason: `signup points ${was} → ${now}`,
+        kind: "approve",
+        current: before,
+        proposed: after
+      })
+    }
+  }
+
+  return candidates
+}
+
+export const holdCandidates = (existing: Card, proposed: Card): ReadonlyArray<HoldCandidate> => [
+  ...heldFields(diffCard(existing, proposed)).map(({ path, reason }): HoldCandidate => ({
     change: path,
     reason,
     kind: "approve",
     current: getPath(existing, path),
     proposed: getPath(proposed, path)
-  }))
+  })),
+  ...offerCandidates(existing, proposed)
+]
 
 const revertOffer = (card: Card, existing: Card, id: string): Card => {
   const before = existing.offers?.find((offer) => offer.id === id)

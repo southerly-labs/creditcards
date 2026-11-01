@@ -114,3 +114,48 @@ describe("resolving holds", () => {
     assert.deepStrictEqual(nextDay.holds, [])
   })
 })
+
+describe("offer holds", () => {
+  const signup = (points: number, source: "parser" | "cdr" | "manual" = "parser") => ({
+    id: "signup",
+    source,
+    components: [{ kind: "signup_points" as const, program: "qantas", points, year: 1 as const }] as const
+  })
+
+  const withSignup = (points: number, source?: "parser" | "cdr" | "manual") => ({
+    ...base,
+    offers: [signup(points, source)],
+    signup_review: { state: "present" as const, source: "parser" as const, text_hash: `h${points}` }
+  })
+
+  test("a generated offer that disappears waits a day to confirm", () => {
+    const candidates = holdCandidates(withSignup(100_000), base)
+
+    assert.deepStrictEqual(
+      candidates.map((c) => [c.change, c.kind]),
+      [["offers.signup", "confirm"]]
+    )
+    assert.deepStrictEqual(revertChange(base, withSignup(100_000), "offers.signup")?.offers, [signup(100_000)])
+    assert.deepStrictEqual(revertChange(base, withSignup(100_000), "offers.signup")?.signup_review, {
+      state: "present",
+      source: "parser",
+      text_hash: "h100000"
+    })
+  })
+
+  test("a manual offer is never held", () => {
+    assert.deepStrictEqual(holdCandidates(withSignup(100_000, "manual"), base), [])
+  })
+
+  test("a signup increase over 50% needs approval; smaller changes and decreases apply", () => {
+    assert.deepStrictEqual(
+      holdCandidates(withSignup(100_000), withSignup(160_000)).map((c) => [c.change, c.kind, c.reason]),
+      [["offers.signup", "approve", "signup points 100000 → 160000"]]
+    )
+    assert.deepStrictEqual(holdCandidates(withSignup(100_000), withSignup(140_000)), [])
+    assert.deepStrictEqual(holdCandidates(withSignup(100_000), withSignup(20_000)), [])
+    assert.deepStrictEqual(revertChange(withSignup(160_000), withSignup(100_000), "offers.signup")?.offers, [
+      signup(100_000)
+    ])
+  })
+})
