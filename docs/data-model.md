@@ -39,8 +39,10 @@ A card's `locked` entries are dotted paths the automated sync must not overwrite
   in CDR; set by hand and kept by the sync) or `discontinued` (it left CDR).
 - `closed`: the date the card closed to new applicants, when known. Allowed with
   status `closed` or `discontinued`.
-- `discontinued`: the date the sync saw the card leave CDR. Only with status
-  `discontinued`.
+- `missing_since`: the first day a sync did not see the card. Cleared when a sync
+  sees it again.
+- `discontinued`: the day the card left CDR (its `missing_since`), set once a sync
+  on a later day still misses it. Only with status `discontinued`.
 
 `api.json` adds two derived dates under `provenance`: `cdr_observed_at`, the last
 successful sync that saw the card (from `data/cdr-observations.toml`), and

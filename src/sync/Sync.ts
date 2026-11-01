@@ -10,7 +10,16 @@ import { applyOffers, signupState } from "../offers/build.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
-import { diffCard, type FieldChange, holdReasons, MAX_DISCONTINUED_SHARE, mergeCard, MIN_SEEN_SHARE } from "./merge.ts"
+import {
+  diffCard,
+  type FieldChange,
+  holdReasons,
+  MAX_DISCONTINUED_SHARE,
+  mergeCard,
+  MissingStep,
+  missingStep,
+  MIN_SEEN_SHARE
+} from "./merge.ts"
 
 const CATEGORY = "CRED_AND_CHRG_CARDS"
 
@@ -22,6 +31,7 @@ export interface SyncReport {
   readonly added: ReadonlyArray<string>
   readonly updated: ReadonlyArray<{ readonly card: string; readonly changes: ReadonlyArray<FieldChange> }>
   readonly discontinued: ReadonlyArray<string>
+  readonly missing: ReadonlyArray<string>
   readonly held: ReadonlyArray<{ readonly card: string; readonly reasons: ReadonlyArray<string> }>
   readonly newIssuers: ReadonlyArray<string>
   readonly newPrograms: ReadonlyArray<string>
@@ -169,6 +179,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const updated: Array<{ card: string; changes: ReadonlyArray<FieldChange> }> = []
   const held: Array<{ card: string; reasons: ReadonlyArray<string> }> = []
   const discontinued: Array<string> = []
+  const missing: Array<string> = []
   const newPrograms: Array<string> = []
   const writes = new Map<string, Card>()
   const rewardsSet: Array<{ card: string; earn: ReadonlyArray<EarnRate> }> = []
@@ -315,8 +326,20 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
     for (const key of keys) {
       const missingCard = required(cards.get(key))
-      writes.set(key, { ...missingCard, status: "discontinued", discontinued: date })
-      discontinued.push(key)
+      MissingStep.$match(missingStep(missingCard, date), {
+        Discontinue: ({ since }) => {
+          const { missing_since: _since, ...rest } = missingCard
+          writes.set(key, { ...rest, status: "discontinued", discontinued: since })
+          discontinued.push(key)
+        },
+        Mark: () => {
+          writes.set(key, { ...missingCard, missing_since: date })
+          missing.push(key)
+        },
+        Wait: () => {
+          missing.push(key)
+        }
+      })
     }
   }
 
@@ -344,6 +367,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     added,
     updated,
     discontinued,
+    missing,
     held,
     newIssuers: [...new Set(newIssuers)],
     newPrograms,
@@ -386,6 +410,10 @@ export const summariseReport = (r: SyncReport): string => {
   }
 
   if (r.discontinued.length > 0) lines.push("Discontinued:", ...r.discontinued.map((c) => `- ${c}`), "")
+
+  if (r.missing.length > 0) {
+    lines.push("Not seen (discontinued if still missing on a later day):", ...r.missing.map((c) => `- ${c}`), "")
+  }
 
   if (r.held.length > 0)
     lines.push("Held for review:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")

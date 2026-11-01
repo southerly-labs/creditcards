@@ -7,6 +7,7 @@ const report = (earn: number, bonus: number): SyncReport => ({
   added: [],
   updated: [],
   discontinued: [],
+  missing: [],
   held: [],
   newIssuers: [],
   newPrograms: [],

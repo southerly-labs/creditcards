@@ -2,7 +2,7 @@ import { assert, test } from "@effect/vitest"
 import { Schema } from "effect"
 import { Card } from "../src/model/schema.ts"
 import { sectionLocks } from "../src/provenance/schema.ts"
-import { mergeCard } from "../src/sync/merge.ts"
+import { mergeCard, MissingStep, missingStep } from "../src/sync/merge.ts"
 
 test("section corrections and provenance survive CDR merging", () => {
   const existing = Schema.decodeUnknownSync(Card)({
@@ -76,4 +76,24 @@ test("lifecycle dates must agree with the status", () => {
       discontinued: "2026-01-01"
     })
   })
+})
+
+test("a card must be missing on two different days before it is discontinued", () => {
+  const card = Schema.decodeUnknownSync(Card)({
+    name: "Card",
+    type: "personal",
+    status: "active",
+    first_seen: "2026-10-31",
+    fees: {},
+    rates: {},
+    limits: {},
+    perks: {}
+  })
+
+  const marked = { ...card, missing_since: "2026-11-01" }
+
+  assert.deepStrictEqual(missingStep(card, "2026-11-01"), MissingStep.Mark())
+  assert.deepStrictEqual(missingStep(marked, "2026-11-01"), MissingStep.Wait())
+  assert.deepStrictEqual(missingStep(marked, "2026-11-02"), MissingStep.Discontinue({ since: "2026-11-01" }))
+  assert.strictEqual(mergeCard(marked, card)["missing_since"], undefined)
 })

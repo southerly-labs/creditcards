@@ -69,6 +69,7 @@ const CardFields = Schema.Struct({
   status: Schema.Literals(["active", "closed", "discontinued"]),
   first_seen: CalendarDate,
   closed: Schema.optionalKey(CalendarDate),
+  missing_since: Schema.optionalKey(CalendarDate),
   discontinued: Schema.optionalKey(CalendarDate),
   description: Schema.optionalKey(Schema.String),
   url: Schema.optionalKey(WebUrl),
@@ -150,6 +151,10 @@ export const Card = CardFields.check(
   Schema.makeFilter(
     (card) =>
       card.closed === undefined || card.status !== "active" || "A closed date needs status closed or discontinued"
+  ),
+  Schema.makeFilter(
+    (card) =>
+      card.missing_since === undefined || card.status !== "discontinued" || "A discontinued card cannot be missing"
   ),
   creditRange,
   earnTierOrder,

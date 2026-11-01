@@ -1,5 +1,5 @@
 import { encodeJson } from "../util/json.ts"
-import { Predicate } from "effect"
+import { Data, Predicate } from "effect"
 import { required } from "../util/required.ts"
 import type { Card } from "../model/schema.ts"
 import type { NormalisedCard } from "../cdr/normalise.ts"
@@ -75,6 +75,7 @@ export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard):
 
   merged["status"] = existing.status === "closed" ? "closed" : "active"
   delete merged["discontinued"]
+  delete merged["missing_since"]
 
   const rewards = merged["rewards"]
 
@@ -98,7 +99,7 @@ const withoutTimestamp = (path: string, value: unknown) => {
 }
 
 export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<FieldChange> => {
-  const paths = [...CDR_OWNED_PATHS, "status", "discontinued", ...EARN_PATHS, ...OFFER_PATHS]
+  const paths = [...CDR_OWNED_PATHS, "status", "discontinued", "missing_since", ...EARN_PATHS, ...OFFER_PATHS]
 
   return paths
     .values()
@@ -148,5 +149,18 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<
 }
 
 export const MAX_DISCONTINUED_SHARE = 0.5
+
+export type MissingStep =
+  | { readonly _tag: "Mark" }
+  | { readonly _tag: "Wait" }
+  | { readonly _tag: "Discontinue"; readonly since: string }
+
+export const MissingStep = Data.taggedEnum<MissingStep>()
+
+export const missingStep = (card: Card, date: string): MissingStep => {
+  if (card.missing_since === undefined) return MissingStep.Mark()
+
+  return card.missing_since < date ? MissingStep.Discontinue({ since: card.missing_since }) : MissingStep.Wait()
+}
 
 export const MIN_SEEN_SHARE = 0.8
