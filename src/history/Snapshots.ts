@@ -28,7 +28,29 @@ const sortKeys = (value: unknown): unknown => {
 export const encodeSnapshot = (snapshot: CdrSnapshot): string =>
   `${encodeJson(sortKeys({ brand: snapshot.brand, version: snapshot.version, product: snapshot.product }), 2)}\n`
 
-const SavedVersion = Schema.fromJsonString(Schema.Struct({ version: Schema.NullOr(Schema.Number) }))
+const Saved = Schema.fromJsonString(Schema.Struct({ brand: Schema.String, product: Schema.Unknown }))
+
+const byEncoding = (a: unknown, b: unknown) => {
+  const [x, y] = [encodeJson(a), encodeJson(b)]
+
+  return x < y ? -1 : x > y ? 1 : 0
+}
+
+const canonical = (value: unknown, skip: ReadonlySet<string> = new Set()): unknown => {
+  if (Array.isArray(value)) return value.map((item: unknown) => canonical(item)).toSorted(byEncoding)
+
+  if (value === null || typeof value !== "object") return value
+  const result: Record<string, unknown> = {}
+
+  for (const [key, item] of Object.entries(value).toSorted(byKey)) if (!skip.has(key)) result[key] = canonical(item)
+
+  return result
+}
+
+const VOLATILE = new Set(["lastUpdated"])
+
+export const sameProduct = (a: CdrSnapshot, b: Pick<CdrSnapshot, "brand" | "product">): boolean =>
+  a.brand === b.brand && encodeJson(canonical(a.product, VOLATILE)) === encodeJson(canonical(b.product, VOLATILE))
 
 const SNAPSHOT_FILE = /^\d{4}-\d{2}-\d{2}\.json$/u
 
@@ -81,11 +103,9 @@ export class Snapshots extends Context.Service<
             const latestFile = path.join(dir, latest)
             const current = yield* fs.readFileString(latestFile).pipe(Effect.mapError(fail(latestFile)))
 
-            const saved = yield* Schema.decodeUnknownEffect(SavedVersion)(current).pipe(
-              Effect.mapError(fail(latestFile))
-            )
+            const saved = yield* Schema.decodeUnknownEffect(Saved)(current).pipe(Effect.mapError(fail(latestFile)))
 
-            if (current === encodeSnapshot({ ...snapshot, version: saved.version })) return false
+            if (sameProduct(snapshot, saved)) return false
           }
 
           const file = path.join(dir, `${date}.json`)

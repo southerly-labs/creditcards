@@ -60,6 +60,35 @@ describe("CDR snapshots", () => {
       })
     )
 
+    it.effect("ignores a regenerated lastUpdated and reordered arrays", () =>
+      Effect.gen(function* () {
+        const snapshots = yield* Snapshots
+
+        const product = (lastUpdated: string, fees: ReadonlyArray<unknown>) => ({
+          brand: "Bank",
+          version: 4,
+          product: { productId: "p5", lastUpdated, fees }
+        })
+
+        const annual = { name: "Annual", amount: "99" }
+        const late = { name: "Late", amount: "30" }
+
+        yield* snapshots.record("bank", "p5", "2026-11-01", product("2026-11-01T06:00:00Z", [annual, late]))
+        assert.isFalse(
+          yield* snapshots.record("bank", "p5", "2026-11-02", product("2026-11-02T08:00:00Z", [late, annual]))
+        )
+        assert.isTrue(
+          yield* snapshots.record(
+            "bank",
+            "p5",
+            "2026-11-03",
+            product("2026-11-03T08:00:00Z", [{ ...annual, amount: "129" }])
+          )
+        )
+        assert.deepStrictEqual(yield* listed("p5"), ["2026-11-01.json", "2026-11-03.json"])
+      })
+    )
+
     it.effect("keeps one file per day when the sync runs twice", () =>
       Effect.gen(function* () {
         const snapshots = yield* Snapshots
