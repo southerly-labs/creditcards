@@ -1,0 +1,329 @@
+{
+  "brand": "QBANK",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.qbank.com.au/who-can-join/",
+      "feesAndPricingUri": "https://www.qbank.com.au/loans-products/credit-cards/",
+      "overviewUri": "https://www.qbank.com.au/products/credit-cards/bluey-visa-credit-card/",
+      "termsUri": "https://www.qbank.com.au/products/credit-cards/bluey-visa-credit-card/"
+    },
+    "applicationUri": "https://www.qbank.com.au/apply-online",
+    "brand": "QBANK",
+    "brandName": "QBANK",
+    "constraints": [
+      {
+        "additionalInfoUri": "https://www.qbank.com.au/products/credit-cards/bluey-visa-credit-card",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Use your low rate Bluey VISA credit card for shopping, travelling overseas or even to consolidate other credit or store card debt.",
+    "eligibility": [
+      {
+        "additionalInfo": "You must be a member. Membership is open to current or former employees of police, ambulance, firies, health workers, emergency services, correctional services and government employees as well as their family members.",
+        "additionalInfoUri": "https://www.qbank.com.au/who-can-join",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "All applications for credit are subject to responsible lending criteria. Fees and charges apply. You can find our Credit Card terms and conditions online or from any of our offices.",
+        "additionalInfoUri": "https://www.qbank.com.au/products/credit-cards/bluey-visa-credit-card",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalValue": "Visa Credit with payWave",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfoUri": "https://www.qbank.com.au/ways-to-bank/applepay",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.qbank.com.au/ways-to-bank/googlepay",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "0% Balance Transfer Rate for 12 months.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalValue": "Track payments with SMS and email alerts",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "You may receive up to 55 days interest free period for purchases provided you continue to pay your closing balance in full on or before every statement due date.",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "No application fee",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "No annual fee",
+        "featureType": "OTHER"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "featureType": "ADDITIONAL_CARDS"
+      }
+    ],
+    "fees": [
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.00"
+        },
+        "name": "CASH_ADVANCE_FEE"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "12.00"
+        },
+        "name": "RECALL_OF_BPAY"
+      },
+      {
+        "additionalInfo": "Includes NPP and OSKO transactions  to other financial institutions",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "RECALL_OF_EXTERNAL_TRANSFER"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "RECALL_OF_TELEGRAPHIC_TRANSFER_(WITHIN_AUSTRALIA_&_OVERSEAS)"
+      },
+      {
+        "additionalInfo": "Charged when the required payment is not paid by the due date.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "8.00"
+        },
+        "name": "LATE/MISSED_PAYMENT"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "BANK@POST_WITHDRAWALS"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "ACCOUNT_AUDIT_CONFIRMATION"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "INTERNATIONAL_ATM_TRANSACTION"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "11.50"
+        },
+        "name": "DIRECT_DEBIT_DISHONOURS/NON_PAYMENT"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "DEBIT_EXTERNAL_ACCOUNT_REJECTION_FEE"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "27.50"
+        },
+        "name": "ATM_DISPUTE_FEE"
+      },
+      {
+        "additionalInfo": "No charge for current transaction list.Reissue more than 6 months.$5 per page",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "STATEMENTS_/_VOUCHER_SEARCHES"
+      },
+      {
+        "additionalInfo": "Includes NPP and OSKO transactions  to other financial institutions",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "TRACE_OF_EXTERNAL_TRANSFER"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "DIRECT_DEBIT_INVESTIGATION"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "12.00"
+        },
+        "name": "TRACE_OF_BPAY"
+      },
+      {
+        "additionalInfo": "Under 18 y/o and renewal cards exempt",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "REPLACEMENT_OF_CUE_&_VISA_CARD"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "REPLACEMENT_VISA_WRISTBAND_(INCLUDING_CHIP)"
+      },
+      {
+        "additionalInfo": "$175.00 USD",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "EMERGENCY_VISA_CASH_OR_CARD_(OVERSEAS)"
+      },
+      {
+        "additionalInfo": "International Transaction Fee transaction when converted to $AUD",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "VISA_INTERNATIONAL_TRANSACTION_FEE",
+        "rateBased": {
+          "amountRange": {},
+          "rate": "0.0365",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "COPY_OF_VISA_TRANSACTION_VOUCHER"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "VISA_CHARGEBACK_TRANSACTION"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-19T06:10:22.000+10:00",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1274",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1274",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalValue": "P12M",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "OTHER",
+        "rate": "0.12739",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Bluey Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "S25_Bluey"
+  },
+  "version": 6
+}

@@ -1,0 +1,139 @@
+{
+  "brand": "Summerland Bank",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.summerland.com.au/fees-charges-transaction-limits",
+      "overviewUri": "https://summerland.com.au/my-banking/credit-cards/",
+      "termsUri": "https://www.summerland.com.au/detailed-credit-card-product-guide"
+    },
+    "applicationUri": "https://application.summerland.com.au/nPortal__SelfRegistration?product=a0uOm000005EqqbIAC&core=es5&_gl=1*cy7mzo*_gcl_au*MTYyNjUxNDAwNi4xNzQwNjkxMDQ1",
+    "brand": "Summerland",
+    "description": "Benefit from a low interest rate on purchases.",
+    "effectiveFrom": "2015-03-29T13:30:00.0000000Z",
+    "features": [
+      {
+        "additionalInfoUri": "https://summerland.com.au/my-banking/credit-cards/",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.summerland.com.au/",
+        "additionalValue": "Low Rate Visa credit card.",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Unlimited Visa purchases.",
+        "additionalInfoUri": "https://summerland.com.au/my-banking/credit-cards/",
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Consolidate your Credit Card Balances with a Summerland Credit Card.\r\n",
+        "additionalInfoUri": "https://summerland.com.au/credit-cards",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Open accounts, check balances, view transactions, transfer funds, schedule payments, BPAY, eStatements, SMS alerts, activate cards, change card PIN, mark card lost or stolen, loan redraw, loan status update, accept loan contracts and send secure messages.\r\n",
+        "additionalInfoUri": "https://summerland.com.au/access",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://summerland.com.au/apple-pay",
+        "additionalValue": "Apple Pay.",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://summerland.com.au/google-pay",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Up to 55 interest free days on purchases.",
+        "additionalInfoUri": "https://summerland.com.au/credit-cards",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfoUri": "https://summerland.com.au/credit-cards",
+        "additionalValue": "P9M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfoUri": "https://summerland.com.au/phone-banking#sms-alerts",
+        "additionalValue": "Event based notifications.",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfoUri": "https://summerland.com.au/npp",
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfo": "Set up a pay ID to receive lightning fast payments.\r\n",
+        "additionalInfoUri": "https://summerland.com.au/payid",
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "Save on paper, receive and view your statements online with eStatements.",
+        "additionalInfoUri": "https://summerland.com.au/internet-banking#estatements",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfoUri": "https://summerland.com.au/credit-cards",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "The discount is available for holders of a Premium Home Loan.",
+            "discountMethodUType": "rateBased",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "The discount is available for holders of a Premium Home Loan.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "rateBased": {
+              "amountRange": {},
+              "rate": "1.0",
+              "rateType": "FEE"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "49.00"
+        },
+        "name": "Low Rate Annual Fee"
+      },
+      {
+        "additionalInfoUri": "https://www.summerland.com.au/fees-charges-transaction-limits",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "3.50"
+        },
+        "name": "Cash Advance Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-11-01T06:00:40.6201753Z",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://summerland.com.au/credit-cards",
+        "applicationFrequency": "P9M",
+        "applicationType": "PERIODIC",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      }
+    ],
+    "name": "Low Rate Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "74"
+  },
+  "version": 7
+}

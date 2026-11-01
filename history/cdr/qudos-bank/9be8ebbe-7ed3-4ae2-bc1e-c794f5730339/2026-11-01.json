@@ -1,0 +1,236 @@
+{
+  "brand": "Qudos Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.qudosbank.com.au/products/credit-cards/lifestyle-credit-card",
+      "feesAndPricingUri": "https://www.qudosbank.com.au/products/credit-cards/lifestyle-credit-card",
+      "overviewUri": "https://www.qudosbank.com.au/products/credit-cards/lifestyle-credit-card",
+      "termsUri": "https://www.qudosbank.com.au/support/legal/new-to-bank-terms-and-conditions"
+    },
+    "applicationUri": "https://apply.qudosbank.com.au/Apply/credit-card",
+    "brand": "Qudos Bank",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b43c551b6f4a8c20ec8_lifestyle-card-no-border.png",
+        "title": "Visa Lifestyle"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Subject to Lending Criteria",
+        "additionalValue": "20000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "If you're after a low rate with no annual fee, the Lifestyle Credit Card may be the everyday credit card for you.",
+    "effectiveFrom": "2005-02-10T13:30:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Customers above 18 Years may apply",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Only personal customers may apply",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "This product is only available to members who\nhave a residential address in Australia.",
+        "additionalValue": "Australian Resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "ORION 24/7 card protection monitoring services",
+        "additionalValue": "ORION 24/7 Card Protection",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Access to Visa's 24 hour worldwide emergency hotline",
+        "additionalValue": "VISA Emergency",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Visa credit cards are accepted at over 24 million locations worldwide",
+        "additionalValue": "Card Acceptance",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "\nManage your card in the Qudos Bank App on your mobile or tablet device. You can activate a new card, change a PIN, report a lost or stolen card, notify us of overseas trips and more.",
+        "additionalValue": "Enjoy faster, secure payments, and take control of your cards.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "1 or more additional cards may be issued",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalValue": "Apple Pay, Google Pay, FitBit",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "VISA",
+        "featureType": "CARD_ACCESS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalValue": "1 Year",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Card Holder Fee"
+      },
+      {
+        "additionalInfo": "For cash advances overseas, a foreign currency conversion fee is also payable.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "3.50"
+        },
+        "name": "Cash Advance Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee (ITF)",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Replacement Cards"
+      },
+      {
+        "additionalInfo": "Visa International can arrange for a cash advance to be issued \nif your card is lost, stolen or damaged whilst you are overseas. \nIt should be noted that this fee can be avoided by obtaining \ncash from any bank displaying the Visa logo after an emergency \ncard has been issued by Visa International.\nImportant: If you apply for an emergency replacement card \nand an emergency cash advance from Visa International, \nyour Qudos Bank account will be debited with both fees \namounting to US$350.00.",
+        "currency": "USD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Emergency Overseas Visa Cash Advance"
+      },
+      {
+        "additionalInfo": "Visa International can arrange for the issue of an emergency \nreplacement card if your card is lost, stolen or damaged whilst \nyou are overseas. Visa International bills this charge to your \nQudos Bank account",
+        "currency": "USD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Emergency Overseas Visa Replacement Card"
+      },
+      {
+        "additionalInfo": "No charge applies for copies of documents such as loan or withdrawal forms.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Copies of documents other than statements"
+      },
+      {
+        "additionalInfo": "This fee is applied when a Member requests a copy of a statement \non an account for a period more than 3 months before the request. \nThere is no charge for copies of statements less than 3 months \nold. This fee will be charged at the time the copy is provided.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Statement Copies"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Late Payment Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-02-27T04:23:05.801Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Intro rate applies to all transactions (including purchases and balance transfers) for the first five months from the first date your account is approved and then reverts to the standard variable rate.",
+        "additionalInfoUri": "https://www.qudosbank.com.au/products/credit-cards/lifestyle-credit-card",
+        "additionalValue": "P5M",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.0499",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "additionalInfo": "Standard rate",
+        "additionalInfoUri": "https://www.qudosbank.com.au/products/credit-cards/lifestyle-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1234",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1234",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1234",
+        "repaymentType": "UNCONSTRAINED"
+      }
+    ],
+    "name": "Lifestyle",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "9be8ebbe-7ed3-4ae2-bc1e-c794f5730339"
+  },
+  "version": 7
+}

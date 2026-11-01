@@ -1,0 +1,393 @@
+{
+  "brand": "Bankwest",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.bankwest.com.au/content/dam/bankwest/documents/tmd/Credit-Cards/01-10-2026/bankwestqantasplatinummastercard-tmd-280920261424.pdf ",
+      "feesAndPricingUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+      "overviewUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer"
+    },
+    "applicationUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+    "brand": "Bankwest",
+    "brandName": "Bankwest",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-qantas-platinum.png",
+        "title": "Bankwest Qantas Platinum Mastercard"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum credit limit $1,000.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "A credit card for earning unlimited Qantas Points.",
+    "effectiveTo": "9999-12-31T00:00:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Customers must be 18 years or older.",
+        "additionalInfoUri": "https://www.bankwest.com.au/content/dam/bankwest/documents/tmd/Credit-Cards/01-10-2026/bankwestqantasplatinummastercard-tmd-280920261424.pdf ",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Customers must be an individual.",
+        "additionalInfoUri": "https://www.bankwest.com.au/content/dam/bankwest/documents/tmd/Credit-Cards/01-10-2026/bankwestqantasplatinummastercard-tmd-280920261424.pdf ",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Customers must meet Bankwest's credit assessment criteria, which includes demonstrating the capacity to service the credit facility.",
+        "additionalInfoUri": "https://www.bankwest.com.au/content/dam/bankwest/documents/tmd/Credit-Cards/01-10-2026/bankwestqantasplatinummastercard-tmd-280920261424.pdf ",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Customers must be living in Australia as an Australian citizen, Australian permanent resident or temporary resident (exceptions may apply).",
+        "additionalInfoUri": "https://www.bankwest.com.au/content/dam/bankwest/documents/tmd/Credit-Cards/01-10-2026/bankwestqantasplatinummastercard-tmd-280920261424.pdf ",
+        "additionalValue": "Australian citizen or Australian permanent resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Start spending instantly. No need for a physical card.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "Digital Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Make purchases without using your regular card details. Create a single-use or multi-use virtual card in the app.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "Virtual Cards",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "You can ask for up to three other people to have an additional Card (excluding a Virtual card)",
+        "additionalInfoUri": "https://www.bankwest.com.au/content/dam/bankwest/documents/legal-library/PDS_20051111-093533.pdf ",
+        "additionalValue": "3",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Balance transfer your non-Bankwest credit card balances. Conditions apply. ",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "2.99% p.a. for 9 months on balance transfers after your Card is approved. After the intro period, the ongoing balance transfer rate of 19.99% p.a. applies. Offer is only available for a limited time to new Bankwest Qantas Mastercard customers who apply from 8 June 2015 until the promotion ends, and are approved. Minimum balance transfer amount is $500 and a balance transfer request will only be processed up to 95% of your approved credit limit. Only non-Bankwest branded credit cards can be balance transferred to Bankwest Mastercard credit cards. Other fees and T&Cs apply.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "You can bank over the phone.",
+        "additionalInfoUri": "https://www.bankwest.com.au/content/dam/bankwest/documents/legal-library/PDS_20050801-144423.pdf",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Make bill payments electronically through BPAY",
+        "additionalInfoUri": "https://www.bankwest.com.au/content/dam/bankwest/documents/legal-library/PDS_20050801-144423.pdf",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Earn up to 40,000 Bonus Qantas Points when you spend $4,000 on eligible purchases in the first 4 months and keep your card open for over 15 months. Offer is only available for a limited time to eligible new Bankwest Qantas Mastercard customers. Customers must apply for and open (that is, activate the card we issue for) a new Bankwest Qantas Mastercard on or after 1 October 2026 and must not have held a Bankwest Qantas Mastercard in the last 36 months. Other fees and T&Cs apply.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "40000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "Get complimentary overseas travel insurance. Limitations, exclusions, eligibility criteria, sub-limits and excesses may apply.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "Complimentary Overseas Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Earn uncapped Qantas Points. Earn 0.6 Qantas Points per $1 on the first $2,500 spent on eligible purchases per month, and 0.15 points thereafter.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "Qantas Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Qantas will waive the Frequent Flyer membership joining fee - saving you $99.50 - if you join at qantas.com/joinffbankwest",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "Qantas Frequent Flyer Membership Waiver",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Bankwest Online Banking is a Service provided by us that is accessible via a computer or mobile device with internet access, and a mobile device using the Bankwest App, which enables a User to make enquiries and effect transactions over the Internet on your Card account using a PAN and Password.",
+        "additionalInfoUri": "https://www.bankwest.com.au/content/dam/bankwest/documents/legal-library/PDS_20050801-144423.pdf",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Add your card to your digital wallet, then spend instantly with Apple Pay",
+        "additionalInfoUri": "https://www.bankwest.com.au/legal-stuff/mobile-payments-terms-of-use/apple-pay-terms-of-use",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Add your card to your digital wallet, then spend instantly with Garmin Pay",
+        "additionalInfoUri": "https://www.bankwest.com.au/legal-stuff/mobile-payments-terms-of-use/garmin-pay-terms-of-use",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Add your card to your digital wallet, then spend instantly with Google Pay",
+        "additionalInfoUri": "https://www.bankwest.com.au/legal-stuff/mobile-payments-terms-of-use/google-pay-terms-of-use",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Add your card to your digital wallet, then spend instantly with Samsung Pay",
+        "additionalInfoUri": "https://www.bankwest.com.au/legal-stuff/mobile-payments-terms-of-use/samsung-pay-terms-of-use",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Easy Instalments Purchase Plans can help you spread the cost of up to five eligible purchases between $100 and $10,000 over four monthly instalments at 0% p.a. If you have an eligible purchase, you'll get an offer in the Bankwest App. Terms and conditions apply.",
+        "additionalInfoUri": "https://www.bankwest.com.au/support/credit-cards/easy-instalments",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "Easy Instalments Balance Plans can help you pay off all or part of your purchase balance over an agreed term at a lower rate. If you're eligible for a plan, you'll get an offer in the Bankwest App. From there, you can select the plan that best suits you. Terms and conditions apply.",
+        "additionalInfoUri": "https://www.bankwest.com.au/support/credit-cards/easy-instalments",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "No foreign transaction fees or overseas ATM fees apply.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Lock your card from the app, see if an account name checks out when making a payment, and manage your security in the app.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Up to 44 interest free days on purchases. You qualify for interest free days on purchases if you pay the closing balance owing (excluding any promotional or introductory balance transfer amount) on your current statement in full by the due date.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Get alerts when your next repayment is due.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "Credit card repayment reminders",
+        "featureType": "NOTIFICATIONS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "3% of transaction amount or $4 (whichever is greater). Payable for transactions that the annual cash advance percentage rate applies to.",
+        "additionalInfoUri": "https://www.bankwest.com.au/rates/credit-card-rates",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "4.00"
+          },
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Foreign transactions are transaction occurring outside of Australia whether in foreign currency or Australian dollars including if you are in Australia (for example, online) where the merchant or the financial institution or entity processing the transaction is located overseas.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Transaction Fee",
+        "rateBased": {
+          "rate": "0",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable for each statement period that the minimum payment is not processed to your card account by the due date. This includes any amount shown on your card account statement as amount due immediately\".\"",
+        "additionalInfoUri": "https://www.bankwest.com.au/rates/credit-card-rates",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Late Payment Administration Fee"
+      },
+      {
+        "additionalInfo": "Payable each time a periodical payment or a cheque deposit to your Card Account is dishonoured",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": "Payable for each paper Card Account Statement sent to you. Fee is waived if opted-in to e-statements.",
+        "additionalInfoUri": "https://www.bankwest.com.au/rates/credit-card-rates",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "1.25"
+        },
+        "name": "Paper Statement Fee"
+      },
+      {
+        "additionalInfo": "Payable for each statement period that you exceed your credit limit. This fee only applies to accounts opened and activated before July 2012, where over limit consent has been provided.",
+        "additionalInfoUri": "https://www.bankwest.com.au/rates/credit-card-rates",
+        "currency": "AUD",
+        "feeCap": "10.00",
+        "feeCapPeriod": "P1M",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Over the Limit Fee"
+      },
+      {
+        "additionalInfo": "Payable when the Card Account is opened and in advance on each anniversary of Card Account opening.",
+        "additionalInfoUri": "https://www.bankwest.com.au/rates/credit-card-rates",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "No credit card annual fee applies when the card is taken out as an eligible card with the Complete Home Loan Package.",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "No credit card annual fee applies when the card is taken out as an eligible card with the Complete Home Loan Package.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "199.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "199.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "Charged as a % of the total balance transfer transaction amount. Payable for each transaction that the introductory balance transfer percentage rate applies to.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Balance Transfer Fee",
+        "rateBased": {
+          "rate": "0",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable each time we have to locate you during the period that you're in default under the card contract.",
+        "additionalInfoUri": "https://www.bankwest.com.au/rates/credit-card-rates",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Customer Trace Fee"
+      },
+      {
+        "additionalInfo": "Payable on reissue of a lost credit card over the entitled two free reissues per Card Account per calendar year. This fee does not apply to stolen cards when Bankwest is advised of the police report identification number.",
+        "additionalInfoUri": "https://www.bankwest.com.au/rates/credit-card-rates",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Credit Card Replacement Fee"
+      }
+    ],
+    "instalments": {
+      "maximumConcurrentPlans": 5,
+      "maximumPlanValue": "10000.00",
+      "maximumSplit": 4,
+      "minimumPlanValue": "100.00",
+      "minimumSplit": 4
+    },
+    "isTailored": false,
+    "lastUpdated": "2026-10-09T11:08:30.000Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "The rate you'll pay on purchases if you're not eligible for an interest free period.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1999",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "additionalInfo": "The rate you'll pay on any cash advances, including when you withdraw cash",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2199",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "additionalInfo": "The rate you'll pay on balance transfers after any introductory period.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1999",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "additionalInfo": "2.99% p.a. for 9 months on balance transfers after your Card is approved. After the intro period, the ongoing balance transfer rate applies. Limited time for new Qantas Mastercard customers only. Minimum balance transfer amount is $500 and a balance transfer request will only be processed up to 95% of your approved credit limit. Only non-Bankwest branded credit cards can be balance transferred to Bankwest Mastercard credit cards. Other fees and T&Cs apply.",
+        "additionalInfoUri": "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer",
+        "additionalValue": "P9M",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Only available to new Bankwest Qantas Mastercard customers. Excludes product transfers from existing Bankwest credit cards.",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.0299",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "maximumValue": "9",
+            "minimumValue": "1",
+            "name": "Term",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "Bankwest Qantas Platinum Mastercard",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "ff24e3061b6a4de3b91c101607c3f15f"
+  },
+  "version": 7
+}

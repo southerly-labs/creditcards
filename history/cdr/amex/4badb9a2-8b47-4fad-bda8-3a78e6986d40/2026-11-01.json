@@ -1,0 +1,239 @@
+{
+  "brand": "American Express",
+  "product": {
+    "additionalInformation": {
+      "overviewUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-green-card/",
+      "termsUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-green-card/"
+    },
+    "brand": "American Express",
+    "brandName": "American Express",
+    "cardArt": [
+      {
+        "cardScheme": "AMEX",
+        "cardType": "CHARGE",
+        "imageUri": "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGGR00001S3.gif",
+        "title": "American Express® Personal Card"
+      }
+    ],
+    "description": "Charge Card with Membership Rewards",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Long term visa means 12 months or more and does not include a student visa.",
+        "additionalValue": "You are an Australian citizen or permanent resident or hold a long term visa.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Additional Cards are available for any friend or family member 16 years and over.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Applications are assessed based on the information provided and are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Available only to existing American Express Card Members who transfer from an eligible American Express Card product. This product is not available for new applications.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "$45 annual Additional Card fee per Card for up to 99 Cards.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/additional-card/",
+        "additionalValue": "99",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/pay-bill/",
+        "additionalValue": "Ways to pay your bill",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "The Amex App lets you quickly and easily manage your Card Account anytime, anywhere.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/manage-your-card/mobile-app/",
+        "additionalValue": "Amex App",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Fraud Protection Guarantee, protecting you from unauthorised charges made on your Account.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/service-and-security/fraud-protection/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Will keep your protected with cover should your eligible items be stolen or damaged. Item must be stolen or broken within 90 days of purchase. You’re covered for up to $20,000 per year and $2,500 per claim with a $50 excess per claim. Terms, conditions and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Purchase Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Is available should a store refuse to accept the return of an eligible item. Must be within 90 days of purchase. You’re covered for up to $2,000 per year and $500 per claim, with no excess\nTerms, conditions and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Refund Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Extends your manufacturer's warranty by up to 12 months on eligible items purchased with your Card. You're covered for up to $7,000 per year on eligible items within the Buyer's Advantage period",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Buyer’s Advantage Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "1.5 points per $1 spent on all purchases, excluding government bodies.\n1 point per $1 spent at government bodies in Australia.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-green-card/",
+        "additionalValue": "Membership Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalValue": "Payment due reminder",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Spend tracking notification",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Payment received alert",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Whether it's shopping, dining, travel or entertainment, eligible Card Members can access Amex Offers providing statement credits or bonus points. Amex Offers must be saved to the Card and used for qualifying spend, subject to offer-specific criteria, to receive a benefit.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/why-amex/offers/",
+        "additionalValue": "Amex Offers",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Get pre-sale tickets and access to some of your favourite events, and enjoy the Amex Entertainment Lounge before the show at select venues. With Amex, you can dive into unforgettable experiences.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/benefits/entertainment/events",
+        "additionalValue": "American Express Experiences",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Up to 44 days to pay for purchases.",
+        "additionalValue": "Cashflow Days",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Your Green Card has flexible spending power, also known as no pre-set spending limit, because it is a Charge Card",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/flexible-spending-power/",
+        "additionalValue": "Flexible Spending Power",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "80.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "Applies to all 99 Additional Cards",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "45.00"
+        },
+        "name": "Additional Card Fee"
+      },
+      {
+        "additionalInfo": "Three percent (3%) or $20, whichever is greater, will be charged on any overdue amount.",
+        "additionalValue": "When you do not pay the amount due by the due date as shown on your statement.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Late Payment Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "20.00"
+          },
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": "3.5% of the converted amount. Payable when any charge is processed in a currency other than Australian dollars.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$6 for each dishonour or debit rejection. Payable if there aren’t enough funds in your nominated account to pay the Card Account or if the whole or part of a payment by direct debit is rejected.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "6.00"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": "$3 Payable if you pay your Card Account in person at Australia Post by EFTPOS.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Over The Counter Fee"
+      },
+      {
+        "additionalInfo": "Payable if you or an Additional Card Member requests a copy of an individual charge. $7 for charges in Australia, $10 for other charges",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "7.00"
+        },
+        "name": "Record of Charge Fee"
+      },
+      {
+        "additionalInfo": "Payable if you or an Additional Card Member requests an additional posted monthly paper statement. You may access statements free of charge through your online Account.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Additional Statement Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-07-08T02:30:00.000Z",
+    "name": "American Express® Personal Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "4badb9a2-8b47-4fad-bda8-3a78e6986d40"
+  },
+  "version": 7
+}

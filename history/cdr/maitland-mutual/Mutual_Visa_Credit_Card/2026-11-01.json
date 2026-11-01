@@ -1,0 +1,225 @@
+{
+  "brand": "Maitland Mutual Limited",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.themutual.com.au/everyday-banking/personal-finance/mutual-visa-credit-card/",
+      "feesAndPricingUri": "https://www.themutual.com.au/help-support/important-documents/",
+      "overviewUri": "https://www.themutual.com.au/everyday-banking/personal-finance/mutual-visa-credit-card/",
+      "termsUri": "https://www.themutual.com.au/help-support/important-documents/"
+    },
+    "applicationUri": "https://themutual.apply-online.com.au/#/d632e613-271c-4718-95ae-9dhw9dh2rm",
+    "brand": "TheMutualBank",
+    "brandName": "The Mutual Bank",
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "20000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "A low interest rate credit card.",
+    "eligibility": [
+      {
+        "additionalValue": "Australian citizen or a permanent resident of Australia or otherwise approved",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Up to 1 additional cardholder upon approval",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "BPAY Bills from your credit card and make Credit Card payments via BPAY using our Biller Code",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalValue": "Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "For purchases",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalValue": "Mutual Alerts - Balance, low and high balance, deposit, withdrawal",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalValue": "Apple Pay and Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "featureType": "FRAUD_PROTECTION"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "$60.00 per hour (subject to minimum $10.00 per copy). Payable if you request copies of documents such as withdrawal forms or statements, or you ask us to verify a transaction performed on your Account e.g. evidence of a Visa Debit Card purchase.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/important-documents/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "60.00"
+        },
+        "name": "DOCUMENT_FEE"
+      },
+      {
+        "additionalInfo": "Payable to us if you do not make a required payment by the due date in any month.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/tools-services/lending-fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "LATE_PAYMENT_FEE"
+      },
+      {
+        "additionalInfo": "Payable to us annually in arrears on the 28th day of the anniversary month of when your Credit Card was approved. Waived if Package Home Loan held.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/tools-services/lending-fees-and-charges/",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "49.00"
+        },
+        "name": "ANNUAL_FEE"
+      },
+      {
+        "additionalInfo": "Payable if you request a replacement card within Australia, payable when the request is processed.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/tools-services/lending-fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "REPLACEMENT_CARD_FEE_(AUSTRALIA)"
+      },
+      {
+        "additionalInfo": "Payable if you request a replacement card when overseas via Visa Global Cardholder Assistance Service (GCAS), payable when the request is processed.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/important-documents/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "100.00"
+        },
+        "name": "REPLACEMENT_CARD_FEE_(INTERNATIONAL)"
+      },
+      {
+        "additionalInfo": "Payable to us when a payment to or from your account is dishonoured.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/tools-services/lending-fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "9.00"
+        },
+        "name": "DISHONOUR_FEE_CREDIT_CARD"
+      },
+      {
+        "additionalInfo": "Payable to us when a transaction in a foreign currency is made on your account.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/tools-services/lending-fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "FOREIGN_CURRENCY_CONVERSION_FEE_CREDIT_CARD",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "This fee amount is disclosed at the time of the ATM transaction and charged by the ATM owner for an ATM transaction including an ATM enquiry.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/important-documents/",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "CASH_ADVANCE",
+        "name": "ATM_OWNER_FEE",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "Payable to us when we send you a notice of default under the contract.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/tools-services/lending-fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "DEFAULT_FEE"
+      },
+      {
+        "additionalInfo": "If your Account is overdrawn, without our prior agreement, a fee will be charged each time this occurs. Penalty interest (at the rate disclosed on the Deposit Interest Rate Schedule) will also be charged until the Account is brought back in order.",
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/important-documents/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "9.00"
+        },
+        "name": "OVERDRAWN_FEE"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-07-15T07:46:22.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/tools-services/interest-rates/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1249",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.themutual.com.au/help-support/tools-services/interest-rates/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1249",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Mutual Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "Mutual_Visa_Credit_Card"
+  },
+  "version": 7
+}

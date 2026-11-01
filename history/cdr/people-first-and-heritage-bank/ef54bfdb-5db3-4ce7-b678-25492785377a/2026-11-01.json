@@ -1,0 +1,363 @@
+{
+  "brand": "People First and Heritage Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.peoplefirstbank.com.au/brc-8-1-6",
+      "feesAndPricingUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+      "overviewUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+      "termsUri": "https://www.peoplefirstbank.com.au/brc-8-3-2"
+    },
+    "brand": "b111c64b-b6c9-eb11-a823-000d3a884a20",
+    "brandName": "People First Bank",
+    "constraints": [
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "The People's Choice Credit Union Visa Credit card offers you the flexibility of more interest free days than most other cards. You can use it for anything from day to day purchases to paying bills or even withdrawing cash.",
+    "effectiveTo": "9999-12-31T00:00:00Z",
+    "eligibility": [
+      {
+        "additionalInfo": "18 years and over",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/borrowing-for-a-life-event/buying-a-home",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Terms, conditions, fees, charges and lending criteria apply and are available on application",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-3-2",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/borrowing-for-a-life-event/buying-a-home",
+        "additionalValue": "Permanent residents of Australia who reside in Australia at the time of membership application are eligible for membership, regardless of citizenship status.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/borrowing-for-a-life-event/buying-a-home",
+        "additionalValue": "Personal Members Only",
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-1",
+        "additionalValue": "Enabled to send and receive Fast Payments.",
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfo": "A low introductory rate of 2.99% p.a. for the first 6 months - available across all balance transfers, cash advances and purchases.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+        "additionalValue": "Low Intro Rate",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-1",
+        "additionalValue": "Use your PayID to get paid fast. PayID can be a mobile number or email address",
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "Now you can tap and pay using your mobile phone for fast, convenient and secure payments.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/banking/ways-to-bank/digital-wallet-payments",
+        "additionalValue": "The Pays",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/banking",
+        "additionalValue": "Easy access to your account 24/7 with the People’s Choice Smartphone and iPhone App, Internet Banking and Phone Banking.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "The interest free period applies to purchases only, providing that both the closing balance on the statement immediately preceding the purchase is paid in full by the due date and the closing balance of the statement recording the purchase is paid in full by the due date; otherwise interest will apply from the date of the purchase. Cash advances do not qualify for the interest free period and attract interest from the date of the cash advance.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+        "additionalValue": "P2M1D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Visa Credit Card gives you the convenience to make purchases, pay bills or get cash worldwide",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+        "additionalValue": "Worldwide acceptance",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-1",
+        "additionalValue": "Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Quick assessment process",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+        "additionalValue": "Quick assessment process",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "No application fees",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+        "additionalValue": "No application fees",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Competitive interest rates",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+        "additionalValue": "Competitive interest rates",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/loans/visa-credit-card",
+        "additionalValue": "Visa cardholders get access to a range of exclusive entertainment offers, including pre-sale tickets for some of the biggest concerts and live events",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Charged when demand is issued to request payment where no credit limit exists.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Final Demand"
+      },
+      {
+        "additionalInfo": "Applies when you have a scheduled monthly balance sweep set up and there are insufficient funds in your account to process a payment.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Credit Card Monthly Transfer Rejection"
+      },
+      {
+        "additionalInfo": "Payable if you exceed your approved credit limit and you fail to pay an amount sufficient to return the balance of the account to less than or equal to the approved credit limit within 7 days of us notifying you that your account is over its limit.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Over limit Administration Fee 1"
+      },
+      {
+        "additionalInfo": "Payable if you fail to make repayments due under your credit contract and you do not pay an amount sufficient to clear all repayment arrears within 7 days of us notifying you that your account is in arrears.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Arrears Administration Fee 1"
+      },
+      {
+        "additionalInfo": "Payable if you exceed your approved credit limit and your account balance remains over the approved limit for a period of 20 days or more.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Over limit Administration Fee 2"
+      },
+      {
+        "additionalInfo": "Payable if you fail to make repayments due under your credit contract and your account remains in arrears for a period of 20 days or more.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Arrears Administration Fee 2"
+      },
+      {
+        "additionalInfo": "Visa Cash Advances are withdrawals using your visa Card at Australian Bank branches, overseas Bank branches, overseas ATMs, National ATMs or Australia Post  (using the credit account selection or accessing a Credit Card account).",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Visa Cash Advance- Australia and Overseas"
+      },
+      {
+        "additionalInfo": "Applies when a transaction is performed overseas using a Visa Card. Charged at the time of transaction. ",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Conversion Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Charged within a month of the account opening and then annually on the anniversary of the account opening month.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+            "description": "Annual Visa credit card fee waiver",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Annual Visa credit card fee is waived if you have an Activate Account and are under 25 years of age, an active Home Loan or Line of Credit~, Financial \nPlanning Relationship^ or One to One Relationship.",
+                "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "59.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "59.00"
+        },
+        "name": "Annual Visa Credit Card Fee"
+      },
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Balance Transfer (via Corporate Cheque)"
+      },
+      {
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "1.50"
+        },
+        "name": "Balance Transfer (via external transfer)"
+      },
+      {
+        "additionalInfo": "Cash Advance fee",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "ATM Withdrawal"
+      },
+      {
+        "additionalInfo": "Applies when a lost or damaged Card is replaced (no fee is payable if Card is stolen). Fee is charged when the Card is ordered.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Visa - Replacement Card Fee"
+      },
+      {
+        "additionalInfo": "Applies when a transaction is performed overseas using a Visa Card. Charged at the time of the transaction.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Visa - Conversion Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Visa Cash Advances are withdrawals using your Visa Card at Australian Bank branches, overseas Bank branches, overseas ATMs, National ATMs* or Australia Post using the ‘CR’ account selection or accessing a Credit Card Account.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Visa Cash Advance – Australia and Overseas"
+      },
+      {
+        "additionalInfo": "Applies when you request an urgent replacement Card to be issued while overseas (for any reason including theft)",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "300.00"
+        },
+        "name": "Emergency Visa Card Replacement Overseas"
+      },
+      {
+        "additionalInfo": "Applies when you request an emergency cash advance without your Visa Card",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/brc-8-6-2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "300.00"
+        },
+        "name": "Emergency Visa Cash Advance Overseas"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-05-04T14:36:10.727Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "A low introductory rate of 2.99% p.a. for the first 6 months - available across all balance transfers, cash advances and purchases",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/rates/credit-card-rates",
+        "additionalValue": "P6M",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "OTHER",
+        "rate": "0.0299",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "The applicable variable interest rate will be determined by the information you provide and the assessment of your application. The interest rate will be confirmed in your loan contract.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/rates/credit-card-rates",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1295",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "The applicable variable interest rate will be determined by the information you provide and the assessment of your application. The interest rate will be confirmed in your loan contract.",
+        "additionalInfoUri": "https://www.peoplefirstbank.com.au/rates/credit-card-rates",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1295",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Visa Credit Card ",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "ef54bfdb-5db3-4ce7-b678-25492785377a"
+  },
+  "version": 7
+}

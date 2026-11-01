@@ -1,0 +1,332 @@
+{
+  "brand": "Westpac",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.westpac.com.au/credit-cards/low-rate-cards/low-rate",
+      "feesAndPricingUri": "https://www.westpac.com.au/credit-cards/low-rate-cards/low-rate",
+      "overviewUri": "https://www.westpac.com.au/credit-cards/low-rate-cards/low-rate",
+      "termsUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/pb/credit-cards/westpac-credit-card-terms-and-conditions.pdf"
+    },
+    "brand": "Westpac",
+    "brandName": "Westpac",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.westpac.com.au/content/dam/public/wbc/images/personal/credit-cards/wbc_pp_p_credit-cards_low%20rate_232x146.png",
+        "title": "Low Rate Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "Our Low Rate Card provides a lower interest rate on purchases, plus a lower monthly card fee to help reduce your credit card costs.",
+    "eligibility": [
+      {
+        "additionalInfo": "18+ years old",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Those having permanent residency in Australia/NZ OR being a non-resident or migrant and hold an acceptable Visa, with a minimum 1 year before expiry",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Earn a minimum $30,000 per annum",
+        "additionalValue": "30000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Customer having a regular, verifiable Australian taxable income.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Customer having a fixed, verifiable residential address in Australia.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "You can add one additional cardholder (16 years or older) at no extra cost. The primary cardholder is liable for all transactions made with either card.",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Garmin Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Apple Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Google Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Samsung Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Click to Pay - Online shopping made quick, simple and secure with Click to Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/click-to-pay/",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Digital Card - We got your back. Use the Dynamic CVC on your digital card. The 3 digit number changes every 24 hours for added fraud protection.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "Know what to pay when - Set up Card Autopay or SMS payment reminders so you can stay on top of your spend and repayments.",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Cashback and discounts: With a Westpac credit card, you'll get personalised cashback offers from Westpac Extras, Westpac bonus Cashback when you shop via the Westpac Lounge on ShopBack, plus other discounts and offers from a wide range of shops, in-store and online.",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/westpac-extras",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Earn up to $450 cashback on your new credit card - $75 cashback for each month you spend $1k or more on eligible purchases in the first 6 months from card approval. Already a Westpac customer? We'll waive your first year's card fee. Offer not available if you've held a Westpac credit card in the last 24 months. New cards only. Credit criteria and T&Cs apply.",
+        "additionalValue": "450.00",
+        "featureType": "CASHBACK_OFFER"
+      },
+      {
+        "additionalInfo": "Balance Transfer offer: Request a 0% p.a. for 20 months balance transfer - For balance transfers requested at card application. 3% balance transfer fee applies. After 20 months, the rate reverts to the variable cash advance rate. Already a Westpac customer? We'll waive your first year's card fee. Offer not available if you've held a Westpac credit card in the last 24 months. New cards only. Credit criteria and T&Cs apply.",
+        "additionalValue": "P20M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "For balance transfers requested at card application. 3% balance transfer fee applies. After 20 months, the rate reverts to the variable cash advance rate. Already a Westpac customer? We'll waive your first year's card fee. Offer not available if you've held a Westpac credit card in the last 24 months. New cards only. Credit criteria and T&Cs apply.",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Westpac Fraud Money Back Guarantee ensures that any unauthorised transaction claims will be reimbursed provided that the cardholder has not contributed to the loss and contacted us promptly.",
+        "additionalInfoUri": "https://www.westpac.com.au/security/how-we-protect-you/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "The product includes extra repayments",
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "additionalInfo": "Westpac PartPay: Split your purchases over $100 into 4 payments over 6 weeks with the PartPay feature on your credit card. T&Cs applies.",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/partpay",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "Use our SmartPlan repayment planner to break large purchases or balances down into regular instalments while keeping interest-free days.",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/smartplan",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Minimum repayments: 2% of the closing balance outstanding, or $10; whichever is greater. If the closing balance is less than $10, it must be paid in full.",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/credit-card-changes",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Recurring payments - You may authorise a Merchant to charge recurring payments to your Card automatically without requesting your authorisation on each occasion.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Confirming and authorising transactions: There are a number of ways you may be able to confirm a transaction. These include: signing your name. Holding your Card in front of a contactless payment device. Entering your PIN. Entering your Card details and any other information required.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Gambling blocks: If you wish to limit access to gambling services through the Card Account, please call us or log into your online banking and activate gambling block in the Card Services menu.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Statements: We will issue a statement for the Card Account to you every month unless the account has a balance of $10 or less and there has been no account activity in that month. You can choose to receive statements by mail or electronically.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Make shopping and ordering online even more safe and secure with Westpac My Merchants. Westpac My Merchants lets you shop and order online without needing to share your card details, because your card number is replaced with a unique identification code called a 'digital token'. This digital token, which won't contain your personal information and is used by the merchant instead of your card number, helping protect you online.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/my-merchants/",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Customers can access their eligible Westpac cards and Apple's ID&V security features within Apple Wallet. T&Cs apply.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Easily set transaction and transfer limits to place tabs on your spending and tailor how you use your card.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "$7 monthly card fee",
+        "additionalValue": "P1M",
+        "discounts": [
+          {
+            "description": "Card Fee Waiver",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Existing customers only - Low Rate Card Fee Waiver: Offer commenced 28th May 2026. Waiver is available for existing Westpac customers when you apply and are approved for a new Low Rate credit card before the offer is withdrawn. After the first year, the $7 monthly card fee will be debited to your account on a monthly basis. This promotion may be varied or withdrawn at any time and is not available in conjunction with any other promotion.",
+                "additionalValue": "P1M",
+                "discountEligibilityType": "INTRODUCTORY"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "7.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "7.00"
+        },
+        "name": "Monthly Card Fee"
+      },
+      {
+        "additionalInfo": "Payable as a percentage of the Australian dollar value of any foreign transaction. Applies for transactions in a foreign currency, or in Australian dollars but processed by an overseas merchant or financial institution. Note: It may not always be clear to you that the Merchant or entity processing the transaction is located outside Australia.",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$20 each statement cycle that the minimum monthly payment is not paid by the statement due date.",
+        "additionalValue": "30",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Missed Payment Fee"
+      },
+      {
+        "additionalInfo": "$15.00 once per statement period if your credit card account was opened before 4 June 2012. No overlimit fee will be charged for personal credit card accounts opened on or after 4 June 2012.",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Although not a Westpac fee, using your card in a non-Westpac Group or Westpac Group partner ATM may result in a charge to you. Avoid paying an ATM operator fee by using any Westpac, St.George, BankSA, Bank of Melbourne or select Westpac Group partner ATM.",
+        "additionalInfoUri": "https://www.westpac.com.au/locateus/",
+        "feeMethodUType": "variable",
+        "feeType": "TRANSACTION",
+        "name": "Non-Westpac Group ATM fee",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "In some instances, businesses may administer a 'surcharge' for credit card payments. Usually, these are a percentage fee of your purchase amount. Ask the merchant if a surcharge applies and how much it is before paying if you're unsure.",
+        "feeMethodUType": "variable",
+        "feeType": "PURCHASE",
+        "name": "Credit Card Surcharge",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "Balance Transfer promotion: Request a 0% p.a. for 20 months balance transfer. For balance transfers requested at card application. 3% balance transfer fee applies. After 20 months, the rate reverts to the variable cash advance rate.",
+        "feeMethodUType": "rateBased",
+        "feeType": "UPFRONT",
+        "name": "Balance Transfer Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      }
+    ],
+    "instalments": {
+      "maximumSplit": 4,
+      "minimumPlanValue": "100.00",
+      "minimumSplit": 4
+    },
+    "isTailored": false,
+    "lastUpdated": "2026-10-29T02:41:54Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Interest on purchases",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Interest Free Days may apply",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1374",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Interest on cash advances",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "No Interest Free days",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Balance Transfer promotion: Request a 0% p.a. for 20 months balance transfer. For balance transfers requested at card application. 3% balance transfer fee applies. After 20 months, the rate reverts to the variable cash advance rate. New cards only. Credit criteria and T&Cs apply.",
+        "applicabilityConditions": [
+          {
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationFrequency": "P20M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.00",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Low Rate Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "CCLowRate"
+  },
+  "version": 7
+}

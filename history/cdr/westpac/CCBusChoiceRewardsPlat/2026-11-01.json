@@ -1,0 +1,341 @@
+{
+  "brand": "Westpac",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.westpac.com.au/business-banking/credit-cards/rewards-cards/businesschoice-rewards/",
+      "feesAndPricingUri": "https://www.westpac.com.au/business-banking/credit-cards/rewards-cards/businesschoice-rewards/",
+      "overviewUri": "https://www.westpac.com.au/business-banking/credit-cards/rewards-cards/businesschoice-rewards/",
+      "termsUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/bb/010BusinessChoiceCardsT_C.pdf"
+    },
+    "brand": "Westpac",
+    "brandName": "Westpac",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.westpac.com.au/content/dam/public/wbc/images/business/credit-cards/wbc_fc_b_credit-cards_bus-choice-rewards-visa_232x146.png",
+        "title": "BusinessChoice Rewards credit card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "2000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "250000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "Receive Qantas Points for eligible purchases and tax payments, plus complimentary extended insurance.",
+    "eligibility": [
+      {
+        "additionalInfo": "18+ years old",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Principals must be a permanent resident or Australian citizen",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Your Business must be registered in Australia and for GST",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfo": "ABN must be registered for at least 12 months",
+        "eligibilityType": "BUSINESS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Individual card credit limits from $1,000 on up to 99 cards for each account to keep track of each card's activities.",
+        "additionalValue": "99",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Up to 55 interest free days on purchases when you pay off your closing balance in full by the due date shown on your statement each month.",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Garmin Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Apple Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Google Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Samsung Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Click to Pay - Online shopping made quick, simple and secure with Click to Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/click-to-pay/",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Digital Card - Unlock extra protection using the dynamic CVC on your digital Westpac debit or credit card. Add it to your digital wallet or use it",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Special offers: Earn 100,000 Bonus Qantas Points when you spend a minimum of $8,000 on eligible business purchases within 90 days of opening a new BusinessChoice Rewards Platinum credit card. This offer is not available in conjunction with any other special offers and may be varied or withdrawn at any time. T&Cs apply.",
+        "additionalInfoUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/bb/BusinessChoiceRewardsPlatinum-Card-QantasBusTC.pdf",
+        "additionalValue": "100000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "Travel knowing that you, your family, your business and your possessions may be covered against injury, loss, theft or damage in accordance with the policy (conditions, limits and exclusions apply).",
+        "additionalInfoUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/bb/businesscards_complimentaryinsurancepolicy.pdf",
+        "additionalValue": "Complimentary insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "International Travel insurance (includes your spouse and certain dependent children) for up to 3 months when you meet the eligibility criteria as set out in the Credit Card Complimentary Insurance Policy.",
+        "additionalInfoUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/bb/businesscards_complimentaryinsurancepolicy.pdf",
+        "additionalValue": "International Travel insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Interstate Flight Inconvenience Insurance covers against Cancellation, Flight Delay, Luggage, Luggage Delay and Funeral Expenses when you charge the entire cost of the return interstate flight to your eligible credit card (terms, conditions, exclusions and eligibility criteria apply).",
+        "additionalInfoUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/bb/businesscards_complimentaryinsurancepolicy.pdf",
+        "additionalValue": "Interstate Flight Inconvenience insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Protection against specified accidental death or injury when sustained while riding as a passenger in a plane, bus, train or ferry when you have purchased the tickets for the entire trip using your Credit Card before you leave (terms, conditions, exclusions and eligibility criteria apply).",
+        "additionalInfoUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/bb/businesscards_complimentaryinsurancepolicy.pdf",
+        "additionalValue": "Overseas Transit Accident insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Access to up to 4 months Purchase Protection Insurance on eligible purchases, as set out in the Credit Card Complimentary Insurance Policy (terms, conditions, exclusions and eligibility criteria apply).",
+        "additionalInfoUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/bb/businesscards_complimentaryinsurancepolicy.pdf",
+        "additionalValue": "Purchase Protection insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 24 months extended warranty insurance cover (in addition to the manufacturer's expressed Australian warranty) on a range of personal items purchased using your Credit Card and up to 3 months on Business items (terms, conditions, exclusions and eligibility criteria apply).",
+        "additionalInfoUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/bb/businesscards_complimentaryinsurancepolicy.pdf",
+        "additionalValue": "Extended Warranty insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Account holder's Unauthorised Transaction insurance - receive automatic protection (up to $20,000 per cardholder and $150,000 per account holder) against unauthorised transactions made by cardholders in a 12 month period (if you are the principal and the account holder of the card)",
+        "additionalInfoUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/bb/businesscards_complimentaryinsurancepolicy.pdf",
+        "additionalValue": "Account holder's Unauthorised Transaction insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Westpac Fraud Money Back Guarantee ensures that any unauthorised transaction claims will be reimbursed provided that the cardholder has not contributed to the loss and contacted us promptly. Refer to the BusinessChoice Cards Terms and Conditions for full details of when cardholders may be liable.",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "The product includes FRAUD_PROTECTION features.",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "RELATIONSHIP_MANAGEMENT is available for eligible customers.",
+        "featureType": "RELATIONSHIP_MANAGEMENT"
+      },
+      {
+        "additionalInfo": "The product has EXTRA_REPAYMENTS option available.",
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "additionalInfo": "$0 Qantas Business Rewards joining fee waived (saving you $89.50). Not already a Qantas Business Rewards member? We'll save you time and money by waiving the fee and enrolling your business for you.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Personal Concierge Service: Priority access, upgrades, savings with dedicated expert support 24/7. Find out more",
+        "additionalInfoUri": "https://westpac.tenconcierge.com/product/westpac/homepage?v=2",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Statements of account for the Billing Account shall be issued monthly and will be addressed to the Contact Person. In addition, each Cardholder will be provided a statement of account for their Card.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Autopay Facility: You may authorise us to automatically withdraw funds from your nominated account to make payments to the Card Account using a Card Autopay facility. You may elect to pay: The minimum payment shown on the Card Account Statement, or the full amount shown as the 'closing balance' on the Card Account Statement, or, A fixed dollar or percentage of the closing balance on the Card Account Statement",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "The minimum payment that we require from you (being the Primary Cardholder) each month will be shown on the Card Account statement. Your payment due date is 25 days from your statement date. Please refer T&C document for more details about the minimum payment required.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Qantas Business Rewards - Earn Qantas Points twice, with Qantas Business Rewards and Qantas Frequent Flyer.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Easy tax reporting: Make tax reporting easy by exporting your transactions into MYOB and BAS with ease. You can also download your transactions into excel to make analysis of your business transactions easy (check the terms and conditions before deciding).",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Business Money Tools: Spend less time on business admin with bank feeds2 and Westpac money tools.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Minimum payment: The greater of 3% of the closing balance (rounded up to the nearest dollar) or $10, plus the greater of any unpaid past due amount or any amount exceeding the credit limit.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Per card.",
+        "additionalValue": "P1Y",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "150.00"
+        },
+        "name": "Card Fee"
+      },
+      {
+        "additionalInfo": "Payable as a percentage of the Australian dollar value of any foreign transaction. Applies for transactions in a foreign currency, or in Australian dollars but processed by an overseas merchant or financial institution. Note: It may not always be clear to you that the Merchant or entity processing the transaction is located outside Australia.",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "No Missed Payment fee will be charged for business credit card accounts opened on or after 22 November 2021. May be payable each statement cycle that the whole of the minimum monthly payment is not paid by the statement due date. If charged, the missed payment charge will be debited to your account.",
+        "additionalValue": "30",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Missed Payment Fee"
+      },
+      {
+        "additionalValue": "P1M",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Account Keeping Fee"
+      },
+      {
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Overseas ATM cash withdrawals (partner)"
+      },
+      {
+        "additionalInfo": "$15.00 once per statement period if your credit card account was opened before 21 November 2021. No Overlimit fee will be charged for business credit card accounts opened on or after 22 November 2021. May be debited from your credit card account every time you exceed your credit limit during a statement cycle. It is debited from your account in that statement cycle, on or after the day(s) your credit limit is exceeded. This fee may also be charged whenever your account is over limit at the commencement of a statement cycle.",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Customers opting in for Data feeds will be charged a monthly fee of $5.00 per Card (up to a maximum of $50 per facility per month) applies when the facility is enrolled in Business Credit Card Data Feeds. The fee will be charged at the end of each statement cycle. Please refer to T&C for more information.",
+        "additionalValue": "P1M",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Data Feed Fee"
+      },
+      {
+        "discounts": [
+          {
+            "description": "Complimentary Qantas Business Rewards joining fee waiver",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "The Qantas Business Rewards program joining fee waived - saving you $89.50",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "89.50"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "89.50"
+        },
+        "name": "Qantas Business Rewards program joining fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-29T02:41:55Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Interest on purchases",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Charged to purchase balances where full closing balance is not paid by due date",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2024",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Interest on cash advances",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Applied to any amount of 'cash' withdrawn from account. (includes physical cash and transfer from account)",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2024",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "BusinessChoice Rewards Platinum",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "CCBusChoiceRewardsPlat"
+  },
+  "version": 7
+}

@@ -1,0 +1,247 @@
+{
+  "brand": "CommBank",
+  "product": {
+    "additionalInformation": {
+      "overviewUri": "https://www.commbank.com.au/business/business-credit-cards.html"
+    },
+    "brand": "CBA",
+    "brandName": "CommBank",
+    "constraints": [
+      {
+        "additionalInfo": "Maximum facility limit",
+        "additionalValue": "100000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Maximum Card Limit",
+        "additionalValue": "100000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Minimum facility limit",
+        "additionalValue": "5000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": "Minimum Card Limit",
+        "additionalValue": "100.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Be rewarded for essential business spend and save on business travel. Take advantage of offers and partner discounts whilst purchasing with confidence and convenience knowing you are backed by two of Australia's largest brands",
+    "eligibility": [
+      {
+        "additionalInfo": "Yes",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Each application for credit is assessed on the ability of the applicant to service debt (limit) based on the financials supplied in the application.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Need to be a member of the Qantas Business Rewards Program",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Applications for credit cards are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Available to citizens or permanent resident of Australia and valid visa holders. Make sure you are legally allowed to work in Australia.",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Available to citizens or permanent resident of NZ and valid visa holders. Make sure you are legally allowed to work in Australia.",
+        "additionalValue": "NZ",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Issue additional cards to your employees, each with custom spending limits and controls",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Streamline your business banking and save time with automatic data feeds from your online banking to your accounting software.",
+        "additionalInfoUri": "https://www.commbank.com.au/business/accounting-software-integration.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "From 1 December 2023, we will no longer accept new balance transfer requests on our credit cards.",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "See, track and easily pay your bills online in NetBank or on the go in the CommBank app.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/bpay-view.html",
+        "additionalValue": "BPAY View",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "170,000 Qantas Business Rewards bonus points when you spend $6,000 on eligible purchases within 90 days of your card account being opened. The offer applies to new card accounts opened between 01/06/2026- 30/10/2026.",
+        "additionalInfoUri": "https://www.commbank.com.au/business/business-credit-cards/commbank-qantas-business-rewards-credit-card.html",
+        "additionalValue": "170000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "200,000 Qantas Business Rewards bonus points when you open an account and make an eligible purchase before 30 April 2026. The offer applies to new card accounts opened between 31/12/2025- 30/04/2026.",
+        "additionalInfoUri": "https://www.commbank.com.au/business/business-credit-cards/commbank-qantas-business-rewards-credit-card.html",
+        "additionalValue": "200000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "Transit Accident Insurance up to $250,000, Unauthorised Transactions Insurance up to $150,000 a year, International travel insurance and Interstate Flight Inconvenience, Price Guarantee and Purchase Security, Extended Warranty",
+        "additionalInfoUri": "https://www.commbank.com.au/business/business-credit-cards/commbank-qantas-business-rewards-credit-card.html",
+        "additionalValue": "Insurance provided by Cover Genius",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Instantly lock, block or limit your credit card for extra control through the CommBank app or NetBank.",
+        "additionalInfoUri": "https://www.commbank.com.au/personal/credit-cards/lock-block-limit.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Be rewarded for essential business spend and save on business travel. Take advantage of offers and partner discounts, whilst purchasing with confidence and convenience knowing you are backed by two of Australia's largest brands",
+        "additionalValue": "Qantas Business Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Get access to exclusive benefits and offers with Visa Concierge and Visa Commercial Offers.",
+        "additionalInfoUri": "https://www.visa.com.au/en_au/visa-commercial-offers/",
+        "additionalValue": "VISA Commercial Offers and Discounts",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Yello for Business Offers and partner discounts",
+        "additionalInfoUri": "https://www.commbank.com.au/commbank-yello.html",
+        "additionalValue": "Yello for Business",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Up to 44 days. We won't charge any interest on purchases if you pay at least the closing balance shown on your statement by the due date each and every month.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/credit-card-interest.html",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Reminders before payments are due to avoid late fees.",
+        "additionalValue": "Payment reminders",
+        "featureType": "NOTIFICATIONS"
+      }
+    ],
+    "fees": [
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Emergency Card Replacement"
+      },
+      {
+        "additionalInfo": "When you make a purchase or obtain a cash advance in Australian dollars while overseas, or while in Australia (for example online) where the merchant, or the financial institution or entity processing the transaction, is located overseas.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transaction fee (Transactions in Australian dollars but with an overseas connection)",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Greater of $3 or 3%",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Cash equivalent items or cash substitutes cash advance charge"
+      },
+      {
+        "additionalInfo": "Greater of $3 or 3%",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash equivalent items or cash substitutes cash advance charge",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Annual Fee per card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "PERIODIC",
+        "name": "Annual Fee per card",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "When you don't make your minimum monthly payment, plus any overdue amount, by your statement due date.",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "When we first allow you to go over your credit limit in a statement period.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Annual fee per facility",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Annual Facility Fee"
+      }
+    ],
+    "isTailored": true,
+    "lastUpdated": "2026-11-01T02:15:42.000Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1999",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "CommBank Qantas Business Rewards Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "e15ed5da59354af78c9e8aa0f4f841cf"
+  },
+  "version": 7
+}

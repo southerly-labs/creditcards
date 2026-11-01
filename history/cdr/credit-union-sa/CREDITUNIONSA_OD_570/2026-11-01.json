@@ -1,0 +1,251 @@
+{
+  "brand": "Credit Union SA",
+  "product": {
+    "additionalInformation": {
+      "additionalBundleUris": [],
+      "additionalEligibilityUris": [],
+      "additionalFeesAndPricingUris": [],
+      "additionalOverviewUris": [],
+      "additionalTermsUris": [],
+      "eligibilityUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+      "feesAndPricingUri": "https://www.creditunionsa.com.au/fees/credit-cards-and-overdrafts/",
+      "overviewUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+      "termsUri": "https://www.creditunionsa.com.au/globalassets/pdfs/brc_1025.pdf"
+    },
+    "applicationUri": "https://apply.creditunionsa.com.au/cusa/servlet/SmartForm.html?formCode=joint-credit-card",
+    "brand": "Credit Union SA",
+    "bundles": [],
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cms.creditunionsa.com.au/assets/images/20220112_SecondaryPageBanners_Cards_VisaCreditCard.jpg",
+        "title": "Workplace Benefits Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "20000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "Our Workplace Benefits Credit Card includes no annual fee, a 0% pa introductory rate for the first six months on purchases, balance transfers and cash advances as well as a low ongoing interest rate after the first 6 months.  You’ll have the ability to make fast payments with Google Pay, Apple Pay, Samsung Pay, Garmin Pay and Visa payWave. It’s also highly secure, with microchip technology, 24/7 fraud monitoring, Visa’s Zero Liability policy and Visa Secure for online purchases from participating merchants and payWave. You’ll also be able to temporarily lock your card (if you misplace it), plus block payWave, international and online transactions whenever you need to – using the Mobile Banking App or Internet Banking.",
+    "effectiveFrom": "2016-12-16T00:00:00.000+11:00",
+    "effectiveTo": "2099-06-01T00:00:00.000+10:00",
+    "eligibility": [
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Workplace Banking Benefits are available to any qualifying members. Refer to the website for more info.",
+        "additionalInfoUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+        "additionalValue": "Australian citizen or permanent resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+        "additionalValue": "Workplace Benefits Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+        "additionalValue": "Null",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/fees/credit-cards-and-overdrafts/",
+        "featureType": "OVERDRAFT"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/tools/digital-wallet/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/tools/digital-wallet/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/tools/digital-wallet/",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/tools/digital-wallet/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/digital-banking/",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/digital-banking/real-time-payments/payid",
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/digital-banking/real-time-payments/payid",
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/globalassets/pdfs/brc_1095.pdf",
+        "additionalValue": "Bpay",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/globalassets/pdfs/brc_1095.pdf",
+        "additionalValue": "SMS alerts available for specified events/transactions, at regular intervals of one-off.",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Round-ups (destination account)",
+        "additionalInfoUri": "https://www.creditunionsa.com.au/globalassets/pdfs/brc_1095.pdf",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Lock, block and control your card",
+        "additionalInfoUri": "https://www.creditunionsa.com.au/community/news/2019/lock-block-and-control-your-card/",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Business Banking can be attached to the product",
+        "additionalInfoUri": "https://www.creditunionsa.com.au/accounts/transaction-accounts/business-banking",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/fees/credit-cards-and-overdrafts/",
+        "additionalValue": "Annual fee is waived for any Workplace Banking Benefits member.",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Workplace Benefits Credit Card Periodic"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/fees/credit-cards-and-overdrafts/",
+        "additionalValue": "No transaction or withdrawal fees",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Transaction"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/fees/credit-cards-and-overdrafts/",
+        "additionalValue": "Arrears administration fee",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Arrears"
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/fees/credit-cards-and-overdrafts/",
+        "additionalValue": "Visa Currency Conversion",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Currency Conversion",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "9999999.99",
+            "feeMinimum": "0.01"
+          },
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable when you lose or misplace your VISA Card and we need to order you a new card",
+        "additionalInfoUri": "https://www.creditunionsa.com.au/fees/other-fees/",
+        "additionalValue": "Lost VISA Card",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Lost VISA Card"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-06-29T00:00:00.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+        "additionalValue": "P6M",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": "0.0",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "OTHER",
+        "rate": "0.0",
+        "repaymentType": "INTEREST_ONLY",
+        "tiers": []
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": "0.0",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1149",
+        "repaymentType": "INTEREST_ONLY",
+        "tiers": []
+      },
+      {
+        "additionalInfoUri": "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": "0.0",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1149",
+        "repaymentType": "INTEREST_ONLY",
+        "tiers": []
+      }
+    ],
+    "name": "Workplace Benefits Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "CREDITUNIONSA_OD_570"
+  },
+  "version": 7
+}

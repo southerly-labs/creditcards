@@ -1,0 +1,804 @@
+{
+  "brand": "Greater Bank",
+  "product": {
+    "additionalInformation": {
+      "additionalBundleUris": null,
+      "additionalEligibilityUris": null,
+      "additionalFeesAndPricingUris": null,
+      "additionalOverviewUris": null,
+      "additionalTermsUris": null,
+      "bundleUri": null,
+      "eligibilityUri": null,
+      "feesAndPricingUri": "https://www.greater.com.au/siteassets/calculators-rate-and-support/documents/disclosure-documents/fees-and-charges/businessvisacreditcard_feesandchargesform.pdf",
+      "overviewUri": "https://www.greater.com.au/business/services/",
+      "termsUri": "https://www.greater.com.au/termsandconditions"
+    },
+    "applicationUri": null,
+    "brand": "GB",
+    "brandGroup": null,
+    "brandName": "Greater Bank",
+    "bundles": null,
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.greater.com.au/globalassets/images/gb-cards/gb_visa_credit_card.png",
+        "title": "Visa Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "100000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": null,
+    "description": "Credit card for small business",
+    "effectiveFrom": "2020-06-30T14:00:00Z",
+    "effectiveTo": "9999-12-29T13:00:00Z",
+    "eligibility": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Must be identifiable in terms of legislative requirements. Lending criteria apply.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Businesses only",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Australian Residents only",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Receive notification from bank of your nominated transactions (e.g. low account balance warning; credits over $500)",
+        "additionalInfoUri": null,
+        "additionalValue": "SMS or Email",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Greater Bank Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "GUARANTOR"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "9",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Subject to credit limit",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.greater.com.au/digitalwallet/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "RELATIONSHIP_MANAGEMENT"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.greater.com.au/digitalwallet/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Charged to your account on the last day of the month in which the primary card is activated and thereafter annually on anniversary date.",
+        "additionalInfoUri": null,
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "49.00"
+        },
+        "name": "Annual fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Fee amount will be variable, calculated if and when applicable. Payable for costs we have to pay to a government body to register any documents in relation to a security.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "UPFRONT",
+        "fixedAmount": null,
+        "name": "Registration fee",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": null
+        }
+      },
+      {
+        "additionalInfo": "For any replacement card issued overseas. Payable for each replacement card issued within the expiry period, if a replacement card has been previously requested in the preceding 12 months",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "100.00"
+        },
+        "name": "Replacement card fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Fee amount will be variable, calculated if and when applicable. Payable when we request a valuation of an existing or proposed Security Property",
+        "additionalInfoUri": "https://www.greater.com.au/termsandconditions",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "UPFRONT",
+        "fixedAmount": null,
+        "name": "Valuation fee",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": null
+        }
+      },
+      {
+        "additionalInfo": "Charged on the last day of the second consecutive statement period, in which the minimum repayment is not made and thereafter on the last day of each statement period that the minimum repayment is not made by the due date.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Missed payment fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "If your account has a negative balance you will be charged 2.00% of the cash advance amount. The minimum fee is $1.50, the maximum fee is $20.00. If your account has a positive balance $0.00. Cash advance fees will be calculated from date of transaction and charged on the last day of the statement period.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "rateBased",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": null,
+        "name": "Cash advance fee - Domestic",
+        "rateBased": {
+          "accrualFrequency": null,
+          "amountRange": null,
+          "rate": "0.0200",
+          "rateType": "TRANSACTION"
+        },
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable when we send you a notice informing you of a default under your contract.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Default notice fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Fee amount will be variable, calculated if and when applicable. Payable when a liability arises to pay duty to the relevant government body in relation to the Contract, a Security, or any other dutiable document.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "UPFRONT",
+        "fixedAmount": null,
+        "name": "Stamp duty",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": null
+        }
+      },
+      {
+        "additionalInfo": "Charged for each SMS alert that is sent to you notifying you of account balances and/or other nominated transactions.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.20"
+        },
+        "name": "SMS alert fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applicable when receiving an inward RTGS (Real time gross settlement)",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "8.00"
+        },
+        "name": "Bank transfer fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Fee amount will be variable, calculated if and when applicable.  Payable for the amount we are charged by our insurer for any title and loan protection insurance policy that we require.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "UPFRONT",
+        "fixedAmount": null,
+        "name": "Title insurance premium",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": null
+        }
+      },
+      {
+        "additionalInfo": "Fee amount will be variable, calculated if and when applicable. Payable for any costs and disbursements we have to pay to a Solicitor or conveyancer for acting for us in relation to the Contract, Settlement, a Security, Court Application or Discharge.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "UPFRONT",
+        "fixedAmount": null,
+        "name": "Legal fee",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": null
+        }
+      },
+      {
+        "additionalInfo": "Payable per item and charged when a copy of a disputed transaction is requested.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Disputed transaction fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DEPOSIT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Foreign currency deposit fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "If your account has a negative balance you will be charged 2.00% of the cash advance amount. The minimum fee is $4.00, the maximum fee is $20.00. If your account has a positive balance $0.00. Cash advance fees will be calculated from date of transaction and charged on the last day of the statement period.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "rateBased",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": null,
+        "name": "Cash advance fee - International",
+        "rateBased": {
+          "accrualFrequency": null,
+          "amountRange": null,
+          "rate": "0.0200",
+          "rateType": "TRANSACTION"
+        },
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applicable when you send an outward RTGS (Real time gross settlement)",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "EFT transaction fee (RTGS)",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "For each replacement card issued in Australia. Payable for each replacement card issued within the expiry period, if a replacement card has been previously requested in the preceding 12 months.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "7.00"
+        },
+        "name": "Replacement card fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable when we consent to any subdivision, lease, discharge, partial discharge, change of name, release of Security provider, changing a policy of lenders mortgage insurance, creation of subsequent Security Interest or any dealing in relation to a Security.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "350.00"
+        },
+        "name": "Administration fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Where secured by Land Title: Payable immediately before you pay out the Contract where there is a Security registered at any Land Titles Registration Office. Where secured by Goods Security Agreement: Payable immediately before you pay out the Contract and your Credit Facility is closed.",
+        "additionalInfoUri": "https://www.greater.com.au/termsandconditions",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EXIT",
+        "fixedAmount": {
+          "amount": "300.00"
+        },
+        "name": "Discharge administration fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "2.00% of value (minimum $2.00)",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "rateBased",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": null,
+        "name": "Bulk coin purchase fee - In branch",
+        "rateBased": {
+          "accrualFrequency": null,
+          "amountRange": null,
+          "rate": "0.0200",
+          "rateType": "TRANSACTION"
+        },
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "0.20"
+        },
+        "name": "EasyPay notification fee - SMS",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "$8.00 per bag",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "8.00"
+        },
+        "name": "Bulk coin purchase fee - External",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "3.00% of the value of the transaction in AUD debited to your account when you make a transaction in a foreign currency or in AUD when you are outside of Australia; or in Australia where the merchant or financial institution that processes the transaction is located outside of Australia",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "fixedAmount": null,
+        "name": "Foreign currency conversion fee",
+        "rateBased": {
+          "accrualFrequency": null,
+          "amountRange": null,
+          "rate": "0.0300",
+          "rateType": "TRANSACTION"
+        },
+        "variable": null
+      },
+      {
+        "additionalInfo": "Fee amount will be variable, calculated if and when applicable. The amount payable when you are in default and we send a mercantile agent to discuss this with you.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "EVENT",
+        "fixedAmount": null,
+        "name": "Mercantile agents fee",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": null
+        }
+      },
+      {
+        "additionalInfo": "$20.00 plus $1.00 per page copied. Payable when we provide information or copies to you or a third party that relates to a Security, dealing document, or any record relating to your Contract or loan account (other than information you are entitled to obtain free of charge under the National Credit Code (where applicable)).",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "ENQUIRY",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Information fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "$5.00 plus Foreign Currency Conversion Fee",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Overseas ATM",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable per card provided and charged to your account on the last day of the month in which each card is created and thereafter annually on card creation anniversary date.",
+        "additionalInfoUri": null,
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Card fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "When transferring in AUD. Fee is inclusive of $40.00 payable to the product issuer, Convera Australia Pty Ltd.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Telegraphic transfer - Australian Currency (Outgoing International Payment)",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Fee amount will be variable, calculated if and when applicable. Payable for costs and disbursements we pay to our Law Stationers for providing information on a security or acting for us in connection with the Contract or a Security.",
+        "additionalInfoUri": "https://www.greater.com.au/termsandconditions",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "EVENT",
+        "fixedAmount": null,
+        "name": "Law stationers fee",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": null
+        }
+      },
+      {
+        "additionalInfo": "Payable for each guarantee provided.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "200.00"
+        },
+        "name": "Guarantee fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "When transferring in a foreign currency. Fee is inclusive of $20.00 payable to the product issuer, Convera Australia Pty Ltd.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Telegraphic transfer - Foreign Currency (Outgoing International Payment)",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable when you ask us to establish a Credit Limit or when you request an increase in the Credit Limit. *Excludes Valuation and Solicitor Costs. Valuation fees are required to be paid upfront.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "300.00"
+        },
+        "name": "Establishment fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable when we provide information or copies to you or a third party that relates to a Security, dealing document, or any record relating to your Contract or loan account (other than information you are entitled to obtain free of charge under the National Credit Code (where applicable)).",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "ENQUIRY",
+        "fixedAmount": {
+          "amount": "1.00"
+        },
+        "name": "Information fee - Per Page",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "8.00"
+        },
+        "name": "EasyPay notification fee - Letter",
+        "rateBased": null,
+        "variable": null
+      }
+    ],
+    "instalments": null,
+    "isTailored": false,
+    "lastUpdated": "2026-09-23T14:00:00Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Base rate disclosed. Margins will be applied.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": null,
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0696",
+        "repaymentType": "PRINCIPAL_AND_INTEREST",
+        "tiers": null
+      },
+      {
+        "additionalInfo": "Base rate disclosed. Margins will be applied.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": null,
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0696",
+        "repaymentType": "PRINCIPAL_AND_INTEREST",
+        "tiers": null
+      },
+      {
+        "additionalInfo": "Base rate disclosed. Margins will be applied. ",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": null,
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0696",
+        "repaymentType": "PRINCIPAL_AND_INTEREST",
+        "tiers": null
+      }
+    ],
+    "name": "Business Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "3215"
+  },
+  "version": 7
+}

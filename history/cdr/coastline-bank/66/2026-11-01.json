@@ -1,0 +1,190 @@
+{
+  "brand": "Coastline Bank",
+  "product": {
+    "additionalInformation": {
+      "bundleUri": "https://www.coastline.com.au/business/visa-business-credit-card",
+      "eligibilityUri": "https://www.coastline.com.au/conditions-of-use/",
+      "feesAndPricingUri": "https://www.coastline.com.au/conditions-of-use/",
+      "overviewUri": "https://www.coastline.com.au/business/visa-business-credit-card",
+      "termsUri": "https://www.coastline.com.au/conditions-of-use/"
+    },
+    "applicationUri": "https://www.coastline.com.au/business/visa-business-credit-card",
+    "brand": "Coastline ",
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Business Access Plus",
+    "effectiveFrom": "2006-06-30T14:30:00.0000000Z",
+    "eligibility": [
+      {
+        "eligibilityType": "BUSINESS"
+      }
+    ],
+    "features": [
+      {
+        "featureType": "GUARANTOR"
+      },
+      {
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      }
+    ],
+    "fees": [
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Settlement Disbursement Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "380.00"
+        },
+        "name": "CU Solicitor Mtg Discharge Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "250.00"
+        },
+        "name": "Mortgage Discharge Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "PPSR Security Interest Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Property Search Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Manual Arrears Transfer Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Arrears Reminder Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Final Notice of Demand"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-03-24T04:00:14.5359085Z",
+    "lendingRates": [
+      {
+        "applicabilityConditions": [
+          {
+            "rateApplicabilityType": "EXISTING_CUST"
+          },
+          {
+            "additionalValue": "1",
+            "rateApplicabilityType": "MIN_DEPOSITS"
+          },
+          {
+            "rateApplicabilityType": "NEW_ACCOUNTS"
+          },
+          {
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1405",
+        "repaymentType": "INTEREST_ONLY",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "EXISTING_CUST"
+              },
+              {
+                "additionalValue": "1",
+                "rateApplicabilityType": "MIN_DEPOSITS"
+              },
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              },
+              {
+                "rateApplicabilityType": "NEW_CUSTOMER"
+              }
+            ],
+            "minimumValue": "0.01",
+            "name": "Cash Advance",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "applicabilityConditions": [
+          {
+            "rateApplicabilityType": "EXISTING_CUST"
+          },
+          {
+            "additionalValue": "1",
+            "rateApplicabilityType": "MIN_DEPOSITS"
+          },
+          {
+            "rateApplicabilityType": "NEW_ACCOUNTS"
+          },
+          {
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "INVESTMENT",
+        "rate": "0.1405",
+        "repaymentType": "INTEREST_ONLY"
+      }
+    ],
+    "name": "Business Access Plus",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "66"
+  },
+  "version": 7
+}

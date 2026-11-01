@@ -1,0 +1,193 @@
+{
+  "brand": "Hume Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.humebank.com.au/tools-help/product-tcs/",
+      "feesAndPricingUri": "https://www.humebank.com.au/business/business-visa-credit-card/",
+      "overviewUri": "https://www.humebank.com.au/business/business-visa-credit-card",
+      "termsUri": "https://www.humebank.com.au/tools-help/product-tcs/"
+    },
+    "applicationUri": "https://www.humebank.com.au/business/business-visa-credit-card/",
+    "brand": "HUME BANK LIMITED",
+    "brandName": "HUME BANK LIMITED",
+    "constraints": [
+      {
+        "additionalValue": "5000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Hume Bank's Business credit card is a great business solution giving you freedom in managing your cash flow.",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Must be an Australian resident or citizen, with an Australian residential mailing address",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Business customers only",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.humebank.com.au/business/business-visa-credit-card/",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Free additional card holder",
+        "featureType": "OTHER"
+      },
+      {
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "Samsung Wallet",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfo": "Loyalty points program",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "featureType": "FRAUD_PROTECTION"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Annual Visa Business fee",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "60.00"
+        },
+        "name": "FEEVANN"
+      },
+      {
+        "additionalInfo": "Card Issuance fee - Applicable when requesting the replacement of an existing card or when ordering a second or any additional card",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "FEECARDREP"
+      },
+      {
+        "additionalInfo": "When you make a request for a chargeback",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "FEECHGBACK"
+      },
+      {
+        "additionalInfo": "Payable when a replacement card is to be sent overseas",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "250.00"
+        },
+        "name": "FEECARDOSEAS"
+      },
+      {
+        "additionalInfo": "When a Visa Debit Card is requested to be delivered by express post",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "FEECARDCOUR"
+      },
+      {
+        "additionalInfo": "$2 per page. Charged when a duplicate statement or interim fee is requested",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "FEESTATDUP"
+      },
+      {
+        "additionalInfo": "Payable on any transaction to your account in a currency other than Australian dollars.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "FEEFORCON",
+        "rateBased": {
+          "accrualFrequency": "D",
+          "rate": "0.0285",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": "Charged when your repayment is not made by the due date",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "FEELATEPAY"
+      },
+      {
+        "additionalInfo": "Payable each time we are asked to provide a copy of a visa card transaction voucher. This fee will not be charged if the voucher retrieval relates to a disputed transaction and the dispute is resolved in your favour",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "FEEVOUCHRET"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-05-01T11:51:28.000+10:00",
+    "name": "Business Visa",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "S5V2"
+  },
+  "version": 7
+}

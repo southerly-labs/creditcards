@@ -1,0 +1,167 @@
+{
+  "brand": "Horizon Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://horizonbank.com.au/loans/credit-facilities/visa-credit-card/",
+      "feesAndPricingUri": "https://horizonbank.com.au/loans/credit-facilities/visa-credit-card/",
+      "overviewUri": "https://horizonbank.com.au/loans/credit-facilities/visa-credit-card/",
+      "termsUri": "https://horizonbank.com.au/more/important-info/disclosure-documents/"
+    },
+    "applicationUri": "https://forms.unpz.au/form?id=0e59f9ae8f4709bdb38e0606359b4f09:d46ce3a8-1726-4fd2-b451-23157ea36e6a",
+    "brand": "HORIZON BANK",
+    "brandName": "HORIZON BANK",
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "30000.00",
+        "constraintType": "MIN_BALANCE"
+      }
+    ],
+    "description": "VISA CREDIT CARD",
+    "effectiveFrom": "2020-10-01T00:00:00.000+10:00",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      }
+    ],
+    "features": [
+      {
+        "additionalValue": "Visa Credit",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free on purchases",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalValue": "Apple Pay, Samsung Pay and Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Internet Banking and Mobile Banking App.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "This account type is enabled for Osko payments, via the New Payments Platform (NPP). Osko is the faster way to pay or receive money from friends, family and businesses. No more waiting days for money to change hands. Now you can pay and be paid in a matter of seconds",
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfo": "Create a PayID through Horizon Bank s Internet Banking or Mobile Banking App to receive Osko payments with a unique identifier, such as your mobile number or email address, enabling you to receive and send money securely without the need to remember complex banking details.",
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "BPAY is an electronic bill payment service, providing a convenient access point for the payment and receipt of consumer bills.",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Manage payments from your bank account using PayTo.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Low Special Rate for the first 5 months",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "STATEMENT_COPY"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "29.00"
+        },
+        "name": "VISA_CARD_CHARGE_BACK"
+      },
+      {
+        "additionalInfo": "Australia only",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "9.00"
+        },
+        "name": "VISA_CARD_REPLACEMENT"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "VISA_CARD_REPLACEMENT_(EMERGENCY)"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "24.00"
+        },
+        "name": "VISA_CARD_VOUCHER_RETRIEVAL"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "VISA_CREDIT_CARD_LATE_PAYMENT_FEE"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2025-10-23T15:35:57.000+11:00",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1295",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1295",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalValue": "P5M",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "OTHER",
+        "rate": "0.0796",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "VISA CREDIT CARD",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "S97_S970001"
+  },
+  "version": 7
+}

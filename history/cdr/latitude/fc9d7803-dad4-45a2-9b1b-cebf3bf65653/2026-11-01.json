@@ -1,0 +1,358 @@
+{
+  "brand": "Latitude Credit Cards",
+  "product": {
+    "additionalInformation": {
+      "additionalOverviewUris": [
+        {
+          "additionalInfoUri": "https://assets.latitudefinancial.com/legals/terms-conditions/lowrate-rewards.pdf",
+          "description": "Latitude Low Rate Mastercard Rewards Program Terms and Conditions"
+        }
+      ],
+      "additionalTermsUris": [
+        {
+          "additionalInfoUri": "https://assets.latitudefinancial.com/legals/terms-conditions/lowrate-rewards.pdf",
+          "description": "Latitude Low Rate Mastercard Rewards Program Terms and Conditions"
+        }
+      ],
+      "eligibilityUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/",
+      "feesAndPricingUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/",
+      "overviewUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/",
+      "termsUri": "https://assets.latitudefinancial.com/legals/credit-card-general-terms-and-conditions.pdf"
+    },
+    "applicationUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/",
+    "brand": "Latitude Credit Cards",
+    "brandName": "Latitude Credit Cards",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://images.ctfassets.net/w0q68lqdeo57/GlKmCLDJ2z1Xd52kge2dE/ed4c3987aabeabad1733f88218cde8c6/cc-lr_1.jpg",
+        "title": "Latitude Low Rate Mastercard"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Min credit limit",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Latitude Low Rate Mastercard with a low purchase rate of 13.99% p.a., up to 55 days interest free on general purchases, and access to Latitude Rewards discounts and offers.",
+    "effectiveFrom": "2026-01-18T13:00:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Applicants must be at least 18 years old.",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Applicants must be able to supply: \n- A copy of your driver's licence, passport or proof of age card. \n- Details of your income, assets and debts. \n- Employers name and contact details.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "A resident of Australia or a temporary resident who legally has the right to work in Australia (and intend to stay) for at least the next 12 months.",
+        "additionalValue": "Australian resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "To be eligible you must: Have an income of at least $20,000 gross per year, from employment or investments",
+        "additionalValue": "20000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Credit history\nTo be eligible you must: Be able to demonstrate a good credit history for the last 5 years",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Product is only eligible for a natural person.",
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "$0 additional cardholder fee.\nTeam up for even more rewards.\nAdd an additional cardholder at no extra cost and become the ultimate rewards-earning team.",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "0% Balance Transfer for 25 months\n\n3% balance transfer fee and eligibility criteria apply. New customers only, must be approved by 31 January 2027. Balance Transfer must be submitted by 31 March 2027. T&Cs, annual card fee (normally $69) and other charges apply. Interest rate reverts to the cash advance rate after the promotional period, currently 29.99% (subject to change). A balance transfer cannot be made from a Latitude issued credit card.",
+        "additionalInfoUri": "https://cards.latitudefinancial.com/low-rate?source_code=IDAAA&promo_code=KGXNTCTT&promo_code=8F5UH373&gemid2=lfs-web%3Acards%3Alow-rate%3Aapply-now-with-a-balance-transfer%3A0-balance-transfer-for-25-months&_gl=1*1ixdlmq*_gcl_au*MjYzNDQ5ODM2LjE3ODUxMjE1OTM.*_ga*MjE0MTE3MDAzMi4xNzg1MTIxNTky*_ga_HN02VX7PXM*czE3ODU3MzI4NzUkbzI4JGcxJHQxNzg1NzMzMTc5JGo0OSRsMCRoMTY4OTA4MzE1NA..*_ga_VZY6JWYT4Y*czE3ODU3MzI4NzUkbzI4JGcxJHQxNzg1NzMzMTc5JGo0OSRsMCRoMTY3MTQwMzAy",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "A low rate rewards card. Enjoy amazing offers and discounts designed to make every dollar go further.",
+        "additionalInfoUri": "https://latitudefinancial.com.au/credit-cards/low-rate/latitude-rewards",
+        "additionalValue": "Latitude Rewards",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Click to Pay\n\nA fast, simple and secure way to checkout online without entering your details every time.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/click-to-pay/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free on general purchases.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Mastercard Credit Card Access",
+        "additionalValue": "Mastercard",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Enjoy the benefits of using a Latitude Low Rate Mastercard\n\nA low rate and rewards credit card rolled into one. Spoil yourself, and get more from your budget, with the Latitude Low Rate Mastercard.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Let your budget breathe\n\nEnjoy a 13.99% p.a. purchase rate, so you can stretch your budget without stressing it.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Shop with Confidence\n\nDelivery gone missing for your online purchases? Latitude’s E-Commerce Purchase Protection Insurance has got you covered for eligible purchases, subject to T&Cs.",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Travel with peace of mind\n\nWherever you go, our specialist team keeps your personal info safe from fraud and identity theft.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/scams-hub/?gemid2=lfs-web%3Acards%3Alow-rate%3Alearn-more%3Atravel-with-peace-of-mind",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Earn on everyday spend\n\nGet 3% back in Latitude Rewards when you set up recurring payments direct with participating utilities, telco, and streaming services. T&Cs apply.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/latitude-rewards",
+        "additionalValue": "Latitude Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Browse tons of rewards\n\nUse your Latitude Rewards for dining and cinema experiences, eGift cards, and more. Enjoy your rewards your way.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/latitude-rewards",
+        "additionalValue": "Latitude Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Redeem your rewards in seconds. Just use the Latitude app or log in to the Latitude Service Centre.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/latitude-rewards",
+        "additionalValue": "Latitude Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Click to Pay\n\nA fast, simple and secure way to checkout online without entering your details every time.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/click-to-pay/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Before 31/01/27 - 0% p.a. for 25 months on Balance Transfers. 3% Balance Transfer fee and eligibility criteria apply.New customers only, must be approved by 31/01/2027. T&Cs apply.\nAfter 31/01/27 - 0% for 12 months on Balance Transfers. ",
+        "additionalInfoUri": "https://cards.latitudefinancial.com/low-rate?source_code=IDAAA&promo_code=KGXNTCTT&promo_code=8F5UH373&gemid2=lfs-web%3Acards%3Alow-rate%3Aapply-now-with-a-balance-transfer%3A0-balance-transfer-for-25-months&_gl=1*12nzmp6*_gcl_au*MjYzNDQ5ODM2LjE3ODUxMjE1OTM.*_ga*MjE0MTE3MDAzMi4xNzg1MTIxNTky*_ga_HN02VX7PXM*czE3ODU3MzI4NzUkbzI4JGcxJHQxNzg1NzMzMjU3JGozMiRsMCRoMTY4OTA4MzE1NA..*_ga_VZY6JWYT4Y*czE3ODU3MzI4NzUkbzI4JGcxJHQxNzg1NzMzMjU3JGozMiRsMCRoMTY3MTQwMzAy",
+        "additionalValue": "P25M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Balance transfers available",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "0% for 25 months Balance Transfer\nPay off your debt faster with 0% p.a. for 25 months on a Balance Transfer. 3% Balance Transfer fee and eligibility criteria apply. New customers only, must be approved by 31 January 2027. Balance Transfer must be submitted by 31 March 2027.",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Minimum Monthly Payment\n\nThe minimum monthly payment for a statement period is an amount equal to the greater of $30 or 2.75% of the closing balance, shown for the statement period on your statement of account. If your outstanding balance is less than $30, you must pay that balance.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "45.00"
+        },
+        "name": "Late Fee"
+      },
+      {
+        "additionalInfo": "Credit card fee charged annually.",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "69.00"
+        },
+        "name": "Credit Card Fee"
+      },
+      {
+        "additionalInfo": "3.00% of the Australian dollar value of the international transaction.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$5.00 You can avoid this fee by opting to receive statements online. Simply login to the Latitude Service Centre.",
+        "additionalValue": "P0D",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Paper Statement Fee"
+      },
+      {
+        "additionalInfo": "Up to 3% of balance transfer amount or in accordance with the specific balance transfer offer.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "OTHER",
+        "name": "Balance Transfer Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$4, on top of the cash advance fee.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "4.00"
+        },
+        "name": "International ATM Fee"
+      },
+      {
+        "additionalInfo": "$5, on top of the cash advance fee.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "OTHER",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "International Over the Counter Fee"
+      },
+      {
+        "additionalInfo": "The fee amount will be the lesser of your balance or $19.99.",
+        "currency": "AUD",
+        "feeCap": "19.99",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "OTHER",
+        "fixedAmount": {
+          "amount": "19.99"
+        },
+        "name": "Credit Balance Processing Fee"
+      },
+      {
+        "additionalInfo": "$3.95 (in person at Australia Post), $1.95 (online using BPAY®). You can avoid this fee by making your payments via mail, direct debit or via the Latitude Service Centre.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/gem-visa/#rates",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "PAYMENT",
+        "name": "Payment Handling Fees",
+        "variable": {
+          "feeMaximum": "3.95",
+          "feeMinimum": "0.00"
+        }
+      },
+      {
+        "additionalInfo": "3.5% of the cash advance or $4 (whichever is greater).",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "4.00"
+          },
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-12T07:48:57.375Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Cash advance rate.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2999",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "The Cash Advance Rate applies unless a specific valance transfer rate is subsequently offered",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/balance-transfer/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2999",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Applies after the promotional period.",
+            "minimumValue": "26",
+            "name": "Ongoing revert rate",
+            "rateApplicationMethod": "PER_TIER",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "0% p.a. on purchases up to 55 days",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/low-rate/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1399",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Before 31/01/27 - 0% for 25 months on Balance Transfer. 3% Balance Transfer fee and eligibility criteria apply.\nAfter 31/01/27 - 0% for 12 months on Balance Transfer.",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "New customers only, must be approved by 31 January 2027. Balance Transfer must be submitted by 31 March 2027. T&Cs , annual card fee and other charge apply. Interest rate reverts to the cash advance rate after the promotional period. A Balance Transfer cannot be made from a Latitude issued credit card.",
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "0% p.a. balance transfer for 25 months",
+            "maximumValue": "25",
+            "minimumValue": "1",
+            "name": "Promotional period",
+            "rateApplicationMethod": "PER_TIER",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "Latitude Low Rate Mastercard",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "fc9d7803-dad4-45a2-9b1b-cebf3bf65653"
+  },
+  "version": 7
+}

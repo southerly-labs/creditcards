@@ -1,0 +1,427 @@
+{
+  "brand": "Latitude Credit Cards",
+  "product": {
+    "additionalInformation": {
+      "additionalOverviewUris": [
+        {
+          "additionalInfoUri": "https://assets.latitudefinancial.com/legals/28degreescard/28degrees-rewards.pdf",
+          "description": "Latitude 28° Global Platinum Mastercard Rewards Program Terms and Conditions"
+        }
+      ],
+      "additionalTermsUris": [
+        {
+          "additionalInfoUri": "https://assets.latitudefinancial.com/legals/28degreescard/28degrees-rewards.pdf",
+          "description": "Latitude 28° Global Platinum Mastercard Rewards Program Terms and Conditions"
+        }
+      ],
+      "eligibilityUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#eligibility",
+      "feesAndPricingUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#fees",
+      "overviewUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/",
+      "termsUri": "https://assets.latitudefinancial.com/legals/credit-card-general-terms-and-conditions.pdf"
+    },
+    "applicationUri": "https://cards.latitudefinancial.com/28degrees",
+    "brand": "Latitude Credit Cards",
+    "brandName": "Latitude Credit Cards",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://images.ctfassets.net/w0q68lqdeo57/7b5n6ycF7fUnsuJsYeAKWq/5c87be8f2127f8a7f82701d7cd94beec/cc-28d_1.jpg",
+        "title": "Latitude 28° Global Platinum Mastercard"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum credit limit of $1,000.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "The Latitude 28° Global Platinum Mastercard offers $0 international transaction fees on purchases, $0 currency conversion fees, complimentary travel and purchase protection insurance, up to 55 days interest free on purchases when paid in full by the due date, and access to Latitude Rewards including cashback offers from partner merchants. Annual fee of $96 (waived for the first year). Minimum credit limit $1,000.",
+    "effectiveFrom": "2025-12-03T13:00:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Applicants must be at least 18 years old.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#how-to-apply",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "A resident of Australia or a temporary resident who legally has the right to work in Australia (and intend to stay) for at least the next 12 months.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#how-to-apply",
+        "additionalValue": "Australian resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Able to supply identification and financial details\nA copy of your driver's licence, passport or proof of age card. Details of your income, assets and debts. Employer's name and contact details.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#how-to-apply",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "To be eligible you must: Have an income of at least $20,000 gross per year, from employment or investments",
+        "additionalValue": "20000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Credit history\nTo be eligible you must: Be able to demonstrate a good credit history for the last 5 years",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Product is only eligible for a natural person.",
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "$0 Foreign Transaction Fee\n\nWhether you're shopping online or abroad, you'll enjoy a $0 international transaction fee & great exchange rates.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "First year $0 annual fee\n\nPlus, spend $12k yearly on eligible purchases to have your fee waived year after year6.Use our spend Tracker",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/spend-tracker",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Get a bonus $260 in Latitude Rewards when you spend $2,200 or more each month for your first 3 months. New customers only, approved by 31 July 2026. Plus, get ongoing Latitude Rewards: Up to $240 each year when you spend $1,000 or more on eligible international and local purchases each month.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Enjoy everyday savings from groceries and dining to cinema and entertainment. Plus, earn cashback in Latitude Rewards when you shop Merchant Offers.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/latitude-rewards",
+        "additionalValue": "Latitude Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Earn $10 in Rewards each month when you spend $1,000 on eligible purchases. That's up to $120 per year! T&Cs apply.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/latitude-rewards",
+        "additionalValue": "Latitude Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "New customers from 29/5/25 earn an extra $10 in Rewards, when they spend the equivalent of AUD $1,000 per month on international purchases.",
+        "additionalValue": "Latitude Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Free Flight Delay Pass & Global Data Roaming\n\nAccess to a selection of airport lounges if your flight is delayed 2+ hours. Stay in touch with 3GB free global data each year and 15% off any extra data purchased in 150+ countries. T&Cs apply.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/flight-delay-pass/",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Unmissable every day and travel offers\n\nEnjoy a range of credit back offers, discounts and deals from big brands at home and abroad, like Mastercard Priceless Specials, Expedia and Wotif.",
+        "additionalInfoUri": "https://specials.priceless.com/en-au/cardhome/28%C2%B0_Global_Platinum_Mastercard",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Balance transfers available.",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "$0 additional card holder fee. Share all the features and benefits without needing to open a second account.",
+        "additionalInfoUri": "https://latitudefs.zendesk.com/hc/en-au/articles/36591875170577-Additional-Cardholders",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Top-rated app to complement your card\nWith a 4.8/5 App Store rating, the Latitude App helps you stay on top of payments and never miss a due date.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/mobile-app/",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Digital banking available via the Latitude App and Latitude Service Centre.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Mastercard credit card access.",
+        "additionalValue": "Mastercard",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Bill payment functionality available.",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Around the clock protection\n\nOur specialist team protects your personal and financial information from fraud and identity theft.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/scams-hub/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Great foreign exchange rates\n\nSet by our partners at Mastercard. So you get foreign currencies at the same rate we do.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Shop with confidence online and overseas with complimentary E-Commerce and Purchase Protection insurance.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/insurances",
+        "additionalValue": "Complimentary protection for your shopping",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free on purchases if paid in full by due date.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "0% p.a. for 12 months Balance Transfer, 3% Balance Transfer fee and eligibility criteria applies.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/balance-transfer/",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Pay with your compatible iPhone",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/digital-wallets/apple-pay/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your compatible Samsung phone",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/digital-wallets/samsung-pay/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your compatible Pixel phone",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/digital-wallets/google-pay/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your compatible Garmin device",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/digital-wallets/garmin-pay/",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Always On BT - 0% for 12 months on Balance Transfers with a 3% BT fee.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/balance-transfer/",
+        "additionalValue": "P1Y",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Minimum Monthly Payment\n\nThe minimum monthly payment for a statement period is an amount equal to the greater of $30 or 2.50% of the closing balance, shown on your statement of account.\n\nIf your outstanding balance is less than $30, you must pay that balance.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Annual fee of $96. Waived for the first year.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalValue": "P0D",
+            "description": "$96 annual fee is waived for the first year.",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "FEE_CAP",
+            "fixedAmount": {
+              "amount": "96.00"
+            }
+          },
+          {
+            "additionalValue": "P1Y",
+            "description": "$96 annual fee is waived in the second and subsequent years if eligible spend in the prior 12 months is $12,000 or more",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "FEE_CAP",
+            "eligibility": [
+              {
+                "additionalInfo": "Must spend $12,000 or more on eligible purchases in the 12 months prior",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "96.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "96.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "Fee charged when a minimum payment is not received by the due date.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "45.00"
+        },
+        "name": "Late Fee"
+      },
+      {
+        "additionalInfo": "$3.95 (in person at Australia Post), $1.95 (online using BPAY®). You can avoid this fee by making your payments via mail, direct debit or via the Latitude Service Centre.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "PAYMENT",
+        "name": "Payment Handling Fees",
+        "variable": {
+          "feeMaximum": "3.95",
+          "feeMinimum": "0.00"
+        }
+      },
+      {
+        "additionalInfo": "$0 international transaction fees on purchases.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "International Transaction Fee"
+      },
+      {
+        "additionalInfo": "$5.00 paper statement fee. You can avoid this fee by opting to receive statements online via the Latitude Service Centre.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "additionalValue": "P1D",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Paper Statement Fee"
+      },
+      {
+        "additionalInfo": "Up to 3% of balance transfer amount or in accordance with the specific balance transfer offer.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "OTHER",
+        "name": "Balance Transfer Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$0 additional cardholder fee.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "additionalValue": "P0D",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Cardholder Fee"
+      },
+      {
+        "additionalInfo": "$0 currency conversion fees on purchases.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Currency Conversion Fee"
+      },
+      {
+        "additionalInfo": "3.5% of the cash advance or $4 (whichever is greater).",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "4.00"
+          },
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "The amount will be the lesser of your balance or $19.99",
+        "feeCap": "19.99",
+        "feeMethodUType": "variable",
+        "feeType": "OTHER",
+        "name": "Credit Balance Processing Fee",
+        "variable": {
+          "feeMaximum": "19.99",
+          "feeMinimum": "0.00"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-05T06:00:13.451Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "28.99% p.a. interest rate on purchases.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2899",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "29.99% p.a. interest rate on cash advances.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2999",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "29.99% p.a. interest rate on balance transfers.",
+        "additionalInfoUri": "https://www.latitudefinancial.com.au/credit-cards/28-degrees/#rates",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2999",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Applies after promotional period.",
+            "minimumValue": "13",
+            "name": "Ongoing revert rate",
+            "rateApplicationMethod": "PER_TIER",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Always on BT - 0% for 12 months on Balance Transfers with a 3% BT fee.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "0% p.a. on balance transfer for 12 months.",
+            "maximumValue": "12",
+            "minimumValue": "1",
+            "name": "Promotional period",
+            "rateApplicationMethod": "PER_TIER",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "Latitude 28° Global Platinum Mastercard",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "107798f7-b01a-4ba6-a934-caca8a2b4a80"
+  },
+  "version": 7
+}

@@ -1,0 +1,426 @@
+{
+  "brand": "Regional Australia Bank",
+  "product": {
+    "additionalInformation": {
+      "additionalBundleUris": null,
+      "additionalEligibilityUris": null,
+      "additionalFeesAndPricingUris": null,
+      "additionalOverviewUris": null,
+      "additionalTermsUris": null,
+      "bundleUri": null,
+      "eligibilityUri": "https://www.regionalaustraliabank.com.au/personal/products/credit-cards/your-choice-credit-card",
+      "feesAndPricingUri": "https://www.regionalaustraliabank.com.au/personal/products/credit-cards/your-choice-credit-card",
+      "overviewUri": "https://www.regionalaustraliabank.com.au/personal/products/credit-cards/your-choice-credit-card",
+      "termsUri": "https://www.regionalaustraliabank.com.au/about-us/corporate-documents/product-terms-and-conditions"
+    },
+    "applicationUri": "https://apply.regionalaustraliabank.com.au/cip/rab/p/community/personalcredit/application.html?OfficeUseApplicationType=Credit%20card&SelectCreditCardType=Your%20Choice%20Visa",
+    "brand": "Regional Australia Bank",
+    "brandGroup": null,
+    "brandName": "Regional Australia Bank",
+    "bundles": [],
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://regionalaustraliabank-prod.imgix.net/getContentAsset/76e93286-ba9c-4671-a273-76cfa028b41c/3beffb48-3dfa-48f3-8905-aded8557907a/Visa-Your-Choice-regional-australia-bank.png?auto=format&w=800",
+        "title": "Your Choice Visa Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "A minimum loan amount of $500 applies to this product.",
+        "additionalInfoUri": null,
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "Versatile and competitive no frills credit card with low rates, low annual fee and great discounts for home loan borrowers.",
+    "effectiveFrom": null,
+    "effectiveTo": null,
+    "eligibility": [
+      {
+        "additionalInfo": "As a customer-owned bank, customers must also become a shareholder of Regional Australia Bank to be eligible to open an account.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Product is available to approved borrowers only. Terms, conditions, fees, charges and normal lending criteria apply.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Borrowers must demonstrate at least 6 months continuing employment history at the time of application.",
+        "additionalInfoUri": null,
+        "additionalValue": "Ongoing Employment",
+        "eligibilityType": "EMPLOYMENT_STATUS"
+      },
+      {
+        "additionalInfo": "Individuals must be citizens or permanent residents of Australia.",
+        "additionalInfoUri": null,
+        "additionalValue": "Australian Resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Up to 55 days interest free on purchases",
+        "additionalInfoUri": "https://www.regionalaustraliabank.com.au/-/media/communitymutual/files/documents/pdf/member/visa-conditions-of-use.pdf",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE",
+        "isActivated": "UNKNOWN"
+      },
+      {
+        "additionalInfo": "Make deposits and withdrawals through a Bank@Post facility at Australia Post outlets. For full details refer to our Conditions of Use. Fees and charges may apply.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "OTHER",
+        "isActivated": "UNKNOWN"
+      },
+      {
+        "additionalInfo": "Ability to make extra payments or repay the balance in full at any time.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "OTHER",
+        "isActivated": "UNKNOWN"
+      },
+      {
+        "additionalInfo": "Speed isn’t the only major advance of the NPP and Osko. Rather than needing hard-to-remember BSBs and account numbers, Osko users can make transactions using a ‘PayID’. This can be their mobile number, personal email or ABN.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "NPP_PAYID",
+        "isActivated": "UNKNOWN"
+      },
+      {
+        "additionalInfo": "Bank 24/7 wherever you are and whenever you want with RAB mobile and internet banking.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "DIGITAL_BANKING",
+        "isActivated": "UNKNOWN"
+      },
+      {
+        "additionalInfo": "Apple Pay can be attached to the product on request.",
+        "additionalInfoUri": null,
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET",
+        "isActivated": "UNKNOWN"
+      },
+      {
+        "additionalInfo": "The option for additional cardholders at no extra cost.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "ADDITIONAL_CARDS",
+        "isActivated": "UNKNOWN"
+      },
+      {
+        "additionalInfo": "Samsung Pay can be attached to the product on request.",
+        "additionalInfoUri": null,
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET",
+        "isActivated": "UNKNOWN"
+      },
+      {
+        "additionalInfo": "Google Pay can be attached to the product on request.",
+        "additionalInfoUri": null,
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET",
+        "isActivated": "UNKNOWN"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "This fee is charged by the card issuer for purchases in foreign currency, payments in Australian Dollars processed by a merchant or financial institution located outside Australia or for transactions where a currency conversion occurs.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": null,
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "accrualFrequency": null,
+          "amountRange": null,
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        },
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies for each day that a Direct Debit or Cheque transaction is debited to a member which results in a deposit or overdraft account being drawn beyond its available balance or limit.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "3.50"
+        },
+        "name": "Over Limit Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies where a direct debit request is rejected by us due to insufficient funds in your account.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Direct Debit Dishonour Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies per counter withdrawal or debit transfer once the monthly limit of 6 included withdrawals is exceeded. ",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Over the Counter Withdraw",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Your first 10 cheque deposits to your membership each month are free, each subsequent deposit will be charged per cheque.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DEPOSIT",
+        "fixedAmount": {
+          "amount": "0.50"
+        },
+        "name": "Cheque Deposit Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies when you make a late payment. ",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Late Payment Fee ",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies for each bank cheque you order from us.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "11.00"
+        },
+        "name": "Bank Cheque Fee ",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies when you make a transaction through a direct debit or credit.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Direct Debits and Credits ",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies when you add an additional cardholder to the account. ",
+        "additionalInfoUri": null,
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Card Holder Fee ",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies when you make a Cash Advance. ",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Cash Advance Fee ",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies when a staff provides assistance with an external transfer in branch. ",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Staff-Assisted External Transfer Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Applies on 31st of March each calendar year after initial funding of your “Your Choice Visa” account. Fee does not apply to additional cardholders on the same Your Choice Visa account.",
+        "additionalInfoUri": null,
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfo": "$40 Annual Fee waived for customers who hold an active, funded Partnership Advantage Home Loan.",
+            "additionalInfoUri": null,
+            "additionalValue": null,
+            "description": "Partnership Advantage Package",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Annual Fee waived for customers who hold an active, funded Partnership Advantage Home Loan.",
+                "additionalInfoUri": null,
+                "additionalValue": null,
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "40.00"
+            },
+            "rateBased": null
+          }
+        ],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Annual Fee ",
+        "rateBased": null,
+        "variable": null
+      }
+    ],
+    "instalments": null,
+    "isTailored": false,
+    "lastUpdated": "2026-06-29T04:05:39.586605Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Interest is per annum (p.a.). The Cash Advance rate for this product is equal to the relevant purchase rate. Applicable discounts also apply. Interest is charged immediately on any cash advance. Internal branch transfers that debit the Your Choice Visa will be treated as a cash advance and interest will be charged immediately. BPAY transactions from Your Choice Visa accounts will be treated as cash advances and interest will be charged immediately.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1469",
+        "repaymentType": "OTHER",
+        "tiers": []
+      },
+      {
+        "additionalInfo": "Interest is per annum (p.a.). 3.00% discount applies to the standard purchase rate if a Your Choice Visa is held on the same membership as an active, funded Home Loan. For each purchase that a member makes they will receive an interest free period of up to 55 days. Each monthly statement will show a payment due date that is at least 24 days from the statement date. The member does not pay any interest on purchases on that statement until after the due date. This means that all purchases receive at least 24 days interest free, and if the purchase is made early in the monthly statement cycle the member will receive up to 55 days interest free.",
+        "additionalInfoUri": null,
+        "additionalValue": "0.03",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "DISCOUNT",
+        "loanPurpose": "OTHER",
+        "rate": "0.1169",
+        "repaymentType": "OTHER",
+        "tiers": []
+      },
+      {
+        "additionalInfo": "Interest is per annum (p.a.). For each purchase that a member makes they will receive an interest free period of up to 55 days. Each monthly statement will show a payment due date that is at least 24 days from the statement date. The member does not pay any interest on purchases on that statement until after the due date. This means that all purchases receive at least 24 days interest free, and if the purchase is made early in the monthly statement cycle the member will receive up to 55 days interest free.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1469",
+        "repaymentType": "OTHER",
+        "tiers": []
+      }
+    ],
+    "name": "Your Choice Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "8d097100-9251-4174-a9e5-8af00812ca87"
+  },
+  "version": 7
+}

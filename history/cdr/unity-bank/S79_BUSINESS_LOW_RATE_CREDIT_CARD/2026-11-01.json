@@ -1,0 +1,267 @@
+{
+  "brand": "Unity Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.unity.bank/reusable-documents/disclosure-documents/account-and-access-facility-conditions-of-use/",
+      "feesAndPricingUri": "https://www.unity.bank/help/rates-fees/",
+      "overviewUri": "https://www.unity.bank/personal-loans/credit-card/low-rate-business-credit-card/",
+      "termsUri": "https://www.unity.bank/reusable-documents/disclosure-documents/account-and-access-facility-conditions-of-use/"
+    },
+    "applicationUri": "https://www.unitybank.com.au/forms/loan-enquiry-form/",
+    "brand": "UBL",
+    "brandName": "UNITY BANK",
+    "constraints": [
+      {
+        "additionalValue": "1000.00",
+        "constraintType": "OPENING_BALANCE"
+      },
+      {
+        "additionalValue": "100000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Our Business Low Rate Visa Credit Card features one of the lowest ongoing purchase rates in the market. And with up to 50 days interest free and a low annual fee, it all adds up to great value.",
+    "eligibility": [
+      {
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfo": "Business must be registered within Australia",
+        "additionalValue": "Must be an Australian Citizen or permanet resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Our Business Visa Credit Card offers quick, secure and convenient access to your money in person, online, overseas and over the phone. Enjoy the convenience of paying directly from your account, with all of the security you'd expect from Visa.",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "No fees for additional cardholders",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Unlimited free electronic transactions available on your account",
+        "additionalValue": "9999999999",
+        "featureType": "FREE_TXNS"
+      },
+      {
+        "additionalInfo": "Unlimited electronic transactions available on your account",
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalValue": "P50D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "Securely lock your debit card in the GCMB App while you look for it and unlock it again when you find it",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Cards made from 82% recycled PVC",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Find the digital version of your card via the Mobile App before your physical card arrives in the mail.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "With PayTo, you can see, review and authorise all new PayTo payments for transactions such as recurring bills, memberships and subscriptions before the money leaves your account.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "A range of security features and services provided, including fraud prevention technology and secure banking, to help keep your funds safe.",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Make free deposits and withdrawals through a Bank@Post facility at Australia Post outlets.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Minimum monthly repayment is the greater of 3% of the amount of the closing balance, or $20",
+        "featureType": "OTHER"
+      },
+      {
+        "featureType": "NPP_ENABLED"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Third party fee charged when you need an emergency replacement card delivered to you (fee is charged at cost)",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "EMERGENCY_CASH/CARD_VISA_CREDIT"
+      },
+      {
+        "additionalInfo": "A fee charged when you don't make your minimum monthly payment, plus any overdue amount",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "LATE_PAYMENT_FEE"
+      },
+      {
+        "additionalInfo": "A fee charged to cover the cost of producing and sending paper statements",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "CREDIT_CARD_STATEMENT_FEE_-_GCMB"
+      },
+      {
+        "additionalInfo": "A fee charged if you don't have enough money in your account for an EFTPOS transaction",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "1.00"
+        },
+        "name": "EFTPOS_DECLINE_FEE"
+      },
+      {
+        "additionalInfo": "A fee charged if you don't have enough money in your account for an ATM withdrawal",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "1.00"
+        },
+        "name": "ATM_INSUFFICIENT_FUNDS"
+      },
+      {
+        "additionalInfo": "A Processing fee charged when you require funds to be sent straight away",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "OUTWARD_RTGS_PAYMENT_FEE"
+      },
+      {
+        "additionalInfo": "A processing fee charged when you receive funds through this channel",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DEPOSIT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "INWARD_RTGS_AND_SWIFT_PAYMENT_FEE"
+      },
+      {
+        "additionalInfo": "Foreign currency conversion fee charged on transaction value in AUD (overseas transactions)",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "_FOREIGN_CURRENCY_CONVERSION_FEE",
+        "rateBased": {
+          "accrualFrequency": "D",
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "An annual fee charged for the Low Rate Business Credit Card product",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "ANNUAL_CREDIT_CARD_FEE_-_BUSINESS_LOW_RATE"
+      },
+      {
+        "additionalInfo": "A fee charged when you have insufficient funds in your account and we are unable to honour the Quick Debit transaction for you",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "QUICKDEBIT_DISHONOUR_FEE"
+      },
+      {
+        "additionalInfo": "A fee charged for cash advances and overseas transactions will attract an additional currency conversion fee",
+        "additionalInfoUri": "https://www.unity.bank/help/rates-fees/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.00"
+        },
+        "name": "VISA_CASH_ADVANCE_FEE"
+      }
+    ],
+    "isTailored": true,
+    "lastUpdated": "2026-09-30T10:27:11.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "Calculated daily. Charged monthly",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1949",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Calculated daily. Charged monthly",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1249",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Business  - Low Rate Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "S79_BUSINESS_LOW_RATE_CREDIT_CARD"
+  },
+  "version": 7
+}

@@ -1,0 +1,241 @@
+{
+  "brand": "Bank of us",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://bankofus.com.au/source-assets/documents/compliance/Summary-of-Accounts-Availability-of-Access-Facilities-and-Transaction-Limits-15-July-2024.pdf",
+      "feesAndPricingUri": "https://bankofus.com.au/source-assets/documents/compliance/Credit-Card-Key-Fact-Sheet_15.02.2022.pdf",
+      "overviewUri": "https://bankofus.com.au/cards",
+      "termsUri": "https://bankofus.com.au/source-assets/documents/compliance/61525-Bank-of-Us-Conditions-of-Use-Visa-Credit-Credit-Card-36PP-Cover1Dec2020.pdf"
+    },
+    "applicationUri": "https://bankofus.com.au/online-application?refer=bank-accounts",
+    "brand": "BNE LTD",
+    "brandName": "Bank of us",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://secureapps.bankofus.com.au/ibank3/Images/OBCreditCard.png",
+        "title": "Visa Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "A Bank of us Visa Credit Card gives you all the features you'd expect from a credit card accepted at more than 24 million outlets worldwide. With card limits from as little of $500, you'll get the ext",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "additionalValue": "Null",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "additionalInfo": "[58 days",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "The Annual Fee is waived if the cardholder/s spends a minimum of $8,000 on the card during the year",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "$39.00 charged on the anniversary of the first statement and charged annually on the same date thereafter. Waived if $8,000 in purchases is completed on the card during the 12 month period.",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "39.00"
+        },
+        "name": "ANNUAL_FEE"
+      },
+      {
+        "additionalInfo": "Applies where you request us to generate a PIN for your card. The fee will be debited to your account at the end of the day in which the PIN is generated",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "ASSISTED_PIN_ISSUE_FEE"
+      },
+      {
+        "additionalInfo": "This fee applies where you make a cash withdrawal via Australia Post offices displaying the Bank@Post symbol. The fee is debited to your account at the end of the month in which the fee is incurred.",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "BANK@POST_WITHDRAWAL_FEE"
+      },
+      {
+        "additionalInfo": "Applies where a cheque paid into your account with us is dishonoured. The fee is debited to your account on the date of dishonour.",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "12.00"
+        },
+        "name": "CHEQUE_DISHONOUR_(INWARD)_FEE"
+      },
+      {
+        "additionalInfo": "Applies where you request us to draw a counter/corporate cheque against funds held in your account, whether to a third party or to yourself. The fee is debited to your account at the end of the day in which the cheque is drawn.",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "COUNTER_(CORPORATE)_CHEQUE_FEE"
+      },
+      {
+        "additionalInfo": "Payable for each duplicate paper copy of your monthly statement you request. Charged at the time of your request.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "DUPLICATE_STATEMENT_FEE"
+      },
+      {
+        "additionalInfo": "Applies where an electronic transaction processed is rejected e.g. due to insufficient funds. The fee is debited to your account on the date of the rejection.",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "12.00"
+        },
+        "name": "ELECTRONIC_TRANSACTION_REJECTION_FEE"
+      },
+      {
+        "additionalInfo": "Applies where you request us to prepare an International Draft. The fee is payable by you at that time.",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "LATE_PAYMENT_FEE"
+      },
+      {
+        "additionalInfo": "Applies where you request the emergency replacement through VISA International of your VISA Debit card that is lost or stolen. The fee is debited to your account at the time of your request for a replacement card.",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "120.00"
+        },
+        "name": "OVERSEAS_DEBIT_CARD_REPLACEMENT_FEE"
+      },
+      {
+        "additionalInfo": "Applies to all cash advances and retail purchase transactions made in currencies other than Australian dollars. The fee is added to the total transaction amount debited to your account in Australian dollars.",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "OVERSEAS_CARD_TRANSACTION_FEE",
+        "rateBased": {
+          "rate": "0.025",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Applies where you make a VISA cash advance at an overseas ATM. The fee is debited to your account at the end of the month.",
+        "additionalInfoUri": "https://bankofus.com.au/source-assets/documents/compliance/Fees-and-Charges-Schedule-1-July-2021.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "VISA_CASH_WITHDRAWAL_FEE"
+      },
+      {
+        "additionalInfo": "Applies where you request us to retrieve the paper item or evidence supporting a transaction. The fee is debited to your account when the required documentation is provided to you. Please note that the fee is not applicable where evidence shows that you did not initiate the transaction.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "EVIDENCE_RETRIEVAL_FEE"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-04-13T22:42:12.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "For both purchases and cash advances",
+        "additionalInfoUri": "https://bankofus.com.au/cards",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0999",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "For both purchases and cash advances",
+        "additionalInfoUri": "https://bankofus.com.au/cards",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0999",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "Visa_Credit_Card"
+  },
+  "version": 7
+}

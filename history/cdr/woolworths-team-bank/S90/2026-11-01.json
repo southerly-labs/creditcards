@@ -1,0 +1,74 @@
+{
+  "brand": "Woolworths Team Bank",
+  "product": {
+    "additionalInformation": {
+      "bundleUri": "",
+      "eligibilityUri": "https://woolworthsteambank.com.au",
+      "feesAndPricingUri": "https://woolworthsteambank.com.au/wp-content/uploads/2025/06/PDS-Fees-Charges-Transaction-Limits_07.2025_FINAL.pdf",
+      "overviewUri": "https://woolworthsteambank.com.au",
+      "termsUri": "https://woolworthsteambank.com.au"
+    },
+    "applicationUri": "https://woolworthsteambank.com.au/loan/",
+    "brand": "WOOLWORTHS TEAM BANK",
+    "brandName": "WOOLWORTHS TEAM BANK",
+    "description": "Visa Credit Card",
+    "effectiveFrom": "2020-08-01T00:00:00.000+10:00",
+    "eligibility": [
+      {
+        "additionalInfo": "",
+        "additionalInfoUri": "",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Membership is open to team members of Woolworths and Endeavour Groups, their immediate family members, and those with an affinity to Woolworths Group.",
+        "additionalInfoUri": "https://woolworthsteambank.com.au/becoming-member/",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "accrualFrequency": "",
+        "additionalInfo": "",
+        "additionalInfoUri": "https://woolworthsteambank.com.au/wp-content/uploads/2025/06/PDS-Fees-Charges-Transaction-Limits_07.2025_FINAL.pdf",
+        "amount": "25.00",
+        "currency": "AUD",
+        "feeType": "TRANSACTION",
+        "name": "ARREARS_LETTER_FEE"
+      },
+      {
+        "accrualFrequency": "",
+        "additionalInfo": "",
+        "additionalInfoUri": "https://woolworthsteambank.com.au/wp-content/uploads/2025/06/PDS-Fees-Charges-Transaction-Limits_07.2025_FINAL.pdf",
+        "amount": "35.00",
+        "currency": "AUD",
+        "feeType": "TRANSACTION",
+        "name": "DEFAULT_NOTICE"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2025-08-26T11:59:05.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "",
+        "additionalInfoUri": "https://woolworthsteambank.com.au/our-interest-rates/",
+        "applicationFrequency": "P1M",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "rate": "0.1345"
+      },
+      {
+        "additionalInfo": "",
+        "additionalInfoUri": "https://woolworthsteambank.com.au/our-interest-rates/",
+        "applicationFrequency": "P1M",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "rate": "0.1345"
+      }
+    ],
+    "name": "Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "S90"
+  },
+  "version": 4
+}

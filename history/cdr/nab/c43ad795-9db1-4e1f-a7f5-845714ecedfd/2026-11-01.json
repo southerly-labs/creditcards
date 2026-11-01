@@ -1,0 +1,397 @@
+{
+  "brand": "NATIONAL AUSTRALIA BANK",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+      "feesAndPricingUri": "https://www.nab.com.au/personal/help-and-guidance/personal-banking-fees-and-charges#3a",
+      "overviewUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+      "termsUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card"
+    },
+    "applicationUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+    "brand": "NAB",
+    "bundles": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/content/dam/nabrwd/documents/terms-and-conditions/banking/nab-private-tailored-package-terms-and-conditions.pdf",
+        "description": "The NAB private tailored package is an exclusive package specifically designed for nab private clients of national australia bank (NAB). we offer through the package a wide range of concessions and benefits on many of nab’s most competitive products.",
+        "name": "NAB Private Tailored Package",
+        "productIds": [
+          "fbce13b1-77db-4226-9f55-9028ee31884f",
+          "0c2ca397-dc24-4eb0-8fb9-e098c582ebd5",
+          "263a9294-f2d8-4f5e-885c-363e1c2010b9",
+          "c43ad795-9db1-4e1f-a7f5-845714ecedfd",
+          "8a47c774-0065-4850-992c-42d73253f3eb",
+          "e10279eb-1172-48dd-b6d2-08bed9605c5d"
+        ]
+      },
+      {
+        "description": "The NAB Portfolio Package is designed to provide a wide range of discounts and extra benefits .",
+        "name": "NAB Portfolio Package",
+        "productIds": [
+          "fbce13b1-77db-4226-9f55-9028ee31884f",
+          "0c2ca397-dc24-4eb0-8fb9-e098c582ebd5",
+          "263a9294-f2d8-4f5e-885c-363e1c2010b9",
+          "c43ad795-9db1-4e1f-a7f5-845714ecedfd",
+          "8a47c774-0065-4850-992c-42d73253f3eb",
+          "e10279eb-1172-48dd-b6d2-08bed9605c5d"
+        ]
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/private-portfolio-package",
+        "description": "The NAB private portfolio package is an exclusive package specifically designed for nab private clients of national australia bank (NAB). we offer through the package a wide range of concessions and benefits on many of nab’s most competitive products.",
+        "name": "NAB Private Portfolio Package",
+        "productIds": [
+          "fbce13b1-77db-4226-9f55-9028ee31884f",
+          "0c2ca397-dc24-4eb0-8fb9-e098c582ebd5",
+          "263a9294-f2d8-4f5e-885c-363e1c2010b9",
+          "c43ad795-9db1-4e1f-a7f5-845714ecedfd",
+          "8a47c774-0065-4850-992c-42d73253f3eb",
+          "e10279eb-1172-48dd-b6d2-08bed9605c5d"
+        ]
+      }
+    ],
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards-cards"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "6000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Earn NAB Rewards Points and enjoy platinum services and complimentary insurances",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Must be an Australian resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Lending criteria apply",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalValue": "NAB Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Up to one additional cardholder",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Earn points on your every day transactions and there is no limit to the amount of points you can earn each month\r\nEarn 2 NAB Rewards points \r\nOn purchases made online with Webjet via the NAB Rewards Store or on webjet.com.au. \r\nEarn 1.5 NAB Rewards points at eligible Grocery Stores. Eligibility for additional points at Grocery stores is determined by a merchant’s Merchant Category Code (MCC). An eligible Grocery store is a merchant whose MCC is designated as 5411 Grocery Stores. NAB is not responsible for designating MCCs and has no control over the same. You’re unable to get bonus points if you use an intermediary platform such as PayPal or a delivery platform such as Uber Eats for these transactions. \r\nEarn 1 NAB Rewards Point on all other eligible transactions.  \r\n\r\nNAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalValue": "NAB Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Complimentary International Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Complimentary Domestic Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Complimentary Purchase Protection Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Complimentary Extended Warranty Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Complimentary Rental Vehicle Excess Insurance in Australia",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "3% fee\r\n\r\nNAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Up to 44 interest free days on purchases",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "NAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "P12M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "NAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "Access to 24 hour, 7 day assistance for travel and lifestyle services with NAB Concierge.",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "NAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalValue": "Visa Premium Access",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "80,000 BONUS POINTS when you spend $3,000 on everyday purchases within 90 days of account opening.Minimum monthly repayments required. NAB may vary or end this offer at any time.Effective from May 27, 2025\r\n\r\nNAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "80000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "20,000 BONUS POINTS when you keep your card for over 12 months. NAB may vary or end this offer at any time.\r\n\r\nNAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "20000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "Fraud protection\r\nNAB Defence proactively detects fraudulent transactions, so you can enjoy 100% peace of mind with all purchases.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "featureType": "FRAUD_PROTECTION"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "NAB may waive or discount fees at its discretion, as part of a package or promotional offer.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfo": "No annual credit card fees on up to 2 eligible NAB credit card accounts that you include in your package.",
+            "additionalInfoUri": "https://www.nab.com.au/personal/home-loans/nab-portfolio-facility",
+            "description": "NAB Portfolio Facility - no annual fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Part of NAB Portfolio Facility",
+                "additionalInfoUri": "https://www.nab.com.au/personal/home-loans/nab-portfolio-facility",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "195.00"
+            },
+            "rateBased": {
+              "rate": "1.0",
+              "rateType": "TRANSACTION"
+            }
+          },
+          {
+            "additionalInfo": "No annual credit card fees on up to 2 eligible NAB credit card accounts that you include in your package.",
+            "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/private-portfolio-package",
+            "description": "NAB Private Portfolio Package - no annual fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Part of NAB Private Portfolio Package",
+                "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/private-portfolio-package",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "195.00"
+            },
+            "rateBased": {
+              "rate": "1.0",
+              "rateType": "TRANSACTION"
+            }
+          },
+          {
+            "additionalInfo": "No annual credit card fees on up to 2 eligible NAB credit card accounts that you include in your package.",
+            "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/nab-private-tailored-package",
+            "description": "NAB Private Tailored Package - no annual fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Part of NAB Private Tailored Package",
+                "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/nab-private-tailored-package",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "195.00"
+            },
+            "rateBased": {
+              "rate": "1.0",
+              "rateType": "TRANSACTION"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "195.00"
+        },
+        "name": "Annual Card Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee Single-currency",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee Multi-currency",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Minimum fee is $3.5",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Debited after day on which payment due if balance of account is $50 or more",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Late Payment Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-01T13:59:59Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "NAB may discount the purchase rate at its discretion, including for promotional purposes.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2249",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2299",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "0% p.a. for 12 months standard balance transfer rate. 3% balance transfer fee applies.\r\nNAB may offer different introductory rates at its discretion, including for promotional purposes.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card",
+        "additionalValue": "P12M",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "UPFRONT",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ADVANCE",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "OTHER",
+        "rate": "0.0",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-signature-card",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2174",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "NAB Rewards Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "c43ad795-9db1-4e1f-a7f5-845714ecedfd"
+  },
+  "version": 7
+}

@@ -1,0 +1,123 @@
+{
+  "brand": "First Option Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://firstoptionbank.com.au/disclosure-statements/",
+      "feesAndPricingUri": "https://firstoptionbank.com.au/disclosure-statements/",
+      "overviewUri": "https://www.firstoptionbank.com.au/credit-card/",
+      "termsUri": "https://firstoptionbank.com.au/disclosure-statements/"
+    },
+    "applicationUri": "https://www.firstoptionbank.com.au/credit-card-enquiry/",
+    "brand": "FIRST OPTION BANK LTD",
+    "brandName": "FIRST OPTION BANK",
+    "cardArt": [
+      {
+        "cardScheme": null,
+        "cardType": null,
+        "imageUri": "https://firstoptionbank.com.au/wp-content/uploads/2020/11/Credit-Card-Mockup_blue-8.png",
+        "title": "Visa Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Low Rate Visa Credit Card",
+    "eligibility": [
+      {
+        "additionalValue": "Australian Residents",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Visa Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "up to 45 days on purchases",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Google, Apple Pay, Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfo": "Email, SMS",
+        "featureType": "NOTIFICATIONS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "Credit Card Annual Fee",
+            "discountMethodUType": "rateBased",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "If you have a Complete Home Loan with First Option you will not be charged this fee",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "rateBased": {
+              "rate": "1.0",
+              "rateType": "FEE"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "48.00"
+        },
+        "name": "CREDIT_CARD_ANNUAL_FEE"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-06-02T12:56:29.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.firstoptionbank.com.au/lending-rates/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1799",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.firstoptionbank.com.au/lending-rates/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1049",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "VISA CREDIT CARD",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "VISA_CREDIT_CARD"
+  },
+  "version": 7
+}

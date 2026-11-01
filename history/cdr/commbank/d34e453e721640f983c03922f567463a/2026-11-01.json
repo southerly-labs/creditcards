@@ -1,0 +1,219 @@
+{
+  "brand": "CommBank",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.commbank.com.au/personal/apply-online/download-printed-forms/ADB1682.pdf",
+      "overviewUri": "https://www.commbank.com.au/credit-cards/interest-free-low-fee.html",
+      "termsUri": "https://www.commbank.com.au/personal/apply-online/download-printed-forms/008-188-interest-free-low-fee.pdf"
+    },
+    "applicationUri": "https://www.commbank.com.au/credit-cards/interest-free-low-fee.html",
+    "brand": "CBA",
+    "brandName": "CommBank",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-IFLF-credit-card.png",
+        "title": "Interest-Free Low Fee credit card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Note the credit limit we give you will depend on your requirements and objectives, and financial situation.",
+        "additionalValue": "1500.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Note the credit limit we give you will depend on your requirements and objectives, and financial situation.",
+        "additionalValue": "400.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "CommBank's simplest credit card yet with no interest and no late fees. Just a simple monthly fee.",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Individuals must have the legal capacity to enter into the loan contract. Not available for non-personal borrowers.",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Applications for Interest-free Low fee credit card are subject to CBA's lending policy for new Low Cost Credit Contracts.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "You must have an Australian residential address.",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Through AutoPay, you can choose to have the full closing balance, the minimum amount due, or set an amount debited from your chosen CommBank transaction account. If the set amount isn't enough to cover the minimum payment shown on your current statement, we'll take out more to cover the difference. If the set amount is more than your closing balance shown on your current statement, only the closing balance amount is debited.",
+        "additionalInfoUri": "https://www.commbank.com.au/support.credit-cards.set-up-autopay.html",
+        "additionalValue": "AutoPay",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "With BPAY View you can switch to online bills & ask billers to send them directly to the CommBank app or NetBank, making it easy to see, track, and pay bills online.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/bpay-view.html",
+        "additionalValue": "BPAY View",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Get access to exclusive benefits, cashbacks and discounts with CommBank Yello.",
+        "additionalInfoUri": "https://www.commbank.com.au/commbank-yello.html",
+        "additionalValue": "CommBank Yello",
+        "featureType": "CASHBACK_OFFER"
+      },
+      {
+        "additionalInfo": "Wherever you are in the world, CommBank gives you the choice and control to securely manage all of your accounts on a range of devices, the way you want.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking.html",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "With Bill Sense, you can see how much you'll need to cover bills each month - up to 12 months in advance - on one simple timeline in the CommBank app. We predict your bills based on patterns in your transactions, how much you pay and when. We may not predict all of your bills.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/bill-sense.html",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Pay with your Apple(TM) device using Apple Pay.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/apple-pay.html",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Android(TM) phone using the CommBank app.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/tap-and-pay.html",
+        "additionalValue": "CommBank Tap and Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Garmin(TM) smartwatch using Garmin Pay.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/garmin-pay.html",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Android(TM) device using Google Pay(TM).",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/google-pay.html",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Samsung(TM) device using Samsung Pay.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/samsung-pay.html",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Instantly lock, block or limit your card for extra control through the CommBank app or NetBank.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/lock-block-limit-your-credit-card.html",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Use instore and online at millions of locations, everywhere Mastercard is accepted. A Mastercard allows you to pay for things using your card, smartphone or wearable. You may receive access to other features and benefits associated with your Mastercard subject to terms and conditions",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "We'll tell you when your online bill payment is due.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/bpay-view.html",
+        "additionalValue": "Billing notifications",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "We'll notify you when you go over your limit so you can make a payment in time and prevent an overlimit fee from being charged to your account. (Only applies to accounts opened before 1 July 2012).",
+        "additionalValue": "Overlimit notifications",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Reminders before payments are due.",
+        "additionalValue": "Payment reminders",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Turn Transaction Notifications on in the CommBank app and we'll instantly alert you when you pay using your CommBank Interest-free Low Fee credit card, and when you receive money into your everyday account.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/transaction-notifications.html",
+        "additionalValue": "Transaction Notifications",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "We help you stay on track with your card spending in the CommBank app.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/spend-tracker-insights.html",
+        "featureType": "DIGITAL_BANKING"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Pay no international transaction fees for purchases you make overseas or online.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transaction fee",
+        "rateBased": {
+          "rate": "0",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Late payment fees are not charged.",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Late payment fee"
+      },
+      {
+        "additionalInfo": "Monthly fee of $10. If you do not have any processed transactions in a given statement period and pay your previous statement closing balance in full by the due date, you will not be charged a monthly fee for that statement period.",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "If you do not have any processed transactions in a given statement period and pay your previous statement closing balance in full by the due date, you will not be charged a monthly fee of $10 for that statement period.",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "If you do not have any processed transactions in a given statement period and pay your previous statement closing balance in full by the due date, you will not be charged a monthly fee for that statement period.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "10.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Monthly fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-11-01T02:15:42.000Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Interest-free Low Fee credit card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "d34e453e721640f983c03922f567463a"
+  },
+  "version": 7
+}

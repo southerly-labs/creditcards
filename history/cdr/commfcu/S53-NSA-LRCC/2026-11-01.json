@@ -1,0 +1,276 @@
+{
+  "brand": "CommFCU",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card",
+      "feesAndPricingUri": "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card",
+      "overviewUri": "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card",
+      "termsUri": "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card"
+    },
+    "applicationUri": "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card",
+    "brand": "C",
+    "brandName": "Community First Credit Union",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cms.communityfirst.com.au/wp-content/uploads/2026/05/National-Seniors-Visa-Card.png",
+        "title": "NSA Credit Card"
+      }
+    ],
+    "description": "A low rate credit card with up to 55 days interest free on purchases. Half the annual fee goes to National Seniors Australia to help with their work on advocacy and financial literacy",
+    "effectiveFrom": "2026-09-01T00:00:00.000+10:00",
+    "eligibility": [
+      {
+        "additionalInfo": "Account holders must be 18 years or older",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Business members not eligible",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Australian citizen or permanent residency only",
+        "additionalValue": "Eligibility criteria applies",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Must be approved by Community First",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Additional card holders subject to approval and must be aged 16 years or older",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Ability to pay bills via BPAY",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Visa",
+        "additionalValue": "Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Leave your wallet at home and make payments on the go with Apple Pay.",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Up to 55 days. When you pay your balance in full by the due date each month",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Leave your wallet at home and make payments on the go with Google Pay.",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Leave your wallet at home and make payments on the go with Samsung Pay.",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Charged to loan account",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "LATE_PAYMENT"
+      },
+      {
+        "additionalInfo": "Applicable on all cards",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "ATM_WITHDRAWAL/CASH_ADVANCE_OVERSEAS"
+      },
+      {
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "VISA_CHARGEBACKS"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "OUT_OF_DATE_CARD_DETAILS"
+      },
+      {
+        "additionalInfo": "Half of annual fee ($25) will go back to National Seniors",
+        "additionalInfoUri": "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "CREDIT_CARD_ANNUAL_FEE_-_NSA"
+      },
+      {
+        "additionalInfo": "Charged per page. For statements issued prior to January 1997 the fee is $3 per page.",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "1.50"
+        },
+        "name": "COPY_OF_STATEMENT_(ALREADY_ISSUED)"
+      },
+      {
+        "additionalInfo": "Cheque deposits",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DEPOSIT",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "BANK@POST_CHEQUE_DEPOSIT"
+      },
+      {
+        "additionalInfo": "Deposit or withdraw cash via Bank@Post",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "BANK@POST_WITHDRAWAL,_CASH_ADVANCE_OR_CASH_DEPOSIT"
+      },
+      {
+        "additionalInfo": "Charged in US Dollars",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "CANCEL_REPLACEMENT_OF_VISA_CARD"
+      },
+      {
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "55.00"
+        },
+        "name": "REPLACEMENT_OF_VISA_CARD_(OVERSEAS)_STD"
+      },
+      {
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "12.50"
+        },
+        "name": "REPLACEMENT_OF_VISA_CARD_(WITHIN_AUS)"
+      },
+      {
+        "additionalInfo": "Fee charged on the day of the transaction",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "DOMESTIC_CASH_ADVANCE_FEE"
+      },
+      {
+        "additionalInfo": "Charged on the day of the transaction",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "OVERSEAS_CASH_ADVANCE_FEE"
+      },
+      {
+        "additionalInfo": "Applies for all transactions (including reversals and cash advances) where you use your card for a foreign currency transaction or for an Australian dollar transaction that is with a foreign merchant or that is processed by an entity or financial institution outside Australia.",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "INTERNATIONAL_TRANSACTION_FEE",
+        "rateBased": {
+          "accrualFrequency": "D",
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-06T15:34:19.000+11:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "Credit eligibility criteria, terms and conditions fees and charges apply. Rates are current as at 01/09/2026 and subject to change without notice.",
+        "additionalInfoUri": "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0999",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Credit eligibility criteria, terms and conditions fees and charges apply. Rates are current as at 01/09/2026 and subject to change without notice.",
+        "additionalInfoUri": "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0999",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Credit eligibility criteria, terms and conditions fees and charges apply. Rates are current as at 01/09/2026 and subject to change without notice.",
+        "additionalInfoUri": "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0499",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "NSA CREDIT CARD",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "S53-NSA-LRCC"
+  },
+  "version": 7
+}

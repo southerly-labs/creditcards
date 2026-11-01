@@ -1,0 +1,385 @@
+{
+  "brand": "Latitude Credit Cards",
+  "product": {
+    "additionalInformation": {
+      "additionalOverviewUris": [
+        {
+          "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+          "description": "Key Facts Sheet"
+        }
+      ],
+      "eligibilityUri": "https://www.davidjones.com/credit-card/compare/premiere",
+      "feesAndPricingUri": "https://www.davidjones.com/credit-card/compare/premiere",
+      "overviewUri": "https://www.davidjones.com/credit-card/compare/premiere",
+      "termsUri": "https://assets.latitudefinancial.com/legals/david-jones-credit-card-general-terms-and-conditions.pdf"
+    },
+    "applicationUri": "https://cards.latitudefinancial.com/davidjonespremiere",
+    "brand": "Latitude Credit Cards",
+    "brandName": "Latitude Credit Cards",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.davidjones.com/images/assetimages/2024/CreditCard/card_Premiere.png",
+        "title": "DAVID JONES PREMIERE CREDIT CARD"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Min credit limit",
+        "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Elevate your everyday spending with the David Jones Premiere Credit Card. The David Jones Premiere credit card unlocks a stylish new world of benefits. Enjoy exclusive access to complimentary store services, events and offers. Discover a credit card that turns general purchases into a luxury experience.",
+    "effectiveFrom": "2026-01-19T00:00:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Applicants must be at least 18 years old.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "A resident of Australia or a temporary resident who legally has the right to work in Australia (and intend to stay) for at least the next 12 months.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "Australian resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "A driver licence, passport or medicare card to help verify your identity. Details about your income, living expenses & debts.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Have an income of at least $20,000 gross per year, from employment or investments. Be able to demonstrate a good credit history for the last 5 years\n",
+        "additionalInfoUri": "https://cards.latitudefinancial.com/davidjonespremiere",
+        "additionalValue": "20000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Product is only eligible for a natural person.",
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Additional cardholder fee - $24 per cardholder. Additional Cardholder must be 16 years of age or over. The Primary Cardholder will be liable to pay for all transactions made by Additional Cardholder. Can have one or more additional cardholders.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "Mastercard Offers",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Access the Points Hub through the Latitude App to redeem your David Jones points for gift cards and more.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere#",
+        "additionalValue": "Explore the David Jones Points Hub",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Complete Security\n\nSet up Face ID or fingerprint login for extra protection.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Manage Your Account\n\nManage your David Jones Prestige credit card with ease using the Latitude Mobile App.\nView your account, pay your balance, and check your transaction history in an instant.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Control Your Card\n\nUpdate your address, change your pin, and temporarily lock and unlock your card.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Earn David Jones Rewards when you spend at David Jones.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "Earn David Jones Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "0% p.a. for 12 months Balance Transfer, 3% Balance Transfer fee and eligibility criteria applies.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/balance-transfer",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Earn 2 points per $1 spent at David Jones. Earn 1 point per $1 spent everywhere else.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "Earn David Jones credit card points",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "Mastercard Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Receive exclusive invitations to events and previews. Unlock exclusive David Jones discounts. Receive complimentary express delivery. Receive complimentary gift wrapping.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "David Jones Benefits",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Compatible with all major digital wallets",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "E-commerce Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 44 days interest free on general purchases",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "10% discount at selected hotels with Expedia and Wotif via the Latitude App",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "Travel Benefits",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Compatible with all major digital wallets",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Compatible with all major digital wallets",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Always On BT - 0% for 12 months on Balance Transfers with a 3% BT fee.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/balance-transfer",
+        "additionalValue": "P1Y",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Balance transfers available.",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Minimum Monthly Payment\n\nThe minimum monthly payment for a statement period is an amount equal to the greater of $30 or 2.75% of the closing balance, shown on your statement of account.\nIf your outstanding balance is less than $30, you must pay that balance.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Credit card fee charged annually",
+        "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+        "additionalValue": "P1Y",
+        "discounts": [
+          {
+            "additionalValue": "P1Y",
+            "description": "$149 annual fee is waived for the first year.\n",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "FEE_CAP",
+            "fixedAmount": {
+              "amount": "149.00"
+            }
+          },
+          {
+            "additionalValue": "P1Y",
+            "description": "$149 annual fee is waived in the second and subsequent years if eligible spend in the prior 12 months is $24,000 or more\n",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "FEE_CAP",
+            "eligibility": [
+              {
+                "additionalInfo": "Must spend $24,000 or more on eligible purchases in the 12 months prior",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "149.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "149.00"
+        },
+        "name": "Annual Credit Card Fee"
+      },
+      {
+        "additionalInfo": "Greater of 3% or $3 (with a maximum of $30 per transaction)",
+        "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "30.00",
+            "feeMinimum": "3.00"
+          },
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Late Fee"
+      },
+      {
+        "additionalInfo": "$0 when you pay via the Latitude App, Online Service Centre, mail, direct debit or online using BPAY or $3.95 (in person at Australia Post)",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Payment Handling Fees"
+      },
+      {
+        "additionalInfo": "3.00% of the Australian dollar value of the international transaction",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$3 per statement only charged if account balance is over $5 on day of billing",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/compare/premiere",
+        "additionalValue": "P0D",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Paper Statement Fee"
+      },
+      {
+        "additionalInfo": "Up to 3% of balance transfer amount",
+        "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+        "feeMethodUType": "rateBased",
+        "feeType": "OTHER",
+        "name": "Balance Transfer Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "P1Y\n$24 per additional cardholder",
+        "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+        "additionalValue": "P1Y",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "24.00"
+        },
+        "name": "Additional Cardholder Fee"
+      },
+      {
+        "additionalInfo": "Charged when your account is closed and still holds a credit balance of less than $20.00; unless an instruction is provided to us on how to return the credit balance to you. The fee amount will be the lesser of your balance, or $19.99.",
+        "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+        "feeCap": "19.99",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "OTHER",
+        "fixedAmount": {
+          "amount": "19.99"
+        },
+        "name": "Credit Balance Processing Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-06T06:29:28.323Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Purchase rate",
+        "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2499",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Cash advance rate",
+        "additionalInfoUri": "https://assets.latitudefinancial.com/legals/key-fact-sheet/DJ-Premiere/KFS.html",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2599",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "The Cash Advance Rate applies, unless a specific balance transfer rate is subsequently offered.",
+        "additionalInfoUri": "https://www.davidjones.com/credit-card/balance-transfer",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2599",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Applies after promotional period",
+            "minimumValue": "13",
+            "name": "Ongoing revert rate",
+            "rateApplicationMethod": "PER_TIER",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Always on BT - 0% for 12 months on Balance Transfers with a 3% BT fee.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "0% p.a. on balance transfers for 12 months",
+            "maximumValue": "12",
+            "minimumValue": "1",
+            "name": "Promotional period",
+            "rateApplicationMethod": "PER_TIER",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "David Jones Premiere Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "59ad92b9-5500-40b3-8da6-3b9580b6c13c"
+  },
+  "version": 7
+}

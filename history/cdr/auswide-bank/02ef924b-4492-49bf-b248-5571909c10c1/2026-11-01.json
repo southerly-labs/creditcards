@@ -1,0 +1,239 @@
+{
+  "brand": "Auswide Bank Ltd",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://auswidebank.com.au/help/resources/terms-and-conditions/",
+      "feesAndPricingUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+      "overviewUri": "https://auswidebank.com.au/banking/credit-cards/low-rate-visa-credit-card/",
+      "termsUri": "https://auswidebank.com.au/help/resources/terms-and-conditions/"
+    },
+    "brand": "A-Auswide Bank",
+    "brandName": "A-Auswide Bank",
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "A low rate credit card",
+    "eligibility": [
+      {
+        "additionalInfo": "Available for personal use",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      }
+    ],
+    "features": [
+      {
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "featureType": "NPP_PAYID"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Debited to your account on the day your credit card facility is activated and annually on anniversary",
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfo": "FEE WAIVED",
+            "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+            "description": "Under 25's",
+            "discountMethodUType": "rateBased",
+            "discountType": "ELIGIBILITY_ONLY",
+            "rateBased": {
+              "rate": "1.0",
+              "rateType": "FEE"
+            }
+          },
+          {
+            "additionalInfo": "FEE WAIVED",
+            "additionalInfoUri": "https://auswidebank.com.au/corporate/shareholder-information/shareholder-advantage/",
+            "description": "Shareholder of Auswide Bank",
+            "discountMethodUType": "rateBased",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Must provide Holder Identification Number",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "rateBased": {
+              "rate": "1.0",
+              "rateType": "FEE"
+            }
+          },
+          {
+            "additionalInfo": "FEE WAIVED",
+            "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+            "description": "Hold an Auswide Bank Mortgage",
+            "discountMethodUType": "rateBased",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Must hold Auswide Bank mortgage",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "rateBased": {
+              "rate": "1.0",
+              "rateType": "FEE"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "ANNUAL_FEE"
+      },
+      {
+        "additionalInfo": "Direct charge fee is levied by the ATM owner. May be payable to the ATM owner when using your card to withdraw or check your balance at a non-Auswide Bank ATM network ATM.",
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "CASH_ADVANCE",
+        "name": "ATM_DIRECT_CHARGE_FEE",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "This fee is charged for making a cash advance, cash transfer or cash equivalent debit from your account",
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "3.50"
+        },
+        "name": "CASH_ADVANCE"
+      },
+      {
+        "additionalInfo": "Plus 3% Currency Conversion Fee. Payable when you use your Visa Debit Card at any oversas ATM to withdraw from your account",
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "FOREIGN_ATM_WITHDRAWAL_FEE"
+      },
+      {
+        "additionalInfo": "Payable when you use your card to pay for purchases or withdraw cash at overseas retail outlets or overseas ATM",
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "CURRENCY_CONVERSION_FEE",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Unascertainable - as quoted by Visa Global Customer Assistance Service.",
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "CASH_ADVANCE",
+        "name": "EMERGENCY_CARD/EMERGENCY_CASH_DISBURSEMENT_FEE",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "Payable where there is an amount overdue for payment past its due date",
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "LATE_PAYMENT_FEE"
+      },
+      {
+        "additionalInfo": "Charged per rejection. Payable when you've arranged a direct debit payment or external payment to an account at another financial institution but there are insufficient clear funds in your account",
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "DISHONOUR_FEE_-_DIRECT_DEBIT_AND_EXTERNAL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Payable each time you request a high value, time critical payment from your account to another financial institution on a real time basis for    same day    payment",
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "RTGS_OUTWARD_PAYMENT_FEE"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-06-24T16:11:08.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/interest-rates/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0974",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/interest-rates/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0974",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://auswidebank.com.au/help/resources/interest-rates/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "LOW RATE VISA CREDIT CARD",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "02ef924b-4492-49bf-b248-5571909c10c1"
+  },
+  "version": 7
+}

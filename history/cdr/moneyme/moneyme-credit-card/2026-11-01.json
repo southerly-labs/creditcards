@@ -1,0 +1,437 @@
+{
+  "brand": "MoneyMe",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.moneyme.com.au/credit-card",
+      "feesAndPricingUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+      "overviewUri": "https://www.moneyme.com.au/credit-card",
+      "termsUri": "https://mmestoragecdn.blob.core.windows.net/web2/v3/images/legal/credit-guide.pdf"
+    },
+    "applicationUri": "https://www.moneyme.com.au/credit-card",
+    "brand": "MoneyMe",
+    "brandName": "MoneyMe",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://cdn.moneyme.com.au/images/assets/cards/cashback-rewards-card.png",
+        "title": "MoneyMe Cashback Rewards Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum credit limit of $1,000.",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": "Express application credit limit: $2,000.",
+        "additionalValue": "2000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Standard credit limit tier: $5,000 (Equifax OneScore 400-499).",
+        "additionalValue": "5000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Standard credit limit tier: $7,500 (Equifax OneScore 500-599).",
+        "additionalValue": "7500.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Standard credit limit tier: $10,000 (Equifax OneScore 600-699).",
+        "additionalValue": "10000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Standard credit limit tier: $15,000 (Equifax OneScore 700-799).",
+        "additionalValue": "15000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Standard credit limit tier: $20,000 (Equifax OneScore 800 and above). The maximum credit limit on this product is $20,000; a $30,000 limit is not offered.",
+        "additionalValue": "20000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "Digital credit card with cashback rewards. Purchase and cash advance rates are personalised to your Equifax OneScore credit band. Credit limits up to $20,000.",
+    "eligibility": [
+      {
+        "additionalInfo": "Available to natural persons only; not available to businesses or other entities.",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Applicants must be at least 18 years of age.",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Applicants must be an Australian citizen or permanent resident.",
+        "additionalValue": "Australian citizen or permanent resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Applicants must be currently employed with a regular income.",
+        "additionalValue": "Must be currently employed",
+        "eligibilityType": "EMPLOYMENT_STATUS"
+      },
+      {
+        "additionalInfo": "Minimum gross annual income of $30,000.",
+        "additionalValue": "30000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Minimum Equifax OneScore of 400 is required. Applications are subject to MoneyMe's credit assessment criteria.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Earn cashback on eligible purchases through the MoneyMe cashback rewards program. Cashback is credited to your card account.",
+        "featureType": "CASHBACK_OFFER"
+      },
+      {
+        "additionalInfo": "Card is managed entirely online via the MoneyMe app and member dashboard.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Supports payments via the New Payments Platform where available.",
+        "featureType": "NPP_ENABLED"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Annual account fee of $149, charged yearly.",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "149.00"
+        },
+        "name": "Annual fee"
+      },
+      {
+        "additionalInfo": "3% of the cash advance amount, charged each time a cash advance is made.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "WITHDRAWAL",
+        "name": "Cash advance fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": "Charged when a payment to your account is dishonoured.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Dishonour fee"
+      },
+      {
+        "additionalInfo": "Charged when the minimum payment is not received by the due date.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Late payment fee"
+      },
+      {
+        "additionalInfo": "May be charged where a disputed transaction investigation finds the transaction was valid.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Disputed transaction fee"
+      },
+      {
+        "additionalInfo": "3% of the transaction value in AUD, charged after conversion to AUD, for transactions made overseas or with overseas merchants.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transaction fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": true,
+    "lastUpdated": "2026-10-08T00:00:00Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Credit band A1+ (Equifax OneScore 950-2000). Purchase rate for this band is 19.99% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1999",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A1+ (Equifax OneScore 950-2000).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Credit band A1 (Equifax OneScore 800-949). Purchase rate for this band is 22.49% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2249",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A1 (Equifax OneScore 800-949).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Credit band A2 (Equifax OneScore 650-799). Purchase rate for this band is 24.49% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2449",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A2 (Equifax OneScore 650-799).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Credit band A3 (Equifax OneScore 550-649). Purchase rate for this band is 26.49% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2649",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A3 (Equifax OneScore 550-649).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Credit band A4 (Equifax OneScore 400-549). Purchase rate for this band is 26.99% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2699",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A4 (Equifax OneScore 400-549).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Credit band A1+ (Equifax OneScore 950-2000). Cash advance rate for this band is 22.99% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2299",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A1+ (Equifax OneScore 950-2000).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Credit band A1 (Equifax OneScore 800-949). Cash advance rate for this band is 25.49% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2549",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A1 (Equifax OneScore 800-949).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Credit band A2 (Equifax OneScore 650-799). Cash advance rate for this band is 27.49% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2749",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A2 (Equifax OneScore 650-799).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Credit band A3 (Equifax OneScore 550-649). Cash advance rate for this band is 29.49% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2949",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A3 (Equifax OneScore 550-649).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Credit band A4 (Equifax OneScore 400-549). Cash advance rate for this band is 29.99% p.a. Your actual rate is determined at application time via your Equifax OneScore.",
+        "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2999",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": [
+          {
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Applies to cardholders assessed in credit band A4 (Equifax OneScore 400-549).",
+                "additionalInfoUri": "https://www.moneyme.com.au/credit-card/cashback-credit-card",
+                "rateApplicabilityType": "OTHER"
+              }
+            ],
+            "minimumValue": "0.00",
+            "name": "All balances",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "DOLLAR"
+          }
+        ]
+      }
+    ],
+    "name": "MoneyMe Cashback Rewards Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "moneyme-credit-card"
+  },
+  "version": 7
+}

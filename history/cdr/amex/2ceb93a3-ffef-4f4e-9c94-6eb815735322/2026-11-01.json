@@ -1,0 +1,272 @@
+{
+  "brand": "American Express",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.americanexpress.com/au/business/customer-centre/corporate/program-management/",
+      "overviewUri": "https://www.americanexpress.com/au/business/corporate-credit-cards/green-corporate-card",
+      "termsUri": "https://www.americanexpress.com/au/business/customer-centre/corporate/program-management/"
+    },
+    "applicationUri": "https://www.americanexpress.com/en-au/business/corporate-credit-cards/green-corporate-card/",
+    "brand": "American Express",
+    "brandName": "American Express",
+    "cardArt": [
+      {
+        "cardScheme": "AMEX",
+        "cardType": "CHARGE",
+        "imageUri": "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAURGGR00000S3.gif",
+        "title": "American Express Corporate Green Card"
+      }
+    ],
+    "description": "Corporate Charge Card for consolidating employee expenses that provides improved cash flow and increased visibility and control, while offering employees a range of rewards and travel benefits.",
+    "eligibility": [
+      {
+        "additionalInfo": "Employees over 18 years of age that are Australian citizens or permanent residents can apply for a Corporate Card under the Corporate Card program.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Must be a Director or Controller of the business.",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfo": "An active Australian Business Number (ABN).",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfo": "Minimum 2 years in business.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Business must be GST registered.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalValue": "10000000.00",
+        "eligibilityType": "MIN_TURNOVER"
+      },
+      {
+        "additionalInfo": "Applications are assessed based on the information provided and are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/customer-centre/corporate/pay-bill/",
+        "additionalValue": "Ways to pay your bill",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/business/corporate-credit-cards/green-corporate-card/",
+        "additionalValue": "New Corporate Customer Offer",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "The Amex App lets you quickly and easily manage your Card Account anytime, anywhere.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/manage-your-card/mobile-app/",
+        "additionalValue": "Amex App",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Fraud Protection Guarantee, protecting you from unauthorised charges made on your Account.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/service-and-security/fraud-protection/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Terms, conditions, cover limits and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "International & Domestic Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "1.5 points per $1 spent, and 1 point per $1 on government spend.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/business/corporate-credit-cards/green-corporate-card/",
+        "additionalValue": "Membership Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalValue": "Payment due reminder",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Spend tracking notification",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Payment received alert",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Get pre-sale tickets and access to some of your favourite events, and enjoy the Amex Entertainment Lounge before the show at select venues. With Amex, you can dive into unforgettable experiences.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/benefits/entertainment/events",
+        "additionalValue": "American Express Experiences",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Up to 51 days to pay for purchases.",
+        "additionalValue": "Cashflow Days",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "With @ Work, you can access personalised reports and commercial insights to help you efficiently manage your Corporate Card program.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/customer-centre/corporate/program-management/reporting-and-data-insights/",
+        "additionalValue": "American Express @ Work",
+        "featureType": "DIGITAL_BANKING"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "$70 per employee card annually",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "70.00"
+        },
+        "name": "Annual Fee (1-19 employee cards)"
+      },
+      {
+        "additionalInfo": "$50 per employee card annually",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Annual Fee (20-99 employee cards)"
+      },
+      {
+        "additionalInfo": "$40 per employee card annually",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Annual Fee (100-249 employee cards)"
+      },
+      {
+        "additionalInfo": "$35 per employee card annually",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Annual Fee (250-499 employee cards)"
+      },
+      {
+        "additionalInfo": "$0 per employee card annually",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Annual Fee (500+ employee cards)"
+      },
+      {
+        "additionalInfo": "Enrolment into the Reward Program is optional.",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "89.00"
+        },
+        "name": "Reward Program Fee"
+      },
+      {
+        "additionalInfo": "Three percent (3%) or $30, whichever is greater, will be charged on any overdue amount.",
+        "additionalValue": "When you do not pay the amount due by the due date as shown on your statement.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Late Payment Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "30.00"
+          },
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": "3.5% of the converted amount. Payable when any charge is processed in a currency other than Australian dollars.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$6 for each dishonour or debit rejection.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "6.00"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": "$3 Payable if you pay your Card Account in person at Australia Post by EFTPOS.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Over The Counter Fee"
+      },
+      {
+        "additionalInfo": "Payable if a Card Member requests an additional posted monthly paper statement. Card Members may access statements free of charge through your online Account.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Additional Statement Fee"
+      },
+      {
+        "additionalInfo": "3.5% of the amount withdrawn. A transaction fee applies to each withdrawal from an ATM.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Corporate Cash",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-07-08T02:30:00.000Z",
+    "name": "American Express® Corporate Green Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "2ceb93a3-ffef-4f4e-9c94-6eb815735322"
+  },
+  "version": 7
+}

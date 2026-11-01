@@ -1,0 +1,372 @@
+{
+  "brand": "ANZ",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.anz.com.au/personal/credit-cards/low-interest-rate/low-rate-card/?CID=af:obank:cc#eligibility",
+      "feesAndPricingUri": "https://www.anz.com.au/personal/credit-cards/low-interest-rate/low-rate-card/?CID=af:obank:cc#rates",
+      "overviewUri": "https://www.anz.com.au/personal/credit-cards/low-interest-rate/low-rate-card?CID=af:obank:cc",
+      "termsUri": "http://www.anz.com/auxiliary/rates-fees-terms/fees-terms-conditions/?CID=af:obank:cc"
+    },
+    "applicationUri": "https://www.anz.com.au/personal/credit-cards/low-interest-rate/low-rate-card/",
+    "brand": "ANZ",
+    "bundles": [],
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.anz.com.au/content/dam/anzcomau/images/credit-cards/card-images/cc-lowrate-card-finder-awards-2026.jpg",
+        "title": "ANZ Low Rate"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "A credit card with a low ongoing interest rate for your everyday purchases",
+    "eligibility": [
+      {
+        "additionalInfo": "You must be 18 years of age or older to apply",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "be an Australian or New Zealand citizen, permanent resident or have more than 12 months left on your visa",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Up to 3 additional cardholders, no cost for additional cardholders.",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/low-interest-rate-card/",
+        "additionalValue": "3",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free days on purchases.",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/anz-creditcards-conditions-of-use.pdf",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/support/online-banking/manage-your-card/digital-wallets/apple-pay/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/support/online-banking/manage-your-card/digital-wallets/google-pay/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/support/online-banking/manage-your-card/digital-wallets/samsung-pay/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/support/online-banking/manage-your-card/digital-wallets/google-pay/",
+        "additionalValue": "Fitbit Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/support/online-banking/manage-your-card/digital-wallets/garmin-pay/",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Access using ANZ Internet Banking or ANZ App",
+        "additionalInfoUri": "https://www.anz.com.au/support/online-banking/",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/support/online-banking/payments/bpay/",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/balance-transfer/",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "ANZ Falcon provides 24/7 anti-fraud protection. If we identify any unusual transactions, we’ll contact you to help protect your money.",
+        "additionalInfoUri": "https://www.anz.com.au/security/how-we-protect-you/credit-card/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "From 2 December 2025, ANZ Instalment Plans will no longer be offered on eligible ANZ Credit Cards. From this date, customers will not be able to set up new ANZ Instalment Plans for eligible credit card purchases or balances.\n\nIf you have an active ANZ Instalment Plan as of 2 December 2025, it will not be affected by this change. You can continue to view and manage your active ANZ Instalment Plans and make instalment payments via the ANZ App.",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/instalment-plans/",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "New card offer 0% p.a. Balance Transfer rate for a 26-month promotional period on transfers from non-ANZ store or credit cards to a new ANZ Low Rate credit card.\n26-month promotional period starts when we issue a Letter of Offer, not when the Balance Transfer is processed (usually 3-15 business days after card activation). Rate reverts to standard BT rate at the end of the promotional period. T&Cs, eligibility criteria, fees and charges apply (including an annual fee, $0 for the first year, currently $58 thereafter).",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/balance-transfer/",
+        "additionalValue": "P26M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Earn $400 back to your new card when you spend $5,000 on eligible purchases in the first 6 months from approval.\n\nT&Cs, eligibility criteria, fees and charges apply (including an annual fee, currently $58)",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/low-interest-rate-card/",
+        "additionalValue": "400",
+        "featureType": "CASHBACK_OFFER"
+      },
+      {
+        "additionalInfo": "Existing card offer 0% p.a. Balance Transfer rate for an 18-month promotional period on transfers from non-ANZ store or credit cards to your existing ANZ credit card with a 3% Balance Transfer Fee.\n\nReverts to the standard balance transfer rate after 18 months. Existing customers only. T&Cs and eligibility criteria apply. The standard balance transfer rate is subject to change.\n\nIf the promo code is not included in the application form, then the standard balance transfer rate may apply.",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/balance-transfer/",
+        "additionalValue": "P18M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "58.00"
+        },
+        "name": "Account Service"
+      },
+      {
+        "additionalInfo": "We charge 3.5% of any overseas transaction using your ANZ Credit Card. The amount on which the fee is charged may include fees and other charges related to the overseas transaction (excluding any Cash Advance Fee that may be charged). Overseas Transaction Fees are not charged on ANZ Rewards Travel Adventures Credit Cards. See your letter of offer for details (including how we calculate the fee and when it applies).",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Overseas Transaction Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "We charge an Overlimit Fee if: • we allow you to exceed your credit limit so that a debit can be processed; and • you have consented to being charged the Overlimit Fee (or if your account was opened before 18 June 2012, you have not opted out of the overlimit fee, or if you have opted out, you have since consented), and have not withdrawn that consent, at the time we allow the overlimit. The Overlimit Fee is only charged once in any statement period and isn’t charged if you hold an ANZ Access Basic Account.",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+            "description": "You will not be charged an Overlimit Fee where ANZ provides you with an Informal Overlimit amount during the Statement Period and: - you hold an ANZ Access Basic Account; or - we determine that: (1) Your account was opened before 18 June 2012 and you have asked us to decline transactions (in most cases) that will take you over the credit limit; or (2) Your account was opened on or after 18 June 2012 and at the time the Informal Overlimit amount is provided you have not consented, or you have withdrawn your consent to being charged an Overlimit Fee (unless you are charged an Overlimit Fee in accordance with paragraph A in respect of an earlier Informal Overlimit amount).",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "We charge an Overlimit Fee if: • we allow you to exceed your credit limit so that a debit can be processed; and • you have consented to being charged the Overlimit Fee (or if your account was opened before 18 June 2012, you have not opted out of the overlimit fee, or if you have opted out, you have since consented), and have not withdrawn that consent, at the time we allow the overlimit. The Overlimit Fee is only charged once in any statement period and isn’t charged if you hold an ANZ Access Basic Account.",
+                "additionalInfoUri": "https://www.anz.com.au/personal/bank-accounts/everyday-accounts/access-basic/",
+                "additionalValue": "You will not be charged an Overlimit Fee where ANZ provides you with an Informal Overlimit amount during the Statement Period and: - you hold an ANZ Access Basic Account; or - we determine that: (1) Your account was opened before 18 June 2012 and you have asked us to decline transactions (in most cases) that will take you over the credit limit; or (2) Your account was opened on or after 18 June 2012 and at the time the Informal Overlimit amount is provided you have not consented, or you have withdrawn your consent to being charged an Overlimit Fee (unless you are charged an Overlimit Fee in accordance with paragraph A in respect of an earlier Informal Overlimit amount).",
+                "discountEligibilityType": "PENSION_RECIPIENT"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "0.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "We charge a Priority Fee if you ask us to issue and deliver a card and/or PIN mailer as a priority.",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Priority Fee"
+      },
+      {
+        "additionalInfo": "We may charge a Balance Transfer Fee on any promotional Balance Transfer offers you accept in the future. Details of the fee will be set out in the terms of the offer.",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Balance Transfer Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+        "discounts": [],
+        "feeMethodUType": "variable",
+        "feeType": "OTHER",
+        "name": "Instalment Plan Fee",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "Any transaction on your account which is a Cash Advance attracts a fee. The fee applies even if your account has a positive balance. A Cash Advance is not just a cash withdrawal. Transactions which are Cash Advances are described in ANZ’s Credit Cards Conditions of Use.\nWe charge a 3.5% fee, subject to:\n• a minimum fee of $4; and\n• a maximum fee of $50.\nSee your letter of offer for details as to how we calculate the fee. For ANZ Rewards Travel Adventures cards, we won’t charge a Cash Advance Fee on cash withdrawals made from a branch or ATM located outside Australia.",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "50.00",
+            "feeMinimum": "4.00"
+          },
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "We charge a Late Payment Fee if you don’t pay the “Minimum Monthly Payment” plus any amount “Payable Immediately” shown on your statement by the “Due Date” shown on that statement. Late Payment Fees are not charged if you hold an ANZ Access Basic Account",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfo": "Late Payment Fees are not charged if you hold an ANZ Access Basic Account",
+            "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+            "description": "Late Payment Fees are not charged if you hold an ANZ Access Basic Account",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Late Payment Fees are not charged if you hold an ANZ Access Basic Account",
+                "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/credit-card-fees-charges.pdf",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "20.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Late Payment Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-27T22:00:00.000Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Rates are subject to change",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/manage-my-card/rates-fees-terms/",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1374",
+        "repaymentType": "OTHER",
+        "tiers": []
+      },
+      {
+        "additionalInfo": "Rates are subject to change. The interest rate that applies to cash advances is currently equivalent to the interest rate that applies to standard balance transfers.",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/manage-my-card/rates-fees-terms/",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2349",
+        "repaymentType": "OTHER",
+        "tiers": []
+      },
+      {
+        "additionalInfo": "Rates are subject to change",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/manage-my-card/rates-fees-terms/",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2349",
+        "repaymentType": "OTHER",
+        "tiers": []
+      },
+      {
+        "additionalInfo": "Balance Transfer rate for an 18-month promotional period on transfers from non-ANZ store or credit cards to your existing ANZ credit card with a 3% Balance Transfer Fee\nOffer applies to any existing ANZ credit card\nSimple transfer form, using promo code: BT200\nReverts to the standard balance transfer rate, currently 23.49% p.a. after 18 months. Existing customers only. T&Cs and eligibility criteria apply. The standard balance transfer rate of 23.49% p.a. is current as at today's date and is subject to change.\n\nIf the promo code is not included in the application form, then the standard balance transfer rate may apply.",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/balance-transfer/",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.00",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Balance Transfer rate for an 18-month promotional period on transfers from non-ANZ store or credit cards to your existing ANZ credit card with a 3% Balance Transfer Fee\nOffer applies to any existing ANZ credit card\nSimple transfer form, using promo code: BT200\nReverts to the standard balance transfer rate, currently 23.49% p.a. after 18 months. Existing customers only. T&Cs and eligibility criteria apply. The standard balance transfer rate of 23.49% p.a. is current as at today's date and is subject to change.\n\nIf the promo code is not included in the application form, then the standard balance transfer rate may apply.",
+            "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/balance-transfer",
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Balance Transfer rate for an 18-month promotional period on transfers from non-ANZ store or credit cards to your existing ANZ credit card with a 3% Balance Transfer Fee\nOffer applies to any existing ANZ credit card\nSimple transfer form, using promo code: BT200\nReverts to the standard balance transfer rate, currently 23.49% p.a. after 18 months. Existing customers only. T&Cs and eligibility criteria apply. The standard balance transfer rate of 23.49% p.a. is current as at today's date and is subject to change.\n\nIf the promo code is not included in the application form, then the standard balance transfer rate may apply.",
+                "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/balance-transfer",
+                "rateApplicabilityType": "EXISTING_CUST"
+              }
+            ],
+            "maximumValue": "18",
+            "minimumValue": "1",
+            "name": "Existing Card Offer",
+            "rateApplicationMethod": "PER_TIER",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Balance Transfer rate for a 26-month promotional period on transfers from non-ANZ store or credit cards to a new ANZ Low Rate credit card\n$0 annual fee in the first year\n3% balance transfer fee\nSimple online application process\n26-month promotional period starts when we issue a Letter of Offer, not when the Balance Transfer is processed (usually 3-15 business days after card activation). Rate reverts to standard BT rate at the end of the promotional period, currently 23.49% p.a. T&Cs, eligibility criteria, fees and charges apply (including an annual fee, $0 for the first year, currently $58 thereafter).",
+        "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/balance-transfer/",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.00",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Balance Transfer rate for a 26-month promotional period on transfers from non-ANZ store or credit cards to a new ANZ Low Rate credit card\n$0 annual fee in the first year\n3% balance transfer fee\nSimple online application process\n26-month promotional period starts when we issue a Letter of Offer, not when the Balance Transfer is processed (usually 3-15 business days after card activation). Rate reverts to standard BT rate at the end of the promotional period, currently 23.49% p.a. T&Cs, eligibility criteria, fees and charges apply (including an annual fee, $0 for the first year, currently $58 thereafter).",
+            "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/balance-transfer/",
+            "applicabilityConditions": [
+              {
+                "additionalInfo": "Balance Transfer rate for a 26-month promotional period on transfers from non-ANZ store or credit cards to a new ANZ Low Rate credit card\n$0 annual fee in the first year\n3% balance transfer fee\nSimple online application process\n26-month promotional period starts when we issue a Letter of Offer, not when the Balance Transfer is processed (usually 3-15 business days after card activation). Rate reverts to standard BT rate at the end of the promotional period, currently 23.49% p.a. T&Cs, eligibility criteria, fees and charges apply (including an annual fee, $0 for the first year, currently $58 thereafter).",
+                "additionalInfoUri": "https://www.anz.com.au/personal/credit-cards/balance-transfer/",
+                "rateApplicabilityType": "NEW_CUSTOMER"
+              }
+            ],
+            "maximumValue": "26",
+            "minimumValue": "1",
+            "name": "New Card Offer",
+            "rateApplicationMethod": "PER_TIER",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "ANZ Low Rate",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "7c74f4ae-4965-08a0-c5c0-7bf2c677269b"
+  },
+  "version": 7
+}

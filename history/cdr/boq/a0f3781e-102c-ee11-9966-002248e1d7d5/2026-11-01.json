@@ -1,0 +1,305 @@
+{
+  "brand": "Bank of Queensland Limited",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.boq.com.au/personal/credit-cards/blue-visa-credit-card",
+      "feesAndPricingUri": "https://www.boq.com.au/personal/help-and-support/rates-and-fees/credit-cards",
+      "overviewUri": "https://www.boq.com.au/personal/credit-cards/blue-visa-credit-card",
+      "termsUri": "https://www.boq.com.au/personal/help-and-support/forms-and-important-information/terms-and-conditions/"
+    },
+    "applicationUri": "https://application.boq.com.au/boq-forms/boq-card/boq-card-apply?",
+    "brand": "BOQ",
+    "brandName": "Bank of Queensland",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://marvel-b1-cdn.bc0a.com/f00000000185299/www.boq.com.au/content/dam/boq/images/cards/visa-cc-blue.png",
+        "title": "Blue Visa CC Card Art"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/compare-credit-cards",
+        "additionalValue": "2000.0000000000",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/compare-credit-cards",
+        "additionalValue": "50000.0000000000",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "Our Blue Visa Credit Card rewards you when you buy - earning you 1 Q Rewards® credit card point for every dollar of eligible spend, which you can put towards just about anything.",
+    "eligibility": [
+      {
+        "additionalInfo": "Earn a taxable income of $25,000 per year or more",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "additionalValue": "25000.0000000000",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Have a good credit rating",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Be a permanent Australian resident or citizen",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "additionalValue": "Resident or Citizen",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Be at least 18 years of age",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-visa-credit-card",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "0% p.a. on Balance Transfers for 6 months. 1% Balance Transfer fee applies. Reverts to the cash advance rate thereafter.",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-visa-credit-card",
+        "additionalValue": "P6M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Earn 50,000 Q Rewards® Bonus Points when you spend $3,500 on eligible purchases within 90 days from approval.",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-visa-credit-card",
+        "additionalValue": "50000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "Extended Warranty Insurance, cardholders may be entitled to extended warranty insurance of up to 12 months in addition to the covered product's Australian warranty period, which you purchase on your BOQ Blue Visa Credit Card.",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "additionalValue": "Extended Warranty Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Earn 1 Q Rewards credit card point for every dollar spent on Eligible Transactions.",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "additionalValue": "Q Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Up to 44 days interest free for your purchases (Interest Free Days are not available if you have a Balance Transfer).",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Purchase Protection Insurance, cardholders receive 90 days complimentary insurance against loss, theft or accidental damage on covered products purchased anywhere in the world using your BOQ Blue Visa Credit Card up to specified amounts.",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "additionalValue": "Purchase Protection Insurance",
+        "featureType": "INSURANCE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "For retail purchases or cash advance transactions made in a foreign currency or using a foreign merchant.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.0330000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "For each statement period we issue you with a paper statement, $2 will be debited to your account in the following statement period. This may be waived in limited circumstances.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "2.0000"
+        },
+        "name": "Paper Statement Fee"
+      },
+      {
+        "additionalInfo": "Fee per statement period when your credit limit is exceeded. $40 for accounts approved prior to 1 July 2012.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.0000"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Domestic cash withdrawals from your credit card.. For any Cash Advance equal to or over $100 debited to your Account on the Transaction Date.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Domestic Cash Advance above $100",
+        "rateBased": {
+          "rate": "0.0350000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Fee for each time we do not receive the Minimum Payment Due and any Overdue Amount by the payment due date, debited to your Account after the payment due date.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "30.0000"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "International cash withdrawals made outside Australia on your credit card. Minimum fee amount of $4.00 and maximum amount of $30.00 debited to your Account on the Transaction Date.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "International Cash Advance",
+        "rateBased": {
+          "rate": "0.0150000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Fee for each time a cheque or Direct Debit payment is dishonoured.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "10.0000"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": "Domestic cash withdrawals from your credit card.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "3.5000"
+        },
+        "name": "Domestic Cash Advance below $100"
+      },
+      {
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "89.0000"
+        },
+        "name": "Annual fee"
+      },
+      {
+        "additionalInfo": "The balance transfer fee is 1% of the balance transferred",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Balance Transfer fee",
+        "rateBased": {
+          "rate": "0.0100000000000000",
+          "rateType": "BALANCE"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-05T00:05:19Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Except to the extent that an interest free period applies, you must pay interest on everything charged to your account. Interest is charged monthly at the end of each statement period. We calculate interest for each balance type at its applicable APR for each statement period. The APR (Annual Percentage Rate) that applies to each balance type (e.g. a balance transfer) also applies to related fees and interest. The Retail APR applies to retail purchase balance. To calculate that interest, we multiply the applicable daily percentage rate by the daily unpaid balance of its balance type (including related fees and interest) for each day of that statement period, and then add those amounts together. The daily percentage rate is the applicable APR divided by 365. Information on any APR is available on request.",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/blue-rewards-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Except to the extent that an interest free period applies, you must pay interest on everything charged to your account. Interest is charged monthly at the end of each statement period. We calculate interest for each balance type at its applicable APR for each statement period. The APR (Annual Percentage Rate) that applies to each balance type (e.g. a balance transfer) also applies to related fees and interest. The Retail APR applies to retail purchase balance. To calculate that interest, we multiply the applicable daily percentage rate by the daily unpaid balance of its balance type (including related fees and interest) for each day of that statement period, and then add those amounts together. The daily percentage rate is the applicable APR divided by 365. Information on any APR is available on request.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Balance Transfer rate reverts to the variable Annual Percentage Rate for Cash Advances at the end of promotional period.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved BOQ Blue Visa Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "minimumValue": "7",
+            "name": "Standard Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Earn 50,000 Q Rewards Bonus Points & 0% p.a. on Balance Transfers for 6 months. When you spend $3,500 on eligible purchases within 90 days from approval. With a 1% Balance Transfer Fee. Reverts to Cash Advance rate thereafter.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0000000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved BOQ Blue Visa Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "maximumValue": "6",
+            "minimumValue": "1",
+            "name": "Promotional Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "BOQ Blue Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "a0f3781e-102c-ee11-9966-002248e1d7d5"
+  },
+  "version": 7
+}

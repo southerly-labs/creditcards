@@ -1,0 +1,407 @@
+{
+  "brand": "Bendigo Bank",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.bendigobank.com.au/globalassets/documents/disclosures/business-fees-and-charges.pdf",
+      "overviewUri": "https://www.bendigobank.com.au/business/cards/qantas-business-mastercard/",
+      "termsUri": "https://www.bendigobank.com.au/globalassets/documents/disclosures/bendigo-business-credit-card-terms-conditions.pdf"
+    },
+    "brand": "BENDIGO",
+    "brandName": "Bendigo Bank",
+    "bundles": [],
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.bendigobank.com.au/siteassets/business/cards-for-business/qantasbusinesscreditcard/exploreimage-businessrewardscard.png",
+        "title": "Qantas Business Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "With one of the lowest annual fees in the market, and a range of insurances, the Qantas Business Credit Card will help your points soar. You will also receive up to 55 days interest free on purchases.",
+    "eligibility": [
+      {
+        "additionalInfoUri": "https://www.bendigobank.com.au/business/cards/",
+        "eligibilityType": "BUSINESS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "With Bendigo Bank you can turn your phone or smart watch into your wallet. A Wallet includes but is not limited to Google Pay, Samsung Pay, Apple Pay or Garmin Pay, if and when they are available to our customers.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/digital-wallets/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "With Bendigo Bank you can turn your phone or smart watch into your wallet. A Wallet includes but is not limited to Google Pay, Samsung Pay, Apple Pay or Garmin Pay, if and when they are available to our customers.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/mobile-payments/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "With Bendigo Bank you can turn your phone or smart watch into your wallet. A Wallet includes but is not limited to Google Pay, Samsung Pay, Apple Pay or Garmin Pay, if and when they are available to our customers.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/mobile-payments/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "With Bendigo Bank you can turn your phone or smart watch into your wallet. A Wallet includes but is not limited to Google Pay, Samsung Pay, Apple Pay or Garmin Pay, if and when they are available to our customers.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/mobile-payments/",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "$89 p.a. per card",
+        "additionalValue": "99",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "A business must be a Qantas Business Rewards member to earn Qantas Points for business. A one-off join fee of $89.50 including GST normally applies, however this will be waived for Bendigo Bank customers upon approval of a new Qantas Business Credit Card facility. Membership and Qantas Points are subject to the Bendigo Business Credit Card Terms. ",
+        "additionalInfoUri": "https://www.bendigobank.com.au/business/cards/qantas-business-mastercard/",
+        "additionalValue": "Earn 0.6 Qantas points for every $1 spent on everyday business spend;Earn 0.3 Qantas Points for every $1 spent on eligible utilities and government transactions;Earn 1.6 Qantas Points for every $1 spent on selected Qantas products and services. (T&Cs Apply)",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Extended warranty on purchases made with your credit card for up to 1 year after the original manufacturer's warranty ends",
+        "additionalInfoUri": "https://www.bendigobank.com.au/globalassets/documents/disclosures/qantas-business-mastercard-insurance-terms-conditions.pdf",
+        "additionalValue": "Extended Warranty",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "90 day purchase protection on stolen or accidentally damaged purchases when the total cost of the purchase is charged to your credit card",
+        "additionalInfoUri": "https://www.bendigobank.com.au/globalassets/documents/disclosures/qantas-business-mastercard-insurance-terms-conditions.pdf",
+        "additionalValue": "Purchase Protection",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Enjoy a variety of domestic travel insurance benefits.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/business/cards/qantas-business-credit-card/",
+        "additionalValue": "Travel Insurance",
+        "featureType": "INSURANCE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Payable each time you fail to pay your Minimum Repayment as stated on a statement of account by its due date.",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "15.000000"
+        },
+        "name": "Late Payment Fee "
+      },
+      {
+        "additionalInfo": "An International Transaction Fee of 3% of the Transaction amount (in AUD) payable for each Transaction which is conducted in a currency other than Australian dollars (AUD) or in Australian dollars (AUD) but with or using a merchant, payment processor, financial institution or other entity (including an online merchant) who is outside of Australia.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$3.00 or 3% of Transaction amount, whichever is greater.​​​​​​​Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee ",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable whenever you make a cash withdrawal outside of Australia at a non-Bendigo Bank ATM (in addition to the Cash Advance Fee).\nOther financial institutions may charge you a fee for using their ATMs. This fee will be displayed at the time of the transaction and allows the customer to accept or decline the fee as shown. If using your credit card interest will be charged from the day the withdrawal is completed.\n",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "5.000000"
+        },
+        "name": "International ATM Withdrawal"
+      },
+      {
+        "additionalInfo": "Payable whenever you make a facility inquiry outside of Australia at a non-Bendigo Bank ATM.",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "1.500000"
+        },
+        "name": "International ATM Inquiry "
+      },
+      {
+        "additionalInfo": "Payable whenever we issue you a replacement, reissue or redirection card other than by standard post at your request.",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.000000"
+        },
+        "name": "Replacement Card Fee "
+      },
+      {
+        "additionalInfo": "Applies when you have a Qantas Business Credit Card linked to your account. This fee is charged per card linked to the account and is charged to the account annually.",
+        "additionalValue": "P1Y",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "89.000000"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "BPAY Withdrawal – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "WITHDRAWAL",
+        "name": "BPAY Withdrawal",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Internal Transfer – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Internal Transfer",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Phone Banking Transfer – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Phone Banking Transfer",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Pay Anyone Transfer, Including Osko – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Pay Anyone Transfer, Including Osko",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Transfer – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Transfer",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "EFTPOS Withdrawal – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "EFTPOS Withdrawal",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": " Bendigo Bank ATM Transfer – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": " Bendigo Bank ATM Transfer",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Bendigo Bank ATM Withdrawal – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Bendigo Bank ATM Withdrawal",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "4.000000"
+        },
+        "name": "Bank@Post Withdrawal"
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.000000"
+        },
+        "name": "Bank@Post Deposit"
+      },
+      {
+        "additionalInfo": "When you make balance enquiry at a Bank@Post \nterminal in an Australia Post Office using a Bendigo \nBank card, where this facility is available.",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.000000"
+        },
+        "name": "Bank@Post balance enquiry"
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.000000"
+        },
+        "name": "Retail Purchase"
+      },
+      {
+        "additionalInfo": "Direct Debit – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Direct Debit",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Periodical Payment (Internal) – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Periodical Payment (Internal)",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "10.000000"
+        },
+        "name": "Bank Cheque Withdrawal"
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.000000"
+        },
+        "name": "EFT Credit Transfer"
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "3.750000"
+        },
+        "name": "Periodical Payment to Other Financial Institution"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-08-31T06:51:48.424Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1999000000000000",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Qantas Business Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "05bc94b5-8ce3-4c8d-9843-678b9de0e2ae"
+  },
+  "version": 7
+}

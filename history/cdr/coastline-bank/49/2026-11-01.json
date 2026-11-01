@@ -1,0 +1,141 @@
+{
+  "brand": "Coastline Bank",
+  "product": {
+    "additionalInformation": {
+      "bundleUri": "https://www.coastline.com.au/personal/personal-and-car-loans",
+      "eligibilityUri": "https://www.coastline.com.au/conditions-of-use/",
+      "feesAndPricingUri": "https://www.coastline.com.au/conditions-of-use/",
+      "overviewUri": "https://www.coastline.com.au/personal/personal-and-car-loans",
+      "termsUri": "https://www.coastline.com.au/conditions-of-use/"
+    },
+    "applicationUri": "https://www.coastline.com.au/personal/personal-and-car-loans",
+    "brand": "Coastline ",
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Visa Debit Card",
+    "effectiveFrom": "2006-06-30T14:30:00.0000000Z",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "Australia",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "fees": [
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Settlement Disbursement Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "300.00"
+        },
+        "name": "Personal Ln Establishment Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "380.00"
+        },
+        "name": "CU Solicitor Mtg Discharge Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "250.00"
+        },
+        "name": "Mortgage Discharge Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "PPSR Security Interest Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Property Search Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Manual Arrears Transfer Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Arrears Reminder Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Final Notice of Demand"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-03-24T02:00:14.6439979Z",
+    "lendingRates": [
+      {
+        "applicabilityConditions": [
+          {
+            "rateApplicabilityType": "EXISTING_CUST"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "VARIABLE",
+        "loanPurpose": "INVESTMENT",
+        "rate": "0.1875",
+        "repaymentType": "INTEREST_ONLY"
+      }
+    ],
+    "name": "Visa Debit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "49"
+  },
+  "version": 7
+}

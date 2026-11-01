@@ -1,0 +1,595 @@
+{
+  "brand": "Police Bank",
+  "product": {
+    "additionalInformation": {
+      "additionalBundleUris": null,
+      "additionalEligibilityUris": null,
+      "additionalFeesAndPricingUris": null,
+      "additionalOverviewUris": null,
+      "additionalTermsUris": null,
+      "bundleUri": null,
+      "eligibilityUri": "https://cdn.mediavalet.com/aunsw/policebank/hHJRPThAFkuxc-Ty2_iJIg/LxZ7JlAT706TzKwISu0e-A/Original/PBS14-STU_Student-Credit-Card-TMD.pdf",
+      "feesAndPricingUri": null,
+      "overviewUri": "https://www.policebank.com.au/academy",
+      "termsUri": null
+    },
+    "applicationUri": "https://www.policebank.com.au/academy",
+    "brand": "Police Bank",
+    "brandGroup": null,
+    "brandName": null,
+    "bundles": null,
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.policebank.com.au/wp-content/uploads/2026/01/PB_D-CUSCAL-LS-3472549-Police-Bank-V145HC_512x321.png",
+        "title": "Visa Credit Card"
+      }
+    ],
+    "constraints": null,
+    "depositRates": null,
+    "description": "This product is suitable for members who are an active student at the Tasmania Rokeby Academy, or at session 2 of the NSW Goulburn Academy, or have graduated from either Academy within the last 6 months and are looking for a low-cost credit card for everyday purchases, unexpected expenses, travel, bill management, international transactions, or online payments.",
+    "effectiveFrom": "2020-09-24T14:37:00Z",
+    "effectiveTo": null,
+    "eligibility": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": " Be living in Australia as an Australian citizen, permanent resident, or New Zealand citizen who holds a Special Category Visa (SCV)",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "An active student at the Tasmania Rokeby Academy, or at session 2 of the NSW Goulburn Academy, or have graduated from either Academy within the last 6 months",
+        "additionalInfoUri": null,
+        "additionalValue": "An active student at the Tasmania Rokeby Academy, or at session 2 of the NSW Goulburn Academy, or have graduated from either Academy within the last 6 months",
+        "eligibilityType": "STUDENT"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Periodical Payments. Can set up Periodical Payments",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.policebank.com.au/credit-card",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Direct Credits. Set regular payments like your pay sent straight to your account",
+        "additionalInfoUri": "https://www.policebank.com.au/credit-card",
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Mobile Number. Select the Contact Method that you would like to use for your PayID i.e. your mobile number or email address.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "Email Address. Select the Contact Method that you would like to use for your PayID i.e. your mobile number or email address.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "Pay with your Police Bank Visa Debit Cards using Google Pay",
+        "additionalInfoUri": null,
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Bank@Post. Withdraw cash at any participating Australia Post outlets with Bank@POST™",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Yes",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfo": "Can be used at over 29 million Visa outlets in over 250 countries around the world",
+        "additionalInfoUri": "https://www.policebank.com.au/credit-card",
+        "additionalValue": "Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Direct Debits. Set up Direct Debits from this account",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Pay with your Police Bank Visa Debit Cards using Samsung Pay",
+        "additionalInfoUri": null,
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Internet Banking. You can pay bills via BPAY and check your account details or make transfers anytime or anywhere using our online with Internet Banking – the service is free.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Pay with your Police Bank Visa Debit Cards using Apple Pay",
+        "additionalInfoUri": null,
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Visa Preferred Rewards. Our Visa Card provides access to the Visa Entertainment program. This gives you the opportunity to purchase unique deals including preferred seating at special events, discounts on retail as well as other exclusive offers",
+        "additionalInfoUri": "https://www.policebank.com.au/credit-card",
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "ATM withdrawals. up to $1000",
+        "additionalInfoUri": "https://www.policebank.com.au/pdf/Schedule_of_fees_and_charges.pdf",
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Visa PayWave. Our Debit Card is issued with the Visa PayWave ‘contactless’ payment feature. This allows you to pay for purchases under $100 without swiping, signing, or entering a PIN at participating merchants.",
+        "additionalInfoUri": "https://www.policebank.com.au/credit-card",
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Verified by Visa. Verified by Visa is a service designed to ensure you are protected while shopping online with your Visa card. As you make a purchase online, Police Bank assesses the risk of the transaction based on a number of factors. In some instances, you may be asked to confirm some personal details (date of birth, mother's maiden name, address details) so Police Bank can be sure the card isn't being used without your permission.",
+        "additionalInfoUri": "https://www.policebank.com.au/faq/#visa",
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Confirmation Of Payee",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.policebank.com.au/academy",
+        "additionalValue": "P3M",
+        "featureType": "INTEREST_FREE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Visa Credit Card Annual Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Minimum $22.77 per hour retrieval fee and minimum $30.00 per hour administrative fee.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Document Retrieval Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Per Draft",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Bank Draft",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Includes; cash withdrawals, declined Bank@Post transactions including incorrect PIN entered, insufficient funds and exceeding withdrawal limits",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "Bank@Post Cash Withdrawal fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable per Visa voucher requested.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "16.50"
+        },
+        "name": "Visa Voucher Request",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "At Cost. Any costs charged to us from a third party will be passed on to you. Information on these costs is available on request.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Third Party Costs",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "At Cost",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "ATM Balance Enquiry fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable when you exceed your credit limit by $75 or more within a calendar month. Interest will also be charged on any amount overdrawn in excess of the approved credit limit at the then current annual percentage rate.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Overdrawn Account Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Per Withdrawal",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Counter Cash withdrawal $25,000 and over",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable if and when you use the Visa Card overseas and the transaction is in a\r\nforeign currency. All overseas transactions are converted to Australian dollars\r\nand are subject to this fee as a percentage of the value of the transaction. A\r\nproportion of the fee may be retained by Police Bank. The amount of this conversion\r\nfee is subject to change from time to time and we will advise you in advance.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": null,
+        "name": "Visa International Fees",
+        "rateBased": {
+          "accrualFrequency": null,
+          "amountRange": null,
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        },
+        "variable": null
+      },
+      {
+        "additionalInfo": "$5.00 for Archive Retrieval and $1.50 per page.",
+        "additionalInfoUri": "https://www.policebank.com.au/pdf/Schedule_of_fees_and_charges.pdf",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Additional Statement Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable if and when we send you a default notice for an overdrawn account where an arrears remains unremedied after we have sent you an arrears letter.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "21.50"
+        },
+        "name": "Default Notice Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Visa Cash withdrawal at a merchant using the CR (Credit) facility, another financial institution, or an overseas ATM withdrawal, or any ATM withdrawal from an S14 Visa Credit Card.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "3.80"
+        },
+        "name": "ATM Overseas withdrawal",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable for any second or subsequent request for the replacement of a Visa Card",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Replacement Card Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Per Withdrawal",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "Counter Cash withdrawal fee up to $24,999",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Per transaction that you request Police Bank staff to set up on your behalf.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "1.00"
+        },
+        "name": "External Electronic Periodical Payments",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable when you request an emergency replacement Visa Card or emergency cash advance overseas.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Visa Overseas Emergency Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Visa Cash withdrawal at a merchant using the CR (Credit) facility, another financial institution, or an overseas ATM withdrawal, or any ATM withdrawal from an S14 Visa Credit Card.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "3.80"
+        },
+        "name": "Visa Cash Advance Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "After 3 years an account is classed as dormant if no Member transactions occur. Interest, fees and government charges are not classed as transactions.",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Dormant Accounts fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Charged where the whole or any part of your loan repayment remains unpaid after 14 days past the due date. Applies to all Police Bank loans and continuing credit accounts",
+        "additionalInfoUri": "https://www.policebank.com.au/schedule-of-fees-and-charges",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": null,
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Late Payment Fee",
+        "rateBased": null,
+        "variable": null
+      }
+    ],
+    "instalments": null,
+    "isTailored": false,
+    "lastUpdated": "2026-07-28T22:48:33.717Z",
+    "lendingRates": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.policebank.com.au/interest-rates/",
+        "additionalValue": null,
+        "applicabilityConditions": null,
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1076",
+        "repaymentType": "OTHER",
+        "tiers": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.policebank.com.au/interest-rates/",
+        "additionalValue": null,
+        "applicabilityConditions": null,
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1076",
+        "repaymentType": "OTHER",
+        "tiers": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.policebank.com.au/academy",
+        "additionalValue": "P3M",
+        "applicabilityConditions": null,
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "OTHER",
+        "rate": "0",
+        "repaymentType": "OTHER",
+        "tiers": null
+      },
+      {
+        "additionalInfo": "Applies after 3 month interest free period.",
+        "additionalInfoUri": "https://www.policebank.com.au/academy",
+        "additionalValue": "P9M",
+        "applicabilityConditions": null,
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "OTHER",
+        "rate": "0.0799",
+        "repaymentType": "OTHER",
+        "tiers": null
+      }
+    ],
+    "name": "Police Student Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "4b04816d-c585-4702-88f8-19f928de57a0"
+  },
+  "version": 7
+}

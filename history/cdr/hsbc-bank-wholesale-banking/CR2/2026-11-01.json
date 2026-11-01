@@ -1,0 +1,158 @@
+{
+  "brand": "HSBC Bank Australia Limited – Wholesale Banking",
+  "product": {
+    "additionalInformation": {
+      "bundleUri": "https://www.business.hsbc.com.au/en-au/solutions/corporate-card",
+      "eligibilityUri": "https://www.business.hsbc.com.au/en-au/solutions/corporate-card",
+      "overviewUri": "https://www.business.hsbc.com.au/en-au/solutions/corporate-card",
+      "termsUri": "https://www.business.hsbc.com.au/en-au/solutions/corporate-card"
+    },
+    "applicationUri": "https://www.business.hsbc.com.au/en-au/cards-email-us",
+    "brand": "HSBC",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.business.hsbc.com.au/-/jssmedia/media/australia/images/campaigns/au-corporate-cardface-img.jpg?h=516&iar=0&w=800&hash=64E0EE07E5471A3DC30D08CD12733021",
+        "title": "Corporate or Purchasing"
+      }
+    ],
+    "description": "Corporate or Purchasing cards for corporate expenditure including T&E and  Procurement spend",
+    "effectiveFrom": "2020-10-01T00:49:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Corporate applicants only. Company Liability.",
+        "eligibilityType": "BUSINESS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.business.hsbc.com.au/en-au/solutions/corporate-card",
+        "additionalValue": "Physical, Chip, Contactless, Apple Wallet, Google Wallet",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Unlimited additional cards can be issued under the company",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfoUri": "https://www.business.hsbc.com.au/en-au/form-downloads-and-interest-rates",
+        "additionalValue": "Complimentary travel & unauthorised transaction insurance ",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Online card management portal available",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "Mandatory direct debit, BPAY available",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalValue": "Alerts such as fraud alerts, spending alerts, and more",
+        "featureType": "NOTIFICATIONS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Annual fee per card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Annual fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Overseas Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Overseas cash advance and quasi cash fee",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "4.50"
+        },
+        "name": "Overseas cash advance fee"
+      },
+      {
+        "additionalInfo": "Domestic cash advance and quasi cash fee",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "Domestic cash advance fee"
+      },
+      {
+        "additionalInfo": "payable on or after the day an amount is due for payment and has not been paid",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Late Payment Reminder Fee"
+      },
+      {
+        "additionalInfo": "Per item disputed where the resultant investigation confirms liability for the transaction is with the cardholder",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Disputed Transaction Charge"
+      }
+    ],
+    "isTailored": true,
+    "lastUpdated": "2025-12-02T07:07:11.406Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Interest rate applied to cash advances",
+        "applicationFrequency": "P1D",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1575",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      },
+      {
+        "additionalValue": "Purchases interest rate for purchases not paid off in full by payment due date",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PENALTY",
+        "loanPurpose": "OTHER",
+        "rate": "0.1575",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      }
+    ],
+    "name": "HSBC Corporate or Purchasing Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "CR2"
+  },
+  "version": 7
+}

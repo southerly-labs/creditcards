@@ -1,0 +1,286 @@
+{
+  "brand": "Queensland Country Bank",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_fees-charges.pdf",
+      "overviewUri": "https://www.queenslandcountry.bank/business-banking/business-finance/business-visa-credit-card/",
+      "termsUri": "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_account-access-facility.pdf"
+    },
+    "brand": "Queensland Country Bank",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visabusiness-reward.jpg",
+        "title": "Business My Rewards Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Our Business Visa Credit Card comes with a competitive low interest rate, low annual fee and up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date, and is linked to our free rewards program, Business Rewarder",
+    "effectiveFrom": "2015-06-30T14:30:00.0000000Z",
+    "eligibility": [
+      {
+        "eligibilityType": "BUSINESS"
+      }
+    ],
+    "features": [
+      {
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalValue": "Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "24/7 mobile and internet banking access",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Pay faster, easier and more securely with Apple Pay. Apple Pay eligibility restrictions may apply.\r\n",
+        "additionalValue": "APPLE PAY",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay faster, easier and more securely with Google Pay. Google Pay eligibility restrictions may apply.",
+        "additionalValue": "GOOGLE PAY",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay faster, easier and more securely with Samsung Pay. Samsung Pay eligibility restrictions may apply.",
+        "additionalValue": "SAMSUNG PAY",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Reward dollars are earned on eligible purchases.",
+        "additionalValue": "An automatic inclusion to our rewards program that gives you the choice of where to spend your rewards points",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "A low competitive interest rate on both purchases and cash advances",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Ability to set monthly spend limits for individual cardholders",
+        "featureType": "OTHER"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Balance transfers can be made to the account",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Charged as a percentage of the foreign currency transaction value",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Overseas Purchase Fee",
+        "rateBased": {
+          "amountRange": {},
+          "rate": "0.0365",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Disputed Transaction Fee"
+      },
+      {
+        "additionalInfo": "Applies to Direct Debit, Direct Credit and OSKO payments",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Direct Entry Recall of Funds"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "DE Mistaken Payment Return Req"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "8.00"
+        },
+        "name": "Honour Charge"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "8.00"
+        },
+        "name": "Dishonour Insuff. Funds"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "7.20"
+        },
+        "name": "RTGS Payment Received Fee"
+      },
+      {
+        "additionalInfo": "Refer to our Fees and Charges brochure for information on other transactions which may attract fees and charges",
+        "additionalInfoUri": "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_fees-charges.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "OTHER",
+        "name": "Other Service Fees",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "Price on Application",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "OTHER",
+        "name": "Document Fee",
+        "variable": {}
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Arrears Letter - Second Arrears Letter"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "70.00"
+        },
+        "name": "Arrears Letter Fee - Default Notice prior to Enforcement"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Transaction Investigation Fee"
+      },
+      {
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalValue": "50.00",
+            "description": "On a fee for maintaining a set balance",
+            "discountMethodUType": "rateBased",
+            "discountType": "BALANCE",
+            "rateBased": {
+              "amountRange": {},
+              "rate": "1.0",
+              "rateType": "FEE"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Annual Fee charged on commencement and annually on anniversary of the commencement date",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "A business or other non-person legal entity",
+            "discountMethodUType": "rateBased",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "discountEligibilityType": "BUSINESS"
+              }
+            ],
+            "rateBased": {
+              "amountRange": {},
+              "rate": "1.0",
+              "rateType": "FEE"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "85.00"
+        },
+        "name": "Business Visa Annual Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-11-01T06:00:23.7841209Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.1499",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1499",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1499",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Visa Business My Rewards",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "19"
+  },
+  "version": 7
+}

@@ -1,0 +1,190 @@
+{
+  "brand": "Macquarie Bank Limited",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.macquarie.com.au/everyday-banking/credit-cards.html#how-to-apply",
+      "feesAndPricingUri": "https://www.macquarie.com.au/everyday-banking/credit-cards/ratesaver.html#tab-panels-0-account-fees",
+      "overviewUri": "https://www.macquarie.com.au/everyday-banking/credit-cards/ratesaver.html",
+      "termsUri": "https://www.macquarie.com.au/everyday-banking/credit-cards/ratesaver.html#tab-panels-0-terms--conditions-and-documents-"
+    },
+    "applicationUri": "https://www.macquarie.com.au/everyday-banking/credit-cards.html",
+    "brand": "Macquarie Bank Limited",
+    "brandName": "Macquarie",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.macquarie.com.au/assets/bfs/images/open-banking/credit-cards/Macquarie_VISA_RATESAVER_front_Masked-01_CDR.png",
+        "title": "Macquarie_VISA_RATESAVER_front_Masked-01_CDR"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "The credit limit we give you will depend on your ability to meet your repayments.",
+        "additionalValue": "2000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "The Macquarie RateSaver Credit Card is designed for customers who want a credit card with a lower annual fee and/or interest rates than those that apply to rewards credit cards.",
+    "effectiveFrom": "2007-04-16T00:01:00.001Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Earn a minimum taxable income of $50,000 per annum.",
+        "additionalValue": "50000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalValue": "Must be a permanent resident of Australia.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Approval is subject to Macquarie credit criteria and suitability assessment.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Credit cards may be made available for Macquarie home loan customers, Business Bank clients and Private Bank clients.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Up to 55 days interest free on purchases.",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalValue": "Apple Pay and Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "A primary cardholder can apply for an additional cardholder to be added to their account.",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Mobile and Online banking",
+        "additionalInfoUri": "https://www.macquarie.com.au/digital-banking.html",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "We don't charge international purchase fees when you shop overseas or with international online retailers. Receive the Visa foreign exchange rate, with no additional fees or charges.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Macquarie Authenticator is our two-factor authentication app designed to maximise your security",
+        "additionalInfoUri": "https://www.macquarie.com.au/digital-banking/macquarie-authenticator.html",
+        "featureType": "FRAUD_PROTECTION"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "69.00"
+        },
+        "name": "Annual Fee Primary Cardholder"
+      },
+      {
+        "additionalInfo": "$5.00 or 3% of the value of the transaction, whichever is the greater.",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "Waived Cash Advance fee",
+            "discountMethodUType": "rateBased",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "These fees are subject to your current financial table.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "rateBased": {
+              "amountRange": {
+                "discountMinimum": "5.00"
+              },
+              "rate": "0.03",
+              "rateType": "TRANSACTION"
+            }
+          }
+        ],
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash advance fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "5.00"
+          },
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "We don't charge fees for card purchases made or processed outside Australia but others, such as the banks of international merchants and foreign ATM operators, may charge fees for these transactions.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PURCHASE",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "International purchase fee"
+      },
+      {
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "Waived Late Payment fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "These fees are subject to your current financial table.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "20.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Late payment fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-03-13T00:01:00.001Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1595",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1595",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Macquarie Ratesaver Card ",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "498413VCSLRC"
+  },
+  "version": 7
+}

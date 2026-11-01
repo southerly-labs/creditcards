@@ -1,0 +1,143 @@
+{
+  "brand": "Zip",
+  "product": {
+    "additionalInformation": {
+      "additionalBundleUris": [],
+      "additionalEligibilityUris": [],
+      "additionalFeesAndPricingUris": [],
+      "additionalOverviewUris": [],
+      "additionalTermsUris": [],
+      "eligibilityUri": "https://help.zip.co/hc/en-us/articles/360001595076",
+      "feesAndPricingUri": "https://help.zip.co/hc/en-us/articles/7087561373199-What-are-the-costs-associated-with-Zip-Pay-and-Zip-Money",
+      "overviewUri": "https://zip.co/au/zip-plus",
+      "termsUri": "https://zip.co/au/zip-plus"
+    },
+    "applicationUri": "https://zip.co/au/zip-plus",
+    "brand": "zip",
+    "brandGroup": "zip",
+    "brandName": "Zip",
+    "bundles": [],
+    "cardArt": [],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum credit limit.",
+        "additionalValue": "2000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": "Maximum credit limit.",
+        "additionalValue": "20000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "Higher-limit everyday account with a Zip Visa Card and conditional interest-free balance treatment.",
+    "eligibility": [
+      {
+        "additionalInfo": "Applicants must be at least 18 years old",
+        "additionalInfoUri": "https://zip.co/au/zip-plus",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Must be an Australian citizen or permanent resident",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Have your own valid and verifiable email address.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Have your own valid and verifiable mobile number.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Approval subject to Zip’s credit assessment criteria.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Pay with your Apple(TM) device using Apple Pay.",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Android(TM) device using Google Pay(TM).",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay bills for Zip with BPay.",
+        "additionalValue": "Pay bills for Zip with BPay.",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalValue": "Shop anywhere Visa is accepted with the Zip Visa card.",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "featureType": "FRAUD_PROTECTION"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Charged if there is an owing balance at the end of the calendar month. No monthly fee if the account balance is $0.",
+        "additionalInfoUri": "https://help.zip.co/hc/en-us/articles/7087561373199-What-are-the-costs-associated-with-Zip-Pay-and-Zip-Money",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "9.95"
+        },
+        "name": "Monthly account fee"
+      },
+      {
+        "additionalInfo": "Charged 7 days after the due date if the minimum monthly repayment is not made.",
+        "additionalValue": "7",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Late fee"
+      },
+      {
+        "additionalInfo": "A $5 dishonour fee applies if your repayment is rejected by your bank.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Dishonour fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-08-04T00:00:00+00:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "From 1 April 2026, the standard variable rate is 13.70% p.a. when the end-of-month owing balance is more than $1,000.",
+        "additionalInfoUri": "https://help.zip.co/hc/en-us/articles/8269374835343-How-is-interest-calculated-on-Zip-Plus",
+        "additionalValue": "No interest is charged if the end-of-month owing balance is $1,000 or less.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "VARIABLE",
+        "loanPurpose": "OTHER",
+        "rate": "0.137",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      }
+    ],
+    "name": "Zip Plus",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "zip-plus"
+  },
+  "version": 7
+}

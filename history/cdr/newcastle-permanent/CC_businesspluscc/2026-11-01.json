@@ -1,0 +1,376 @@
+{
+  "brand": "Newcastle Permanent",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.newcastlepermanent.com.au/tools-and-services/terms-and-conditions#Business",
+      "feesAndPricingUri": "https://www.newcastlepermanent.com.au/tools-and-services/terms-and-conditions#Business",
+      "termsUri": "https://www.newcastlepermanent.com.au/tools-and-services/terms-and-conditions#Business"
+    },
+    "brand": "NP",
+    "brandName": "Newcastle Permanent",
+    "bundles": [],
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_BALANCE"
+      },
+      {
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "A business credit card designed to help separate company and business expenses, manage spending, and simplify bookkeeping.",
+    "effectiveFrom": "2006-12-29T00:00:00+11:00",
+    "effectiveTo": "9999-12-30T00:00:00+11:00",
+    "eligibility": [
+      {
+        "additionalInfo": "Minimum cardholder age 16 years",
+        "additionalValue": "16",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Subject to credit approval",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Non-individual borrowers, Sole traders, partnerships and companies",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalValue": "Available to permanent Australian Residents ",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Available for Visa cards only.",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/mobile-payments",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Transfer store or other credit card balances to your Business plus Credit Card",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalValue": "BPAY View",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Internet Banking and Mobile Banking",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Unlimited cardholders",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Eligible customers enjoy dedicated and personalised service from the Business Solutions team.",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "featureType": "RELATIONSHIP_MANAGEMENT"
+      },
+      {
+        "additionalInfo": "Available for Visa cards only.",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/mobile-payments",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Subject to credit and account limits",
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Up to 44 days interest free on eligible purchases",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Applies when a card is used to perform a transaction overseas or where a merchant processes the payment overseas. ",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Foreign Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.0300",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "variable",
+        "feeType": "UPFRONT",
+        "name": "Valuation Fee",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "Payable for each statement period that the minimum payment amount is not processed to your credit card account ",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "UPFRONT",
+        "fixedAmount": {
+          "amount": "300.00"
+        },
+        "name": "Settlement Fee"
+      },
+      {
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "variable",
+        "feeType": "UPFRONT",
+        "name": "Registration Fee",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "Payable for each statement period in which there is an overlimit",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Additional Authority to Set Off Deposits and/or Guarantee",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "VARIATION",
+        "fixedAmount": {
+          "amount": "100.00"
+        },
+        "name": "Legal and Documentation Fee 7"
+      },
+      {
+        "additionalInfo": "New or increased facility and substitution of security plus Authority to Set Off Deposits and or Guarantee",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "VARIATION",
+        "fixedAmount": {
+          "amount": "350.00"
+        },
+        "name": "Legal and Documentation Fee 2 "
+      },
+      {
+        "additionalInfo": "Consent and Execution of Leases, Plans of Subdivision etc.",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "VARIATION",
+        "fixedAmount": {
+          "amount": "150.00"
+        },
+        "name": "Legal and Documentation Fee 8"
+      },
+      {
+        "additionalInfo": "Applies to cash advances performed using the card via ATM, at a branch or other financial institution, or by internet banking. Minimum of $2.50.",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.0200",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable upon enquiry",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Disputed Transaction Fee"
+      },
+      {
+        "additionalInfo": "Applies for each replacement card you or an additional cardholder requests overseas",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "100.00"
+        },
+        "name": "Credit Card Replacement Fee Overseas"
+      },
+      {
+        "additionalInfo": "Applies for each replacement card you or an additional cardholder requests within Australia",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Credit Card Replacement Fee within Australia"
+      },
+      {
+        "additionalInfo": "A payment may be dishonoured for various reasons, including insufficient funds being available in the credit card account at the agreed time the debit is to occur, the request being incorrectly completed or because the credit card account has been closed",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "9.00"
+        },
+        "name": "Dishonour Fees (Direct debit or payment)"
+      },
+      {
+        "additionalInfo": "Payable on reissue of a statement",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Replacement Statement Fee"
+      },
+      {
+        "additionalInfo": "Replacement of documents due to original documentation being lost or amendments to original documents required",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "100.00"
+        },
+        "name": "Legal and Documentation Fee 5"
+      },
+      {
+        "additionalInfo": "Partial Release or Discharge of Security",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "VARIATION",
+        "fixedAmount": {
+          "amount": "250.00"
+        },
+        "name": "Legal and Documentation Fee 4"
+      },
+      {
+        "additionalInfo": "New or increased facility and substitution of security not requiring Authority to Set Off Deposits and/or Guarantee",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "VARIATION",
+        "fixedAmount": {
+          "amount": "250.00"
+        },
+        "name": "Legal and Documentation Fee 1"
+      },
+      {
+        "additionalInfo": "Unsecured Business plus Credit Card not requiring Guarantee",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "VARIATION",
+        "fixedAmount": {
+          "amount": "100.00"
+        },
+        "name": "Legal and Documentation Fee 10"
+      },
+      {
+        "additionalInfo": "Payable per card, annually in advance on the anniversary date the card account is opened ",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "55.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "New facility where the file contains: Trusts; Commercial Security; Company Mortgage; PPSR; Any other specialised security",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/business",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "variable",
+        "feeType": "VARIATION",
+        "name": "Legal and Documentation Fee 3",
+        "variable": {}
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-08-25T00:00:00+10:00",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/interest-rates",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1199000000",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      },
+      {
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/interest-rates",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1199000000",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      },
+      {
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/interest-rates",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.1199000000",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      }
+    ],
+    "name": "Business Plus Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "CC_businesspluscc"
+  },
+  "version": 7
+}

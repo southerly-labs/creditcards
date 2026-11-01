@@ -1,0 +1,422 @@
+{
+  "brand": "Virgin Money",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.virginmoney.com.au/credit-cards/flyer-credit-card",
+      "feesAndPricingUri": "https://www.virginmoney.com.au/help-and-support/rates-and-fees/credit-cards",
+      "overviewUri": "https://www.virginmoney.com.au/credit-cards/flyer-credit-card",
+      "termsUri": "https://www.virginmoney.com.au/help-and-support/forms-and-important-information/credit-cards"
+    },
+    "applicationUri": "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/virginmoney-card-apply?",
+    "brand": "VMA",
+    "brandName": "Virgin Money Australia",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/flyer-credit-card.png",
+        "title": "VMA Flyer CC Card Art"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum credit limit",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "additionalValue": "6000.0000000000",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Go places faster with our award-winning Virgin Australia Velocity Flyer credit card. Turn your everyday spend into flights, accommodation and more. The sky's the limit.",
+    "eligibility": [
+      {
+        "additionalInfo": "Minimum income required",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "additionalValue": "35000.0000000000",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "You must be at least 18 years of age to apply for a credit card",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Australian Citizen or permanent resident",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "additionalValue": "Australian Citizen or permanent resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Earn 0.5 points per $1 up to $1,500 spend and 0.25 points per $1 over $1,500",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rewards-and-benefits/velocity-rewards",
+        "additionalValue": "Velocity Points Earn",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Mobile Phone cover for accidental damage and theft up to a limit of $1,650 p.a. (with $1,000 per claim). Excess of $50 per claim.",
+        "additionalInfoUri": "https://www.virginmoney.com.au/credit-cards/mobile-phone-insurance",
+        "additionalValue": "Mobile Phone Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "0% p.a. for 12 months on balance transfers from approval. 3% balance transfer fee applies. Reverts to cash advance rate.",
+        "additionalInfoUri": "https://www.virginmoney.com.au/credit-cards/flyer-credit-card",
+        "additionalValue": "P12M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "0% p.a. for 24 months on balance transfers from approval. 3% balance transfer fee applies. Reverts to cash advance rate.",
+        "additionalInfoUri": "https://www.virginmoney.com.au/credit-cards/flyer-credit-card",
+        "additionalValue": "P24M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/virgin-money-app/app-features/digital-wallet",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/virgin-money-app/app-features/digital-wallet",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/virgin-money-app/app-features/digital-wallet",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Reward yourself with a lower rate. Apply for an instalment plan that lets you pay off your card balance with certainty and allows you the potential to save on monthly interest that you may otherwise pay. Plus you can still enjoy interest free days on your other purchases made outside the Fixed Payment Option.",
+        "additionalInfoUri": "https://virginmoney.com.au/help-and-support/credit-cards/instalments",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "Enjoy an exclusive $129 Virgin Australia Gift Voucher each year. To unlock your benefit, simply make a retail purchase in the 2 months prior to requesting your voucher.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rewards-and-benefits/flight-benefit",
+        "additionalValue": "Exclusive Flight Benefit",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Cardholders receive 90 days complimentary insurance against loss, theft or accidental damage on covered products purchased anywhere in the world using your Virgin Australia Velocity Flyer or High Flyer Card up to specified amounts",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/forms-and-important-information",
+        "additionalValue": "Purchase Protection Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Earn 1 extra Velocity Point for every $1 spent directly with Virgin Australia.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Cardholders may be entitled to extended warranty insurance of up to 12 months in addition to the covered product's Australian warranty period, which you purchase on your Virgin Australia Velocity Flyer or High Flyer card",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/forms-and-important-information",
+        "additionalValue": "Extended Warranty Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "For purchases of up to $100, simply wave & go anywhere that has a Visa payWave sensor, making payments easy and convenient.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Take advantage of round-the-clock access to the Visa Platinum Concierge Service. It's the next best thing to having your very own personal assistant and all it takes is a phone call or a mouse click, anytime, anywhere in the world.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "additionalValue": "Personal Concierge",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Imagine having first choice of seats to some of the most sought-after events in Australia. No queuing, no waiting, no disappointment to some of the biggest concerts, hottest shows and most exciting sports events, before pre-sales and before they go on sale to the general public.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rewards-and-benefits/visa-benefits",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Up to 44 days interest free for your purchases (Interest Free Days are not available if you have a Balance Transfer)",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "25,000 Bonus Velocity Points will be awarded for each month $1,500 or more is spent on eligible purchases for the first 60 days from approval. 20,000 Velocity Points will be awarded when you keep your card open for over 12 months. New and approved customers only.",
+        "additionalInfoUri": "https://www.virginmoney.com.au/credit-cards/flyer-credit-card",
+        "additionalValue": "70000",
+        "featureType": "BONUS_REWARDS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Annual fee charged on the card.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalValue": "P12M",
+            "description": "$0 annual fee for the first year",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "FEE_CAP",
+            "fixedAmount": {
+              "amount": "149.0000"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "169.0000"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "For each statement period we issue you with a paper statement, $2 will be debited to your account in the following statement period. This may be waived in limited circumstances",
+        "additionalInfoUri": "https://www.virginmoney.com.au/help-and-support/rates-and-fees/credit-cards",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "2.0000"
+        },
+        "name": "Paper Statement Fee"
+      },
+      {
+        "additionalInfo": "Fee per statement period when your credit limit is exceeded",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.0000"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Fee for each time we do not receive the Minimum Payment Due and any Overdue Amount by the payment due date, debited to your Account after the payment due date.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "30.0000"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "Domestic cash withdrawals from your credit card.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Domestic Cash Advance above $100",
+        "rateBased": {
+          "rate": "0.0270000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Domestic cash withdrawals from your credit card.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "2.7000"
+        },
+        "name": "Domestic Cash Advance below $100"
+      },
+      {
+        "additionalInfo": "International cash withdrawals on your credit card",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.0000"
+        },
+        "name": "International Cash Advance"
+      },
+      {
+        "additionalInfo": "Fee for each time a cheque or Direct Debit payment is dishonoured.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "15.0000"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": "For retail purchases or cash advance transactions made in a foreign currency or using a foreign merchant",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.0330000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "2.5000"
+        },
+        "name": "Over-the-Counter Fee (Bank@Post)"
+      },
+      {
+        "additionalInfo": "The balance transfer fee is 3% of the balance transferred",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Balance Transfer fee",
+        "rateBased": {
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-21T04:44:27Z",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Balance Transfer rate reverts to the variable Annual Percentage Rate for Cash Advances at the end of promotional period.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved Virgin Australia Velocity Flyer Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "minimumValue": "25",
+            "name": "Standard Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Balance Transfer rate reverts to the variable Annual Percentage Rate for Cash Advances at the end of promotional period.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved Virgin Australia Velocity Flyer Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "minimumValue": "13",
+            "name": "Promotional Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "Up to 44 days Interest free on retail purchases",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "25,000 Bonus Velocity Points will be awarded for each month $1,500 or more is spent on eligible purchases for the first 60 days from approval. 20,000 Velocity Points will be awarded when you keep your card open for over 12 months. New and approved customers only. 0% p.a. for 12 months on balance transfers. 3% balance transfer fee applies.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0000000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved Virgin Australia Velocity Flyer Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "maximumValue": "12",
+            "minimumValue": "1",
+            "name": "Promotional Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "0% p.a. for 24 months on balance transfers from approval. 3% balance transfer fee applies",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0000000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved Virgin Australia Velocity Flyer Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "maximumValue": "24",
+            "minimumValue": "1",
+            "name": "Promotional Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "Virgin Australia Velocity Flyer Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "76126e21-102c-ee11-9966-002248e1dc43"
+  },
+  "version": 7
+}

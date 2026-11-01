@@ -1,0 +1,256 @@
+{
+  "brand": "Bank of Melbourne",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.bankofmelbourne.com.au/business/credit-card/rewards",
+      "feesAndPricingUri": "https://www.bankofmelbourne.com.au/content/dam/bom/downloads/accounts_and_cards/bom-cc-fee-charges.pdf",
+      "overviewUri": "https://www.bankofmelbourne.com.au/business/credit-card/rewards",
+      "termsUri": "https://www.bankofmelbourne.com.au/content/dam/bom/downloads/small_business/bom_amplify_business_cc_conditions_of_use.pdf"
+    },
+    "brand": "Bank of Melbourne",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.bankofmelbourne.com.au/content/dam/bom/images/business/credit-card/BOM_Business-Amplify-credit-card_261x166.jpg",
+        "title": "Amplify Business credit card"
+      }
+    ],
+    "description": "Amplify Business is a personal liability business credit card that rewards you for your business expenses. Earn something more rewarding with uncapped points on eligible business purchases.",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Intend to use the card predominantly for business expenditure",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalValue": "Should have an Australian Residential address",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "An extra card: For an additional cardholder",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.bankofmelbourne.com.au/content/dam/bom/downloads/accounts_and_cards/BOM_Amplify_Business_Credit_Card_Comp_Insurance.pdf",
+        "additionalValue": "Complimentary insurance: Including Transit Accident Insurance and Unauthorised Transaction Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "55 interest free days: Up to 55 days interest free on purchases when you pay the closing balance by statement due date each month.",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Simplified tax reporting: Export expenses directly into MYOB and BAS or download as an Excel file to make analysis of business transactions easy",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Personal liability business credit card that rewards you for your business expenses",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Earn up to 2.5 Amplify Points per $1 on eligible international spending.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "You would earn 2.5 Amplify points per dollar spent on Overseas purchases, 1.5 Amplify point per dollar spent on Australian purchases and 1 Amplify point per dollar spent on Government purchases",
+        "additionalInfoUri": "https://www.bankofmelbourne.com.au/content/dam/bom/downloads/business/credit-cards/bom-amplify-business-credit-card-rewards-tc.pdf",
+        "additionalValue": "Amplify Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "You would earn 1 Qantas points per dollar spent on Overseas purchases, 0.5 Qantas point per dollar spent on Australian purchases and 0.25 Qantas point per dollar spent on Government purchases",
+        "additionalInfoUri": "https://www.bankofmelbourne.com.au/content/dam/bom/downloads/business/credit-cards/bom-amplify-business-credit-card-rewards-tc.pdf",
+        "additionalValue": "Amplify Qantas",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfoUri": "https://amplify.bankofmelbourne.com.au/",
+        "additionalValue": "You can redeem your Amplify points for Rewards from a wide range of categories including appliances, gift cards, charitable donations, entertainment expenses and more. Domestic and international flights on a variety of major airlines, as well as accommodation, holiday packages and car hire through Amplify Travel. Airline points or miles through Virgin Australia's Velocity program and Singapore Airlines' KrisFlyer program.",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfoUri": "https://www.qantas.com/au/en/frequent-flyer/earn-points.html",
+        "additionalValue": "You can redeem your Qantas points for Classic Award flights on Qantas and 35 partner airlines, Qantas and Jetstar Any Seat Award flights, Flight Upgrade Awards on eligible Qantas flights when available, Over 3,000 products, experiences and vouchers from the online Qantas Marketplace.",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "We will provide you with a monthly statement (the actual date may vary slightly each month) for your card account. If you: are registered for Online Banking, and have supplied us with a valid email address to send statement notifications to; satisfy any other applicable eligibility criteria, your statement will be available to you electronically through our Online Banking service, instead of receiving paper statements in the mail. You may elect to receive paper statements in the mail at any point.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Automatic Payment Plan: If the principal has an Automatic Payment Plan, we debit the payment specified on statement to the account selected for debiting under the Plan. We debit the payment 25 days after the statement date (or if that is not a banking day, then the next banking day).",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Credit card payments can be paid via Phone banking, Internet banking, BPAY.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "The product has EXTRA_REPAYMENTS option available.",
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "additionalInfo": "The product includes FRAUD_PROTECTION features.",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "RELATIONSHIP_MANAGEMENT is available for eligible customers.",
+        "featureType": "RELATIONSHIP_MANAGEMENT"
+      },
+      {
+        "additionalInfo": "Gambling Preference Request: For a card account, a primary cardholder can request us to decline transaction authorisation requests that we receive and that we are able to recognise as an authorisation request for a gambling transaction. A primary cardholder can make such a request (a 'Gambling Preference Request') by calling us or by another means offered by us from time to time. See our website for more information about this service and how to contact us.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Per account.",
+        "additionalValue": "P1Y",
+        "discounts": [
+          {
+            "description": "Card Fee Waiver",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalValue": "P1Y",
+                "discountEligibilityType": "INTRODUCTORY"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "89.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "89.00"
+        },
+        "name": "Card Fee"
+      },
+      {
+        "additionalInfo": "3% of the Australian dollar value of any Foreign Transaction.",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$0 applied for each missed payment",
+        "additionalValue": "30",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Missed Payment Fee"
+      },
+      {
+        "additionalInfo": "Courier costs may apply",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Card Replacement Fee"
+      },
+      {
+        "additionalInfo": "$0 applied once per statement period if a transaction is made for an amount exceeding the available credit at the date the transaction is debited to your credit card account.",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "$0 applied once per statement period for each payment dishonoured made under the automatic payment plan.",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Automatic payment fee"
+      },
+      {
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.50"
+        },
+        "name": "Copy of a sales voucher"
+      },
+      {
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Copy of a deposit or withdrawal form"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-29T01:03:02Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Purchase Rate",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Charged to purchase balances where full closing balance is not paid by due date",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1949",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Cash Advances",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Applied to any amount of 'cash' withdrawn from account. (includes physical cash and transfer from account)",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2024",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Amplify Business",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "BOMCCBusAmplifyBusiness"
+  },
+  "version": 7
+}

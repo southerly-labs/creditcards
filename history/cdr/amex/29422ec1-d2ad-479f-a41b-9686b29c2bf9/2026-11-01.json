@@ -1,0 +1,298 @@
+{
+  "brand": "American Express",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-business-rewards-card/",
+      "feesAndPricingUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-business-rewards-card/",
+      "overviewUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-business-rewards-card/",
+      "termsUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-business-rewards-card/"
+    },
+    "applicationUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-business-rewards-card/",
+    "brand": "American Express",
+    "brandName": "American Express",
+    "cardArt": [
+      {
+        "cardScheme": "AMEX",
+        "cardType": "CHARGE",
+        "imageUri": "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG870QBR17S3.gif",
+        "title": "The American Express Qantas Business Rewards Card"
+      }
+    ],
+    "description": "The American Express Qantas Business Rewards Card - the Business Card that moves with you. Earn Qantas Points on your Business spend",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Long term visa means 12 months or more and does not include a student visa.",
+        "additionalValue": "You are an Australian citizen or permanent resident or hold a long term visa.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Employee Card Members must be over 18 years of age. The Business and the Primary Card Member are jointly and severally liable for all Employee Card spending. Each employee is entitled to only one (1) Employee Card.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Must be a Director or Controller of the business",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfo": "An active Australian Business Number (ABN).",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfo": "Business must be GST registered.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalValue": "75000.00",
+        "eligibilityType": "MIN_TURNOVER"
+      },
+      {
+        "additionalInfo": "Applications are assessed based on the information provided and are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "No fee for up to 99 Employee Cards.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/customer-centre/business/employee-cards/",
+        "additionalValue": "99",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/pay-bill/",
+        "additionalValue": "Ways to pay your bill",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-business-rewards-card/",
+        "additionalValue": "New Card Member Offer",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/merchant-card-offer/",
+        "additionalValue": "Existing Merchant Member Card Offer",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "The Amex App lets you quickly and easily manage your Card Account anytime, anywhere.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/manage-your-card/mobile-app/",
+        "additionalValue": "Amex App",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Fraud Protection Guarantee, protecting you from unauthorised charges made on your Account.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/service-and-security/fraud-protection/",
+        "additionalValue": "Fraud Protection",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Terms, conditions, cover limits and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Complimentary Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Earn up to 4 Qantas Points per $1 spent:\n2 Qantas Points per $1 spent on eligible Qantas products and services when you pay with your Card, plus 2 bonus Qantas Points per $1 spent on eligible Qantas flights once all segments in a flight booking have been flown.\n1.25 Qantas Points on everyday business spend, except spend at government, utilities & insurance in Australia where you'll get 0.5 Qantas Points per $1 spent.\nAfter a total of 500,000 Qantas Points is earned in a calendar year, the everyday business earn rate will change from 1.25 to 0.75 Qantas Point per $1 spent.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-business-rewards-card/",
+        "additionalValue": "Earn Qantas Points",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalValue": "Payment due reminder",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Spend tracking notification",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Payment received alert",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Enjoy exciting offers and deals with Amex Offers that add value to your Card Membership. Amex Offers must be saved to the Card and used for qualifying spend, subject to offer-specific criteria, to receive a benefit.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/why-amex/offers/",
+        "additionalValue": "Amex Offers",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Get pre-sale tickets and access to some of your favourite events, and enjoy the Amex Entertainment Lounge before the show at select venues. With Amex, you can dive into unforgettable experiences.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/benefits/entertainment/events",
+        "additionalValue": "American Express Experiences",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Optimise your cash flow by choosing to pay off a portion of your balance, up to your FPO limit, over time. Subject to interest.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/credit-cards/membership-benefits/FPO/",
+        "additionalValue": "Flexible Payment Option",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "With up to 51 days to pay for purchases, you can give your business the financial breathing room to take greater control of your cash flow.",
+        "additionalValue": "Extend your cash flow by up to 51 days",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Make your Travel more Comfortable with Complimentary Lounge Access. With two complimentary domestic Qantas Club lounge passes annually, you can unwind before your flight after your first spend on selected Qantas products or services.",
+        "additionalValue": "Qantas Lounge Access",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Welcome to the best of both worlds with your complimentary membership to the Qantas Business Rewards program. You can earn Qantas Points for your business with American Express and other Qantas Business Rewards Partners, while saving up to 10% on eligible Qantas flights.",
+        "additionalValue": "Complimentary Qantas Business Rewards Membership",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Your American Express Qantas Business Rewards Card has flexible spending power, also known as no pre-set spending limit, because it is a Charge Card",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/flexible-spending-power/",
+        "additionalValue": "Flexible Spending Power",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": " $0 annual Employee Card fee for up to 99 cards (this limit includes both active and cancelled Employee Cards).",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/customer-centre/business/employee-cards/",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Business Employee Card Fee"
+      },
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "American Express may, at its discretion, discount the annual fee where the customer holds an eligible American Express Personal Card and meets all other applicable eligibility criteria.",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Offer only available to Card Members who hold and continue to hold a full‑fee Qantas American Express Ultimate Card and meet all other applicable eligibility criteria.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "450.00"
+            }
+          },
+          {
+            "description": "American Express may, at its discretion, discount the annual fee to new Card Members who are American Express accepting Merchants and meet all other applicable eligibility criteria.",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Offer only available to new Card Members who are American Express accepting Merchants at the time of application and approval, continue to accept American Express and do not breach their Card acceptance agreement, and have not held any other American Express Business Card in the past 18 months.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "225.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "450.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "Three percent (3%) or $20, whichever is greater, will be charged on any overdue amount.",
+        "additionalValue": "When you do not pay the minimum payment required by the due date as shown on your statement.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Late Payment Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "20.00"
+          },
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": " 3.5% of the converted amount. Payable when any charge is processed in a currency other than Australian dollars.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$20 for each dishonour or debit rejection.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": " $3 Payable if you pay your Card Account in person at Australia Post by EFTPOS.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Over The Counter Fee"
+      },
+      {
+        "additionalInfo": "Payable when you or the Employee Card Member requests a copy of an individual charge. $7 for charges in Australia, or $10 for other charges.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "7.00"
+        },
+        "name": "Record of Charge Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-07-09T05:00:00.000Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Flexible Payment Option rate applied to the portion of your statement balance carried forward up to your FPO limit.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2399",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "The American Express® Qantas Business Rewards Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "29422ec1-d2ad-479f-a41b-9686b29c2bf9"
+  },
+  "version": 7
+}

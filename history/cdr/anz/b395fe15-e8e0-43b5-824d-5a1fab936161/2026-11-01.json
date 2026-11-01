@@ -1,0 +1,231 @@
+{
+  "brand": "ANZ",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "http://www.anz.com.au/business/credit-cards/qantas-business-rewards/#eligibility",
+      "feesAndPricingUri": "http://www.anz.com.au/business/credit-cards/qantas-business-rewards/#rates",
+      "overviewUri": "http://www.anz.com.au/business/credit-cards/qantas-business-rewards/",
+      "termsUri": "https://www.anz.com.au/business/help-support/terms-conditions/?section=SBS&CID=af:obank:cm"
+    },
+    "applicationUri": "http://www.anz.com.au/business/credit-cards/qantas-business-rewards/",
+    "brand": "ANZ",
+    "bundles": [],
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.anz.com.au/content/dam/anzcomau/images/business/products/credit-cards/qbr-700x300.png"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "5000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": "Maximum Limit is only applicable when applying via GoBiz online application channel.",
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "A credit card facility for businesses where you can earn Qantas points on eligible transactions and receive complimentary domestic and international travel insurance",
+    "eligibility": [
+      {
+        "eligibilityType": "BUSINESS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Any number of additional cards can be ordered",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Unlimited ANZ transactions available using ANZ Internet Banking, ANZ Phone Banking, ANZ ATMs, ANZ Business Visa Debit and EFTPOS. Also includes any deposit, withdrawal or transfer at ANZ branches, cheques drawn by you and any cheque or manual merchant slip deposited to your account.",
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Unauthorised Transactions Insurance protects your business against misuse for up to $37,500 per cardholder and $200,000 maximum for the total account, in any 12 month period.",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/pdf/commercial-cards-anz-business-one-tsc.pdf",
+        "additionalValue": "Unauthorised Transactions Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcom/documents/pdf/anz-business-black-travel-insurance-policy.pdf",
+        "additionalValue": "Domestic Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcom/documents/pdf/anz-business-black-travel-insurance-policy.pdf",
+        "additionalValue": "International Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 44 days interest free days on purchases",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/ways-to-bank/digital-wallets/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/ways-to-bank/digital-wallets/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/ways-to-bank/digital-wallets/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/ways-to-bank/digital-wallets/",
+        "additionalValue": "Fitbit Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/ways-to-bank/digital-wallets/",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Access using ANZ Internet Banking or ANZ App",
+        "additionalInfoUri": "https://www.anz.com.au/ways-to-bank/internet-banking/personal/?CID=af:obank:cm",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.anz.com.au/ways-to-bank/more/bpay/?CID=af:obank:cm",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "0.75 Qantas Points for every $1 spent on eligible purchases up to and including $15,000 in the statement period and 0.5 Qantas Points for every $1 spent thereafter (excluding taxation payments and government charges).  0.5 Qantas Points for every $1 spent on taxation payments and government charges.",
+        "additionalInfoUri": "https://www.anz.com.au/content/dam/anzcomau/documents/pdf/business/anz-qantas-business-rewards-tcs.pdf",
+        "additionalValue": "Qantas Points",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Earn up to 150,000 bonus Qantas Points\nEarn 100,000 bonus Qantas Points when you spend $6k on eligible purchases in the first 3 months from approval of your new card.  Plus earn an additional 50,000 bonus Qantas Points when you keep the card for over 15 months.\nT&Cs, eligibility criteria, fees and charges apply (including an Annual Fee, currently $300 plus a Rewards Fee, currently $75 per card per annum).  New cardholders only.  Offer not available to customers who have held an ANZ Qantas Business Rewards or ANZ Business Black card in the last 12 months.",
+        "additionalInfoUri": "https://www.anz.com.au/business/credit-cards/qantas-business-rewards/",
+        "additionalValue": "150000",
+        "featureType": "BONUS_REWARDS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "300.00"
+        },
+        "name": "Account Service"
+      },
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "75.00"
+        },
+        "name": "Rewards Fee"
+      },
+      {
+        "additionalInfo": "On the value of any International Transaction charged or credited to an ANZ Business One Facility.",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Overseas Transaction",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "A fee will be charged if the Closing Balance shown on a Statement of Account exceeds the Facility Limit. The Overlimit Fee will be the lesser of 5% of the overlimit amount and $50.",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Over Limit",
+        "rateBased": {
+          "rate": "0.05",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "12.00"
+        },
+        "name": "Payment Dishonour"
+      },
+      {
+        "additionalInfo": "A fee will be charged for each Cash Advance, except where it is obtained through an ANZ ATM. The fee will be the greater of $1.50 and 1.50% of the Cash Advance amount plus any ATM operator fee. For Cash Advances made overseas at an ATM, bank or ANZ office, the 1.50% fee will be calculated with reference to the Cash Advance amount, any ATM operator fee plus any Overseas Transaction Fee charged on the Cash Advance.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.015",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalValue": "1",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Late Payment Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-04T23:00:00.000Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Rates are subject to change",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2024",
+        "repaymentType": "OTHER",
+        "tiers": []
+      },
+      {
+        "additionalInfo": "Rates are subject to change",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2174",
+        "repaymentType": "OTHER",
+        "tiers": []
+      }
+    ],
+    "name": "ANZ Qantas Business Rewards",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "b395fe15-e8e0-43b5-824d-5a1fab936161"
+  },
+  "version": 7
+}

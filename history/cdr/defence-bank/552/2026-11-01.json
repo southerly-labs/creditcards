@@ -1,0 +1,315 @@
+{
+  "brand": "Defence Bank",
+  "product": {
+    "additionalInformation": {
+      "additionalBundleUris": [],
+      "additionalEligibilityUris": [],
+      "additionalFeesAndPricingUris": [],
+      "additionalOverviewUris": [],
+      "additionalTermsUris": [],
+      "eligibilityUri": "https://www.defencebank.com.au/creditcard",
+      "feesAndPricingUri": "https://www.defencebank.com.au/creditcard",
+      "overviewUri": "https://www.defencebank.com.au/creditcard",
+      "termsUri": "https://www.defencebank.com.au/tools-and-advice/legal-and-compliance/disclosure-documents/"
+    },
+    "applicationUri": "https://www.defencebank.com.au/creditcard",
+    "brand": "Defence Bank",
+    "brandName": "Defence Bank Limited",
+    "bundles": [],
+    "cardArt": [],
+    "constraints": [],
+    "depositRates": [],
+    "description": "A Visa credit card that gives back. Half of the annual $45 card fee is donated to the Defence Bank Foundation - a charity whose sole beneficiary is Defence Community Dogs.",
+    "effectiveFrom": "2020-10-01T00:00:00.000+10:00",
+    "effectiveTo": "2029-12-31T00:00:00.000+11:00",
+    "eligibility": [],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Additional cardholder at no extra cost.",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Digital banking convenience, Access via our award-winning banking app.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Compatible with digital wallets from Apple, Garmin, Google and Samsung.",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "55 Days",
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Up to 55 days interest free on purchases.",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Same low rate for purchases and cash advances.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Quick Cards",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/lost-or-stolen-cards/",
+        "additionalValue": "Replace lost or stolen cards immediately. Using Quick Cards, Members can order a replacement card within the app and be issued with a virtual card that they can add to their digital wallet and use immediately. This removes the stress and inconvenience of having to wait until the physical card arrives to access funds.",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Lock & Block",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/lost-or-stolen-cards/",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Annual donation to charity",
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Half of the annual $45 card fee is donated to the Defence Bank Foundation - a charity whose sole beneficiary is Defence Community Dogs.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Select your own Pin",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "tap & go™",
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Use tap & go™ to make instant purchases at the tap of a card.",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Bank@Post",
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Bank@Post facility available.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Minimum repayment",
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "The greater of $10 or 3% of outstanding balance, plus overlimit or past due amounts.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "For each cheque deposited through the Bank@Post  system and subsequently dishonoured.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "14.47"
+        },
+        "name": "Cheque Dishonour Bank@Post"
+      },
+      {
+        "additionalInfo": "Cash advance fee when cash advance is as a Bank@Post transaction",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "6.10"
+        },
+        "name": "Bank@Post Cash Advances."
+      },
+      {
+        "additionalInfo": "Transfer between accounts within Defence Bank.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.10"
+        },
+        "name": "Transfer Fees"
+      },
+      {
+        "additionalInfo": "Electronic Transfer requested online.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "5.10"
+        },
+        "name": "Transfer Fees"
+      },
+      {
+        "additionalInfo": "Electronic Transfer requested at a branch.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "6.10"
+        },
+        "name": "Transfer Fees"
+      },
+      {
+        "additionalInfo": "Emergency Overseas Visa Cash Advance Fee.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "USD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Emergency Overseas Visa Cash Advance Fee."
+      },
+      {
+        "additionalInfo": "Emergency Overseas Visa Replacement Card Fee.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "USD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Emergency overseas Visa replacement card"
+      },
+      {
+        "additionalInfo": "Fee is charged as a percentage of value of transaction.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Currency Conversion Fee,",
+        "rateBased": {
+          "accrualFrequency": "Event",
+          "amountRange": {
+            "feeMaximum": "999999.99",
+            "feeMinimum": "0.00"
+          },
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "enforcement notice",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Notice of Demand"
+      },
+      {
+        "additionalInfo": "When requested via online banking or the mobile app.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Outbound Foreign Currency International Telegraphic Transfer."
+      },
+      {
+        "additionalInfo": "When requested at a branch.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Outbound Foreign Currency International Telegraphic Transfer."
+      },
+      {
+        "additionalInfo": "Fee charged when the payment is received after the due date",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Late Payment Fee."
+      },
+      {
+        "additionalInfo": "BPAY transaction.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.10"
+        },
+        "name": "BPay"
+      },
+      {
+        "additionalInfo": "Cash advance fee (includes withdrawals, electronic transfers).",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.10"
+        },
+        "name": "Cash Advances except Bank@Post."
+      },
+      {
+        "additionalInfo": "Half of the annual fee is donated to the Defence Bank Foundation - a charity whose sole beneficiary is Defence Community Dogs.",
+        "additionalInfoUri": "https://www.defencebank.com.au/tools-and-advice/rates-fees-and-charges/credit-card/",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "45.00"
+        },
+        "name": "Annual Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-03-16T00:00:00.000+11:00",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "6 month introductory rate.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "INTRODUCTORY",
+        "rate": "0.0399",
+        "repaymentType": "PRINCIPAL_AND_INTEREST",
+        "tiers": []
+      },
+      {
+        "additionalInfoUri": "https://www.defencebank.com.au/creditcard",
+        "additionalValue": "Ongoing rate 6 month introductory period.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "FLOATING",
+        "rate": "0.0899",
+        "repaymentType": "PRINCIPAL_AND_INTEREST",
+        "tiers": []
+      }
+    ],
+    "name": "Defence Bank Foundation Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "552"
+  },
+  "version": 7
+}

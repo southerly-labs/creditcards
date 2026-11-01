@@ -1,0 +1,232 @@
+{
+  "brand": "Macquarie Bank Limited",
+  "product": {
+    "additionalInformation": {
+      "bundleUri": "https://www.macquarie.com.au/home-loans/home-loan-package.html",
+      "eligibilityUri": "https://www.macquarie.com.au/everyday-banking/credit-cards.html#how-to-apply",
+      "feesAndPricingUri": "https://www.macquarie.com.au/everyday-banking/credit-cards/black-rewards.html#rates-and-fees",
+      "overviewUri": "https://www.macquarie.com.au/everyday-banking/credit-cards/black-rewards.html",
+      "termsUri": "https://www.macquarie.com.au/everyday-banking/credit-cards/black-rewards.html#tab-panels-0-terms--conditions-and-documents-"
+    },
+    "applicationUri": "https://www.macquarie.com.au/everyday-banking/credit-cards.html",
+    "brand": "Macquarie Bank Limited",
+    "brandName": "Macquarie",
+    "bundles": [
+      {
+        "additionalInfoUri": "https://www.macquarie.com.au/home-loans/home-loan-package.html",
+        "description": "If you have a Macquarie Offset Home Loan Package, your Credit Card Annual fee is waived (for the Macquarie Black Card and Macquarie Platinum Card) for the period you hold this package with us.",
+        "name": "Offset Home Loan Package",
+        "productIds": [
+          "LN001MBLSTD001",
+          "LN001MBLBAS001"
+        ]
+      }
+    ],
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.macquarie.com.au/assets/bfs/images/open-banking/credit-cards/Macquarie_VISA_SIGNATURE_front_Masked-01_CDR.png",
+        "title": "Macquarie_VISA_SIGNATURE_front_Masked-01_CDR"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "The credit limit we give you will depend on your ability to meet your repayments.",
+        "additionalValue": "15000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "The Macquarie Black Rewards Credit Card is designed for customers who are willing to consider incurring (and are in a financial position to pay) a higher annual fee and/or interest rates in order to obtain the additional benefits of a rewards credit card.",
+    "effectiveFrom": "2015-04-16T00:01:00.001Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Earn a minimum taxable income of $70,000 per annum.",
+        "additionalValue": "70000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalValue": "Must be permanent resident of Australia.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Approval is subject to Macquarie credit criteria and suitability assessment.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Credit cards may be made available for Macquarie home loan customers, Business Bank clients and Private Bank clients.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "A primary cardholder can apply for an additional cardholder to be added to their account.",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Earn 2 Macquarie Reward Points per $1 spent on eligible purchases up to and including $10,000, then earn 0.5 Macquarie Reward points for every $1 spent on eligible purchases over $10,000 in any given statement period.",
+        "additionalValue": "Macquarie Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalValue": "Overseas Medical Emergency, Expenses Cover, Trip Cancellation and Amendment Cover, Trip Delay Cover, Rental Vehicle Excess Cover, Card Purchase Cover and Buyer's Advantage Cover.",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free on purchases.",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalValue": "Apple Pay and Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Mobile and Online banking",
+        "additionalInfoUri": "https://www.macquarie.com.au/digital-banking.html",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "We don’t charge international purchase fees when you shop overseas or with international online retailers. Receive the Visa foreign exchange rate, with no additional fees or charges.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Concierge Service",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Macquarie Authenticator is our two-factor authentication app designed to maximise your security",
+        "additionalInfoUri": "https://www.macquarie.com.au/digital-banking/macquarie-authenticator.html",
+        "featureType": "FRAUD_PROTECTION"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "Waived credit card annual fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "If you have a Macquarie Offset Home Loan Package, your Credit Card Annual fee is waived (for the Macquarie Black Card and Macquarie Platinum Card) for the period you hold this package with us.",
+                "additionalInfoUri": "https://www.macquarie.com.au/home-loans/home-loan-package.html",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "249.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "249.00"
+        },
+        "name": "Annual Fee Primary Cardholder"
+      },
+      {
+        "additionalInfo": "We don't charge fees for card purchases made or processed outside Australia but others, such as the banks of international merchants and foreign ATM operators, may charge fees for these transactions.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PURCHASE",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "International purchase fee"
+      },
+      {
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "Waived Late Payment fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "These fees are subject to your financial table.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "20.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Late payment fee"
+      },
+      {
+        "additionalInfo": "$5.00 or 3% of the value of the transaction, whichever is the greater.",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "Waived Cash Advance fee",
+            "discountMethodUType": "rateBased",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "These fees are subject to your financial table.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "rateBased": {
+              "amountRange": {
+                "discountMinimum": "5.00"
+              },
+              "rate": "0.03",
+              "rateType": "TRANSACTION"
+            }
+          }
+        ],
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash advance fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "5.00"
+          },
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-03-13T00:01:00.001Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.207",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.207",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Macquarie Black Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "498416VPSPLT"
+  },
+  "version": 7
+}

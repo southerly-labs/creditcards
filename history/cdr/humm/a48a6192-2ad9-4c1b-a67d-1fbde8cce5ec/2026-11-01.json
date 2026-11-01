@@ -1,0 +1,305 @@
+{
+  "brand": "humm",
+  "product": {
+    "additionalInformation": {
+      "additionalFeesAndPricingUris": [
+        {
+          "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+          "description": "Product Fees & Charges"
+        }
+      ],
+      "additionalTermsUris": [
+        {
+          "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2025/11/h90_My-humm-Terms-of-Use_update_nov2025_v2.pdf",
+          "description": "Self Service Terms and Conditions"
+        },
+        {
+          "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2023/02/humm90CASH-TCs-20230210.pdf",
+          "description": "humm90//CASH Terms & Conditions"
+        }
+      ],
+      "feesAndPricingUri": "https://www.humm90.com/au/fees-charges/",
+      "overviewUri": "https://www.humm90.com/au/",
+      "termsUri": "https://cdn.humm90.com/uploads/sites/3/2024/01/5001_H90_Conditions-of-Use-and-Credit-Guide_Jan2024.pdf"
+    },
+    "applicationUri": "https://apply.flexicards.com.au/seller=SKYE2?_gl=1*1ijr9ao*_gcl_au*MTg2NjQzMzg4NS4xNzgyNzg2OTA2*_ga*OTk5MzYyMjg2LjE3ODI3ODY5MDc.*_ga_7JLW8TSYG6*czE3ODI3OTcxNTEkbzMkZzEkdDE3ODI3OTc2MDkkajYwJGwwJGgxMDQ4NDEwMTYy",
+    "brand": "humm",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://cdn.humm90.com/uploads/sites/3/2023/12/humm90-interest-free-card-600w.png",
+        "title": "humm90 card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum credit limit",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/02/5293_H90_Key-Facts_060326.pdf",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": "Maximum credit limit",
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "The humm90® Platinum Mastercard® offers flexible Interest Free options and can be used everywhere Mastercard is accepted both in Australia and internationally.",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "25000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Have a clear credit file",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Have a valid mobile number",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalValue": "Be a permanent Australian resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "humm®90 Platinum Mastercard® is one of the only credit cards that gives you between 80 – 110 days interest free* on eligible purchases. Get at least 80 days from the date of your purchase before any interest is charged – which can stretch to 110 days depending on the date in your statement period when the purchase was made.",
+        "additionalInfoUri": "https://www.humm90.com/au/benefits/up-to-110-days-interest-free/",
+        "additionalValue": "P110D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Long Term Interest free allows you to have what you need now and pay over an extended time, interest free~. Our partner retailers may offer up to 60 months interest free on select purchases allowing you to take it today, and get a long, affordable, interest free time to pay.",
+        "additionalInfoUri": "https://www.humm90.com/au/benefits/long-term-interest-free/",
+        "additionalValue": "P60M",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "humm90//WRAP allows you to convert purchases of $250 or more to a 9, 12 or 15 month Interest Free^ instalment plan for a small establishment fee. Giving you greater control of your repayments for life’s important purchases.",
+        "additionalInfoUri": "https://www.humm90.com/au/benefits/h90-wrap/",
+        "additionalValue": "P15M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalValue": "Pay bills with Bpay",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalValue": "Pay bills via direct debit",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "If you have a humm90 Mastercard, you may ask us to issue a humm90 Mastercard to another person aged 18 or over as an Additional Cardholder. If we agree, we will issue that person a humm90 Mastercard and they will be able to operate your humm90 Account. You will be responsible for their use of your humm90 Account.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2024/01/5001_H90_Conditions-of-Use-and-Credit-Guide_Jan2024.pdf",
+        "additionalValue": "Additional Cardholder",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Introducing new and easy-to-use features that make managing your account even more convenient. Plus, spend in-store and online, with Apple PayTM, Google PayTM and Garmin PayTM on the go!",
+        "additionalValue": "Pay with digital wallet",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Based on the value of the Transaction in Australian dollars charged, each time an amount is debited to your humm90 Account in respect of a Card Transaction conducted in a currency other than Australian Dollars.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "additionalValue": "No International Transaction Fees",
+        "featureType": "FREE_TXNS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Charged at the time your humm90 Account is created and monthly thereafter.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "additionalValue": "9.95",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "9.95"
+        },
+        "name": "Monthly Fee"
+      },
+      {
+        "additionalInfo": "Charged each time a payment is made via BPAY to pay your account.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "0.95"
+        },
+        "name": "Payment Handling Fee"
+      },
+      {
+        "additionalInfo": "Per statement, charged for each paper statement we provide you.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "OTHER",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Paper Statement Fee"
+      },
+      {
+        "additionalInfo": "Charged when an amount owing is not paid by the due date.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "additionalValue": "45.00",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "45.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "Charged when a payment is dishonoured.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Payment Dishonour Fee"
+      },
+      {
+        "additionalInfo": "Per annum for each Additional Cardholder, charged at the time each Additional Cardholder is added to your humm90 Account and annually on the anniversary of that day while the Additional Card remains issued",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "OTHER",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Additional Cardholder Fee"
+      },
+      {
+        "additionalInfo": "Charged when you ask us to replace a humm90 Mastercard.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Card Replacement Fee"
+      },
+      {
+        "additionalInfo": "Charged when you ask us to arrange an urgent replacement of a humm90 Mastercard, with the amount determined by where and how we send the replacement card.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "REPLACEMENT",
+        "name": "Urgent Card Replacement Fee",
+        "variable": {
+          "feeMaximum": "200.00",
+          "feeMinimum": "20.00"
+        }
+      },
+      {
+        "additionalInfo": "Charged when the relevant Balance Transfer Transaction is debited to your humm90 Account. It will be a percentage of the debit balance transferred under a Balance Transfer Transaction. This percentage is notified to you before you complete the Balance Transfer Transaction.",
+        "additionalInfoUri": "https://cdn.humm90.com/uploads/sites/3/2026/03/5293_humm90_Product_Fee-and_Charges_update_v03.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.00"
+          },
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": "An Establishment Fee will be charged whenever a purchase is converted to humm90//WRAP. The Establishment Fee is 3% of the purchase you convert to humm90//WRAP on a 9 month term",
+        "additionalInfoUri": "https://www.humm90.com/au/faqs/are-there-any-fees-for-using-humm90-wrap/",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "UPFRONT_PER_PLAN",
+        "name": "humm90wrap Fee Establishment Fee - 9 month term",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": "An Establishment Fee will be charged whenever a purchase is converted to humm90//WRAP. The Establishment Fee is 4% of the purchase you convert to humm90//WRAP on a 12 month term.",
+        "additionalInfoUri": "https://www.humm90.com/au/faqs/are-there-any-fees-for-using-humm90-wrap/",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "UPFRONT_PER_PLAN",
+        "name": "humm90wrap Fee Establishment Fee - 12 month term",
+        "rateBased": {
+          "rate": "0.04",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": "An Establishment Fee will be charged whenever a purchase is converted to humm90//WRAP. The Establishment Fee is 5% of the purchase you convert to humm90//WRAP on a 15 month term.",
+        "additionalInfoUri": "https://www.humm90.com/au/faqs/are-there-any-fees-for-using-humm90-wrap/",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "UPFRONT_PER_PLAN",
+        "name": "humm90wrap Fee Establishment Fee - 15 month term",
+        "rateBased": {
+          "rate": "0.05",
+          "rateType": "BALANCE"
+        }
+      }
+    ],
+    "instalments": {
+      "maximumSplit": 15,
+      "minimumPlanValue": "250.00",
+      "minimumSplit": 9
+    },
+    "isTailored": false,
+    "lastUpdated": "2026-07-23T07:05:14Z",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.humm90.com/au/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2899",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      },
+      {
+        "additionalInfoUri": "https://www.humm90.com/au/",
+        "applicationFrequency": "P1M",
+        "applicationType": "MATURITY",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.273",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      },
+      {
+        "additionalInfoUri": "https://www.humm90.com/au/",
+        "additionalValue": "28.99",
+        "applicationFrequency": "P1M",
+        "applicationType": "MATURITY",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PENALTY",
+        "loanPurpose": "OTHER",
+        "rate": "0.2899",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      }
+    ],
+    "name": "humm90",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "a48a6192-2ad9-4c1b-a67d-1fbde8cce5ec"
+  },
+  "version": 7
+}

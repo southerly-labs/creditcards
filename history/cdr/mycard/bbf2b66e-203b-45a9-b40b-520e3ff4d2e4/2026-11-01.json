@@ -1,0 +1,278 @@
+{
+  "brand": "MyCard",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://mycard.com.au/credit-cards/clear-card",
+      "feesAndPricingUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+      "overviewUri": "https://mycard.com.au/credit-cards/clear-card",
+      "termsUri": "https://mycard.com.au/help-and-support/important-information/terms-and-conditions"
+    },
+    "brand": "MyCard",
+    "brandName": "MyCard",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.mycard.com.au/credit-cards/clear-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1762859319006/mycard-clear-digital-card-1536x969.png"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "100000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalValue": "2000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "The Product is a low interest rate credit card that provides individuals with a line of credit facility that has a low rate.",
+    "effectiveFrom": "2020-09-01T00:00:00Z",
+    "eligibility": [
+      {
+        "additionalInfoUri": "https://mycard.com.au/credit-cards/clear-card",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfoUri": "https://mycard.com.au/credit-cards/clear-card",
+        "additionalValue": "Must be an Australian resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/clear-card",
+        "additionalValue": "4",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/help-and-support/manage-account/balance-transfers",
+        "additionalValue": "Eligibility criteria and terms and conditions apply",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/help-and-support/manage-account/paying-your-mycard-account",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/benefits",
+        "additionalValue": "Complimentary range of everyday benefits to help you shop and save",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "MyCard Online",
+        "additionalInfoUri": "https://secure.mycard.com.au/login",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "MyCard App",
+        "additionalInfoUri": "https://apps.apple.com/au/app/mycard-au/id6504455295",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/help-and-support/account-setup/digital-wallets",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/help-and-support/account-setup/digital-wallets",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/help-and-support/account-setup/digital-wallets",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/benefits",
+        "additionalValue": "Purchase Protection Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/benefits",
+        "additionalValue": "Extended Warranty Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/benefits",
+        "additionalValue": "Mobile phone insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/clear-card",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/clear-card",
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "24/7 worldwide customer service and fraud protection",
+        "additionalInfoUri": "https://www.mycard.com.au/help-and-support/contact-us",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "24/7 customer service if your card is lost or stolen.",
+        "additionalInfoUri": "https://www.mycard.com.au/help-and-support/contact-us",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/instalment-plans",
+        "additionalValue": "Eligibility criteria and terms and conditions apply",
+        "featureType": "INSTALMENT_PLAN"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "The amount charged to your Account after the Payment Due Date if at the time the fee is debited, your Account has an Overdue Amount and the balance of your Account is $50 or more.",
+        "additionalInfoUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+        "additionalValue": "14",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "Only for accounts opened prior to 1 July 2012. Charged per statement period when your credit limit is exceeded, debited to your account on the date your credit limit is exceeded and on each statement date in subsequent statement periods if your account remains overlimit.",
+        "additionalInfoUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Charged on the anniversary of your account opening.",
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/clear-card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "149.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "Charged per additional cardholder attached to your account.",
+        "additionalInfoUri": "https://www.mycard.com.au/credit-cards/clear-card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Cardholder Fee"
+      },
+      {
+        "additionalInfo": "When you make a Retail Purchase or obtain a Cash Advance in Australian dollars while overseas, or while in Australia (for example online) where the merchant, or the financial institution or entity processing the transaction, is located outside Australia. An ATM fee may also apply.",
+        "additionalInfoUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Charged for each payment made to your Account by cash at an Australia Post outlet displaying the Bank@PostTM symbol.",
+        "additionalInfoUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "Over-the-Counter Transaction Fee"
+      },
+      {
+        "additionalInfo": "$3.50 per transaction amount or 3.5% of the transaction amount, whichever is higher, for a Cash Advance inside Australia, debited to your Account on the date the Cash Advance takes place. An ATM fee may also apply.",
+        "additionalInfoUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Domestic Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.50"
+          },
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$3.50 per transaction amount or 3.50% of the transaction amount, whichever is higher, for a Cash Advance outside Australia, debited to your Account on the date the Cash Advance tasks place. Please note, this is in addition to any International Transaction Fee that may be payable. An ATM fee may also apply.",
+        "additionalInfoUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "International Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.50"
+          },
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Charged when we issue you a paper statement and debited to your Account on the last day of the Statement Period.",
+        "additionalInfoUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "Paper Statement Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-08-24T00:00:00Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Retail purchase rate",
+        "additionalInfoUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1499",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Cash advance rate",
+        "additionalInfoUri": "https://mycard.com.au/help-and-support/important-information/fees-and-charges-credit-cards",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2224",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "MyCard Clear",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "bbf2b66e-203b-45a9-b40b-520e3ff4d2e4"
+  },
+  "version": 7
+}

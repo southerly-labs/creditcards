@@ -1,0 +1,219 @@
+{
+  "brand": "Kogan Money Credit Cards",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/",
+      "feesAndPricingUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/",
+      "overviewUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/",
+      "termsUri": "https://www.koganmoney.com.au/credit-cards/important-information/"
+    },
+    "applicationUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/",
+    "brand": "Kogan Money",
+    "brandName": "Kogan Money Credit Cards",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://koganmoney.com.au/credit-cards/kogan-money-black-card/"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "30000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalValue": "6000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "The Product is a rewards credit card that provides individuals with a line of credit facility, the ability to earn Kogan Money Credit Card Rewards Points (Reward Points) and access to ancillary Kogan.com benefits, with up to 44 days interest free on retail purchases and no annual fee.",
+    "effectiveFrom": "2025-11-06T00:12:00Z",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Must be an Australian resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "35000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Have an Australian mobile number",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Have a valid email address",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/balance-transfer/",
+        "additionalValue": "Eligibility criteria and terms and conditions apply",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/using-your-card/",
+        "additionalValue": "Direct Debit/ AutoPay",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/using-your-card/",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/",
+        "additionalValue": "Kogan First Membership",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Kogan Money Credit Cards Online",
+        "additionalInfoUri": "https://www.cards.koganmoney.com.au/",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Kogan Money Credit Cards Mobile App",
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/mobile-app/",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/apple-pay/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/google-pay/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/using-your-card/",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/rewards/",
+        "additionalValue": "Kogan Money Credit Cards Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/kogan-money-black-card/",
+        "additionalValue": "Kogan.com acquisition voucher",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/kogan-instalment-plans/",
+        "additionalValue": "Eligibility criteria and terms and conditions apply",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfoUri": "https://koganmoney.com.au/credit-cards/faq/",
+        "additionalValue": "4",
+        "featureType": "ADDITIONAL_CARDS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfoUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "$5 per transaction amount or 3.5% of the transaction value, whichever is higher, for a Cash Advance inside Australia, debited to your Account on the Transaction Date.",
+        "additionalInfoUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Domestic Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "5.00"
+          },
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$5 per transaction amount for a Cash Advance outside of Australia, debited to your Account on the Transaction Date.",
+        "additionalInfoUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "International Cash Advance Fee"
+      },
+      {
+        "additionalInfo": "We charge you an International Transaction Fee of 3.4%, debited to your Account on the Transaction Date.",
+        "additionalInfoUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.034",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$30 each time we do not receive the Minimum Payment Due and any Overdue Amount by the payment due date, debited to your Account after the payment due date. The Minimum Payment Due, any Overdue Amount, and payment due date are detailed on your statement of account",
+        "additionalInfoUri": "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/",
+        "additionalValue": "2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Late Payment Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-04-23T00:12:00Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Retail purchase rate",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Cash advance rate",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2274",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Kogan Money Black Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "229ba4a9-71f0-4339-b447-e00a6b524b90"
+  },
+  "version": 7
+}

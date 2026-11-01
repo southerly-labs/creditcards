@@ -1,0 +1,742 @@
+{
+  "brand": "Australian Military Bank",
+  "product": {
+    "additionalInformation": {
+      "additionalBundleUris": null,
+      "additionalEligibilityUris": null,
+      "additionalFeesAndPricingUris": null,
+      "additionalOverviewUris": null,
+      "additionalTermsUris": null,
+      "bundleUri": null,
+      "eligibilityUri": "https://www.australianmilitarybank.com.au/disclosuredocuments",
+      "feesAndPricingUri": "https://www.australianmilitarybank.com.au/disclosuredocuments",
+      "overviewUri": "https://www.australianmilitarybank.com.au/credit-card/low-rate-visa-card",
+      "termsUri": "https://www.australianmilitarybank.com.au/disclosuredocuments"
+    },
+    "applicationUri": "https://ib.australianmilitarybank.com.au/AMBInternetBanking/?pd=AMBCC",
+    "brand": "AMB",
+    "brandGroup": null,
+    "brandName": "AMB Bank Product ",
+    "bundles": [],
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.australianmilitarybank.com.au/sites/default/files/AMBCredit.png",
+        "title": "Tri-Forces"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "2000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "With a low annual fee and a low ongoing interest rate for purchases, the Low Rate Visa Credit Card is the only credit card you'll ever need.\nPlus, with our competitive 12-month balance transfer rate, you can also transfer your outstanding balances from other credit or store cards to Australian Military Bank for 0.00% p.a (introductory rate).",
+    "effectiveFrom": "2021-12-31T13:00:00Z",
+    "effectiveTo": null,
+    "eligibility": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Individuals must be permanently residing in Australia",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Applicants must be currently employed or receiving a regular income.   Self employed clients should contact the Bank prior to applying",
+        "eligibilityType": "EMPLOYMENT_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "You may receive up to 55 days interest free period for purchases provided you continue to pay your closing balance in full on or before every statement due date.",
+        "additionalInfoUri": null,
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "0.00% p.a.12 months introductory balance transfer rate.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Visa Credit",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Apple Pay, Google Pay, Samsung Pay. Garmin Pay, Fitbit Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Members can set up a variety of notifications in Internet Banking",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "0.00% p.a.12 months introductory balance transfer rate. Reverts to purchase rate after that period. Balance transfer offer (including interest rate and term) applies to approved requests made at the time of application.",
+        "additionalInfoUri": null,
+        "additionalValue": "P12M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": null,
+        "name": "Foreign Currency Conversion fee",
+        "rateBased": {
+          "accrualFrequency": null,
+          "amountRange": null,
+          "rate": "0.0295",
+          "rateType": "TRANSACTION"
+        },
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "4.50"
+        },
+        "name": "Overseas ATM withdrawals",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Foreign Cheque encashment (>AU$5000)",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "At cost plus $20 bank processing fee",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "EVENT",
+        "fixedAmount": null,
+        "name": "Emergency replacement Visa card (within Australia)\nBank processing fee",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": "1.00"
+        }
+      },
+      {
+        "additionalInfo": "1% of AUD value of amount purchased. Minimum order of AU$100 applies",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "fixedAmount": null,
+        "name": "Foreign Cash",
+        "rateBased": {
+          "accrualFrequency": null,
+          "amountRange": null,
+          "rate": "0.01",
+          "rateType": "TRANSACTION"
+        },
+        "variable": null
+      },
+      {
+        "additionalInfo": "per page",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Copies of statements (over 12 months) at branch or posted",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "4.50"
+        },
+        "name": "Cash advance at other financial institution",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Payable when a notice is issued regarding a default under the credit card contract",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Default notice fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "At cost plus $20 bank processing fee",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "EVENT",
+        "fixedAmount": null,
+        "name": "Overseas Visa card replacement\nBank processing fee",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": "1.00"
+        }
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Stopped bank cheque",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "EFT trace/recall of funds",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "49.00"
+        },
+        "name": "Annual fee - credit card",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Bank Cheque",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "Copies of statements (up to 12 months) at branch",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "Paper statement fee (per statement)",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Periodical payment - insufficient funds rejection fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "A hourly fee applies plus any expenses incurred",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "variable",
+        "feeType": "EVENT",
+        "fixedAmount": null,
+        "name": "Archive retrieval fee",
+        "rateBased": null,
+        "variable": {
+          "feeMaximum": null,
+          "feeMinimum": "50.00"
+        }
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Foreign drafts",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Telegraphic transfers (AUD)",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "2nd and subsequent reminders by letter or phone",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Arrears notice fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Minimum encashment of AU$50 applies",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Encashment of Foreign Cash",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Telegraphic transfers (online)",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Amendment/ cancellation of\ntelegraphic transfer/swift transfers",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "If a Visa dispute lodged by you is declined and found that the claim was invalid",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Declined Visa dispute",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Telegraphic transfers (foreign currency)",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Foreign Cheque encashment (<AU$5000)",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Direct debit dishonour - electronic",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Late payment fee - credit card",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Electronic funds transfer between Australian Military Bank and other financial institutions",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Swift transfers",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "per page",
+        "additionalInfoUri": null,
+        "additionalValue": "P1M",
+        "currency": "XXX",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Copies of statements (up to 12 months) posted",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Card transaction voucher retrieval",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "Per audit certificate requested",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Audit Certificate Fee",
+        "rateBased": null,
+        "variable": null
+      }
+    ],
+    "instalments": null,
+    "isTailored": false,
+    "lastUpdated": "2026-09-30T14:00:00.323756Z",
+    "lendingRates": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": null,
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1199",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": []
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": null,
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1999",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": []
+      },
+      {
+        "additionalInfo": "Introductory balance transfer rate: 0.00% p.a. for 12 months",
+        "additionalInfoUri": null,
+        "additionalValue": "P12M",
+        "applicabilityConditions": [],
+        "applicationFrequency": null,
+        "applicationType": "PERIODIC",
+        "calculationFrequency": null,
+        "comparisonRate": null,
+        "interestPaymentDue": null,
+        "lendingRateType": "FIXED",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.00",
+        "repaymentType": "UNCONSTRAINED",
+        "tiers": []
+      }
+    ],
+    "name": "Low Rate Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "e1f63c50-20bb-457a-8fee-da684c281a0a"
+  },
+  "version": 7
+}

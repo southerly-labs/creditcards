@@ -1,0 +1,276 @@
+{
+  "brand": "Queensland Country Bank",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_fees-charges.pdf",
+      "overviewUri": "https://www.queenslandcountry.bank/Banking/credit-cards/Visa-My-Rewards-Credit-Card/",
+      "termsUri": "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_account-access-facility.pdf"
+    },
+    "brand": "Queensland Country Bank",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visacreditmyrewards.jpg",
+        "title": "My Rewards Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "60000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Our Visa My Rewards Credit Card comes with a competitive low interest rate, rewards program, low annual fee and up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date",
+    "effectiveFrom": "2022-09-11T14:30:00.0000000Z",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalValue": "Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Pay faster, easier and more securely with Apple Pay. Apple Pay eligibility restrictions may apply.",
+        "additionalValue": "APPLE PAY",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay faster, easier and more securely with Google Pay. Google Pay eligibility restrictions may apply.",
+        "additionalValue": "GOOGLE PAY",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay faster, easier and more securely with Samsung Pay. Samsung Pay eligibility restrictions may apply.",
+        "additionalValue": "SAMSUNG PAY",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "A low competitive interest rate on both purchases and cash advances",
+        "featureType": "OTHER"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Balance transfers can be made to the account",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Charged as a percentage of the foreign currency transaction value",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Overseas Purchase Fee",
+        "rateBased": {
+          "amountRange": {},
+          "rate": "0.0365",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Disputed Transaction Fee"
+      },
+      {
+        "additionalInfo": "Applies to Direct Debit, Direct Credit and OSKO payments",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Direct Entry Recall of Funds"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "DE Mistaken Payment Return Req"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "8.00"
+        },
+        "name": "Honour Charge"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "8.00"
+        },
+        "name": "Dishonour Insuff. Funds"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "7.20"
+        },
+        "name": "RTGS Payment Received Fee"
+      },
+      {
+        "additionalInfo": "Refer to our Fees and Charges brochure for information on other transactions which may attract fees and charges",
+        "additionalInfoUri": "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_fees-charges.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "OTHER",
+        "name": "Other Service Fees",
+        "variable": {}
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Transaction Investigation Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Arrears Letter - Second Arrears Letter"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "70.00"
+        },
+        "name": "Arrears Letter Fee - Default Notice prior to Enforcement"
+      },
+      {
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalValue": "50.00",
+            "description": "100% waived when the Overlimit amount <= $50.000000",
+            "discountMethodUType": "rateBased",
+            "discountType": "BALANCE",
+            "rateBased": {
+              "amountRange": {},
+              "rate": "1.0",
+              "rateType": "FEE"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "Annual Visa Card fee is waived under our Ultimate Home Loan Package",
+            "discountMethodUType": "rateBased",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Annual Visa Card fee is waived under our Ultimate Home Loan Package",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "rateBased": {
+              "amountRange": {},
+              "rate": "1.0",
+              "rateType": "FEE"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "89.00"
+        },
+        "name": "Visa Annual Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-11-01T06:00:23.7841209Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.1499",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1499",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1499",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Visa Credit My Rewards",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "55"
+  },
+  "version": 7
+}

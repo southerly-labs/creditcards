@@ -1,0 +1,229 @@
+{
+  "brand": "Qudos Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.qudosbank.com.au/products/credit-cards/visa-platinum-credit-card",
+      "feesAndPricingUri": "https://www.qudosbank.com.au/products/credit-cards/visa-platinum-credit-card",
+      "overviewUri": "https://www.qudosbank.com.au/products/credit-cards/visa-platinum-credit-card",
+      "termsUri": "https://www.qudosbank.com.au/support/legal/new-to-bank-terms-and-conditions"
+    },
+    "applicationUri": "https://apply.qudosbank.com.au/Apply/credit-card",
+    "brand": "Qudos Bank",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b434aae6516cad1ecd0_visa-platinum-credit-card.png",
+        "title": "VISA Platinum"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Subject to Lending Criteria \r\n",
+        "additionalValue": "20000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Minimum limit of $6000 applies",
+        "additionalValue": "6000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Earn Qantas Points* on your everyday purchases and enjoy a host of other exceptional features with our Visa Platinum Credit Card.",
+    "effectiveFrom": "2011-07-27T14:30:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Customers above 18 Years may apply",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Only personal customers may apply",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "This product is only available to members who\nhave a residential address in Australia.",
+        "additionalValue": "Australian Resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Manage your card in the Qudos Bank App on your mobile or tablet device. You can activate a new card, change a PIN, report a lost or stolen card, notify us of overseas trips and more.",
+        "additionalValue": "Enjoy faster, secure payments, and take control of your cards.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Earn 1 Qantas Point for every $1 spent on eligible purchases8 ($1 -$2,500) per calendar month.\nEarn 0.5 Qantas Points for every $1 spent on eligible purchases8 ($2,501 & above) per calendar month.\nEarn 1 extra Qantas Point per $1 spent on selected Qantas products and services.\n",
+        "additionalValue": "Qantas Frequent Flyer",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Up to 55 interest free days on purchases",
+        "additionalValue": "P1M25D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Complimentary international travel insurance",
+        "additionalValue": "International Travel Insurance",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Access to Visa Platinum Entertainment Offers",
+        "additionalValue": "Visa Platinum Entertainment Offers",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "24/7 worldwide Visa Premium Concierge Service",
+        "additionalValue": "Visa Premium Concierge Service",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalValue": "Apple Pay, Google Pay, FitBit",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "VISA",
+        "featureType": "CARD_ACCESS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "No charge applies for copies of documents such as loan or withdrawal forms.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Copies of documents other than statements"
+      },
+      {
+        "additionalInfo": "This fee is applied when a Member requests a copy of a statement \non an account for a period more than 3 months before the request. \nThere is no charge for copies of statements less than 3 months \nold. This fee will be charged at the time the copy is provided.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Statement Copies"
+      },
+      {
+        "additionalValue": "1 Year",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Card Holder Fee"
+      },
+      {
+        "additionalInfo": "For cash advances overseas, a foreign currency conversion fee is also payable.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Cash Advance Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee (ITF)",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Visa International can arrange for the issue of an emergency \nreplacement card if your card is lost, stolen or damaged whilst \nyou are overseas. Visa International bills this charge to your \nQudos Bank account",
+        "currency": "USD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Emergency Overseas Visa Replacement Card"
+      },
+      {
+        "additionalInfo": "Visa International can arrange for a cash advance to be issued \nif your card is lost, stolen or damaged whilst you are overseas. \nIt should be noted that this fee can be avoided by obtaining \ncash from any bank displaying the Visa logo after an emergency \ncard has been issued by Visa International.\nImportant: If you apply for an emergency replacement card \nand an emergency cash advance from Visa International, \nyour Qudos Bank account will be debited with both fees \namounting to US$350.00.",
+        "currency": "USD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Emergency Overseas Visa Cash Advance"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Replacement Cards"
+      },
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "189.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Late Payment Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-31T21:58:08.869Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Standard rate",
+        "additionalInfoUri": "https://www.qudosbank.com.au/products/credit-cards/visa-platinum-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2099",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2099",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2099",
+        "repaymentType": "UNCONSTRAINED"
+      }
+    ],
+    "name": "VISA Platinum Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "9a6f5620-e93c-4e0c-bc23-d7f979b97f69"
+  },
+  "version": 7
+}

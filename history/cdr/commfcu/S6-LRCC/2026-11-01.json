@@ -1,0 +1,278 @@
+{
+  "brand": "CommFCU",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://communityfirst.com.au/personal/banking/credit-cards",
+      "feesAndPricingUri": "https://communityfirst.com.au/tools/rates-and-fees",
+      "overviewUri": "https://communityfirst.com.au/personal/banking/credit-cards",
+      "termsUri": "https://communityfirst.com.au/support/important-information/disclosure-documents"
+    },
+    "applicationUri": "https://www.communityfirst.com.au/applying-for-a-loan",
+    "brand": "C",
+    "brandName": "Community First Credit Union",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cms.communityfirst.com.au/wp-content/uploads/2026/05/CFCU-Visa-Card.png",
+        "title": "CFB Low Rate Credit Card"
+      },
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cms.communityfirst.com.au/wp-content/uploads/2026/05/McGrath-Pink-Visa-Card.png",
+        "title": "CFB Low Rate Pink Credit Card"
+      },
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cms.communityfirst.com.au/wp-content/uploads/2026/05/CFCU-Prostate-Visa-Card.png",
+        "title": "CFB Low Rate Blue Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "A low rate credit card with the same low rate on cash advances and up to 55 days interest free on purchases. Choose pink and half the annual fee is donated to the McGrath Foundation each year",
+    "effectiveFrom": "2026-09-01T00:00:00.000+10:00",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Australian citizen or permanent residency only",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Additional card holders subject to approval and must be aged 16 years or older.",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Subject to approval and must be processed by Community First",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Option of Pink, Blue or standard card",
+        "additionalValue": "Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Via Community First Mobile App and Internet Banking",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Leave your wallet at home and make payments on the go with Apple Pay.",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free when you pay your balance in full by the due date each month",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Leave your wallet at home and make payments on the go with Google Pay.",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Leave your wallet at home and make payments on the go with Samsung Pay.",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "For Pink and Blue Low Rate Credit Cards, half the annual fee ($25) is donated to the McGrath Foundation (pink) or the Prostate Cancer Foundation of Australia (blue) each year",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "LOW_RATE_CREDIT_CARD_ANNUAL_FEE"
+      },
+      {
+        "additionalInfo": "Charged to loan account",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "LATE_PAYMENT"
+      },
+      {
+        "additionalInfo": "Charged on the day of the request",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "45.00"
+        },
+        "name": "CARD_EXTRACTION_FEE"
+      },
+      {
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "VISA_CHARGEBACKS"
+      },
+      {
+        "additionalInfo": "Charged per page. For statements issued prior to January 1997 the fee is $3 per page.",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "1.50"
+        },
+        "name": "COPY_OF_STATEMENT_(ALREADY_ISSUED)"
+      },
+      {
+        "additionalInfo": "Cheque deposits",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DEPOSIT",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "BANK@POST_CHEQUE_DEPOSIT"
+      },
+      {
+        "additionalInfo": "Deposit or withdraw cash via Bank@Post",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "BANK@POST_WITHDRAWAL,_CASH_ADVANCE_OR_CASH_DEPOSIT"
+      },
+      {
+        "additionalInfo": "Charged in US Dollars",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "CANCEL_REPLACEMENT_OF_VISA_CARD"
+      },
+      {
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "55.00"
+        },
+        "name": "REPLACEMENT_OF_VISA_CARD_(OVERSEAS)_STD"
+      },
+      {
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "12.50"
+        },
+        "name": "REPLACEMENT_OF_VISA_CARD_(WITHIN_AUS)"
+      },
+      {
+        "additionalInfo": "Fee charged on the day of the transaction",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "DOMESTIC_CASH_ADVANCE_FEE"
+      },
+      {
+        "additionalInfo": "Charged on the day of the transaction",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "OVERSEAS_CASH_ADVANCE_FEE"
+      },
+      {
+        "additionalInfo": "Applies for all transactions (including reversals and cash advances) where you use your card for a foreign currency transaction or for an Australian dollar transaction that is with a foreign merchant or that is processed by an entity or financial institution outside Australia.",
+        "additionalInfoUri": "https://communityfirst.com.au/tools/rates-and-fees",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "INTERNATIONAL_TRANSACTION_FEE",
+        "rateBased": {
+          "accrualFrequency": "D",
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-06T15:31:28.000+11:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "Credit eligibility criteria, terms and conditions fees and charges apply. Rates are current as at 01/09/2026 and subject to change without notice.",
+        "additionalInfoUri": "https://communityfirst.com.au/products/low-rate-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0999",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Credit eligibility criteria, terms and conditions fees and charges apply. Rates are current as at 01/09/2026 and subject to change without notice.",
+        "additionalInfoUri": "https://communityfirst.com.au/products/low-rate-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.0999",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Credit eligibility criteria, terms and conditions fees and charges apply. Rates are current as at 01/09/2026 and subject to change without notice.",
+        "additionalInfoUri": "https://communityfirst.com.au/products/low-rate-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0999",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "LOW RATE CREDIT CARD",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "S6-LRCC"
+  },
+  "version": 7
+}

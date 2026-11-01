@@ -1,0 +1,476 @@
+{
+  "brand": "Bendigo Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.bendigobank.com.au/personal/credit-cards/check-my-eligibility/?ccproduct=ready",
+      "feesAndPricingUri": "https://www.bendigobank.com.au/disclosure-documents/",
+      "overviewUri": "https://www.bendigobank.com.au/personal/credit-cards/ready/",
+      "termsUri": "https://www.bendigobank.com.au/disclosure-documents/#CreditCards"
+    },
+    "brand": "BENDIGO",
+    "brandName": "Bendigo Bank",
+    "bundles": [],
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.bendigobank.com.au/siteassets/personal/creditcards/bendigoreadycreditcard/promoexploretiles/highlightsection-ready.jpg",
+        "title": "Bendigo ready Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "3000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "Bendigo Ready Credit Card lets you enjoy a $0 annual fee - this year and beyond. Also, save with $0 international transaction fees, a range of added insurances, purchase protections, plus access to Mastercard Priceless Cities exclusive experiences and special offers - it's the only card you'll need. Plus you'll receive up to 55 days interest free on purchases. ",
+    "effectiveFrom": "2022-11-29T21:30:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Additional cardholders must be 16 years old",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "Must be an Australian Resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "With Bendigo Bank you can turn your phone or smart watch into your wallet.  A Wallet includes but is not limited to Google Pay, Samsung Pay, Apple Pay or Garmin Pay, if and when they are available to our customers.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/digital-wallets/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "With Bendigo Bank you can turn your phone or smart watch into your wallet.  A Wallet includes but is not limited to Google Pay, Samsung Pay, Apple Pay or Garmin Pay, if and when they are available to our customers.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/digital-wallets/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "With Bendigo Bank you can turn your phone or smart watch into your wallet.  A Wallet includes but is not limited to Google Pay, Samsung Pay, Apple Pay or Garmin Pay, if and when they are available to our customers.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/digital-wallets/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "With Bendigo Bank you can turn your phone or smart watch into your wallet.  A Wallet includes but is not limited to Google Pay, Samsung Pay, Apple Pay or Garmin Pay, if and when they are available to our customers.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/digital-wallets/",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "No fee for additional cardholder",
+        "additionalValue": "99",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Up to 3 consecutive months international travel insurance (for persons under 81 years). T&Cs apply.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/benefits-and-rewards/travel-insurance/",
+        "additionalValue": "International Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Cover is activated when you purchase the full value of the covered item with your card. T&Cs apply.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/benefits-and-rewards/extended-warranty-insurance/",
+        "additionalValue": "Extended Warranty Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "90 day purchase protection on stolen or accidentally damaged purchases when the total cost of the purchase is charged to your participating credit card. T&Cs apply",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/benefits-and-rewards/purchase-protection-insurance/",
+        "additionalValue": "Purchase Protection Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Purchase the total value of your return domestic travel ticket (and your spouse’s and dependants’ if they’re travelling with you) on your card. You may have cover if your domestic flight is delayed, your luggage is lost or you’ve had to cancel your trip due to illness, injury or death of a relative. T&Cs apply.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/benefits-and-rewards/domestic-travel-insurance/",
+        "additionalValue": "Domestic Travel Insurance ",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "The cover is activated when you take legal control of the hire car and the entire rental cost is charged to your card. T&Cs apply.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/benefits-and-rewards/global-hire-car-excess-waiver-cover/",
+        "additionalValue": "Rental Vehicle Excess Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "A balance transfer is when you transfer all or part of your credit card balance from another bank to a Bendigo Bank credit card.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/balance-transfers-for-credit-card/",
+        "additionalValue": "N/A",
+        "featureType": "BALANCE_TRANSFERS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Payable on the day before we issue the first Statement of Account for your Account and annually thereafter.",
+        "additionalValue": "P1Y",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.000000"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "International Transaction Fee – [0% of the Transaction amount (in AUD)] An International Transaction Fee of 0% of the Transaction amount (in AUD) payable for each Transaction which is conducted in a currency other than Australian dollars (AUD) or in Australian dollars (AUD) but with or using a merchant, payment processor, financial institution or other entity (including an online merchant) who is outside of Australia. Note: It may not always be apparent to you that an online merchant is located outside of Australia.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/common-credit-card-fees/",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.0000000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Balance Transfer Fee – [2% of the balance transferred] Payable each time we agree to transfer the balance owing by you in respect of a different credit card facility to your Bendigo Bank Credit Card as a Promotional Balance Transfer.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/common-credit-card-fees/",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Balance Transfer Fee",
+        "rateBased": {
+          "rate": "0.0200000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable each time you fail to pay your Minimum Repayment as stated on a Statement of Account by its due date.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/common-credit-card-fees/",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "15.000000"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "Cash Advance Fee – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/common-credit-card-fees/",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable whenever you make a cash withdrawal outside of Australia at a non-Bendigo Bank ATM (in addition to the Cash Advance Fee.",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "5.000000"
+        },
+        "name": "International ATM Withdrawal"
+      },
+      {
+        "additionalInfo": "Payable whenever you make an Account inquiry outside of Australia at a non-Bendigo Bank ATM.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/common-credit-card-fees/",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "1.500000"
+        },
+        "name": "International ATM Inquiry"
+      },
+      {
+        "additionalInfo": "Payable whenever we issue you a replacement, reissue or redirection card other than by standard post at your request.",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/my-card/common-credit-card-fees/",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.000000"
+        },
+        "name": "Replacement Card Fee"
+      },
+      {
+        "additionalInfo": "When you make balance enquiry at a Bank@Post \nterminal in an Australia Post Office using a Bendigo \nBank card, where this facility is available.",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.000000"
+        },
+        "name": "Bank@Post balance enquiry"
+      },
+      {
+        "additionalInfo": "Internal Transfer – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Internal Transfer",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Pay Anyone Transfer, Including Osko – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Pay Anyone Transfer, Including Osko",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "3.750000"
+        },
+        "name": "Periodical Payment to Other Financial Institution"
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "4.000000"
+        },
+        "name": "Bank@Post Withdrawal"
+      },
+      {
+        "additionalInfo": "Direct Debit – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Direct Debit",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Phone Banking Transfer – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Phone Banking Transfer",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "EFTPOS Withdrawal – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "EFTPOS Withdrawal",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.000000"
+        },
+        "name": "Bank@Post Deposit"
+      },
+      {
+        "additionalInfo": " Bendigo Bank ATM Transfer – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": " Bendigo Bank ATM Transfer",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Transfer – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Transfer",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "BPAY Withdrawal – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "WITHDRAWAL",
+        "name": "BPAY Withdrawal",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Bendigo Bank ATM Withdrawal – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Bendigo Bank ATM Withdrawal",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Cash Withdrawal – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "WITHDRAWAL",
+        "name": "Cash Withdrawal",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.000000"
+        },
+        "name": "Retail Purchase"
+      },
+      {
+        "additionalInfo": "Periodical Payment (Internal) – [$3.00 or 3% of Transaction amount, whichever is greater] Payable each time we provide credit in the form of cash or you perform a Transaction we treat as being equivalent to cash.",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Periodical Payment (Internal)",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.0000000000000000"
+          },
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "10.000000"
+        },
+        "name": "Bank Cheque Withdrawal"
+      },
+      {
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.000000"
+        },
+        "name": "EFT Credit Transfer"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-26T04:53:22.959Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Calculated daily, charged monthly ",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/ready/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1999000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Interest is charged at the cash advance rate from the time the cash advance is made until it’s completely paid off & is charged monthly. ",
+        "additionalInfoUri": "https://www.bendigobank.com.au/personal/credit-cards/ready/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1999000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.1999000000000000",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      }
+    ],
+    "name": "Bendigo Ready Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "c9e36d80-661e-4aad-87d5-90521d174882"
+  },
+  "version": 7
+}

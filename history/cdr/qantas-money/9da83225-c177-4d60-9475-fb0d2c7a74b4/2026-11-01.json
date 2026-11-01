@@ -1,0 +1,273 @@
+{
+  "brand": "Qantas Money Credit Cards",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.qantasmoney.com/credit-cards/platinum",
+      "feesAndPricingUri": "https://www.qantasmoney.com/credit-cards/platinum#fees-rates",
+      "overviewUri": "https://www.qantasmoney.com/credit-cards/platinum",
+      "termsUri": "https://qantasmoney.com/terms-and-forms"
+    },
+    "applicationUri": "https://www.qantasmoney.com/credit-cards",
+    "brand": "Qantas Money",
+    "brandName": "Qantas Money Credit Cards",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.qantasmoney.com/credit-cards"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "100000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalValue": "6000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "The Product is a rewards credit card that provides individuals with a line of credit facility, the ability to earn Qantas Frequent Flyer Points (Qantas Points) and access to ancillary Qantas benefits and complimentary travel insurance, with up to 44 days interest free on retail purchases and an annual fee.",
+    "effectiveFrom": "2020-09-01T00:00:00Z",
+    "eligibility": [
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards",
+        "additionalValue": "35000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards",
+        "additionalValue": "Must be a permanent Australian resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Must have Australian mobile",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards",
+        "additionalValue": "Must have Australian mobile",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Must have Australian residential address",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards",
+        "additionalValue": "Must have Australian residential address",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "You must be a Qantas Frequent Flyer member.",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards",
+        "additionalValue": "Must be a Qantas Frequent Flyer member",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "additionalValue": "4",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "additionalValue": "Eligibility criteria and terms and conditions apply",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Qantas Money Credit Cards Online",
+        "additionalInfoUri": "https://www.qantasmoney.com/app",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Qantas Money Credit Cards App",
+        "additionalInfoUri": "https://www.qantasmoney.com/app",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/features-and-benefits",
+        "additionalValue": "2x Complimentary Lounge Invitations",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/features-and-benefits",
+        "additionalValue": "Discounted Companion Fares",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/features-and-benefits",
+        "additionalValue": "Complimentary Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum#earning-qantas-points",
+        "additionalValue": "Qantas Frequent Flyer",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Concierge service",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/features-and-benefits",
+        "additionalValue": " ",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "MasterCard ID Theft Protection",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/features-and-benefits",
+        "additionalValue": " ",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/digital-wallet",
+        "additionalValue": "Contactless payments using Apple Pay & Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "MasterCard Zero Liability",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/features-and-benefits",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/instalment-plans",
+        "additionalValue": "Eligibility criteria and terms and conditions apply",
+        "featureType": "INSTALMENT_PLAN"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "$349 first year only",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "399.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Additional Cardholder Fee"
+      },
+      {
+        "additionalInfo": "Each time we do not receive the Minimum Payment Due and any Overdue Amount by the payment due date, debited to your Account after the payment due date. The Minimum Payment Due, any Overdue Amount, and payment due date are detailed on your statement of account.",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "additionalValue": "2",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "$3.00 per transaction or 3% of the transaction amount whichever is higher",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Domestic Cash Advance Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "3.00"
+          },
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$5 per transaction\r\nFor a Cash Advance outside Australia, debited to your Account on the date the Cash Advance takes place. This fee is in addition to any International Transaction Fee.",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "International Cash Advance Fee"
+      },
+      {
+        "additionalInfo": "3% of the transaction amount when you make any purchase or cash advance",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$2.50 when you make a payment at an Australia Post outlet",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "Over-the-Counter Transaction Fee"
+      },
+      {
+        "additionalInfo": "$2 for each paper statement we send you",
+        "additionalInfoUri": "https://www.qantasmoney.com/credit-cards/platinum/fees-and-rates",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "Paper Statement Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-04-27T00:12:00Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Retail Purchase Rate",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2099",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Cash Advance Rate",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Qantas Money Platinum Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "9da83225-c177-4d60-9475-fb0d2c7a74b4"
+  },
+  "version": 7
+}

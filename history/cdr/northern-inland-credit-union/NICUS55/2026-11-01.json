@@ -1,0 +1,192 @@
+{
+  "brand": "Northern Inland Credit Union Limited",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.nicu.com.au/banking/cards/visa-classic-credit-card",
+      "feesAndPricingUri": "https://www.nicu.com.au/ArticleDocuments/298/NICU_Fees_Charges.pdf.aspx",
+      "overviewUri": "https://nicu.com.au/banking/cards/visa-classic-credit-card",
+      "termsUri": "https://www.nicu.com.au/banking/cards/visa-classic-credit-card"
+    },
+    "applicationUri": "https://www.nicu.com.au/banking/banking-enquiry",
+    "brand": "NORTHERN INLAND CREDIT UNION LTD.",
+    "brandName": "NORTHERN INLAND CREDIT UNION LTD.",
+    "description": "Use your credit card for shopping, online purchasing, travelling overseas or even to consolidate other credit or store card debt.",
+    "eligibility": [
+      {
+        "additionalInfo": "Individuals must be citizens or permanent residents of Australia.",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Credit criteria and eligibility applies to all applicants. Terms and Conditions are available on application.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Shop online or in store with our Classic Credit Card",
+        "additionalInfoUri": "https://nicu.com.au/banking/cards",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Secure banking 24/7 from your computer or mobile with Online Banking",
+        "additionalInfoUri": "https://nicu.com.au/help-support/online-banking",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "24/7 access to your accounts anywhere in the world with our smartPAY App. You can also temporarily block your card or report it lost or stolen.",
+        "additionalInfoUri": "https://nicu.com.au/help-support/smartpay-app",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Send and receive real-time payments via Osko from your Online Banking and NICU smartPay App",
+        "additionalInfoUri": "https://www.nicu.com.au/help-support/osko-fast-payments",
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfo": "Receive fast real-time payments using your mobile number, email address or ABN instead of your BSB and account number",
+        "additionalInfoUri": "https://www.nicu.com.au/help-support/osko-fast-payments",
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "Receive notifications for transactions and balances on your accounts via SMS",
+        "additionalInfoUri": "https://nicu.com.au/help-support/alerts",
+        "additionalValue": "Alerts",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "The easy way to pay everyday with Apple Pay",
+        "additionalInfoUri": "https://nicu.com.au/help-support/apple-pay",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "The convenience of a mobile wallet in your hands with Google Pay",
+        "additionalInfoUri": "https://nicu.com.au/help-support/google-pay",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "First 5 free transactions per month for Members residing outside postcodes 2340, 2380 & 2390.",
+        "additionalInfoUri": "https://www.nicu.com.au/ArticleDocuments/298/NICU_Fees_Charges.pdf.aspx",
+        "currency": "AUD",
+        "feeCap": "0.00",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.00"
+        },
+        "name": "BANK@POST_TRANS"
+      },
+      {
+        "additionalInfoUri": "https://www.nicu.com.au/ArticleDocuments/298/NICU_Fees_Charges.pdf.aspx",
+        "currency": "AUD",
+        "feeCap": "0.00",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "2.00"
+        },
+        "name": "VISA_ATM_WITHDRAWAL_OVERSEAS"
+      },
+      {
+        "additionalInfoUri": "https://www.nicu.com.au/ArticleDocuments/298/NICU_Fees_Charges.pdf.aspx",
+        "currency": "AUD",
+        "feeCap": "0.00",
+        "feeMethodUType": "variable",
+        "feeType": "CASH_ADVANCE",
+        "name": "VISA_CONVERSION_FEE",
+        "variable": {}
+      },
+      {
+        "additionalInfoUri": "https://www.nicu.com.au/ArticleDocuments/298/NICU_Fees_Charges.pdf.aspx",
+        "currency": "AUD",
+        "feeCap": "0.00",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "VISA_CLASSIC_COUNTER_WDL"
+      },
+      {
+        "additionalInfoUri": "https://www.nicu.com.au/ArticleDocuments/298/NICU_Fees_Charges.pdf.aspx",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeCap": "0.00",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "VISA_CLASSIC_ANNUAL_FEE"
+      },
+      {
+        "additionalInfoUri": "https://www.nicu.com.au/ArticleDocuments/298/NICU_Fees_Charges.pdf.aspx",
+        "currency": "AUD",
+        "feeCap": "0.00",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "1.50"
+        },
+        "name": "VISA_CLASSIC_ATM"
+      },
+      {
+        "additionalInfo": "First 8 free",
+        "additionalInfoUri": "https://www.nicu.com.au/ArticleDocuments/298/NICU_Fees_Charges.pdf.aspx",
+        "currency": "AUD",
+        "feeCap": "0.00",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.25"
+        },
+        "name": "ALERTS"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-01-21T11:16:44.000+11:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "Up to 55 interest free days on all purchases made",
+        "additionalInfoUri": "https://www.nicu.com.au/banking/cards/visa-classic-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.14",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Up to 55 interest free days on all purchases made",
+        "additionalInfoUri": "https://www.nicu.com.au/banking/cards/visa-classic-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.14",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Up to 55 interest free days on all purchases made",
+        "additionalInfoUri": "https://www.nicu.com.au/banking/cards/visa-classic-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Classic Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "NICUS55"
+  },
+  "version": 6
+}

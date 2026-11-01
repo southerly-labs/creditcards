@@ -1,0 +1,142 @@
+{
+  "brand": "Coastline Bank",
+  "product": {
+    "additionalInformation": {
+      "bundleUri": "https://www.coastline.com.au/personal/visa-credit-card",
+      "eligibilityUri": "https://www.coastline.com.au/conditions-of-use/",
+      "feesAndPricingUri": "https://www.coastline.com.au/conditions-of-use/",
+      "overviewUri": "https://www.coastline.com.au/personal/visa-credit-card",
+      "termsUri": "https://www.coastline.com.au/conditions-of-use/"
+    },
+    "applicationUri": "https://apply.coastline.com.au/cip/coastline/p/coastline/consumercredit/application.html?a=UDIYMN06R7P6YVQ7&s=APPLICATION::UDIYMN06R7P6YVQ7",
+    "brand": "Coastline ",
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Visa Credit Card",
+    "effectiveFrom": "2006-06-30T14:30:00.0000000Z",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "Australia",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalValue": "P6M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      }
+    ],
+    "fees": [
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Manual Arrears Transfer Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Arrears Reminder Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.00"
+        },
+        "name": "Final Notice of Demand"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Real Time Transfer Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-14T14:00:14.4205168Z",
+    "lendingRates": [
+      {
+        "applicabilityConditions": [
+          {
+            "rateApplicabilityType": "EXISTING_CUST"
+          },
+          {
+            "additionalValue": "1",
+            "rateApplicabilityType": "MIN_DEPOSITS"
+          },
+          {
+            "rateApplicabilityType": "NEW_ACCOUNTS"
+          },
+          {
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "INVESTMENT",
+        "rate": "0.1024",
+        "repaymentType": "INTEREST_ONLY"
+      },
+      {
+        "applicabilityConditions": [
+          {
+            "rateApplicabilityType": "EXISTING_CUST"
+          },
+          {
+            "additionalValue": "1",
+            "rateApplicabilityType": "MIN_DEPOSITS"
+          },
+          {
+            "rateApplicabilityType": "NEW_ACCOUNTS"
+          },
+          {
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "INVESTMENT",
+        "rate": "0.1024",
+        "repaymentType": "INTEREST_ONLY"
+      }
+    ],
+    "name": "Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "25"
+  },
+  "version": 7
+}

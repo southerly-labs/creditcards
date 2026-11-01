@@ -1,0 +1,248 @@
+{
+  "brand": "NATIONAL AUSTRALIA BANK",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+      "feesAndPricingUri": "https://www.nab.com.au/business/tools/rates-fees-and-charges#commercial",
+      "overviewUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+      "termsUri": "https://www.nab.com.au/business/business-credit-cards/terms-conditions"
+    },
+    "applicationUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+    "brand": "NAB",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CHARGE",
+        "imageUri": "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Account limit",
+        "additionalValue": "5000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": "Card limit",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "18000000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "Manage your employee's business expenses by giving them their own charge card.",
+    "eligibility": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "75000.00",
+        "eligibilityType": "MIN_TURNOVER"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "Must be an Australian citizen or permanent resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Have 12 months of business financial data.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Registered for GST",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Have a valid ABN/ACN",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "NAB Business Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "1000",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Complimentary",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "Unauthorised Transaction Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Enjoy 35 days interest-free on business purchases (excludes cash advances)",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "P35D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "NAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "Visa Business Offers",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "VISA Secure reduces online fraud by confirming your identity with a secret code to your mobile",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Fraud protection\r\nNAB Defence detects fraudulent transactions. If fraud occurs, we’ll give back all your money.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "featureType": "OTHER"
+      },
+      {
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "featureType": "GUARANTOR"
+      },
+      {
+        "featureType": "RELATIONSHIP_MANAGEMENT"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "NAB may waive or discount fees at its discretion, as part of a package or promotional offer.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "9.00"
+        },
+        "name": "Monthly Card Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Multi-Currency",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Single Currency",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalValue": "Minimum of $3.00",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-06-01T13:59:59Z",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.165",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-business-card",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.165",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "NAB Business Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "5f5dfdb4-43b1-41e6-923e-546bb801e026"
+  },
+  "version": 7
+}

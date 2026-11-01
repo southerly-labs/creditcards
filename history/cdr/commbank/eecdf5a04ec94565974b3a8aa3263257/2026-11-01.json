@@ -1,0 +1,412 @@
+{
+  "brand": "CommBank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.commbank.com.au/credit-cards/ultimate.html",
+      "feesAndPricingUri": "https://www.commbank.com.au/personal/apply-online/download-printed-forms/ADB1682.pdf",
+      "overviewUri": "https://www.commbank.com.au/credit-cards/ultimate.html",
+      "termsUri": "https://www.commbank.com.au/content/dam/commbank/personal/apply-online/download-printed-forms/cc2-cou.pdf"
+    },
+    "applicationUri": "https://www.commbank.com.au/credit-cards/ultimate.html",
+    "brand": "CBA",
+    "brandName": "CommBank",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-ultimate-credit-card.png",
+        "title": "Ultimate credit card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Note that the credit limit we give you will depend on your ability to meet your repayments.",
+        "additionalValue": "6000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Enjoy new lifestyle and travel benefits with the Ultimate credit card, designed to help you get more value. Plus, enjoy a new points experience if you're eligible for CommBank Yello.",
+    "eligibility": [
+      {
+        "additionalInfo": "The additional cardholder may be 16 years of age or older.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/what-you-need-to-apply.html",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Individuals must have the legal capacity to enter into the loan contract. Not available for non-personal borrowers.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/what-you-need-to-apply.html",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Applications for credit cards are subject to credit approval.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/what-you-need-to-apply.html",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Each application for credit is assessed on the ability of the applicant to service debt (limit) based on the financials supplied in the application.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/what-you-need-to-apply.html",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Available to citizens or permanent residents of Australia and valid visa holders. Make sure you are legally allowed to work in Australia.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/what-you-need-to-apply.html",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Available to citizens or permanent residents of NZ and valid visa holders. Make sure you are legally allowed to work in Australia.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/what-you-need-to-apply.html",
+        "additionalValue": "NZ",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Adding an additional cardholder is an easy way to share the convenience and accessibility of your CommBank credit card, without opening a new account. You can have one additional cardholder and they must be at least 16 years old. They'll get a card with their name but with your account number.",
+        "additionalInfoUri": "https://www.commbank.com.au/support.credit-cards.add-additional-cardholder.html",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Through AutoPay, you can choose to have the full closing balance, the minimum amount due, or set an amount debited from your chosen CommBank transaction account. If the set amount isn't enough to cover the minimum payment shown on your current statement, we'll take out more to cover the difference. If the set amount is more than your closing balance shown on your current statement, only the closing balance amount is debited.",
+        "additionalInfoUri": "https://www.commbank.com.au/support.credit-cards.set-up-autopay.html",
+        "additionalValue": "AutoPay",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "With BPAY View you can switch to online bills & ask billers to send them directly to the CommBank app or NetBank, making it easy to see, track, and pay bills online.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/bpay-view.html",
+        "additionalValue": "BPAY View",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Earn up to 100,000 CommBank Yello points: Earn 50,000 CommBank Yello points when you spend $9,000 or more on eligible spend with your new Ultimate credit card within 90 days of activating your card, and become CommBank Yello eligible within that 90-day period and remain eligible until the points are paid. Earn an additional 50,000 CommBank Yello points when you keep your account open for more than 12 months from card activation and are CommBank Yello eligible at the 12-month anniversary of your card activation as well as at the time the points are paid to your account (which is usually within 31 days from the date that full eligibility requirements are met). The earning and redemption of CommBank Yello points are subject to meeting the eligibility criteria, including holding an eligible transaction account, as well as the applicable CommBank Yello terms and conditions. Additional T&C's may apply.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/ultimate.html",
+        "additionalValue": "100000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "Monthly DoorDash Credit: $10 monthly DoorDash credit for an order where the subtotal is over $50. Exclusions, terms and conditions may apply.",
+        "additionalInfoUri": "http://commbank.com.au/credit-cards/doordash.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Cracked Screen Cover for eligible mobile phones, subject to eligibility criteria and policy terms. Cover provides up to $1,000 per claim, limited to one claim per year, and applies for up to three years from the date of purchase for eligible mobile phones purchased using an eligible CommBank card or funded through a phone plan paid using an eligible CommBank card.",
+        "additionalValue": "Cracked Screen Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "International travel insurance, when customers spend at least $500 in a single transaction on prepaid travel costs (e.g. airline tickets, hotels, tours etc) using your credit card and activate your travel insurance before leaving Australia. You will also qualify if the $500 worth of prepaid travel costs is redeemed using CommBank Yello points or Travel Booking Credits. You will need to provide a copy of the letter/statement/email confirming the redemption. Cover is provided by XCover.com, a trading name of Cover Genius Pty Ltd (ABN 43 159 983 598, AFS Licence No. 490058), and underwritten by Allied World Assurance Company Ltd (ABN 54 163 304 907), for Commonwealth Bank of Australia (CBA), for Commonwealth Bank of Australia (CBA). Limitations, exclusions (including for pre-existing medical conditions and persons aged 80 years or over) and eligibility criteria apply. You need to upgrade your travel insurance in order to have a comprehensive or extended level of cover. Before acting on this information you should consider the appropriateness of the product with regard to your personal circumstances. See the Credit Card Insurances Product Disclosure Statement and Information booklet (PDF), Credit Card Travel Insurance TMD (PDF) and Financial Services Guide (PDF) for details. Commonwealth Bank and its related bodies corporate do not issue or guarantee this insurance. It does not represent a deposit with or liability of either Commonwealth Bank or any of its related bodies corporate. We do not provide any advice on this insurance based on any consideration of your objectives, financial situation or needs. If you purchase an upgrade policy, we (Commonwealth Bank) receive a commission which is a percentage of your premium.",
+        "additionalValue": "International travel insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Earn unlimited points with your Ultimate credit card if you're eligible for CommBank Yello, with up to 6.5 points per $1 spent on eligible purchases. With opportunities to earn points not only on your credit card, but across more of your banking moments. The earning and redemption of CommBank Yello points are subject to meeting the eligibility criteria, including holding an eligible transaction account, as well as the applicable Yello terms and conditions.",
+        "additionalInfoUri": "https://www.commbank.com.au/commbank-yello.html",
+        "additionalValue": "CommBank Yello Program",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "From 1 October 2026, eligible CommBank Yello cusotmers with an eligible CommBank credit cards will be able to opt in to have their CommBank Yello points converted to Qantas Frequent Flyer points. Customers can do this by visiting the CommBank app or NetBank, navigating to 'CBA Yello' and selecting 'Ways to redeem'. The earning and redemption of CommBank Yello points are subject to meeting the eligibility criteria, including holding an eligible transaction account, as well as the applicable Yello terms and conditions.",
+        "additionalInfoUri": "https://www.commbank.com.au/commbank-yello.html",
+        "additionalValue": "Qantas Frequent Flyer Program",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Earn up to $300 in travel credits from Travel Booking: Spend $9,000 or more on eligible spend with your new Ultimate credit card within 90 days of activating your card to receive $300 in travel credits from Travel Booking. T&Cs apply.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/ultimate.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Enjoy two complimentary airport lounge passes each calendar year with Mastercard Travel Pass provided by DragonPass to over 1,300 airport lounges worldwide and up-to-date travel information.",
+        "additionalInfoUri": "https://mastercardtravelpass.dragonpass.com/",
+        "additionalValue": "Mastercard Travel Pass provided by DragonPass",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Monthly Dining Credit: $10 monthly dining credit to use on Dine In Deals provided by EatClub, to enjoy on your next meal out. Dining credits are only issued where the applicable card fee has been charged. Where the fee is waived or not charged, no dining credit will be provided for that period, except where the fee is waived by meeting the minimum spend requirement (Ultimate: $4,000 per statement period). The dining credit expires 12 months after it is issued. Dining credit benefit is subject to change, and removal without notice and at our discretion.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/dineindeals.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "A program available exclusively to Mastercard cardholders that provides access to unforgettable experiences in the cities where you live and travel.",
+        "additionalInfoUri": "https://www.priceless.com/",
+        "additionalValue": "Priceless Cities",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Monthly Travel Credit: $25 monthly travel credit to use on Travel Booking. Travel credits are only issued for a card account statement period where the applicable card fee has been charged for that statement period. Where the fee is waived or not charged, no travel credit will be provided for that period, except where the fee is waived by meeting the minimum spend requirement (Ultimate: $4,000 per statement period). Travel Credit benefit is subject to change, and removal without notice and at our discretion.",
+        "additionalInfoUri": "https://www.commbank.com.au/travel/travel-booking.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Enjoy cashback offers when you travel overseas and pay with your Ultimate Mastercard at participating merchants. Mastercard Travel Rewards are only available through participating merchants outside Australia. To receive the advertised cashback, pay with your Ultimate Mastercard at a participating overseas merchant and meet the offer's terms and conditions. You must pay in the overseas currency of the offer - transactions made in Australian dollars are not eligible. Cashbacks may take up to 30 days to appear on your statement. Visit https://mtr.mastercardservices.com/en/i/1527 for a list of participating merchants and to find out more.",
+        "additionalInfoUri": "https://mtr.mastercardservices.com/en/i/1527",
+        "additionalValue": "Mastercard Travel Rewards",
+        "featureType": "CASHBACK_OFFER"
+      },
+      {
+        "additionalInfo": "Complimentary DashPass membership with DoorDash, valued at $120 annually, with exclusive member benefits including $0 delivery fees, reduced service fees and member-only offers on eligible orders. DashPass is provided by DoorDash Inc (DoorDash). DoorDash is not part of the CBA Group. CBA is not responsible for the content on this portal, nor the provision of any of the services that are offered through this portal. The services offered are subject to the DoorDash terms and conditions. CBA does not guarantee the obligations or performance of DoorDash or the services it offers. DoorDash benefits are subject to change, and removal without notice and at our discretion.",
+        "additionalInfoUri": "http://commbank.com.au/credit-cards/doordash.html",
+        "additionalValue": "DoorDash DashPass Membership",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Wherever you are in the world, CommBank gives you the choice and control to securely manage all of your accounts on a range of devices, the way you want.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking.html",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Securing your accounts is our top priority. That's why we provide a range of security features and services, including fraud prevention technology and secure banking, to help you stay safe.",
+        "additionalInfoUri": "https://www.commbank.com.au/support/security.html",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Pay with your Apple(TM) device using Apple Pay.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/apple-pay.html",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Android(TM) phone using the CommBank app.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/tap-and-pay.html",
+        "additionalValue": "CommBank Tap and Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Garmin(TM) smartwatch using Garmin Pay.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/garmin-pay.html",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Android(TM) device using Google Pay(TM).",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/google-pay.html",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Samsung(TM) device using Samsung Pay.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/samsung-pay.html",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "While you have a SurePay instalment plan, payments are applied in accordance with our Terms and Conditions.",
+        "additionalInfoUri": "https://www.commbank.com.au/content/dam/commbank/personal/apply-online/download-printed-forms/cc2-cou.pdf",
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "additionalInfo": "Instantly lock, block or limit your credit card for extra control through the CommBank app or NetBank.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/lock-block-limit-your-credit-card.html",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Up to 44 days. We won't charge any interest on purchases if you pay at least the closing balance shown on your statement by the due date each and every month.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/credit-card-interest.html",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Use instore, online and withdraw local currency at millions of locations, everywhere Mastercard is accepted. A Mastercard allows you to pay for things using your card, smartphone or wearable. You may receive access to other features and benefits associated with your Mastercard subject to terms and conditions.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "We'll tell you when your online bill payment is due.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/bpay-view.html",
+        "additionalValue": "Billing notifications",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "We'll notify you when you go over your limit so you can make a payment in time and prevent an over limit fee from being charged to your account. (Only applies to accounts opened before 1 July 2012).",
+        "additionalValue": "Overlimit notifications",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Reminders before payments are due to avoid late fees.",
+        "additionalValue": "Payment reminders",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Turn Transaction Notifications on in the CommBank app and we'll instantly alert you when you pay using your CommBank credit card, and when you receive money into your everyday account.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/transaction-notifications.html",
+        "additionalValue": "Transaction Notifications",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Use QR Cardless to withdraw cash or deposit notes, coins and cheques (subject to product eligibility) by using the latest version of the CommBank app to scan a QR code at a compatible CommBank ATM",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/qr-cardless.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Setting a Spending Cap helps you keep on top of your spend. Plus you can still access additional funds if you need them.",
+        "additionalInfoUri": "https://www.commbank.com.au/support.credit-cards.set-a-spending-cap-or-decrease-limit.html",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "We help you stay on track with your credit card spending in the CommBank app.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/spend-tracker-insights.html",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "The SurePay - Balance Plan is an instalment plan feature available to help you manage your credit card repayments. You can break down your credit card purchase balance into smaller, manageable instalments with a fixed term and no set up fee. Your card purchase interest rate, or special interest rate, will be applied to the balance and Terms and Conditions apply.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/manage/surepay-instalment-plans.html",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "The SurePay - Cash Advance Plan is an instalment plan feature available to help you manage your credit card repayments. You can break down your cash advance balance into smaller, manageable instalments with a fixed term and no set up fee. Your cash advance interest rate will apply to the balance and Terms and Conditions apply.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/manage/surepay-instalment-plans.html",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "The SurePay - Purchase Plan is an instalment plan feature available to help you manage your credit card repayments. You can split your purchases into smaller, manageable instalments with a fixed term and 0% interest rate for purchases in an instalment plan. A set-up fee and minimum term applies and is subject to Terms and Conditions. The SurePay - Purchase Plan is considered an Instalment Feature of the account. For further information refer to the BankingProductInstalments Open Banking API.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/manage/surepay-instalment-plans.html",
+        "featureType": "INSTALMENT_PLAN"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Pay no additional cardholder fee to share the convenience of your card with someone else.",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional cardholder fee"
+      },
+      {
+        "additionalInfo": "When you don't make your minimum monthly payment, plus any overdue amount, by your statement due date.",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Late payment fee"
+      },
+      {
+        "additionalInfo": "When we first allow you to go over your credit limit in a statement period. Only applies to accounts opened before 1 July 2012 (including any time you switch to a new credit card product).",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Overlimit fee"
+      },
+      {
+        "additionalInfo": "When you need an emergency replacement card delivered to you.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Emergency issue/ lost/ replacement card fee"
+      },
+      {
+        "additionalInfo": "From 1 October 2026, eligible customers enrolled into CommBank Yello with eligible CommBank credit cards will be able to opt in to have their CommBank Yello points converted to Qantas Frequent Flyer points. Customers can do this by visiting the CommBank app or NetBank, navigating to 'CBA Yello' and selecting 'Ways to redeem'. Qantas Frequent Flyer opt-in through CommBank Yello will only be available on selected eligible CommBank credit cards. Eligibility criteria, fees, conversion rates and terms and conditions will apply. More information will be available from 1 October 2026.",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "149.00"
+        },
+        "name": "Qantas Frequent Flyer Direct fee"
+      },
+      {
+        "additionalInfo": "Pay no international transaction fees for purchases you make overseas or online. For international cash advances, the cash advance fee will apply.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transaction fee",
+        "rateBased": {
+          "rate": "0",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "This is charged for cash advances from Commbank branches or other Australian financial institutions, ATMs, overseas terminals or financial institutions, funds transfers using CommBank networks and purchases of cash equivalent items, such as gambling, lottery tickets and money transfers. Capped at a maximum fee of $300.00 (or $4.00 if your closing balance was in credit the previous business day).",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash advance fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "300.00",
+            "feeMinimum": "4.00"
+          },
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable each month, giving you access to the features and benefits of your credit card. Pay no monthly fee if you spend at least $4,000 in your statement period. From your first statement issued on or after 1 January 2027, the monthly fee waiver based on spend will be removed and the $35 monthly fee will apply.",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "Monthly fee waiver if eligibility criteria is met. From your first statement issued on or after 1 January 2027, the monthly fee waiver based on spend will be removed and the $35 monthly fee will apply.",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "No monthly fee if you spend at least $4,000 on your Ultimate credit card in your statement period. Otherwise the monthly fee is $35. From your first statement issued on or after 1 January 2027, the monthly fee waiver based on spend will be removed and the $35 monthly fee will apply.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "35.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "35.00"
+        },
+        "name": "Monthly Fee"
+      }
+    ],
+    "instalments": {
+      "maximumConcurrentPlans": 50,
+      "maximumSplit": 12,
+      "minimumPlanValue": "100.00",
+      "minimumSplit": 3
+    },
+    "isTailored": false,
+    "lastUpdated": "2026-11-01T02:15:42.000Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2099",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Ultimate credit card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "eecdf5a04ec94565974b3a8aa3263257"
+  },
+  "version": 7
+}

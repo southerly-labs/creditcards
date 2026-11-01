@@ -1,0 +1,221 @@
+{
+  "brand": "Bank Australia",
+  "product": {
+    "additionalInformation": {
+      "bundleUri": "https://www.bankaust.com.au/banking/home-loans/offset-home-loan",
+      "feesAndPricingUri": "https://www.bankaust.com.au/support/disclosures",
+      "overviewUri": "https://www.bankaust.com.au/banking/credit-cards/platinum-rewards-credit-card",
+      "termsUri": "https://www.bankaust.com.au/support/disclosures"
+    },
+    "brand": "Bank Australia",
+    "bundles": [
+      {
+        "additionalInfo": "Offset loans include an annual fee waiver for the Platinum Rewards Credit Card and everyday banking.",
+        "additionalInfoUri": "https://www.bankaust.com.au/banking/home-loans/offset-home-loan",
+        "description": "Offset Loan",
+        "name": "Offset Loan",
+        "productIds": [
+          "194",
+          "216",
+          "225",
+          "229",
+          "238",
+          "490",
+          "494"
+        ]
+      }
+    ],
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cdn.bfldr.com/1R31Y8GR/at/8pjw5xj3k6637fhx8gw7tb/1_Platinum.png?auto=webp&format=png"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum Credit Limit of $1000 is required",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Be rewarded for your spending with Qantas Points. Great for those who pay their card in full each month and are a Qantas Frequent Flyer member.",
+    "effectiveFrom": "2013-09-25T14:30:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "18+ years",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Each application for credit is subject to our normal lending criteria and approval.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Available to citizens or permanent resident of Australia and valid Visa holders.",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "For greater convenience and flexibility you can share you Bank Australia credit card with 1 additional card holder provided they are at least 18 years old. The card will be in their name but you will remain responsible for the account.",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Use instore, online and withdraw local currency at millions of locations, everywhere Visa is accepted. Cards are enabled to support diverse needs with raised bumps on the left hand-side on the front face of the card.",
+        "additionalValue": "Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Overseas travel insurance is provided free of charge for up to 90 days subject to full terms and conditions.",
+        "additionalValue": "Complimentary Overseas Travel Insurance",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "You can self-serve your day-to-day banking needs via Bank Australia's App or Internet Banking.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Leave your wallet behind and pay for the things you need with Google Pay/ Samsung Pay/ Apple Pay.",
+        "additionalValue": "Google, Samsung and Apple Pay available",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free days for purchases",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Earn Qantas Frequent Flyer points on your everyday purchases. Limits, terms and conditions apply.",
+        "additionalValue": "Qantas Frequent Flyer",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Notifications can be enabled in the App or through Internet Banking, allowing you to be alerted either by email, sms or through the App about your card/account activity.",
+        "additionalValue": "Card and Account Notifications",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Card Controls: Decide the features you want enabled on your card including card lock, digital wallet, pay wave, international transactions, ATM withdrawals or online/instore transactions and simply switch them on or off from your App or Internet Banking.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Applies to any cash advance made outside Australia on the Platinum Rewards Visa, $5 plus the International Transaction Fee (ITF)",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Cash Advance Fee - Overseas"
+      },
+      {
+        "additionalInfo": "A fee charged to any cash advance within Australia through all channels on the Platinum Rewards Visa Credit Card",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Cash Advance Fee - Domestic"
+      },
+      {
+        "additionalInfo": "When you undertake an International transaction on a Bank Australia Visa Debit Card you will be charged the fee. An International transaction is any purchase, withdrawal or credit in a currency other than Australian Dollars or where the merchant or financial institution accepting the transaction is outside of Australia or where there is a currency conversion.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transaction fee (ITF)",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "An annual fee charged on your credit card.",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfo": "We won't charge the fee if this criteria is met.",
+            "description": "This fee is waived for holders of an Offset or Clean Energy Home Loan. Each Offset or Clean Energy Loan is entitled to a wavier for the future Annual Fee for one eligible card account in the name of the loan holder.",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "This fee is waived for holders of an Offset or Clean Energy Home Loan. Each Offset or Clean Energy Loan is entitled to a wavier for the future Annual Fee for one eligible card account in the name of the loan holder.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "189.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "189.00"
+        },
+        "name": "Platinum Rewards Credit Card Annual Fee"
+      },
+      {
+        "additionalInfo": "A fee charged when you need an emergency replacement card or cash delivered to you on an urgent basis to an address overseas.",
+        "currency": "USD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Visa emergency card/cash overseas fee"
+      },
+      {
+        "additionalInfo": "A fee payable if you request that we allow someone else to have a card on your account. Paid annually.",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Cardholder Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-31T21:00:24.184Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Minimum monthly repayments of 2.5% or $20, whichever is greater. If the closing balance is less than $20, you must pay the full closing balance.\n",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2099",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Minimum monthly repayments of 2.5% or $20, whichever is greater. If the closing balance is less than $20, you must pay the full closing balance.\n",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2099",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Platinum Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "f23e4849-212b-4a22-beb1-a088654d73e5"
+  },
+  "version": 7
+}

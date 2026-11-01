@@ -1,0 +1,312 @@
+{
+  "brand": "Virgin Money",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.virginmoney.com.au/credit-cards/low-rate-credit-card",
+      "feesAndPricingUri": "https://www.virginmoney.com.au/help-and-support/rates-and-fees/credit-cards",
+      "overviewUri": "https://www.virginmoney.com.au/credit-cards/low-rate-credit-card",
+      "termsUri": "https://www.virginmoney.com.au/help-and-support/forms-and-important-information/credit-cards"
+    },
+    "applicationUri": "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/virginmoney-card-apply?",
+    "brand": "VMA",
+    "brandName": "Virgin Money Australia",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/low-rate-credit-card.png",
+        "title": "VMA Low Rate CC Card Art"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum credit limit",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "additionalValue": "2000.0000000000",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "At 12.99% p.a. lower your interest, not your standards.",
+    "eligibility": [
+      {
+        "additionalInfo": "Minimum income required",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "additionalValue": "35000.0000000000",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Australian Citizen or permanent resident",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "additionalValue": "Australian Citizen or permanent resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "You must be at least 18 years of age to apply for a credit card",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Up to 55 days on retail purchases No interest free days apply to purchases while you have a balance transfer.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "0% p.a. for 24 months on balance transfers from approval. 3% balance transfer fee applies. Reverts to cash advance rate.",
+        "additionalInfoUri": "https://www.virginmoney.com.au/credit-cards/low-rate-credit-card",
+        "additionalValue": "P24M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/virgin-money-app/app-features/digital-wallet",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/virgin-money-app/app-features/digital-wallet",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/virgin-money-app/app-features/digital-wallet",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Reward yourself with a lower rate. Apply for an instalment plan that lets you pay off your card balance with certainty and allows you the potential to save on monthly interest that you may otherwise pay. Plus you can still enjoy interest free days on your other purchases made outside the Fixed Payment Option.",
+        "additionalInfoUri": "https://virginmoney.com.au/help-and-support/credit-cards/instalments",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "You can earn loads of Virgin Money Bonus Points from a range of partner offers, all from the palm of your hand in the Rewards Hub of the Virgin Money app.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "additionalValue": "Virgin Money Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Low ongoing variable purchase rate of 12.99% p.a.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "For purchases of up to $100, simply wave & go anywhere that has a Visa payWave sensor, making payments easy and convenient.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "For each statement period we issue you with a paper statement, $2 will be debited to your account in the following statement period. This may be waived in limited circumstances.",
+        "additionalInfoUri": "https://www.virginmoney.com.au/help-and-support/rates-and-fees/credit-cards",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "2.0000"
+        },
+        "name": "Paper Statement Fee"
+      },
+      {
+        "additionalInfo": "Fee per statement period when your credit limit is exceeded.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "40.0000"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "International cash withdrawals on your credit card.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.0000"
+        },
+        "name": "International Cash Advance"
+      },
+      {
+        "additionalInfo": "Fee for each time a cheque or Direct Debit payment is dishonoured.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "15.0000"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "2.5000"
+        },
+        "name": "Over-the-Counter Fee (Bank@Post)"
+      },
+      {
+        "additionalInfo": "Annual fee charged on the card.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/flyer-credit-card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "99.0000"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "For retail purchases or cash advance transactions made in a foreign currency or using a foreign merchant.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.0330000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Fee for each time we do not receive the Minimum Payment Due and any Overdue Amount by the payment due date, debited to your Account after the payment due date.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "30.0000"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "Domestic cash withdrawals from your credit card.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "2.7000"
+        },
+        "name": "Domestic Cash Advance below $100"
+      },
+      {
+        "additionalInfo": "Domestic cash withdrawals from your credit card.",
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/rates-and-fees#CommonCCFees.html",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Domestic Cash Advance above $100",
+        "rateBased": {
+          "rate": "0.0270000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "The balance transfer fee is 3% of the balance transferred",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Balance Transfer fee",
+        "rateBased": {
+          "rate": "0.0300000000000000",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-08-05T03:56:39Z",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2169000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://virginmoney.com.au/credit-card/compare-our-credit-cards/low-rate-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1299000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Balance Transfer rate reverts to the variable Annual Percentage Rate for Cash Advances at the end of promotional period.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2169000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved Virgin Money Low Rate Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "minimumValue": "25",
+            "name": "Standard Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "0% p.a. for 24 months on balance transfers from approval. 3% balance transfer fee applies. Reverts to the cash advance rate.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0000000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved Virgin Money Low Rate Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "maximumValue": "24",
+            "minimumValue": "1",
+            "name": "Promotional Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "Virgin Money Low Rate Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "8cb23721-102c-ee11-9965-002248e1d56c"
+  },
+  "version": 7
+}

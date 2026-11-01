@@ -1,0 +1,335 @@
+{
+  "brand": "NATIONAL AUSTRALIA BANK",
+  "product": {
+    "additionalInformation": {
+      "bundleUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+      "eligibilityUri": "https://www.nab.com.au/personal/credit-cards/fees-charges",
+      "feesAndPricingUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+      "overviewUri": "https://www.nab.com.au/personal/credit-cards/low-fee",
+      "termsUri": "https://www.nab.com.au/personal/credit-cards/low-fee"
+    },
+    "applicationUri": "https://www.nab.com.au/personal/banking/credit-cards/nab-low-fee-card",
+    "brand": "NAB",
+    "bundles": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/content/dam/nabrwd/documents/terms-and-conditions/banking/nab-private-tailored-package-terms-and-conditions.pdf",
+        "description": "The NAB private tailored package is an exclusive package specifically designed for nab private clients of national australia bank (NAB). we offer through the package a wide range of concessions and benefits on many of nab’s most competitive products.",
+        "name": "NAB Private Tailored Package",
+        "productIds": [
+          "fbce13b1-77db-4226-9f55-9028ee31884f",
+          "0c2ca397-dc24-4eb0-8fb9-e098c582ebd5",
+          "263a9294-f2d8-4f5e-885c-363e1c2010b9",
+          "c43ad795-9db1-4e1f-a7f5-845714ecedfd",
+          "8a47c774-0065-4850-992c-42d73253f3eb",
+          "e10279eb-1172-48dd-b6d2-08bed9605c5d"
+        ]
+      },
+      {
+        "description": "The NAB Portfolio Package is designed to provide a wide range of discounts and extra benefits .",
+        "name": "NAB Portfolio Package",
+        "productIds": [
+          "fbce13b1-77db-4226-9f55-9028ee31884f",
+          "0c2ca397-dc24-4eb0-8fb9-e098c582ebd5",
+          "263a9294-f2d8-4f5e-885c-363e1c2010b9",
+          "c43ad795-9db1-4e1f-a7f5-845714ecedfd",
+          "8a47c774-0065-4850-992c-42d73253f3eb",
+          "e10279eb-1172-48dd-b6d2-08bed9605c5d"
+        ]
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/private-portfolio-package",
+        "description": "The NAB private portfolio package is an exclusive package specifically designed for nab private clients of national australia bank (NAB). we offer through the package a wide range of concessions and benefits on many of nab’s most competitive products.",
+        "name": "NAB Private Portfolio Package",
+        "productIds": [
+          "fbce13b1-77db-4226-9f55-9028ee31884f",
+          "0c2ca397-dc24-4eb0-8fb9-e098c582ebd5",
+          "263a9294-f2d8-4f5e-885c-363e1c2010b9",
+          "c43ad795-9db1-4e1f-a7f5-845714ecedfd",
+          "8a47c774-0065-4850-992c-42d73253f3eb",
+          "e10279eb-1172-48dd-b6d2-08bed9605c5d"
+        ]
+      }
+    ],
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.nab.com.au/personal/credit-cards/low-fee-cards"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Enjoy our lowest annual card fee of only $30 and our special cashback offer.",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "Must be an Australian resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Lending criteria apply",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "NAB Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Up to one additional cardholder.\r\nAdditional cardholder must be 16 years of age or older.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "3% fee\r\n\r\nNAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Up to 44 interest free days on purchases",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Complimentary",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "Purchase Protection Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "NAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "P12M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "$200 cashback when you spend $1,500 on purchases within 90 days from account opening.\r\n\r\nNAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "200",
+        "featureType": "CASHBACK_OFFER"
+      },
+      {
+        "additionalInfo": "Fraud protection\r\nNAB Defence proactively detects fraudulent transactions, so you can enjoy 100% peace of mind with all purchases.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "featureType": "FRAUD_PROTECTION"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "NAB may waive or discount fees at its discretion, as part of a package or promotional offer.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/fees-charges",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfo": "No annual credit card fees on up to 2 eligible NAB credit card accounts that you include in your package.",
+            "additionalInfoUri": "https://www.nab.com.au/personal/home-loans/nab-portfolio-facility",
+            "description": "NAB Portfolio Facility - no annual fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Part of NAB Portfolio Facility",
+                "additionalInfoUri": "https://www.nab.com.au/personal/home-loans/nab-portfolio-facility",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "30.00"
+            }
+          },
+          {
+            "additionalInfo": "No annual credit card fees on up to 2 eligible NAB credit card accounts that you include in your package.",
+            "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/private-portfolio-package",
+            "description": "NAB Private Portfolio Package - no annual fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Part of NAB Private Portfolio Package",
+                "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/private-portfolio-package",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "30.00"
+            }
+          },
+          {
+            "additionalInfo": "No annual credit card fees on up to 2 eligible NAB credit card accounts that you include in your package.",
+            "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/nab-private-tailored-package",
+            "description": "NAB Private Tailored Package - no annual fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Part of NAB Private Tailored Package",
+                "additionalInfoUri": "https://www.nab.com.au/personal/private-banking/tailored-banking-solutions/nab-private-tailored-package",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "30.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "49.00"
+        },
+        "name": "Annual fee"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/fees-charges",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transaction single currency",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/fees-charges",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transaction multi currency",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/fees-charges",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash advance",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/fees-charges",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Late payment"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-01T13:59:59Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "0% p.a. for 12 months standard balance transfer rate. 3% balance transfer fee applies.\r\nNAB may offer different introductory rates at its discretion, including for promotional purposes.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "additionalValue": "P12M",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2299",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "NAB may discount the purchase rate at its discretion, including for promotional purposes.",
+        "additionalInfoUri": "https://www.nab.com.au/personal/credit-cards/low-fee/nab-low-fee-card",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2249",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "NAB Low Fee Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "fbce13b1-77db-4226-9f55-9028ee31884f"
+  },
+  "version": 7
+}

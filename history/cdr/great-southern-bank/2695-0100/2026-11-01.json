@@ -1,0 +1,201 @@
+{
+  "brand": "Great Southern Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.greatsouthernbank.com.au/credit-cards/platinum",
+      "feesAndPricingUri": "https://www.greatsouthernbank.com.au/__data/assets/pdf_file/0021/45903/RC00688_Schedule_of_Fees_CREDIT_CARD_250910.pdf",
+      "overviewUri": "https://www.greatsouthernbank.com.au/credit-cards/platinum",
+      "termsUri": "https://www.greatsouthernbank.com.au/__data/assets/pdf_file/0024/536154/RC00689_CREDIT_CARD_Conditions_of_Use_and_Credit_Guide_260911.pdf"
+    },
+    "applicationUri": "https://apply.greatsouthernbank.com.au/integatecus/frmIntegate.aspx?company=CUA&merchant=250&operator=WEB&Product=CC&ccProductId=2&ccCardDesign=1&ccProductName=Platinum%20Credit%20Card&ccPromoCode=&encp=3PbPtkh51DQ5EnhM38OwPPF6jX0oem/KmPj0zQrDv80=a1RV/y24aquBKZoqpcE8gLiWGIMvYN6z&_gl=1*1j4v47l*_gcl_au*NTQ1MDkxOTQ1LjE3NTQ0NDUxNzU.",
+    "brand": "Great Southern Bank",
+    "brandGroup": "Great Southern Bank",
+    "brandName": "Great Southern Bank",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.greatsouthernbank.com.au/media/jthn/platinum-black.webp",
+        "title": "Platinum Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum credit limit",
+        "additionalInfoUri": "https://www.greatsouthernbank.com.au/__data/assets/pdf_file/0025/536155/KFS_KEY-FACTS-SHEET_250725.pdf",
+        "additionalValue": "6000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "A Platinum VISA credit card with a monthly fee.",
+    "effectiveFrom": "2026-09-28T14:00:00.00000Z",
+    "effectiveTo": "2037-12-31T13:59:59.00000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "To be 18 or over",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Applications are for individuals and personal use purposes only.",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "You must be an Australian citizen or Australian resident to hold an account with Great Southern Bank",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Applications for credit cards are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Additional Cardholders must be over 16 years of age. If an Additional Cardholder is not an existing Great Southern Bank customer, they must complete a Membership Application - Individual form and satisfy our identification requirements before being added to your account.",
+        "additionalValue": "3",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Cashback is only available with the Platinum Credit Card. Cashback on eligible transactions accrued in accordance with the Great Southern Bank Cashback Terms & Conditions. You will not earn cash back on interest charges, government charges, bank fees, gambling, cash advances, balance transfers or card account adjustments resulting from disputed transactions.",
+        "additionalInfoUri": "https://www.greatsouthernbank.com.au/__data/assets/pdf_file/0017/537011/RC2212966_Cashback_Terms_and_Conditions_250807.pdf",
+        "additionalValue": "Cashback",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalValue": "Monthly Statements",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Minimum Repayment. Your minimum repayment for each month will be calculated as the amount that is the greatest (or equal greatest) of:  $35; or 3% of your Closing Balance; AND your Overlimit Amount (if any). If the Closing Balance on your Account is less than $35, the minimum repayment will be the Closing Balance.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Wherever you are in the world, Great Southern Bank gives you the choice and control to securely manage all of your accounts on a range of devices, the way you want.",
+        "additionalInfoUri": "https://www.greatsouthernbank.com.au/digital-banking",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Pay with your Apple(TM) device using Apple Pay.",
+        "additionalInfoUri": "https://www.greatsouthernbank.com.au/digital-banking/apple-pay-everyday",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Enjoy 24/7 fraud monitoring and Visa’s Zero Liability Policy^.",
+        "additionalInfoUri": "https://www.greatsouthernbank.com.au/credit-cards",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "24/7 Emergency Assistance. If your card is lost or stolen, you can call us anytime to block it and order a replacement card.",
+        "additionalInfoUri": "https://www.greatsouthernbank.com.au/credit-cards",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Pay with your NFC capable Android(TM) devices using Google Pay.",
+        "additionalInfoUri": "https://www.greatsouthernbank.com.au/digital-banking/google-pay",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Complimentary international travel insurance (T&Cs, limits and exclusions apply).",
+        "additionalInfoUri": "https://www.greatsouthernbank.com.au/__data/assets/pdf_file/0025/511639/Great-Southern-Bank-Platinum-Credit-Cards-Complimentary-Insurances-Policy-Information-Booklet.pdf",
+        "additionalValue": "Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Complimentary 90-day cover for loss, theft, or accidental damage on a wide range of items purchased with your card.  (T&Cs, limits and exclusions apply).",
+        "additionalInfoUri": "https://www.greatsouthernbank.com.au/__data/assets/pdf_file/0025/511639/Great-Southern-Bank-Platinum-Credit-Cards-Complimentary-Insurances-Policy-Information-Booklet.pdf",
+        "additionalValue": "Purchase Protection",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 55 interest free days on purchases when you pay off your closing balance in full by the due date shown on your statement each month.",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "The Annual Fee is charged to your Account on the last day of your first statement cycle, and then will be\ncharged monthly thereafter. Where a first year annual fee waiver applies, the Annual Fee will be charged to your Account on the statement after the first anniversary of you entering into the Credit Card contract and then will be charged monthly thereafter.",
+        "additionalValue": "Monthly",
+        "amount": "12.00",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "12.00"
+        },
+        "name": "Monthly Card fee"
+      },
+      {
+        "additionalInfo": "A minimum of $3.50 Cash Advance Fee will be charged when a Cash Advance is obtained from your Account.",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "WITHDRAWAL",
+        "name": "Cash Advance Fee",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "A Foreign Exchange Fee will be charged in Australian dollars for any Purchases or Cash Advances made or processed in a foreign currency or where the merchant, or the merchant’s financial institution, is located overseas (both Multi-Currency Transactions and Single Currency Transactions).",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Exchange Fee",
+        "variable": {}
+      },
+      {
+        "additionalInfo": "A Late Payment Fee will be charged if the ”Total amount due” figure shown on the Statement is not paid within 25 days from your Statement Date.",
+        "amount": "12.50",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "12.50"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "An Emergency Replacement Card Fee will be charged when a replacement Card is requested to be provided to you or an Additional Cardholder via a priority service within Australia or overseas.",
+        "amount": "30.00",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Emergency Replacement Card Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-30T21:01:00.00000Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2174",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1999",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Platinum Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "2695-0100"
+  },
+  "version": 7
+}

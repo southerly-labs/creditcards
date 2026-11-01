@@ -1,0 +1,356 @@
+{
+  "brand": "BankSA",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.banksa.com.au/personal/credit-cards/rewards/amplify-signature",
+      "feesAndPricingUri": "https://www.banksa.com.au/content/dam/bsa/downloads/accounts_and_cards/bsa-cc-fee-charges.pdf",
+      "overviewUri": "https://www.banksa.com.au/personal/credit-cards/rewards/amplify-signature/summary",
+      "termsUri": "https://www.banksa.com.au/content/dam/bsa/downloads/personal/credit-cards/bsa_credit_card_terms_and_conditions.pdf"
+    },
+    "brand": "BankSA",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.banksa.com.au/content/dam/public/open-banking/BSA-Amplify-Signature-Card-Art-232x146.png",
+        "title": "Amplify Signature card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "15000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "80000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "Our top-tier credit card that lets you earn Amplify points",
+    "eligibility": [
+      {
+        "additionalInfo": "Aged 18 or over",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Be an Australian or New Zealand citizen or be an Australian permanent resident or hold a valid temporary residence visa with a minimum of 1 year before expiry",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Have a regular, verifiable Australian taxable income for at least 3 months (18 months for self employed)",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "You're up-to-date with your regular repayments (rent or home loan, phone, other credit cards and loans etc.)",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Have a fixed residential address in Australia",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalValue": "Earn Amplify Rewards points on eligible purchases and redeem them for flights, upgrades, gift cards, merchandise and more.",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfoUri": "https://www.prioritypass.com/amplifysignature",
+        "additionalValue": " 2 lounge passes: Enjoy 2 complimentary Priority Pass lounge visits each year when you enrol at below link",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "1 Amplify point per $1 spend on all other purchases. Once you spend $10,000 in a statement cycle, you will earn 0.5 Amplify points per $1 on further eligible purchases. New cards only. Refer to standard rates and fees.",
+        "additionalValue": "Amplify Signature Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "2 Amplify points per $1 on everyday spend. Once you spend $10,000 in a statement cycle, you will earn 0.5 Amplify points per $1 on further eligible purchases. New cards only. Refer to standard rates and fees.",
+        "additionalValue": "Amplify Rewards Points",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "3 Amplify points per $1 on international spend. Once you spend $10,000 in a statement cycle, you will earn 0.5 Amplify points per $1 on further eligible purchases. New cards only. Refer to standard rates and fees.",
+        "additionalValue": "Amplify Rewards Points",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Up to 45 days Interest free on purchases when you pay the Closing Balance (or the Monthly Payment Balance with a balance transfer) on time.",
+        "additionalValue": "P45D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Multiple ways to pay, securely, with mobile wallet. Pay on the go simply and securely from your mobile device at millions of stores worldwide, where contactless payments are accepted - compatible with Apple Pay.",
+        "additionalInfoUri": "https://www.banksa.com.au/online-services/ways-to-pay",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Multiple ways to pay, securely, with mobile wallet. Pay on the go simply and securely from your mobile device at millions of stores worldwide, where contactless payments are accepted - compatible with Google Pay.",
+        "additionalInfoUri": "https://www.banksa.com.au/online-services/ways-to-pay",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Multiple ways to pay, securely, with mobile wallet. Pay on the go simply and securely from your mobile device at millions of stores worldwide, where contactless payments are accepted - compatible with Samsung Pay.",
+        "additionalInfoUri": "https://www.banksa.com.au/online-services/ways-to-pay",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Digital Card - Boost your card security by using the dynamic CVV. Access your card details anytime, anywhere. Be assured that you will have uninterrupted access to your funds even if your card is lost or stolen.",
+        "additionalInfoUri": "https://www.banksa.com.au/online-services/ways-to-pay",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.banksa.com.au/content/dam/bsa/downloads/accounts_and_cards/BSA_Consumer_Credit_Card_Complimentary_Insurance_Allianz.pdf",
+        "additionalValue": "Access to Interstate Flight Inconvenience Insurance and Rental Vehicle Excess in Australia cover, up to 6 months' complimentary cover for international travel insurance, plus extended warranty, purchase protection for up to 4 months and overseas transit accident insurance. (terms, conditions, exclusions and eligibility criteria apply).",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "An extra card: For an additional cardholder aged 16 or over at no extra cost, provided the account isn't a joint account. Additional card transactions are the responsibility of the primary account holder.",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Earn 90,000 Rewards bonus Points if you spend $9k+ on eligible purchases within 90 days of card approval. $199 first year card fee (reverts to $295 p.a. thereafter). A $75 annual Amplify Rewards Program fee still applies. Offer not available if you've held a BankSA, St.George or Bank of Melbourne rewards card in the last 24 months. New cards only. T&Cs Apply.",
+        "additionalValue": "90000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "Phone and Internet Banking",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "SMS and email alerts are available for the product",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Feel confident using our cards, with 24/7 fraud monitoring, Secure Online Shopping Service, and the BankSA Fraud Money Back Guarantee.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Explore ShopBack offers and earn bonus Cashback when you shop via the BankSA Lounge on ShopBack. Terms & Conditions apply.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Put a 'yay' in Everyday. Turn your Amplify points into Everyday Rewards points and get more value at the checkout. Eligibility, min and max points transfer and T&Cs apply.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Exclusive to Amplify Signature cardholders, our Concierge Service allows you to explore and book experiences online, including hard-to-find tickets, last-minute reservations and more",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "The product includes extra repayment features.",
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "additionalInfo": "The product includes fraud protection features.",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Recurring payments - You may authorise a Merchant to charge recurring payments to your Card automatically without requesting your authorisation on each occasion",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Confirming and authorising transactions: There are a number of ways you may be able to confirm a transaction. These include: signing your name. Holding your Card in front of a contactless payment device. Entering your PIN. Entering your Card details and any other information required.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Gambling blocks: If you wish to limit access to gambling services through the Card Account, please call us or log into your online banking and activate gambling block in the Card Services menu.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Statements: We will issue a statement for the Card Account to you every month unless the account has a balance of $10 or less and there has been no account activity in that month. You can choose to receive statements by mail or electronically.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "2.5% of the closing balance or $25; whichever is greater. If the closing balance is less than $25, it must be paid in full.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Plan&Pay is a repayment plan for your credit card. It splits your credit card repayments into smaller bite-sized instalments.",
+        "additionalInfoUri": "https://www.banksa.com.au/personal/credit-cards/manage/plan-and-pay",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Tracking your points balance: Your Card statement will show for the period covered any Points earned to your Amplify Rewards Account",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Access to Visa's Luxury Hotel Collection, giving you the best available rate guarantee and upgrade benefits when available.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Access to My Offers Hub: My Offers Hub is a collection of offers and discounts available to eligible debit or credit cardholders to thank you for being our customer.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Autopay facility is available. With Autopay, you can choose to pay off your Minimum Payment Due or your full closing balance each month.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Customers can access their eligible BankSA cards and Apple's ID&V security features within Apple Wallet. T&Cs apply.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "discounts": [
+          {
+            "description": "Amplify Rewards Signature Discounted First Year Fee:",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "A reduced first year annual card fee of $199 ($295 thereafter)",
+                "additionalValue": "P1Y",
+                "discountEligibilityType": "INTRODUCTORY"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "96.00"
+            }
+          },
+          {
+            "description": "Existing Reduced First year Annual Card Fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Already with BankSA? Sign in to apply to get a $149 card fee for the first year (reverts to $295). Offer not available if you've held a St.George, Bank of Melbourne or BankSA rewards card in the last 24 months. T&Cs Apply.",
+                "additionalValue": "P1Y",
+                "discountEligibilityType": "INTRODUCTORY"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "146.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "295.00"
+        },
+        "name": "Annual Card Fee"
+      },
+      {
+        "additionalValue": "30",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Missed Payment Fee"
+      },
+      {
+        "additionalValue": "P1Y",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "75.00"
+        },
+        "name": "Annual Amplify Rewards Program fee"
+      },
+      {
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "3% of the Australian dollar value for transactions with merchants based overseas",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Courier costs may apply",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Card Replacement Fee"
+      },
+      {
+        "additionalInfo": "$15.00 once per statement period if your credit card account was opened before 4 June 2012. No overlimit fee will be charged for personal credit card accounts opened on or after 4 June 2012.",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.50"
+        },
+        "name": "Copy of a sales voucher"
+      },
+      {
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Copy of a deposit or withdrawal form"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-29T01:03:01Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Interest on purchases",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Interest Free Days may apply",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2398",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Interest on cash advances",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "No Interest Free days",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2399",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Amplify Rewards Signature",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "BSACCAmplifySignaturecardRewards"
+  },
+  "version": 7
+}

@@ -1,0 +1,252 @@
+{
+  "brand": "Newcastle Permanent",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.newcastlepermanent.com.au/tools-and-services/terms-and-conditions#Personal",
+      "feesAndPricingUri": "https://www.newcastlepermanent.com.au/tools-and-services/terms-and-conditions#Personal",
+      "overviewUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+      "termsUri": "https://www.newcastlepermanent.com.au/tools-and-services/terms-and-conditions"
+    },
+    "applicationUri": "https://www.newcastlepermanent.com.au/tools-and-services/apply-for-a-product",
+    "brand": "NP",
+    "brandName": "Newcastle Permanent",
+    "bundles": [],
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "20000.00",
+        "constraintType": "MAX_BALANCE"
+      },
+      {
+        "additionalValue": "20000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "A personal credit card with up to 55 days interest free on purchases, a low annual fee and competitive interest rate.",
+    "effectiveFrom": "2006-07-03T00:00:00+10:00",
+    "effectiveTo": "9999-12-30T00:00:00+11:00",
+    "eligibility": [
+      {
+        "additionalValue": "20000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Minimum additional cardholder age is 16 years. ",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Available to permanent Australian Residents ",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "Fulltime, Part time, Casual, Contract, Self Employed ",
+        "eligibilityType": "EMPLOYMENT_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Internet Banking and Mobile Banking",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Transfer store or other credit card balances to your Value plus Credit Card",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Subject to credit limit",
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Available for Visa cards only.",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/mobile-payments",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "BPAY View",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Available for Visa cards only.",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/mobile-payments",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Up to 3 additional cardholders. No additional cardholder fee.",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/accessing-your-money",
+        "additionalValue": "3",
+        "featureType": "ADDITIONAL_CARDS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "A payment may be dishonoured for various reasons, including insufficient funds being available in the credit card account at the agreed time the debit is to occur, the request being incorrectly completed or because the credit card account has been closed",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "9.00"
+        },
+        "name": "Payment Dishonour Fee"
+      },
+      {
+        "additionalInfo": "Applies when a card is used to perform a transaction overseas or where a merchant processes the payment overseas. ",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Foreign Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.0300",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable in advance on your first transaction and then on each anniversary date thereafter. ",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "49.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "Applies for each replacement card you or an additional cardholder requests within Australia",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Credit Card Replacement Fee within Australia"
+      },
+      {
+        "additionalInfo": "Payable for each statement period that the minimum payment amount is not processed to your credit card account ",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "Applies to cash advances performed using the card via ATM, at a branch or other financial institution, or by internet banking. Minimum of $2.50.",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.0200",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Payable on reissue of a statement",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Replacement Statement Fee"
+      },
+      {
+        "additionalInfo": "Applies for each replacement card you or an additional cardholder requests overseas",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "100.00"
+        },
+        "name": "Credit Card Replacement Fee Overseas"
+      },
+      {
+        "additionalInfo": "A direct debit may be dishonoured for various reasons, including insufficient funds being available in the credit card account at the agreed time the debit is to occur, the request being incorrectly completed or because the credit card account has been closed.",
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/personal/credit-card",
+        "currency": "AUD",
+        "discounts": [],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "9.00"
+        },
+        "name": "Direct Debit Dishonour Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-08-25T00:00:00+10:00",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/interest-rates",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1199000000",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      },
+      {
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/interest-rates",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.1199000000",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      },
+      {
+        "additionalInfoUri": "https://www.newcastlepermanent.com.au/tools-and-services/interest-rates",
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1199000000",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      }
+    ],
+    "name": "Value Plus Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "CC_valuepluscc"
+  },
+  "version": 7
+}

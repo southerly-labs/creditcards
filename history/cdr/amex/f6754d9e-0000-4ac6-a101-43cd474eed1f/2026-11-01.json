@@ -1,0 +1,410 @@
+{
+  "brand": "American Express",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.americanexpress.com/au/credit-cards/the-platinum-card/",
+      "feesAndPricingUri": "https://www.americanexpress.com/au/credit-cards/the-platinum-card/",
+      "overviewUri": "https://www.americanexpress.com/en-au/credit-cards/the-platinum-card/",
+      "termsUri": "https://www.americanexpress.com/au/credit-cards/the-platinum-card/"
+    },
+    "applicationUri": "https://www.americanexpress.com/au/credit-cards/the-platinum-card/",
+    "brand": "American Express",
+    "brandName": "American Express",
+    "cardArt": [
+      {
+        "cardScheme": "AMEX",
+        "cardType": "CHARGE",
+        "imageUri": "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGPL00001S3.gif",
+        "title": "The American Express Platinum Card"
+      }
+    ],
+    "description": "American Express's top tier card with a suite of elevated benefits including travel insurance.",
+    "eligibility": [
+      {
+        "additionalInfo": "Long term visa means 12 months or more and does not include a student visa.",
+        "additionalValue": "You are an Australian citizen or permanent resident or hold a long term visa.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Additional Cards are available for any friend or family member 16 years and over.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Applications are assessed based on the information provided and are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Add up to 4 Cards at no additional fee.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/additional-card/",
+        "additionalValue": "4",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/pay-bill/",
+        "additionalValue": "Ways to pay your bill",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/the-platinum-card/",
+        "additionalValue": "New Card Member Offer",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "The Amex App lets you quickly and easily manage your Card Account anytime, anywhere.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/manage-your-card/mobile-app/",
+        "additionalValue": "Amex App",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Fraud Protection Guarantee, protecting you from unauthorised charges made on your Account.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/service-and-security/fraud-protection/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Terms, conditions, cover limits and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "International & Domestic Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": " Will keep your protected with cover should your eligible items be stolen or damaged. Item must be stolen or broken within 90 days of purchase. You’re covered for up to $30,000 per year and $3,500 per claim with a $50 excess per claim. Terms, conditions and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Purchase Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": " Is available should a store refuse to accept the return of an eligible item. Must be within 90 days of purchase. You’re covered for up to $5,000 per year and $1,000 per claim, with no excess. Terms, conditions and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Refund Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Your Platinum Card includes Smartphone Front Screen Insurance, which provides cover for up to $500 when you pay for your smartphone with your Platinum Card, either outright or on a monthly contract. A 10% excess applies to the claimed amount. Terms, conditions and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Smartphone Front Screen Cover Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Extends your manufacturer's warranty by up to 12 months on eligible items purchased with your Card. You're covered for up to $20,000 per year on eligible items within the Buyer's Advantage period.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Buyer’s Advantage Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Loss Damage Waiver Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "2.25 points per $1 spent on all purchases, excluding government bodies.\n1 point per $1 spent at government bodies in Australia.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/",
+        "additionalValue": "Membership Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalValue": "Payment due reminder",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Spend tracking notification",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Payment received alert",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Whether it's shopping, dining, travel or entertainment, eligible Card Members can access Amex Offers providing statement credits or bonus points. Amex Offers must be saved to the Card and used for qualifying spend, subject to offer-specific criteria, to receive a benefit.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/why-amex/offers/",
+        "additionalValue": "Amex Offers",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Get pre-sale tickets and access to some of your favourite events, and enjoy the Amex Entertainment Lounge before the show at select venues. With Amex, you can dive into unforgettable experiences.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/benefits/entertainment/events",
+        "additionalValue": "American Express Experiences",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Up to 44 days to pay for purchases.",
+        "additionalValue": "Cashflow Days",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Priority Pass™ complimentary airport lounge access worldwide with a guest.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/#G5",
+        "additionalValue": "Priority Pass™",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Complimentary access to all Centurion Lounge locations with up to 1 guest.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/#G5",
+        "additionalValue": "Centurion Lounge Access",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Gives you access to The Australian’s news coverage and analysis from here and around the world across all your devices as well as access to The Wall Street Journal. In addition, you will have access to exclusive member-only features including a weekly curated eNewsletter featuring a selection of the best reads from The Australian and global news partners including The Times of London and Harvard Business Review, as well as The Australian annual event featuring some of The Australian’s most experienced political and business journalists. The complimentary digital subscription to The Australian Premium is available to Primary and Additional Platinum Card Members.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/retail/the-australian-premium/",
+        "additionalValue": "The Australian Premium subscription",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Receive $450 to spend on domestic or international travel each year when you book eligible flights, hotels or car hire with the Platinum Travel Service or American Express Travel Online.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/#G3",
+        "additionalValue": "$450 Travel Credit each year",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "We customise once-in-a-lifetime events – from sporting and fashion to fine dining, art and performances.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-platinum-card/events.html",
+        "additionalValue": "Platinum Card Experiences",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Plaza Premium lounge visits worldwide with up to 1 guest.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/#G5",
+        "additionalValue": "Plaza Premium",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Delta Sky Club visits worldwide when flying Delta.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/#G5",
+        "additionalValue": "Delta Sky Club",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Primary Card Members receive complimentary Virgin Australia Lounge access with up to one guest at selected domestic airports when flying on an eligible Virgin Australia flight, subject to availability and eligibility criteria.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/#G5",
+        "additionalValue": "Virgin Australia Lounge Access",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Receive a complimentary suite of benefits which offer an average total value of USD$550 at over 1,800 extraordinary properties worldwide when you book with Fine Hotels + Resorts. Complimentary benefits include guaranteed 4pm late check-out, room upgrade (subject to availability), daily breakfast for two, or a complimentary amenity valued at US$100 experience credit per stay, unique to each property",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/collections/fine-hotels-plus-resorts/",
+        "additionalValue": "Fine Hotels + Resorts program",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Receive up to US $100 hotel credit and room upgrade (when available) at selected hotels in The Hotel Collection when you book two consecutive nights’ stay through American Express Travel. Subject to availability and eligibility criteria.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/collections/the-hotel-collection/",
+        "additionalValue": "The Hotel Collection",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Complimentary ALL Accor+ Explorer Membership valued at $349 p.a.\n\nEnjoy two ‘Stay Plus’ complimentary nights stay (each complimentary night must be booked in conjunction with a paid night) at over 1,300 participating hotels in Asia Pacific.\n30% off dining, for up to 10 guests at over 1,600 participating restaurants.\n15% off drinks in Asia Pacific.\nALL Accor Gold status with bonus 30 status nights",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/hotels/accor/",
+        "additionalValue": "ALL Accor+ Explorer Membership",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Hilton Honors Gold status.",
+        "additionalInfoUri": "https://www.americanexpress.com/amex/en-au/credit-cards/membership-benefits/the-platinum-card/travel/hotels/hilton-honors-gold-status/",
+        "additionalValue": "Hilton Gold Status",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Marriott Bonvoy Gold Status",
+        "additionalInfoUri": "https://www.americanexpress.com/amex/en-au/credit-cards/membership-benefits/the-platinum-card/travel/hotels/marriott-bonvoy-gold-elite-status/",
+        "additionalValue": "Marriott Bonvoy Gold Status",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Radisson Rewards Premium Status.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/hotels/radisson-rewards/",
+        "additionalValue": "Radisson Rewards Premium Status",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Explore the world and sail off into the sunset; enjoy up to US$300 in onboard credit when you book with one of our cruise partners  through Platinum Travel Service.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/cruise-and-tour/cruise-benefits/",
+        "additionalValue": "Cruise Benefits",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Enjoy a pre- or post-trip fine-dining experience up to US$100 per person when you book any overnight journey on the following trains: Venice Simplon-Orient-Express (Europe); Belmond Grand Hibernian (Ireland); Belmond Royal Scotsman (Scotland); and Eastern & Oriental Express (Southeast Asia). Book your next rail journey through Platinum Travel Service on 1800 673 760.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/car-and-rail/luxury-rail/",
+        "additionalValue": "Luxury Rail",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive Hertz Five Star Status including discounts and upgrades when available.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/car-and-rail/hertz-gold-plus-rewards/",
+        "additionalValue": "Hertz Five Star Status",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "As an Amex Platinum Card Member, you’re invited to enjoy priority service and car rental benefits with Avis.\n\nEnrolment in the Avis loyalty program is required to access these benefits. The Avis loyalty program is managed by Avis and is subject to change.\n \nThis benefit is available to Primary and Additional Card Members",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/car-and-rail/avis-preferred/",
+        "additionalValue": "Avis Preferred",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Enjoy up to $400 in Dining Credits\n\nDine out on Platinum and enjoy up to $200 to spend at participating restaurants in Australia and up to $200 to spend at participating restaurants abroad.  \n\nTerms, conditions, and exclusions apply. A separate one-time enrolment is required. Benefit ends 31 December 2026.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/dining/",
+        "additionalValue": "Dining Credit",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "As a Platinum Card Member, you and your Additional Card Members have access to program benefits including:LANGTONS Client Services, a complimentary service granting you exclusive access to hard-to-find vintages, pre-release wines and experiences as well as personalised recommendations and advice; at a time that suits you. Enjoy an extensive range of highly sought-after Australian and imported fine wine from Bordeaux, Italy and beyond.As part of LANGTONS shopping rewards program, you can earn a complimentary bottle of wine per membership year when meeting the minimum spend criteria.A $50 welcome voucher on your first purchase of $240 or more in a single transaction with your designated Private Client ManagerThis benefit is available to Primary and Additional Card Members.To access these offers, you must first enrol in the LANGTONS program. (Terms, conditions and exclusions apply. LANGTONS benefit ends 30 June 2029).",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/retail/langtons/",
+        "additionalValue": "Langtons Wine",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Our International Airline Program offers savings on First and Business Class airfares with some of the world’s leading airlines.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/air/international-airline-program/",
+        "additionalValue": "International Airline Program",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Access 1,550 Airport Lounges in more than 140 countries, including the Centurion® Lounge, Escape Lounges, Priority Pass™ Lounges and more",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/travel/#G5",
+        "additionalValue": "The American Express Global Lounge Collection",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "The Amex Experiences App gives you unrivalled access to Platinum restaurants, travel and exclusive Member offers. Download to browse and book today.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/network/entertainment/experiences-app/",
+        "additionalValue": "Amex Experiences App",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Your Platinum Card has flexible spending power, also known as no pre-set spending limit, because it is a Charge Card",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/flexible-spending-power/",
+        "additionalValue": "Flexible Spending Power",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Get help right away if something goes wrong at home or on the road. For the full Platinum Insurance Terms and Conditions, please click the link.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Legal, Roadside, and Home Assistance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Primary Platinum Card Members receive benefits at 9 destinations across The Bicester Collection Villages in Europe.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/the-platinum-card/retail/bicester-collection/",
+        "additionalValue": "The Bicester Collection​",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "1450.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "Applies to the first 4 Additional Cards",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Card Fee"
+      },
+      {
+        "additionalInfo": "Three percent (3%) or $20, whichever is greater, will be charged on any overdue amount.",
+        "additionalValue": "When you do not pay the amount due by the due date as shown on your statement.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Late Payment Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "20.00"
+          },
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": "3.5% of the converted amount. Payable when any charge is processed in a currency other than Australian dollars.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$6 for each dishonour or debit rejection. Payable if there aren’t enough funds in your nominated account to pay the Card Account or if the whole or part of a payment by direct debit is rejected.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "6.00"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": "$3 Payable if you pay your Card Account in person at Australia Post by EFTPOS.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Over The Counter Fee"
+      },
+      {
+        "additionalInfo": "Payable if you or an Additional Card Member requests a copy of an individual charge. $7 for charges in Australia, $10 for other charges",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "7.00"
+        },
+        "name": "Record of Charge Fee"
+      },
+      {
+        "additionalInfo": "Payable if you or an Additional Card Member requests an additional posted monthly paper statement. You may access statements free of charge through your online Account.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Additional Statement Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-01T23:00:00.000Z",
+    "name": "American Express® Platinum Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "f6754d9e-0000-4ac6-a101-43cd474eed1f"
+  },
+  "version": 7
+}

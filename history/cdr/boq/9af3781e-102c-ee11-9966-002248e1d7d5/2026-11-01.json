@@ -1,0 +1,290 @@
+{
+  "brand": "Bank of Queensland Limited",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+      "feesAndPricingUri": "https://www.boq.com.au/personal/help-and-support/rates-and-fees/credit-cards",
+      "overviewUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+      "termsUri": "https://www.boq.com.au/personal/help-and-support/forms-and-important-information/terms-and-conditions/"
+    },
+    "applicationUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+    "brand": "BOQ",
+    "brandName": "Bank of Queensland",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://marvel-b1-cdn.bc0a.com/f00000000185299/www.boq.com.au/content/dam/boq/images/cards/visa-cc-low-rate.png",
+        "title": "BOQ Low Rate Visa CC Card Art"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/compare-credit-cards",
+        "additionalValue": "2000.0000000000",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/compare-credit-cards",
+        "additionalValue": "30000.0000000000",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "If paying down your balance each month is keeping you up, our Low Rate Visa Credit Card can help you keep costs down.",
+    "eligibility": [
+      {
+        "additionalInfo": "Earn a taxable income of $25,000 per year or more",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "additionalValue": "25000.0000000000",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Be a permanent Australian resident or citizen",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "additionalValue": "Resident or Citizen",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Have a good credit rating",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Be at least 18 years of age",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "eligibilityType": "NATURAL_PERSON"
+      }
+    ],
+    "features": [
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "0% p.a. on Balance Transfers for 24 months",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "additionalValue": "P24M",
+        "featureType": "INTEREST_FREE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Accepted at over 61 million locations and ATMs worldwide.",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free for your purchases (Interest Free Days are not available if you have a Balance Transfer).",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "For purchases of up to $100, simply wave & go anywhere that has a Visa payWave sensor, making payments easy and convenient.",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "For retail purchases or cash advance transactions made in a foreign currency or using a foreign merchant.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "International Transaction Fee",
+        "rateBased": {
+          "rate": "0.0330000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "For each statement period we issue you with a paper statement, $2 will be debited to your account in the following statement period. This may be waived in limited circumstances.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "2.0000"
+        },
+        "name": "Paper Statement Fee"
+      },
+      {
+        "additionalInfo": "Fee per statement period when your credit limit is exceeded. $40 for accounts approved prior to 1 July 2012.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.0000"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Fee for each time we do not receive the Minimum Payment Due and any Overdue Amount by the payment due date, debited to your Account after the payment due date.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "30.0000"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "Fee for each time a cheque or Direct Debit payment is dishonoured.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "10.0000"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": "International cash withdrawals made outside Australia on your credit card. Minimum fee amount of $4.00 and maximum amount of $30.00 debited to your Account on the Transaction Date.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "International Cash Advance",
+        "rateBased": {
+          "rate": "0.0150000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "65.0000"
+        },
+        "name": "Annual fee"
+      },
+      {
+        "additionalInfo": "Domestic cash withdrawals from your credit card.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "3.5000"
+        },
+        "name": "Domestic Cash Advance below $100"
+      },
+      {
+        "additionalInfo": "Domestic cash withdrawals from your credit card.. For any Cash Advance equal to or over $100 debited to your Account on the Transaction Date.",
+        "additionalInfoUri": "https://www.boq.com.au/content/dam/boq/files/personal/credit-cards/credit-card-fees-and-charges-guide.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Domestic Cash Advance above $100",
+        "rateBased": {
+          "rate": "0.0350000000000000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "The balance transfer fee is 3% of the balance transferred",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Balance Transfer fee",
+        "rateBased": {
+          "rate": "0.0300000000000000",
+          "rateType": "BALANCE"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-09-01T01:55:01Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Except to the extent that an interest free period applies, you must pay interest on everything charged to your account. Interest is charged monthly at the end of each statement period. We calculate interest for each balance type at its applicable APR for each statement period. The APR (Annual Percentage Rate) that applies to each balance type (e.g. a balance transfer) also applies to related fees and interest. The Retail APR applies to retail purchase balance. To calculate that interest, we multiply the applicable daily percentage rate by the daily unpaid balance of its balance type (including related fees and interest) for each day of that statement period, and then add those amounts together. The daily percentage rate is the applicable APR divided by 365. Information on any APR is available on request.",
+        "additionalInfoUri": "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1399000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Except to the extent that an interest free period applies, you must pay interest on everything charged to your account. Interest is charged monthly at the end of each statement period. We calculate interest for each balance type at its applicable APR for each statement period. The APR (Annual Percentage Rate) that applies to each balance type (e.g. a balance transfer) also applies to related fees and interest. The Retail APR applies to retail purchase balance. To calculate that interest, we multiply the applicable daily percentage rate by the daily unpaid balance of its balance type (including related fees and interest) for each day of that statement period, and then add those amounts together. The daily percentage rate is the applicable APR divided by 365. Information on any APR is available on request.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Balance Transfer rate reverts to the variable Annual Percentage Rate for Cash Advances at the end of promotional period.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved BOQ Low Rate Visa Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "minimumValue": "25",
+            "name": "Standard Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "additionalInfo": "0% p.a. for 24 months on balance transfers from approval. 3% balance transfer fee applies. Reverts to the cash advance rate.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.0000000000000000",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Available to newly approved BOQ Low Rate Visa Credit Card account holders.",
+            "applicabilityConditions": [
+              {
+                "rateApplicabilityType": "NEW_ACCOUNTS"
+              }
+            ],
+            "maximumValue": "24",
+            "minimumValue": "1",
+            "name": "Promotional Balance Transfer Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "BOQ Low Rate Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "9af3781e-102c-ee11-9966-002248e1d7d5"
+  },
+  "version": 7
+}

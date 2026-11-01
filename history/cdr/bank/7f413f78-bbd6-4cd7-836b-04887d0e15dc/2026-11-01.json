@@ -1,0 +1,174 @@
+{
+  "brand": "Bank Australia",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.bankaust.com.au/support/disclosures",
+      "overviewUri": "https://www.bankaust.com.au/banking/credit-cards/visa-credit-card",
+      "termsUri": "https://www.bankaust.com.au/support/disclosures"
+    },
+    "brand": "Bank Australia",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum Credit Limit of $1000 is required",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "No annual fee and interest fee days to reduce your card costs. Great for those who pay off their card in full each month.",
+    "effectiveFrom": "2005-07-12T14:30:00.000Z",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Natural Person or In trust for a Natural Person or Non-Individual entity",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Each application for credit is subject to our normal lending criteria and approval.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Available to citizens or permanent resident of Australia and valid Visa holders. Make sure you are currently in receipt of a regular income.",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "For greater convenience and flexibility you can share you Bank Australia credit card with 1 additional card holder provided they are at least 18 years old. The card will be in their name but you will remain responsible for the account.",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Use instore, online and withdraw local currency at millions of locations, everywhere Visa is accepted. Cards are enabled to support diverse needs with raised bumps on the left hand-side on the front face of the card.",
+        "additionalValue": "Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "You can self-serve your day-to-day banking needs via Bank Australia's App or Internet Banking.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Leave your wallet behind and pay for the things you need with Google Pay/ Samsung Pay/ Apple Pay.",
+        "additionalValue": "Google, Samsung and Apple Pay available",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free days for purchases",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Notifications can be enabled in the App or through Internet Banking, allowing you to be alerted either by email, sms or through the App about your card/account activity.",
+        "additionalValue": "Card and Account Notifications",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Card Controls: Decide the features you want enabled on your card including card lock, digital wallet, pay wave, international transactions, ATM withdrawals or online/instore transactions and simply switch them on or off from your App or Internet Banking.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "When you undertake an International transaction on a Bank Australia Visa Debit Card you will be charged the fee. An International transaction is any purchase, withdrawal or credit in a currency other than Australian Dollars or where the merchant or financial institution accepting the transaction is outside of Australia or where there is a currency conversion.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transaction fee (ITF)",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "A fee charged when you need an emergency replacement card or cash delivered to you on an urgent basis to an address overseas.",
+        "currency": "USD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Visa emergency card/cash overseas fee"
+      },
+      {
+        "additionalInfo": "A fee charged to any cash advance within Australia through all channels.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "3.50"
+        },
+        "name": "Cash Advance Fee - Domestic"
+      },
+      {
+        "additionalInfo": "Applies to any cash advance made outside Australia, plus the International Transaction Fee (ITF)",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "3.50"
+        },
+        "name": "Cash Advance Fee - Overseas"
+      },
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Annual Fee - Visa Credit Card"
+      },
+      {
+        "additionalInfo": "You can request that we allow someone else to have a card on your account at no charge",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Cardholder Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-27T22:30:45.766Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Minimum monthly repayments of 2.5% or $20, whichever is greater. If the closing balance is less than $20, you must pay the full closing balance.\n",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1974",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Minimum monthly repayments of 2.5% or $20, whichever is greater. If the closing balance is less than $20, you must pay the full closing balance.\n",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1974",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "7f413f78-bbd6-4cd7-836b-04887d0e15dc"
+  },
+  "version": 7
+}

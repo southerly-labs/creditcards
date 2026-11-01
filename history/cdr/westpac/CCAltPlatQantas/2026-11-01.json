@@ -1,0 +1,324 @@
+{
+  "brand": "Westpac",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.westpac.com.au/credit-cards/reward/altitude-qantas-platinum",
+      "feesAndPricingUri": "https://www.westpac.com.au/credit-cards/reward/altitude-qantas-platinum",
+      "overviewUri": "https://www.westpac.com.au/credit-cards/reward/altitude-qantas-platinum",
+      "termsUri": "https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/pb/credit-cards/westpac-credit-card-terms-and-conditions.pdf"
+    },
+    "applicationUri": "https://www.westpac.com.au/credit-cards/reward/altitude-qantas-platinum/summary",
+    "brand": "Westpac",
+    "brandName": "Westpac",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Rewards%20Platinum_232x146_grey.jpg",
+        "title": "Altitude Qantas Platinum Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "3000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "Earn Qantas Points directly to your Qantas Frequent Flyer account and enjoy Platinum credit card benefits.",
+    "eligibility": [
+      {
+        "additionalInfo": "18+ years old",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Those having permanent residency in Australia/NZ OR being a non-resident or migrant and hold an acceptable Visa, with a minimum 1 year before expiry",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Earn a minimum $30,000 per annum",
+        "additionalValue": "30000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Customer having a regular, verifiable Australian taxable income.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Customer having a fixed, verifiable residential address in Australia.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Earn points faster by adding one additional cardholder (16 years or older) at no extra cost.",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalValue": "P45D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Garmin Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Apple Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Google Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Tap and pay quickly and easily using Samsung Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Click to Pay - Online shopping made quick, simple and secure with Click to Pay.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/click-to-pay/",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Digital Card - We got your back. Use the Dynamic CVC on your digital card. The 3 digit number changes every 24 hours for added fraud protection.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "Know what to pay when - Set up Card Autopay or SMS payment reminders so you can stay on top of your spend and repayments.",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "0.33 Qantas points per $1 spend on all other purchases. Once you spend $5,000 in a statement cycle, you will earn 0.2 Qantas points per $1 on further eligible purchases. New cards only. Refer to standard rates and fees.",
+        "additionalValue": "Altitude Qantas",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "0.5 Qantas points per $1 on everyday spend. Once you spend $5,000 in a statement cycle, you will earn 0.2 Qantas points per $1 on further eligible purchases. New cards only. Refer to standard rates and fees.",
+        "additionalValue": "Altitude Qantas",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "0.75 Qantas points per $1 on international spend. Once you spend $5,000 in a statement cycle, you will earn 0.2 Qantas points per $1 on further eligible purchases. New cards only. Refer to standard rates and fees.",
+        "additionalValue": "Altitude Qantas",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Cashback and discounts: With a Westpac credit card, you'll get personalised cashback offers from Westpac Extras, Westpac bonus Cashback when you shop via the Westpac Lounge on ShopBack, plus other discounts and offers from a wide range of shops, in-store and online.",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/westpac-extras",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Earn up to 50,000 bonus Qantas Points - 30,000 bonus Qantas Points in year 1 if you spend $6k+ on eligible purchases within 90 days of new card approval and an extra 20,000 points with $6k+ spend on eligible purchases within 90 days of card anniversary in year 2. Offer not available if you've held an Altitude Platinum or Altitude Black card with Altitude Rewards, Qantas or Velocity in the last 24 months. New cards only. T&Cs apply.",
+        "additionalValue": "50000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "Complimentary cover for Interstate Flight Inconvenience Insurance and Rental Vehicle Excess in Australia cover. Up to 1 month complimentary cover for international medical travel insurance. Subject to the terms and conditions set out in the Westpac Credit Cards Complimentary Insurance Policy",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/manage/travelling-overseas-insurance/insurance-cover",
+        "additionalValue": "Complimentary insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Access to a range of complimentary travel insurances provided by Allianz Global Assistance. International cover includes Overseas Emergency Assistance, Overseas Medical & Hospital Expenses, and Personal Liability. Domestic Travel Insurance and Rental Vehicle Excess Insurance in Australia covers benefits such as Cancellation, Flight Delay, Lost Luggage and Rental Vehicle Insurance. Terms, conditions, exclusions, limits and applicable sub-limits and eligibility apply.",
+        "additionalValue": "Complimentary travel insurances",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Complimentary Flight Delay Access Pass - You and up to four travelling companions may be eligible for a complimentary Flight Delay Access Pass which gives you access to over 1,800 participating airport lounges worldwide if your registered flight is delayed by 120 minutes or more. For multi-leg journeys, each flight must be registered separately.",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/manage/rewards/flight-delay-access-pass",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Westpac Fraud Money Back Guarantee ensures that any unauthorised transaction claims will be reimbursed provided that the cardholder has not contributed to the loss and contacted us promptly.",
+        "additionalInfoUri": "https://www.westpac.com.au/security/how-we-protect-you/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "The product includes extra repayments",
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "additionalInfo": "Westpac PartPay: Split your purchases over $100 into 4 payments over 6 weeks with the PartPay feature on your credit card. T&Cs applies.",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/partpay",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "Use our SmartPlan repayment planner to break large purchases or balances down into regular instalments while keeping interest-free days.",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/smartplan",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Minimum repayments: 2.5% of the closing balance rounded up to the nearest dollar or $25, whichever is greater; The greater of any unpaid past due amounts from previous statements or any amount that exceeds your credit limit. If your closing balance is less than $25, then you must pay the full amount.",
+        "additionalInfoUri": "https://www.westpac.com.au/credit-cards/credit-card-changes",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Recurring payments - You may authorise a Merchant to charge recurring payments to your Card automatically without requesting your authorisation on each occasion.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Confirming and authorising transactions: There are a number of ways you may be able to confirm a transaction. These include: signing your name. Holding your Card in front of a contactless payment device. Entering your PIN. Entering your Card details and any other information required.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Gambling blocks: If you wish to limit access to gambling services through the Card Account, please call us or log into your online banking and activate gambling block in the Card Services menu.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Statements: We will issue a statement for the Card Account to you every month unless the account has a balance of $10 or less and there has been no account activity in that month. You can choose to receive statements by mail or electronically.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Make shopping and ordering online even more safe and secure with Westpac My Merchants. Westpac My Merchants lets you shop and order online without needing to share your card details, because your card number is replaced with a unique identification code called a 'digital token'. This digital token, which won't contain your personal information and is used by the merchant instead of your card number, helping protect you online.",
+        "additionalInfoUri": "https://www.westpac.com.au/personal-banking/mobile-wallets/my-merchants/",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Customers can access their eligible Westpac cards and Apple's ID&V security features within Apple Wallet. T&Cs apply.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Double dip' for more Qantas Points - Whether you are purchasing groceries or stocking up on Qantas Wine, you can earn points twice when you use your Qantas Points earning credit card to do your shopping with Qantas and their partners.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "$175 plus a separate $125 Qantas Rewards Fee, charged annually (applicable only when the Altitude Qantas rewards program is selected)",
+        "additionalValue": "P1Y",
+        "discounts": [
+          {
+            "description": "Existing Reduced First year Card Fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Already with Westpac? Sign in to apply for a $99 card fee for the first year (reverts to $175 p.a. thereafter). This promotion may be varied or withdrawn at any time and is not available in conjunction with any other promotion.",
+                "additionalValue": "P12M",
+                "discountEligibilityType": "INTRODUCTORY"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "76.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "175.00"
+        },
+        "name": "Annual Card Fee"
+      },
+      {
+        "additionalInfo": "Payable as a percentage of the Australian dollar value of any foreign transaction. Applies for transactions in a foreign currency, or in Australian dollars but processed by an overseas merchant or financial institution. Note: It may not always be clear to you that the Merchant or entity processing the transaction is located outside Australia.",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$20 each statement cycle that the minimum monthly payment is not paid by the statement due date.",
+        "additionalValue": "30",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Missed Payment Fee"
+      },
+      {
+        "additionalInfo": "$15.00 once per statement period if your credit card account was opened before 4 June 2012. No overlimit fee will be charged for personal credit card accounts opened on or after 4 June 2012.",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "additionalInfo": "Applies annually for customers who choose to earn Qantas Points through the Altitude Qantas rewards program.",
+        "additionalValue": "P1Y",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "125.00"
+        },
+        "name": "Annual Altitude Qantas Rewards Program fee"
+      }
+    ],
+    "instalments": {
+      "maximumSplit": 4,
+      "minimumPlanValue": "100.00",
+      "minimumSplit": 4
+    },
+    "isTailored": false,
+    "lastUpdated": "2026-10-29T02:41:55Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Interest on purchases",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Interest free days may apply",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2398",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Interest on cash advances",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "No Interest Free days",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2399",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Altitude Qantas Platinum",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "CCAltPlatQantas"
+  },
+  "version": 7
+}

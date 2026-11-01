@@ -1,0 +1,234 @@
+{
+  "brand": "ING BANK (Australia) Ltd",
+  "product": {
+    "additionalInformation": {
+      "overviewUri": "https://www.ing.com.au/credit-cards/orange-one-platinum.html"
+    },
+    "brand": "ING",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.ing.com.au/img/OO/OO_Visa%20Platinum.png",
+        "title": "OOPLATINUM"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "6000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "30000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "The credit card that comes with up to $30 a month cashback on your spend, and no ING international transaction fees when you shop overseas or online.",
+    "effectiveFrom": "2017-05-11T23:00:00.000Z",
+    "effectiveTo": "9999-12-31T01:00:00.000Z",
+    "eligibility": [
+      {
+        "additionalInfo": "You must be aged 18 or over.",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "You must meet any salary or regular deposit condition that we advise at the time you apply.",
+        "additionalValue": "36000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Available to Australian citizen or Australian permanent resident.",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Available to New Zealand citizen.",
+        "additionalValue": "NZ",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Have and maintain an Australian residential address.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "You need to hold, or have applied for, an ING Orange Everyday Transaction Account at the time you apply.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Monthly Auto-Pay from a linked ING account for the Minimum or Full Amount.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Available worldwide where Visa is accepted and EFTPOS is available.",
+        "additionalValue": "Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Unlimited electronic transactions.",
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Leave your wallet at home and pay the easy way with Apple Pay.",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Receive complimentary international travel insurance.",
+        "additionalInfoUri": "https://www.ing.com.au/pdf/OrangeOne/ComplimentaryInsuranceTermsAndConditions.pdf",
+        "additionalValue": "Travel insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Make payments the easy way.",
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Receive SMS or email notifications when your balance moves above or below an amount you've specified, or when a withdrawal or deposit is above an amount you've specified.",
+        "additionalValue": "Transaction notification",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "You can ask us to issue a Visa Credit Card to up to 3 Additional Cardholders.",
+        "additionalValue": "3",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Up to 45 days interest free on purchases.",
+        "additionalValue": "P45D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Use instalment plans to pay off your purchases over time at a lower interest rate - making them easier to plan and manage.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Earn 1% cashback on your eligible spend, up to $30 a month.",
+        "additionalValue": "Cash back",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Leave your wallet at home and pay the easy way with Google Pay.",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "With an annual fee of $149.",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "149.00"
+        },
+        "name": "Annual fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Late payment fee"
+      },
+      {
+        "additionalInfo": "$10/year per additional card.",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Additional card holder fee"
+      },
+      {
+        "additionalInfo": "Pay no ING fees on international transactions (online, overseas and over the phone)",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transactions",
+        "rateBased": {
+          "rate": "0.0000",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "ATM operators may charge you a fee which won’t be rebated",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "International ATM withdrawal"
+      },
+      {
+        "additionalInfo": "The greater of $3 or 3% of the cash advance amount.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash advance fee",
+        "rateBased": {
+          "rate": "0.0300",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "instalments": {
+      "maximumConcurrentPlans": 10,
+      "maximumSplit": 84,
+      "minimumPlanValue": "250.00",
+      "minimumSplit": 3
+    },
+    "isTailored": false,
+    "lastUpdated": "2026-08-11T06:21:03.003Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1699",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1699",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Use instalment plans to pay off your purchases over time at a lower interest rate.",
+        "additionalValue": "Instalments",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "DISCOUNT",
+        "loanPurpose": "OTHER",
+        "rate": "0.0999",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Orange One Rewards Platinum",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "a4ea7460-9e69-499d-84dd-f281c7a04130"
+  },
+  "version": 7
+}

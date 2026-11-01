@@ -1,0 +1,263 @@
+{
+  "brand": "NATIONAL AUSTRALIA BANK",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+      "feesAndPricingUri": "https://www.nab.com.au/business/tools/rates-fees-and-charges/business-banking-fees-and-charges?own_cid=shortURL:feesandcharges#section-3",
+      "overviewUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+      "termsUri": "https://www.nab.com.au/business/business-credit-cards/terms-conditions"
+    },
+    "applicationUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+    "brand": "NAB",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Facility limit",
+        "additionalValue": "5000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": "Card limit",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "18000000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "Get more from your business credit card purchases. Maximise your Qantas Points.",
+    "eligibility": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "75000.00",
+        "eligibilityType": "MIN_TURNOVER"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Must be an Australian citizen or permanent resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Have 12 months of business financial data.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Registered for GST",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Have a valid ABN/ACN",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalValue": "NAB Business Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalValue": "1000",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Earn points on everyday business purchases  \r\nEarn 1 Qantas Point for every AU$1.50 you spend on everyday business purchases. Qantas Points are earned at the business level. Qantas Points are capped at $50,000 per card per statement period.\r\n\r\nNAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Qantas Business Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Unauthorised Transaction Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Transit Accident Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "NAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Visa Business Offers and Visa Premium Benefits",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "NAB may vary or end offers at any time. Eligibility criteria and terms and conditions apply.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-credit-cards/nab-qantas-business-signature-card",
+        "additionalValue": "Take advantage of Visa’s tailored 24/7 concierge service for travel and lifestyle services.\r\nReceive pre-trip information for major destinations worldwide.\r\nGet restaurant reservations, event bookings, cultural, sporting, shopping and tourist information on request.",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      },
+      {
+        "additionalInfo": "Earn 150,000 bonus Qantas Points when you spend $10,000 on everyday business purchases within 90 days of opening your new NAB Qantas Business Signature Card account. Plus, you’ll be rewarded with an additional 50,000 bonus Qantas Points if you keep your account open for 15 months.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "200000",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "Up to 44 interest free days on business purchases.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "VISA Secure reduces online fraud by confirming your identity with a secret code to your mobile",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Fraud protection\r\nProvided you operate your account responsibly, if fraud occurs you'll be reimbursed for the fraudulent transaction.",
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "NAB may waive or discount fees at its discretion, as part of a package or promotional offer.",
+        "additionalInfoUri": "https://www.nab.com.au/business/tools/rates-fees-and-charges/business-banking-fees-and-charges?own_cid=shortURL:feesandcharges#section-3",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "295.00"
+        },
+        "name": "Annual card Fee"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/tools/rates-fees-and-charges/business-banking-fees-and-charges?own_cid=shortURL:feesandcharges#section-3",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/tools/rates-fees-and-charges/business-banking-fees-and-charges?own_cid=shortURL:feesandcharges#section-3",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee Single Currency",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/tools/rates-fees-and-charges/business-banking-fees-and-charges?own_cid=shortURL:feesandcharges#section-3",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International Transaction Fee Multi-Currency",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Minimum fee is $3.00",
+        "additionalInfoUri": "https://www.nab.com.au/business/tools/rates-fees-and-charges/business-banking-fees-and-charges?own_cid=shortURL:feesandcharges#section-3",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-08-03T13:59:59Z",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.195",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Not applicable",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2174",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "NAB Qantas Business Signature Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "2bd0b7d2-4a66-4e34-a7ca-566c6e24bf80"
+  },
+  "version": 7
+}

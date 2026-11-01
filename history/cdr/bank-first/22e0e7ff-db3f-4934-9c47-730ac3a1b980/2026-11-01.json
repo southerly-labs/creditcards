@@ -1,0 +1,426 @@
+{
+  "brand": "Bank First",
+  "product": {
+    "additionalInformation": {
+      "additionalBundleUris": null,
+      "additionalEligibilityUris": null,
+      "additionalFeesAndPricingUris": null,
+      "additionalOverviewUris": null,
+      "additionalTermsUris": null,
+      "bundleUri": null,
+      "eligibilityUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_a.pdf?la=en&hash=1BD3E51F84EC9362648BB08285FA0082715FEDB6",
+      "feesAndPricingUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+      "overviewUri": "https://www.bankfirst.com.au/bank-accounts/credit-cards/visa-platinum",
+      "termsUri": "https://www.bankfirst.com.au/disclosure-documents"
+    },
+    "applicationUri": "https://apply.bankfirst.com.au/Integate/frmIntegate.aspx?company=VTMB&merchant=VTMB&operator=WEB&encp=DCVQRsiMd4t5HMKYD2ht0jlNCxa%2b09p7HVdilWCCsu4%3d5egBQlp30a4TpwxSkFA8jw%3d%3d&product=AU",
+    "brand": "Bank First",
+    "brandGroup": null,
+    "brandName": "Bank First Production",
+    "bundles": [],
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://cdn.intelligencebank.com/au/share/e3Gq6M/23KlN/KPAAz/original/visa-platinum-credit",
+        "title": null
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "6000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "Platinum Credit Card Account",
+    "effectiveFrom": null,
+    "effectiveTo": null,
+    "eligibility": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Individual applications must be permanent residents and joint accounts require at least one permanent resident as well as additional requirements for the non-residant applicants.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Available to members only.",
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Up to 55 days interest free",
+        "additionalInfoUri": null,
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Visa Platinum Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Other service related charges apply based on your circumstances",
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.bankfirst.com.au/bank-accounts/credit-cards/visa-platinum",
+        "additionalValue": "Visa offers and perks. Unlock a range of discounts with your Visa Platinum card, including car rentals, hotels while enjoying 24/7 concierge service.",
+        "featureType": "COMPLEMENTARY_PRODUCT_DISCOUNTS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": null,
+        "name": "Currency Conversion Fee",
+        "rateBased": {
+          "accrualFrequency": null,
+          "amountRange": null,
+          "rate": "0.00",
+          "rateType": "TRANSACTION"
+        },
+        "variable": null
+      },
+      {
+        "additionalInfo": "$12.00 Staff Assisted and $8 via Mobile Banking App",
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "8.00"
+        },
+        "name": "Replacement Card Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "Credit Card Cash Advance At Bank@Post",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Express Posting Of Card Or Pin In Australia",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "$20 Payable immediately if all or any part of a repayment is 7 days in arrears. A further Arrears Fee of $20 is payable at the expiry of 30 days after the account falls into arrears if all or any part of the repayment remains in arrears.",
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": "7",
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Arrears Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "$15 dollars per item",
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Issue Card Or Pin Internationally By Registered Mail",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Inactive Membership Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "Credit Card Bankfirst Atm Withdrawal",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "Visa Debit Over The Counter Cash Advance",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfo": null,
+            "additionalInfoUri": "https://www.bankfirst.com.au/disclosure-documents",
+            "additionalValue": null,
+            "description": "This Fee is waived for Platinum credit card holders",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Fee is waived for Platinum credit card holders",
+                "additionalInfoUri": null,
+                "additionalValue": null,
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "0.00"
+            },
+            "rateBased": null
+          }
+        ],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "150.00"
+        },
+        "name": "Emergency Overseas Replacement Card Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "additionalInfo": null,
+            "additionalInfoUri": null,
+            "additionalValue": null,
+            "description": "Fee waived for Premier Package Home Loan",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Annual fee waived for Premier Package Home Loan",
+                "additionalInfoUri": null,
+                "additionalValue": null,
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "99.00"
+            },
+            "rateBased": null
+          }
+        ],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "99.00"
+        },
+        "name": "Visa Platinum Credit Card Annual Fee",
+        "rateBased": null,
+        "variable": null
+      },
+      {
+        "additionalInfo": "The ATM operator may charge a fee at the time of the transaction",
+        "additionalInfoUri": "https://www.bankfirst.com.au/-/media/bankfirst/pdfs/termsandconditions/tc_part_b.pdf?la=en&hash=172D55D317D95FDB13F24CDFDE6D3B6B2E7C7F37",
+        "additionalValue": null,
+        "currency": "AUD",
+        "discounts": [],
+        "feeCap": null,
+        "feeCapPeriod": null,
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "Visa Debit Card Overseas Atm Withdrawals",
+        "rateBased": null,
+        "variable": null
+      }
+    ],
+    "instalments": null,
+    "isTailored": false,
+    "lastUpdated": "2026-06-15T23:24:20.344287Z",
+    "lendingRates": [
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1959",
+        "repaymentType": "OTHER",
+        "tiers": []
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1149",
+        "repaymentType": "OTHER",
+        "tiers": []
+      },
+      {
+        "additionalInfo": null,
+        "additionalInfoUri": null,
+        "additionalValue": null,
+        "applicabilityConditions": [],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "comparisonRate": null,
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.1149",
+        "repaymentType": "OTHER",
+        "tiers": []
+      }
+    ],
+    "name": "Platinum Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "22e0e7ff-db3f-4934-9c47-730ac3a1b980"
+  },
+  "version": 7
+}

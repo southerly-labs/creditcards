@@ -1,0 +1,149 @@
+{
+  "brand": "SWSbank",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.swsbank.com.au/help-support/rates-fees/fees-and-charges/",
+      "overviewUri": "https://www.swsbank.com.au/loans/credit-facilities/visa-classic-credit-card/",
+      "termsUri": "https://www.swsbank.com.au/help-support/important-information/disclosure-documents/"
+    },
+    "applicationUri": "https://swscu.apply-online.com.au/#/b7f0c6a4-2f6a-49c2-9912-3f8eb4a40b5a",
+    "brand": "South West Slopes Credit Union",
+    "brandName": "South West Slopes Credit Union Ltd trading as SWSbank",
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "20000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [
+      {
+        "additionalInfoUri": "https://www.swsbank.com.au/loans/credit-facilities/visa-classic-credit-card/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "depositRateType": "VARIABLE",
+        "rate": "0.0"
+      }
+    ],
+    "description": "Visa Credit Card",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "Australian citizen or permanent resident",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "eligibilityType": "BUSINESS"
+      }
+    ],
+    "features": [
+      {
+        "additionalValue": "Accepted worldwide wherever visa is accepted",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalValue": "Monthly statements",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "Apple Pay, Google Pay and Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Simply use your mobile, email or ABN to receive payments",
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "Minimum monthly repayment - 3% of the account balance last day of statement or $20, whichever is greater",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "There is no limit to the number of Visa transaction you make",
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Up to 55 days interest free period",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Visa Credit Card is over approved credit limit",
+        "additionalInfoUri": "https://www.swsbank.com.au/help-support/rates-fees/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "OVERLIMIT_FEE"
+      },
+      {
+        "additionalInfo": "Visa Credit Card annual fee",
+        "additionalInfoUri": "https://www.swsbank.com.au/help-support/rates-fees/fees-and-charges/",
+        "additionalValue": "P12Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "VISA_CREDIT_CARD_ANNUAL_FEE"
+      },
+      {
+        "additionalInfoUri": "https://www.swsbank.com.au/help-support/rates-fees/fees-and-charges/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "VISA_CARD_FEE"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2025-09-15T11:05:37.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfoUri": "https://www.swsbank.com.au/loans/credit-facilities/visa-classic-credit-card/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1345",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.swsbank.com.au/loans/credit-facilities/visa-classic-credit-card/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1345",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Visa Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "S3_VC"
+  },
+  "version": 7
+}

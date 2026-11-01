@@ -1,0 +1,340 @@
+{
+  "brand": "Bank of China",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.bankofchina.com/au/en/bocinfo/bi2/201711/t20171115_11912997.html",
+      "overviewUri": "https://www.bankofchina.com/au/en/pbservice/pb4/201801/t20180125_11256138.html",
+      "termsUri": "https://www.bankofchina.com/au/en/bocinfo/bi3/201502/t20150217_10963588.html"
+    },
+    "brand": "BCA",
+    "brandName": "Bank of China",
+    "bundles": [],
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "http://pic.bankofchina.com/branches/australia/201801/W020180125416721522267.jpg",
+        "title": "Bank of China Great Wall International Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "500",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "The Bank of China Great Wall International Credit Card (Credit Card) can be used for making purchases and at any ATM in Australia and overseas displaying a MasterCard logo or for cash withdrawals at any Bank of China retail branches in Australia. You will enjoy up to 55 days of Interest-free period on purchases. The Credit Card also provides you with other features such as Smart Interest Free Instalment Plan and maximum Monthly Usage Limit for additional cardholders.",
+    "effectiveFrom": "2015-01-01T00:00:00.000+11:00",
+    "effectiveTo": "9999-12-31T00:00:00.000+11:00",
+    "eligibility": [],
+    "features": [
+      {
+        "additionalInfo": "Up to 4 additional cards",
+        "additionalValue": "4",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "featureType": "UNLIMITED_TXNS"
+      },
+      {
+        "additionalInfo": "Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "featureType": "OVERDRAFT"
+      },
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Up to 50 days interest free period",
+        "additionalValue": "50 days",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Ulitity Bills,insurance",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Purchase transactions SMS notification",
+        "featureType": "NOTIFICATIONS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "2.5% of total transferred amount for 3 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee on Balance Transfer",
+        "rateBased": {
+          "rate": "0.025",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "5% of total transferred amount for 6 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee on Balance Transfer",
+        "rateBased": {
+          "rate": "0.05",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "9% of total transferred amount for 9 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee on Balance Transfer",
+        "rateBased": {
+          "rate": "0.09",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "13% of total transferred amount for 12 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee on Balance Transfer",
+        "rateBased": {
+          "rate": "0.13",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "1.35% of total installed amount for 3 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee for Smart Interest Free Instalment Plans",
+        "rateBased": {
+          "rate": "0.0135",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "2.6% of total installed amount for 3 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee for Smart Interest Free Instalment Plans",
+        "rateBased": {
+          "rate": "0.026",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "4.25% of total installed amount for 3 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee for Smart Interest Free Instalment Plans",
+        "rateBased": {
+          "rate": "0.0425",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "6.25% of total installed amount for 3 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee for Smart Interest Free Instalment Plans",
+        "rateBased": {
+          "rate": "0.0625",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "9.95% of total installed amount for 3 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee for Smart Interest Free Instalment Plans",
+        "rateBased": {
+          "rate": "0.0995",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "14.10% of total installed amount for 3 months",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Fee for Smart Interest Free Instalment Plans",
+        "rateBased": {
+          "rate": "0.141",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalValue": "pay yearly",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "2.5% of total transaction amount",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.025",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Late payment Fee"
+      },
+      {
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Failed inter-bank direct debit fee"
+      },
+      {
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Failed intra-bank direct debit fee"
+      },
+      {
+        "additionalInfo": "$3 or 1.5% of the total cash advance amount",
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Cash advance Fee",
+        "rateBased": {
+          "rate": "0.015",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Copy of statement fee"
+      },
+      {
+        "additionalValue": "once-off",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Card replacement fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2024-09-25T04:00:00.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "19.99% p.a interest on purchase after interest free period",
+        "additionalValue": "purchase rate",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1999",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "additionalInfo": "21.74% p.a interest on cash advance from transaction date and banlance transfer after transferred period",
+        "additionalValue": "cash advance and balance transfer rate",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2174",
+        "repaymentType": "UNCONSTRAINED"
+      }
+    ],
+    "name": "Bank of China Great Wall International MasterCard Credit Card (Low Fee Card)",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "MALAMAU4"
+  },
+  "version": 7
+}

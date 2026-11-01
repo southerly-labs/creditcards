@@ -1,0 +1,59 @@
+{
+  "brand": "CommBank",
+  "product": {
+    "additionalInformation": {
+      "overviewUri": "https://www.commbank.com.au/business/business-credit-cards/virtual-cards.html",
+      "termsUri": "https://www.commbank.com.au/important-info/business/business-finance.html"
+    },
+    "brand": "CBA",
+    "brandName": "CommBank",
+    "description": "Virtual Cards offer solutions for streamlining business expenditure, which provides large businesses the ability to take advantage of extended payment terms, transaction level payment security, and transaction level data through the deployment of single-use or multi-use virtual cards. To access Virtual Cards, you will need to set up a Procurement Management Account. Please refer to Procurement Management Account for additional product information and pricing. ",
+    "features": [
+      {
+        "additionalInfo": "Virtual Corporate Cards can be provisioned onto mobile devices and digital wallets (Apple Pay/Google Pay) Customers must apply and be accepted. A separate fee structure is applied.",
+        "additionalInfoUri": "https://www.commbank.com.au/business/business-credit-cards/virtual-cards.html",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "This fee applies only to the Virtual Corporate Card solution. It reflects the fee arrangements agreed with you, as set out in your Letter of Offer. Where applicable, fees are paid monthly based on your total number of transactions.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PURCHASE",
+        "fixedAmount": {
+          "amount": "0.20"
+        },
+        "name": "Virtual Corporate Card Volume-based Transaction Fee"
+      },
+      {
+        "additionalInfo": "This fee applies only for the Virtual Card for Travel and Virtual Card for Procurement solutions. The Virtual Card for Travel/Procurement Costs Domestic reflect the fee arrangements agreed with you, as set out in your Letter of Offer. Where applicable, fees are paid monthly based on your total domestic transaction spend.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Virtual Card for Travel/Procurement Costs Domestic",
+        "rateBased": {
+          "rate": "0.001",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "This fee applies only for the Virtual Card for Travel and Virtual Card for Procurement solutions. The Virtual Card for Travel/Procurement Costs International reflect the fee arrangements agreed with you, as set out in your Letter of Offer. Where applicable, fees are paid monthly based on your total international transaction spend",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Virtual Card for Travel/Procurement Costs International",
+        "rateBased": {
+          "rate": "0.0025",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": true,
+    "lastUpdated": "2026-11-01T02:15:42.000Z",
+    "name": "Virtual Cards",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "29967abaf0f640afb581333158f003cc"
+  },
+  "version": 7
+}

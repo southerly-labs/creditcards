@@ -1,0 +1,275 @@
+{
+  "brand": "American Express",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-premium-card/",
+      "feesAndPricingUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-premium-card/",
+      "overviewUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-premium-card/",
+      "termsUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-premium-card/"
+    },
+    "applicationUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-premium-card/",
+    "brand": "American Express",
+    "brandName": "American Express",
+    "cardArt": [
+      {
+        "cardScheme": "AMEX",
+        "cardType": "CREDIT",
+        "imageUri": "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG54100000S3.gif",
+        "title": "The Qantas American Express Premium Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "2000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "The Qantas American Express Premium Card comes with excellent benefits. Enjoy airport lounge access, complimentary Qantas Wine Premium Membership, complimentary travel insurance and earn Qantas Points with every dollar spent.",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Long term visa means 12 months or more and does not include a student visa.",
+        "additionalValue": "You are an Australian citizen or permanent resident or hold a long term visa.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Additional Cards are available for any friend or family member 16 years and over",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Applications are assessed based on the information provided and are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Add up to 4 Cards at no additional fee.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/additional-card/",
+        "additionalValue": "4",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/pay-bill/",
+        "additionalValue": "Ways to pay your bill",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-premium-card/",
+        "additionalValue": "New Card Member Offer",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "The Amex App lets you quickly and easily manage your Card Account anytime, anywhere.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/manage-your-card/mobile-app/",
+        "additionalValue": "Amex App",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Fraud Protection Guarantee, protecting you from unauthorised charges made on your Account.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/service-and-security/fraud-protection/",
+        "additionalValue": "Fraud Protection",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "A flexible way to pay off a selected amount or portion of your Credit Card balance in equal monthly instalments. Subject to fees.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/plan-it/",
+        "additionalValue": "Plan It Instalments",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "Terms, conditions, cover limits and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Complimentary Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Card Purchase Cover, covering eligible items purchased with your Card",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Purchase Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Refund Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 44 days",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/qantas-premium-card/",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": " 2 Qantas Points on eligible Qantas products and services per $1 spent.\n1 Qantas Points on Card purchases, except spend at government bodies in Australia.\n0.5 Qantas Points on purchases at government bodies in Australia per $1 spent.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/qantas-premium-card/",
+        "additionalValue": "Earn Qantas Points",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalValue": "Payment due reminder",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Spend tracking notification",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Payment received alert",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Whether it's shopping, dining, travel or entertainment, eligible Card Members can access Amex Offers providing statement credits or bonus points. Amex Offers must be saved to the Card and used for qualifying spend, subject to offer-specific criteria, to receive a benefit.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/why-amex/offers/",
+        "additionalValue": "Amex Offers",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Get pre-sale tickets and access to some of your favourite events, and enjoy the Amex Entertainment Lounge before the show at select venues. With Amex, you can dive into unforgettable experiences.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/benefits/entertainment/events",
+        "additionalValue": "American Express Experiences",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Your Qantas American Express Premium Card gives you two complimentary Qantas Club Lounge invitations each membership year following your first Card spend on selected Qantas products and services in Australia.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-premium-card/",
+        "additionalValue": "Qantas Lounge Access",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Earn 3 points per dollar spent on all Qantas Wine purchases\nComplimentary Qantas Wine delivery within Australia (exclusions apply)",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/qantas-premium-card/",
+        "additionalValue": "Complimentary Qantas Wine Premium Membership",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Dreaming of your next adventure? Turn dreaming into doing by redeeming your Qantas Points for a Classic Flight Reward with Qantas and their participating partner airlines. Your points can be used for a one way, return or multi-destination Classic Flight Reward on over 50 partner airlines and affiliates and over 1,300 destinations worldwide.",
+        "additionalValue": "Qantas Frequent Flyer",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "249.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "Applies to the first 4 Additional Cards",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Card Fee"
+      },
+      {
+        "additionalInfo": " When you do not pay the minimum payment required by the due date as shown on your statement.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "3.5% of the converted amount. Payable when any charge is processed in a currency other than Australian dollars.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": " $6 for each dishonour or debit rejection.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "6.00"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": " $3 Payable if you pay your Card Account in person at Australia Post by EFTPOS.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Over the Counter Fee"
+      },
+      {
+        "additionalInfo": "$7 for charges in Australia, $10 for other charges",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "7.00"
+        },
+        "name": "Record of Charge Fee"
+      },
+      {
+        "additionalInfo": "Payable if you or an Additional Card Member requests an additional posted monthly paper statement. You may access statements free of charge through your online Account.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Additional Statement Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-07-09T05:00:00.000Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Interest rate applied to outstanding balances not paid in full by the due date.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2399",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "The Qantas American Express Premium Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "58a96cd8-b900-462f-bf5d-78a3671b4b49"
+  },
+  "version": 7
+}

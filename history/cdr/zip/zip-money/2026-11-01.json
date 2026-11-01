@@ -1,0 +1,172 @@
+{
+  "brand": "Zip",
+  "product": {
+    "additionalInformation": {
+      "additionalBundleUris": [],
+      "additionalEligibilityUris": [],
+      "additionalFeesAndPricingUris": [],
+      "additionalOverviewUris": [],
+      "additionalTermsUris": [],
+      "eligibilityUri": "https://help.zip.co/hc/en-us/articles/360001595076",
+      "feesAndPricingUri": "https://help.zip.co/hc/en-us/articles/7087561373199-What-are-the-costs-associated-with-Zip-Pay-and-Zip-Money",
+      "overviewUri": "https://zip.co/au/zip-money",
+      "termsUri": "https://zip.co/au/zip-money"
+    },
+    "applicationUri": "https://zip.co/au/zip-money",
+    "brand": "zip",
+    "brandGroup": "zip",
+    "brandName": "Zip",
+    "bundles": [],
+    "cardArt": [],
+    "constraints": [
+      {
+        "additionalInfo": "Minimum direct-apply credit limit.",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalInfo": "Maximum direct-apply credit limit.",
+        "additionalValue": "5000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "Larger-purchase account with flexible repayments and promotional interest-free periods at eligible merchants.",
+    "eligibility": [
+      {
+        "additionalInfo": "Applicants must be at least 18 years old",
+        "additionalInfoUri": "https://zip.co/au/zip-money",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Must be an Australian citizen or permanent resident",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Have your own valid and verifiable email address.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Have your own valid and verifiable mobile number.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Approval subject to Zip’s credit assessment criteria.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Pay bills for Zip with BPay.",
+        "additionalValue": "Pay bills for Zip with BPay.",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalValue": "Shop online using Zip's Single-Use Card.",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "featureType": "FRAUD_PROTECTION"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "One-off establishment fee for new customers.",
+        "additionalInfoUri": "https://help.zip.co/hc/en-us/articles/7087561373199-What-are-the-costs-associated-with-Zip-Pay-and-Zip-Money",
+        "additionalValue": "Depends on approved credit limit.",
+        "currency": "AUD",
+        "feeMethodUType": "variable",
+        "feeType": "UPFRONT",
+        "name": "Establishment fee",
+        "variable": {
+          "feeMaximum": "99.00",
+          "feeMinimum": "0.00"
+        }
+      },
+      {
+        "additionalInfo": "Charged if there is an outstanding balance on the last day of the month. No monthly fee if the balance is paid in full by month end.",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "9.95"
+        },
+        "name": "Monthly account fee"
+      },
+      {
+        "additionalInfo": "Charged 7 days after the due date if the minimum monthly repayment is not made.",
+        "additionalValue": "7",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Late fee"
+      },
+      {
+        "additionalInfo": "3% of the transaction value converted into Australian dollars.",
+        "additionalInfoUri": "https://help.zip.co/hc/en-us/articles/360001583816-Does-Zip-charge-interest",
+        "additionalValue": "Applies when using a Single-Use Card for purchases in another currency.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign transaction fee",
+        "rateBased": {
+          "accrualFrequency": "PER_TRANSACTION",
+          "amountRange": {
+            "feeMinimum": "0.00"
+          },
+          "rate": "0.03",
+          "rateType": "INTEREST_ACCRUED"
+        }
+      },
+      {
+        "additionalInfo": "Flat fee per bill paid via BPAY. Exemptions may apply.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "BPAY processing fee"
+      },
+      {
+        "additionalInfo": "A $5 dishonour fee applies if your repayment is rejected by your bank.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "DISHONOUR",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Dishonour fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-08-04T00:00:00+00:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "Standard variable interest rate of 25.9% p.a. applies outside or after applicable interest-free periods.",
+        "additionalInfoUri": "https://help.zip.co/hc/en-us/articles/360001583816-Does-Zip-charge-interest",
+        "additionalValue": "Purchases may receive promotional interest-free periods of 3 to 60 months depending on the merchant and offer.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "VARIABLE",
+        "loanPurpose": "OTHER",
+        "rate": "0.259",
+        "repaymentType": "PRINCIPAL_AND_INTEREST"
+      }
+    ],
+    "name": "Zip Money",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "zip-money"
+  },
+  "version": 7
+}

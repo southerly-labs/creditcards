@@ -1,0 +1,360 @@
+{
+  "brand": "P&N Bank",
+  "product": {
+    "additionalInformation": {
+      "feesAndPricingUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+      "overviewUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+      "termsUri": "https://www.pnbank.com.au/important-information/terms-and-conditions/credit-card-conditions-of-use/"
+    },
+    "brand": "PNB",
+    "brandName": "P&N Bank",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://digital.pnbank.com.au/globalassets/internet-banking/onboarding/products/pn-visa-credit_oct25.png",
+        "title": "P&N Bank Visa Classic"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Maximum loan amount is $100,000",
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+        "additionalValue": "100000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "The minimum credit limit is $1,000",
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "If you're looking for a low-cost credit card the Visa Classic Credit Card could be the right fit. With a minimum credit limit of $1,000, it's a great option for first time credit card holders, or if you want to keep your spending habits under control.",
+    "effectiveFrom": "2015-09-18T14:30:00.0000000Z",
+    "eligibility": [
+      {
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Member must be a natural person rather than another legal entity.",
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Credit eligibilty criteria, terms and conditions, fees and charges apply.",
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "You must be or become a P&N Bank member",
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+        "additionalValue": "Personal Lending is not available for non-residents.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "You can apply to add an additional card holder to your account at no additional charge. Please see our website for more information.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/credit-cards/",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Make purchases online or in-store using your Visa Credit card, including paywave. Please visit our website for more information.",
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+        "additionalValue": "Visa Credit card available",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Transfer or make payments using our mobile app or internet banking. Payments made with PayID or using Osko are received in near real-time.",
+        "additionalInfoUri": "https://www.pnbank.com.au/bank-and-save/digital-banking/",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Make payments by adding your card to your digital wallet.",
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/digital-wallets/",
+        "additionalValue": "Apple Pay, Google Pay & Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Shop safely with participating online merchants with Visa Secure and EFTPOS Secure. Please see the terms and conditions for more information.",
+        "additionalInfoUri": "https://www.pnbank.com.au/important-information/terms-and-conditions/credit-card-account-access-conditions-of-use/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Transfer or make payments using our mobile app or internet banking. Payments made with PayID or using Osko are received in near real-time.",
+        "additionalInfoUri": "https://www.pnbank.com.au/bank-and-save/ways-to-pay/",
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfo": "We may at our reasonable descretion agree to a Balance Transfer request by you or a Card Contract Variation. Please refer to our Terms and Condition for additional information.",
+        "additionalInfoUri": "https://www.pnbank.com.au/important-information/terms-and-conditions/credit-card-conditions-of-use/",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Up to 45 days interest free when you pay off your statement balance owing by the due date each month. Terms and Conditions apply.",
+        "additionalInfoUri": "https://www.pnbank.com.au/important-information/terms-and-conditions/credit-card-conditions-of-use/",
+        "additionalValue": "P45D",
+        "featureType": "INTEREST_FREE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Fee for cash withdrawals at Australia Post Offices.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "WITHDRAWAL",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Bank@Post Withdrawal Fee"
+      },
+      {
+        "additionalInfo": "When a cardholder raises a dispute relating to a card transaction.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "Visa Chargeback Request Fee"
+      },
+      {
+        "additionalInfo": "Fee applies for statements over 12 months old. Payable on request to issue a copy of a previously issued statement.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "2.50"
+        },
+        "name": "Statement Retrieval Fee"
+      },
+      {
+        "additionalInfo": "Payable if your emergency card request is declined.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "70.00"
+        },
+        "name": "Declined Emergency Visa Card Fee"
+      },
+      {
+        "additionalInfo": "Both domestic and overseas. Cash advance interest rate will also apply. Please refer to your statement or online banking for your cash advance rate.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Cash Advance Fee"
+      },
+      {
+        "additionalInfo": "Annual fee charged at the end of the month from the account opening, then every year at the end of anniversary month.",
+        "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "49.00"
+        },
+        "name": "Credit Card Annual Fee"
+      },
+      {
+        "additionalInfo": "3% of the transaction value in AUD. When you use your Visa Credit or Debit card in a foreign currency either online or at a merchant point of sale outside or in Australia. Please refer to our website for more information.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Visa Foreign Currency Conversion Fee"
+      },
+      {
+        "additionalInfo": "For the replacement of a lost or damaged Visa Credit card.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Card Replacement - Standard Fee"
+      },
+      {
+        "additionalInfo": "For the urgent replacement of a lost or damaged Visa Credit card.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Card Replacement - Urgent Fee"
+      },
+      {
+        "additionalInfo": "For the issue of a temporary emergency Visa Credit card, to temporarily replace a lost, stolen or damaged Visa Credit card.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "320.00"
+        },
+        "name": "Emergency Card Replacement - Approved Fee"
+      },
+      {
+        "additionalInfo": "Charged when a payment to a credit card becomes overdue by 11 days and 30 days.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "additionalValue": "11",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Late Payment Notification Fee"
+      },
+      {
+        "additionalInfo": "Charged when a payment to a credit card becomes overdue by 46 days.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "75.00"
+        },
+        "name": "Notice of Demand Fee"
+      },
+      {
+        "additionalInfo": "Charged monthly when a payment to a credit card becomes overdue by more than 90 days.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "additionalValue": "90",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "50.00"
+        },
+        "name": "Management Administration Fee"
+      },
+      {
+        "additionalInfo": "Payable when a payment to a credit card becomes overdue for more than 90 days and we choose to engage an external collection agent.",
+        "additionalInfoUri": "https://www.pnbank.com.au/help-and-support/fees/credit-cards/",
+        "additionalValue": "90",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "100.00"
+        },
+        "name": "Collection Agent Administration Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-06-28T16:00:22.3851793Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "We may at our reasonable descretion agree to a Balance Transfer request by you or a Card Contract Variation. Please refer to our Terms and Condition for additional information.",
+        "additionalInfoUri": "https://www.pnbank.com.au/important-information/terms-and-conditions/credit-card-conditions-of-use/",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Rate available to existing customers.",
+            "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+            "rateApplicabilityType": "EXISTING_CUST"
+          },
+          {
+            "additionalInfo": "Rate available for new accounts.",
+            "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+            "rateApplicabilityType": "NEW_ACCOUNTS"
+          },
+          {
+            "additionalInfo": "Rate available to new customers.",
+            "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1199",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Rate available to existing customers.",
+            "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+            "rateApplicabilityType": "EXISTING_CUST"
+          },
+          {
+            "additionalInfo": "Rate available for new accounts.",
+            "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+            "rateApplicabilityType": "NEW_ACCOUNTS"
+          },
+          {
+            "additionalInfo": "Rate available to new customers.",
+            "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1999",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "additionalInfo": "Up to 45 days Interest free if you pay off your balance in full each month",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Rate available to existing customers.",
+            "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+            "rateApplicabilityType": "EXISTING_CUST"
+          },
+          {
+            "additionalInfo": "Rate available for new accounts.",
+            "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+            "rateApplicabilityType": "NEW_ACCOUNTS"
+          },
+          {
+            "additionalInfo": "Rate available to new customers.",
+            "additionalInfoUri": "https://www.pnbank.com.au/cards/credit-cards/visa-classic/",
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1199",
+        "repaymentType": "UNCONSTRAINED"
+      }
+    ],
+    "name": "P&N Bank Visa Classic",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "41"
+  },
+  "version": 7
+}

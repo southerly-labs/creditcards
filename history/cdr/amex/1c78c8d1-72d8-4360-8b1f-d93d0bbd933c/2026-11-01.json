@@ -1,0 +1,411 @@
+{
+  "brand": "American Express",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.americanexpress.com/en-au/credit-cards/platinum-business-card/",
+      "feesAndPricingUri": "https://www.americanexpress.com/en-au/credit-cards/platinum-business-card/",
+      "overviewUri": "https://www.americanexpress.com/en-au/credit-cards/platinum-business-card/",
+      "termsUri": "https://www.americanexpress.com/en-au/credit-cards/platinum-business-card/"
+    },
+    "applicationUri": "https://www.americanexpress.com/en-au/credit-cards/platinum-business-card/",
+    "brand": "American Express",
+    "brandName": "American Express",
+    "cardArt": [
+      {
+        "cardScheme": "AMEX",
+        "cardType": "CHARGE",
+        "imageUri": "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUP822VQR00S3.gif",
+        "title": "American Express® Platinum Business Card"
+      }
+    ],
+    "description": "For business owners who value exceptional service and rewards.",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Long term visa means 12 months or more and does not include a student visa.",
+        "additionalValue": "You are an Australian citizen or permanent resident or hold a long term visa.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Employee Card Members must be over 18 years of age. The Business and the Primary Card Member are jointly and severally liable for all Employee Card spending. Each employee is entitled to only one (1) Employee Card.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Must be a Director or Controller of the business",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfo": "An active Australian Business Number (ABN).",
+        "eligibilityType": "BUSINESS"
+      },
+      {
+        "additionalInfo": "Business must be GST registered.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalValue": "75000.00",
+        "eligibilityType": "MIN_TURNOVER"
+      },
+      {
+        "additionalInfo": "Applications are assessed based on the information provided and are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "No fee for up to 99 Employee Cards.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/customer-centre/business/employee-cards/",
+        "additionalValue": "99",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/pay-bill/",
+        "additionalValue": "Ways to pay your bill",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/business/credit-cards/platinum-business-card/",
+        "additionalValue": "New Card Member Offer",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/merchant-card-offer/",
+        "additionalValue": "Existing Merchant Member Card Offer",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "The Amex App lets you quickly and easily manage your Card Account anytime, anywhere.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/manage-your-card/mobile-app/",
+        "additionalValue": "Amex App",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Fraud Protection Guarantee, protecting you from unauthorised charges made on your Account.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/service-and-security/fraud-protection/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Terms, conditions, cover limits and exclusions apply.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "International & Domestic Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Purchase Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Refund Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Buyer's Advantage Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Loss Damage Waiver Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": " 2.25 points per $1 spent on all purchases, excluding government bodies.\n1 point per $1 spent at government bodies in Australia.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/business/credit-cards/platinum-business-card/",
+        "additionalValue": "Membership Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalValue": "Payment due reminder",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Spend tracking notification",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Payment received alert",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Enjoy exciting offers and deals with Amex Offers that add value to your Card Membership. Amex Offers must be saved to the Card and used for qualifying spend, subject to offer-specific criteria, to receive a benefit.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/why-amex/offers/",
+        "additionalValue": "Amex Offers",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Get pre-sale tickets and access to some of your favourite events, and enjoy the Amex Entertainment Lounge before the show at select venues. With Amex, you can dive into unforgettable experiences.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/benefits/entertainment/events",
+        "additionalValue": "American Express Experiences",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Optimise your cash flow by choosing to pay off a portion of your balance, up to your FPO limit, over time. Subject to interest.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/credit-cards/membership-benefits/FPO/",
+        "additionalValue": "Flexible Payment Option",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Give your business financial breathing room with up to 55 days to pay for purchases.",
+        "additionalValue": "Cash Flow Days",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Priority Pass™ complimentary airport lounge access worldwide",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Priority Pass™",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Complimentary access for the Card Member to all AMEX Centurion Lounge locations.",
+        "additionalInfoUri": "https://global.americanexpress.com/lounge-access/the-platinum-card?locale=en-AU",
+        "additionalValue": "Centurion Lounge Access",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Enjoy a full digital subscription to The Australian, which includes The Australian Business Review, and full digital access to The Wall Street Journal, plus content from The Times of London and Harvard Business Review. Enrolment required.",
+        "additionalValue": "The Australian Premium Subscription",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "We customise once-in-a-lifetime events – from sporting and fashion to fine dining, art and performances.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-platinum-card/events.html",
+        "additionalValue": "Platinum Card Experiences",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Plaza Premium lounge visits worldwide.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Plaza Premium",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Delta Sky Club visits worldwide when flying Delta.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Delta Sky Club",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Primary Card Members receive complimentary Virgin Australia Lounge access with up to one guest at selected domestic airports when flying on an eligible Virgin Australia flight, subject to availability and eligibility criteria.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Virgin Australia Lounge Access",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Every time you book with Fine Hotels + Resorts you’ll receive a range of complimentary benefits, including room upgrade (when available), breakfast for two, and 4pm late checkout.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Fine Hotels + Resorts",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Receive up to US $100 hotel credit and room upgrade (when available) at selected hotels in The Hotel Collection when you book two consecutive nights’ stay through American Express Travel. Subject to availability and eligibility criteria.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "The Hotel Collection",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Enjoy complimentary annual membership to ALL Accor+ Explorer, which entitles you to a host of benefits including two 'Stay Plus' complimentary nights stay each year (each complimentary night must be booked in conjunction with a paid night) and 30% off your dining bill, for up to 10 guests at over 1,600 participating Accor Hotel restaurants. Enrolment required.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "ALL Accor+ Explorer Membership",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Hilton Honors Gold status.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Hilton Gold Status",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Marriott Bonvoy Gold Status",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Marriott Bonvoy Gold Status",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive complimentary Radisson Rewards Premium Status.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Radisson Rewards Premium Status",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Card Members receive Hertz Five Star Status including discounts and upgrades when available.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Hertz Five Star Status",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Receive one complimentary car-class upgrade whenever possible and increased savings on car rentals at participating locations worldwide. Enrolment required.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "Avis Preferred",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Save the benefit to your eligible Card via Amex Offers and spend with Dell Technologies online or via phone, to receive your purchase amount back as a credit, up to $125 back per redemption period. Benefit ends 31 December 2026. Exclusions apply.",
+        "additionalValue": "Dell Statement Credit",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "International Airline Program offers discounts on airfares in premium classes.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/travel/international-airline-program/",
+        "additionalValue": "International Airline Program",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Access 1,550 Airport Lounges in more than 140 countries, including the Centurion® Lounge, Escape Lounges, Priority Pass™ Lounges and more.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-business-card/",
+        "additionalValue": "The American Express Global Lounge Collection",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "The Amex Experiences App gives you unrivalled access to Platinum restaurants, travel and exclusive Member offers. Download to browse and book today.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/network/entertainment/experiences-app/",
+        "additionalValue": "Amex Experiences App",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Your Platinum Business Card has flexible spending power, also known as no pre-set spending limit, because it is a Charge Card",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/flexible-spending-power/",
+        "additionalValue": "Flexible Spending Power",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Legal, Roadside, and Home Assistance",
+        "featureType": "INSURANCE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "discounts": [
+          {
+            "description": "American Express may, at its discretion, discount the annual fee where the customer holds an eligible American Express Personal Platinum Card and meets all other applicable eligibility criteria.",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Reduced Annual Card Fee on the American Express Platinum Business Card as long as you continue to hold your American Express Platinum Card and meet all other applicable eligibility criteria.",
+                "discountEligibilityType": "OTHER"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "1450.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "1750.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "$0 annual Employee Card fee for up to 99 cards (this limit includes both active and cancelled Employee Cards).",
+        "additionalInfoUri": "https://www.americanexpress.com/au/business/customer-centre/business/employee-cards/",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Business Employee Card Fee"
+      },
+      {
+        "additionalInfo": "Three percent (3%) or $20, whichever is greater, will be charged on any overdue amount.",
+        "additionalValue": "When you do not pay the minimum payment required by the due date as shown on your statement.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Late Payment Fee",
+        "rateBased": {
+          "amountRange": {
+            "feeMinimum": "20.00"
+          },
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "additionalInfo": "3.5% of the converted amount. Payable when any charge is processed in a currency other than Australian dollars.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$20 for each dishonour or debit rejection.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": "Payable when you or the Employee Card Member requests a copy of an individual charge. $7 for charges in Australia, or $10 for other charges.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "7.00"
+        },
+        "name": "Record of Charge Fee"
+      },
+      {
+        "additionalInfo": "$3 Payable if you pay your Card Account in person at Australia Post by EFTPOS.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Over The Counter Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-07-09T02:00:00.000Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Flexible Payment Option rate applied to the portion of your statement balance carried forward up to your FPO limit.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2399",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "American Express® Platinum Business Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "1c78c8d1-72d8-4360-8b1f-d93d0bbd933c"
+  },
+  "version": 7
+}

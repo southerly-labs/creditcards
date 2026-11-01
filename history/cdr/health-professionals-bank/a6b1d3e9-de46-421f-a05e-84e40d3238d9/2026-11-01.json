@@ -1,0 +1,248 @@
+{
+  "brand": "Health Professionals Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.hpbank.com.au/banking/credit-card",
+      "feesAndPricingUri": "https://www.hpbank.com.au/content/dam/documents/collateral/fees-and-charges.pdf",
+      "overviewUri": "https://www.hpbank.com.au/banking/credit-card",
+      "termsUri": "https://www.hpbank.com.au/content/dam/documents/collateral/consumer-lending.pdf"
+    },
+    "applicationUri": "https://www.hpbank.com.au/banking/credit-card",
+    "brand": "HPB",
+    "brandName": "Health Professionals Bank",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.hpbank.com.au/content/dam/channels/websites/common-assets/open-banking/hpb-mozo.jpg",
+        "title": "Visa Credit"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "25000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "Use your credit card for shopping, travelling overseas or even to consolidate other credit or store card debt.",
+    "eligibility": [
+      {
+        "additionalInfo": "You must be a member. Membership is open to citizens or permanent residents of Australia who are current or retired employees in the Australian health sector or are family members of members (i.e. shareholders) of the Bank.",
+        "additionalInfoUri": "https://www.hpbank.com.au/banking/credit-card",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalValue": "Individuals must be citizens or permanent residents of Australia.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "All applications for credit are subject to responsible lending criteria. Fees and charges apply. You can find our Credit Card terms and conditions online or from any of our offices.",
+        "additionalInfoUri": "https://www.hpbank.com.au/content/dam/documents/collateral/consumer-lending.pdf",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Special Introductory Rate for first 6 months.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "You may receive up to 55 days interest free period for purchases provided you continue to pay your closing balance in full on or before every statement due date.",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "No application fee",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "No annual fee",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalValue": "Visa Credit with payWave",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "BPAY",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalValue": "Track payments with SMS and email alerts",
+        "featureType": "NOTIFICATIONS"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Payable by debit to your account when the minimum payment on a Credit Card account is not received by the due date. Charged once per statement period.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "LATE_PAYMENT_FEE"
+      },
+      {
+        "additionalInfo": "Payable when you request a replacement card.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "CARD_REPLACEMENT_FEE"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "TRANSACTION",
+        "fixedAmount": {
+          "amount": "4.00"
+        },
+        "name": "ATM_WITHDRAWALS_OVERSEAS"
+      },
+      {
+        "additionalInfo": "2.90% of transaction value in $AUD collected by Cuscal Limited - 0.90% paid to Us; 1.00% retained by Cuscal; 1.00% paid to Visa International. Payable when you transact in a foreign currency using your Visa card either online or at a merchant point of sale (irrespective of where the transaction occurs; performed not in Australian Dollar; or overseas merchants transact in a foreign currency.)",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "INTERNATIONAL_CONVERSION_FEE",
+        "rateBased": {
+          "rate": "0.029",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Visa Debit and Visa Credit card cash advances at other financial institutions in Australia and overseas. Individual bank branches may not offer this service and may charge additional fees (at cost).",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "CASH_ADVANCE",
+        "fixedAmount": {
+          "amount": "4.00"
+        },
+        "name": "CASH_ADVANCES_FEE"
+      },
+      {
+        "additionalInfo": "Payable when we send you a default notice asking you to remedy a default under your credit contract.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "25.00"
+        },
+        "name": "DEFAULT_NOTICE_FEE"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-09-09T15:07:02.000+10:00",
+    "lendingRates": [
+      {
+        "additionalInfo": "Purchase interest rate applies to the amount of any transaction with a merchant made on a credit card account.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.115",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Cash advance interest rate applies to the amount of cash or its equivalent that is withdrawn or transacted from a credit card account.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.115",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Introductory interest rate applies to balance transfer and purchase transactions for the first 6 months from the date of the Letter of Offer.",
+        "additionalValue": "P6M",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "INTRODUCTORY",
+        "loanPurpose": "OTHER",
+        "rate": "0.079",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.079",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Introductory interest rate applies to Balance Transfers for the first 6 months from the date of the Letter of Offer",
+            "maximumValue": "6",
+            "minimumValue": "1",
+            "name": "Promotional Period",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.115",
+        "repaymentType": "OTHER",
+        "tiers": [
+          {
+            "additionalInfo": "Standard Interest rate applies to the balance after the promotional period has ended",
+            "minimumValue": "7",
+            "name": "Standard",
+            "rateApplicationMethod": "WHOLE_BALANCE",
+            "unitOfMeasure": "MONTH"
+          }
+        ]
+      }
+    ],
+    "name": "Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "a6b1d3e9-de46-421f-a05e-84e40d3238d9"
+  },
+  "version": 7
+}

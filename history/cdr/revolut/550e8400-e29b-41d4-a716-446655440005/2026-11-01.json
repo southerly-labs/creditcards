@@ -1,0 +1,201 @@
+{
+  "brand": "Revolut",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.revolut.com/en-AU/legal/cctermsandconditions/",
+      "feesAndPricingUri": "https://www.revolut.com/en-AU/legal/credit-card-fees-au/",
+      "overviewUri": "https://www.revolut.com/en-AU/credit-card/",
+      "termsUri": "https://www.revolut.com/en-AU/legal/cctermsandconditions/"
+    },
+    "brand": "Revolut",
+    "cardArt": [],
+    "constraints": [
+      {
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "35000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "depositRates": [],
+    "description": "A Revolut credit card with interest-free periods on purchases and variable interest rates. Features and fees vary depending on your plan. See our website for details.",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Minimum monthly after-tax income.",
+        "additionalValue": "2000.00",
+        "eligibilityType": "MIN_INCOME"
+      },
+      {
+        "additionalInfo": "Available to eligible customers only. Business customers should apply for a Revolut Business account.",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Select visa types are also eligible.",
+        "additionalValue": "Must be an Australian citizen or permanent resident.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Up to 5 secondary credit card holders.",
+        "additionalValue": "5",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Virtual card available instantly in-app. Physical card delivery and other card fees may also apply depending on your plan - see our website for more info.",
+        "additionalValue": "Visa or Mastercard credit card (physical and virtual)",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "Manage your everyday spending with powerful budgeting and analytics, transfer money abroad, spend easily in the local currency, and so much more.",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Available for both physical and virtual Revolut cards.",
+        "additionalValue": "Apple Pay, Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Real-time transaction monitoring, instant card freeze via app and disposable virtual card numbers.",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "If you are subscribed to a Paid Plan, you may be eligible for complimentary insurance cover.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/our-pricing-plans/",
+        "additionalValue": "Everyday Protection and/or Travel Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 44 days interest-free on purchases when the full balance is paid by the due date.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/credit-card/",
+        "additionalValue": "P44D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Earn RevPoints on eligible card purchases. Redeemable with multiple airlines and other options. T&Cs apply.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/revpoints/",
+        "additionalValue": "RevPoints",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalInfo": "Notifications can be customised in-app.",
+        "additionalValue": "Instant push notifications for card payments",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Pay and receive near real-time payments.",
+        "featureType": "NPP_ENABLED"
+      },
+      {
+        "additionalInfo": "Mobile number and email address PayID supported; register via the Revolut app under Account Settings.",
+        "featureType": "NPP_PAYID"
+      },
+      {
+        "additionalInfo": "Features and benefits will vary depending on your plan - see our website for more info. Plan-specific fees and benefits are tied to your Revolut Personal Account.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/our-pricing-plans/",
+        "additionalValue": "Standard plan",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Features and benefits will vary depending on your plan - see our website for more info. Plan-specific fees and benefits are tied to your Revolut Personal Account.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/our-pricing-plans/",
+        "additionalValue": "Plus plan",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Features and benefits will vary depending on your plan - see our website for more info. Plan-specific fees and benefits are tied to your Revolut Personal Account.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/our-pricing-plans/",
+        "additionalValue": "Premium plan",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Features and benefits will vary depending on your plan - see our website for more info. Plan-specific fees and benefits are tied to your Revolut Personal Account.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/our-pricing-plans/",
+        "additionalValue": "Metal plan",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Features and benefits will vary depending on your plan - see our website for more info. Plan-specific fees and benefits are tied to your Revolut Personal Account.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/our-pricing-plans/",
+        "additionalValue": "Ultra plan",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "Cash advance fee applies to cash transactions, cash-like transaction and cash equivalent transactions. Minimum fee applies regardless of advance amount.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/legal/credit-card-fees-au/",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "A late payment fee may apply if the minimum payment is not received by the due date.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/legal/credit-card-fees-au/",
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "This reflects the Standard plan rate charged over the fair usage limit.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/legal/credit-card-fees-au/",
+        "additionalValue": "Foreign currency transactions exceeding fair usage limit during market hours",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Transaction Fee",
+        "rateBased": {
+          "rate": "0.015",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-07-08T14:04:01.589894Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Variable rate on purchases. Interest is charged after the interest-free period if the full balance is not paid by the due date.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/credit-card/",
+        "additionalValue": "P44D",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2099",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "additionalInfo": "Variable rate on cash advances. Interest is charged from the date of the transaction with no interest-free period.",
+        "additionalInfoUri": "https://www.revolut.com/en-AU/credit-card/",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.2399",
+        "repaymentType": "UNCONSTRAINED"
+      }
+    ],
+    "name": "Revolut Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "550e8400-e29b-41d4-a716-446655440005"
+  },
+  "version": 7
+}

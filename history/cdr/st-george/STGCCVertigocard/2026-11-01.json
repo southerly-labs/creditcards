@@ -1,0 +1,316 @@
+{
+  "brand": "St.George Bank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.stgeorge.com.au/personal/credit-cards/low-rate/vertigo",
+      "feesAndPricingUri": "https://www.stgeorge.com.au/content/dam/stg/downloads/accounts_and_cards/stg-cc-fee-charges.pdf",
+      "overviewUri": "https://www.stgeorge.com.au/personal/credit-cards/low-rate",
+      "termsUri": "https://www.stgeorge.com.au/content/dam/stg/downloads/personal/credit-cards/stg_credit_card_terms_and_conditions.pdf"
+    },
+    "brand": "St. George Bank",
+    "cardArt": [
+      {
+        "cardScheme": "VISA",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.stgeorge.com.au/content/dam/public/open-banking/STG-Vertigo-Card-Art-232x149.png",
+        "title": "Vertigo credit card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      },
+      {
+        "additionalValue": "80000.00",
+        "constraintType": "MAX_LIMIT"
+      }
+    ],
+    "description": "An everyday card with a low rate on purchases, and a low monthly card fee.",
+    "eligibility": [
+      {
+        "additionalInfo": "Aged 18 or over",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalValue": "Be an Australian or New Zealand citizen or be an Australian permanent resident or hold a valid temporary residence visa with a minimum of 1 year before expiry",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Have a regular, verifiable Australian taxable income for at least 3 months (18 months for self employed)",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "You're up-to-date with your regular repayments (rent or home loan, phone, other credit cards and loans etc.)",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Have a fixed residential address in Australia",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "0% p.a. interest on balance transfers for 20 months. 3% balance transfer fee applies. This 0% p.a. offer relates to balance transfers requested at card application. The variable cash advance rate will apply after the promotional period. New cards only.",
+        "featureType": "BALANCE_TRANSFERS"
+      },
+      {
+        "additionalInfo": "Up to $450 cashback - Get $75 cashback for each month you spend $1k or more on eligible purchases in the first 6 months from card approval. Plus, 6.99% p.a. interest on balance transfers for 12 months when requested at card application. The variable cash advance rate will apply after this promotional period. Offer not available if you've held a St.George, Bank of Melbourne or BankSA credit card in the last 24 months. New cards only. Month is based on your credit card statement.",
+        "additionalValue": "450.00",
+        "featureType": "CASHBACK_OFFER"
+      },
+      {
+        "additionalInfo": "Up to 55 days Interest free on purchases when you pay the Closing Balance (or the Monthly Payment Balance with a balance transfer) on time.",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "Multiple ways to pay, securely, with mobile wallet. Pay on the go simply and securely from your mobile device at millions of stores worldwide, where contactless payments are accepted - compatible with Apple Pay.",
+        "additionalInfoUri": "https://www.stgeorge.com.au/online-services/ways-to-pay",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Multiple ways to pay, securely, with mobile wallet. Pay on the go simply and securely from your mobile device at millions of stores worldwide, where contactless payments are accepted - compatible with Google Pay.",
+        "additionalInfoUri": "https://www.stgeorge.com.au/online-services/ways-to-pay",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Multiple ways to pay, securely, with mobile wallet. Pay on the go simply and securely from your mobile device at millions of stores worldwide, where contactless payments are accepted - compatible with Samsung Pay.",
+        "additionalInfoUri": "https://www.stgeorge.com.au/online-services/ways-to-pay",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Digital Card - Boost your card security by using the dynamic CVV. Access your card details anytime, anywhere. Be assured that you will have uninterrupted access to your funds even if your card is lost or stolen.",
+        "additionalInfoUri": "https://www.stgeorge.com.au/online-services/ways-to-pay",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "An extra card: For an additional cardholder aged 16 or over at no extra cost, provided the account isn't a joint account. Additional card transactions are the responsibility of the primary account holder.",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Phone and Internet Banking",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalValue": "SMS and email alerts are available for the product",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Feel confident using our cards, with 24/7 fraud monitoring, Secure Online Shopping Service, and the St.George Fraud Money Back Guarantee.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Explore ShopBack offers and earn bonus Cashback when you shop via the St. George Lounge on ShopBack. Terms & Conditions apply.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "The product includes extra repayment features.",
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "additionalInfo": "The product includes fraud protection features.",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "Recurring payments - You may authorise a Merchant to charge recurring payments to your Card automatically without requesting your authorisation on each occasion",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Confirming and authorising transactions: There are a number of ways you may be able to confirm a transaction. These include: signing your name. Holding your Card in front of a contactless payment device. Entering your PIN. Entering your Card details and any other information required.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Gambling blocks: If you wish to limit access to gambling services through the Card Account, please call us or log into your online banking and activate gambling block in the Card Services menu.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Statements: We will issue a statement for the Card Account to you every month unless the account has a balance of $10 or less and there has been no account activity in that month. You can choose to receive statements by mail or electronically.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "2% of the closing balance outstanding, or $10; whichever is greater. If the closing balance is less than $10, it must be paid in full.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Plan&Pay is a repayment plan for your credit card. It splits your credit card repayments into smaller bite-sized instalments.",
+        "additionalInfoUri": "https://www.stgeorge.com.au/personal/credit-cards/manage/plan-and-pay",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Access to My Offers Hub: My Offers Hub is a collection of offers and discounts available to eligible debit or credit cardholders to thank you for being our customer.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Autopay facility is available. With Autopay, you can choose to pay off your Minimum Payment Due or your full closing balance each month.",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Customers can access their eligible St. George cards and Apple's ID&V security features within Apple Wallet. T&Cs apply.",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1M",
+        "discounts": [
+          {
+            "description": "Existing Reduced First year Monthly Card Fee",
+            "discountMethodUType": "fixedAmount",
+            "discountType": "ELIGIBILITY_ONLY",
+            "eligibility": [
+              {
+                "additionalInfo": "Already with St.George? Sign in to apply for a $0 card fee for the first year (reverts to $7 per month thereafter). T&Cs Apply.",
+                "additionalValue": "P1M",
+                "discountEligibilityType": "INTRODUCTORY"
+              }
+            ],
+            "fixedAmount": {
+              "amount": "7.00"
+            }
+          }
+        ],
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "7.00"
+        },
+        "name": "Monthly Card Fee"
+      },
+      {
+        "additionalValue": "30",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Missed Payment Fee"
+      },
+      {
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Balance Transfer Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "BALANCE"
+        }
+      },
+      {
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash Advance Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "3% of the Australian dollar value for transactions with merchants based overseas",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "Foreign Transaction Fee",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Courier costs may apply",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Card Replacement Fee"
+      },
+      {
+        "additionalInfo": "$15.00 once per statement period if your credit card account was opened before 4 June 2012. No overlimit fee will be charged for personal credit card accounts opened on or after 4 June 2012.",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Overlimit Fee"
+      },
+      {
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.50"
+        },
+        "name": "Copy of a sales voucher"
+      },
+      {
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Copy of a deposit or withdrawal form"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-10-29T01:03:01Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Interest on purchases",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "Interest Free Days may apply",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1399",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "Interest on cash advances",
+        "applicabilityConditions": [
+          {
+            "additionalInfo": "No Interest Free days",
+            "rateApplicabilityType": "OTHER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2199",
+        "repaymentType": "OTHER"
+      },
+      {
+        "additionalInfo": "0% p.a. interest on balance transfers for 20 months. 3% balance transfer fee applies. This 0% p.a. offer relates to balance transfers requested at card application. The variable cash advance rate will apply after the promotional period.",
+        "applicabilityConditions": [
+          {
+            "rateApplicabilityType": "NEW_CUSTOMER"
+          }
+        ],
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "BALANCE_TRANSFER",
+        "loanPurpose": "OTHER",
+        "rate": "0.00",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Vertigo",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "STGCCVertigocard"
+  },
+  "version": 7
+}

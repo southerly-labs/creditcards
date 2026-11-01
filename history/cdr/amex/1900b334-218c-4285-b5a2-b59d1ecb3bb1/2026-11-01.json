@@ -1,0 +1,260 @@
+{
+  "brand": "American Express",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.americanexpress.com/en-au/credit-cards/essential-rewards-credit-card/",
+      "feesAndPricingUri": "https://www.americanexpress.com/en-au/credit-cards/essential-rewards-credit-card/",
+      "overviewUri": "https://www.americanexpress.com/en-au/credit-cards/essential-rewards-credit-card/",
+      "termsUri": "https://www.americanexpress.com/en-au/credit-cards/essential-rewards-credit-card/"
+    },
+    "applicationUri": "https://www.americanexpress.com/en-au/credit-cards/essential-rewards-credit-card/",
+    "brand": "American Express",
+    "brandName": "American Express",
+    "cardArt": [
+      {
+        "cardScheme": "AMEX",
+        "cardType": "CREDIT",
+        "imageUri": "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUW52100000S3.gif",
+        "title": "American Express Essential® Rewards Credit Card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalValue": "2000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Expect extra with the American Express Essential Rewards Credit Card.",
+    "eligibility": [
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "Long term visa means 12 months or more and does not include a student visa.",
+        "additionalValue": "You are an Australian citizen or permanent resident or hold a long term visa.",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Additional Cards are available for any friend or family member 16 years and over.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Applications are assessed based on the information provided and are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Add up to 4 Cards at no additional fee.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/additional-card/",
+        "additionalValue": "4",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/pay-bill/",
+        "additionalValue": "Ways to pay your bill",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/essential-rewards-credit-card/",
+        "additionalValue": "New Card Member Offer",
+        "featureType": "BONUS_REWARDS"
+      },
+      {
+        "additionalInfo": "The Amex App lets you quickly and easily manage your Card Account anytime, anywhere.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/manage-your-card/mobile-app/",
+        "additionalValue": "Amex App",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/manage-your-card/mobile-payments/",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Fraud Protection Guarantee, protecting you from unauthorised charges made on your Account.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/service-and-security/fraud-protection/",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "A flexible way to pay off a selected amount or portion of your Credit Card balance in equal monthly instalments. Subject to fees.",
+        "additionalInfoUri": "https://www.americanexpress.com/au/credit-cards/membership-benefits/plan-it/",
+        "additionalValue": "Plan It Instalments",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Purchase Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Card Refund Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Smartphone Front Screen Cover Insurance",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfoUri": "https://www.americanexpress.com/au/insurance/insurance-with-your-card/",
+        "additionalValue": "Buyer's Advantage Cover",
+        "featureType": "INSURANCE"
+      },
+      {
+        "additionalInfo": "Up to 55 interest free days on purchases",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/essential-rewards-credit-card/",
+        "additionalValue": "P55D",
+        "featureType": "INTEREST_FREE"
+      },
+      {
+        "additionalInfo": "5 points per $1 spent on Eligible Eats and Drinks locations in Australia.\n3 points per $1 spent on Selected Streaming Services in Australia.\n2 points per $1 on Selected Major Retailers in Australia.\n1 point per $1 spent everywhere else in Australia.\nAccelerated earn up to 10k points per month, $1 thereafter.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/essential-rewards-credit-card/",
+        "additionalValue": "Membership Rewards",
+        "featureType": "LOYALTY_PROGRAM"
+      },
+      {
+        "additionalValue": "Payment due reminder",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Spend tracking notification",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalValue": "Payment received alert",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "Whether it's shopping, dining, travel or entertainment, eligible Card Members can access Amex Offers providing statement credits or bonus points. Amex Offers must be saved to the Card and used for qualifying spend, subject to offer-specific criteria, to receive a benefit.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/credit-cards/membership-benefits/why-amex/offers/",
+        "additionalValue": "Amex Offers",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Get pre-sale tickets and access to some of your favourite events, and enjoy the Amex Entertainment Lounge before the show at select venues. With Amex, you can dive into unforgettable experiences.",
+        "additionalInfoUri": "https://www.americanexpress.com/en-au/benefits/entertainment/events",
+        "additionalValue": "American Express Experiences",
+        "featureType": "OTHER"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "P1M",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "9.00"
+        },
+        "name": "Annual Fee"
+      },
+      {
+        "additionalInfo": "Applies to the first 4 Additional Cards",
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "0.00"
+        },
+        "name": "Additional Card Fee"
+      },
+      {
+        "additionalValue": "When you do not pay the minimum payment required by the due date as shown on your statement.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "30.00"
+        },
+        "name": "Late Payment Fee"
+      },
+      {
+        "additionalInfo": "3.5% of the converted amount. Payable when any charge is processed in a currency other than Australian dollars.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "PURCHASE",
+        "name": "Currency Conversion Fee",
+        "rateBased": {
+          "rate": "0.035",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$6 for each dishonour or debit rejection. Payable if there aren’t enough funds in your nominated account to pay the Card Account or if the whole or part of a payment by direct debit is rejected.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "6.00"
+        },
+        "name": "Dishonour Fee"
+      },
+      {
+        "additionalInfo": "$3 Payable if you pay your Card Account in person at Australia Post by EFTPOS.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PAYMENT",
+        "fixedAmount": {
+          "amount": "3.00"
+        },
+        "name": "Over The Counter Fee"
+      },
+      {
+        "additionalInfo": "$7 for charges in Australia, $10 for other charges",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "7.00"
+        },
+        "name": "Record of Charge Fee"
+      },
+      {
+        "additionalInfo": "Payable if you or an Additional Card Member requests an additional posted monthly paper statement. You may access statements free of charge through your online Account.",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Additional Statement Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-07-08T02:30:00.000Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "Interest rate applied to outstanding balances not paid in full by the due date.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.2399",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "American Express Essential® Rewards Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "1900b334-218c-4285-b5a2-b59d1ecb3bb1"
+  },
+  "version": 7
+}

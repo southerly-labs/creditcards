@@ -1,0 +1,351 @@
+{
+  "brand": "CommBank",
+  "product": {
+    "additionalInformation": {
+      "eligibilityUri": "https://www.commbank.com.au/business/business-credit-cards/business-low-rate-credit-card.html",
+      "feesAndPricingUri": "https://www.commbank.com.au/content/dam/commbank/business/pds/003-840-personal-liability-card-fees.pdf",
+      "overviewUri": "https://www.commbank.com.au/business/business-credit-cards/business-low-rate-credit-card.html",
+      "termsUri": "https://www.commbank.com.au/content/dam/commbank/personal/apply-online/download-printed-forms/cc2-cou.pdf"
+    },
+    "applicationUri": "https://www.commbank.com.au/business/business-credit-cards/business-low-rate-credit-card.html",
+    "brand": "CBA",
+    "brandName": "CommBank",
+    "cardArt": [
+      {
+        "cardScheme": "MASTERCARD",
+        "cardType": "CREDIT",
+        "imageUri": "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/personal-liability/mastercard-business-low-rate-credit-card.png",
+        "title": "Business Low Rate credit card"
+      }
+    ],
+    "constraints": [
+      {
+        "additionalInfo": "Max $50,000.00 unsecured credit limit. Eligibility criteria applies.",
+        "additionalValue": "50000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "Min $500.00 credit limit. Note that the credit limit we will give you will depend on your ability to meet your repayments.",
+        "additionalValue": "500.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Ideal for small business owners looking for a line of credit with a competitive interest rate and no annual fee. Note, this product does not include an interest free day period.",
+    "eligibility": [
+      {
+        "additionalInfo": "Only customers older than a minimum age may apply. Additional cardholders allowed from 16 years.",
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      },
+      {
+        "additionalInfo": "The account holder must be a natural person.",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalInfo": "Applications for credit cards are subject to credit approval.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Each application for credit is assessed on the ability of the applicant to service debt (limit) based on the financials supplied in the application.",
+        "eligibilityType": "OTHER"
+      },
+      {
+        "additionalInfo": "Available to citizens or permanent resident of Australia and valid visa holders. Make sure you are legally allowed to work in Australia.",
+        "additionalValue": "AU",
+        "eligibilityType": "RESIDENCY_STATUS"
+      },
+      {
+        "additionalInfo": "Available to citizens or permanent resident of NZ and valid visa holders. Make sure you are legally allowed to work in Australia.",
+        "additionalValue": "NZ",
+        "eligibilityType": "RESIDENCY_STATUS"
+      }
+    ],
+    "features": [
+      {
+        "additionalInfo": "Adding an additional cardholder is an easy way to share the convenience and accessibility of your CommBank credit card, without opening a new account. You can have one additional cardholder and they must be at least 16 years old. They'll get a card with their name but with your account number.",
+        "additionalInfoUri": "https://www.commbank.com.au/support.credit-cards.add-additional-cardholder.html",
+        "additionalValue": "1",
+        "featureType": "ADDITIONAL_CARDS"
+      },
+      {
+        "additionalInfo": "Streamline your business banking and save time with automatic data feeds from your online banking to your accounting software.",
+        "additionalInfoUri": "https://www.commbank.com.au/business/automated-bank-feeds-to-accounting-software.html",
+        "featureType": "OTHER"
+      },
+      {
+        "additionalInfo": "Through AutoPay, you can choose to have the full closing balance, the minimum amount due, or set an amount debited from your chosen CommBank transaction account. If the set amount isn't enough to cover the minimum payment shown on your current statement, we'll take out more to cover the difference. If the set amount is more than your closing balance shown on your current statement, only the closing balance amount is debited.",
+        "additionalInfoUri": "https://www.commbank.com.au/support.credit-cards.set-up-autopay.html",
+        "additionalValue": "AutoPay",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "With BPAY View you can switch to online bills & ask billers to send them directly to the CommBank app or NetBank, making it easy to see, track, and pay bills online.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/bpay-view.html",
+        "additionalValue": "BPAY View",
+        "featureType": "BILL_PAYMENT"
+      },
+      {
+        "additionalInfo": "Wherever you are in the world, CommBank gives you the choice and control to securely manage all of your accounts on a range of devices, the way you want.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking.html",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Pay with your Apple(TM) device using Apple Pay.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/apple-pay.html",
+        "additionalValue": "Apple Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Android(TM) phone using the CommBank app.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/tap-and-pay.html",
+        "additionalValue": "CommBank Tap and Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Garmin(TM) smartwatch using Garmin Pay.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/garmin-pay.html",
+        "additionalValue": "Garmin Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Android(TM) device using Google Pay(TM).",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/google-pay.html",
+        "additionalValue": "Google Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "Pay with your Samsung(TM) device using Samsung Pay.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/mobile-payments-wearables/samsung-pay.html",
+        "additionalValue": "Samsung Pay",
+        "featureType": "DIGITAL_WALLET"
+      },
+      {
+        "additionalInfo": "While you have a SurePay instalment plan, payments are applied in accordance with our Terms and Conditions.",
+        "additionalInfoUri": "https://www.commbank.com.au/content/dam/commbank/personal/apply-online/download-printed-forms/cc2-cou.pdf",
+        "featureType": "EXTRA_REPAYMENTS"
+      },
+      {
+        "additionalInfo": "Instantly lock, block or limit your credit card for extra control through the CommBank app or NetBank.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/lock-block-limit-your-credit-card.html",
+        "featureType": "FRAUD_PROTECTION"
+      },
+      {
+        "additionalInfo": "We help you stay on track with your credit card spending in the CommBank app.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/spend-tracker-insights.html",
+        "featureType": "DIGITAL_BANKING"
+      },
+      {
+        "additionalInfo": "Turn Transaction Notifications on in the CommBank app and we'll instantly alert you when you pay using your CommBank debit or credit card, and when you receive money into your everyday account.",
+        "additionalInfoUri": "https://www.commbank.com.au/digital-banking/transaction-notifications.html",
+        "additionalValue": "Transaction Notifications",
+        "featureType": "NOTIFICATIONS"
+      },
+      {
+        "additionalInfo": "The SurePay - Balance Plan is an instalment plan feature available to help you manage your credit card repayments. You can break down your credit card purchase balance into smaller, manageable instalments with a fixed term and no set up fee. Your card purchase interest rate, or special interest rate, will be applied to the balance and Terms and Conditions apply.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/manage/surepay-instalment-plans.html",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "The SurePay - Cash Advance Plan is an instalment plan feature available to help you manage your credit card repayments. You can break down your cash advance balance into smaller, manageable instalments with a fixed term and no set up fee. Your cash advance interest rate will apply to the balance and Terms and Conditions apply.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/manage/surepay-instalment-plans.html",
+        "featureType": "INSTALMENT_PLAN"
+      },
+      {
+        "additionalInfo": "The SurePay - Purchase Plan is an instalment plan feature available to help you manage your credit card repayments. You can split your purchases into smaller, manageable instalments with a fixed term and 0% interest rate for purchases in an instalment plan. A set-up fee and minimum term applies and is subject to Terms and Conditions. The SurePay - Purchase Plan is considered an Instalment Feature of the account. For further information refer to the BankingProductInstalments Open Banking API.",
+        "additionalInfoUri": "https://www.commbank.com.au/credit-cards/manage/surepay-instalment-plans.html",
+        "featureType": "INSTALMENT_PLAN"
+      }
+    ],
+    "fees": [
+      {
+        "additionalInfo": "When you don't make your minimum monthly payment, plus any overdue amount, by your statement due date.",
+        "additionalValue": "1",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Late payment fee"
+      },
+      {
+        "additionalInfo": "When we first allow you to go over your credit limit in a statement period.",
+        "additionalInfoUri": "https://www.commbank.com.au/content/dam/commbank/business/pds/003-840-personal-liability-card-fees.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Overlimit fee"
+      },
+      {
+        "additionalInfo": "When you need an emergency replacement card delivered to you.",
+        "additionalInfoUri": "https://www.commbank.com.au/content/dam/commbank/business/pds/003-840-personal-liability-card-fees.pdf",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "REPLACEMENT",
+        "fixedAmount": {
+          "amount": "20.00"
+        },
+        "name": "Emergency issue/ lost/ replacement card fee"
+      },
+      {
+        "additionalInfo": "When you make a transaction that is converted by Mastercard or Visa from a foreign currency to Australian dollars.",
+        "additionalInfoUri": "https://www.commbank.com.au/content/dam/commbank/business/pds/003-840-personal-liability-card-fees.pdf",
+        "currency": "AUD",
+        "feeCap": "150.00",
+        "feeCapPeriod": "P1D",
+        "feeMethodUType": "rateBased",
+        "feeType": "OTHER",
+        "name": "International transaction fee (Mastercard and Visa transactions)",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Charge applies to cash advances through a terminal of any financial institution in Australia, at ASB Bank in New Zealand, Commonwealth Bank in Indonesia and Commonwealth Bank in Vietnam. 1.5% of the cash advance amount. A maximum charge of $150.00 applies (or a flat fee of $2.50 if your closing balance on the previous day was in credit).",
+        "additionalInfoUri": "https://www.commbank.com.au/content/dam/commbank/business/pds/003-840-personal-liability-card-fees.pdf",
+        "currency": "AUD",
+        "feeCap": "150.00",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "ATM cash advance charge",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "150.00",
+            "feeMinimum": "2.50"
+          },
+          "rate": "0.015",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Charge applies to cash advances at Commonwealth Bank Branches. $2.50 or 1.5% of the cash advance amount (whichever is greater). A maximum charge of $150.00 applies (or a flat fee of $2.50 if your closing balance on the previous day was in credit).",
+        "additionalInfoUri": "https://www.commbank.com.au/content/dam/commbank/business/pds/003-840-personal-liability-card-fees.pdf",
+        "currency": "AUD",
+        "feeCap": "150.00",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Commonwealth Bank over-the-counter cash advance charge",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "150.00",
+            "feeMinimum": "2.50"
+          },
+          "rate": "0.015",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Charge applies to cash advance transactions made at other financial institutions within Australia. $3.00 or 1.5% of the cash advance amount (whichever is greater).A maximum charge of $150.00 applies (or a flat fee of $3.00 if your closing balance on the previous day was in credit).",
+        "currency": "AUD",
+        "feeCap": "150.00",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Non-Commonwealth Bank over-the-counter cash advance charge",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "150.00",
+            "feeMinimum": "3.00"
+          },
+          "rate": "0.015",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Charge applies to cash advances by way of funds transfer through NetBank, CommBiz, Phonebank Transfer, Commonwealth Bank Customer Service Centre, Australia Post, 132221 Transfer Case, NetBank Transfer Home Loan, Mobile Bank Transfer and NetBank Transfer Personal Loan. 1.5% of the cash advance amount. A maximum charge of $150.00 applies (or a flat fee of $2.50 if your closing balance on the previous day was in credit).",
+        "additionalInfoUri": "https://www.commbank.com.au/content/dam/commbank/business/pds/003-840-personal-liability-card-fees.pdf",
+        "currency": "AUD",
+        "feeCap": "150.00",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Any other Commonwealth Bank Network cash advance charge",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "150.00",
+            "feeMinimum": "2.50"
+          },
+          "rate": "0.015",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "$4.00 or 1.5% of the cash advance amount(whichever is greater). A maximum charge of $150.00 applies (or a flat fee of $4.00 if your closing balance on the previous day was in credit).",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Overseas terminal or bank cash advance charge",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "150.00",
+            "feeMinimum": "4.00"
+          },
+          "rate": "0.015",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "Charge applies to purchases of items we consider equivalent to cash, such as gambling, lottery tickets, money transfers or travellers cheques, including transactions which merchants tell us are for such items. 1.5% of the cash advance amount.  A maximum charge of $150.00 applies (or a flat fee of $2.50 if your closing balance on the previous day was in credit).",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "CASH_ADVANCE",
+        "name": "Cash equivalent items or cash substitutes cash advance charge",
+        "rateBased": {
+          "amountRange": {
+            "feeMaximum": "150.00",
+            "feeMinimum": "2.50"
+          },
+          "rate": "0.015",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "additionalInfo": "When you make a purchase or obtain a cash advance in Australian dollars while overseas, or while in Australia (for example online) where the merchant, or the financial institution or entity processing the transaction, is located overseas.",
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "TRANSACTION",
+        "name": "International transaction fee (Transactions in Australian dollars but with an overseas connection)",
+        "rateBased": {
+          "rate": "0.03",
+          "rateType": "TRANSACTION"
+        }
+      }
+    ],
+    "instalments": {
+      "maximumConcurrentPlans": 50,
+      "maximumSplit": 12,
+      "minimumPlanValue": "100.00",
+      "minimumSplit": 3
+    },
+    "isTailored": false,
+    "lastUpdated": "2026-11-01T02:15:42.000Z",
+    "lendingRates": [
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1455",
+        "repaymentType": "OTHER"
+      },
+      {
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "OTHER",
+        "rate": "0.1455",
+        "repaymentType": "OTHER"
+      }
+    ],
+    "name": "Low Rate credit card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "4002561833054353a1fe48d27be120aa"
+  },
+  "version": 7
+}
