@@ -49,6 +49,17 @@ describe("CDR snapshots", () => {
       })
     )
 
+    it.effect("reports a change date only once a product has changed since tracking began", () =>
+      Effect.gen(function* () {
+        const snapshots = yield* Snapshots
+        assert.isUndefined(yield* snapshots.lastChanged("bank", "p4"))
+        yield* snapshots.record("bank", "p4", "2026-11-01", snapshot(99))
+        assert.isUndefined(yield* snapshots.lastChanged("bank", "p4"))
+        yield* snapshots.record("bank", "p4", "2026-11-05", snapshot(129))
+        assert.strictEqual(yield* snapshots.lastChanged("bank", "p4"), "2026-11-05")
+      })
+    )
+
     it.effect("keeps one file per day when the sync runs twice", () =>
       Effect.gen(function* () {
         const snapshots = yield* Snapshots

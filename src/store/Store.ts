@@ -10,6 +10,8 @@ export interface Dataset {
   readonly cards: ReadonlyMap<string, Card>
 
   readonly observations?: ReadonlyMap<string, string>
+
+  readonly changes?: ReadonlyMap<string, string>
 }
 
 export const OBSERVATIONS_FILE = "cdr-observations.toml"

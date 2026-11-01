@@ -10,7 +10,7 @@ import { CdrClient } from "./cdr/CdrClient.ts"
 import { checkEarnPages, formatCheck, normaliseText, pageText } from "./rewards/check.ts"
 import { bonusReviewQueue, formatBonusQueue, formatQueue, reviewQueue, stamp, stampBonus } from "./rewards/review.ts"
 import { Snapshots } from "./history/Snapshots.ts"
-import { Store } from "./store/Store.ts"
+import { splitCardKey, Store } from "./store/Store.ts"
 import { summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
 
 const DATA_DIR = "data"
@@ -60,7 +60,19 @@ const build = Command.make(
   "build",
   { out: Flag.String("out").pipe(Flag.withDefault("dist")) },
   Effect.fn(function* ({ out }) {
-    const dataset = yield* validate
+    const validated = yield* validate
+    const snapshots = yield* Snapshots
+    const changes = new Map<string, string>()
+
+    for (const [key, card] of validated.cards) {
+      if (!card.cdr) continue
+      const changedOn = yield* snapshots.lastChanged(splitCardKey(key).issuer, card.cdr.product_id)
+
+      if (changedOn !== undefined) changes.set(key, changedOn)
+    }
+
+    const dataset = { ...validated, changes }
+
     yield* writeFile(
       `${out}/api.json`,
       encodeJson(toApi(dataset, new Date(yield* Clock.currentTimeMillis).toISOString()))

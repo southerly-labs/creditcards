@@ -71,11 +71,15 @@ export const toApi = (dataset: Dataset, generatedAt?: string): Api => {
   for (const [key, { locked: _l, ...stored }] of dataset.cards) {
     const { issuer, card: slug } = splitCardKey(key)
     const observedAt = dataset.observations?.get(key)
+    const changedOn = dataset.changes?.get(key)
 
-    const card = {
-      ...stored,
-      ...(observedAt === undefined ? {} : { provenance: { ...stored.provenance, cdr_observed_at: observedAt } })
+    const provenance = {
+      ...stored.provenance,
+      ...(observedAt === undefined ? {} : { cdr_observed_at: observedAt }),
+      ...(changedOn === undefined ? {} : { cdr_changed_on: changedOn })
     }
+
+    const card = { ...stored, ...(Object.keys(provenance).length === 0 ? {} : { provenance }) }
 
     required(issuers[issuer]).cards[slug] = card
   }

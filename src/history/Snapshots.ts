@@ -49,6 +49,7 @@ export class Snapshots extends Context.Service<
       date: string,
       snapshot: CdrSnapshot
     ): Effect.Effect<boolean, SnapshotError>
+    lastChanged(issuer: string, productId: string): Effect.Effect<string | undefined, SnapshotError>
   }
 >()("creditcards/history/Snapshots") {
   static readonly layer = (historyDir: string) =>
@@ -94,7 +95,19 @@ export class Snapshots extends Context.Service<
           return true
         })
 
-        return Snapshots.of({ record })
+        const lastChanged = Effect.fn("Snapshots.lastChanged")(function* (issuer: string, productId: string) {
+          const dir = path.join(historyDir, "cdr", productDir(issuer, productId))
+
+          if (!(yield* fs.exists(dir).pipe(Effect.mapError(fail(dir))))) return undefined
+
+          const files = (yield* fs.readDirectory(dir).pipe(Effect.mapError(fail(dir)))).filter((n) =>
+            SNAPSHOT_FILE.test(n)
+          )
+
+          return files.length < 2 ? undefined : files.toSorted().at(-1)?.slice(0, 10)
+        })
+
+        return Snapshots.of({ record, lastChanged })
       })
     )
 }

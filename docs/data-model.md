@@ -30,6 +30,25 @@ loyalty text. `priority` determines precedence when multiple programs match.
 Issuer `cdr_brands` lists the Register brands whose products belong to the issuer.
 A card's `locked` entries are dotted paths the automated sync must not overwrite.
 
+## Lifecycle dates
+
+- `first_seen`: the date this project first recorded the card. The sync sets it
+  when it adds a card. Cards that existed when the project started have
+  2026-10-31; it is not the issuer's launch date.
+- `status`: `active`, `closed` (the issuer no longer sells it but still lists it
+  in CDR; set by hand and kept by the sync) or `discontinued` (it left CDR).
+- `closed`: the date the card closed to new applicants, when known. Allowed with
+  status `closed` or `discontinued`.
+- `discontinued`: the date the sync saw the card leave CDR. Only with status
+  `discontinued`.
+
+`api.json` adds two derived dates under `provenance`: `cdr_observed_at`, the last
+successful sync that saw the card (from `data/cdr-observations.toml`), and
+`cdr_changed_on`, the date of the newest snapshot in `history/`, which is the last
+day the issuer's CDR response changed. `cdr_changed_on` is omitted until a product
+has changed at least once since tracking began on 2026-11-01. `cdr.last_updated`
+is the issuer's own claim and is not always reliable.
+
 ## Signup bonuses
 
 Signup bonuses are offers; see [offers](offers.md). The parser's `signup` offer

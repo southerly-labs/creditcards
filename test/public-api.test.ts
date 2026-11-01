@@ -119,6 +119,9 @@ test("CDR observations publish on cards and must reference known cards", () => {
   assert.deepStrictEqual(decodeApi(api), api)
   assert.strictEqual(api.issuers["bank"]?.cards["card"]?.provenance?.cdr_observed_at, "2026-11-01T20:00:00Z")
   assert.deepStrictEqual(checkReferences(dataset), ["cdr-observations: unknown card bank/gone"])
+
+  const changed = toApi({ ...dataset, changes: new Map([["bank/card", "2026-11-05"]]) })
+  assert.strictEqual(changed.issuers["bank"]?.cards["card"]?.provenance?.cdr_changed_on, "2026-11-05")
 })
 
 test("public cards publish stored offers as they are", () => {

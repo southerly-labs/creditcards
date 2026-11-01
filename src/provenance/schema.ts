@@ -10,6 +10,7 @@ export const sectionLocks = (section: ProvenanceSection): ReadonlyArray<string> 
 
 export const Provenance = Schema.Struct({
   cdr_observed_at: Schema.optionalKey(Schema.String),
+  cdr_changed_on: Schema.optionalKey(Schema.String),
   sections: Schema.optionalKey(
     Schema.Record(
       Schema.String,
