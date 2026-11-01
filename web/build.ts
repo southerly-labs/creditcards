@@ -1,5 +1,5 @@
 const result = await Bun.build({
-  entrypoints: ["web/index.html"],
+  entrypoints: ["web/index.html", "web/table.html"],
   outdir: "dist",
   minify: true,
 

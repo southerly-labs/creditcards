@@ -2,64 +2,103 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Australian credit cards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Which Australian credit card pays you back?</title>
+    <meta
+      name="description"
+      content="Rank every Australian credit card by what it is worth at your spend: rewards, signup bonuses, fees, overseas costs and interest, from Consumer Data Right data."
+    />
     <link rel="icon" href="../assets/icon.svg" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./finder/finder.css" />
   </head>
   <body>
-    <header>
-      <h1>Australian credit cards</h1>
-      <p class="sub">Fees, rates and rewards for every card published under the Consumer Data Right.</p>
+    <a class="skip" href="#results">Skip to results</a>
+    <header class="masthead">
+      <a class="brand" href="/"><img src="../assets/icon.svg" alt="" width="22" height="22" />creditcards</a>
+      <nav>
+        <a href="/table">Table</a>
+        <a href="/api.json">API</a>
+        <a href="https://github.com/southerly-labs/creditcards">GitHub</a>
+      </nav>
     </header>
-    <section class="controls">
-      <input id="search" type="search" placeholder="Search cards, issuers, programs…" autofocus />
-      <select id="type">
-        <option value="personal">Personal</option>
-        <option value="business">Business</option>
-        <option value="corporate">Corporate</option>
-        <option value="">All types</option>
-      </select>
-      <select id="program">
-        <option value="">Any rewards</option>
-        <option value="airline">Frequent flyer points</option>
-        <option value="bank">Bank points</option>
-        <option value="retail">Retail points</option>
-        <option value="cashback">Cashback</option>
-        <option value="none">No rewards</option>
-      </select>
-      <label
-        >Monthly spend $<input id="spend" type="number" min="0" step="100" inputmode="numeric" placeholder="optional"
-      /></label>
-      <label><input id="nofx" type="checkbox" /> No FX fee</label>
-      <label><input id="government" type="checkbox" /> Government earn</label>
-      <label><input id="nofee" type="checkbox" /> No annual fee</label>
-      <label><input id="discontinued" type="checkbox" /> Show discontinued</label>
-      <details class="columns">
-        <summary>Columns</summary>
-        <div class="column-menu">
-          <div id="column-list"></div>
-          <button id="column-reset" type="button">Reset to defaults</button>
-        </div>
-      </details>
-      <span id="count"></span>
+
+    <section class="ask" aria-labelledby="ask-title">
+      <h1 id="ask-title">Which card pays you back?</h1>
+      <p class="sentence">
+        <span>I put</span>
+        <label class="spend">
+          <span class="sr">Monthly card spend in dollars</span>
+          <span class="currency" aria-hidden="true">$</span>
+          <input id="spend" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" />
+        </label>
+        <span>on my card each month and I want</span>
+        <strong id="goal-sentence"></strong>.
+      </p>
+      <input id="spend-range" class="range" type="range" min="0" max="60" step="1" aria-label="Monthly card spend" />
+      <div id="goals" class="goals" role="radiogroup" aria-label="What matters most"></div>
     </section>
-    <details id="values" class="values">
-      <summary>
-        Point values
-        <span class="dim">— cents per point used for Value /$ and Bonus value; enter your own to override</span>
-      </summary>
-      <div id="value-grid"></div>
-      <button id="value-reset" type="button">Reset to defaults</button>
-    </details>
-    <main>
-      <table>
-        <thead>
-          <tr id="head"></tr>
-        </thead>
-        <tbody id="rows"></tbody>
-      </table>
+
+    <section class="refine" aria-label="Narrow the list">
+      <div class="segmented" id="type" role="radiogroup" aria-label="Card type"></div>
+      <div class="segmented" id="kind" role="radiogroup" aria-label="Rewards"></div>
+      <label class="search">
+        <span class="sr">Search cards</span>
+        <input id="search" type="search" placeholder="Search cards or banks" autocomplete="off" />
+        <kbd aria-hidden="true">/</kbd>
+      </label>
+      <div class="segmented view" id="view" role="radiogroup" aria-label="View"></div>
+    </section>
+
+    <main id="results" tabindex="-1">
+      <p id="summary" class="summary" aria-live="polite"></p>
+      <ol id="list" class="list"></ol>
+      <figure id="map" class="map" hidden>
+        <figcaption>
+          <strong>Fee against what comes back</strong>
+          <span id="map-note"></span>
+        </figcaption>
+        <div class="plot" id="plot"></div>
+      </figure>
     </main>
-    <script type="module" src="./app.ts"></script>
+
+    <footer class="colophon">
+      <p id="freshness"></p>
+      <p>
+        Estimates use each card's base earn rate on your monthly spend and a cents-per-point value for its program.
+        Category rates, caps on bonus categories and fees you avoid are not counted.
+        <button id="open-values" type="button" class="link">Change point values</button>
+      </p>
+    </footer>
+
+    <div id="tray" class="tray" hidden>
+      <ul id="tray-cards"></ul>
+      <button id="open-compare" type="button" class="primary">Compare</button>
+      <button id="clear-compare" type="button" class="ghost">Clear</button>
+    </div>
+
+    <dialog id="sheet" class="sheet" aria-labelledby="sheet-title">
+      <div id="sheet-body"></div>
+    </dialog>
+
+    <dialog id="compare" class="sheet wide" aria-labelledby="compare-title">
+      <div id="compare-body"></div>
+    </dialog>
+
+    <dialog id="values" class="sheet" aria-labelledby="values-title">
+      <header class="sheet-head">
+        <h2 id="values-title">What points are worth</h2>
+        <button type="button" class="close" data-close aria-label="Close">×</button>
+      </header>
+      <p class="dim">
+        Cents per point for each program. Defaults assume a sensible redemption; enter your own and every estimate
+        updates.
+      </p>
+      <div id="value-grid"></div>
+      <button id="value-reset" type="button" class="ghost">Reset to defaults</button>
+    </dialog>
+
+    <div id="tip" class="tip" role="tooltip" hidden></div>
+
+    <script type="module" src="./finder/finder.ts"></script>
   </body>
 </html>
