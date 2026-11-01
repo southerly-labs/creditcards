@@ -54,9 +54,6 @@ min_credit = 2000
 program = "commbank-yello"
 earn_source = "manual"
 earn_text_hash = "17f0b26b02654255"
-bonus_points = 60000
-bonus_source = "parser"
-bonus_text_hash = "afb248138194b514"
 
 [[rewards.earn]]
 rate = 0.5
@@ -74,17 +71,6 @@ expect = [ "2 2 2 2 all other eligible transactions" ]
 [[rewards.earn_check]]
 url = "https://www.commbank.com.au/commbank-yello/terms-and-conditions/commbank-product-offer-terms.html"
 expect = [ "smart credit card / ultimate credit card 1.5 2.0 awards credit cards", "smart credit card / ultimate credit card 1.0 2.0 awards credit cards", "smart credit card / ultimate credit card 0.75 2.0 awards credit cards", "smart credit card / ultimate credit card 0.5 2.0 awards credit cards" ]
-
-[[rewards.bonus]]
-points = 30000
-year = 1
-min_spend = 4500
-spend_days = 90
-
-[[rewards.bonus]]
-points = 30000
-year = 2
-keep_months = 12
 
 [perks]
 insurance = [ "Cracked Screen Cover", "International travel insurance" ]

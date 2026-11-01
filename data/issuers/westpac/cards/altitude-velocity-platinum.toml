@@ -55,9 +55,6 @@ min_income = 30000
 program = "velocity"
 earn_source = "manual"
 earn_text_hash = "2ce603631e19448c"
-bonus_points = 50000
-bonus_source = "parser"
-bonus_text_hash = "8fda879f47c5b5ef"
 
 [[rewards.earn]]
 rate = 0.33
@@ -75,18 +72,6 @@ note = "until $5,000 total spend in a statement cycle, then 0.2 per $1"
 rate = 0.75
 category = "international spend"
 note = "until $5,000 total spend in a statement cycle, then 0.2 per $1"
-
-[[rewards.bonus]]
-points = 30000
-year = 1
-min_spend = 6000
-spend_days = 90
-
-[[rewards.bonus]]
-points = 20000
-year = 2
-min_spend = 6000
-spend_days = 90
 
 [perks]
 insurance = [ "Complimentary insurance", "Complimentary travel insurances" ]

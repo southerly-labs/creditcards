@@ -32,11 +32,6 @@ purchase = 12.34
 cash_advance = 12.34
 balance_transfer = 12.34
 
-[[rates.intro]]
-applies_to = "both"
-rate = 4.99
-months = 5
-
 [limits]
 min_credit = 1000
 max_credit = 20000

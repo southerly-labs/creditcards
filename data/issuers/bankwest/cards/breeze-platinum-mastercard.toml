@@ -33,11 +33,6 @@ cash_advance = 21.99
 balance_transfer = 12.99
 interest_free_days = 55
 
-[[rates.intro]]
-applies_to = "balance_transfer"
-rate = 0
-months = 24
-
 [limits]
 min_credit = 1000
 

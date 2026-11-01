@@ -30,11 +30,6 @@ purchase = 13.99
 cash_advance = 13.99
 interest_free_days = 55
 
-[[rates.intro]]
-applies_to = "purchase"
-rate = 0
-months = 12
-
 [limits]
 min_credit = 5000
 max_credit = 18000000

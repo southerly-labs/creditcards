@@ -29,11 +29,6 @@ foreign_txn_pct = 3
 purchase = 11.49
 cash_advance = 11.49
 
-[[rates.intro]]
-applies_to = "balance_transfer"
-rate = 0
-months = 6
-
 [limits]
 min_credit = 1000
 max_credit = 20000

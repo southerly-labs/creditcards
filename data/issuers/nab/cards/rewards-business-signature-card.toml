@@ -52,9 +52,6 @@ max_credit = 18000000
 program = "nab-rewards"
 earn_source = "manual"
 earn_text_hash = "e389f2345b5b2dd6"
-bonus_points = 200000
-bonus_source = "parser"
-bonus_text_hash = "8f3694bd93fa160d"
 
 [[rewards.earn]]
 rate = 1.25
@@ -63,17 +60,6 @@ rate = 1.25
 rate = 3.75
 category = "Webjet and overseas purchases"
 note = "triple points"
-
-[[rewards.bonus]]
-points = 200000
-year = 1
-min_spend = 8000
-spend_days = 90
-
-[[rewards.bonus]]
-points = 50000
-year = 2
-keep_months = 15
 
 [perks]
 insurance = [ "Unauthorised Transaction Insurance", "Transit Accident Insurance" ]

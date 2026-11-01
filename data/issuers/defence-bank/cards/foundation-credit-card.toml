@@ -27,11 +27,6 @@ foreign_txn_pct = 3
 [rates]
 interest_free_days = 55
 
-[[rates.intro]]
-applies_to = "balance_transfer"
-rate = 3.99
-months = 6
-
 [limits]
 [perks]
 

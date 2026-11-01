@@ -46,9 +46,6 @@ max_credit = 80000
 program = "amplify"
 earn_source = "manual"
 earn_text_hash = "7f477ad6a085f69d"
-bonus_points = 50000
-bonus_source = "parser"
-bonus_text_hash = "b2f3afd75fa90136"
 
 [[rewards.earn]]
 rate = 1
@@ -66,12 +63,6 @@ note = "until $5,000 total spend in a statement cycle, then 0.5 per $1"
 rate = 2
 category = "international spend"
 note = "until $5,000 total spend in a statement cycle, then 0.5 per $1"
-
-[[rewards.bonus]]
-points = 50000
-year = 1
-min_spend = 6000
-spend_days = 90
 
 [perks]
 lounge_access = true

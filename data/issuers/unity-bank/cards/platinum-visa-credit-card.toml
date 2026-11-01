@@ -33,9 +33,6 @@ max_credit = 75000
 program = "qantas"
 earn_source = "manual"
 earn_text_hash = "f06a45d1ed32331e"
-bonus = []
-bonus_source = "manual"
-bonus_text_hash = "8cbf8ea47c3eb87f"
 
 [[rewards.earn]]
 rate = 1

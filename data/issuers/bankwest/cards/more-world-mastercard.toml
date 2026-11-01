@@ -52,11 +52,6 @@ cash_advance = 21.99
 balance_transfer = 14.99
 interest_free_days = 44
 
-[[rates.intro]]
-applies_to = "balance_transfer"
-rate = 0
-months = 6
-
 [limits]
 min_credit = 6000
 
@@ -64,9 +59,6 @@ min_credit = 6000
 program = "bankwest-rewards"
 earn_source = "manual"
 earn_text_hash = "07739c4212d5a439"
-bonus_points = 50000
-bonus_source = "manual"
-bonus_text_hash = "851b6303edf123fd"
 
 [[rewards.earn]]
 rate = 2.5
@@ -74,14 +66,6 @@ cap_monthly = 2000
 
 [[rewards.earn]]
 rate = 0.5
-
-[[rewards.bonus]]
-points = 50000
-year = 2
-min_spend = 10000
-spend_days = 90
-keep_months = 15
-note = "paid once both conditions are met"
 
 [perks]
 insurance = [ "Complimentary Overseas Travel Insurance" ]

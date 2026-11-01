@@ -26,11 +26,6 @@ foreign_txn_pct = 3
 purchase = 12.95
 cash_advance = 12.95
 
-[[rates.intro]]
-applies_to = "both"
-rate = 2.99
-months = 6
-
 [limits]
 min_credit = 1000
 

@@ -66,9 +66,6 @@ min_income = 35000
 program = "velocity"
 earn_source = "parser"
 earn_text_hash = "63a745e491608be2"
-bonus_points = 70000
-bonus_source = "manual"
-bonus_text_hash = "3a5ff197ec65e884"
 
 [[rewards.earn]]
 rate = 0.5
@@ -76,25 +73,6 @@ cap_monthly = 1500
 
 [[rewards.earn]]
 rate = 0.25
-
-[[rewards.bonus]]
-points = 25000
-year = 1
-min_spend = 1500
-spend_days = 30
-note = "first month"
-
-[[rewards.bonus]]
-points = 25000
-year = 1
-min_spend = 1500
-spend_days = 30
-note = "second month"
-
-[[rewards.bonus]]
-points = 20000
-year = 2
-keep_months = 12
 
 [perks]
 insurance = [ "Mobile Phone Insurance", "Purchase Protection Insurance", "Extended Warranty Insurance" ]

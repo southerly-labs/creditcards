@@ -55,9 +55,6 @@ program = "commbank-yello"
 partners = [ "qantas" ]
 earn_source = "manual"
 earn_text_hash = "334f7843975c090a"
-bonus_points = 100000
-bonus_source = "parser"
-bonus_text_hash = "b02ae990a3b0fc6d"
 
 [[rewards.earn]]
 rate = 0.5
@@ -75,17 +72,6 @@ expect = [ "2 2 2 2 all other eligible transactions" ]
 [[rewards.earn_check]]
 url = "https://www.commbank.com.au/commbank-yello/terms-and-conditions/commbank-product-offer-terms.html"
 expect = [ "smart credit card / ultimate credit card 1.5 2.0 awards credit cards", "smart credit card / ultimate credit card 1.0 2.0 awards credit cards", "smart credit card / ultimate credit card 0.75 2.0 awards credit cards", "smart credit card / ultimate credit card 0.5 2.0 awards credit cards" ]
-
-[[rewards.bonus]]
-points = 50000
-year = 1
-min_spend = 9000
-spend_days = 90
-
-[[rewards.bonus]]
-points = 50000
-year = 2
-keep_months = 12
 
 [perks]
 insurance = [ "Cracked Screen Cover", "International travel insurance" ]

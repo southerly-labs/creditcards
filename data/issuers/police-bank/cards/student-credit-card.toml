@@ -42,16 +42,6 @@ purchase = 10.76
 cash_advance = 10.76
 interest_free_days = 55
 
-[[rates.intro]]
-applies_to = "balance_transfer"
-rate = 0
-months = 3
-
-[[rates.intro]]
-applies_to = "balance_transfer"
-rate = 7.99
-months = 9
-
 [limits]
 [perks]
 

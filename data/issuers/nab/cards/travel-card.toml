@@ -55,11 +55,6 @@ cash_advance = 22.99
 balance_transfer = 21.74
 interest_free_days = 44
 
-[[rates.intro]]
-applies_to = "balance_transfer"
-rate = 0
-months = 12
-
 [limits]
 min_credit = 15000
 
@@ -67,9 +62,6 @@ min_credit = 15000
 program = "nab-rewards"
 earn_source = "manual"
 earn_text_hash = "8f68f8958d69c208"
-bonus_points = 80000
-bonus_source = "parser"
-bonus_text_hash = "722c5ba25ebd4d2b"
 
 [[rewards.earn]]
 rate = 1.5
@@ -81,17 +73,6 @@ rate = 0.5
 [[rewards.earn]]
 rate = 3
 category = "Webjet via the NAB Rewards Store or webjet.com.au"
-
-[[rewards.bonus]]
-points = 80000
-year = 1
-min_spend = 5000
-spend_days = 60
-
-[[rewards.bonus]]
-points = 30000
-year = 2
-keep_months = 12
 
 [perks]
 insurance = [ "Complimentary International Travel Insurance", "Complimentary Domestic Travel Insurance", "Complimentary Purchase Protection Insurance", "Complimentary Extended Warranty Insurance", "Complimentary Rental Vehicle Excess Insurance in Australia", "Mobile phone insurance" ]
