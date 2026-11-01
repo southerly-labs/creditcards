@@ -138,15 +138,19 @@ export const firstYearFee = (fees: ReadonlyArray<Fee>): number | undefined => {
   return discounted ? 0 : undefined
 }
 
-const FX_NAME = /international|overseas|foreign|currency conversion|cross[- ]border/iu
+const feeName = (fee: Fee) => (fee.name ?? "").replaceAll("_", " ")
+
+const FX_NAME = /international|overseas|foreign|currency conversion|currency other than|cross[- ]border/iu
 const NOT_FX = /replacement|atm|cash|withdraw|deposit|emergency|card fee|statement|travel\/procurement/iu
+
+const fxFeeType = (fee: Fee) =>
+  !["CASH_ADVANCE", "REPLACEMENT", "WITHDRAWAL", "DEPOSIT", "PERIODIC"].includes(fee.feeType) ||
+  (fee.feeType === "WITHDRAWAL" && /currency conversion/iu.test(feeName(fee)))
 
 export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefined => {
   const candidates = fees.filter(
     (f) =>
-      !["CASH_ADVANCE", "REPLACEMENT", "WITHDRAWAL", "DEPOSIT", "PERIODIC"].includes(f.feeType) &&
-      !NOT_FX.test(f.name ?? "") &&
-      (FX_NAME.test(f.name ?? "") || FX_NAME.test(f.additionalInfo ?? ""))
+      fxFeeType(f) && !NOT_FX.test(feeName(f)) && (FX_NAME.test(feeName(f)) || FX_NAME.test(f.additionalInfo ?? ""))
   )
 
   const rates = candidates
@@ -169,8 +173,6 @@ export const cashAdvanceFee = (fees: ReadonlyArray<Fee>) => {
 
   return { pct, min }
 }
-
-const feeName = (fee: Fee) => (fee.name ?? "").replaceAll("_", " ")
 
 const LATE_NAME = /late\s*pay|missed\s*payment/iu
 

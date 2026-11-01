@@ -64,6 +64,32 @@ describe("fees", () => {
       ])
     ).toBe(0)
   })
+
+  test("FX fee reads coded names and descriptions", () => {
+    const rate = (name: string, feeType: string, additionalInfo?: string): Fee => ({
+      name,
+      feeType,
+      rateBased: { rate: "0.02" },
+      ...(additionalInfo === undefined ? {} : { additionalInfo })
+    })
+
+    expect(foreignTransactionFee([rate("CURRENCY_CONVERSION_FEE", "TRANSACTION")])).toBe(2)
+    expect(foreignTransactionFee([rate("INTERNATIONAL_TRANSACTION_CURRENCY_CONVERSION_FEE", "WITHDRAWAL")])).toBe(2)
+
+    expect(
+      foreignTransactionFee([
+        rate("FEEFORCON", "TRANSACTION", "Payable on any transaction in a currency other than AUD.")
+      ])
+    ).toBe(2)
+  })
+
+  test("FX fee still ignores international cash withdrawals", () => {
+    expect(
+      foreignTransactionFee([
+        { name: "INTERNATIONAL_ATM_WITHDRAWAL", feeType: "WITHDRAWAL", rateBased: { rate: "0.02" } }
+      ])
+    ).toBeUndefined()
+  })
 })
 
 describe("late payment fee", () => {
