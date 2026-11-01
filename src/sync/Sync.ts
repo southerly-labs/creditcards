@@ -377,24 +377,32 @@ export const summariseReport = (r: SyncReport): string => {
   return lines.join("\n")
 }
 
-export const summariseRewardsReview = (r: SyncReport): string =>
-  [
-    `${r.rewards.review.length} cards have earn rates the parser could not read (sync ${r.date}).`,
-    "",
-    "To resolve them locally, run `bun run cli rewards todo` (optionally `--issuer <slug>`), set",
-    "`rewards.earn` from the CDR text it prints, then `bun run cli rewards stamp <issuer/card>...`.",
-    'See "Earn rates" in the README.',
-    "",
-    ...r.rewards.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`),
-    ...(r.bonus.review.length === 0
-      ? []
-      : [
-          "",
-          `${r.bonus.review.length} cards have signup bonuses the parser could not split by year.`,
-          "",
-          "Run `bun run cli rewards bonus-todo`, set `rewards.bonus` from the CDR text it prints, then",
-          '`bun run cli rewards bonus-stamp <issuer/card>...`. See "Signup bonuses" in the README.',
-          "",
-          ...r.bonus.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
-        ])
-  ].join("\n")
+const earnReviewSection = (r: SyncReport) => [
+  `${r.rewards.review.length} cards have earn rates the parser could not read (sync ${r.date}).`,
+  "",
+  "To resolve them locally, run `bun run cli rewards todo` (optionally `--issuer <slug>`), set",
+  "`rewards.earn` from the CDR text it prints, then `bun run cli rewards stamp <issuer/card>...`.",
+  'See "Earn rates" in the README.',
+  "",
+  ...r.rewards.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
+]
+
+const bonusReviewSection = (r: SyncReport) => [
+  `${r.bonus.review.length} cards have signup bonuses the parser could not split by year (sync ${r.date}).`,
+  "",
+  "Run `bun run cli rewards bonus-todo`, set `rewards.bonus` from the CDR text it prints, then",
+  '`bun run cli rewards bonus-stamp <issuer/card>...`. See "Signup bonuses" in the README.',
+  "",
+  ...r.bonus.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
+]
+
+export const summariseRewardsReview = (r: SyncReport): string => {
+  const sections = [
+    ...(r.rewards.review.length > 0 ? [earnReviewSection(r)] : []),
+    ...(r.bonus.review.length > 0 ? [bonusReviewSection(r)] : [])
+  ]
+
+  if (sections.length === 0) return `No earn rates or signup bonuses need review (sync ${r.date}).`
+
+  return sections.map((lines) => lines.join("\n")).join("\n\n")
+}
