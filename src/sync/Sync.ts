@@ -216,11 +216,17 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
             ...mergedRewards,
             earn: plan.earn,
             earn_source: "parser",
-            earn_text_hash: plan.hash
+            earn_text_hash: plan.hash,
+            earn_review: { state: "present" }
           }
           earnSet = plan.earn
         } else if (RewardsPlan.$is("Review")(plan)) {
           rewardsReview.push({ card: key, reason: plan.reason })
+
+          merged["rewards"] =
+            mergedRewards.earn_source === "manual"
+              ? mergedRewards
+              : { ...mergedRewards, earn_review: { state: "unknown" } }
         }
       }
 

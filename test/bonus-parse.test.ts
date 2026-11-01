@@ -204,7 +204,8 @@ describe("plans bonus updates", () => {
       program: "nab-rewards",
       bonus: parsed,
       bonus_source: "parser",
-      bonus_text_hash: bonusTextHash(split)
+      bonus_text_hash: bonusTextHash(split),
+      bonus_review: { state: "present" }
     })
   })
 
@@ -212,7 +213,7 @@ describe("plans bonus updates", () => {
     const current = { program: "qantas", bonus: parsed, bonus_source: "parser" as const, bonus_text_hash: "old" }
     const plan = planBonus(current, unclear)
     expect(plan).toEqual(BonusPlan.Review({ reason: "only an 'up to' total, no tranches", clear: true }))
-    expect(applyBonusPlan(current, plan)).toEqual({ program: "qantas" })
+    expect(applyBonusPlan(current, plan)).toEqual({ program: "qantas", bonus_review: { state: "unknown" } })
   })
 
   test("keeps a manual bonus but asks for review when the text changes", () => {

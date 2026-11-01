@@ -136,7 +136,16 @@ describe("planRewards", () => {
   test("parser sets earn for new cards and leaves unchanged ones alone", () => {
     expect(planRewards({ program: "x" }, simple)).toEqual(RewardsPlan.Set({ earn: [{ rate: 1.5 }], hash }))
     expect(
-      planRewards({ program: "x", earn: [{ rate: 1.5 }], earn_source: "parser", earn_text_hash: hash }, simple)
+      planRewards(
+        {
+          program: "x",
+          earn: [{ rate: 1.5 }],
+          earn_source: "parser",
+          earn_review: { state: "present" },
+          earn_text_hash: hash
+        },
+        simple
+      )
     ).toEqual(RewardsPlan.Unchanged())
   })
 

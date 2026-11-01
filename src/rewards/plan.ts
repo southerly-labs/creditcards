@@ -30,7 +30,10 @@ export const planRewards = (
 
   if (ParseResult.$is("Parsed")(parsed)) {
     const same =
-      current?.earn_source === "parser" && current.earn_text_hash === hash && equal(current.earn, parsed.earn)
+      current?.earn_source === "parser" &&
+      current.earn_review?.state === "present" &&
+      current.earn_text_hash === hash &&
+      equal(current.earn, parsed.earn)
 
     return same ? RewardsPlan.Unchanged() : RewardsPlan.Set({ earn: parsed.earn, hash })
   }
@@ -55,12 +58,21 @@ export const BonusPlan = Data.taggedEnum<BonusPlan>()
 
 type Rewards = NonNullable<Card["rewards"]>
 
-const withoutBonus = ({ bonus: _bonus, bonus_source: _source, bonus_text_hash: _hash, ...rest }: Rewards) => rest
+const withoutBonus = ({ bonus: _bonus, bonus_source: _source, bonus_text_hash: _hash, ...rest }: Rewards): Rewards => ({
+  ...rest,
+  bonus_review: { state: "unknown" }
+})
 
 export const applyBonusPlan = (rewards: Rewards, plan: BonusPlan): Rewards =>
   BonusPlan.$match(plan, {
     Unchanged: () => rewards,
-    Set: ({ bonus, hash }) => ({ ...rewards, bonus, bonus_source: "parser" as const, bonus_text_hash: hash }),
+    Set: ({ bonus, hash }) => ({
+      ...rewards,
+      bonus,
+      bonus_source: "parser" as const,
+      bonus_text_hash: hash,
+      bonus_review: { state: "present" as const }
+    }),
     Clear: () => withoutBonus(rewards),
     Review: ({ clear }) => (clear ? withoutBonus(rewards) : rewards)
   })
@@ -80,7 +92,12 @@ export const planBonus = (current: Rewards | undefined, features: ReadonlyArray<
   if (BonusResult.$is("Review")(parsed)) return BonusPlan.Review({ reason: parsed.reason, clear: hasParsed })
 
   if (parsed.bonus.length === 0) return hasParsed ? BonusPlan.Clear() : BonusPlan.Unchanged()
-  const same = hasParsed && current.bonus_text_hash === hash && equal(current.bonus, parsed.bonus)
+
+  const same =
+    hasParsed &&
+    current.bonus_review?.state === "present" &&
+    current.bonus_text_hash === hash &&
+    equal(current.bonus, parsed.bonus)
 
   return same ? BonusPlan.Unchanged() : BonusPlan.Set({ bonus: parsed.bonus, hash })
 }

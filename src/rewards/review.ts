@@ -1,5 +1,5 @@
 import { encodeJson } from "../util/json.ts"
-import { Effect, Schema } from "effect"
+import { DateTime, Effect, Schema } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
 import type { BonusTranche, Card, EarnRate } from "../model/schema.ts"
 import { splitCardKey, Store } from "../store/Store.ts"
@@ -138,7 +138,16 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
     const { issuer, card: slug } = splitCardKey(key)
     yield* store.writeCard(issuer, slug, {
       ...card,
-      rewards: { ...card.rewards, earn, earn_source: "manual", earn_text_hash: hash }
+      rewards: {
+        ...card.rewards,
+        earn,
+        earn_source: "manual",
+        earn_text_hash: hash,
+        earn_review: {
+          state: earn.length === 0 ? "none" : "present",
+          reviewed_at: DateTime.formatIsoDateUtc(yield* DateTime.now)
+        }
+      }
     })
     yield* Effect.logInfo(`Stamped ${key} (${hash})`)
   }
@@ -237,7 +246,16 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
     const { issuer, card: slug } = splitCardKey(key)
     yield* store.writeCard(issuer, slug, {
       ...card,
-      rewards: { ...card.rewards, bonus, bonus_source: "manual", bonus_text_hash: hash }
+      rewards: {
+        ...card.rewards,
+        bonus,
+        bonus_source: "manual",
+        bonus_text_hash: hash,
+        bonus_review: {
+          state: bonus.length === 0 ? "none" : "present",
+          reviewed_at: DateTime.formatIsoDateUtc(yield* DateTime.now)
+        }
+      }
     })
     yield* Effect.logInfo(`Stamped bonus for ${key} (${hash})`)
   }

@@ -54,6 +54,13 @@ export const EarnCheck = Schema.Struct({
 
 export type EarnCheck = typeof EarnCheck.Type
 
+export const RewardsReview = Schema.Struct({
+  state: Schema.Literals(["unknown", "present", "none"]),
+  reviewed_at: Schema.optionalKey(CalendarDate)
+})
+
+export type RewardsReview = typeof RewardsReview.Type
+
 const CardFields = Schema.Struct({
   name: Schema.NonEmptyString,
   type: CardType,
@@ -101,6 +108,7 @@ const CardFields = Schema.Struct({
       earn: Schema.optionalKey(Schema.Array(EarnRate)),
       earn_rules: Schema.optionalKey(Schema.Array(EarnRule)),
 
+      earn_review: Schema.optionalKey(RewardsReview),
       earn_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
 
       earn_text_hash: Schema.optionalKey(Schema.String),
@@ -108,6 +116,7 @@ const CardFields = Schema.Struct({
       bonus_points: Schema.optionalKey(between(0, 1_000_000).check(Schema.isInt())),
       bonus: Schema.optionalKey(Schema.Array(BonusTranche)),
 
+      bonus_review: Schema.optionalKey(RewardsReview),
       bonus_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
 
       bonus_text_hash: Schema.optionalKey(Schema.String)
