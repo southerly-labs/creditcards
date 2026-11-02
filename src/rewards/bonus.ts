@@ -21,6 +21,10 @@ export const bonusTextHash = (features: ReadonlyArray<LoyaltyFeature>): string =
 
 const review = (reason: string): BonusResult => BonusResult.Review({ reason })
 
+export const NO_DETAILS = "CDR names an offer without its details"
+
+export const isResolvableFromCdr = (reason: string): boolean => reason !== NO_DETAILS
+
 const MENTION = /(?<![\d.,$])(up to\s+)?(\d{1,3}(?:,\d{3})+|\d{4,7})\s+(?:[\p{L}\p{S}'’.]+\s+){0,5}?points?\b/giu
 
 const COMPLEX: ReadonlyArray<readonly [RegExp, string]> = [
@@ -86,7 +90,7 @@ const parseFeature = (f: LoyaltyFeature): ReadonlyArray<BonusTranche> | string =
   const mentions = [...text.matchAll(MENTION)]
   const headlines = mentions.filter((m) => m[1] !== undefined)
 
-  if (!/\d/u.test(text)) return "CDR names an offer without its details"
+  if (!/\d/u.test(text)) return NO_DETAILS
 
   if (mentions.length === headlines.length)
     return headlines.length > 0 ? "only an 'up to' total, no tranches" : "no bonus points in text"

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@effect/vitest"
-import { BonusResult, bonusTextHash, parseBonus } from "../src/rewards/bonus.ts"
+import { BonusResult, bonusTextHash, isResolvableFromCdr, parseBonus } from "../src/rewards/bonus.ts"
 import { applyBonusPlan, BonusPlan, planBonus } from "../src/rewards/plan.ts"
 
 const feature = (additionalValue: string, additionalInfo = "") => ({ additionalValue, additionalInfo })
@@ -171,6 +171,11 @@ describe("sends unclear offers to review", () => {
 
   test("an offer named without details", () => {
     expect(reason(parse("New Card Member Offer"))).toBe("CDR names an offer without its details")
+  })
+
+  test("an offer named without details cannot be resolved from CDR", () => {
+    expect(isResolvableFromCdr(reason(parse("New Card Member Offer")) ?? "")).toBe(false)
+    expect(isResolvableFromCdr(reason(parse("Earn 50,000 points")) ?? "")).toBe(true)
   })
 
   test("a CDR value that matches nothing in the text", () => {

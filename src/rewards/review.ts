@@ -7,7 +7,7 @@ import type { Offer } from "../offers/schema.ts"
 import { rawBonusPoints } from "../cdr/normalise.ts"
 import { splitCardKey, Store } from "../store/Store.ts"
 import { loyaltyText, loyaltyTextHash, type LoyaltyFeature } from "./parse.ts"
-import { bonusText, bonusTextHash } from "./bonus.ts"
+import { bonusText, bonusTextHash, isResolvableFromCdr } from "./bonus.ts"
 import { BonusPlan, planBonus, planRewards, RewardsPlan } from "./plan.ts"
 
 export interface ReviewItem {
@@ -175,7 +175,7 @@ const toBonusReviewItem = (
 ): BonusReviewItem | undefined => {
   const plan = planBonus(signupState(card), features)
 
-  if (!BonusPlan.$is("Review")(plan)) return undefined
+  if (!BonusPlan.$is("Review")(plan) || !isResolvableFromCdr(plan.reason)) return undefined
 
   return {
     card: key,

@@ -9,6 +9,7 @@ import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } fro
 import { applyOffers, signupState } from "../offers/build.ts"
 import { holdCandidates, holdId, resolveHolds, revertChange } from "./holds.ts"
 import type { Hold } from "../model/holds.ts"
+import { isResolvableFromCdr } from "../rewards/bonus.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
@@ -50,6 +51,7 @@ export interface SyncReport {
   readonly bonus: {
     readonly set: ReadonlyArray<{ readonly card: string; readonly bonus: ReadonlyArray<BonusTranche> }>
     readonly review: ReadonlyArray<{ readonly card: string; readonly reason: string }>
+    readonly undetailed: ReadonlyArray<string>
   }
 }
 
@@ -204,6 +206,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const rewardsReview: Array<{ card: string; reason: string }> = []
   const bonusSet: Array<{ card: string; bonus: ReadonlyArray<BonusTranche> }> = []
   const bonusReview: Array<{ card: string; reason: string }> = []
+  const bonusUndetailed: Array<string> = []
   const snapshotWrites: Array<{ issuer: string; productId: string; snapshot: CdrSnapshot }> = []
 
   for (const { brand, products } of fetched) {
@@ -285,7 +288,10 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       const bonusPlan: BonusPlan =
         merged["rewards"] === undefined ? BonusPlan.Unchanged() : planBonus(currentSignup, bonusFeatures(product))
 
-      if (BonusPlan.$is("Review")(bonusPlan)) bonusReview.push({ card: key, reason: bonusPlan.reason })
+      if (BonusPlan.$is("Review")(bonusPlan)) {
+        if (isResolvableFromCdr(bonusPlan.reason)) bonusReview.push({ card: key, reason: bonusPlan.reason })
+        else bonusUndetailed.push(key)
+      }
 
       const decoded = yield* decodeCard(merged).pipe(Effect.result)
 
@@ -427,7 +433,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     cardlessBrandErrors: failedBrands.filter((b) => !activeByBrand.has(b.brand)).length,
     snapshotsSaved,
     rewards: { set: rewardsSet, review: rewardsReview },
-    bonus: { set: bonusSet, review: bonusReview }
+    bonus: { set: bonusSet, review: bonusReview, undetailed: bonusUndetailed }
   } satisfies SyncReport
 })
 
@@ -475,8 +481,12 @@ export const summariseReport = (r: SyncReport): string => {
     lines.push(`Earn rates: ${r.rewards.set.length} set by parser, ${r.rewards.review.length} need review`, "")
   }
 
-  if (r.bonus.set.length > 0 || r.bonus.review.length > 0) {
-    lines.push(`Signup bonuses: ${r.bonus.set.length} set by parser, ${r.bonus.review.length} need review`, "")
+  if (r.bonus.set.length > 0 || r.bonus.review.length > 0 || r.bonus.undetailed.length > 0) {
+    lines.push(
+      `Signup bonuses: ${r.bonus.set.length} set by parser, ${r.bonus.review.length} need review, ` +
+        `${r.bonus.undetailed.length} named in CDR without details`,
+      ""
+    )
   }
 
   if (r.snapshotsSaved > 0) lines.push(`History: saved ${r.snapshotsSaved} changed CDR product responses`, "")
