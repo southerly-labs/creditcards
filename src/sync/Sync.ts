@@ -549,7 +549,8 @@ const earnReviewSection = (r: SyncReport) => [
   "",
   "To resolve them locally, run `bun run cli rewards todo` (optionally `--issuer <slug>`), set",
   "`rewards.earn` from the CDR text it prints, then `bun run cli rewards stamp <issuer/card>...`.",
-  'See "Earn rates" in the README.',
+  'See "Earn rates" in the README. When a card has no fixed earn rate, comment',
+  "`/earn-none <issuer/card>...` here instead.",
   "",
   ...r.rewards.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
 ]
@@ -558,7 +559,8 @@ const bonusReviewSection = (r: SyncReport) => [
   `${r.bonus.review.length} cards have signup bonuses the parser could not split by year (sync ${r.date}).`,
   "",
   "Run `bun run cli rewards bonus-todo`, write a manual signup offer from the CDR text it prints, then",
-  '`bun run cli rewards bonus-stamp <issuer/card>...`. See "Signup bonuses" in the README.',
+  '`bun run cli rewards bonus-stamp <issuer/card>...`. See "Signup bonuses" in the README. When a',
+  "card has no current points offer, comment `/bonus-none <issuer/card>...` here instead.",
   "",
   ...r.bonus.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
 ]
@@ -585,7 +587,7 @@ export const summariseHolds = (r: SyncReport): ReadonlyArray<string> => {
 
   if (review.length > 0) {
     lines.push(
-      "Held for review (`bun run cli held approve <id> --evidence ...` or `held reject`):",
+      "Held for review (comment `/approve <id> [why]` or `/reject <id> <why>` on the sync-held issue):",
       ...review.map((hold) => holdLine(hold)),
       ""
     )

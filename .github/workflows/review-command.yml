@@ -1,0 +1,96 @@
+name: Review commands
+
+on:
+  issue_comment:
+    types: [created]
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+jobs:
+  apply:
+    if: >-
+      github.event.issue.pull_request == null &&
+      (contains(github.event.issue.labels.*.name, 'sync-held') ||
+       contains(github.event.issue.labels.*.name, 'rewards-review')) &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association) &&
+      contains(github.event.comment.body, '/')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE: ${{ github.event.issue.number }}
+      COMMENT_ID: ${{ github.event.comment.id }}
+      COMMENT_URL: ${{ github.event.comment.html_url }}
+      COMMENT_BY: ${{ github.event.comment.user.login }}
+      COMMENT_BODY: ${{ github.event.comment.body }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: main
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version-file: package.json
+      - run: bun install --frozen-lockfile
+
+      - name: Apply commands
+        run: |
+          mkdir -p .cache
+          printf '%s\n' "$COMMENT_BODY" > .cache/comment.md
+          bun run cli review apply --body-file .cache/comment.md --by "$COMMENT_BY" --url "$COMMENT_URL" --out .cache/review-result.md
+
+      # Bot pushes made with GITHUB_TOKEN do not trigger CI, so run the
+      # full check here before anything reaches main.
+      - name: Check
+        run: bun run check
+
+      - name: Commit to main
+        id: commit
+        run: |
+          if [ -z "$(git status --porcelain data)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          printf 'data: review decisions from #%s\n\n%s\n\nComment: %s\n' "$ISSUE" "$(cat .cache/review-result.md)" "$COMMENT_URL" > .cache/review-commit.md
+          git commit -F .cache/review-commit.md
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt); rebasing onto main"
+            git pull --rebase origin main
+            bun run check
+          done
+          exit 1
+
+      - name: Run the sync to apply decisions and refresh the issues
+        if: steps.commit.outputs.changed == 'true'
+        run: gh workflow run sync.yml --ref main
+
+      - name: Reply
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/issues/comments/$COMMENT_ID/reactions" -f content=+1 > /dev/null
+          printf 'Applied (%s), and started the sync:\n\n%s\n' "$(git rev-parse --short HEAD)" "$(cat .cache/review-result.md)" > .cache/review-reply.md
+          gh issue comment "$ISSUE" --body-file .cache/review-reply.md
+
+      - name: Report failure
+        if: failure()
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/issues/comments/$COMMENT_ID/reactions" -f content=confused > /dev/null
+          {
+            echo "Could not apply that comment; nothing was committed."
+            echo
+            if [ -s .cache/review-result.md ]; then cat .cache/review-result.md; echo; fi
+            echo "Log: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          } > .cache/review-reply.md
+          gh issue comment "$ISSUE" --body-file .cache/review-reply.md

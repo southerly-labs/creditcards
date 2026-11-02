@@ -120,6 +120,15 @@ bun run cli held approve <id> --evidence "BONUS_REWARDS text now says 150,000 po
 bun run cli held reject <id> --evidence "text unchanged; the parser misread it"
 ```
 
+You can also decide from GitHub without a checkout: comment on the `sync-held` or `rewards-review` issue with one command per line. The `Review commands` workflow (`.github/workflows/review-command.yml`) only acts on comments from the repo's owner, members and collaborators. It applies the commands with the CLI, runs `bun run check`, pushes the change to `main`, starts the sync and replies. If any line is malformed, nothing is applied.
+
+```text
+/approve <hold id> [why]
+/reject <hold id> <why>
+/earn-none <issuer/card>...      same as rewards stamp --none
+/bonus-none <issuer/card>...     same as rewards bonus-stamp --none
+```
+
 The next sync applies an approved change and drops its entry. A rejected change keeps the current value for as long as CDR proposes that exact value; a different proposal is held afresh. Invalid records and vanished issuers still hold the whole card.
 
 A data holder whose product list fails (a timeout, a transport error or a 5xx) is asked again on its own after every other brand has been fetched, since many time out only under the parallel first pass. The sync commit lists brands that still fail and have cards in the data; brands with no cards are only counted.
