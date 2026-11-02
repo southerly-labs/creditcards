@@ -12,6 +12,9 @@ product_id = "S31V1"
 last_updated = "2026-05-01T11:46:38.000+10:00"
 
 [fees]
+foreign_txn_pct = 2.85
+late_payment = 20
+
 [rates]
 purchase = 11.95
 cash_advance = 19.95

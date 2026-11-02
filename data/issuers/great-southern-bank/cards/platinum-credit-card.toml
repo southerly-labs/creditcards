@@ -10,10 +10,11 @@ image = "https://www.greatsouthernbank.com.au/media/jthn/platinum-black.webp"
 [cdr]
 brand = "Great Southern Bank"
 product_id = "2695-0100"
-last_updated = "2026-04-01T14:01:00.00000Z"
+last_updated = "2026-10-30T21:01:00.00000Z"
 
 [fees]
 annual = 144
+late_payment = 12.5
 
 [rates]
 purchase = 19.99

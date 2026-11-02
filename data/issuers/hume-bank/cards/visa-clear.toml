@@ -12,6 +12,9 @@ product_id = "S32V1"
 last_updated = "2026-05-01T11:47:56.000+10:00"
 
 [fees]
+foreign_txn_pct = 2.85
+late_payment = 20
+
 [rates]
 purchase = 14.95
 cash_advance = 19.95

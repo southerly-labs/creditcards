@@ -22,6 +22,8 @@ product_id = "S97_S970001"
 last_updated = "2025-10-23T15:35:57.000+11:00"
 
 [fees]
+late_payment = 10
+
 [rates]
 purchase = 12.95
 cash_advance = 12.95

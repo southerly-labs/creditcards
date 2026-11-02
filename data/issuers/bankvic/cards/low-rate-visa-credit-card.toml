@@ -22,6 +22,9 @@ product_id = "S15_VISA_CLASSIC_CREDIT_CA"
 last_updated = "2025-11-21T14:27:08.000+11:00"
 
 [fees]
+foreign_txn_pct = 3.65
+late_payment = 15
+
 [rates]
 purchase = 13.95
 cash_advance = 13.95

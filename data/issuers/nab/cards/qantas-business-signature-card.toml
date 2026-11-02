@@ -39,6 +39,7 @@ last_updated = "2026-08-03T13:59:59Z"
 [fees]
 annual = 295
 foreign_txn_pct = 3
+late_payment = 15
 
 [rates]
 purchase = 19.5
@@ -57,6 +58,9 @@ earn_text_hash = "8c328cd48e1e97f4"
 [[rewards.earn]]
 rate = 0.6667
 cap_monthly = 50000
+
+[rewards.earn_review]
+state = "present"
 
 [perks]
 insurance = [ "Unauthorised Transaction Insurance", "Transit Accident Insurance" ]

@@ -8,10 +8,11 @@ image = "https://www.commbank.com.au/content/dam/commbank/assets/business/cards/
 [cdr]
 brand = "CommBank"
 product_id = "d44d38acc5b34c5bb76117f290d97134"
-last_updated = "2026-10-31T02:15:41.000Z"
+last_updated = "2026-11-02T02:15:41.000Z"
 
 [fees]
 foreign_txn_pct = 2.5
+late_payment = 25
 
 [rates]
 purchase = 14.55

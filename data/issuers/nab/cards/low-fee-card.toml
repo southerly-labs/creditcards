@@ -26,6 +26,7 @@ last_updated = "2026-10-01T13:59:59Z"
 annual = 49
 foreign_txn_pct = 3.5
 cash_advance_pct = 3.5
+late_payment = 20
 
 [rates]
 purchase = 22.49

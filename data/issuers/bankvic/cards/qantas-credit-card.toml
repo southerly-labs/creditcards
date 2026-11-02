@@ -22,6 +22,9 @@ product_id = "S17_QANTAS_CREDIT_CARD"
 last_updated = "2026-08-13T15:52:02.000+10:00"
 
 [fees]
+foreign_txn_pct = 2
+late_payment = 9
+
 [rates]
 purchase = 18.95
 cash_advance = 18.95
@@ -38,6 +41,9 @@ earn_text_hash = "e775fa5444f0f356"
 
 [[rewards.earn]]
 rate = 0.5
+
+[rewards.earn_review]
+state = "present"
 
 [perks]
 insurance = [ "Complimentary International Travel Insurance**" ]

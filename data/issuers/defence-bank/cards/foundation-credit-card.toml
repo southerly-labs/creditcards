@@ -24,6 +24,7 @@ last_updated = "2026-03-16T00:00:00.000+11:00"
 [fees]
 annual = 45
 foreign_txn_pct = 3
+late_payment = 20
 
 [rates]
 interest_free_days = 55

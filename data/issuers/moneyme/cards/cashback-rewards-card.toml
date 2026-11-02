@@ -20,6 +20,7 @@ last_updated = "2026-10-08T00:00:00Z"
 [fees]
 annual = 149
 foreign_txn_pct = 3
+late_payment = 35
 
 [rates]
 purchase = 19.99

@@ -16,6 +16,7 @@ last_updated = "2026-07-08T02:30:00.000Z"
 annual = 195
 additional_card = 0
 foreign_txn_pct = 3.5
+late_payment = 30
 
 [rates]
 purchase = 23.99
