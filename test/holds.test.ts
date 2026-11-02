@@ -2,7 +2,14 @@ import { assert, describe, test } from "@effect/vitest"
 import { Schema } from "effect"
 import { Card } from "../src/model/schema.ts"
 import type { Hold } from "../src/model/holds.ts"
-import { type HoldCandidate, holdCandidates, holdId, resolveHolds, revertChange } from "../src/sync/holds.ts"
+import {
+  type HoldCandidate,
+  holdCandidates,
+  holdId,
+  resolveHolds,
+  revertChange,
+  withCdrEvidence
+} from "../src/sync/holds.ts"
 import { required } from "../src/util/required.ts"
 
 const base = Schema.decodeUnknownSync(Card)({
@@ -157,5 +164,35 @@ describe("offer holds", () => {
     assert.deepStrictEqual(revertChange(withSignup(160_000), withSignup(100_000), "offers.signup")?.offers, [
       signup(100_000)
     ])
+  })
+})
+
+describe("CDR evidence for held changes", () => {
+  const jump = required(holdCandidates(base, { ...base, fees: { annual: 450, foreign_txn_pct: 3 } })[0])
+  const yesterday = { date: "2026-11-01", card: base }
+
+  test("a change the previous CDR snapshot does not make waits a day to confirm", () => {
+    const decided = withCdrEvidence(jump, yesterday)
+
+    assert.strictEqual(decided.kind, "confirm")
+    assert.strictEqual(decided.evidence, "CDR snapshot 2026-11-01 gives 100; today's gives 450")
+  })
+
+  test("a change the previous CDR snapshot already makes stays for a reviewer", () => {
+    const sameAsToday = { date: "2026-11-01", card: { ...base, fees: { annual: 450, foreign_txn_pct: 3 } } }
+
+    assert.strictEqual(withCdrEvidence(jump, sameAsToday).kind, "approve")
+    assert.strictEqual(withCdrEvidence(jump, undefined).kind, "approve")
+  })
+
+  test("a disappearing field or an implausible value stays for a reviewer", () => {
+    const gone = required(holdCandidates(base, { ...base, fees: { foreign_txn_pct: 3 } })[0])
+
+    const earn = required(
+      holdCandidates(base, { ...base, rewards: { ...base.rewards, program: "qantas", earn: [{ rate: 12 }] } })[0]
+    )
+
+    assert.strictEqual(withCdrEvidence(gone, yesterday).kind, "approve")
+    assert.strictEqual(withCdrEvidence(earn, yesterday).kind, "approve")
   })
 })

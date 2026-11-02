@@ -1,8 +1,8 @@
 import { createHash } from "node:crypto"
 import { Schema } from "effect"
 import type { Hold } from "../model/holds.ts"
-import { Card } from "../model/schema.ts"
-import type { Offer } from "../offers/schema.ts"
+import { Card, EarnRate } from "../model/schema.ts"
+import { Offer } from "../offers/schema.ts"
 import { encodeJson } from "../util/json.ts"
 import { diffCard, getPath, heldFields, setPath } from "./merge.ts"
 
@@ -14,6 +14,7 @@ export interface HoldCandidate {
   readonly kind: HoldKind
   readonly current: unknown
   readonly proposed: unknown
+  readonly evidence?: string
 }
 
 const REVERTED_WITH: Readonly<Record<string, ReadonlyArray<string>>> = {
@@ -87,6 +88,58 @@ const revertOffer = (card: Card, existing: Card, id: string): Card => {
   }
 }
 
+export const valueAt = (card: Card, change: string): unknown =>
+  change.startsWith(OFFER_PREFIX)
+    ? card.offers?.find((offer) => offer.id === change.slice(OFFER_PREFIX.length))
+    : getPath(card, change)
+
+const isEarn = Schema.is(Schema.Array(EarnRate))
+
+const isOffer = Schema.is(Offer)
+
+const baseEarn = (value: unknown) =>
+  isEarn(value) ? value.find((e) => e.category == null || e.category === "")?.rate : undefined
+
+const PLAUSIBLE: Readonly<Record<string, (value: unknown) => boolean>> = {
+  "fees.annual": (v) => typeof v === "number" && v >= 0 && v <= 2500,
+  "fees.foreign_txn_pct": (v) => typeof v === "number" && v >= 0 && v <= 5,
+  "rates.purchase": (v) => typeof v === "number" && v > 0 && v <= 40,
+  "rates.cash_advance": (v) => typeof v === "number" && v > 0 && v <= 40,
+  "rates.balance_transfer": (v) => typeof v === "number" && v >= 0 && v <= 40,
+  "rewards.earn": (v) => {
+    const rate = baseEarn(v)
+
+    return rate !== undefined && rate > 0 && rate <= 10
+  },
+  "offers.signup": (v) => {
+    const points = signupPoints(isOffer(v) ? v : undefined)
+
+    return points > 0 && points <= 500_000
+  }
+}
+
+export const CONFIRMED_BY_CDR = "the issuer's CDR data changed"
+
+export const withCdrEvidence = (
+  candidate: HoldCandidate,
+  previous: { readonly date: string; readonly card: Card } | undefined
+): HoldCandidate => {
+  if (candidate.kind !== "approve" || previous === undefined || candidate.proposed === undefined) return candidate
+
+  const before = valueAt(previous.card, candidate.change)
+  const fromCdr = encodeJson(before ?? null) === encodeJson(candidate.current ?? null)
+  const changed = encodeJson(before ?? null) !== encodeJson(candidate.proposed)
+
+  if (!fromCdr || !changed || PLAUSIBLE[candidate.change]?.(candidate.proposed) !== true) return candidate
+
+  return {
+    ...candidate,
+    kind: "confirm",
+    reason: `${candidate.reason}; ${CONFIRMED_BY_CDR} since ${previous.date}`,
+    evidence: `CDR snapshot ${previous.date} gives ${encodeJson(before ?? null)}; today's gives ${encodeJson(candidate.proposed)}`
+  }
+}
+
 const isCard = Schema.is(Card)
 
 export const revertChange = (card: Card, existing: Card, change: string): Card | undefined => {
@@ -148,7 +201,8 @@ export const resolveHolds = (input: {
         ...(current === undefined ? {} : { current }),
         ...(proposed === undefined ? {} : { proposed }),
         since: input.date,
-        ...(input.history === undefined ? {} : { history: input.history })
+        ...(input.history === undefined ? {} : { history: input.history }),
+        ...(candidate.evidence === undefined ? {} : { evidence: candidate.evidence })
       }
     )
   }

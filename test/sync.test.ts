@@ -204,6 +204,48 @@ describe("syncCdr", () => {
       })
     )
 
+    it.effect("applies a large fee change the issuer's CDR data shows once a later day still shows it", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const jumped = { ...seeded, products: [product("p1", "450.00"), ...seeded.products.slice(1)] }
+        const held = required((yield* syncOn(2, jumped)).holds[0])
+
+        assert.strictEqual(held.kind, "confirm")
+        assert.strictEqual(held.evidence, "CDR snapshot 2026-11-01 gives 99; today's gives 450")
+        assert.strictEqual((yield* storedCard("example-bank/card-p1")).fees.annual, 99)
+
+        const report = yield* syncOn(3, jumped)
+        assert.deepStrictEqual(
+          report.released.map((hold) => hold.change),
+          ["fees.annual"]
+        )
+        assert.strictEqual((yield* storedCard("example-bank/card-p1")).fees.annual, 450)
+      })
+    )
+
+    it.effect("leaves an implausible fee for a reviewer even when CDR shows it", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const typo = { ...seeded, products: [product("p1", "3000.00"), ...seeded.products.slice(1)] }
+        const held = required((yield* syncOn(2, typo)).holds[0])
+
+        assert.strictEqual(held.kind, "approve")
+        assert.isUndefined(held.evidence)
+      })
+    )
+
+    it.effect("leaves a change for a reviewer when the CDR response did not change", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const card = yield* storedCard("example-bank/card-p1")
+        yield* (yield* Store).writeCard("example-bank", "card-p1", { ...card, fees: { ...card.fees, annual: 450 } })
+        const held = required((yield* syncOn(2)).holds[0])
+
+        assert.strictEqual(held.kind, "approve")
+        assert.isUndefined(held.evidence)
+      })
+    )
+
     it.effect("aborts when far fewer cards come back than are active", () =>
       Effect.gen(function* () {
         yield* syncOn(1)

@@ -72,6 +72,11 @@ export class Snapshots extends Context.Service<
       snapshot: CdrSnapshot
     ): Effect.Effect<boolean, SnapshotError>
     lastChanged(issuer: string, productId: string): Effect.Effect<string | undefined, SnapshotError>
+    previous(
+      issuer: string,
+      productId: string,
+      current: Pick<CdrSnapshot, "brand" | "product">
+    ): Effect.Effect<{ readonly date: string; readonly product: unknown } | undefined, SnapshotError>
   }
 >()("creditcards/history/Snapshots") {
   static readonly layer = (historyDir: string) =>
@@ -127,7 +132,34 @@ export class Snapshots extends Context.Service<
           return files.length < 2 ? undefined : files.toSorted().at(-1)?.slice(0, 10)
         })
 
-        return Snapshots.of({ record, lastChanged })
+        const previous = Effect.fn("Snapshots.previous")(function* (
+          issuer: string,
+          productId: string,
+          current: Pick<CdrSnapshot, "brand" | "product">
+        ) {
+          const dir = path.join(historyDir, "cdr", productDir(issuer, productId))
+
+          if (!(yield* fs.exists(dir).pipe(Effect.mapError(fail(dir))))) return undefined
+
+          const files = (yield* fs.readDirectory(dir).pipe(Effect.mapError(fail(dir))))
+            .filter((n) => SNAPSHOT_FILE.test(n))
+            .toSorted()
+            .toReversed()
+            .slice(0, 2)
+
+          for (const name of files) {
+            const file = path.join(dir, name)
+            const text = yield* fs.readFileString(file).pipe(Effect.mapError(fail(file)))
+            const saved = yield* Schema.decodeUnknownEffect(Saved)(text).pipe(Effect.mapError(fail(file)))
+
+            if (!sameProduct({ ...saved, version: null }, current))
+              return { date: name.slice(0, 10), product: saved.product }
+          }
+
+          return undefined
+        })
+
+        return Snapshots.of({ record, lastChanged, previous })
       })
     )
 }

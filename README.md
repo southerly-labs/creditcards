@@ -110,6 +110,8 @@ Updates auto-merge. Changes that look wrong are held back and listed in a `sync-
 - records that fail schema validation
 - more than half of an issuer's cards vanishing at once
 
+Before asking a reviewer, the sync rebuilds the card from the issuer's previous CDR response in `history/` with the current code. If that gives the stored value and today's response gives the new one, the issuer really changed its data, so the hold becomes a confirm hold with that comparison as its evidence and applies if a sync on a later day still proposes it. It stays for a reviewer when the previous response already gives the new value (a parser change), when there is no earlier response, when a field disappears, or when the new value is outside a plausible range (annual fee above $2,500, a rate above 40%, a foreign transaction fee above 5%, a base earn rate above 10, a signup bonus above 500,000 points).
+
 For the field and offer rules, only the suspicious field or offer is held: the rest of the card still updates. Each held change is recorded in `data/sync-holds.toml` with a stable id, the current and proposed values, the date it was first held and the card's `history/` folder, so the issuer's raw CDR responses can be compared. A reviewer decides each one:
 
 ```sh

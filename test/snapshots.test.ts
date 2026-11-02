@@ -60,6 +60,21 @@ describe("CDR snapshots", () => {
       })
     )
 
+    it.effect("finds the newest snapshot that differs from today's response", () =>
+      Effect.gen(function* () {
+        const snapshots = yield* Snapshots
+        assert.isUndefined(yield* snapshots.previous("bank", "p6", snapshot(99)))
+        yield* snapshots.record("bank", "p6", "2026-11-01", snapshot(99))
+        assert.isUndefined(yield* snapshots.previous("bank", "p6", snapshot(99)))
+        assert.deepStrictEqual(yield* snapshots.previous("bank", "p6", snapshot(450)), {
+          date: "2026-11-01",
+          product: snapshot(99).product
+        })
+        yield* snapshots.record("bank", "p6", "2026-11-02", snapshot(450))
+        assert.strictEqual((yield* snapshots.previous("bank", "p6", snapshot(450)))?.date, "2026-11-01")
+      })
+    )
+
     it.effect("ignores a regenerated lastUpdated and reordered arrays", () =>
       Effect.gen(function* () {
         const snapshots = yield* Snapshots

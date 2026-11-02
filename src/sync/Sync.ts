@@ -1,13 +1,13 @@
 import { encodeJson } from "../util/json.ts"
 import { required } from "../util/required.ts"
-import { DateTime, Effect, Result, Schema } from "effect"
+import { DateTime, Effect, Option, Result, Schema } from "effect"
 import { CdrClient, type CdrError, REQUEST_VARIANTS, type VersionedProduct } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise, type NormaliseResult } from "../cdr/normalise.ts"
 import { type CdrSnapshot, productDir, Snapshots } from "../history/Snapshots.ts"
-import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
+import { ProductDetail, type ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
 import { applyOffers, signupState } from "../offers/build.ts"
-import { holdCandidates, holdId, resolveHolds, revertChange } from "./holds.ts"
+import { holdCandidates, holdId, resolveHolds, revertChange, withCdrEvidence } from "./holds.ts"
 import type { Hold } from "../model/holds.ts"
 import { isResolvableFromCdr } from "../rewards/bonus.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
@@ -119,6 +119,28 @@ const proposeCard = Effect.fn("proposeCard")(function* (
   const card = applyOffers(decoded.success, normalised.offers, applyBonusPlan(currentSignup, bonusPlan))
 
   return { earnPlan, bonusPlan, card } satisfies Proposal
+})
+
+const decodeProduct = Schema.decodeUnknownEffect(ProductDetail)
+
+const previousCard = Effect.fn("previousCard")(function* (
+  existing: Card,
+  productId: string,
+  current: Pick<CdrSnapshot, "brand" | "product">,
+  issuerSlug: string,
+  date: string,
+  programs: ReturnType<typeof makeProgramIndex>
+) {
+  const snapshot = yield* (yield* Snapshots).previous(issuerSlug, productId, current)
+
+  if (snapshot === undefined) return undefined
+  const detail = yield* decodeProduct(snapshot.product).pipe(Effect.option)
+
+  if (Option.isNone(detail)) return undefined
+  const normalised = normalise(detail.value, { issuerSlug, brandName: current.brand, programs })
+  const proposal = yield* proposeCard(existing, detail.value, normalised, date)
+
+  return proposal.card === undefined ? undefined : { date: snapshot.date, card: proposal.card }
 })
 
 const retryable = (b: BrandFetch) => b.listError !== undefined && !/HTTP 4\d\d/u.test(b.listError)
@@ -316,7 +338,14 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       }
 
       const proposed = proposal.card
-      const candidates = existing ? holdCandidates(existing, proposed) : []
+      const flagged = existing ? holdCandidates(existing, proposed) : []
+
+      const previous =
+        existing && flagged.some((candidate) => candidate.kind === "approve")
+          ? yield* previousCard(existing, product.productId, { brand, product: raw }, issuerSlug, date, programIndex)
+          : undefined
+
+      const candidates = flagged.map((candidate) => withCdrEvidence(candidate, previous))
       let card = proposed
 
       if (existing) evaluated.add(key)
