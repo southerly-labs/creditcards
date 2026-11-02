@@ -105,3 +105,46 @@ jobs:
           else
             gh issue create --title "Earn rates and signup bonuses to review" --label rewards-review --body-file .cache/rewards-review.md
           fi
+
+      # Wakes the review agent only when something needs a reviewer. The
+      # fingerprint is the set of open items, and the T3 webhook drops a
+      # repeat of the same fingerprint, so an unchanged queue never re-runs it.
+      - name: Ask the review agent
+        if: always()
+        env:
+          WEBHOOK: ${{ secrets.T3_REVIEW_WEBHOOK }}
+          STATUS: ${{ job.status }}
+        run: |
+          if [ -z "$WEBHOOK" ]; then
+            echo "T3_REVIEW_WEBHOOK is not set"
+            exit 0
+          fi
+          run="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [ "$STATUS" != "success" ] || [ ! -f .cache/sync-report.json ]; then
+            items=$(jq -nc --arg run "$GITHUB_RUN_ID" '{failed: [$run]}')
+          else
+            earn_check='[]'
+            if [ -f .cache/earn-check.json ]; then
+              earn_check=$(jq -c '[.[] | select(.missing | length > 0) | .card]' .cache/earn-check.json)
+            fi
+            items=$(jq -c --argjson earn_check "$earn_check" '{
+              holds: [.holds[] | select(.kind == "approve" and (has("decision") | not)) | .id],
+              held: [.held[].card],
+              earn: [.rewards.review[].card],
+              bonus: [.bonus.review[].card],
+              earn_check: $earn_check,
+              missing: .missing,
+              discontinued: .discontinued,
+              brands: [.brandErrors[].brand]
+            }' .cache/sync-report.json)
+          fi
+          if [ "$(jq '[.[] | length] | add' <<< "$items")" -eq 0 ]; then
+            echo "Nothing needs a reviewer"
+            exit 0
+          fi
+          fingerprint=$(jq -cS . <<< "$items" | sha256sum | cut -c1-16)
+          echo "Items: $items"
+          jq -nc --arg fingerprint "$fingerprint" --arg run "$run" --argjson items "$items" \
+            '{event: "sync-needs-review", fingerprint: $fingerprint, run: $run, items: $items}' \
+            | curl -fsS -X POST -H 'content-type: application/json' --data-binary @- "$WEBHOOK" \
+            || echo "::warning::Could not reach the review agent webhook"

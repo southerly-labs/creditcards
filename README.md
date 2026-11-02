@@ -129,6 +129,8 @@ You can also decide from GitHub without a checkout: comment on the `sync-held` o
 /bonus-none <issuer/card>...     same as rewards bonus-stamp --none
 ```
 
+After each sync, if anything needs a reviewer (undecided `approve` holds, whole cards held, earn rates or bonuses to review, flagged earn pages, cards not seen or discontinued, brand errors) or the sync failed, the workflow posts the list to the review agent's webhook (repo secret `T3_REVIEW_WEBHOOK`). The post carries a fingerprint of that list and the webhook ignores a fingerprint it has already seen, so the agent runs only when the queue changes.
+
 The next sync applies an approved change and drops its entry. A rejected change keeps the current value for as long as CDR proposes that exact value; a different proposal is held afresh. Invalid records and vanished issuers still hold the whole card.
 
 A data holder whose product list fails (a timeout, a transport error or a 5xx) is asked again on its own after every other brand has been fetched, since many time out only under the parallel first pass. The sync commit lists brands that still fail and have cards in the data; brands with no cards are only counted.
