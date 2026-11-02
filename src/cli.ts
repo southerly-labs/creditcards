@@ -9,7 +9,17 @@ import { FetchHttpClient } from "effect/http"
 import { toApi, validate } from "./build/build.ts"
 import { CdrClient } from "./cdr/CdrClient.ts"
 import { checkEarnPages, formatCheck, normaliseText, pageText } from "./rewards/check.ts"
-import { bonusReviewQueue, formatBonusQueue, formatQueue, reviewQueue, stamp, stampBonus } from "./rewards/review.ts"
+import {
+  bonusReviewQueue,
+  formatBonusQueue,
+  formatQueue,
+  RewardsError,
+  reviewQueue,
+  stamp,
+  stampBonus
+} from "./rewards/review.ts"
+import { applyComment } from "./review/apply.ts"
+import { ParsedComment } from "./review/commands.ts"
 import { Snapshots } from "./history/Snapshots.ts"
 import { splitCardKey, Store } from "./store/Store.ts"
 import { summariseHolds, summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
@@ -168,6 +178,35 @@ const rewards = Command.make("rewards").pipe(
   Command.withSubcommands([rewardsTodo, rewardsStamp, bonusTodo, bonusStamp, rewardsCheck])
 )
 
+const reviewApply = Command.make(
+  "apply",
+  {
+    bodyFile: Flag.String("body-file").pipe(Flag.withDescription("File holding the comment text")),
+    by: Flag.String("by").pipe(Flag.withDescription("Login of the comment author")),
+    url: Flag.String("url").pipe(Flag.withDescription("URL of the comment")),
+    out: Flag.String("out").pipe(Flag.withDefault(".cache/review-result.md"))
+  },
+  Effect.fn(function* ({ bodyFile, by, url, out }) {
+    const body = yield* (yield* FileSystem.FileSystem).readFileString(bodyFile)
+    const result = yield* applyComment(body, { by, url })
+
+    if (ParsedComment.$is("Invalid")(result)) {
+      yield* writeFile(out, ["Nothing applied:", ...result.errors.map((error) => `- ${error}`)].join("\n"))
+
+      return yield* new RewardsError({ message: result.errors.join("; ") })
+    }
+
+    yield* writeFile(out, result.applied.map((line) => `- ${line}`).join("\n"))
+
+    return yield* Console.log(result.applied.length === 0 ? "No review commands" : result.applied.join("\n"))
+  })
+).pipe(Command.withDescription("Apply /approve, /reject, /earn-none and /bonus-none commands from an issue comment"))
+
+const review = Command.make("review").pipe(
+  Command.withDescription("Apply review decisions written as issue comment commands"),
+  Command.withSubcommands([reviewApply])
+)
+
 const MainLayer = Layer.mergeAll(
   CdrClient.layer,
   Store.layer(DATA_DIR),
@@ -176,7 +215,7 @@ const MainLayer = Layer.mergeAll(
 ).pipe(Layer.provideMerge(BunServices.layer))
 
 Command.make("creditcards").pipe(
-  Command.withSubcommands([sync, validateCommand, build, rewards, provenanceCommand, heldCommand]),
+  Command.withSubcommands([sync, validateCommand, build, rewards, provenanceCommand, heldCommand, review]),
   Command.run({ version: "0.1.0" }),
   Effect.provide(MainLayer),
   (program) => {

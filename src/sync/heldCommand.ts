@@ -3,20 +3,30 @@ import { Argument, Command, Flag } from "effect/cli"
 import type { Hold } from "../model/holds.ts"
 import { Store, StoreError } from "../store/Store.ts"
 
+export const decideHold = Effect.fn("decideHold")(function* (
+  id: string,
+  decision: "approve" | "reject",
+  evidence: string
+) {
+  const store = yield* Store
+  const holds = (yield* store.load).holds ?? []
+  const hold = holds.find((entry) => entry.id === id)
+
+  if (hold === undefined) return yield* new StoreError({ file: id, message: "Unknown hold" })
+  const decided_on = DateTime.formatIsoDateUtc(yield* DateTime.now)
+  const decided: Hold = { ...hold, decision, decided_on, evidence }
+
+  yield* store.writeHolds(holds.map((entry) => (entry.id === id ? decided : entry)))
+
+  return decided
+})
+
 const decide = (decision: "approve" | "reject") =>
   Command.make(
     decision,
     { id: Argument.String("id"), evidence: Flag.String("evidence") },
     Effect.fn(function* ({ id, evidence }) {
-      const store = yield* Store
-      const holds = (yield* store.load).holds ?? []
-
-      if (!holds.some((hold) => hold.id === id)) return yield* new StoreError({ file: id, message: "Unknown hold" })
-      const decided_on = DateTime.formatIsoDateUtc(yield* DateTime.now)
-
-      const decided = (hold: Hold): Hold => ({ ...hold, decision, decided_on, evidence })
-
-      yield* store.writeHolds(holds.map((hold) => (hold.id === id ? decided(hold) : hold)))
+      yield* decideHold(id, decision, evidence)
       yield* Console.log(`Recorded ${decision} for ${id}; the next sync applies it`)
 
       return undefined
