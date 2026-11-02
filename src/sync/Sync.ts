@@ -2,7 +2,7 @@ import { encodeJson } from "../util/json.ts"
 import { required } from "../util/required.ts"
 import { DateTime, Effect, Result, Schema } from "effect"
 import { CdrClient, type CdrError, REQUEST_VARIANTS, type VersionedProduct } from "../cdr/CdrClient.ts"
-import { makeProgramIndex, normalise } from "../cdr/normalise.ts"
+import { makeProgramIndex, normalise, type NormaliseResult } from "../cdr/normalise.ts"
 import { type CdrSnapshot, productDir, Snapshots } from "../history/Snapshots.ts"
 import type { ProductDetail, ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
@@ -69,6 +69,57 @@ interface BrandFetch {
 }
 
 const decodeCard = Schema.decodeUnknownEffect(Card)
+
+type Proposal =
+  | { readonly earnPlan: RewardsPlan; readonly bonusPlan: BonusPlan; readonly card: Card; readonly invalid?: never }
+  | { readonly earnPlan: RewardsPlan; readonly bonusPlan: BonusPlan; readonly card?: never; readonly invalid: string }
+
+const proposeCard = Effect.fn("proposeCard")(function* (
+  existing: Card | undefined,
+  product: ProductDetail,
+  normalised: NormaliseResult,
+  date: string
+) {
+  const merged = mergeCard(existing, normalised.card)
+
+  if (!existing) merged["first_seen"] = date
+  const mergedRewards = merged["rewards"]
+  const hasRewards = mergedRewards !== undefined && Schema.is(Card.fields.rewards)(mergedRewards)
+  const loyalty = (product.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
+  const earnPlan = hasRewards ? planRewards(mergedRewards, loyalty) : RewardsPlan.Unchanged()
+
+  if (hasRewards && RewardsPlan.$is("Set")(earnPlan)) {
+    merged["rewards"] = {
+      ...mergedRewards,
+      earn: earnPlan.earn,
+      earn_source: "parser",
+      earn_text_hash: earnPlan.hash,
+      earn_review: { state: "present" }
+    }
+  } else if (hasRewards && RewardsPlan.$is("Review")(earnPlan)) {
+    merged["rewards"] =
+      mergedRewards.earn_source === "manual" ? mergedRewards : { ...mergedRewards, earn_review: { state: "unknown" } }
+  }
+
+  const currentSignup = signupState(existing)
+
+  const bonusPlan: BonusPlan =
+    merged["rewards"] === undefined ? BonusPlan.Unchanged() : planBonus(currentSignup, bonusFeatures(product))
+
+  const decoded = yield* decodeCard(merged).pipe(Effect.result)
+
+  if (Result.isFailure(decoded)) {
+    return {
+      earnPlan,
+      bonusPlan,
+      invalid: decoded.failure.message.split("\n").slice(0, 3).join(" ")
+    } satisfies Proposal
+  }
+
+  const card = applyOffers(decoded.success, normalised.offers, applyBonusPlan(currentSignup, bonusPlan))
+
+  return { earnPlan, bonusPlan, card } satisfies Proposal
+})
 
 const retryable = (b: BrandFetch) => b.listError !== undefined && !/HTTP 4\d\d/u.test(b.listError)
 
@@ -221,15 +272,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         snapshot: { brand, version: Number.isFinite(version) ? version : null, product: raw }
       })
 
-      const {
-        card: incoming,
-        offers: offerInputs,
-        fallbackProgram
-      } = normalise(product, {
-        issuerSlug,
-        brandName: brand,
-        programs: programIndex
-      })
+      const normalised = normalise(product, { issuerSlug, brandName: brand, programs: programIndex })
+      const { card: incoming, fallbackProgram } = normalised
 
       if (fallbackProgram != null && fallbackProgram !== "" && !programs.has(fallbackProgram)) {
         const program: Program = { name: `${issuerName} Rewards`, type: "bank" }
@@ -254,53 +298,24 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         keyByCdrId.set(`${brand}|${product.productId}`, key)
       }
 
-      const merged = mergeCard(existing, incoming)
+      const proposal = yield* proposeCard(existing, product, normalised, date)
+      const earnPlan = proposal.earnPlan
+      const bonusPlan = proposal.bonusPlan
+      const earnSet = RewardsPlan.$is("Set")(earnPlan) ? earnPlan.earn : undefined
 
-      if (!existing) merged["first_seen"] = date
-      let earnSet: ReadonlyArray<EarnRate> | undefined
-      const mergedRewards = merged["rewards"]
-
-      if (mergedRewards !== undefined && Schema.is(Card.fields.rewards)(mergedRewards)) {
-        const loyalty = (product.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
-        const plan = planRewards(mergedRewards, loyalty)
-
-        if (RewardsPlan.$is("Set")(plan)) {
-          merged["rewards"] = {
-            ...mergedRewards,
-            earn: plan.earn,
-            earn_source: "parser",
-            earn_text_hash: plan.hash,
-            earn_review: { state: "present" }
-          }
-          earnSet = plan.earn
-        } else if (RewardsPlan.$is("Review")(plan)) {
-          rewardsReview.push({ card: key, reason: plan.reason })
-
-          merged["rewards"] =
-            mergedRewards.earn_source === "manual"
-              ? mergedRewards
-              : { ...mergedRewards, earn_review: { state: "unknown" } }
-        }
-      }
-
-      const currentSignup = signupState(existing)
-
-      const bonusPlan: BonusPlan =
-        merged["rewards"] === undefined ? BonusPlan.Unchanged() : planBonus(currentSignup, bonusFeatures(product))
+      if (RewardsPlan.$is("Review")(earnPlan)) rewardsReview.push({ card: key, reason: earnPlan.reason })
 
       if (BonusPlan.$is("Review")(bonusPlan)) {
         if (isResolvableFromCdr(bonusPlan.reason)) bonusReview.push({ card: key, reason: bonusPlan.reason })
         else bonusUndetailed.push(key)
       }
 
-      const decoded = yield* decodeCard(merged).pipe(Effect.result)
-
-      if (Result.isFailure(decoded)) {
-        held.push({ card: key, reasons: [`invalid: ${decoded.failure.message.split("\n").slice(0, 3).join(" ")}`] })
+      if (proposal.card === undefined) {
+        held.push({ card: key, reasons: [`invalid: ${proposal.invalid}`] })
         continue
       }
 
-      const proposed = applyOffers(decoded.success, offerInputs, applyBonusPlan(currentSignup, bonusPlan))
+      const proposed = proposal.card
       const candidates = existing ? holdCandidates(existing, proposed) : []
       let card = proposed
 
