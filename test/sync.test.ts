@@ -10,6 +10,7 @@ import { syncCdr } from "../src/sync/Sync.ts"
 import { required } from "../src/util/required.ts"
 
 const BASE_URI = "https://cdr.bank.example"
+const CARDLESS_URI = "https://cdr.cardless.example"
 
 const product = (productId: string, annual: string): ProductDetail => ({
   productId,
@@ -26,6 +27,8 @@ const product = (productId: string, annual: string): ProductDetail => ({
 interface WorldState {
   readonly products: ReadonlyArray<ProductDetail>
   readonly failing: ReadonlySet<string>
+  readonly listFailures?: number
+  readonly cardlessDown?: boolean
 }
 
 const seeded: WorldState = {
@@ -45,12 +48,25 @@ const FakeCdr = Layer.effect(
 
     return CdrClient.of({
       brands: Effect.succeed([
-        new DataHolderBrand({ brandName: "Example Bank", industries: ["banking"], publicBaseUri: BASE_URI })
+        new DataHolderBrand({ brandName: "Example Bank", industries: ["banking"], publicBaseUri: BASE_URI }),
+        new DataHolderBrand({ brandName: "Cardless Bank", industries: ["banking"], publicBaseUri: CARDLESS_URI })
       ]),
-      listProducts: () =>
-        Ref.get(world).pipe(
-          Effect.map((state) =>
-            state.products.map((p) => ({ productId: p.productId, name: p.name, productCategory: p.productCategory }))
+      listProducts: (baseUri) =>
+        Ref.getAndUpdate(world, (state) =>
+          baseUri === BASE_URI ? { ...state, listFailures: Math.max((state.listFailures ?? 0) - 1, 0) } : state
+        ).pipe(
+          Effect.flatMap((state) =>
+            (baseUri === CARDLESS_URI ? state.cardlessDown === true : (state.listFailures ?? 0) > 0)
+              ? Effect.fail(new CdrError({ url: baseUri, message: "TimeoutError" }))
+              : Effect.succeed(
+                  baseUri === CARDLESS_URI
+                    ? []
+                    : state.products.map((p) => ({
+                        productId: p.productId,
+                        name: p.name,
+                        productCategory: p.productCategory
+                      }))
+                )
           )
         ),
       getProduct: (_baseUri, productId) =>
@@ -109,6 +125,34 @@ describe("syncCdr", () => {
         assert.strictEqual(card.fees.late_payment, 15)
         assert.strictEqual(card.fees.foreign_txn_pct, 3)
         assert.strictEqual(card.first_seen, "2026-11-01")
+      })
+    )
+
+    it.effect("retries a brand whose product list fails once", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const report = yield* syncOn(2, { ...seeded, listFailures: 1 })
+
+        assert.strictEqual(report.cardsSeen, 10)
+        assert.deepStrictEqual(report.brandErrors, [])
+      })
+    )
+
+    it.effect("retries a failing brand only once", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const error = yield* Effect.flip(syncOn(2, { ...seeded, listFailures: 2 }))
+
+        assert.strictEqual(error._tag, "SyncAborted")
+      })
+    )
+
+    it.effect("only counts unreachable brands that have no cards", () =>
+      Effect.gen(function* () {
+        const report = yield* syncOn(1, { ...seeded, cardlessDown: true })
+
+        assert.deepStrictEqual(report.brandErrors, [])
+        assert.strictEqual(report.cardlessBrandErrors, 1)
       })
     )
 

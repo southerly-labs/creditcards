@@ -39,6 +39,7 @@ export interface SyncReport {
   readonly newIssuers: ReadonlyArray<string>
   readonly newPrograms: ReadonlyArray<string>
   readonly brandErrors: ReadonlyArray<{ readonly brand: string; readonly error: string }>
+  readonly cardlessBrandErrors: number
   readonly snapshotsSaved: number
 
   readonly rewards: {
@@ -67,6 +68,8 @@ interface BrandFetch {
 
 const decodeCard = Schema.decodeUnknownEffect(Card)
 
+const retryable = (b: BrandFetch) => b.listError !== undefined && !/HTTP 4\d\d/u.test(b.listError)
+
 export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRun: boolean }) {
   const cdr = yield* CdrClient
   const store = yield* Store
@@ -90,60 +93,65 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       activeByBrand.set(card.cdr.brand, (activeByBrand.get(card.cdr.brand) ?? 0) + 1)
   }
 
-  const fetched = yield* Effect.forEach(
-    brands,
-    (brand) =>
-      Effect.gen(function* () {
-        const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
+  const fetchBrand = Effect.fn("syncCdr.fetchBrand")(function* (brand: (typeof brands)[number]) {
+    const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
 
-        const list = Effect.fn("CdrClient.listWithFallback")(function* (
-          variant: number
-        ): Effect.fn.Return<ReadonlyArray<ProductSummary>, CdrError> {
-          const products = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY, variant)
+    const list = Effect.fn("CdrClient.listWithFallback")(function* (
+      variant: number
+    ): Effect.fn.Return<ReadonlyArray<ProductSummary>, CdrError> {
+      const products = yield* cdr.listProducts(brand.publicBaseUri, CATEGORY, variant)
 
-          return products.length === 0 && expectsCards && variant + 1 < REQUEST_VARIANTS.length
-            ? yield* list(variant + 1)
-            : products
-        })
+      return products.length === 0 && expectsCards && variant + 1 < REQUEST_VARIANTS.length
+        ? yield* list(variant + 1)
+        : products
+    })
 
-        const listed = yield* list(0).pipe(Effect.result)
+    const listed = yield* list(0).pipe(Effect.result)
 
-        if (Result.isFailure(listed)) {
-          return {
-            brand: brand.brandName,
-            products: [],
-            listed: [],
-            listError: listed.failure.message,
-            productErrors: []
-          } satisfies BrandFetch
-        }
+    if (Result.isFailure(listed)) {
+      return {
+        brand: brand.brandName,
+        products: [],
+        listed: [],
+        listError: listed.failure.message,
+        productErrors: []
+      } satisfies BrandFetch
+    }
 
-        const productErrors: Array<string> = []
+    const productErrors: Array<string> = []
 
-        const products = yield* Effect.forEach(
-          listed.success,
-          (summary) =>
-            cdr
-              .getProduct(brand.publicBaseUri, summary.productId)
-              .pipe(
-                Effect.catchTag("CdrError", (e) =>
-                  Effect.sync(() => (productErrors.push(`${summary.name}: ${e.message}`), undefined))
-                )
-              ),
-          { concurrency: 4 }
-        )
+    const products = yield* Effect.forEach(
+      listed.success,
+      (summary) =>
+        cdr
+          .getProduct(brand.publicBaseUri, summary.productId)
+          .pipe(
+            Effect.catchTag("CdrError", (e) =>
+              Effect.sync(() => (productErrors.push(`${summary.name}: ${e.message}`), undefined))
+            )
+          ),
+      { concurrency: 4 }
+    )
 
-        return {
-          brand: brand.brandName,
-          products: products.filter((p) => p !== undefined),
-          listed: listed.success.map((summary) => summary.productId),
-          listError:
-            productErrors.length > 0 && productErrors.length === listed.success.length ? productErrors[0] : undefined,
-          productErrors
-        } satisfies BrandFetch
-      }),
-    { concurrency: 16 }
+    return {
+      brand: brand.brandName,
+      products: products.filter((p) => p !== undefined),
+      listed: listed.success.map((summary) => summary.productId),
+      listError:
+        productErrors.length > 0 && productErrors.length === listed.success.length ? productErrors[0] : undefined,
+      productErrors
+    } satisfies BrandFetch
+  })
+
+  const firstPass = yield* Effect.forEach(brands, fetchBrand, { concurrency: 16 })
+
+  const retried = yield* Effect.forEach(
+    brands.filter((_, i) => retryable(required(firstPass[i]))),
+    (brand) => fetchBrand(brand),
+    { concurrency: 1 }
   )
+
+  const fetched = firstPass.map((result) => retried.find((retry) => retry.brand === result.brand) ?? result)
 
   const cardsSeen = fetched.reduce((n, b) => n + b.products.length, 0)
   const activeCdrCards = [...cards.values()].filter((c) => c.status !== "discontinued" && c.cdr !== undefined).length
@@ -380,6 +388,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   holds.push(...priorHolds.filter((hold) => !evaluated.has(hold.card) && cards.has(hold.card)))
 
+  const failedBrands = fetched.filter((b) => retryable(b))
+
   let snapshotsSaved = 0
 
   if (!options.dryRun) {
@@ -411,9 +421,10 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     released,
     newIssuers: [...new Set(newIssuers)],
     newPrograms,
-    brandErrors: fetched
-      .filter((b) => b.listError !== undefined && !/HTTP 4\d\d/u.test(b.listError))
+    brandErrors: failedBrands
+      .filter((b) => activeByBrand.has(b.brand))
       .map((b) => ({ brand: b.brand, error: required(b.listError) })),
+    cardlessBrandErrors: failedBrands.filter((b) => !activeByBrand.has(b.brand)).length,
     snapshotsSaved,
     rewards: { set: rewardsSet, review: rewardsReview },
     bonus: { set: bonusSet, review: bonusReview }
@@ -470,7 +481,11 @@ export const summariseReport = (r: SyncReport): string => {
 
   if (r.snapshotsSaved > 0) lines.push(`History: saved ${r.snapshotsSaved} changed CDR product responses`, "")
 
-  if (r.brandErrors.length > 0) lines.push("Brand errors:", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")
+  if (r.brandErrors.length > 0)
+    lines.push("Brand errors (after a retry):", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")
+
+  if (r.cardlessBrandErrors > 0)
+    lines.push(`Unreachable brands with no cards in the data: ${r.cardlessBrandErrors}`, "")
 
   return lines.join("\n")
 }
