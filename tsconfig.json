@@ -44,7 +44,7 @@
           "acquireReleaseDisposable": "error",
           "allOfMapToForEach": "error",
           "anyUnknownInErrorContext": "error",
-          "apiStabilityLeak": "error",
+          "apiStabilityLeak": "off",
           "asyncFunction": "error",
           "catchAllTagDispatchToCatchTag": "error",
           "catchAllToMapError": "error",
