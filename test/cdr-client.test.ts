@@ -1,5 +1,5 @@
 import { assert, describe, layer } from "@effect/vitest"
-import { Deferred, Effect, Fiber, Layer } from "effect"
+import { Deferred, Effect, Fiber, Layer, Array as EffectArray } from "effect"
 import { HttpClient, HttpClientResponse } from "effect/http"
 import { TestClock } from "effect/testing"
 import { CdrClient } from "../src/cdr/CdrClient.ts"
@@ -9,7 +9,7 @@ const BASE = "https://cdr.bank.example"
 const page = (products: ReadonlyArray<{ readonly id: string; readonly category: string }>) =>
   Response.json({
     data: {
-      products: products.map((p) => ({ productId: p.id, name: p.id, productCategory: p.category }))
+      products: EffectArray.map(products, (p) => ({ productId: p.id, name: p.id, productCategory: p.category }))
     }
   })
 
@@ -59,7 +59,7 @@ describe("CdrClient.listProducts", () => {
         const products = yield* cdr.listProducts(BASE, "CRED_AND_CHRG_CARDS")
 
         assert.deepStrictEqual(
-          products.map((p) => p.productId),
+          EffectArray.map(products, (p) => p.productId),
           ["card"]
         )
         assert.deepStrictEqual(requests, [
@@ -75,7 +75,7 @@ describe("CdrClient.listProducts", () => {
         const products = yield* cdr.listProducts("https://reject.example", "CRED_AND_CHRG_CARDS")
 
         assert.deepStrictEqual(
-          products.map((p) => p.productId),
+          EffectArray.map(products, (p) => p.productId),
           ["card"]
         )
         assert.strictEqual(requests.at(-1), "https://reject.example/cds-au/v1/banking/products?page-size=100")
@@ -91,7 +91,7 @@ describe("CdrClient.listProducts", () => {
         const products = yield* Fiber.join(fiber)
 
         assert.deepStrictEqual(
-          products.map((p) => p.productId),
+          EffectArray.map(products, (p) => p.productId),
           ["card"]
         )
         assert.strictEqual(requests.length, 2)

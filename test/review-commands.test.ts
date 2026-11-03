@@ -1,5 +1,6 @@
 import { assert, describe, test } from "@effect/vitest"
 import { ParsedComment, parseComment, ReviewCommand } from "../src/review/commands.ts"
+import { Array as EffectArray } from "effect"
 
 const commands = (body: string) => {
   const parsed = parseComment(body)
@@ -17,13 +18,16 @@ describe("review commands in issue comments", () => {
   test("reads one command per line and ignores other text", () => {
     assert.deepStrictEqual(
       commands(
-        [
-          "Looked at these:",
-          "/approve 0123456789ab",
-          "/reject abcdef012345 text unchanged, parser misread it",
-          "/earn-none anz/rewards `nab/low-fee-card`",
-          "/bonus-none westpac/altitude-black"
-        ].join("\n")
+        EffectArray.join(
+          [
+            "Looked at these:",
+            "/approve 0123456789ab",
+            "/reject abcdef012345 text unchanged, parser misread it",
+            "/earn-none anz/rewards `nab/low-fee-card`",
+            "/bonus-none westpac/altitude-black"
+          ],
+          "\n"
+        )
       ),
       [
         ReviewCommand.Approve({ id: "0123456789ab", note: "" }),

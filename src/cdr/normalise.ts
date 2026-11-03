@@ -1,5 +1,5 @@
 import { defined } from "../util/defined.ts"
-import { Schema } from "effect"
+import { Predicate, Schema, Array as EffectArray, String as EffectString, Record as EffectRecord, pipe } from "effect"
 import { required } from "../util/required.ts"
 import type { CdrOfferInputs } from "../offers/build.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
@@ -18,9 +18,11 @@ export interface ProgramIndex {
 }
 
 export const makeProgramIndex = (programs: Record<string, Program>): ProgramIndex => ({
-  programs: Object.entries(programs)
-    .map(([id, program]) => ({ id, program, patterns: (program.aliases ?? []).map((a) => new RegExp(a, "iu")) }))
-    .toSorted((a, b) => (b.program.priority ?? 0) - (a.program.priority ?? 0))
+  programs: EffectArray.map(EffectRecord.toEntries(programs), ([id, program]) => ({
+    id,
+    program,
+    patterns: EffectArray.map(program.aliases ?? [], (a) => new RegExp(a, "iu"))
+  })).toSorted((a, b) => (b.program.priority ?? 0) - (a.program.priority ?? 0))
 })
 
 export interface NormaliseContext {
@@ -38,7 +40,7 @@ export interface NormaliseResult {
 
 export const parseNumber = (value: string | null | undefined): number | undefined => {
   if (value == null) return undefined
-  const cleaned = value.replaceAll(/[$,\s]/gu, "")
+  const cleaned = pipe(value, EffectString.replaceAll(/[$,\s]/gu, ""))
 
   if (cleaned === "") return undefined
   const n = Number(cleaned)
@@ -64,7 +66,7 @@ export const timesPerYear = (period: string | null | undefined, name: string): n
 
     if (n === 0) return undefined
     const periods: Record<string, number> = { Y: 1, M: 12, W: 52 }
-    const perYear = periods[required(iso[2]).toUpperCase()]
+    const perYear = periods[EffectString.toUpperCase(required(iso[2]))]
 
     return perYear === undefined ? undefined : perYear / n
   }
@@ -81,7 +83,7 @@ export const timesPerYear = (period: string | null | undefined, name: string): n
 export const isoMonths = (value: string | null | undefined): number | undefined => {
   const iso = value?.trim().match(/^P(\d+)([YM])$/iu)
 
-  if (iso) return Number(iso[1]) * (required(iso[2]).toUpperCase() === "Y" ? 12 : 1)
+  if (iso) return Number(iso[1]) * (EffectString.toUpperCase(required(iso[2])) === "Y" ? 12 : 1)
   const text = value?.match(/(\d+)\s*months?/iu)
 
   return text ? Number(text[1]) : undefined
@@ -112,10 +114,10 @@ const annualised = (fees: ReadonlyArray<Fee>) => {
 }
 
 export const annualFee = (fees: ReadonlyArray<Fee>) =>
-  annualised(fees.filter((f) => f.feeType === "PERIODIC" && !NOT_CARD_FEE.test(f.name ?? "")))
+  annualised(EffectArray.filter(fees, (f) => f.feeType === "PERIODIC" && !NOT_CARD_FEE.test(f.name ?? "")))
 
 export const additionalCardFee = (fees: ReadonlyArray<Fee>) =>
-  annualised(fees.filter((f) => f.feeType === "PERIODIC" && ADDITIONAL_CARD.test(f.name ?? "")))
+  annualised(EffectArray.filter(fees, (f) => f.feeType === "PERIODIC" && ADDITIONAL_CARD.test(f.name ?? "")))
 
 const FeeDiscounts = Schema.Struct({
   discounts: Schema.optional(
@@ -124,11 +126,12 @@ const FeeDiscounts = Schema.Struct({
 })
 
 export const firstYearFee = (fees: ReadonlyArray<Fee>): number | undefined => {
-  const discounted = fees.some(
+  const discounted = EffectArray.some(
+    fees,
     (f) =>
       f.feeType === "PERIODIC" &&
       !NOT_CARD_FEE.test(f.name ?? "") &&
-      (Schema.decodeUnknownSync(FeeDiscounts)(f).discounts ?? []).some((d) =>
+      EffectArray.some(Schema.decodeUnknownSync(FeeDiscounts)(f).discounts ?? [], (d) =>
         /first year free|\$0 (annual fee )?(in|for) the first year|no annual fee (in|for) the first year/iu.test(
           d.description ?? ""
         )
@@ -138,7 +141,7 @@ export const firstYearFee = (fees: ReadonlyArray<Fee>): number | undefined => {
   return discounted ? 0 : undefined
 }
 
-const feeName = (fee: Fee) => (fee.name ?? "").replaceAll("_", " ")
+const feeName = (fee: Fee) => pipe(fee.name ?? "", EffectString.replaceAll("_", " "))
 
 const FX_NAME = /international|overseas|foreign|currency conversion|currency other than|cross[- ]border/iu
 const NOT_FX = /replacement|atm|cash|withdraw|deposit|emergency|card fee|statement|travel\/procurement/iu
@@ -148,7 +151,8 @@ const fxFeeType = (fee: Fee) =>
   (fee.feeType === "WITHDRAWAL" && /currency conversion/iu.test(feeName(fee)))
 
 export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefined => {
-  const candidates = fees.filter(
+  const candidates = EffectArray.filter(
+    fees,
     (f) =>
       fxFeeType(f) && !NOT_FX.test(feeName(f)) && (FX_NAME.test(feeName(f)) || FX_NAME.test(f.additionalInfo ?? ""))
   )
@@ -163,13 +167,17 @@ export const foreignTransactionFee = (fees: ReadonlyArray<Fee>): number | undefi
 }
 
 export const cashAdvanceFee = (fees: ReadonlyArray<Fee>) => {
-  const cash = fees.filter((f) => f.feeType === "CASH_ADVANCE" && !/overseas|international/iu.test(f.name ?? ""))
-  const pct = cash.map((fee) => feeRate(fee)).find((r) => r !== undefined)
+  const cash = EffectArray.filter(
+    fees,
+    (f) => f.feeType === "CASH_ADVANCE" && !/overseas|international/iu.test(f.name ?? "")
+  )
 
-  const min = cash
-    .map((f) => f.fixedAmount?.amount ?? f.amount)
-    .map((value) => parseNumber(value))
-    .find((r) => r !== undefined)
+  const pct = EffectArray.map(cash, (fee) => feeRate(fee)).find((r) => r !== undefined)
+
+  const min = EffectArray.map(
+    EffectArray.map(cash, (f) => f.fixedAmount?.amount ?? f.amount),
+    (value) => parseNumber(value)
+  ).find((r) => r !== undefined)
 
   return { pct, min }
 }
@@ -209,14 +217,19 @@ export const introOffers = (rates: ReadonlyArray<LendingRate>): Array<IntroOffer
     const rate = toPercent(r.rate)
 
     if (rate === undefined) continue
-    const text = `${r.additionalInfo ?? ""} ${r.additionalValue ?? ""}`.toLowerCase()
-    const bt = r.lendingRateType === "BALANCE_TRANSFER" || text.includes("balance transfer")
-    const purchase = r.lendingRateType === "PURCHASE" || text.includes("purchase")
+    const text = EffectString.toLowerCase(`${r.additionalInfo ?? ""} ${r.additionalValue ?? ""}`)
+    const bt = r.lendingRateType === "BALANCE_TRANSFER" || pipe(text, EffectString.includes("balance transfer"))
+    const purchase = r.lendingRateType === "PURCHASE" || pipe(text, EffectString.includes("purchase"))
     const applies_to = bt && purchase ? "both" : purchase ? "purchase" : "balance_transfer"
     const months = isoMonths(r.additionalValue) ?? isoMonths(r.additionalInfo)
     const offer = { applies_to, rate, ...(months !== undefined && months <= 60 ? { months } : {}) } as const
 
-    if (!offers.some((o) => o.applies_to === offer.applies_to && o.rate === offer.rate && o.months === months)) {
+    if (
+      !EffectArray.some(
+        offers,
+        (o) => o.applies_to === offer.applies_to && o.rate === offer.rate && o.months === months
+      )
+    ) {
       offers.push(offer)
     }
   }
@@ -247,7 +260,10 @@ export const cardType = (p: ProductDetail): CardType => {
 
   const business =
     /business/iu.test(p.name) ||
-    (p.eligibility ?? []).some((e) => e.eligibilityType === "BUSINESS" || e.eligibilityType === "MIN_TURNOVER")
+    EffectArray.some(
+      p.eligibility ?? [],
+      (e) => e.eligibilityType === "BUSINESS" || e.eligibilityType === "MIN_TURNOVER"
+    )
 
   return business ? "business" : "personal"
 }
@@ -261,10 +277,17 @@ const NETWORKS: ReadonlyArray<readonly [Network, RegExp]> = [
 
 export const network = (p: ProductDetail, brandName: string): Network | undefined => {
   if (/american express/iu.test(brandName)) return "amex"
-  const fromName = NETWORKS.filter(([, re]) => re.test(p.name))
+  const fromName = EffectArray.filter(NETWORKS, ([, re]) => re.test(p.name))
 
   if (fromName.length === 1) return required(fromName[0])[0]
-  const text = [p.description, ...(p.features ?? []).flatMap((f) => [f.additionalValue, f.additionalInfo])].join(" ")
+
+  const text = EffectArray.join(
+    EffectArray.filter(
+      [p.description, ...EffectArray.flatMap(p.features ?? [], (f) => [f.additionalValue, f.additionalInfo])],
+      Predicate.isNotNullish
+    ),
+    " "
+  )
 
   const counts = NETWORKS.values()
     .map(([n, re]) => [n, (text.match(new RegExp(re, "giu")) ?? []).length] as const)
@@ -275,12 +298,12 @@ export const network = (p: ProductDetail, brandName: string): Network | undefine
 }
 
 export const matchProgram = (index: ProgramIndex, text: string): string | undefined =>
-  index.programs.find((p) => p.patterns.some((re) => re.test(text)))?.id
+  index.programs.find((p) => EffectArray.some(p.patterns, (re) => re.test(text)))?.id
 
 export const issuerProgramId = (issuerSlug: string) => `${issuerSlug}-rewards`
 
 const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
-  const loyalty = (p.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
+  const loyalty = EffectArray.filter(p.features ?? [], (f) => f.featureType === "LOYALTY_PROGRAM")
 
   if (loyalty.length === 0) return { rewards: undefined, fallback: undefined }
   let fallback: string | undefined
@@ -302,21 +325,26 @@ const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
 }
 
 export const rawBonusPoints = (features: ReadonlyArray<{ readonly additionalValue?: string | null | undefined }>) =>
-  features.map((f) => parseNumber(f.additionalValue)).find((n) => n !== undefined && n > 0)
+  EffectArray.map(features, (f) => parseNumber(f.additionalValue)).find((n) => n !== undefined && n > 0)
 
 const perks = (p: ProductDetail): NormalisedCard["perks"] => {
   const features = p.features ?? []
 
   const insurance = [
     ...new Set(
-      features
-        .filter((f) => f.featureType === "INSURANCE")
-        .map((f) => f.additionalValue?.trim())
-        .filter((v): v is string => !(v == null || v === "") && v.length < 80)
+      EffectArray.filter(
+        EffectArray.map(
+          EffectArray.filter(features, (f) => f.featureType === "INSURANCE"),
+          (f) => f.additionalValue?.trim()
+        ),
+        (v): v is string => !(v == null || v === "") && v.length < 80
+      )
     )
   ]
 
-  const lounge = features.some((f) => /lounge/iu.test(`${f.additionalValue ?? ""} ${f.additionalInfo ?? ""}`))
+  const lounge = EffectArray.some(features, (f) =>
+    /lounge/iu.test(`${f.additionalValue ?? ""} ${f.additionalInfo ?? ""}`)
+  )
 
   return {
     ...(insurance.length > 0 ? { insurance } : {}),
@@ -332,10 +360,10 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
   const constraint = (type: string) =>
     parseNumber((p.constraints ?? []).find((c) => c.constraintType === type)?.additionalValue)
 
-  const minIncome = (p.eligibility ?? [])
-    .filter((e) => e.eligibilityType === "MIN_INCOME")
-    .map((e) => parseNumber(e.additionalValue))
-    .find((n) => n !== undefined)
+  const minIncome = EffectArray.map(
+    EffectArray.filter(p.eligibility ?? [], (e) => e.eligibilityType === "MIN_INCOME"),
+    (e) => parseNumber(e.additionalValue)
+  ).find((n) => n !== undefined)
 
   const intro = introOffers(rates)
   const { rewards: rewardsValue, fallback } = rewards(p, ctx)
@@ -343,7 +371,7 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
   const image = p.cardArt?.[0]?.imageUri
 
   const card: NormalisedCard = defined({
-    name: p.name.trim(),
+    name: EffectString.trim(p.name),
     type: cardType(p),
     network: net,
     status: "active" as const,
@@ -380,7 +408,7 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
     bonusPoints:
       rewardsValue === undefined
         ? undefined
-        : rawBonusPoints((p.features ?? []).filter((f) => f.featureType === "BONUS_REWARDS"))
+        : rawBonusPoints(EffectArray.filter(p.features ?? [], (f) => f.featureType === "BONUS_REWARDS"))
   }
 
   return { card, offers, fallbackProgram: fallback }

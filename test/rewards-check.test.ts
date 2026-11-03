@@ -1,5 +1,5 @@
 import { assert, describe, expect, layer, test } from "@effect/vitest"
-import { Effect, Layer } from "effect"
+import { Effect, Layer, String as EffectString, pipe } from "effect"
 import { HttpClient, HttpClientResponse } from "effect/http"
 import type { Card } from "../src/model/schema.ts"
 import { checkEarnPages, formatCheck, htmlText, missingQuotes, normaliseText } from "../src/rewards/check.ts"
@@ -27,7 +27,7 @@ describe("missing quotes", () => {
   })
 
   test("reports a quote whose rate changed", () => {
-    const changed = page.replace("0.75", "0.6")
+    const changed = pipe(page, EffectString.replace("0.75", "0.6"))
     expect(
       missingQuotes(changed, ["0.75 Qantas Points per whole AU$1 on Domestic Spend", "on International Spend"])
     ).toEqual(["0.75 Qantas Points per whole AU$1 on Domestic Spend"])

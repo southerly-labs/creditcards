@@ -1,4 +1,4 @@
-import { Effect } from "effect"
+import { Effect, Array as EffectArray } from "effect"
 import { stamp, stampBonus } from "../rewards/review.ts"
 import { decideHold } from "../sync/heldCommand.ts"
 import { ParsedComment, parseComment, ReviewCommand } from "./commands.ts"
@@ -23,12 +23,12 @@ const run = Effect.fn("runReviewCommand")(function* (command: ReviewCommand, sou
   if (ReviewCommand.$is("EarnNone")(command)) {
     yield* stamp(command.cards, true)
 
-    return `no fixed earn rate: ${command.cards.join(", ")}`
+    return `no fixed earn rate: ${EffectArray.join(command.cards, ", ")}`
   }
 
   yield* stampBonus(command.cards, true)
 
-  return `no current signup offer: ${command.cards.join(", ")}`
+  return `no current signup offer: ${EffectArray.join(command.cards, ", ")}`
 })
 
 export const applyComment = Effect.fn("applyComment")(function* (body: string, source: CommentSource) {

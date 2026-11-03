@@ -1,4 +1,5 @@
 import { parseSync } from "oxc-parser"
+import { String as EffectString, Array as EffectArray, pipe } from "effect"
 
 interface CommentRange {
   readonly start: number
@@ -9,12 +10,13 @@ const cssTokens =
   /"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|url\((?:\\[\s\S]|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|[^)\\])*\)|\/\*[\s\S]*?(?:\*\/|$)/giu
 
 const cssComment = (match: RegExpExecArray): ReadonlyArray<CommentRange> =>
-  match[0].startsWith("/*") ? [{ start: match.index, end: match.index + match[0].length }] : []
+  pipe(match[0], EffectString.startsWith("/*")) ? [{ start: match.index, end: match.index + match[0].length }] : []
 
 export const findCodeComments = async (file: string, source: string): Promise<ReadonlyArray<CommentRange>> => {
-  if (file.endsWith(".css")) return [...source.matchAll(cssTokens)].flatMap((match) => cssComment(match))
+  if (pipe(file, EffectString.endsWith(".css")))
+    return EffectArray.flatMap([...source.matchAll(cssTokens)], (match) => cssComment(match))
 
-  if (file.endsWith(".html")) {
+  if (pipe(file, EffectString.endsWith(".html"))) {
     const ranges: Array<CommentRange> = []
     let cursor = 0
     await new HTMLRewriter()

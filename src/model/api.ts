@@ -1,4 +1,4 @@
-import { Option, Predicate, Result, Schema } from "effect"
+import { Option, Predicate, Result, Schema, String as EffectString, Record as EffectRecord } from "effect"
 
 export { decodeApi } from "../api/contract.ts"
 
@@ -6,9 +6,9 @@ export const decodePointValues = (text: string): Record<string, number> => {
   const parsed = Schema.decodeUnknownOption(Schema.fromJsonString(Schema.Unknown))(text)
   const values: Record<string, number> = {}
 
-  if (Option.isNone(parsed) || !Predicate.isObjectOrArray(parsed.value)) return values
+  if (Option.isNone(parsed) || !Predicate.isObject(parsed.value)) return values
 
-  for (const [id, value] of Object.entries(parsed.value)) {
+  for (const [id, value] of EffectRecord.toEntries(parsed.value)) {
     if (typeof value === "number" && Number.isFinite(value) && value >= 0) values[id] = value
   }
 
@@ -25,9 +25,9 @@ export const decodeColumnVisibility = (text: string): Record<string, boolean> =>
   const parsed = Schema.decodeUnknownOption(Schema.fromJsonString(Schema.Unknown))(text)
   const values: Record<string, boolean> = {}
 
-  if (Option.isNone(parsed) || !Predicate.isObjectOrArray(parsed.value)) return values
+  if (Option.isNone(parsed) || !Predicate.isObject(parsed.value)) return values
 
-  for (const [id, value] of Object.entries(parsed.value)) {
+  for (const [id, value] of EffectRecord.toEntries(parsed.value)) {
     if (typeof value === "boolean") values[id] = value
   }
 
@@ -41,7 +41,7 @@ export const loadColumnVisibility = (read: () => string | null): Record<string, 
   })
 
 export const decodeMonthlySpend = (text: string | null): number | undefined => {
-  if (text === null || text.trim() === "") return undefined
+  if (text === null || EffectString.trim(text) === "") return undefined
   const value = Number(text)
 
   return Number.isFinite(value) && value >= 0 ? value : undefined

@@ -1,4 +1,14 @@
-import { Context, Effect, Layer, Predicate, Schedule, Schema } from "effect"
+import {
+  Context,
+  Effect,
+  Layer,
+  Predicate,
+  Schedule,
+  Schema,
+  String as EffectString,
+  Array as EffectArray,
+  pipe
+} from "effect"
 import { FetchHttpClient, HttpClient, HttpClientResponse } from "effect/http"
 import { DataHolderBrand, ProductDetail, ProductsPage, RegisterResponse, type ProductSummary } from "./schema.ts"
 
@@ -87,7 +97,9 @@ export class CdrClient extends Context.Service<
           Effect.mapError((cause) => new CdrError({ url: REGISTER_URL, message: String(cause) }))
         )
 
-        return response.data.filter((brand) => brand.industries.some((i) => LENDING_INDUSTRIES.has(i)))
+        return EffectArray.filter(response.data, (brand) =>
+          EffectArray.some(brand.industries, (i) => LENDING_INDUSTRIES.has(i))
+        )
       }).pipe(Effect.withSpan("CdrClient.brands"))
 
       const listPages = Effect.fn("CdrClient.listPages")(function* (
@@ -106,7 +118,7 @@ export class CdrClient extends Context.Service<
             Effect.mapError(schemaError(url))
           )
 
-          products.push(...decoded.data.products.filter((p) => p.productCategory === category))
+          products.push(...EffectArray.filter(decoded.data.products, (p) => p.productCategory === category))
           const next: string | null | undefined = decoded.links?.next
           url = next != null && next !== "" && next !== url ? next : undefined
         }
@@ -149,4 +161,4 @@ export class CdrClient extends Context.Service<
 const decodeProductsPage = Schema.decodeUnknownEffect(ProductsPage)
 const decodeProductDetail = Schema.decodeUnknownEffect(ProductDetail)
 
-const trimSlash = (uri: string) => uri.replace(/\/+$/u, "")
+const trimSlash = (uri: string) => pipe(uri, EffectString.replace(/\/+$/u, ""))

@@ -1,4 +1,14 @@
-import { Context, Effect, FileSystem, Layer, Path, Schema } from "effect"
+import {
+  Context,
+  Effect,
+  FileSystem,
+  Layer,
+  Path,
+  Schema,
+  Record as EffectRecord,
+  String as EffectString,
+  Array as EffectArray
+} from "effect"
 import * as Toml from "smol-toml"
 import { Card, Issuer, Program } from "../model/schema.ts"
 import { CdrObservations } from "../provenance/schema.ts"
@@ -24,7 +34,7 @@ export const HOLDS_FILE = "sync-holds.toml"
 export const cardKey = (issuer: string, card: string) => `${issuer}/${card}`
 
 export const splitCardKey = (key: string) => {
-  const [issuer, card] = key.split("/")
+  const [issuer, card] = EffectString.split(key, "/")
 
   if (issuer === undefined || issuer === "" || card === undefined || card === "")
     throw new Error(`Invalid card key: ${key}`)
@@ -73,7 +83,11 @@ export class Store extends Context.Service<
           )
 
         const tomlFiles = (dir: string) =>
-          listDir(dir).pipe(Effect.map((names) => names.filter((n) => n.endsWith(".toml")).map((n) => n.slice(0, -5))))
+          listDir(dir).pipe(
+            Effect.map((names) =>
+              EffectArray.map(EffectArray.filter(names, EffectString.endsWith(".toml")), EffectString.slice(0, -5))
+            )
+          )
 
         const load = Effect.gen(function* () {
           const programs = new Map<string, Program>()
@@ -97,7 +111,7 @@ export class Store extends Context.Service<
           const observationsFile = path.join(dataDir, OBSERVATIONS_FILE)
 
           const observations = (yield* fs.exists(observationsFile).pipe(Effect.mapError(fail(observationsFile))))
-            ? new Map(Object.entries(yield* readToml(CdrObservations, observationsFile)))
+            ? new Map(EffectRecord.toEntries(yield* readToml(CdrObservations, observationsFile)))
             : new Map<string, string>()
 
           const holdsFile = path.join(dataDir, HOLDS_FILE)
@@ -148,7 +162,7 @@ export class Store extends Context.Service<
             writeToml(
               CdrObservations,
               path.join(dataDir, OBSERVATIONS_FILE),
-              Object.fromEntries([...value].toSorted(([a], [b]) => a.localeCompare(b)))
+              EffectRecord.fromEntries([...value].toSorted(([a], [b]) => a.localeCompare(b)))
             )
         })
       })

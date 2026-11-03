@@ -1,5 +1,5 @@
 import { assert, test } from "@effect/vitest"
-import { Schema } from "effect"
+import { Schema, Array as EffectArray } from "effect"
 
 const lintReport = Schema.fromJsonString(
   Schema.Struct({
@@ -28,7 +28,8 @@ test("the vendored anti-slop plugin rejects Reflect indirection", async () => {
   const result = await lintSource('export const value = Reflect.get({ value: 1 }, "value")\n')
   assert.notStrictEqual(result.exitCode, 0)
   assert.isTrue(
-    result.diagnostics.some(
+    EffectArray.some(
+      result.diagnostics,
       (diagnostic) => diagnostic.code === "anti-slop(no-reflect-get)" && diagnostic.severity === "error"
     )
   )
@@ -40,14 +41,19 @@ test("the existing Effect plugin remains active beside anti-slop", async () => {
   )
 
   assert.notStrictEqual(result.exitCode, 0)
-  assert.isTrue(result.diagnostics.some((diagnostic) => diagnostic.code === "effect(no-effect-fn-untraced)"))
+  assert.isTrue(
+    EffectArray.some(result.diagnostics, (diagnostic) => diagnostic.code === "effect(no-effect-fn-untraced)")
+  )
 })
 
 test("the anti-slop Effect plugin rejects manual tagged construction", async () => {
   const result = await lintSource('export const state = { _tag: "Ready", value: 1 }\n')
   assert.notStrictEqual(result.exitCode, 0)
   assert.isTrue(
-    result.diagnostics.some((diagnostic) => diagnostic.code === "anti-slop-effect(no-manual-tagged-construction)")
+    EffectArray.some(
+      result.diagnostics,
+      (diagnostic) => diagnostic.code === "anti-slop-effect(no-manual-tagged-construction)"
+    )
   )
 })
 
@@ -57,14 +63,17 @@ test("anti-slop rejects adjacent eager array passes", async () => {
   )
 
   assert.notStrictEqual(result.exitCode, 0)
-  assert.isTrue(result.diagnostics.some((diagnostic) => diagnostic.code === "anti-slop(no-array-filter-map)"))
+  assert.isTrue(
+    EffectArray.some(result.diagnostics, (diagnostic) => diagnostic.code === "anti-slop(no-array-filter-map)")
+  )
 })
 
 test("the local Oxlint rule rejects code comments", async () => {
   const result = await lintSource("// explanation\nexport const value = 1\n")
   assert.notStrictEqual(result.exitCode, 0)
   assert.isTrue(
-    result.diagnostics.some(
+    EffectArray.some(
+      result.diagnostics,
       (diagnostic) => diagnostic.code === "project(no-code-comments)" && diagnostic.severity === "error"
     )
   )
@@ -74,6 +83,9 @@ test("non-const assertions need an invariant outside the isolated utility", asyn
   const result = await lintSource("export const date = {} as Date\n")
   assert.notStrictEqual(result.exitCode, 0)
   assert.isTrue(
-    result.diagnostics.some((diagnostic) => diagnostic.code === "anti-slop(require-safety-comment-for-type-assertion)")
+    EffectArray.some(
+      result.diagnostics,
+      (diagnostic) => diagnostic.code === "anti-slop(require-safety-comment-for-type-assertion)"
+    )
   )
 })

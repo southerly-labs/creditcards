@@ -1,4 +1,4 @@
-import { Console, DateTime, Effect } from "effect"
+import { Console, DateTime, Effect, Array as EffectArray } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import type { Hold } from "../model/holds.ts"
 import { Store, StoreError } from "../store/Store.ts"
@@ -16,7 +16,7 @@ export const decideHold = Effect.fn("decideHold")(function* (
   const decided_on = DateTime.formatIsoDateUtc(yield* DateTime.now)
   const decided: Hold = { ...hold, decision, decided_on, evidence }
 
-  yield* store.writeHolds(holds.map((entry) => (entry.id === id ? decided : entry)))
+  yield* store.writeHolds(EffectArray.map(holds, (entry) => (entry.id === id ? decided : entry)))
 
   return decided
 })
@@ -45,13 +45,16 @@ const list = Command.make(
   Effect.fn(function* () {
     for (const hold of (yield* (yield* Store).load).holds ?? []) {
       yield* Console.log(
-        [
-          `${hold.id} ${hold.kind} ${hold.card} ${hold.change}${hold.decision === undefined ? "" : ` [${hold.decision}]`}`,
-          `  reason: ${hold.reason} (since ${hold.since})`,
-          `  current: ${hold.current ?? "—"}`,
-          `  proposed: ${hold.proposed ?? "—"}`,
-          ...(hold.history === undefined ? [] : [`  history: ${hold.history}`])
-        ].join("\n")
+        EffectArray.join(
+          [
+            `${hold.id} ${hold.kind} ${hold.card} ${hold.change}${hold.decision === undefined ? "" : ` [${hold.decision}]`}`,
+            `  reason: ${hold.reason} (since ${hold.since})`,
+            `  current: ${hold.current ?? "—"}`,
+            `  proposed: ${hold.proposed ?? "—"}`,
+            ...(hold.history === undefined ? [] : [`  history: ${hold.history}`])
+          ],
+          "\n"
+        )
       )
     }
   })

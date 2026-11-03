@@ -1,6 +1,7 @@
 import { assert, describe, test } from "@effect/vitest"
 import { attempt } from "../src/model/api.ts"
 import { entriesFrom, rank, value, type Entry, type PublicCard, type Ranked } from "../web/finder/model.ts"
+import { Array as EffectArray } from "effect"
 
 const today = "2026-11-01"
 
@@ -189,7 +190,7 @@ describe("card finder goals", () => {
     )
   ]
 
-  const ids = (ranked: ReadonlyArray<Ranked>) => ranked.map((r) => r.entry.id)
+  const ids = (ranked: ReadonlyArray<Ranked>) => EffectArray.map(ranked, (r) => r.entry.id)
 
   test("most back ranks by value after fees, with unknowns last", () => {
     assert.deepStrictEqual(ids(rank(rows, "value", today)), ["points", "cheap", "transfer", "unknown"])

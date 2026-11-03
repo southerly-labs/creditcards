@@ -1,4 +1,4 @@
-import { Data } from "effect"
+import { Data, Array as EffectArray, String as EffectString, pipe } from "effect"
 
 export type ReviewCommand =
   | { readonly _tag: "Approve"; readonly id: string; readonly note: string }
@@ -18,16 +18,19 @@ const HOLD_ID = /^[0-9a-f]{12}$/u
 
 const CARD_KEY = /^[a-z0-9-]+\/[a-z0-9-]+$/u
 
-export const COMMAND_HELP = [
-  "`/approve <hold id> [why]`",
-  "`/reject <hold id> <why>`",
-  "`/earn-none <issuer/card>...`",
-  "`/bonus-none <issuer/card>...`"
-].join(", ")
+export const COMMAND_HELP = EffectArray.join(
+  [
+    "`/approve <hold id> [why]`",
+    "`/reject <hold id> <why>`",
+    "`/earn-none <issuer/card>...`",
+    "`/bonus-none <issuer/card>...`"
+  ],
+  ", "
+)
 
 const parseHold = (tag: "Approve" | "Reject", words: ReadonlyArray<string>, line: string): ReviewCommand | string => {
   const [id = "", ...rest] = words
-  const note = rest.join(" ")
+  const note = EffectArray.join(rest, " ")
 
   if (!HOLD_ID.test(id)) return `\`${line}\`: expected a 12-character hold id`
 
@@ -55,24 +58,24 @@ const PARSERS: Readonly<
 }
 
 const parseLine = (line: string): ReviewCommand | string => {
-  const [name = "", ...words] = line.split(/\s+/u)
-  const cards = words.map((word) => word.replaceAll("`", ""))
+  const [name, ...words] = EffectString.split(line, /\s+/u)
+  const cards = EffectArray.map(words, (word) => pipe(word, EffectString.replaceAll("`", "")))
 
-  const parse = PARSERS[name.toLowerCase()]
+  const parse = PARSERS[EffectString.toLowerCase(name)]
 
   return parse === undefined ? `\`${line}\`: unknown command; use ${COMMAND_HELP}` : parse(words, cards, line)
 }
 
 export const parseComment = (body: string): ParsedComment => {
-  const lines = body
-    .split(/\r?\n/u)
-    .map((line) => line.trim())
-    .filter((line) => /^\/[a-z]/iu.test(line))
+  const lines = EffectArray.filter(
+    EffectArray.map(EffectString.split(body, /\r?\n/u), (line) => EffectString.trim(line)),
+    (line) => /^\/[a-z]/iu.test(line)
+  )
 
-  const parsed = lines.map((line) => parseLine(line))
-  const errors = parsed.filter((item) => typeof item === "string")
+  const parsed = EffectArray.map(lines, (line) => parseLine(line))
+  const errors = EffectArray.filter(parsed, (item) => typeof item === "string")
 
   return errors.length > 0
     ? ParsedComment.Invalid({ errors })
-    : ParsedComment.Commands({ commands: parsed.filter((item) => typeof item !== "string") })
+    : ParsedComment.Commands({ commands: EffectArray.filter(parsed, (item) => typeof item !== "string") })
 }

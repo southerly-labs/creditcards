@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@effect/vitest"
-import { Schema } from "effect"
+import { Schema, Array as EffectArray } from "effect"
 import { Card } from "../model/schema"
 import type { Offer } from "./schema"
 import { applyOffers, cdrOffers, combineOffers, signupOffer, signupState } from "./build"
@@ -12,14 +12,17 @@ const tranches = [
 describe("building offers", () => {
   it("gives CDR intro rates and the first-year fee stable ids", () => {
     expect(
-      cdrOffers({
-        intro: [
-          { applies_to: "balance_transfer", rate: 0, months: 24 },
-          { applies_to: "balance_transfer", rate: 1.99, months: 12 },
-          { applies_to: "purchase", rate: 0 }
-        ],
-        annualFirstYear: 0
-      }).map((offer) => [offer.id, offer.source])
+      EffectArray.map(
+        cdrOffers({
+          intro: [
+            { applies_to: "balance_transfer", rate: 0, months: 24 },
+            { applies_to: "balance_transfer", rate: 1.99, months: 12 },
+            { applies_to: "purchase", rate: 0 }
+          ],
+          annualFirstYear: 0
+        }),
+        (offer) => [offer.id, offer.source]
+      )
     ).toEqual([
       ["intro-balance-transfer", "cdr"],
       ["intro-balance-transfer-2", "cdr"],

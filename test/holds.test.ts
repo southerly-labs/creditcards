@@ -1,5 +1,5 @@
 import { assert, describe, test } from "@effect/vitest"
-import { Schema } from "effect"
+import { Schema, Array as EffectArray } from "effect"
 import { Card } from "../src/model/schema.ts"
 import type { Hold } from "../src/model/holds.ts"
 import {
@@ -30,7 +30,7 @@ describe("field-level holds", () => {
     const candidates = holdCandidates(base, proposed)
 
     assert.deepStrictEqual(
-      candidates.map((c) => [c.change, c.kind, c.current, c.proposed]),
+      EffectArray.map(candidates, (c) => [c.change, c.kind, c.current, c.proposed]),
       [["fees.annual", "approve", 100, 1000]]
     )
     assert.deepStrictEqual(revertChange(proposed, base, "fees.annual")?.fees, { annual: 100, foreign_txn_pct: 2.5 })
@@ -43,7 +43,7 @@ describe("field-level holds", () => {
     }
 
     assert.deepStrictEqual(
-      holdCandidates(base, proposed).map((c) => c.change),
+      EffectArray.map(holdCandidates(base, proposed), (c) => c.change),
       ["rewards.earn"]
     )
     assert.deepStrictEqual(revertChange(proposed, base, "rewards.earn")?.rewards, base.rewards)
@@ -139,7 +139,7 @@ describe("offer holds", () => {
     const candidates = holdCandidates(withSignup(100_000), base)
 
     assert.deepStrictEqual(
-      candidates.map((c) => [c.change, c.kind]),
+      EffectArray.map(candidates, (c) => [c.change, c.kind]),
       [["offers.signup", "confirm"]]
     )
     assert.deepStrictEqual(revertChange(base, withSignup(100_000), "offers.signup")?.offers, [signup(100_000)])
@@ -156,7 +156,7 @@ describe("offer holds", () => {
 
   test("a signup increase over 50% needs approval; smaller changes and decreases apply", () => {
     assert.deepStrictEqual(
-      holdCandidates(withSignup(100_000), withSignup(160_000)).map((c) => [c.change, c.kind, c.reason]),
+      EffectArray.map(holdCandidates(withSignup(100_000), withSignup(160_000)), (c) => [c.change, c.kind, c.reason]),
       [["offers.signup", "approve", "signup points 100000 → 160000"]]
     )
     assert.deepStrictEqual(holdCandidates(withSignup(100_000), withSignup(140_000)), [])

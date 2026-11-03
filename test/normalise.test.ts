@@ -1,6 +1,6 @@
 import { required } from "../src/util/required.ts"
 import { describe, expect, test } from "@effect/vitest"
-import { Schema } from "effect"
+import { Schema, Array as EffectArray } from "effect"
 import {
   annualFee,
   cardType,
@@ -222,7 +222,7 @@ describe("merge and guardrails", () => {
     const cdr = required(card.cdr)
     const bumped = { ...card, cdr: { ...cdr, last_updated: "2026-10-31" } }
     expect(diffCard(card, bumped)).toEqual([])
-    expect(diffCard(card, { ...bumped, fees: { annual: 120 } }).map((c) => c.path)).toEqual([
+    expect(EffectArray.map(diffCard(card, { ...bumped, fees: { annual: 120 } }), (c) => c.path)).toEqual([
       "fees.annual",
       "fees.foreign_txn_pct"
     ])

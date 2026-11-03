@@ -1,5 +1,5 @@
 import { required } from "../util/required.ts"
-import { Effect, Schema } from "effect"
+import { Effect, Schema, Record as EffectRecord, Array as EffectArray } from "effect"
 import { type Api, type PublicCard } from "../api/contract.ts"
 import { datasetFreshness } from "../api/freshness.ts"
 
@@ -20,8 +20,10 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
 
     if (!dataset.issuers.has(issuer)) problems.push(`${key}: unknown issuer ${issuer}`)
 
-    const offerPrograms = (card.offers ?? []).flatMap((offer) =>
-      offer.components.flatMap((component) => (component.kind === "signup_points" ? [component.program] : []))
+    const offerPrograms = EffectArray.flatMap(card.offers ?? [], (offer) =>
+      EffectArray.flatMap(offer.components, (component) =>
+        component.kind === "signup_points" ? [component.program] : []
+      )
     )
 
     for (const id of [card.rewards?.program, ...(card.rewards?.partners ?? []), ...offerPrograms]) {
@@ -63,8 +65,8 @@ export const validate = Effect.gen(function* () {
 }).pipe(Effect.withSpan("validate"))
 
 export const toApi = (dataset: Dataset, generatedAt?: string): Api => {
-  const programs = Object.fromEntries(
-    [...dataset.programs].map(([id, { aliases: _a, priority: _p, ...rest }]) => [id, rest])
+  const programs = EffectRecord.fromEntries(
+    EffectArray.map([...dataset.programs], ([id, { aliases: _a, priority: _p, ...rest }]) => [id, rest])
   )
 
   const issuers: Record<string, { name: string; website?: string; cards: Record<string, PublicCard> }> = {}
@@ -88,7 +90,7 @@ export const toApi = (dataset: Dataset, generatedAt?: string): Api => {
       ...(changedOn === undefined ? {} : { cdr_changed_on: changedOn })
     }
 
-    const card = { ...stored, ...(Object.keys(provenance).length === 0 ? {} : { provenance }) }
+    const card = { ...stored, ...(EffectRecord.keys<string, unknown>(provenance).length === 0 ? {} : { provenance }) }
 
     required(issuers[issuer]).cards[slug] = card
   }

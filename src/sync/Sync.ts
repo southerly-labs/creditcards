@@ -1,6 +1,15 @@
 import { encodeJson } from "../util/json.ts"
 import { required } from "../util/required.ts"
-import { DateTime, Effect, Option, Result, Schema } from "effect"
+import {
+  DateTime,
+  Effect,
+  Option,
+  Result,
+  Schema,
+  Array as EffectArray,
+  Record as EffectRecord,
+  String as EffectString
+} from "effect"
 import { CdrClient, type CdrError, REQUEST_VARIANTS, type VersionedProduct } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise, type NormaliseResult } from "../cdr/normalise.ts"
 import { type CdrSnapshot, productDir, Snapshots } from "../history/Snapshots.ts"
@@ -25,7 +34,8 @@ import {
 
 const CATEGORY = "CRED_AND_CHRG_CARDS"
 
-const bonusFeatures = (p: ProductDetail) => (p.features ?? []).filter((f) => f.featureType === "BONUS_REWARDS")
+const bonusFeatures = (p: ProductDetail) =>
+  EffectArray.filter(p.features ?? [], (f) => f.featureType === "BONUS_REWARDS")
 
 export interface SyncReport {
   readonly date: string
@@ -85,7 +95,7 @@ const proposeCard = Effect.fn("proposeCard")(function* (
   if (!existing) merged["first_seen"] = date
   const mergedRewards = merged["rewards"]
   const hasRewards = mergedRewards !== undefined && Schema.is(Card.fields.rewards)(mergedRewards)
-  const loyalty = (product.features ?? []).filter((f) => f.featureType === "LOYALTY_PROGRAM")
+  const loyalty = EffectArray.filter(product.features ?? [], (f) => f.featureType === "LOYALTY_PROGRAM")
   const earnPlan = hasRewards ? planRewards(mergedRewards, loyalty) : RewardsPlan.Unchanged()
 
   if (hasRewards && RewardsPlan.$is("Set")(earnPlan)) {
@@ -112,7 +122,7 @@ const proposeCard = Effect.fn("proposeCard")(function* (
     return {
       earnPlan,
       bonusPlan,
-      invalid: decoded.failure.message.split("\n").slice(0, 3).join(" ")
+      invalid: EffectArray.join(EffectString.split(decoded.failure.message, "\n").slice(0, 3), " ")
     } satisfies Proposal
   }
 
@@ -158,7 +168,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const programs = new Map(dataset.programs)
   const cards = new Map(dataset.cards)
   const observations = new Map(dataset.observations)
-  const programIndex = makeProgramIndex(Object.fromEntries(programs))
+  const programIndex = makeProgramIndex(EffectRecord.fromEntries(programs))
 
   const brands = yield* cdr.brands
   const activeByBrand = new Map<string, number>()
@@ -210,8 +220,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
     return {
       brand: brand.brandName,
-      products: products.filter((p) => p !== undefined),
-      listed: listed.success.map((summary) => summary.productId),
+      products: EffectArray.filter(products, (p) => p !== undefined),
+      listed: EffectArray.map(listed.success, (summary) => summary.productId),
       listError:
         productErrors.length > 0 && productErrors.length === listed.success.length ? productErrors[0] : undefined,
       productErrors
@@ -221,15 +231,22 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const firstPass = yield* Effect.forEach(brands, fetchBrand, { concurrency: 16 })
 
   const retried = yield* Effect.forEach(
-    brands.filter((_, i) => retryable(required(firstPass[i]))),
+    EffectArray.filter(brands, (_, i) => retryable(required(firstPass[i]))),
     (brand) => fetchBrand(brand),
     { concurrency: 1 }
   )
 
-  const fetched = firstPass.map((result) => retried.find((retry) => retry.brand === result.brand) ?? result)
+  const fetched = EffectArray.map(
+    firstPass,
+    (result) => retried.find((retry) => retry.brand === result.brand) ?? result
+  )
 
-  const cardsSeen = fetched.reduce((n, b) => n + b.products.length, 0)
-  const activeCdrCards = [...cards.values()].filter((c) => c.status !== "discontinued" && c.cdr !== undefined).length
+  const cardsSeen = EffectArray.reduce(fetched, 0, (n, b) => n + b.products.length)
+
+  const activeCdrCards = EffectArray.filter(
+    [...cards.values()],
+    (c) => c.status !== "discontinued" && c.cdr !== undefined
+  ).length
 
   if (activeCdrCards > 0 && cardsSeen < activeCdrCards * MIN_SEEN_SHARE) {
     return yield* new SyncAborted({
@@ -341,11 +358,11 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       const flagged = existing ? holdCandidates(existing, proposed) : []
 
       const previous =
-        existing && flagged.some((candidate) => candidate.kind === "approve")
+        existing && EffectArray.some(flagged, (candidate) => candidate.kind === "approve")
           ? yield* previousCard(existing, product.productId, { brand, product: raw }, issuerSlug, date, programIndex)
           : undefined
 
-      const candidates = flagged.map((candidate) => withCdrEvidence(candidate, previous))
+      const candidates = EffectArray.map(flagged, (candidate) => withCdrEvidence(candidate, previous))
       let card = proposed
 
       if (existing) evaluated.add(key)
@@ -354,7 +371,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         const resolution = resolveHolds({
           card: key,
           candidates,
-          entries: priorHolds.filter((hold) => hold.card === key),
+          entries: EffectArray.filter(priorHolds, (hold) => hold.card === key),
           date,
           history: existing.cdr && `history/cdr/${productDir(issuerSlug, existing.cdr.product_id)}/`
         })
@@ -364,13 +381,14 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         for (const { change, proposed: value } of resolution.apply)
           released.push({ id: holdId(key, change, value), card: key, change })
 
-        const reverted = resolution.revert.reduce<Card | undefined>(
-          (next, candidate) => next && revertChange(next, existing, candidate.change),
-          proposed
+        const reverted = EffectArray.reduce<(typeof resolution.revert)[number], Card | undefined>(
+          resolution.revert,
+          proposed,
+          (next, candidate) => next && revertChange(next, existing, candidate.change)
         )
 
         if (reverted === undefined) {
-          held.push({ card: key, reasons: resolution.revert.map((candidate) => candidate.reason) })
+          held.push({ card: key, reasons: EffectArray.map(resolution.revert, (candidate) => candidate.reason) })
           continue
         }
 
@@ -394,8 +412,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
-  const seenIds = new Set(fetched.flatMap((b) => b.listed.map((id) => `${b.brand}|${id}`)))
-  const brandStatus = new Map(fetched.map((b) => [b.brand, b]))
+  const seenIds = new Set(EffectArray.flatMap(fetched, (b) => EffectArray.map(b.listed, (id) => `${b.brand}|${id}`)))
+  const brandStatus = new Map(EffectArray.map(fetched, (b) => [b.brand, b]))
   const missingByBrand = new Map<string, Array<string>>()
 
   for (const [key, card] of cards) {
@@ -409,7 +427,10 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   }
 
   for (const [brand, keys] of missingByBrand) {
-    const active = [...cards.values()].filter((c) => c.status !== "discontinued" && c.cdr?.brand === brand).length
+    const active = EffectArray.filter(
+      [...cards.values()],
+      (c) => c.status !== "discontinued" && c.cdr?.brand === brand
+    ).length
 
     if (keys.length / active > MAX_DISCONTINUED_SHARE && keys.length > 1) {
       for (const key of keys)
@@ -436,9 +457,9 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
-  holds.push(...priorHolds.filter((hold) => !evaluated.has(hold.card) && cards.has(hold.card)))
+  holds.push(...EffectArray.filter(priorHolds, (hold) => !evaluated.has(hold.card) && cards.has(hold.card)))
 
-  const failedBrands = fetched.filter((b) => retryable(b))
+  const failedBrands = EffectArray.filter(fetched, (b) => retryable(b))
 
   let snapshotsSaved = 0
 
@@ -471,10 +492,11 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     released,
     newIssuers: [...new Set(newIssuers)],
     newPrograms,
-    brandErrors: failedBrands
-      .filter((b) => activeByBrand.has(b.brand))
-      .map((b) => ({ brand: b.brand, error: required(b.listError) })),
-    cardlessBrandErrors: failedBrands.filter((b) => !activeByBrand.has(b.brand)).length,
+    brandErrors: EffectArray.map(
+      EffectArray.filter(failedBrands, (b) => activeByBrand.has(b.brand)),
+      (b) => ({ brand: b.brand, error: required(b.listError) })
+    ),
+    cardlessBrandErrors: EffectArray.filter(failedBrands, (b) => !activeByBrand.has(b.brand)).length,
     snapshotsSaved,
     rewards: { set: rewardsSet, review: rewardsReview },
     bonus: { set: bonusSet, review: bonusReview, undetailed: bonusUndetailed }
@@ -487,39 +509,49 @@ export const summariseReport = (r: SyncReport): string => {
 
   const lines = [
     `CDR sync ${r.date}: ${r.cardsSeen} cards seen, ${r.added.length} added, ${r.updated.length} updated, ` +
-      `${r.discontinued.length} discontinued, ${r.held.length + r.holds.filter((hold) => hold.decision === undefined).length} held`,
+      `${r.discontinued.length} discontinued, ${r.held.length + EffectArray.filter(r.holds, (hold) => hold.decision === undefined).length} held`,
     ""
   ]
 
-  if (r.added.length > 0) lines.push("Added:", ...r.added.map((c) => `- ${c}`), "")
+  if (r.added.length > 0) lines.push("Added:", ...EffectArray.map(r.added, (c) => `- ${c}`), "")
 
   if (r.updated.length > 0) {
     lines.push("Updated:")
 
     for (const u of r.updated) {
-      const shown = u.changes.filter(
+      const shown = EffectArray.filter(
+        u.changes,
         (c) =>
           !["cdr", "description", "rewards.earn_source", "rewards.earn_text_hash", "signup_review"].includes(c.path)
       )
 
       lines.push(
-        `- ${u.card}: ${shown.map((c) => `${c.path} ${fmt(c.before)} → ${fmt(c.after)}`).join("; ") || "metadata"}`
+        `- ${u.card}: ${
+          EffectArray.join(
+            EffectArray.map(shown, (c) => `${c.path} ${fmt(c.before)} → ${fmt(c.after)}`),
+            "; "
+          ) || "metadata"
+        }`
       )
     }
 
     lines.push("")
   }
 
-  if (r.discontinued.length > 0) lines.push("Discontinued:", ...r.discontinued.map((c) => `- ${c}`), "")
+  if (r.discontinued.length > 0) lines.push("Discontinued:", ...EffectArray.map(r.discontinued, (c) => `- ${c}`), "")
 
   if (r.missing.length > 0) {
-    lines.push("Not seen (discontinued if still missing on a later day):", ...r.missing.map((c) => `- ${c}`), "")
+    lines.push(
+      "Not seen (discontinued if still missing on a later day):",
+      ...EffectArray.map(r.missing, (c) => `- ${c}`),
+      ""
+    )
   }
 
   lines.push(...summariseHolds(r))
 
   if (r.newPrograms.length > 0)
-    lines.push("New fallback programs (add aliases or rename):", ...r.newPrograms.map((p) => `- ${p}`), "")
+    lines.push("New fallback programs (add aliases or rename):", ...EffectArray.map(r.newPrograms, (p) => `- ${p}`), "")
 
   if (r.rewards.set.length > 0 || r.rewards.review.length > 0) {
     lines.push(`Earn rates: ${r.rewards.set.length} set by parser, ${r.rewards.review.length} need review`, "")
@@ -536,12 +568,16 @@ export const summariseReport = (r: SyncReport): string => {
   if (r.snapshotsSaved > 0) lines.push(`History: saved ${r.snapshotsSaved} changed CDR product responses`, "")
 
   if (r.brandErrors.length > 0)
-    lines.push("Brand errors (after a retry):", ...r.brandErrors.map((b) => `- ${b.brand}: ${b.error}`), "")
+    lines.push(
+      "Brand errors (after a retry):",
+      ...EffectArray.map(r.brandErrors, (b) => `- ${b.brand}: ${b.error}`),
+      ""
+    )
 
   if (r.cardlessBrandErrors > 0)
     lines.push(`Unreachable brands with no cards in the data: ${r.cardlessBrandErrors}`, "")
 
-  return lines.join("\n")
+  return EffectArray.join(lines, "\n")
 }
 
 const earnReviewSection = (r: SyncReport) => [
@@ -552,7 +588,7 @@ const earnReviewSection = (r: SyncReport) => [
   'See "Earn rates" in the README. When a card has no fixed earn rate, comment',
   "`/earn-none <issuer/card>...` here instead.",
   "",
-  ...r.rewards.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
+  ...EffectArray.map(r.rewards.review, (i) => `- [ ] \`${i.card}\` — ${i.reason}`)
 ]
 
 const bonusReviewSection = (r: SyncReport) => [
@@ -562,7 +598,7 @@ const bonusReviewSection = (r: SyncReport) => [
   '`bun run cli rewards bonus-stamp <issuer/card>...`. See "Signup bonuses" in the README. When a',
   "card has no current points offer, comment `/bonus-none <issuer/card>...` here instead.",
   "",
-  ...r.bonus.review.map((i) => `- [ ] \`${i.card}\` — ${i.reason}`)
+  ...EffectArray.map(r.bonus.review, (i) => `- [ ] \`${i.card}\` — ${i.reason}`)
 ]
 
 export const summariseRewardsReview = (r: SyncReport): string => {
@@ -573,22 +609,25 @@ export const summariseRewardsReview = (r: SyncReport): string => {
 
   if (sections.length === 0) return `No earn rates or signup bonuses need review (sync ${r.date}).`
 
-  return sections.map((lines) => lines.join("\n")).join("\n\n")
+  return EffectArray.join(
+    EffectArray.map(sections, (lines) => EffectArray.join(lines, "\n")),
+    "\n\n"
+  )
 }
 
 const holdLine = (hold: Hold) =>
   `- \`${hold.id}\` ${hold.card} ${hold.change}: ${hold.reason} (since ${hold.since}${hold.history === undefined ? "" : `, ${hold.history}`})`
 
 export const summariseHolds = (r: SyncReport): ReadonlyArray<string> => {
-  const pending = r.holds.filter((hold) => hold.decision === undefined)
-  const review = pending.filter((hold) => hold.kind === "approve")
-  const confirm = pending.filter((hold) => hold.kind === "confirm")
+  const pending = EffectArray.filter(r.holds, (hold) => hold.decision === undefined)
+  const review = EffectArray.filter(pending, (hold) => hold.kind === "approve")
+  const confirm = EffectArray.filter(pending, (hold) => hold.kind === "confirm")
   const lines: Array<string> = []
 
   if (review.length > 0) {
     lines.push(
       "Held for review (comment `/approve <id> [why]` or `/reject <id> <why>` on the sync-held issue):",
-      ...review.map((hold) => holdLine(hold)),
+      ...EffectArray.map(review, (hold) => holdLine(hold)),
       ""
     )
   }
@@ -596,19 +635,23 @@ export const summariseHolds = (r: SyncReport): ReadonlyArray<string> => {
   if (confirm.length > 0) {
     lines.push(
       "Waiting to confirm (applied if still proposed on a later day):",
-      ...confirm.map((hold) => holdLine(hold)),
+      ...EffectArray.map(confirm, (hold) => holdLine(hold)),
       ""
     )
   }
 
   if (r.held.length > 0) {
-    lines.push("Whole cards held:", ...r.held.map((h) => `- ${h.card}: ${h.reasons.join("; ")}`), "")
+    lines.push(
+      "Whole cards held:",
+      ...EffectArray.map(r.held, (h) => `- ${h.card}: ${EffectArray.join(h.reasons, "; ")}`),
+      ""
+    )
   }
 
   if (r.released.length > 0) {
     lines.push(
       "Applied after review or confirmation:",
-      ...r.released.map((h) => `- \`${h.id}\` ${h.card} ${h.change}`),
+      ...EffectArray.map(r.released, (h) => `- \`${h.id}\` ${h.card} ${h.change}`),
       ""
     )
   }

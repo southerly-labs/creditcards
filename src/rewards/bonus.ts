@@ -1,4 +1,4 @@
-import { Data } from "effect"
+import { Data, Array as EffectArray, String as EffectString, pipe } from "effect"
 import { createHash } from "node:crypto"
 import { parseNumber } from "../cdr/normalise.ts"
 import type { BonusTranche } from "../model/schema.ts"
@@ -11,13 +11,18 @@ export type BonusResult =
 
 export const BonusResult = Data.taggedEnum<BonusResult>()
 
-const clean = (s: string | null | undefined) => (s ?? "").replaceAll(/\s+/gu, " ").trim()
+const clean = (s: string | null | undefined) => EffectString.trim(pipe(s ?? "", EffectString.replaceAll(/\s+/gu, " ")))
 
 export const bonusText = (features: ReadonlyArray<LoyaltyFeature>): string =>
-  features.map((f) => [clean(f.additionalValue), clean(f.additionalInfo)].filter(Boolean).join(" — ")).join("\n")
+  EffectArray.join(
+    EffectArray.map(features, (f) =>
+      EffectArray.join(EffectArray.filter([clean(f.additionalValue), clean(f.additionalInfo)], Boolean), " — ")
+    ),
+    "\n"
+  )
 
 export const bonusTextHash = (features: ReadonlyArray<LoyaltyFeature>): string =>
-  createHash("sha256").update(bonusText(features)).digest("hex").slice(0, 16)
+  pipe(createHash("sha256").update(bonusText(features)).digest("hex"), EffectString.slice(0, 16))
 
 const review = (reason: string): BonusResult => BonusResult.Review({ reason })
 
@@ -47,7 +52,7 @@ const SPEND =
 const WINDOW = /(\d+)\s+(days?|months?)\b/iu
 
 const money = (digits: string, thousands: string | undefined) =>
-  Number(digits.replaceAll(",", "")) * (thousands === undefined ? 1 : 1000)
+  Number(pipe(digits, EffectString.replaceAll(",", ""))) * (thousands === undefined ? 1 : 1000)
 
 const tranche = (points: number, clause: string): BonusTranche | string => {
   const keep = clause.match(KEEP)
@@ -60,10 +65,11 @@ const tranche = (points: number, clause: string): BonusTranche | string => {
       : money(spend[1], spend[2])
     : undefined
 
-  const window = spend ? clause.slice(spend.index).match(WINDOW) : null
+  const window = spend ? pipe(clause, EffectString.slice(spend.index)).match(WINDOW) : null
 
   const spendDays = window
-    ? Number(window[1]) * (required(window[2]).toLowerCase().startsWith("month") ? 30 : 1)
+    ? Number(window[1]) *
+      (pipe(EffectString.toLowerCase(required(window[2])), EffectString.startsWith("month")) ? 30 : 1)
     : undefined
 
   const yearTwo = (keepMonths !== undefined && keepMonths >= 12) || YEAR_TWO.test(clause)
@@ -88,7 +94,7 @@ const parseFeature = (f: LoyaltyFeature): ReadonlyArray<BonusTranche> | string =
 
   if (complex) return complex[1]
   const mentions = [...text.matchAll(MENTION)]
-  const headlines = mentions.filter((m) => m[1] !== undefined)
+  const headlines = EffectArray.filter(mentions, (m) => m[1] !== undefined)
 
   if (!/\d/u.test(text)) return NO_DETAILS
 
@@ -100,24 +106,24 @@ const parseFeature = (f: LoyaltyFeature): ReadonlyArray<BonusTranche> | string =
 
   for (const [i, m] of mentions.entries()) {
     if (m[1] !== undefined) continue
-    const points = Number(required(m[2]).replaceAll(",", ""))
+    const points = Number(pipe(required(m[2]), EffectString.replaceAll(",", "")))
 
     if (!(points >= 1000 && points <= 1_000_000)) return `implausible bonus ${points}`
-    const clause = text.slice(m.index + m[0].length, mentions[i + 1]?.index ?? text.length)
+    const clause = pipe(text, EffectString.slice(m.index + m[0].length, mentions[i + 1]?.index ?? text.length))
     const parsed = tranche(points, clause)
 
     if (typeof parsed === "string") return parsed
     tranches.push(parsed)
   }
 
-  const total = tranches.reduce((sum, t) => sum + t.points, 0)
+  const total = EffectArray.reduce(tranches, 0, (sum, t) => sum + t.points)
   const headline = headlines[0]
 
-  if (headline && Number(required(headline[2]).replaceAll(",", "")) !== total)
+  if (headline && Number(pipe(required(headline[2]), EffectString.replaceAll(",", ""))) !== total)
     return "tranches do not add up to the 'up to' total"
   const value = parseNumber(f.additionalValue)
 
-  if (value !== undefined && value !== total && !tranches.some((t) => t.points === value))
+  if (value !== undefined && value !== total && !EffectArray.some(tranches, (t) => t.points === value))
     return `CDR value ${value} matches neither the total nor a tranche`
 
   return tranches
@@ -133,9 +139,9 @@ export const parseBonus = (features: ReadonlyArray<LoyaltyFeature>): BonusResult
     tranches.push(...parsed)
   }
 
-  if (tranches.filter((t) => t.year === 1).length > 1) return review("several first-year offers")
+  if (EffectArray.filter(tranches, (t) => t.year === 1).length > 1) return review("several first-year offers")
 
-  if (tranches.filter((t) => t.year === 2).length > 1) return review("several second-year offers")
+  if (EffectArray.filter(tranches, (t) => t.year === 2).length > 1) return review("several second-year offers")
 
   return BonusResult.Parsed({ bonus: tranches.toSorted((a, b) => a.year - b.year) })
 }

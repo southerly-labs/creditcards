@@ -1,4 +1,4 @@
-import { Schema } from "effect"
+import { Schema, Array as EffectArray, String as EffectString, pipe } from "effect"
 
 const amount = Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum: 0, maximum: 100_000_000 })))
 const months = Schema.Int.pipe(Schema.check(Schema.isBetween({ minimum: 1, maximum: 120 })))
@@ -6,7 +6,7 @@ const months = Schema.Int.pipe(Schema.check(Schema.isBetween({ minimum: 1, maxim
 function validDate(value: string): boolean {
   const date = new Date(`${value}T00:00:00Z`)
 
-  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value
+  return Number.isFinite(date.getTime()) && pipe(date.toISOString(), EffectString.slice(0, 10)) === value
 }
 
 export const OfferDate = Schema.String.pipe(
@@ -78,4 +78,4 @@ export const SignupReview = Schema.Struct({
 })
 
 export const uniqueOfferIds = (offers: ReadonlyArray<{ readonly id: string }>): boolean =>
-  new Set(offers.map((offer) => offer.id)).size === offers.length
+  new Set(EffectArray.map(offers, (offer) => offer.id)).size === offers.length

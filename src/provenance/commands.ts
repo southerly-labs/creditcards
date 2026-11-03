@@ -1,4 +1,4 @@
-import { Console, DateTime, Effect, Option, Schema } from "effect"
+import { Console, DateTime, Effect, Option, Schema, String as EffectString } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import { splitCardKey, Store, StoreError } from "../store/Store.ts"
 import { Card } from "../model/schema.ts"
@@ -50,7 +50,7 @@ const inspect = Command.make(
 
     for (const [key, card] of cards) {
       for (const locked of card.locked ?? []) {
-        const section = locked.split(".")[0] ?? locked
+        const section = EffectString.split(locked, ".")[0] ?? locked
         const review = card.provenance?.sections?.[section]
         const parsed = review ? DateTime.make(review.reviewed_at) : Option.none()
         const age = Option.isSome(parsed) ? (now - DateTime.toEpochMillis(parsed.value)) / 86_400_000 : Number.NaN

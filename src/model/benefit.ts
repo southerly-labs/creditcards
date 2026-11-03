@@ -1,5 +1,6 @@
 import { ruleAnnualPoints, type EarnRule } from "./earn.ts"
 import type { EarnRate } from "./schema.ts"
+import { Array as EffectArray } from "effect"
 
 const isBaseRate = (e: EarnRate) => e.category == null || e.category === ""
 
@@ -9,7 +10,7 @@ export const annualPoints = (
   rules?: ReadonlyArray<EarnRule>
 ): number | undefined => {
   if (rules !== undefined) return ruleAnnualPoints(rules, monthlySpend)
-  const tiers = earn.filter((e) => isBaseRate(e))
+  const tiers = EffectArray.filter(earn, (e) => isBaseRate(e))
 
   if (tiers.length === 0) return undefined
   let floor = 0

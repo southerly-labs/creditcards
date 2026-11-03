@@ -1,5 +1,5 @@
 import { encodeJson } from "../util/json.ts"
-import { Data, Predicate } from "effect"
+import { Data, Option, Predicate, Array as EffectArray, String as EffectString, pipe } from "effect"
 import { required } from "../util/required.ts"
 import type { Card } from "../model/schema.ts"
 import type { NormalisedCard } from "../cdr/normalise.ts"
@@ -34,10 +34,12 @@ export const CDR_OWNED_PATHS = [
 type Obj = Record<string, unknown>
 
 export const getPath = (obj: Obj, path: string): unknown =>
-  path.split(".").reduce<unknown>((o, k) => (Predicate.isObject(o) ? o[k] : undefined), obj)
+  EffectArray.reduce<string, unknown>(EffectString.split(path, "."), obj, (o, k) =>
+    Predicate.isObject(o) ? o[k] : undefined
+  )
 
 export const setPath = (obj: Obj, path: string, value: unknown) => {
-  const keys = path.split(".")
+  const keys = EffectString.split(path, ".")
   let target = obj
 
   for (const k of keys.slice(0, -1)) {
@@ -58,7 +60,10 @@ export const setPath = (obj: Obj, path: string, value: unknown) => {
 }
 
 const isLocked = (locked: ReadonlyArray<string>, path: string) =>
-  locked.some((l) => path === l || path.startsWith(`${l}.`) || l.startsWith(`${path}.`))
+  EffectArray.some(
+    locked,
+    (l) => path === l || pipe(path, EffectString.startsWith(`${l}.`)) || pipe(l, EffectString.startsWith(`${path}.`))
+  )
 
 const equal = (a: unknown, b: unknown) =>
   a === undefined || b === undefined ? a === b : encodeJson(a) === encodeJson(b)
@@ -128,9 +133,17 @@ export const heldFields = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<H
       continue
     }
 
-    if (path === "rewards.earn" && Array.isArray(before) && Array.isArray(after)) {
-      const base = (earn: ReadonlyArray<{ rate: number; category?: string }>) =>
-        earn.find((e) => e.category == null || e.category === "")?.rate
+    if (path === "rewards.earn" && EffectArray.isArray(before) && EffectArray.isArray(after)) {
+      const base = (earn: ReadonlyArray<unknown>) =>
+        pipe(
+          EffectArray.findFirst(
+            EffectArray.filter(earn, Predicate.isObject),
+            (e) => e["category"] == null || e["category"] === ""
+          ),
+          Option.map((e) => e["rate"]),
+          Option.filter(Predicate.isNumber),
+          Option.getOrUndefined
+        )
 
       const [b, a] = [base(before), base(after)]
 
@@ -144,7 +157,7 @@ export const heldFields = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<H
 
     if (path === "fees.annual" && delta > 100 && delta / Math.max(before, 1) > 0.5) {
       reasons.push({ path, reason: `${path} ${before} → ${after}` })
-    } else if (path.startsWith("rates.") && path !== "rates.interest_free_days" && delta > 5) {
+    } else if (pipe(path, EffectString.startsWith("rates.")) && path !== "rates.interest_free_days" && delta > 5) {
       reasons.push({ path, reason: `${path} ${before}% → ${after}%` })
     } else if (path === "fees.foreign_txn_pct" && delta > 2) {
       reasons.push({ path, reason: `${path} ${before}% → ${after}%` })
@@ -155,7 +168,7 @@ export const heldFields = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<H
 }
 
 export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<string> =>
-  heldFields(changes).map((held) => held.reason)
+  EffectArray.map(heldFields(changes), (held) => held.reason)
 
 export const MAX_DISCONTINUED_SHARE = 0.5
 

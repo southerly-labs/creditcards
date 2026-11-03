@@ -1,4 +1,4 @@
-import { Clock } from "effect"
+import { Clock, Array as EffectArray } from "effect"
 import { provenanceCommand } from "./provenance/commands.ts"
 import { heldCommand } from "./sync/heldCommand.ts"
 import { encodeJson } from "./util/json.ts"
@@ -52,7 +52,10 @@ const sync = Command.make(
     yield* writeFile(`${reportDir}/sync-report.json`, encodeJson(report, 2))
     yield* writeFile(`${reportDir}/sync-summary.md`, summary)
     yield* writeFile(`${reportDir}/rewards-review.md`, summariseRewardsReview(report))
-    yield* writeFile(`${reportDir}/sync-held.md`, [`Sync ${report.date}`, "", ...summariseHolds(report)].join("\n"))
+    yield* writeFile(
+      `${reportDir}/sync-held.md`,
+      EffectArray.join([`Sync ${report.date}`, "", ...summariseHolds(report)], "\n")
+    )
     yield* Console.log(summary)
   })
 ).pipe(Command.withDescription("Pull CDR product data and update data/"))
@@ -191,14 +194,25 @@ const reviewApply = Command.make(
     const result = yield* applyComment(body, { by, url })
 
     if (ParsedComment.$is("Invalid")(result)) {
-      yield* writeFile(out, ["Nothing applied:", ...result.errors.map((error) => `- ${error}`)].join("\n"))
+      yield* writeFile(
+        out,
+        EffectArray.join(["Nothing applied:", ...EffectArray.map(result.errors, (error) => `- ${error}`)], "\n")
+      )
 
-      return yield* new RewardsError({ message: result.errors.join("; ") })
+      return yield* new RewardsError({ message: EffectArray.join(result.errors, "; ") })
     }
 
-    yield* writeFile(out, result.applied.map((line) => `- ${line}`).join("\n"))
+    yield* writeFile(
+      out,
+      EffectArray.join(
+        EffectArray.map(result.applied, (line) => `- ${line}`),
+        "\n"
+      )
+    )
 
-    return yield* Console.log(result.applied.length === 0 ? "No review commands" : result.applied.join("\n"))
+    return yield* Console.log(
+      result.applied.length === 0 ? "No review commands" : EffectArray.join(result.applied, "\n")
+    )
   })
 ).pipe(Command.withDescription("Apply /approve, /reject, /earn-none and /bonus-none commands from an issue comment"))
 

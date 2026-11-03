@@ -1,5 +1,6 @@
 import { describe, expect, test } from "@effect/vitest"
 import { type SyncReport, summariseReport, summariseRewardsReview } from "../src/sync/Sync.ts"
+import { String as EffectString, pipe } from "effect"
 
 const report = (earn: number, bonus: number, undetailed: ReadonlyArray<string> = []): SyncReport => ({
   date: "2026-11-01",
@@ -28,7 +29,7 @@ describe("review issue body", () => {
   test("leaves out the earn section when no earn rates need review", () => {
     const body = summariseRewardsReview(report(0, 2))
     expect(body).not.toContain("earn rates the parser")
-    expect(body.startsWith("2 cards have signup bonuses")).toBe(true)
+    expect(pipe(body, EffectString.startsWith("2 cards have signup bonuses"))).toBe(true)
   })
 
   test("leaves out the bonus section when no bonuses need review", () => {

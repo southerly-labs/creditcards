@@ -1,4 +1,5 @@
 import { required } from "../util/required.ts"
+import { Array as EffectArray, String as EffectString, pipe } from "effect"
 
 export const ISSUER_SEEDS: Record<string, { readonly slug: string; readonly name: string }> = {
   "American Express": { slug: "amex", name: "American Express" },
@@ -19,28 +20,30 @@ export const ISSUER_SEEDS: Record<string, { readonly slug: string; readonly name
 }
 
 export const slugify = (s: string) =>
-  s
-    .normalize("NFKD")
-    .replaceAll(/[®™©]/gu, "")
-    .toLowerCase()
-    .replaceAll("&", " and ")
-    .replaceAll(/[^a-z0-9]+/gu, "-")
-    .replaceAll(/^-|-$/gu, "")
+  pipe(
+    s,
+    EffectString.normalize("NFKD"),
+    EffectString.replaceAll(/[®™©]/gu, ""),
+    EffectString.toLowerCase,
+    EffectString.replaceAll("&", " and "),
+    EffectString.replaceAll(/[^a-z0-9]+/gu, "-"),
+    EffectString.replaceAll(/^-|-$/gu, "")
+  )
 
 const CORPORATE_TAIL = /(?:\s+\(?australia\)?)?(?:\s+(?:limited|ltd|pty)\.?)+$/iu
 
 export const issuerSeed = (brandName: string) =>
   ISSUER_SEEDS[brandName] ?? {
-    slug: slugify(brandName.replace(CORPORATE_TAIL, "")),
-    name: brandName.replace(/\s+(Limited|Ltd\.?)$/iu, "").trim()
+    slug: slugify(pipe(brandName, EffectString.replace(CORPORATE_TAIL, ""))),
+    name: EffectString.trim(pipe(brandName, EffectString.replace(/\s+(Limited|Ltd\.?)$/iu, "")))
   }
 
 export const cardSlug = (cardName: string, issuerName: string) => {
-  const issuerWords = new Set(slugify(issuerName).split("-"))
-  const words = slugify(cardName).split("-")
+  const issuerWords = new Set(EffectString.split(slugify(issuerName), "-"))
+  const words = EffectString.split(slugify(cardName), "-")
   let start = 0
 
   while (start < words.length - 1 && (issuerWords.has(required(words[start])) || words[start] === "the")) start++
 
-  return words.slice(start).join("-") || slugify(cardName)
+  return EffectArray.join(words.slice(start), "-") || slugify(cardName)
 }

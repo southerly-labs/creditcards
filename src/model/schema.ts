@@ -1,5 +1,5 @@
 import { Provenance } from "../provenance/schema.ts"
-import { Schema } from "effect"
+import { Schema, Array as EffectArray } from "effect"
 import { EarnRule } from "./earn.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "./domain.ts"
 import { Offer, SignupReview, uniqueOfferIds } from "../offers/schema"
@@ -160,7 +160,8 @@ export const Card = CardFields.check(
   earnTierOrder,
   Schema.makeFilter((card) => uniqueOfferIds(card.offers ?? []) || "Offer ids must be unique within a card"),
   Schema.makeFilter(
-    (card) => (card.locked ?? []).every((path) => recognizesLock(CardFields.ast, path)) || "Unrecognized lock path"
+    (card) =>
+      EffectArray.every(card.locked ?? [], (path) => recognizesLock(CardFields.ast, path)) || "Unrecognized lock path"
   )
 )
 

@@ -1,6 +1,6 @@
 import { BunServices } from "@effect/platform-bun"
 import { assert, describe, layer } from "@effect/vitest"
-import { Context, Effect, FileSystem, Layer, Path, Ref } from "effect"
+import { Context, Effect, FileSystem, Layer, Path, Ref, Array as EffectArray } from "effect"
 import { TestClock } from "effect/testing"
 import { CdrClient, CdrError } from "../src/cdr/CdrClient.ts"
 import { DataHolderBrand, type ProductDetail } from "../src/cdr/schema.ts"
@@ -32,7 +32,9 @@ interface WorldState {
 }
 
 const seeded: WorldState = {
-  products: ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10"].map((id) => product(id, "99.00")),
+  products: EffectArray.map(["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10"], (id) =>
+    product(id, "99.00")
+  ),
   failing: new Set()
 }
 
@@ -61,7 +63,7 @@ const FakeCdr = Layer.effect(
               : Effect.succeed(
                   baseUri === CARDLESS_URI
                     ? []
-                    : state.products.map((p) => ({
+                    : EffectArray.map(state.products, (p) => ({
                         productId: p.productId,
                         name: p.name,
                         productCategory: p.productCategory
@@ -176,7 +178,7 @@ describe("syncCdr", () => {
     it.effect("discontinues an unlisted card only after a later day still misses it", () =>
       Effect.gen(function* () {
         yield* syncOn(1)
-        const gone = { ...seeded, products: seeded.products.filter((p) => p.productId !== "p1") }
+        const gone = { ...seeded, products: EffectArray.filter(seeded.products, (p) => p.productId !== "p1") }
 
         assert.deepStrictEqual((yield* syncOn(2, gone)).missing, ["example-bank/card-p1"])
         assert.deepStrictEqual((yield* syncOn(3, gone)).discontinued, ["example-bank/card-p1"])
@@ -197,7 +199,7 @@ describe("syncCdr", () => {
         const report = yield* syncOn(2, jumped)
 
         assert.deepStrictEqual(
-          report.holds.map((hold) => [hold.card, hold.change]),
+          EffectArray.map(report.holds, (hold) => [hold.card, hold.change]),
           [["example-bank/card-p1", "fees.annual"]]
         )
         assert.strictEqual((yield* storedCard("example-bank/card-p1")).fees.annual, 99)
@@ -216,7 +218,7 @@ describe("syncCdr", () => {
 
         const report = yield* syncOn(3, jumped)
         assert.deepStrictEqual(
-          report.released.map((hold) => hold.change),
+          EffectArray.map(report.released, (hold) => hold.change),
           ["fees.annual"]
         )
         assert.strictEqual((yield* storedCard("example-bank/card-p1")).fees.annual, 450)
@@ -249,7 +251,7 @@ describe("syncCdr", () => {
     it.effect("aborts when far fewer cards come back than are active", () =>
       Effect.gen(function* () {
         yield* syncOn(1)
-        const outage = { ...seeded, failing: new Set(seeded.products.slice(0, 3).map((p) => p.productId)) }
+        const outage = { ...seeded, failing: new Set(EffectArray.map(seeded.products.slice(0, 3), (p) => p.productId)) }
         const error = yield* syncOn(2, outage).pipe(Effect.flip)
 
         assert.strictEqual(error._tag, "SyncAborted")

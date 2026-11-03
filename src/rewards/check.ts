@@ -1,5 +1,5 @@
 import { required } from "../util/required.ts"
-import { Effect, Result, Schedule, Schema } from "effect"
+import { Effect, Result, Schedule, Schema, Array as EffectArray, String as EffectString, pipe } from "effect"
 import { HttpClient } from "effect/http"
 import { extractText, getDocumentProxy } from "unpdf"
 import type { Card } from "../model/schema.ts"
@@ -31,22 +31,32 @@ const NAMED_ENTITIES: Record<string, string> = {
 
 const decodeEntity = (match: string, name: string): string => {
   if (name[0] === "#") {
-    const code = name[1] === "x" || name[1] === "X" ? parseInt(name.slice(2), 16) : Math.trunc(Number(name.slice(1)))
+    const code =
+      name[1] === "x" || name[1] === "X"
+        ? parseInt(pipe(name, EffectString.slice(2)), 16)
+        : Math.trunc(Number(pipe(name, EffectString.slice(1))))
 
     return Number.isFinite(code) ? String.fromCodePoint(code) : match
   }
 
-  return NAMED_ENTITIES[name.toLowerCase()] ?? match
+  return NAMED_ENTITIES[EffectString.toLowerCase(name)] ?? match
 }
 
-const decodeEntities = (s: string) => s.replaceAll(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/giu, decodeEntity)
+const decodeEntities = (s: string) =>
+  EffectArray.join(
+    EffectArray.map(EffectString.split(s, /&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/iu), (part, i) =>
+      i % 2 === 0 ? part : decodeEntity(`&${part};`, part)
+    ),
+    ""
+  )
 
 export const htmlText = (html: string): string =>
-  decodeEntities(
-    html
-      .replaceAll(/<!--[\s\S]*?-->/gu, " ")
-      .replaceAll(/<(script|style|noscript|template)\b[\s\S]*?<\/\1\s*>/giu, " ")
-      .replaceAll(/<[^>]+>/gu, " ")
+  pipe(
+    html,
+    EffectString.replaceAll(/<!--[\s\S]*?-->/gu, " "),
+    EffectString.replaceAll(/<(script|style|noscript|template)\b[\s\S]*?<\/\1\s*>/giu, " "),
+    EffectString.replaceAll(/<[^>]+>/gu, " "),
+    decodeEntities
   )
 
 export const pdfText = (url: string, bytes: Uint8Array) =>
@@ -59,19 +69,21 @@ export const pdfText = (url: string, bytes: Uint8Array) =>
   })
 
 export const normaliseText = (s: string): string =>
-  s
-    .normalize("NFKC")
-    .toLowerCase()
-    .replaceAll(/[‘’‚′]/gu, "'")
-    .replaceAll(/[“”„″]/gu, '"')
-    .replaceAll(/[‐-―−]/gu, "-")
-    .replaceAll(/[\s ​]+/gu, " ")
-    .trim()
+  pipe(
+    s,
+    EffectString.normalize("NFKC"),
+    EffectString.toLowerCase,
+    EffectString.replaceAll(/[‘’‚′]/gu, "'"),
+    EffectString.replaceAll(/[“”„″]/gu, '"'),
+    EffectString.replaceAll(/[‐-―−]/gu, "-"),
+    EffectString.replaceAll(/[\s ​]+/gu, " "),
+    EffectString.trim
+  )
 
 export const missingQuotes = (text: string, expect: ReadonlyArray<string>): ReadonlyArray<string> => {
   const haystack = normaliseText(text)
 
-  return expect.filter((quote) => !haystack.includes(normaliseText(quote)))
+  return EffectArray.filter(expect, (quote) => !pipe(haystack, EffectString.includes(normaliseText(quote))))
 }
 
 const isPdf = (bytes: Uint8Array, contentType: string | undefined) =>
@@ -113,13 +125,13 @@ export interface CheckResult {
 }
 
 export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: ReadonlyMap<string, Card>) {
-  const checks = [...cards].flatMap(([card, c]) =>
+  const checks = EffectArray.flatMap([...cards], ([card, c]) =>
     c.status !== "discontinued"
-      ? (c.rewards?.earn_check ?? []).map((check) => ({ card, url: check.url, expect: check.expect }))
+      ? EffectArray.map(c.rewards?.earn_check ?? [], (check) => ({ card, url: check.url, expect: check.expect }))
       : []
   )
 
-  const urls = [...new Set(checks.map((c) => c.url))]
+  const urls = [...new Set(EffectArray.map(checks, (c) => c.url))]
 
   const texts = new Map(
     yield* Effect.forEach(
@@ -141,12 +153,12 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
       : { card, url, missing: missingQuotes(text.success, expect) }
   }
 
-  return checks.map((check) => toCheckResult(check))
+  return EffectArray.map(checks, (check) => toCheckResult(check))
 })
 
 export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {
-  const changed = results.filter((r) => r.missing.length > 0)
-  const failed = results.filter((r) => r.error !== undefined)
+  const changed = EffectArray.filter(results, (r) => r.missing.length > 0)
+  const failed = EffectArray.filter(results, (r) => r.error !== undefined)
 
   const lines = [
     `Issuer earn pages: ${results.length} checked, ${changed.length} changed, ${failed.length} unreadable.`,
@@ -161,14 +173,18 @@ export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {
     )
 
     for (const r of changed) {
-      lines.push(`- [ ] \`${r.card}\` — ${r.url}`, ...r.missing.map((q) => `  - missing: "${q}"`))
+      lines.push(`- [ ] \`${r.card}\` — ${r.url}`, ...EffectArray.map(r.missing, (q) => `  - missing: "${q}"`))
     }
 
     lines.push("")
   }
 
   if (failed.length > 0)
-    lines.push("Unreadable (not checked this run):", ...failed.map((r) => `- \`${r.card}\` — ${r.url}: ${r.error}`), "")
+    lines.push(
+      "Unreadable (not checked this run):",
+      ...EffectArray.map(failed, (r) => `- \`${r.card}\` — ${r.url}: ${r.error}`),
+      ""
+    )
 
-  return lines.join("\n")
+  return EffectArray.join(lines, "\n")
 }

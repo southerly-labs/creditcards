@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto"
-import { Schema } from "effect"
+import { Schema, String as EffectString, Array as EffectArray, pipe } from "effect"
 import type { Hold } from "../model/holds.ts"
 import { Card, EarnRate } from "../model/schema.ts"
 import { Offer } from "../offers/schema.ts"
@@ -26,8 +26,11 @@ const OFFER_PREFIX = "offers."
 export const SIGNUP_INCREASE_HOLD = 1.5
 
 const signupPoints = (offer: Offer | undefined) =>
-  offer?.components.reduce((sum, component) => sum + (component.kind === "signup_points" ? component.points : 0), 0) ??
-  0
+  EffectArray.reduce(
+    offer?.components ?? [],
+    0,
+    (sum, component) => sum + (component.kind === "signup_points" ? component.points : 0)
+  )
 
 const offerCandidates = (existing: Card, proposed: Card): ReadonlyArray<HoldCandidate> => {
   const candidates: Array<HoldCandidate> = []
@@ -63,7 +66,7 @@ const offerCandidates = (existing: Card, proposed: Card): ReadonlyArray<HoldCand
 }
 
 export const holdCandidates = (existing: Card, proposed: Card): ReadonlyArray<HoldCandidate> => [
-  ...heldFields(diffCard(existing, proposed)).map(({ path, reason }): HoldCandidate => ({
+  ...EffectArray.map(heldFields(diffCard(existing, proposed)), ({ path, reason }): HoldCandidate => ({
     change: path,
     reason,
     kind: "approve",
@@ -76,8 +79,8 @@ export const holdCandidates = (existing: Card, proposed: Card): ReadonlyArray<Ho
 const revertOffer = (card: Card, existing: Card, id: string): Card => {
   const before = existing.offers?.find((offer) => offer.id === id)
   const after = card.offers ?? []
-  const kept = after.flatMap((offer) => (offer.id !== id ? [offer] : before === undefined ? [] : [before]))
-  const offers = before !== undefined && !after.some((offer) => offer.id === id) ? [...kept, before] : kept
+  const kept = EffectArray.flatMap(after, (offer) => (offer.id !== id ? [offer] : before === undefined ? [] : [before]))
+  const offers = before !== undefined && !EffectArray.some(after, (offer) => offer.id === id) ? [...kept, before] : kept
   const { offers: _offers, signup_review: _review, ...rest } = card
   const review = id === "signup" ? existing.signup_review : card.signup_review
 
@@ -89,8 +92,8 @@ const revertOffer = (card: Card, existing: Card, id: string): Card => {
 }
 
 export const valueAt = (card: Card, change: string): unknown =>
-  change.startsWith(OFFER_PREFIX)
-    ? card.offers?.find((offer) => offer.id === change.slice(OFFER_PREFIX.length))
+  pipe(change, EffectString.startsWith(OFFER_PREFIX))
+    ? card.offers?.find((offer) => offer.id === pipe(change, EffectString.slice(OFFER_PREFIX.length)))
     : getPath(card, change)
 
 const isEarn = Schema.is(Schema.Array(EarnRate))
@@ -143,7 +146,8 @@ export const withCdrEvidence = (
 const isCard = Schema.is(Card)
 
 export const revertChange = (card: Card, existing: Card, change: string): Card | undefined => {
-  if (change.startsWith(OFFER_PREFIX)) return revertOffer(card, existing, change.slice(OFFER_PREFIX.length))
+  if (pipe(change, EffectString.startsWith(OFFER_PREFIX)))
+    return revertOffer(card, existing, pipe(change, EffectString.slice(OFFER_PREFIX.length)))
   const reverted: Record<string, unknown> = structuredClone(card)
 
   for (const path of REVERTED_WITH[change] ?? [change])
@@ -153,10 +157,12 @@ export const revertChange = (card: Card, existing: Card, change: string): Card |
 }
 
 export const holdId = (card: string, change: string, proposed: unknown): string =>
-  createHash("sha256")
-    .update(encodeJson([card, change, proposed ?? null]))
-    .digest("hex")
-    .slice(0, 12)
+  pipe(
+    createHash("sha256")
+      .update(encodeJson([card, change, proposed ?? null]))
+      .digest("hex"),
+    EffectString.slice(0, 12)
+  )
 
 export interface Resolution {
   readonly apply: ReadonlyArray<HoldCandidate>

@@ -3,6 +3,8 @@ import { checkReferences, toApi } from "../src/build/build.ts"
 import { decodeApi } from "../src/api/contract.ts"
 import type { Offer } from "../src/offers/schema.ts"
 import type { Dataset } from "../src/store/Store.ts"
+import { String as EffectString, pipe } from "effect"
+import { encodeJson } from "../src/util/json.ts"
 
 test("public output round trips and requires version and freshness", () => {
   const dataset: Dataset = { cards: new Map(), programs: new Map(), issuers: new Map() }
@@ -48,9 +50,9 @@ test("public projection retains review evidence and excludes storage controls", 
   assert.deepStrictEqual(decodeApi(api), api)
   assert.strictEqual(api.freshness?.cdr_latest_product_updated_at, "2025-01-01T00:00:00.000Z")
   assert.strictEqual(api.freshness?.cdr_products_with_known_updated_at, 1)
-  assert.strictEqual(JSON.stringify(api).includes('"locked"'), false)
-  assert.strictEqual(JSON.stringify(api).includes('"aliases"'), false)
-  assert.strictEqual(JSON.stringify(api).includes('"earn_text_hash":"hash"'), true)
+  assert.strictEqual(pipe(encodeJson(api), EffectString.includes('"locked"')), false)
+  assert.strictEqual(pipe(encodeJson(api), EffectString.includes('"aliases"')), false)
+  assert.strictEqual(pipe(encodeJson(api), EffectString.includes('"earn_text_hash":"hash"')), true)
 })
 
 const card = {

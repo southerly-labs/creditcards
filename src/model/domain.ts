@@ -1,4 +1,4 @@
-import { Schema, SchemaAST, Predicate, Option } from "effect"
+import { Schema, SchemaAST, Predicate, Option, Array as EffectArray, String as EffectString, pipe } from "effect"
 
 function validUrl(value: string): boolean | string {
   const url = URL.parse(value)
@@ -16,7 +16,7 @@ export const CalendarDate = Schema.String.check(
     (value) =>
       (/^\d{4}-\d{2}-\d{2}$/u.test(value) &&
         Option.isSome(Schema.decodeUnknownOption(Schema.DateTimeUtcFromString)(value)) &&
-        new Date(value).toISOString().slice(0, 10) === value) ||
+        pipe(new Date(value).toISOString(), EffectString.slice(0, 10)) === value) ||
       "Expected a valid YYYY-MM-DD date"
   )
 )
@@ -24,7 +24,7 @@ export const CalendarDate = Schema.String.check(
 export const Timestamp = Schema.String.check(
   Schema.makeFilter(
     (value) =>
-      (Schema.is(CalendarDate)(value.slice(0, 10)) &&
+      (Schema.is(CalendarDate)(pipe(value, EffectString.slice(0, 10))) &&
         /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/u.test(value) &&
         Option.isSome(Schema.decodeUnknownOption(Schema.DateTimeUtcFromString)(value))) ||
       "Expected an ISO timestamp with timezone"
@@ -32,13 +32,13 @@ export const Timestamp = Schema.String.check(
 )
 
 export function recognizesLock(ast: SchemaAST.AST, path: string): boolean {
-  if (Predicate.isTagged(ast, "Union")) return ast.types.some((type) => recognizesLock(type, path))
+  if (Predicate.isTagged(ast, "Union")) return EffectArray.some(ast.types, (type) => recognizesLock(type, path))
 
   if (!Predicate.isTagged(ast, "Objects")) return false
-  const [head, ...tail] = path.split(".")
+  const [head, ...tail] = EffectString.split(path, ".")
   const field = ast.propertySignatures.find((property) => property.name === head)
 
-  return field !== undefined && (tail.length === 0 || recognizesLock(field.type, tail.join(".")))
+  return field !== undefined && (tail.length === 0 || recognizesLock(field.type, EffectArray.join(tail, ".")))
 }
 
 type Tier = { readonly category?: string; readonly cap_monthly?: number; readonly cap_annual?: number }
@@ -54,14 +54,15 @@ export function orderedTiers(tiers: ReadonlyArray<Tier>): boolean {
 
   for (const group of groups.values()) {
     for (const period of ["cap_monthly", "cap_annual"] as const) {
-      if (!group.some((tier) => tier[period] !== undefined)) continue
+      if (!EffectArray.some(group, (tier) => tier[period] !== undefined)) continue
 
       if (!orderedPeriod(group, period)) return false
     }
 
     if (
       group.length > 1 &&
-      group.some(
+      EffectArray.some(
+        group,
         (tier, index) => tier.cap_monthly === undefined && tier.cap_annual === undefined && index !== group.length - 1
       )
     )

@@ -1,5 +1,5 @@
 import { encodeJson } from "../util/json.ts"
-import { DateTime, Effect, Schema } from "effect"
+import { DateTime, Effect, Schema, Array as EffectArray } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
 import type { Card, EarnRate } from "../model/schema.ts"
 import { signupState } from "../offers/build.ts"
@@ -41,7 +41,7 @@ const productFeatures = Effect.fn("productFeatures")(function* (
     return yield* new RewardsError({ message: `${card.cdr.brand} is not in the CDR Register` })
   const { detail } = yield* cdr.getProduct(baseUri, card.cdr.product_id)
 
-  return (detail.features ?? []).filter((f) => f.featureType === featureType)
+  return EffectArray.filter(detail.features ?? [], (f) => f.featureType === featureType)
 })
 
 const loyaltyFeatures = (card: Card, baseUris: ReadonlyMap<string, string>) =>
@@ -53,7 +53,7 @@ const bonusFeatures = (card: Card, baseUris: ReadonlyMap<string, string>) =>
 const registerBaseUris = Effect.gen(function* () {
   const brands = yield* (yield* CdrClient).brands
 
-  return new Map(brands.map((b) => [b.brandName, b.publicBaseUri]))
+  return new Map(EffectArray.map(brands, (b) => [b.brandName, b.publicBaseUri]))
 })
 
 const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFeature>): ReviewItem | undefined => {
@@ -73,7 +73,8 @@ const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFe
 }
 
 const reviewCandidates = (cards: ReadonlyMap<string, Card>, issuer: string | undefined) =>
-  [...cards].filter(
+  EffectArray.filter(
+    [...cards],
     ([key, card]) =>
       card.status !== "discontinued" &&
       card.rewards !== undefined &&
@@ -96,32 +97,35 @@ export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | 
     { concurrency: 8 }
   )
 
-  return items.filter((i) => i !== undefined)
+  return EffectArray.filter(items, (i) => i !== undefined)
 })
 
 export const formatQueue = (items: ReadonlyArray<ReviewItem>): string =>
-  [
-    `# Earn rates to review (${items.length})`,
-    "",
-    "For each card, set `rewards.earn` in its TOML file from the text below (see the",
-    "docs/data-model.md for how tiers and categories work), then run",
-    "`bun run cli rewards stamp <issuer/card>...` to mark it manually reviewed.",
-    "Use `--none` when the text has no fixed earn rate.",
-    "",
-    ...items.flatMap((i) => [
-      `## ${i.card} — ${i.name}`,
+  EffectArray.join(
+    [
+      `# Earn rates to review (${items.length})`,
       "",
-      `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
-      `- Program: ${i.program ?? "—"}`,
-      `- Reason: ${i.reason}`,
-      `- Current earn: ${i.earn ? encodeJson(i.earn) : "—"}`,
+      "For each card, set `rewards.earn` in its TOML file from the text below (see the",
+      "docs/data-model.md for how tiers and categories work), then run",
+      "`bun run cli rewards stamp <issuer/card>...` to mark it manually reviewed.",
+      "Use `--none` when the text has no fixed earn rate.",
       "",
-      "```text",
-      i.text || "(no loyalty text)",
-      "```",
-      ""
-    ])
-  ].join("\n")
+      ...EffectArray.flatMap(items, (i) => [
+        `## ${i.card} — ${i.name}`,
+        "",
+        `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
+        `- Program: ${i.program ?? "—"}`,
+        `- Reason: ${i.reason}`,
+        `- Current earn: ${i.earn ? encodeJson(i.earn) : "—"}`,
+        "",
+        "```text",
+        i.text || "(no loyalty text)",
+        "```",
+        ""
+      ])
+    ],
+    "\n"
+  )
 
 export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, none: boolean) {
   const store = yield* Store
@@ -202,35 +206,38 @@ export const bonusReviewQueue = Effect.fn("bonusReviewQueue")(function* (issuer:
     { concurrency: 8 }
   )
 
-  return items.filter((i) => i !== undefined)
+  return EffectArray.filter(items, (i) => i !== undefined)
 })
 
 export const formatBonusQueue = (items: ReadonlyArray<BonusReviewItem>): string =>
-  [
-    `# Signup bonuses to review (${items.length})`,
-    "",
-    "For each card, write the signup offer in its TOML file from the text below: an",
-    '`[[offers]]` table with `id = "signup"` and `source = "manual"`, and one `signup_points`',
-    "component per tranche with `program`, `points`, `year` (1 or 2) and any of `min_spend`,",
-    "`spend_days`, `keep_months` and `note` (see docs/offers.md). Then run",
-    "`bun run cli rewards bonus-stamp <issuer/card>...`. Use `--none` when there is no",
-    "current points offer, for example when it has expired or is cashback only.",
-    "",
-    ...items.flatMap((i) => [
-      `## ${i.card} — ${i.name}`,
+  EffectArray.join(
+    [
+      `# Signup bonuses to review (${items.length})`,
       "",
-      `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
-      `- Program: ${i.program ?? "—"}`,
-      `- Reason: ${i.reason}`,
-      `- CDR bonus total: ${i.bonusPoints ?? "—"}`,
-      `- Current signup offer: ${i.signup ? encodeJson(i.signup) : "—"}`,
+      "For each card, write the signup offer in its TOML file from the text below: an",
+      '`[[offers]]` table with `id = "signup"` and `source = "manual"`, and one `signup_points`',
+      "component per tranche with `program`, `points`, `year` (1 or 2) and any of `min_spend`,",
+      "`spend_days`, `keep_months` and `note` (see docs/offers.md). Then run",
+      "`bun run cli rewards bonus-stamp <issuer/card>...`. Use `--none` when there is no",
+      "current points offer, for example when it has expired or is cashback only.",
       "",
-      "```text",
-      i.text || "(no bonus text)",
-      "```",
-      ""
-    ])
-  ].join("\n")
+      ...EffectArray.flatMap(items, (i) => [
+        `## ${i.card} — ${i.name}`,
+        "",
+        `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
+        `- Program: ${i.program ?? "—"}`,
+        `- Reason: ${i.reason}`,
+        `- CDR bonus total: ${i.bonusPoints ?? "—"}`,
+        `- Current signup offer: ${i.signup ? encodeJson(i.signup) : "—"}`,
+        "",
+        "```text",
+        i.text || "(no bonus text)",
+        "```",
+        ""
+      ])
+    ],
+    "\n"
+  )
 
 export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray<string>, none: boolean) {
   const store = yield* Store
@@ -243,7 +250,7 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
     if (!card) return yield* new RewardsError({ message: `Unknown card ${key}` })
 
     if (!card.rewards) return yield* new RewardsError({ message: `${key} has no rewards program` })
-    const others = (card.offers ?? []).filter((offer) => offer.id !== "signup")
+    const others = EffectArray.filter(card.offers ?? [], (offer) => offer.id !== "signup")
     const signup = card.offers?.find((offer) => offer.id === "signup")
 
     if (!none && !signup) {

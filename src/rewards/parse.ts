@@ -1,4 +1,4 @@
-import { Data } from "effect"
+import { Data, String as EffectString, Array as EffectArray, pipe } from "effect"
 import { required } from "../util/required.ts"
 import { createHash } from "node:crypto"
 import type { EarnRate } from "../model/schema.ts"
@@ -14,13 +14,18 @@ export type ParseResult =
 
 export const ParseResult = Data.taggedEnum<ParseResult>()
 
-const clean = (s: string | null | undefined) => (s ?? "").replaceAll(/\s+/gu, " ").trim()
+const clean = (s: string | null | undefined) => EffectString.trim(pipe(s ?? "", EffectString.replaceAll(/\s+/gu, " ")))
 
 export const loyaltyText = (features: ReadonlyArray<LoyaltyFeature>): string =>
-  features.map((f) => [clean(f.additionalValue), clean(f.additionalInfo)].filter(Boolean).join(" — ")).join("\n")
+  EffectArray.join(
+    EffectArray.map(features, (f) =>
+      EffectArray.join(EffectArray.filter([clean(f.additionalValue), clean(f.additionalInfo)], Boolean), " — ")
+    ),
+    "\n"
+  )
 
 export const loyaltyTextHash = (features: ReadonlyArray<LoyaltyFeature>): string =>
-  createHash("sha256").update(loyaltyText(features)).digest("hex").slice(0, 16)
+  pipe(createHash("sha256").update(loyaltyText(features)).digest("hex"), EffectString.slice(0, 16))
 
 const review = (reason: string): ParseResult => ParseResult.Review({ reason })
 
@@ -29,46 +34,49 @@ const PER_DOLLAR = /per \$\s?1\b|per dollar|for every (?:AU)?\$\s?[\d.]+|for eve
 const DIVISOR = /for every (?:AU)?\$\s?(\d+(?:\.\d+)?)/iu
 
 const COMPLEX = new RegExp(
-  [
-    "qantas products",
-    "virgin australia",
-    "international",
-    "overseas",
-    "government",
-    "grocer",
-    "dining",
-    "supermarket",
-    "petrol",
-    "webjet",
-    "selected",
-    "taxation",
-    "utilit",
-    "eats",
-    "streaming",
-    "retailer",
-    "david jones",
-    "travel",
-    "airline",
-    "hotel",
-    "online",
-    "foreign",
-    "business spend",
-    "\\btax\\b",
-    "except",
-    "excluding",
-    "bonus",
-    "extra",
-    "additional",
-    "cash ?back",
-    "%",
-    "\\bup to [\\d.]+k?\\s+(?:\\w+\\s+)?points",
-    "capped at [\\d,]+ (?:points|per)",
-    "calendar year",
-    "per year",
-    "annual",
-    "\\bor\\b \\d",
-    "opt[- ]in"
-  ].join("|"),
+  EffectArray.join(
+    [
+      "qantas products",
+      "virgin australia",
+      "international",
+      "overseas",
+      "government",
+      "grocer",
+      "dining",
+      "supermarket",
+      "petrol",
+      "webjet",
+      "selected",
+      "taxation",
+      "utilit",
+      "eats",
+      "streaming",
+      "retailer",
+      "david jones",
+      "travel",
+      "airline",
+      "hotel",
+      "online",
+      "foreign",
+      "business spend",
+      "\\btax\\b",
+      "except",
+      "excluding",
+      "bonus",
+      "extra",
+      "additional",
+      "cash ?back",
+      "%",
+      "\\bup to [\\d.]+k?\\s+(?:\\w+\\s+)?points",
+      "capped at [\\d,]+ (?:points|per)",
+      "calendar year",
+      "per year",
+      "annual",
+      "\\bor\\b \\d",
+      "opt[- ]in"
+    ],
+    "|"
+  ),
   "iu"
 )
 
@@ -78,7 +86,7 @@ const THRESHOLD = /\b(?:over|above|once you spend|after spending) \$\s?([\d,]+)/
 
 const SPEND_CAP = /capped at \$\s?([\d,]+)/iu
 
-const amount = (s: string) => Number(s.replaceAll(",", ""))
+const amount = (s: string) => Number(pipe(s, EffectString.replaceAll(",", "")))
 
 export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult => {
   const text = loyaltyText(features)
@@ -95,7 +103,10 @@ export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult 
 
   if (mentions.length > 3) return review("too many rates")
 
-  const clauses = mentions.map((m, i) => text.slice(m.index, mentions[i + 1]?.index ?? text.length))
+  const clauses = EffectArray.map(mentions, (m, i) =>
+    pipe(text, EffectString.slice(m.index, mentions[i + 1]?.index ?? text.length))
+  )
+
   const tiers: Array<EarnRate> = []
 
   for (let i = 0; i < mentions.length; i++) {
@@ -106,7 +117,7 @@ export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult 
     const rate = Math.round((Number(required(mentions[i])[1]) / divisor) * 10_000) / 10_000
 
     if (!(rate > 0 && rate <= 10)) return review(`implausible rate ${rate}`)
-    const capHere = clause.slice(required(mentions[i])[0].length).match(CAP_HERE)?.[1]
+    const capHere = pipe(clause, EffectString.slice(required(mentions[i])[0].length)).match(CAP_HERE)?.[1]
     const capNext = clauses[i + 1]?.match(THRESHOLD)?.[1]
     const cap = capHere ?? capNext
     tiers.push({ rate, ...(cap != null && cap !== "" ? { cap_monthly: amount(cap) } : {}) })

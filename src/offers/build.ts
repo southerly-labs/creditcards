@@ -1,6 +1,7 @@
 import type { BonusTranche, Card, IntroOffer } from "../model/schema"
 import type { SignupState } from "../rewards/plan"
 import type { Offer, OfferComponent, SignupReview } from "./schema"
+import { Array as EffectArray, Option, pipe } from "effect"
 
 export interface CdrOfferInputs {
   readonly intro?: ReadonlyArray<IntroOffer> | undefined
@@ -51,7 +52,9 @@ export const signupOffer = (input: {
       source: "parser",
       components: [
         { kind: "signup_points", program: input.program, ...first },
-        ...rest.map((tranche) => Object.assign({ kind: "signup_points" as const, program: input.program }, tranche))
+        ...EffectArray.map(rest, (tranche) =>
+          Object.assign({ kind: "signup_points" as const, program: input.program }, tranche)
+        )
       ]
     }
   }
@@ -73,13 +76,13 @@ export const combineOffers = (input: {
   const existing = input.existing ?? []
 
   if (input.locked) return existing
-  const manual = existing.filter((offer) => offer.source === "manual")
-  const manualById = new Map(manual.map((offer) => [offer.id, offer] as const))
+  const manual = EffectArray.filter(existing, (offer) => offer.source === "manual")
+  const manualById = new Map(EffectArray.map(manual, (offer) => [offer.id, offer] as const))
   const offers: Array<Offer> = []
 
   for (const offer of input.generated) offers.push(manualById.get(offer.id) ?? offer)
 
-  return [...offers, ...manual.filter((offer) => !offers.includes(offer))]
+  return [...offers, ...EffectArray.filter(manual, (offer) => !offers.includes(offer))]
 }
 
 const parsedTranche = (component: OfferComponent): ReadonlyArray<BonusTranche> => {
@@ -91,9 +94,11 @@ const parsedTranche = (component: OfferComponent): ReadonlyArray<BonusTranche> =
 
 export const signupState = (card: Card | undefined): SignupState => ({
   review: card?.signup_review,
-  parsed: card?.offers
-    ?.find((offer) => offer.id === "signup" && offer.source === "parser")
-    ?.components.flatMap((component) => parsedTranche(component))
+  parsed: pipe(
+    EffectArray.findFirst(card?.offers ?? [], (offer) => offer.id === "signup" && offer.source === "parser"),
+    Option.map((offer) => EffectArray.flatMap(offer.components, (component) => parsedTranche(component))),
+    Option.getOrUndefined
+  )
 })
 
 export const applyOffers = (card: Card, cdr: CdrOfferInputs, signup: SignupState): Card => {
