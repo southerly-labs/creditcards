@@ -10,16 +10,15 @@
     "validate": "bun run src/cli.ts validate",
     "build": "bun run src/cli.ts build && bun run web/build.ts",
     "test": "bun --bun run vitest run",
-    "typecheck": "tsrs --noEmit",
+    "typecheck": "effect-tsgo tsrs --noEmit",
     "dev": "bun run build && bun run web/server.ts",
-    "check": "bun run format:check && tsrs --noEmit && bun run lint && bun run test && bun run validate && bun run build",
+    "check": "bun run format:check && effect-tsgo tsrs --noEmit && bun run lint && bun run test && bun run validate && bun run build",
     "prepare": "git config core.hooksPath .githooks || true",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "lint": "bun run comments:check && oxlint --deny-warnings --report-unused-disable-directives .",
     "lint:fix": "oxlint --fix --deny-warnings --report-unused-disable-directives . && bun run comments:check",
-    "comments:check": "bun tools/oxlint/local/check-comments.ts",
-    "typecheck:effect": "effect-tsgo tsrs --noEmit"
+    "comments:check": "bun tools/oxlint/local/check-comments.ts"
   },
   "dependencies": {
     "@effect/platform-bun": "4.1.0",

@@ -1,0 +1,11 @@
+#!/bin/sh
+# Starts the Effect-patched tsrs language server that @effect/tsgo ships.
+# Point your editor's TypeScript 7 / tsrs server command at this script: tools/effect-lsp --lsp --stdio
+set -e
+cd "$(dirname "$0")/.."
+version=$(node -p 'require("tsrs/package.json").version' 2>/dev/null || bun -e 'console.log(require("tsrs/package.json").version)')
+for binary in node_modules/@effect/tsgo-*/artifacts/tsrs/"$version"/tsrs; do
+  [ -x "$binary" ] && exec "$binary" "$@"
+done
+echo "effect-lsp: no Effect-patched tsrs $version for this platform; run bun install" >&2
+exit 1

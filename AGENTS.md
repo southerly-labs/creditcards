@@ -83,7 +83,7 @@ Every dependency is pinned to an exact version, and nothing published less than 
 - **npm packages.** `bunfig.toml` sets `exact = true` and `minimumReleaseAge = 259200` (72 hours), so `bun add` saves exact versions and won't pick anything newer than 72 hours. Never write `^` or `~` ranges in `package.json`, and don't weaken or bypass these settings. If you need a version that is too new, wait until it's old enough.
 - **Bun.** The version is in `packageManager` in `package.json`. CI reads it from there. Cloudflare's build reads `BUN_VERSION`, which is set in the dashboard, so keep the two in sync.
 - **GitHub Actions.** Pin each action to a full commit SHA, with the version in a comment, for example `actions/checkout@<sha> # v4.4.0`. Check that the release is more than 72 hours old.
-- **Upgrades.** Do them on purpose, one dependency per commit, and check the publish date (`npm view <pkg> time`) first. `tsrs` is a beta, so read its changelog before you upgrade it.
+- **Upgrades.** Do them on purpose, one dependency per commit, and check the publish date (`npm view <pkg> time`) first. `tsrs` is a beta, so read its changelog before you upgrade it. `@effect/tsgo` ships an Effect-patched build for specific `tsrs` versions (see its README's supported versions table), and `bun run check` uses that build, so upgrade the two together.
 
 ## Deploys
 

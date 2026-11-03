@@ -147,6 +147,7 @@ bun run sync -- --dry-run   # pull CDR data and report changes
 bun run sync                # pull CDR data and write data/
 bun run validate            # check every file in data/
 bun run build               # write the static site and api.json to dist/
+bun run typecheck           # tsrs with the Effect language service
 bun run test               # Vitest, with Effect test services
 bun run lint               # strict, type-aware Oxlint; warnings fail
 bun run format             # apply Oxfmt
@@ -164,6 +165,18 @@ promoted to an error and no Effect rules disabled. It checks composition, tracin
 error handling, Schema boundaries and Effect test services. Effect tests use scoped
 `@effect/vitest` layers; Vitest runs under Bun. The Effect plugin uses syntax analysis;
 type-aware safety checks come from Oxlint/tsgolint rather than a type-aware Effect plugin.
+
+Type checking runs the Effect language service ([`@effect/tsgo`](https://github.com/Effect-TS/tsgo))
+inside tsrs, through `effect-tsgo tsrs --noEmit`. `tsconfig.json` turns on every Effect
+diagnostic at error, counting warnings and suggestions too. There are three exceptions:
+`apiStabilityLeak` is off, because it asks libraries to tag their exports and this app
+builds on Effect 4's unstable modules on purpose. Those modules (`effect/cli`,
+`effect/http`, `effect/crypto`, `FileSystem`, `Path`, `@effect/platform-bun` and
+`@effect/vitest`) are listed in `allowedUnstableApis`. And `strictEffectProvide` is off
+for the six entry points that provide their layers. For the same diagnostics, completions
+and quick fixes in your editor, set its TypeScript 7 (tsrs) language server command to
+`tools/effect-lsp --lsp --stdio`. The script starts the Effect-patched tsrs that
+`@effect/tsgo` ships, and leaves `node_modules` unpatched.
 
 Vendored [anti-slop](https://github.com/dmmulroy/anti-slop) adds safety, collection,
 tagged-value and spacing rules. Authored JS/TS, CSS and HTML code comments are banned;
