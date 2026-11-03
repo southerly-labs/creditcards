@@ -12,6 +12,7 @@ import { required } from "../util/required.ts"
 import type { CdrOfferInputs } from "../offers/build.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
 import type { Fee, ProductDetail } from "./schema.ts"
+import { dual } from "effect/Function"
 
 type Mutable<T> = { -readonly [K in keyof T]: T[K] extends object ? Mutable<T[K]> : T[K] }
 
@@ -73,7 +74,7 @@ export const toPercent = (value: string | null | undefined): number | undefined 
 
 const round = (n: number, dp: number) => Math.round(n * 10 ** dp) / 10 ** dp
 
-export const timesPerYear = (period: string | null | undefined, name: string): number | undefined => {
+const timesPerYearImpl = (period: string | null | undefined, name: string): number | undefined => {
   const iso = pipe(
     Option.fromNullishOr(period),
     Option.map(EffectString.trim),
@@ -98,6 +99,11 @@ export const timesPerYear = (period: string | null | undefined, name: string): n
 
   return undefined
 }
+
+export const timesPerYear = dual<
+  (name: string) => (period: string | null | undefined) => number | undefined,
+  (period: string | null | undefined, name: string) => number | undefined
+>(2, timesPerYearImpl)
 
 export const isoMonths = (value: string | null | undefined): number | undefined => {
   const present = Option.fromNullishOr(value)
@@ -299,7 +305,7 @@ const NETWORKS: ReadonlyArray<readonly [Network, RegExp]> = [
   ["unionpay", /union ?pay/iu]
 ]
 
-export const network = (p: ProductDetail, brandName: string): Network | undefined => {
+const networkImpl = (p: ProductDetail, brandName: string): Network | undefined => {
   if (/american express/iu.test(brandName)) return "amex"
   const fromName = EffectArray.filter(NETWORKS, ([, re]) => re.test(p.name))
 
@@ -323,10 +329,21 @@ export const network = (p: ProductDetail, brandName: string): Network | undefine
   return counts.length === 1 ? required(counts[0])[0] : undefined
 }
 
-export const matchProgram = (index: ProgramIndex, text: string): string | undefined =>
-  Option.getOrUndefined(
-    EffectArray.findFirst(index.programs, (p) => EffectArray.some(p.patterns, (re) => re.test(text)))
-  )?.id
+export const network = dual<
+  (brandName: string) => (p: ProductDetail) => Network | undefined,
+  (p: ProductDetail, brandName: string) => Network | undefined
+>(2, networkImpl)
+
+export const matchProgram = dual<
+  (text: string) => (index: ProgramIndex) => string | undefined,
+  (index: ProgramIndex, text: string) => string | undefined
+>(
+  2,
+  (index: ProgramIndex, text: string): string | undefined =>
+    Option.getOrUndefined(
+      EffectArray.findFirst(index.programs, (p) => EffectArray.some(p.patterns, (re) => re.test(text)))
+    )?.id
+)
 
 export const issuerProgramId = (issuerSlug: string) => `${issuerSlug}-rewards`
 
@@ -385,7 +402,7 @@ const perks = (p: ProductDetail): NormalisedCard["perks"] => {
   }
 }
 
-export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult => {
+const normaliseImpl = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult => {
   const fees = p.fees ?? []
   const rates = p.lendingRates ?? []
   const cash = cashAdvanceFee(fees)
@@ -459,3 +476,8 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
 
   return { card, offers, fallbackProgram: fallback }
 }
+
+export const normalise = dual<
+  (ctx: NormaliseContext) => (p: ProductDetail) => NormaliseResult,
+  (p: ProductDetail, ctx: NormaliseContext) => NormaliseResult
+>(2, normaliseImpl)

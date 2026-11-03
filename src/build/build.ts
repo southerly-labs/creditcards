@@ -1,4 +1,5 @@
 import { required } from "../util/required.ts"
+import { dual } from "effect/Function"
 import { Effect, Schema, Record as EffectRecord, Array as EffectArray } from "effect"
 import { type Api, type PublicCard } from "../api/contract.ts"
 import { datasetFreshness } from "../api/freshness.ts"
@@ -67,7 +68,7 @@ export const validate = Effect.gen(function* () {
   return dataset
 }).pipe(Effect.withSpan("validate"))
 
-export const toApi = (dataset: Dataset, generatedAt?: string): Api => {
+const toApiImpl = (dataset: Dataset, generatedAt?: string): Api => {
   const programs = EffectRecord.fromEntries(
     EffectArray.map([...dataset.programs], ([id, { aliases: _a, priority: _p, ...rest }]) => [id, rest])
   )
@@ -106,3 +107,8 @@ export const toApi = (dataset: Dataset, generatedAt?: string): Api => {
     issuers
   }
 }
+
+export const toApi = dual<
+  (generatedAt?: string) => (dataset: Dataset) => Api,
+  (dataset: Dataset, generatedAt?: string) => Api
+>((args) => typeof args[0] === "object", toApiImpl)

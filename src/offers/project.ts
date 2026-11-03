@@ -1,6 +1,7 @@
 import type { Offer } from "./schema"
+import { dual } from "effect/Function"
 
-export const offerStatus = (offer: Offer, today: string): "upcoming" | "expired" | "undated" | "within_window" => {
+const offerStatusImpl = (offer: Offer, today: string): "upcoming" | "expired" | "undated" | "within_window" => {
   if (offer.valid_from !== undefined && today < offer.valid_from) return "upcoming"
 
   if (offer.valid_until !== undefined && today > offer.valid_until) return "expired"
@@ -9,3 +10,8 @@ export const offerStatus = (offer: Offer, today: string): "upcoming" | "expired"
 
   return "within_window"
 }
+
+export const offerStatus = dual<
+  (today: string) => (offer: Offer) => "upcoming" | "expired" | "undated" | "within_window",
+  (offer: Offer, today: string) => "upcoming" | "expired" | "undated" | "within_window"
+>(2, offerStatusImpl)

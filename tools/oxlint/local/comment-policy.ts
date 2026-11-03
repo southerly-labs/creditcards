@@ -1,5 +1,6 @@
 import { parseSync } from "oxc-parser"
 import { Effect, String as EffectString, Array as EffectArray, pipe, Option } from "effect"
+import { dual } from "effect/Function"
 
 interface CommentRange {
   readonly start: number
@@ -42,7 +43,7 @@ function collectHtmlComments(source: string): Promise<ReadonlyArray<CommentRange
     .then(() => ranges)
 }
 
-export const findCodeComments = (file: string, source: string): Effect.Effect<ReadonlyArray<CommentRange>> => {
+const findCodeCommentsImpl = (file: string, source: string): Effect.Effect<ReadonlyArray<CommentRange>> => {
   if (pipe(file, EffectString.endsWith(".css")))
     return Effect.succeed(
       EffectArray.flatMap([...pipe(source, EffectString.matchAll(cssTokens))], (match) => cssComment(match))
@@ -52,3 +53,8 @@ export const findCodeComments = (file: string, source: string): Effect.Effect<Re
 
   return Effect.sync(() => parseSync(file, source).comments)
 }
+
+export const findCodeComments = dual<
+  (source: string) => (file: string) => Effect.Effect<ReadonlyArray<CommentRange>>,
+  (file: string, source: string) => Effect.Effect<ReadonlyArray<CommentRange>>
+>(2, findCodeCommentsImpl)

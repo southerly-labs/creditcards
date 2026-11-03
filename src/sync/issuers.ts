@@ -1,5 +1,6 @@
 import { required } from "../util/required.ts"
 import { Array as EffectArray, String as EffectString, pipe } from "effect"
+import { dual } from "effect/Function"
 
 export const ISSUER_SEEDS: Record<string, { readonly slug: string; readonly name: string }> = {
   "American Express": { slug: "amex", name: "American Express" },
@@ -38,7 +39,7 @@ export const issuerSeed = (brandName: string) =>
     name: EffectString.trim(pipe(brandName, EffectString.replace(/\s+(Limited|Ltd\.?)$/iu, "")))
   }
 
-export const cardSlug = (cardName: string, issuerName: string) => {
+const cardSlugImpl = (cardName: string, issuerName: string): string => {
   const issuerWords = new Set(EffectString.split(slugify(issuerName), "-"))
   const words = EffectString.split(slugify(cardName), "-")
   let start = 0
@@ -47,3 +48,8 @@ export const cardSlug = (cardName: string, issuerName: string) => {
 
   return EffectArray.join(words.slice(start), "-") || slugify(cardName)
 }
+
+export const cardSlug = dual<
+  (issuerName: string) => (cardName: string) => string,
+  (cardName: string, issuerName: string) => string
+>(2, cardSlugImpl)

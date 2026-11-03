@@ -1,4 +1,5 @@
 import { Schema, Array as EffectArray } from "effect"
+import { dual } from "effect/Function"
 
 const Amount = Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum: 0, maximum: 100_000_000 })))
 const Id = Schema.String.pipe(Schema.check(Schema.isPattern(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u)))
@@ -19,7 +20,7 @@ export const EarnRule = Schema.Struct({
 
 export type EarnRule = typeof EarnRule.Type
 
-export const ruleAnnualPoints = (rules: ReadonlyArray<EarnRule>, monthlySpend: number): number | undefined => {
+const ruleAnnualPointsImpl = (rules: ReadonlyArray<EarnRule>, monthlySpend: number): number | undefined => {
   if (!Number.isFinite(monthlySpend) || monthlySpend < 0 || rules.length === 0) return undefined
 
   if (EffectArray.some(rules, (rule) => rule.category.id !== "general" || rule.cap?.shared_group !== undefined))
@@ -39,3 +40,8 @@ export const ruleAnnualPoints = (rules: ReadonlyArray<EarnRule>, monthlySpend: n
 
   return Math.round(points)
 }
+
+export const ruleAnnualPoints = dual<
+  (monthlySpend: number) => (rules: ReadonlyArray<EarnRule>) => number | undefined,
+  (rules: ReadonlyArray<EarnRule>, monthlySpend: number) => number | undefined
+>(2, ruleAnnualPointsImpl)

@@ -3,6 +3,7 @@ import { Effect, Data, Option, Predicate, Array as EffectArray, String as Effect
 import { required } from "../util/required.ts"
 import type { Card } from "../model/schema.ts"
 import type { NormalisedCard } from "../cdr/normalise.ts"
+import { dual } from "effect/Function"
 
 export const CDR_OWNED_PATHS = [
   "name",
@@ -33,12 +34,15 @@ export const CDR_OWNED_PATHS = [
 
 type Obj = Record<string, unknown>
 
-export const getPath = (obj: Obj, path: string): unknown =>
-  EffectArray.reduce<string, unknown>(EffectString.split(path, "."), obj, (o, k) =>
-    Predicate.isObject(o) ? o[k] : undefined
-  )
+export const getPath = dual<(path: string) => (obj: Obj) => unknown, (obj: Obj, path: string) => unknown>(
+  2,
+  (obj: Obj, path: string): unknown =>
+    EffectArray.reduce<string, unknown>(EffectString.split(path, "."), obj, (o, k) =>
+      Predicate.isObject(o) ? o[k] : undefined
+    )
+)
 
-export const setPath = (obj: Obj, path: string, value: unknown) => {
+const setPathImpl = (obj: Obj, path: string, value: unknown): void => {
   const keys = EffectString.split(path, ".")
   let target = obj
 
@@ -59,13 +63,18 @@ export const setPath = (obj: Obj, path: string, value: unknown) => {
   else target[last] = value
 }
 
+export const setPath = dual<
+  (path: string, value: unknown) => (obj: Obj) => void,
+  (obj: Obj, path: string, value: unknown) => void
+>(3, setPathImpl)
+
 const isLocked = (locked: ReadonlyArray<string>, path: string) =>
   EffectArray.some(
     locked,
     (l) => path === l || pipe(path, EffectString.startsWith(`${l}.`)) || pipe(l, EffectString.startsWith(`${path}.`))
   )
 
-export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard): Obj => {
+const mergeCardImpl = (existing: Card | undefined, incoming: NormalisedCard): Obj => {
   if (existing === undefined) return structuredClone(incoming)
   const merged: Obj = structuredClone(existing)
   const locked = existing.locked ?? []
@@ -86,6 +95,11 @@ export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard):
 
   return merged
 }
+
+export const mergeCard = dual<
+  (incoming: NormalisedCard) => (existing: Card | undefined) => Obj,
+  (existing: Card | undefined, incoming: NormalisedCard) => Obj
+>(2, mergeCardImpl)
 
 export interface FieldChange {
   readonly path: string
@@ -185,10 +199,15 @@ export type MissingStep =
 
 export const MissingStep = Data.taggedEnum<MissingStep>()
 
-export const missingStep = (card: Card, date: string): MissingStep => {
+const missingStepImpl = (card: Card, date: string): MissingStep => {
   if (card.missing_since === undefined) return MissingStep.Mark()
 
   return card.missing_since < date ? MissingStep.Discontinue({ since: card.missing_since }) : MissingStep.Wait()
 }
+
+export const missingStep = dual<
+  (date: string) => (card: Card) => MissingStep,
+  (card: Card, date: string) => MissingStep
+>(2, missingStepImpl)
 
 export const MIN_SEEN_SHARE = 0.8

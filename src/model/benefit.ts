@@ -1,10 +1,11 @@
 import { ruleAnnualPoints, type EarnRule } from "./earn.ts"
 import type { EarnRate } from "./schema.ts"
 import { Array as EffectArray } from "effect"
+import { dual } from "effect/Function"
 
 const isBaseRate = (e: EarnRate) => e.category == null || e.category === ""
 
-export const annualPoints = (
+const annualPointsImpl = (
   earn: ReadonlyArray<EarnRate>,
   monthlySpend: number,
   rules?: ReadonlyArray<EarnRule>
@@ -28,7 +29,12 @@ export const annualPoints = (
   return Math.round(points * 12)
 }
 
-export const meetsSpendTarget = (
+export const annualPoints = dual<
+  (monthlySpend: number, rules?: ReadonlyArray<EarnRule>) => (earn: ReadonlyArray<EarnRate>) => number | undefined,
+  (earn: ReadonlyArray<EarnRate>, monthlySpend: number, rules?: ReadonlyArray<EarnRule>) => number | undefined
+>((args) => typeof args[1] === "number", annualPointsImpl)
+
+const meetsSpendTargetImpl = (
   monthlySpend: number,
   target: { readonly min_spend?: number; readonly spend_days?: number }
 ): boolean => {
@@ -37,3 +43,8 @@ export const meetsSpendTarget = (
 
   return (monthlySpend * 12 * days) / 365 >= target.min_spend
 }
+
+export const meetsSpendTarget = dual<
+  (target: { readonly min_spend?: number; readonly spend_days?: number }) => (monthlySpend: number) => boolean,
+  (monthlySpend: number, target: { readonly min_spend?: number; readonly spend_days?: number }) => boolean
+>(2, meetsSpendTargetImpl)

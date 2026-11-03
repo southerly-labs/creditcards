@@ -4,6 +4,7 @@ import type { BonusTranche, Card, EarnRate } from "../model/schema.ts"
 import type { SignupReview } from "../offers/schema.ts"
 import { BonusResult, bonusTextHash, parseBonus } from "./bonus.ts"
 import { type LoyaltyFeature, loyaltyTextHash, ParseResult, parseEarn } from "./parse.ts"
+import { dual } from "effect/Function"
 
 export type RewardsPlan =
   | { readonly _tag: "Unchanged" }
@@ -61,7 +62,10 @@ export interface SignupState {
 
 const cleared: SignupState = { review: { state: "unknown" }, parsed: undefined }
 
-export const applyBonusPlan = (current: SignupState, plan: BonusPlan): SignupState =>
+export const applyBonusPlan = dual<
+  (plan: BonusPlan) => (current: SignupState) => SignupState,
+  (current: SignupState, plan: BonusPlan) => SignupState
+>(2, (current: SignupState, plan: BonusPlan): SignupState =>
   BonusPlan.$match(plan, {
     Unchanged: () => current,
     Set: ({ bonus, hash }) => ({
@@ -71,6 +75,7 @@ export const applyBonusPlan = (current: SignupState, plan: BonusPlan): SignupSta
     Clear: () => cleared,
     Review: ({ clear }) => (clear ? cleared : current)
   })
+)
 
 export const planBonus = Effect.fn("planBonus")(function* (
   current: SignupState,

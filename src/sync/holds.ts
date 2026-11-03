@@ -1,10 +1,12 @@
 import { sha256Prefix } from "../util/hash.ts"
+import type { Digest } from "effect/crypto"
 import { Schema, String as EffectString, Array as EffectArray, pipe, Option, Effect } from "effect"
 import type { Hold } from "../model/holds.ts"
 import { Card, EarnRate } from "../model/schema.ts"
 import { Offer } from "../offers/schema.ts"
 import { encodeJson } from "../util/json.ts"
 import { diffCard, getPath, heldFields, setPath } from "./merge.ts"
+import { dual } from "effect/Function"
 
 export type HoldKind = "approve" | "confirm"
 
@@ -95,15 +97,18 @@ const revertOffer = (card: Card, existing: Card, id: string): Card => {
   }
 }
 
-export const valueAt = (card: Card, change: string): unknown =>
-  pipe(change, EffectString.startsWith(OFFER_PREFIX))
-    ? Option.getOrUndefined(
-        EffectArray.findFirst(
-          card.offers ?? [],
-          (offer) => offer.id === pipe(change, EffectString.slice(OFFER_PREFIX.length))
+export const valueAt = dual<(change: string) => (card: Card) => unknown, (card: Card, change: string) => unknown>(
+  2,
+  (card: Card, change: string): unknown =>
+    pipe(change, EffectString.startsWith(OFFER_PREFIX))
+      ? Option.getOrUndefined(
+          EffectArray.findFirst(
+            card.offers ?? [],
+            (offer) => offer.id === pipe(change, EffectString.slice(OFFER_PREFIX.length))
+          )
         )
-      )
-    : getPath(card, change)
+      : getPath(card, change)
+)
 
 const isEarn = Schema.is(Schema.Array(EarnRate))
 
@@ -157,7 +162,7 @@ export const withCdrEvidence = Effect.fn("withCdrEvidence")(function* (
 
 const isCard = Schema.is(Card)
 
-export const revertChange = (card: Card, existing: Card, change: string): Card | undefined => {
+const revertChangeImpl = (card: Card, existing: Card, change: string): Card | undefined => {
   if (pipe(change, EffectString.startsWith(OFFER_PREFIX)))
     return revertOffer(card, existing, pipe(change, EffectString.slice(OFFER_PREFIX.length)))
   const reverted: Record<string, unknown> = structuredClone(card)
@@ -168,8 +173,17 @@ export const revertChange = (card: Card, existing: Card, change: string): Card |
   return isCard(reverted) ? reverted : undefined
 }
 
-export const holdId = (card: string, change: string, proposed: unknown) =>
+export const revertChange = dual<
+  (existing: Card, change: string) => (card: Card) => Card | undefined,
+  (card: Card, existing: Card, change: string) => Card | undefined
+>(3, revertChangeImpl)
+
+export const holdId = dual<
+  (change: string, proposed: unknown) => (card: string) => Effect.Effect<string, never, Digest.Digest>,
+  (card: string, change: string, proposed: unknown) => Effect.Effect<string, never, Digest.Digest>
+>(3, (card: string, change: string, proposed: unknown): Effect.Effect<string, never, Digest.Digest> =>
   encodeJson([card, change, proposed ?? null]).pipe(Effect.flatMap((json) => sha256Prefix(json, 12)))
+)
 
 export interface Resolution {
   readonly apply: ReadonlyArray<HoldCandidate>

@@ -8,6 +8,7 @@ import {
   pipe,
   DateTime
 } from "effect"
+import { dual } from "effect/Function"
 
 function validUrl(value: string): boolean | string {
   const url = URL.parse(value)
@@ -40,7 +41,7 @@ export const Timestamp = Schema.String.check(
   )
 )
 
-export function recognizesLock(ast: SchemaAST.AST, path: string): boolean {
+const recognizesLockImpl = (ast: SchemaAST.AST, path: string): boolean => {
   if (Predicate.isTagged(ast, "Union")) return EffectArray.some(ast.types, (type) => recognizesLock(type, path))
 
   if (!Predicate.isTagged(ast, "Objects")) return false
@@ -52,6 +53,11 @@ export function recognizesLock(ast: SchemaAST.AST, path: string): boolean {
 
   return field !== undefined && (tail.length === 0 || recognizesLock(field.type, EffectArray.join(tail, ".")))
 }
+
+export const recognizesLock: {
+  (path: string): (ast: SchemaAST.AST) => boolean
+  (ast: SchemaAST.AST, path: string): boolean
+} = dual(2, recognizesLockImpl)
 
 type Tier = { readonly category?: string; readonly cap_monthly?: number; readonly cap_annual?: number }
 

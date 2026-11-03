@@ -2,6 +2,7 @@ import type { BonusTranche, Card, IntroOffer } from "../model/schema"
 import type { SignupState } from "../rewards/plan"
 import type { Offer, OfferComponent, SignupReview } from "./schema"
 import { Array as EffectArray, Option, pipe } from "effect"
+import { dual } from "effect/Function"
 
 export interface CdrOfferInputs {
   readonly intro?: ReadonlyArray<IntroOffer> | undefined
@@ -101,7 +102,7 @@ export const signupState = (card: Card | undefined): SignupState => ({
   )
 })
 
-export const applyOffers = (card: Card, cdr: CdrOfferInputs, signup: SignupState): Card => {
+const applyOffersImpl = (card: Card, cdr: CdrOfferInputs, signup: SignupState): Card => {
   const { offers: stored, signup_review: _review, ...rest } = card
 
   const offer =
@@ -126,3 +127,8 @@ export const applyOffers = (card: Card, cdr: CdrOfferInputs, signup: SignupState
     ...(signup.review === undefined ? {} : { signup_review: signup.review })
   }
 }
+
+export const applyOffers = dual<
+  (cdr: CdrOfferInputs, signup: SignupState) => (card: Card) => Card,
+  (card: Card, cdr: CdrOfferInputs, signup: SignupState) => Card
+>(3, applyOffersImpl)

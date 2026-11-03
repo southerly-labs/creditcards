@@ -13,7 +13,8 @@ import {
   Option,
   Predicate
 } from "effect"
-import { encodeJson } from "../util/json.ts"
+import { encodeJson, encodePrettyJson } from "../util/json.ts"
+import { dual } from "effect/Function"
 
 export interface CdrSnapshot {
   readonly brand: string
@@ -43,7 +44,7 @@ const sortKeys = (value: unknown): unknown => {
 }
 
 export const encodeSnapshot = (snapshot: CdrSnapshot) =>
-  encodeJson(sortKeys({ brand: snapshot.brand, version: snapshot.version, product: snapshot.product }), 2).pipe(
+  encodePrettyJson(sortKeys({ brand: snapshot.brand, version: snapshot.version, product: snapshot.product })).pipe(
     Effect.map((json) => `${json}\n`)
   )
 
@@ -87,13 +88,18 @@ export const sameProduct = Effect.fn("sameProduct")(function* (
 
 const SNAPSHOT_FILE = /^\d{4}-\d{2}-\d{2}\.json$/u
 
-export const productDir = (issuer: string, productId: string): string => {
+const productDirImpl = (issuer: string, productId: string): string => {
   const safe = encodeURIComponent(productId)
 
   if (safe === "" || safe === "." || safe === "..") throw new Error(`Unsafe CDR product id: ${productId}`)
 
   return `${issuer}/${safe}`
 }
+
+export const productDir = dual<
+  (productId: string) => (issuer: string) => string,
+  (issuer: string, productId: string) => string
+>(2, productDirImpl)
 
 export class Snapshots extends Context.Service<
   Snapshots,

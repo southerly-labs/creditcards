@@ -9,7 +9,7 @@ import {
   loadMonthlySpend,
   loadPointValues
 } from "../src/model/api.ts"
-import { encodeJson } from "../src/util/json.ts"
+import { encodeJson, encodePrettyJson } from "../src/util/json.ts"
 
 const apiDecodes = (input: unknown) => Effect.exit(decodeApi(input)).pipe(Effect.map(Exit.isSuccess))
 
@@ -67,6 +67,6 @@ test("monthly spend keeps only non-negative numbers", () => {
 it.effect("Schema serialization preserves optional report fields and pretty output", () =>
   Effect.gen(function* () {
     assert.strictEqual(yield* encodeJson({ omitted: undefined, kept: [undefined, 1] }), '{"kept":[null,1]}')
-    assert.strictEqual(yield* encodeJson({ kept: 1 }, 2), '{\n  "kept": 1\n}')
+    assert.strictEqual(yield* encodePrettyJson({ kept: 1 }), '{\n  "kept": 1\n}')
   })
 )

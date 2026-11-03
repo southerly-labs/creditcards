@@ -1,7 +1,7 @@
 import { Array as EffectArray, DateTime } from "effect"
 import { provenanceCommand } from "./provenance/commands.ts"
 import { heldCommand } from "./sync/heldCommand.ts"
-import { encodeJson } from "./util/json.ts"
+import { encodeJson, encodePrettyJson } from "./util/json.ts"
 import { BunRuntime, BunServices } from "@effect/platform-bun"
 import { Console, Effect, FileSystem, Layer, Option, Path } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
@@ -50,7 +50,7 @@ const sync = Command.make(
   Effect.fn(function* ({ dryRun, reportDir }) {
     const report = yield* syncCdr({ dryRun })
     const summary = yield* summariseReport(report)
-    yield* writeFile(`${reportDir}/sync-report.json`, yield* encodeJson(report, 2))
+    yield* writeFile(`${reportDir}/sync-report.json`, yield* encodePrettyJson(report))
     yield* writeFile(`${reportDir}/sync-summary.md`, summary)
     yield* writeFile(`${reportDir}/rewards-review.md`, summariseRewardsReview(report))
     yield* writeFile(
@@ -167,7 +167,7 @@ const rewardsCheck = Command.make(
     if (Option.isSome(show)) return yield* Console.log(normaliseText(yield* pageText(show.value)))
     const results = yield* checkEarnPages((yield* (yield* Store).load).cards)
     const report = formatCheck(results)
-    yield* writeFile(`${reportDir}/earn-check.json`, yield* encodeJson(results, 2))
+    yield* writeFile(`${reportDir}/earn-check.json`, yield* encodePrettyJson(results))
     yield* writeFile(`${reportDir}/earn-check.md`, report)
 
     return yield* Console.log(report)

@@ -3,6 +3,7 @@ import { Effect, Result, Schedule, Schema, Array as EffectArray, String as Effec
 import { HttpClient } from "effect/http"
 import { extractText, getDocumentProxy } from "unpdf"
 import type { Card } from "../model/schema.ts"
+import { dual } from "effect/Function"
 
 export class PageError extends Schema.TaggedError<PageError, { readonly brand: unique symbol }>()("PageError", {
   url: Schema.String,
@@ -59,7 +60,10 @@ export const htmlText = (html: string): string =>
     decodeEntities
   )
 
-export const pdfText = (url: string, bytes: Uint8Array) =>
+export const pdfText = dual<
+  (bytes: Uint8Array) => (url: string) => Effect.Effect<string, PageError>,
+  (url: string, bytes: Uint8Array) => Effect.Effect<string, PageError>
+>(2, (url: string, bytes: Uint8Array): Effect.Effect<string, PageError> =>
   Effect.tryPromise({
     try: () =>
       getDocumentProxy(new Uint8Array(bytes), { verbosity: 0 })
@@ -67,6 +71,7 @@ export const pdfText = (url: string, bytes: Uint8Array) =>
         .then((r) => r.text),
     catch: (cause) => PageError.make({ url, message: `PDF: ${cause instanceof Error ? cause.message : String(cause)}` })
   })
+)
 
 export const normaliseText = (s: string): string =>
   pipe(
@@ -80,11 +85,16 @@ export const normaliseText = (s: string): string =>
     EffectString.trim
   )
 
-export const missingQuotes = (text: string, expect: ReadonlyArray<string>): ReadonlyArray<string> => {
+const missingQuotesImpl = (text: string, expect: ReadonlyArray<string>): ReadonlyArray<string> => {
   const haystack = normaliseText(text)
 
   return EffectArray.filter(expect, (quote) => !pipe(haystack, EffectString.includes(normaliseText(quote))))
 }
+
+export const missingQuotes = dual<
+  (expect: ReadonlyArray<string>) => (text: string) => ReadonlyArray<string>,
+  (text: string, expect: ReadonlyArray<string>) => ReadonlyArray<string>
+>(2, missingQuotesImpl)
 
 const isPdf = (bytes: Uint8Array, contentType: string | undefined) =>
   (contentType !== undefined && pipe(contentType, EffectString.includes("application/pdf"))) ||

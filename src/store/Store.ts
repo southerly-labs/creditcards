@@ -15,6 +15,7 @@ import * as Toml from "smol-toml"
 import { Card, Issuer, Program } from "../model/schema.ts"
 import { CdrObservations } from "../provenance/schema.ts"
 import { type Hold, SyncHolds } from "../model/holds.ts"
+import { dual } from "effect/Function"
 
 export interface Dataset {
   readonly programs: ReadonlyMap<string, Program>
@@ -33,7 +34,10 @@ export const OBSERVATIONS_FILE = "cdr-observations.toml"
 
 export const HOLDS_FILE = "sync-holds.toml"
 
-export const cardKey = (issuer: string, card: string) => `${issuer}/${card}`
+export const cardKey = dual<(card: string) => (issuer: string) => string, (issuer: string, card: string) => string>(
+  2,
+  (issuer: string, card: string): string => `${issuer}/${card}`
+)
 
 export const splitCardKey = (key: string) => {
   const [issuer, card] = EffectString.split(key, "/")

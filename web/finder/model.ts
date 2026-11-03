@@ -4,6 +4,7 @@ import type { Card, Program } from "../../src/model/schema.ts"
 import { offerStatus } from "../../src/offers/project.ts"
 import type { Offer, OfferComponent } from "../../src/offers/schema.ts"
 import { Array as EffectArray, Record as EffectRecord, Option, Order, String as EffectString, pipe } from "effect"
+import { dual } from "effect/Function"
 
 export type PublicCard = Omit<Card, "locked">
 
@@ -50,13 +51,24 @@ export const entriesFrom = (api: Api): ReadonlyArray<Entry> =>
     )
   )
 
-export const currentOffers = (card: PublicCard, today: string): ReadonlyArray<Offer> =>
+export const currentOffers = dual<
+  (today: string) => (card: PublicCard) => ReadonlyArray<Offer>,
+  (card: PublicCard, today: string) => ReadonlyArray<Offer>
+>(2, (card: PublicCard, today: string): ReadonlyArray<Offer> =>
   EffectArray.filter(card.offers ?? [], (o) => ["within_window", "undated"].includes(offerStatus(o, today)))
+)
 
-export const introRates = (card: PublicCard, today: string): ReadonlyArray<IntroRate> =>
+export const introRates = dual<
+  (today: string) => (card: PublicCard) => ReadonlyArray<IntroRate>,
+  (card: PublicCard, today: string) => ReadonlyArray<IntroRate>
+>(2, (card: PublicCard, today: string): ReadonlyArray<IntroRate> =>
   EffectArray.flatMap(currentOffers(card, today), (o) => EffectArray.filter(o.components, isIntroRate))
+)
 
-export const transferOffer = (card: PublicCard, today: string): IntroRate | undefined =>
+export const transferOffer = dual<
+  (today: string) => (card: PublicCard) => IntroRate | undefined,
+  (card: PublicCard, today: string) => IntroRate | undefined
+>(2, (card: PublicCard, today: string): IntroRate | undefined =>
   Option.getOrUndefined(
     EffectArray.head(
       EffectArray.sort(
@@ -68,14 +80,19 @@ export const transferOffer = (card: PublicCard, today: string): IntroRate | unde
       )
     )
   )
+)
 
 const signupOffer = (card: PublicCard, today: string) =>
   Option.getOrUndefined(
     EffectArray.findFirst(currentOffers(card, today), (o) => EffectArray.some(o.components, isSignupPoints))
   )
 
-export const signupTranches = (card: PublicCard, today: string): ReadonlyArray<SignupPoints> =>
+export const signupTranches = dual<
+  (today: string) => (card: PublicCard) => ReadonlyArray<SignupPoints>,
+  (card: PublicCard, today: string) => ReadonlyArray<SignupPoints>
+>(2, (card: PublicCard, today: string): ReadonlyArray<SignupPoints> =>
   EffectArray.filter(signupOffer(card, today)?.components ?? [], isSignupPoints)
+)
 
 export const isBaseRate = (category: string | undefined) => category === undefined || category === ""
 
@@ -106,11 +123,17 @@ const sumPoints = (tranches: ReadonlyArray<SignupPoints>) => {
   return total === 0 ? undefined : total
 }
 
-export const firstYearFee = (card: PublicCard, today: string) =>
-  EffectArray.flatMap(currentOffers(card, today), (o) => EffectArray.filter(o.components, isYearLongFeeDiscount))[0]
-    ?.payable ?? card.fees.annual
+export const firstYearFee = dual<
+  (today: string) => (card: PublicCard) => number | undefined,
+  (card: PublicCard, today: string) => number | undefined
+>(
+  2,
+  (card: PublicCard, today: string): number | undefined =>
+    EffectArray.flatMap(currentOffers(card, today), (o) => EffectArray.filter(o.components, isYearLongFeeDiscount))[0]
+      ?.payable ?? card.fees.annual
+)
 
-export const value = (
+const valueImpl = (
   entry: Entry,
   monthlySpend: number,
   overrides: Readonly<Record<string, number>>,
@@ -150,6 +173,11 @@ export const value = (
       earnValue === undefined || feeYearOne === undefined ? undefined : earnValue + firstYearBonusValue - feeYearOne
   }
 }
+
+export const value = dual<
+  (monthlySpend: number, overrides: Readonly<Record<string, number>>, today: string) => (entry: Entry) => Valuation,
+  (entry: Entry, monthlySpend: number, overrides: Readonly<Record<string, number>>, today: string) => Valuation
+>(4, valueImpl)
 
 export interface Ranked {
   readonly entry: Entry
@@ -238,7 +266,7 @@ export const goals: Record<GoalId, Goal> = {
 
 export const isGoalId = (text: string | null): text is GoalId => EffectArray.some(goalIds, (id) => id === text)
 
-export const rank = (rows: ReadonlyArray<Ranked>, goal: GoalId, today: string): ReadonlyArray<Ranked> => {
+const rankImpl = (rows: ReadonlyArray<Ranked>, goal: GoalId, today: string): ReadonlyArray<Ranked> => {
   const { keep, order } = goals[goal]
 
   return EffectArray.sort(
@@ -246,3 +274,8 @@ export const rank = (rows: ReadonlyArray<Ranked>, goal: GoalId, today: string): 
     Order.combine(order(today), byCardName)
   )
 }
+
+export const rank = dual<
+  (goal: GoalId, today: string) => (rows: ReadonlyArray<Ranked>) => ReadonlyArray<Ranked>,
+  (rows: ReadonlyArray<Ranked>, goal: GoalId, today: string) => ReadonlyArray<Ranked>
+>(3, rankImpl)
