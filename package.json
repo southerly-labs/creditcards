@@ -18,7 +18,8 @@
     "format:check": "oxfmt --check .",
     "lint": "bun run comments:check && oxlint --deny-warnings --report-unused-disable-directives .",
     "lint:fix": "oxlint --fix --deny-warnings --report-unused-disable-directives . && bun run comments:check",
-    "comments:check": "bun tools/oxlint/local/check-comments.ts"
+    "comments:check": "bun tools/oxlint/local/check-comments.ts",
+    "typecheck:effect": "effect-tsgo tsrs --noEmit"
   },
   "dependencies": {
     "@effect/platform-bun": "4.1.0",
@@ -27,6 +28,7 @@
     "unpdf": "1.9.1"
   },
   "devDependencies": {
+    "@effect/tsgo": "0.63.0",
     "@effect/vitest": "4.0.7",
     "@oxlint/plugins": "1.90.0",
     "@shekohex/oxc-effect": "0.2.1",
