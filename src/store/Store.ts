@@ -7,7 +7,9 @@ import {
   Schema,
   Record as EffectRecord,
   String as EffectString,
-  Array as EffectArray
+  Array as EffectArray,
+  Order,
+  pipe
 } from "effect"
 import * as Toml from "smol-toml"
 import { Card, Issuer, Program } from "../model/schema.ts"
@@ -78,7 +80,7 @@ export class Store extends Context.Service<
         const listDir = (dir: string) =>
           fs.exists(dir).pipe(
             Effect.flatMap((exists) => (exists ? fs.readDirectory(dir) : Effect.succeed([]))),
-            Effect.map((names) => names.toSorted()),
+            Effect.map((names) => EffectArray.sort(names, Order.String)),
             Effect.mapError(fail(dir))
           )
 
@@ -162,7 +164,12 @@ export class Store extends Context.Service<
             writeToml(
               CdrObservations,
               path.join(dataDir, OBSERVATIONS_FILE),
-              EffectRecord.fromEntries([...value].toSorted(([a], [b]) => a.localeCompare(b)))
+              EffectRecord.fromEntries(
+                EffectArray.sort(
+                  [...value],
+                  Order.make<readonly [string, unknown]>(([a], [b]) => pipe(a, EffectString.localeCompare(b)))
+                )
+              )
             )
         })
       })

@@ -87,7 +87,7 @@ export const missingQuotes = (text: string, expect: ReadonlyArray<string>): Read
 }
 
 const isPdf = (bytes: Uint8Array, contentType: string | undefined) =>
-  contentType?.includes("application/pdf") === true ||
+  (contentType !== undefined && pipe(contentType, EffectString.includes("application/pdf"))) ||
   (bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46)
 
 const USER_AGENT = "Mozilla/5.0 (compatible; creditcards-earn-check)"

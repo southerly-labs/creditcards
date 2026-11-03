@@ -1,4 +1,4 @@
-import { Data, Array as EffectArray, String as EffectString, pipe } from "effect"
+import { Data, Array as EffectArray, String as EffectString, pipe, Option, Order } from "effect"
 import { createHash } from "node:crypto"
 import { parseNumber } from "../cdr/normalise.ts"
 import type { BonusTranche } from "../model/schema.ts"
@@ -55,9 +55,9 @@ const money = (digits: string, thousands: string | undefined) =>
   Number(pipe(digits, EffectString.replaceAll(",", ""))) * (thousands === undefined ? 1 : 1000)
 
 const tranche = (points: number, clause: string): BonusTranche | string => {
-  const keep = clause.match(KEEP)
+  const keep = Option.getOrNull(pipe(clause, EffectString.match(KEEP)))
   const keepMonths = keep ? Number(keep[1]) : undefined
-  const spend = clause.match(SPEND)
+  const spend = Option.getOrNull(pipe(clause, EffectString.match(SPEND)))
 
   const minSpend = spend
     ? spend[1] === undefined
@@ -65,7 +65,9 @@ const tranche = (points: number, clause: string): BonusTranche | string => {
       : money(spend[1], spend[2])
     : undefined
 
-  const window = spend ? pipe(clause, EffectString.slice(spend.index)).match(WINDOW) : null
+  const window = spend
+    ? pipe(clause, EffectString.slice(spend.index), EffectString.match(WINDOW), Option.getOrNull)
+    : null
 
   const spendDays = window
     ? Number(window[1]) *
@@ -90,10 +92,10 @@ const tranche = (points: number, clause: string): BonusTranche | string => {
 
 const parseFeature = (f: LoyaltyFeature): ReadonlyArray<BonusTranche> | string => {
   const text = clean(f.additionalInfo) || clean(f.additionalValue)
-  const complex = COMPLEX.find(([re]) => re.test(text))
+  const complex = Option.getOrUndefined(EffectArray.findFirst(COMPLEX, ([re]) => re.test(text)))
 
   if (complex) return complex[1]
-  const mentions = [...text.matchAll(MENTION)]
+  const mentions = [...pipe(text, EffectString.matchAll(MENTION))]
   const headlines = EffectArray.filter(mentions, (m) => m[1] !== undefined)
 
   if (!/\d/u.test(text)) return NO_DETAILS
@@ -109,7 +111,12 @@ const parseFeature = (f: LoyaltyFeature): ReadonlyArray<BonusTranche> | string =
     const points = Number(pipe(required(m[2]), EffectString.replaceAll(",", "")))
 
     if (!(points >= 1000 && points <= 1_000_000)) return `implausible bonus ${points}`
-    const clause = pipe(text, EffectString.slice(m.index + m[0].length, mentions[i + 1]?.index ?? text.length))
+
+    const clause = pipe(
+      text,
+      EffectString.slice(required(m.index) + m[0].length, mentions[i + 1]?.index ?? text.length)
+    )
+
     const parsed = tranche(points, clause)
 
     if (typeof parsed === "string") return parsed
@@ -143,5 +150,5 @@ export const parseBonus = (features: ReadonlyArray<LoyaltyFeature>): BonusResult
 
   if (EffectArray.filter(tranches, (t) => t.year === 2).length > 1) return review("several second-year offers")
 
-  return BonusResult.Parsed({ bonus: tranches.toSorted((a, b) => a.year - b.year) })
+  return BonusResult.Parsed({ bonus: EffectArray.sortWith(tranches, (t) => t.year, Order.Number) })
 }

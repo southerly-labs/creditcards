@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@effect/vitest"
-import { Schema, Array as EffectArray } from "effect"
+import { Schema, Array as EffectArray, Option } from "effect"
 import { Card } from "../model/schema"
 import type { Offer } from "./schema"
 import { applyOffers, cdrOffers, combineOffers, signupOffer, signupState } from "./build"
@@ -115,12 +115,14 @@ describe("applying offers to a card", () => {
   }
 
   const nothingReviewed = { review: undefined, parsed: undefined }
-  const signupOf = (applied: Card) => applied.offers?.find((offer) => offer.id === "signup")
+
+  const signupOf = (applied: Card) =>
+    Option.getOrUndefined(EffectArray.findFirst(applied.offers ?? [], (offer) => offer.id === "signup"))
 
   it("writes CDR offers and the raw total when nothing has been reviewed", () => {
     const applied = applyOffers(card, cdr, nothingReviewed)
 
-    expect(applied.offers?.map((offer) => [offer.id, offer.source])).toEqual([
+    expect(EffectArray.map(applied.offers ?? [], (offer) => [offer.id, offer.source])).toEqual([
       ["intro-purchase", "cdr"],
       ["first-year-fee", "cdr"],
       ["signup", "cdr"]

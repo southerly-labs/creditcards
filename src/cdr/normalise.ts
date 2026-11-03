@@ -1,5 +1,14 @@
 import { defined } from "../util/defined.ts"
-import { Predicate, Schema, Array as EffectArray, String as EffectString, Record as EffectRecord, pipe } from "effect"
+import {
+  Predicate,
+  Schema,
+  Array as EffectArray,
+  String as EffectString,
+  Record as EffectRecord,
+  pipe,
+  Option,
+  Order
+} from "effect"
 import { required } from "../util/required.ts"
 import type { CdrOfferInputs } from "../offers/build.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
@@ -17,12 +26,19 @@ export interface ProgramIndex {
   }>
 }
 
+const byPriorityDesc = Order.flip(
+  Order.mapInput(Order.Number, (entry: { readonly program: Program }) => entry.program.priority ?? 0)
+)
+
 export const makeProgramIndex = (programs: Record<string, Program>): ProgramIndex => ({
-  programs: EffectArray.map(EffectRecord.toEntries(programs), ([id, program]) => ({
-    id,
-    program,
-    patterns: EffectArray.map(program.aliases ?? [], (a) => new RegExp(a, "iu"))
-  })).toSorted((a, b) => (b.program.priority ?? 0) - (a.program.priority ?? 0))
+  programs: EffectArray.sort(
+    EffectArray.map(EffectRecord.toEntries(programs), ([id, program]) => ({
+      id,
+      program,
+      patterns: EffectArray.map(program.aliases ?? [], (a) => new RegExp(a, "iu"))
+    })),
+    byPriorityDesc
+  )
 })
 
 export interface NormaliseContext {
@@ -59,14 +75,18 @@ export const toPercent = (value: string | null | undefined): number | undefined 
 const round = (n: number, dp: number) => Math.round(n * 10 ** dp) / 10 ** dp
 
 export const timesPerYear = (period: string | null | undefined, name: string): number | undefined => {
-  const iso = period?.trim().match(/^P(\d+)([YMWD])$/iu)
+  const iso = pipe(
+    Option.fromNullishOr(period),
+    Option.map(EffectString.trim),
+    Option.flatMap(EffectString.match(/^P(\d+)([YMWD])$/iu))
+  )
 
-  if (iso) {
-    const n = Number(iso[1])
+  if (Option.isSome(iso)) {
+    const n = Number(iso.value[1])
 
     if (n === 0) return undefined
     const periods: Record<string, number> = { Y: 1, M: 12, W: 52 }
-    const perYear = periods[EffectString.toUpperCase(required(iso[2]))]
+    const perYear = periods[EffectString.toUpperCase(required(iso.value[2]))]
 
     return perYear === undefined ? undefined : perYear / n
   }
@@ -81,12 +101,15 @@ export const timesPerYear = (period: string | null | undefined, name: string): n
 }
 
 export const isoMonths = (value: string | null | undefined): number | undefined => {
-  const iso = value?.trim().match(/^P(\d+)([YM])$/iu)
+  const present = Option.fromNullishOr(value)
+  const iso = pipe(present, Option.map(EffectString.trim), Option.flatMap(EffectString.match(/^P(\d+)([YM])$/iu)))
 
-  if (iso) return Number(iso[1]) * (EffectString.toUpperCase(required(iso[2])) === "Y" ? 12 : 1)
-  const text = value?.match(/(\d+)\s*months?/iu)
+  if (Option.isSome(iso))
+    return Number(iso.value[1]) * (EffectString.toUpperCase(required(iso.value[2])) === "Y" ? 12 : 1)
 
-  return text ? Number(text[1]) : undefined
+  const text = Option.flatMap(present, EffectString.match(/(\d+)\s*months?/iu))
+
+  return Option.isSome(text) ? Number(text.value[1]) : undefined
 }
 
 const fixedAmount = (fee: Fee) => parseNumber(fee.fixedAmount?.amount ?? fee.amount)
@@ -172,12 +195,19 @@ export const cashAdvanceFee = (fees: ReadonlyArray<Fee>) => {
     (f) => f.feeType === "CASH_ADVANCE" && !/overseas|international/iu.test(f.name ?? "")
   )
 
-  const pct = EffectArray.map(cash, (fee) => feeRate(fee)).find((r) => r !== undefined)
+  const pct = Option.getOrUndefined(
+    EffectArray.findFirst(
+      EffectArray.map(cash, (fee) => feeRate(fee)),
+      (r) => r !== undefined
+    )
+  )
 
-  const min = EffectArray.map(
-    EffectArray.map(cash, (f) => f.fixedAmount?.amount ?? f.amount),
-    (value) => parseNumber(value)
-  ).find((r) => r !== undefined)
+  const min = Option.getOrUndefined(
+    EffectArray.findFirst(
+      EffectArray.map(cash, (f) => parseNumber(f.fixedAmount?.amount ?? f.amount)),
+      (r) => r !== undefined
+    )
+  )
 
   return { pct, min }
 }
@@ -240,15 +270,16 @@ export const introOffers = (rates: ReadonlyArray<LendingRate>): Array<IntroOffer
 export const interestFreeDays = (p: ProductDetail): number | undefined => {
   for (const f of p.features ?? []) {
     if (f.featureType !== "INTEREST_FREE") continue
-    const iso = f.additionalValue?.match(/^P(\d+)D$/u)
+    const iso = Option.flatMap(Option.fromNullishOr(f.additionalValue), EffectString.match(/^P(\d+)D$/u))
 
-    if (iso) return Number(iso[1])
+    if (Option.isSome(iso)) return Number(iso.value[1])
 
-    const text = `${f.additionalValue ?? ""} ${f.additionalInfo ?? ""}`.match(
-      /up to (\d+) (?:interest[- ]free )?days/iu
+    const text = pipe(
+      `${f.additionalValue ?? ""} ${f.additionalInfo ?? ""}`,
+      EffectString.match(/up to (\d+) (?:interest[- ]free )?days/iu)
     )
 
-    if (text) return Number(text[1])
+    if (Option.isSome(text)) return Number(text.value[1])
   }
 
   return undefined
@@ -290,7 +321,9 @@ export const network = (p: ProductDetail, brandName: string): Network | undefine
   )
 
   const counts = NETWORKS.values()
-    .map(([n, re]) => [n, (text.match(new RegExp(re, "giu")) ?? []).length] as const)
+    .map(
+      ([n, re]) => [n, (Option.getOrNull(pipe(text, EffectString.match(new RegExp(re, "giu")))) ?? []).length] as const
+    )
     .filter(([n, c]) => c > 0 && n !== "amex")
     .toArray()
 
@@ -298,7 +331,9 @@ export const network = (p: ProductDetail, brandName: string): Network | undefine
 }
 
 export const matchProgram = (index: ProgramIndex, text: string): string | undefined =>
-  index.programs.find((p) => EffectArray.some(p.patterns, (re) => re.test(text)))?.id
+  Option.getOrUndefined(
+    EffectArray.findFirst(index.programs, (p) => EffectArray.some(p.patterns, (re) => re.test(text)))
+  )?.id
 
 export const issuerProgramId = (issuerSlug: string) => `${issuerSlug}-rewards`
 
@@ -325,7 +360,12 @@ const rewards = (p: ProductDetail, ctx: NormaliseContext) => {
 }
 
 export const rawBonusPoints = (features: ReadonlyArray<{ readonly additionalValue?: string | null | undefined }>) =>
-  EffectArray.map(features, (f) => parseNumber(f.additionalValue)).find((n) => n !== undefined && n > 0)
+  Option.getOrUndefined(
+    EffectArray.findFirst(
+      EffectArray.map(features, (f) => parseNumber(f.additionalValue)),
+      (n) => n !== undefined && n > 0
+    )
+  )
 
 const perks = (p: ProductDetail): NormalisedCard["perks"] => {
   const features = p.features ?? []
@@ -335,7 +375,7 @@ const perks = (p: ProductDetail): NormalisedCard["perks"] => {
       EffectArray.filter(
         EffectArray.map(
           EffectArray.filter(features, (f) => f.featureType === "INSURANCE"),
-          (f) => f.additionalValue?.trim()
+          (f) => (f.additionalValue == null ? undefined : EffectString.trim(f.additionalValue))
         ),
         (v): v is string => !(v == null || v === "") && v.length < 80
       )
@@ -358,12 +398,20 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
   const cash = cashAdvanceFee(fees)
 
   const constraint = (type: string) =>
-    parseNumber((p.constraints ?? []).find((c) => c.constraintType === type)?.additionalValue)
+    parseNumber(
+      Option.getOrUndefined(EffectArray.findFirst(p.constraints ?? [], (c) => c.constraintType === type))
+        ?.additionalValue
+    )
 
-  const minIncome = EffectArray.map(
-    EffectArray.filter(p.eligibility ?? [], (e) => e.eligibilityType === "MIN_INCOME"),
-    (e) => parseNumber(e.additionalValue)
-  ).find((n) => n !== undefined)
+  const minIncome = Option.getOrUndefined(
+    EffectArray.findFirst(
+      EffectArray.map(
+        EffectArray.filter(p.eligibility ?? [], (e) => e.eligibilityType === "MIN_INCOME"),
+        (e) => parseNumber(e.additionalValue)
+      ),
+      (n) => n !== undefined
+    )
+  )
 
   const intro = introOffers(rates)
   const { rewards: rewardsValue, fallback } = rewards(p, ctx)
@@ -375,7 +423,12 @@ export const normalise = (p: ProductDetail, ctx: NormaliseContext): NormaliseRes
     type: cardType(p),
     network: net,
     status: "active" as const,
-    description: p.description?.trim() === "" ? undefined : p.description?.trim(),
+    description: pipe(
+      Option.fromNullishOr(p.description),
+      Option.map(EffectString.trim),
+      Option.filter((d) => d !== ""),
+      Option.getOrUndefined
+    ),
     url: p.applicationUri ?? undefined,
     image,
     cdr: defined({ brand: ctx.brandName, product_id: p.productId, last_updated: p.lastUpdated ?? undefined }),

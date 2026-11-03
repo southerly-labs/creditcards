@@ -3,7 +3,7 @@ import { annualPoints, meetsSpendTarget } from "../../src/model/benefit.ts"
 import type { Card, Program } from "../../src/model/schema.ts"
 import { offerStatus } from "../../src/offers/project.ts"
 import type { Offer, OfferComponent } from "../../src/offers/schema.ts"
-import { Array as EffectArray, Record as EffectRecord } from "effect"
+import { Array as EffectArray, Record as EffectRecord, Option, Order, String as EffectString, pipe } from "effect"
 
 export type PublicCard = Omit<Card, "locked">
 
@@ -57,19 +57,30 @@ export const introRates = (card: PublicCard, today: string): ReadonlyArray<Intro
   EffectArray.flatMap(currentOffers(card, today), (o) => EffectArray.filter(o.components, isIntroRate))
 
 export const transferOffer = (card: PublicCard, today: string): IntroRate | undefined =>
-  EffectArray.filter(introRates(card, today), (r) => r.applies_to !== "purchase").toSorted(
-    (a, b) => (b.months ?? 0) - (a.months ?? 0) || a.rate - b.rate
-  )[0]
+  Option.getOrUndefined(
+    EffectArray.head(
+      EffectArray.sort(
+        EffectArray.filter(introRates(card, today), (r) => r.applies_to !== "purchase"),
+        Order.combine(
+          Order.mapInput(Order.flip(Order.Number), (r: IntroRate) => r.months ?? 0),
+          Order.mapInput(Order.Number, (r: IntroRate) => r.rate)
+        )
+      )
+    )
+  )
 
 const signupOffer = (card: PublicCard, today: string) =>
-  currentOffers(card, today).find((o) => EffectArray.some(o.components, isSignupPoints))
+  Option.getOrUndefined(
+    EffectArray.findFirst(currentOffers(card, today), (o) => EffectArray.some(o.components, isSignupPoints))
+  )
 
 export const signupTranches = (card: PublicCard, today: string): ReadonlyArray<SignupPoints> =>
   EffectArray.filter(signupOffer(card, today)?.components ?? [], isSignupPoints)
 
 export const isBaseRate = (category: string | undefined) => category === undefined || category === ""
 
-export const baseEarnRate = (card: PublicCard) => card.rewards?.earn?.find((e) => isBaseRate(e.category))?.rate
+export const baseEarnRate = (card: PublicCard) =>
+  Option.getOrUndefined(EffectArray.findFirst(card.rewards?.earn ?? [], (e) => isBaseRate(e.category)))?.rate
 
 export interface Valuation {
   readonly centsPerPoint: number | undefined
@@ -147,21 +158,13 @@ export interface Ranked {
 
 type Key = number | undefined
 
-const ascending = (a: Key, b: Key) => {
-  if (a === undefined) return b === undefined ? 0 : 1
+const undefinedLast = (defined: Order.Order<number>): Order.Order<Key> =>
+  Order.make((a, b) => (a === undefined ? (b === undefined ? 0 : 1) : b === undefined ? -1 : defined(a, b)))
 
-  if (b === undefined) return -1
+const ascending = <A>(key: (a: A) => Key): Order.Order<A> => Order.mapInput(undefinedLast(Order.Number), key)
 
-  return a - b
-}
-
-const descending = (a: Key, b: Key) => {
-  if (a === undefined) return b === undefined ? 0 : 1
-
-  if (b === undefined) return -1
-
-  return b - a
-}
+const descending = <A>(key: (a: A) => Key): Order.Order<A> =>
+  Order.mapInput(undefinedLast(Order.flip(Order.Number)), key)
 
 export const goalIds = ["value", "bonus", "travel", "rate", "transfer", "free"] as const
 
@@ -171,56 +174,65 @@ export interface Goal {
   readonly label: string
   readonly sentence: string
   readonly keep: (r: Ranked, today: string) => boolean
-  readonly order: (a: Ranked, b: Ranked, today: string) => number
+  readonly order: (today: string) => Order.Order<Ranked>
 }
 
-const byOngoing = (a: Ranked, b: Ranked) =>
-  descending(a.valuation.ongoing, b.valuation.ongoing) || ascending(a.valuation.fee, b.valuation.fee)
+const byFee = ascending((r: Ranked) => r.valuation.fee)
+
+const byPurchaseRate = ascending((r: Ranked) => r.entry.card.rates.purchase)
+
+const byOngoing = Order.combine(
+  descending((r: Ranked) => r.valuation.ongoing),
+  byFee
+)
+
+const byCardName = Order.make<Ranked>((a, b) => pipe(a.entry.card.name, EffectString.localeCompare(b.entry.card.name)))
 
 export const goals: Record<GoalId, Goal> = {
   value: {
     label: "Most back every year",
     sentence: "the most back every year",
     keep: () => true,
-    order: byOngoing
+    order: () => byOngoing
   },
   bonus: {
     label: "Biggest first year",
     sentence: "the biggest first year",
     keep: (r) => r.valuation.firstYearBonusPoints !== undefined,
-    order: (a, b) => descending(a.valuation.firstYear, b.valuation.firstYear) || byOngoing(a, b)
+    order: () =>
+      Order.combine(
+        descending((r: Ranked) => r.valuation.firstYear),
+        byOngoing
+      )
   },
   travel: {
     label: "No fees overseas",
     sentence: "no fees when I spend overseas",
     keep: (r) => r.entry.card.fees.foreign_txn_pct === 0,
-    order: byOngoing
+    order: () => byOngoing
   },
   rate: {
     label: "Low interest",
     sentence: "a low rate if I carry a balance",
     keep: (r) => r.entry.card.rates.purchase !== undefined,
-    order: (a, b) =>
-      ascending(a.entry.card.rates.purchase, b.entry.card.rates.purchase) || ascending(a.valuation.fee, b.valuation.fee)
+    order: () => Order.combine(byPurchaseRate, byFee)
   },
   transfer: {
     label: "Balance transfer",
     sentence: "to move a balance and pay it down",
     keep: (r, today) => transferOffer(r.entry.card, today) !== undefined,
-    order: (a, b, today) => {
-      const x = transferOffer(a.entry.card, today)
-      const y = transferOffer(b.entry.card, today)
-
-      return (
-        descending(x?.months, y?.months) || ascending(x?.rate, y?.rate) || ascending(a.valuation.fee, b.valuation.fee)
-      )
-    }
+    order: (today) =>
+      Order.combineAll([
+        descending((r: Ranked) => transferOffer(r.entry.card, today)?.months),
+        ascending((r: Ranked) => transferOffer(r.entry.card, today)?.rate),
+        byFee
+      ])
   },
   free: {
     label: "No annual fee",
     sentence: "a card with no annual fee",
     keep: (r) => r.entry.card.fees.annual === 0,
-    order: (a, b) => byOngoing(a, b) || ascending(a.entry.card.rates.purchase, b.entry.card.rates.purchase)
+    order: () => Order.combine(byOngoing, byPurchaseRate)
   }
 }
 
@@ -229,7 +241,8 @@ export const isGoalId = (text: string | null): text is GoalId => EffectArray.som
 export const rank = (rows: ReadonlyArray<Ranked>, goal: GoalId, today: string): ReadonlyArray<Ranked> => {
   const { keep, order } = goals[goal]
 
-  return EffectArray.filter(rows, (r) => keep(r, today)).toSorted(
-    (a, b) => order(a, b, today) || a.entry.card.name.localeCompare(b.entry.card.name)
+  return EffectArray.sort(
+    EffectArray.filter(rows, (r) => keep(r, today)),
+    Order.combine(order(today), byCardName)
   )
 }

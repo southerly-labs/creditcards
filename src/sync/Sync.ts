@@ -238,7 +238,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   const fetched = EffectArray.map(
     firstPass,
-    (result) => retried.find((retry) => retry.brand === result.brand) ?? result
+    (result) => Option.getOrUndefined(EffectArray.findFirst(retried, (retry) => retry.brand === result.brand)) ?? result
   )
 
   const cardsSeen = EffectArray.reduce(fetched, 0, (n, b) => n + b.products.length)

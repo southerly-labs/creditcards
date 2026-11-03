@@ -1,4 +1,4 @@
-import { Data, Array as EffectArray, String as EffectString, pipe } from "effect"
+import { Data, Array as EffectArray, String as EffectString, pipe, Option } from "effect"
 
 export type ReviewCommand =
   | { readonly _tag: "Approve"; readonly id: string; readonly note: string }
@@ -41,7 +41,7 @@ const parseHold = (tag: "Approve" | "Reject", words: ReadonlyArray<string>, line
 
 const parseCards = (tag: "EarnNone" | "BonusNone", cards: ReadonlyArray<string>, line: string) => {
   if (cards.length === 0) return `\`${line}\`: name at least one issuer/card`
-  const bad = cards.find((card) => !CARD_KEY.test(card))
+  const bad = Option.getOrUndefined(EffectArray.findFirst(cards, (card) => !CARD_KEY.test(card)))
 
   if (bad !== undefined) return `\`${line}\`: \`${bad}\` is not an issuer/card key`
 

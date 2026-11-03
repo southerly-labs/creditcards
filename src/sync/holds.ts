@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto"
-import { Schema, String as EffectString, Array as EffectArray, pipe } from "effect"
+import { Schema, String as EffectString, Array as EffectArray, pipe, Option } from "effect"
 import type { Hold } from "../model/holds.ts"
 import { Card, EarnRate } from "../model/schema.ts"
 import { Offer } from "../offers/schema.ts"
@@ -36,7 +36,7 @@ const offerCandidates = (existing: Card, proposed: Card): ReadonlyArray<HoldCand
   const candidates: Array<HoldCandidate> = []
 
   for (const before of existing.offers ?? []) {
-    const after = proposed.offers?.find((offer) => offer.id === before.id)
+    const after = Option.getOrUndefined(EffectArray.findFirst(proposed.offers ?? [], (offer) => offer.id === before.id))
 
     if (after === undefined && before.source !== "manual") {
       candidates.push({
@@ -77,7 +77,7 @@ export const holdCandidates = (existing: Card, proposed: Card): ReadonlyArray<Ho
 ]
 
 const revertOffer = (card: Card, existing: Card, id: string): Card => {
-  const before = existing.offers?.find((offer) => offer.id === id)
+  const before = Option.getOrUndefined(EffectArray.findFirst(existing.offers ?? [], (offer) => offer.id === id))
   const after = card.offers ?? []
   const kept = EffectArray.flatMap(after, (offer) => (offer.id !== id ? [offer] : before === undefined ? [] : [before]))
   const offers = before !== undefined && !EffectArray.some(after, (offer) => offer.id === id) ? [...kept, before] : kept
@@ -93,7 +93,12 @@ const revertOffer = (card: Card, existing: Card, id: string): Card => {
 
 export const valueAt = (card: Card, change: string): unknown =>
   pipe(change, EffectString.startsWith(OFFER_PREFIX))
-    ? card.offers?.find((offer) => offer.id === pipe(change, EffectString.slice(OFFER_PREFIX.length)))
+    ? Option.getOrUndefined(
+        EffectArray.findFirst(
+          card.offers ?? [],
+          (offer) => offer.id === pipe(change, EffectString.slice(OFFER_PREFIX.length))
+        )
+      )
     : getPath(card, change)
 
 const isEarn = Schema.is(Schema.Array(EarnRate))
@@ -101,7 +106,9 @@ const isEarn = Schema.is(Schema.Array(EarnRate))
 const isOffer = Schema.is(Offer)
 
 const baseEarn = (value: unknown) =>
-  isEarn(value) ? value.find((e) => e.category == null || e.category === "")?.rate : undefined
+  isEarn(value)
+    ? Option.getOrUndefined(EffectArray.findFirst(value, (e) => e.category == null || e.category === ""))?.rate
+    : undefined
 
 const PLAUSIBLE: Readonly<Record<string, (value: unknown) => boolean>> = {
   "fees.annual": (v) => typeof v === "number" && v >= 0 && v <= 2500,
@@ -185,7 +192,7 @@ export const resolveHolds = (input: {
 
   for (const candidate of input.candidates) {
     const id = holdId(input.card, candidate.change, candidate.proposed)
-    const entry = input.entries.find((hold) => hold.id === id)
+    const entry = Option.getOrUndefined(EffectArray.findFirst(input.entries, (hold) => hold.id === id))
     const confirmed = candidate.kind === "confirm" && entry !== undefined && entry.since < input.date
 
     if (entry?.decision === "approve" || (confirmed && entry.decision === undefined)) {

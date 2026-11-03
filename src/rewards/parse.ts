@@ -1,4 +1,4 @@
-import { Data, String as EffectString, Array as EffectArray, pipe } from "effect"
+import { Data, String as EffectString, Array as EffectArray, pipe, Option } from "effect"
 import { required } from "../util/required.ts"
 import { createHash } from "node:crypto"
 import type { EarnRate } from "../model/schema.ts"
@@ -97,7 +97,7 @@ export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult 
 
   if (!PER_DOLLAR.test(text)) return review("no per-dollar earn rate")
 
-  const mentions = [...text.matchAll(MENTION)]
+  const mentions = [...pipe(text, EffectString.matchAll(MENTION))]
 
   if (mentions.length === 0) return review("no earn rate in text")
 
@@ -113,17 +113,29 @@ export const parseEarn = (features: ReadonlyArray<LoyaltyFeature>): ParseResult 
     const clause = required(clauses[i])
 
     if (i > 0 && !NEXT_TIER.test(clause)) return review("several rates that are not spend tiers")
-    const divisor = Number(clause.match(DIVISOR)?.[1] ?? 1)
+    const divisor = Number(Option.getOrNull(pipe(clause, EffectString.match(DIVISOR)))?.[1] ?? 1)
     const rate = Math.round((Number(required(mentions[i])[1]) / divisor) * 10_000) / 10_000
 
     if (!(rate > 0 && rate <= 10)) return review(`implausible rate ${rate}`)
-    const capHere = pipe(clause, EffectString.slice(required(mentions[i])[0].length)).match(CAP_HERE)?.[1]
-    const capNext = clauses[i + 1]?.match(THRESHOLD)?.[1]
+
+    const capHere = pipe(
+      clause,
+      EffectString.slice(required(mentions[i])[0].length),
+      EffectString.match(CAP_HERE),
+      Option.getOrNull
+    )?.[1]
+
+    const capNext = pipe(
+      Option.fromUndefinedOr(clauses[i + 1]),
+      Option.flatMap(EffectString.match(THRESHOLD)),
+      Option.getOrNull
+    )?.[1]
+
     const cap = capHere ?? capNext
     tiers.push({ rate, ...(cap != null && cap !== "" ? { cap_monthly: amount(cap) } : {}) })
   }
 
-  const spendCap = text.match(SPEND_CAP)?.[1]
+  const spendCap = Option.getOrNull(pipe(text, EffectString.match(SPEND_CAP)))?.[1]
   const last = required(tiers.at(-1))
 
   if (spendCap != null && spendCap !== "" && last.cap_monthly === undefined)

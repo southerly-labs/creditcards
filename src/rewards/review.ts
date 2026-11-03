@@ -1,5 +1,5 @@
 import { encodeJson } from "../util/json.ts"
-import { DateTime, Effect, Schema, Array as EffectArray } from "effect"
+import { DateTime, Effect, Schema, Array as EffectArray, Option } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
 import type { Card, EarnRate } from "../model/schema.ts"
 import { signupState } from "../offers/build.ts"
@@ -187,7 +187,7 @@ const toBonusReviewItem = (
     program: card.rewards?.program,
     reason: plan.reason,
     text: bonusText(features),
-    signup: card.offers?.find((offer) => offer.id === "signup"),
+    signup: Option.getOrUndefined(EffectArray.findFirst(card.offers ?? [], (offer) => offer.id === "signup")),
     bonusPoints: rawBonusPoints(features)
   }
 }
@@ -251,7 +251,7 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
 
     if (!card.rewards) return yield* RewardsError.make({ message: `${key} has no rewards program` })
     const others = EffectArray.filter(card.offers ?? [], (offer) => offer.id !== "signup")
-    const signup = card.offers?.find((offer) => offer.id === "signup")
+    const signup = Option.getOrUndefined(EffectArray.findFirst(card.offers ?? [], (offer) => offer.id === "signup"))
 
     if (!none && !signup) {
       return yield* RewardsError.make({ message: `${key} has no signup offer; write one first or pass --none` })

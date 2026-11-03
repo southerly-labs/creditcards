@@ -14,7 +14,15 @@ import { annualPoints, meetsSpendTarget } from "../src/model/benefit.ts"
 import type { Card, Program } from "../src/model/schema.ts"
 import { offerStatus } from "../src/offers/project.ts"
 import type { OfferComponent } from "../src/offers/schema.ts"
-import { Effect, Record as EffectRecord, String as EffectString, Array as EffectArray, pipe } from "effect"
+import {
+  Effect,
+  Record as EffectRecord,
+  String as EffectString,
+  Array as EffectArray,
+  pipe,
+  Option,
+  Order
+} from "effect"
 
 interface Row {
   readonly id: string
@@ -101,10 +109,13 @@ const intro = (r: Row) => {
 
 type Earn = NonNullable<NonNullable<Card["rewards"]>["earn"]>
 
-const baseEarn = (r: Row) => r.card.rewards?.earn?.find((e) => e.category == null || e.category === "")?.rate
+const baseEarn = (r: Row) =>
+  Option.getOrUndefined(
+    EffectArray.findFirst(r.card.rewards?.earn ?? [], (e) => e.category == null || e.category === "")
+  )?.rate
 
 const governmentRates = (r: Row) =>
-  r.card.rewards?.earn?.filter((e) => /\bgovernment\b|\btaxation\b/iu.test(e.category ?? "")) ?? []
+  EffectArray.filter(r.card.rewards?.earn ?? [], (e) => /\bgovernment\b|\btaxation\b/iu.test(e.category ?? ""))
 
 const governmentEarn = (r: Row) => Math.max(0, ...EffectArray.map(governmentRates(r), (e) => e.rate))
 
@@ -151,7 +162,8 @@ const earnValue = (r: Row) => {
   return earn === undefined || cents === undefined ? undefined : Math.round(earn * cents * 1000) / 1000
 }
 
-const signup = (r: Row) => currentOffers(r).find((o) => EffectArray.some(o.components, isTranche))
+const signup = (r: Row) =>
+  Option.getOrUndefined(EffectArray.findFirst(currentOffers(r), (o) => EffectArray.some(o.components, isTranche)))
 
 const tranches = (r: Row): ReadonlyArray<Tranche> | undefined => {
   const offer = signup(r)
@@ -232,8 +244,11 @@ type Benefit =
   | { readonly kind: "none" }
 
 const firstYearFee = (r: Row) =>
-  EffectArray.flatMap(currentOffers(r), (o) => EffectArray.filter(o.components, isFeeDiscount)).find(
-    (c) => c.fee === "annual" && (c.months ?? 12) >= 12
+  Option.getOrUndefined(
+    EffectArray.findFirst(
+      EffectArray.flatMap(currentOffers(r), (o) => EffectArray.filter(o.components, isFeeDiscount)),
+      (c) => c.fee === "annual" && (c.months ?? 12) >= 12
+    )
   )?.payable ?? r.card.fees.annual
 
 const firstYearTranches = (r: Row) =>
@@ -570,7 +585,7 @@ const toggleColumn = (e: Event) => {
 
   if (!(input instanceof HTMLInputElement)) return
   const id = input.dataset["column"]
-  const column = columns.find((c) => c.id === id)
+  const column = Option.getOrUndefined(EffectArray.findFirst(columns, (c) => c.id === id))
 
   if (!column) return
 
@@ -603,14 +618,16 @@ const sortHead = (e: MouseEvent) => {
 
 head.addEventListener("click", sortHead)
 
-const compare = (a: Value, b: Value) => {
-  if (a === undefined) return b === undefined ? 0 : 1
+const byValue = Order.make<number | string>((a, b) =>
+  typeof a === "number" && typeof b === "number"
+    ? Order.Number(a, b)
+    : pipe(String(a), EffectString.localeCompare(String(b)))
+)
 
-  if (b === undefined) return -1
-  const d = typeof a === "number" && typeof b === "number" ? a - b : String(a).localeCompare(String(b))
-
-  return sortDir === "asc" ? d : -d
-}
+const compare = (dir: "asc" | "desc"): Order.Order<Value> =>
+  Order.make((a, b) =>
+    a === undefined ? (b === undefined ? 0 : 1) : b === undefined ? -1 : dir === "asc" ? byValue(a, b) : byValue(b, a)
+  )
 
 const render = () => {
   const q = EffectString.toLowerCase(EffectString.trim(element("search", HTMLInputElement).value))
@@ -645,7 +662,7 @@ const render = () => {
 
   const visible = EffectArray.filter(rows, (r) => matchesFilters(r))
   const col = required(columns[sortIndex])
-  const sorted = visible.toSorted((a, b) => compare(col.sortValue(a), col.sortValue(b)))
+  const sorted = EffectArray.sortWith(visible, col.sortValue, compare(sortDir))
   const shown = EffectArray.flatMap(columns, (c, i) => (isShown(c) ? [{ c, i }] : []))
 
   head.innerHTML = EffectArray.join(
@@ -676,8 +693,12 @@ const renderValueGrid = () => {
 
   for (const r of rows) if (r.program) counts.set(r.program.id, (counts.get(r.program.id) ?? 0) + 1)
 
-  const programs = EffectArray.map([...counts.keys()], (id) => ({ id, program: required(api.programs[id]) })).toSorted(
-    (a, b) => required(counts.get(b.id)) - required(counts.get(a.id)) || a.program.name.localeCompare(b.program.name)
+  const programs = EffectArray.sort(
+    EffectArray.map([...counts.keys()], (id) => ({ id, program: required(api.programs[id]) })),
+    Order.combine<{ readonly id: string; readonly program: Api["programs"][string] }>(
+      Order.mapInput(Order.flip(Order.Number), (p) => required(counts.get(p.id))),
+      Order.make((a, b) => pipe(a.program.name, EffectString.localeCompare(b.program.name)))
+    )
   )
 
   const renderPointValue = (id: string, p: Api["programs"][string]) => {

@@ -36,7 +36,10 @@ export function recognizesLock(ast: SchemaAST.AST, path: string): boolean {
 
   if (!Predicate.isTagged(ast, "Objects")) return false
   const [head, ...tail] = EffectString.split(path, ".")
-  const field = ast.propertySignatures.find((property) => property.name === head)
+
+  const field = Option.getOrUndefined(
+    EffectArray.findFirst(ast.propertySignatures, (property) => property.name === head)
+  )
 
   return field !== undefined && (tail.length === 0 || recognizesLock(field.type, EffectArray.join(tail, ".")))
 }

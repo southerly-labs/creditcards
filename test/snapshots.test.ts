@@ -1,6 +1,6 @@
 import { BunServices } from "@effect/platform-bun"
 import { assert, describe, layer, test } from "@effect/vitest"
-import { Context, Effect, FileSystem, Layer, Path } from "effect"
+import { Context, Effect, FileSystem, Layer, Path, Array as EffectArray, Order } from "effect"
 import { encodeSnapshot, productDir, Snapshots } from "../src/history/Snapshots.ts"
 
 class HistoryDir extends Context.Service<HistoryDir, string>()("creditcards/test/snapshots.test/HistoryDir") {}
@@ -24,7 +24,7 @@ const listed = Effect.fn("listed")(function* (productId: string) {
   const path = yield* Path.Path
   const dir = yield* HistoryDir
 
-  return (yield* fs.readDirectory(path.join(dir, "cdr", "bank", productId))).toSorted()
+  return EffectArray.sort(yield* fs.readDirectory(path.join(dir, "cdr", "bank", productId)), Order.String)
 })
 
 describe("CDR snapshots", () => {

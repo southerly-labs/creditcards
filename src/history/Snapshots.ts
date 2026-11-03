@@ -8,7 +8,9 @@ import {
   String as EffectString,
   Array as EffectArray,
   Record as EffectRecord,
-  pipe
+  pipe,
+  Order,
+  Option
 } from "effect"
 import { encodeJson } from "../util/json.ts"
 
@@ -23,7 +25,7 @@ export class SnapshotError extends Schema.TaggedError<SnapshotError>()("Snapshot
   message: Schema.String
 }) {}
 
-const byKey = ([a]: readonly [string, unknown], [b]: readonly [string, unknown]) => (a < b ? -1 : a > b ? 1 : 0)
+const byKey = Order.mapInput(Order.String, ([key]: readonly [string, unknown]) => key)
 
 const sortKeys = (value: unknown): unknown => {
   if (EffectArray.isArray(value)) return EffectArray.map(value, (item: unknown) => sortKeys(item))
@@ -31,7 +33,7 @@ const sortKeys = (value: unknown): unknown => {
   if (value === null || typeof value !== "object") return value
   const sorted: Record<string, unknown> = {}
 
-  for (const [key, item] of EffectRecord.toEntries(value).toSorted(byKey)) sorted[key] = sortKeys(item)
+  for (const [key, item] of EffectArray.sort(EffectRecord.toEntries(value), byKey)) sorted[key] = sortKeys(item)
 
   return sorted
 }
@@ -41,19 +43,19 @@ export const encodeSnapshot = (snapshot: CdrSnapshot): string =>
 
 const Saved = Schema.fromJsonString(Schema.Struct({ brand: Schema.String, product: Schema.Unknown }))
 
-const byEncoding = (a: unknown, b: unknown) => {
-  const [x, y] = [encodeJson(a), encodeJson(b)]
-
-  return x < y ? -1 : x > y ? 1 : 0
-}
+const byEncoding = Order.mapInput(Order.String, (value: unknown) => encodeJson(value))
 
 const canonical = (value: unknown, skip: ReadonlySet<string> = new Set()): unknown => {
-  if (EffectArray.isArray(value)) return EffectArray.map(value, (item: unknown) => canonical(item)).toSorted(byEncoding)
+  if (EffectArray.isArray(value))
+    return EffectArray.sort(
+      EffectArray.map(value, (item: unknown) => canonical(item)),
+      byEncoding
+    )
 
   if (value === null || typeof value !== "object") return value
   const result: Record<string, unknown> = {}
 
-  for (const [key, item] of EffectRecord.toEntries(value).toSorted(byKey))
+  for (const [key, item] of EffectArray.sort(EffectRecord.toEntries(value), byKey))
     if (!skip.has(key)) result[key] = canonical(item)
 
   return result
@@ -116,7 +118,7 @@ export class Snapshots extends Context.Service<
               )
             : []
 
-          const latest = existing.toSorted().at(-1)
+          const latest = Option.getOrUndefined(EffectArray.last(EffectArray.sort(existing, Order.String)))
 
           if (latest !== undefined) {
             const latestFile = path.join(dir, latest)
@@ -143,7 +145,14 @@ export class Snapshots extends Context.Service<
             SNAPSHOT_FILE.test(n)
           )
 
-          return files.length < 2 ? undefined : files.toSorted().at(-1)?.slice(0, 10)
+          return files.length < 2
+            ? undefined
+            : pipe(
+                EffectArray.sort(files, Order.String),
+                EffectArray.last,
+                Option.map(EffectString.slice(0, 10)),
+                Option.getOrUndefined
+              )
         })
 
         const previous = Effect.fn("Snapshots.previous")(function* (
@@ -155,11 +164,15 @@ export class Snapshots extends Context.Service<
 
           if (!(yield* fs.exists(dir).pipe(Effect.mapError(fail(dir))))) return undefined
 
-          const files = EffectArray.reverse(
-            EffectArray.filter(yield* fs.readDirectory(dir).pipe(Effect.mapError(fail(dir))), (n) =>
-              SNAPSHOT_FILE.test(n)
-            ).toSorted()
-          ).slice(0, 2)
+          const files = EffectArray.take(
+            EffectArray.sort(
+              EffectArray.filter(yield* fs.readDirectory(dir).pipe(Effect.mapError(fail(dir))), (n) =>
+                SNAPSHOT_FILE.test(n)
+              ),
+              Order.flip(Order.String)
+            ),
+            2
+          )
 
           for (const name of files) {
             const file = path.join(dir, name)

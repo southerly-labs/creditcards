@@ -1,4 +1,4 @@
-import { Console, DateTime, Effect, Array as EffectArray } from "effect"
+import { Console, DateTime, Effect, Array as EffectArray, Option } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import type { Hold } from "../model/holds.ts"
 import { Store, StoreError } from "../store/Store.ts"
@@ -10,7 +10,7 @@ export const decideHold = Effect.fn("decideHold")(function* (
 ) {
   const store = yield* Store
   const holds = (yield* store.load).holds ?? []
-  const hold = holds.find((entry) => entry.id === id)
+  const hold = Option.getOrUndefined(EffectArray.findFirst(holds, (entry) => entry.id === id))
 
   if (hold === undefined) return yield* StoreError.make({ file: id, message: "Unknown hold" })
   const decided_on = DateTime.formatIsoDateUtc(yield* DateTime.now)

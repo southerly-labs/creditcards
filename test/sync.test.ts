@@ -1,6 +1,6 @@
 import { BunServices } from "@effect/platform-bun"
 import { assert, describe, layer } from "@effect/vitest"
-import { Context, Effect, FileSystem, Layer, Path, Ref, Array as EffectArray } from "effect"
+import { Context, Effect, FileSystem, Layer, Path, Ref, Array as EffectArray, Option } from "effect"
 import { TestClock } from "effect/testing"
 import { CdrClient, CdrError } from "../src/cdr/CdrClient.ts"
 import { DataHolderBrand, type ProductDetail } from "../src/cdr/schema.ts"
@@ -41,7 +41,7 @@ const seeded: WorldState = {
 class World extends Context.Service<World, Ref.Ref<WorldState>>()("creditcards/test/sync.test/World") {}
 
 const findProduct = (state: WorldState, productId: string) =>
-  required(state.products.find((p) => p.productId === productId))
+  required(Option.getOrUndefined(EffectArray.findFirst(state.products, (p) => p.productId === productId)))
 
 const FakeCdr = Layer.effect(
   CdrClient,

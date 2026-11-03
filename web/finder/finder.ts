@@ -27,7 +27,15 @@ import {
   type Ranked,
   type SignupPoints
 } from "./model.ts"
-import { Effect, Record as EffectRecord, String as EffectString, Array as EffectArray, pipe } from "effect"
+import {
+  Effect,
+  Record as EffectRecord,
+  String as EffectString,
+  Array as EffectArray,
+  pipe,
+  Option,
+  Order
+} from "effect"
 
 const MOTION = {
   sheetMs: 280,
@@ -73,7 +81,7 @@ type KindId = (typeof kindOptions)[number]["id"]
 type ViewId = (typeof viewOptions)[number]["id"]
 
 const oneOf = <T extends string>(options: ReadonlyArray<{ readonly id: T }>, text: string | null, fallback: T): T =>
-  options.find((o) => o.id === text)?.id ?? fallback
+  Option.getOrUndefined(EffectArray.findFirst(options, (o) => o.id === text))?.id ?? fallback
 
 const esc = (s: string) =>
   pipe(
@@ -214,7 +222,7 @@ const visibleRows = () =>
 
 const hue = (text: string) =>
   EffectArray.reduce(
-    Array.from({ length: text.length }, (_, i) => text.codePointAt(i) ?? 0),
+    Array.from({ length: text.length }, (_, i) => Option.getOrUndefined(EffectString.codePointAt(text, i)) ?? 0),
     7,
     (h, c) => (h * 31 + c) % 360
   )
@@ -470,7 +478,7 @@ const niceStep = (span: number, count: number) => {
   const raw = span / Math.max(1, count)
   const power = 10 ** Math.floor(Math.log10(raw))
 
-  return ([1, 2, 2.5, 5, 10].find((m) => m * power >= raw) ?? 10) * power
+  return (Option.getOrUndefined(EffectArray.findFirst([1, 2, 2.5, 5, 10], (m) => m * power >= raw)) ?? 10) * power
 }
 
 const ticks = (min: number, max: number, count: number) => {
@@ -497,7 +505,7 @@ const LABEL_GAP = 16
 const stackLabels = (labelled: ReadonlyArray<Point>) => {
   const placed: Array<Placed> = []
 
-  for (const p of labelled.toSorted((a, b) => a.y - b.y)) {
+  for (const p of EffectArray.sortWith(labelled, (point) => point.y, Order.Number)) {
     placed.push({ p, y: Math.max(p.y, (placed.at(-1)?.y ?? -Infinity) + LABEL_GAP) })
   }
 
@@ -775,7 +783,12 @@ const renderSheet = (id: string) => {
   const { card } = entry
   const offers = currentOffers(card, today)
   const earn = earnLines(entry)
-  const rank = lastRows.findIndex((x) => x.entry.id === id)
+
+  const rank = Option.getOrElse(
+    EffectArray.findFirstIndex(lastRows, (x) => x.entry.id === id),
+    () => -1
+  )
+
   const compared = isCompared(id)
   const updated = card.cdr?.last_updated
 
@@ -1018,11 +1031,13 @@ const renderValueGrid = () => {
 
   for (const e of entries) if (e.program) counts.set(e.program.id, (counts.get(e.program.id) ?? 0) + 1)
 
-  const programs = EffectArray.map([...counts.keys()], (id) => ({ id, program: required(api.programs[id]) })).toSorted(
-    (a, b) =>
-      (a.program.type === "airline" ? 0 : 1) - (b.program.type === "airline" ? 0 : 1) ||
-      required(counts.get(b.id)) - required(counts.get(a.id)) ||
-      a.program.name.localeCompare(b.program.name)
+  const programs = EffectArray.sort(
+    EffectArray.map([...counts.keys()], (id) => ({ id, program: required(api.programs[id]) })),
+    Order.combineAll<{ readonly id: string; readonly program: Api["programs"][string] }>([
+      Order.mapInput(Order.Boolean, (p) => p.program.type !== "airline"),
+      Order.mapInput(Order.flip(Order.Number), (p) => required(counts.get(p.id))),
+      Order.make((a, b) => pipe(a.program.name, EffectString.localeCompare(b.program.name)))
+    ])
   )
 
   $("value-grid").innerHTML = `<ul class="values">${EffectArray.join(
@@ -1063,7 +1078,12 @@ const HIT_RADIUS = 24
 const nearest = (x: number, y: number) => {
   const distance = (p: Point) => Math.hypot(p.x - x, p.y - y)
 
-  return EffectArray.filter(points, (p) => distance(p) < HIT_RADIUS).toSorted((a, b) => distance(a) - distance(b))[0]
+  return pipe(
+    EffectArray.filter(points, (p) => distance(p) < HIT_RADIUS),
+    EffectArray.sortWith(distance, Order.Number),
+    EffectArray.head,
+    Option.getOrUndefined
+  )
 }
 
 const plotPoint = (e: MouseEvent) => {
@@ -1152,7 +1172,12 @@ onSegment("view", (v) => {
 const arrowKeys = (group: string) => (e: KeyboardEvent) => {
   if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) return
   const buttons = [...$(group).querySelectorAll<HTMLElement>("[role=radio]")]
-  const at = buttons.findIndex((b) => b.getAttribute("aria-checked") === "true")
+
+  const at = Option.getOrElse(
+    EffectArray.findFirstIndex(buttons, (b) => b.getAttribute("aria-checked") === "true"),
+    () => -1
+  )
+
   const step = e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 1
   const next = buttons[(at + step + buttons.length) % buttons.length]
   e.preventDefault()
