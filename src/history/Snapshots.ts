@@ -20,10 +20,13 @@ export interface CdrSnapshot {
   readonly product: unknown
 }
 
-export class SnapshotError extends Schema.TaggedError<SnapshotError>()("SnapshotError", {
-  file: Schema.String,
-  message: Schema.String
-}) {}
+export class SnapshotError extends Schema.TaggedError<SnapshotError, { readonly brand: unique symbol }>()(
+  "SnapshotError",
+  {
+    file: Schema.String,
+    message: Schema.String
+  }
+) {}
 
 const byKey = Order.mapInput(Order.String, ([key]: readonly [string, unknown]) => key)
 
@@ -124,7 +127,7 @@ export class Snapshots extends Context.Service<
             const latestFile = path.join(dir, latest)
             const current = yield* fs.readFileString(latestFile).pipe(Effect.mapError(fail(latestFile)))
 
-            const saved = yield* Schema.decodeUnknownEffect(Saved)(current).pipe(Effect.mapError(fail(latestFile)))
+            const saved = yield* Schema.decodeEffect(Saved)(current).pipe(Effect.mapError(fail(latestFile)))
 
             if (sameProduct(snapshot, saved)) return false
           }
@@ -177,7 +180,7 @@ export class Snapshots extends Context.Service<
           for (const name of files) {
             const file = path.join(dir, name)
             const text = yield* fs.readFileString(file).pipe(Effect.mapError(fail(file)))
-            const saved = yield* Schema.decodeUnknownEffect(Saved)(text).pipe(Effect.mapError(fail(file)))
+            const saved = yield* Schema.decodeEffect(Saved)(text).pipe(Effect.mapError(fail(file)))
 
             if (!sameProduct({ ...saved, version: null }, current))
               return { date: pipe(name, EffectString.slice(0, 10)), product: saved.product }

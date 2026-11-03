@@ -12,7 +12,7 @@ import {
 } from "../src/sync/holds.ts"
 import { required } from "../src/util/required.ts"
 
-const base = Schema.decodeUnknownSync(Card)({
+const base = Schema.decodeSync(Card)({
   name: "Card",
   type: "personal",
   status: "active",

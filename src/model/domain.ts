@@ -15,7 +15,7 @@ export const CalendarDate = Schema.String.check(
   Schema.makeFilter(
     (value) =>
       (/^\d{4}-\d{2}-\d{2}$/u.test(value) &&
-        Option.isSome(Schema.decodeUnknownOption(Schema.DateTimeUtcFromString)(value)) &&
+        Option.isSome(Schema.decodeOption(Schema.DateTimeUtcFromString)(value)) &&
         pipe(new Date(value).toISOString(), EffectString.slice(0, 10)) === value) ||
       "Expected a valid YYYY-MM-DD date"
   )
@@ -26,7 +26,7 @@ export const Timestamp = Schema.String.check(
     (value) =>
       (Schema.is(CalendarDate)(pipe(value, EffectString.slice(0, 10))) &&
         /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/u.test(value) &&
-        Option.isSome(Schema.decodeUnknownOption(Schema.DateTimeUtcFromString)(value))) ||
+        Option.isSome(Schema.decodeOption(Schema.DateTimeUtcFromString)(value))) ||
       "Expected an ISO timestamp with timezone"
   )
 )

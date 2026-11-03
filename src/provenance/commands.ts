@@ -21,7 +21,7 @@ const correct = Command.make(
 
     const reviewed_at = DateTime.formatIso(yield* DateTime.now)
 
-    const updated = yield* Schema.decodeUnknownEffect(Card)({
+    const updated = yield* Schema.decodeEffect(Card)({
       ...card,
       locked: [...new Set([...(card.locked ?? []), ...sectionLocks(selected)])],
       provenance: {

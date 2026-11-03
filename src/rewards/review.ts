@@ -20,12 +20,15 @@ export interface ReviewItem {
   readonly earn: ReadonlyArray<EarnRate> | undefined
 }
 
-export class RewardsError extends Schema.TaggedError<RewardsError>()("RewardsError", {
-  message: Schema.String
-}) {}
+export class RewardsError extends Schema.TaggedError<RewardsError, { readonly brand: unique symbol }>()(
+  "RewardsError",
+  {
+    message: Schema.String
+  }
+) {}
 
 const warnReviewFailure = (key: string, error: { readonly message: string }) =>
-  Effect.logWarning(`${key}: ${error.message}`).pipe(Effect.map(() => undefined))
+  Effect.logWarning(`${key}: ${error.message}`).pipe(Effect.asVoid)
 
 const productFeatures = Effect.fn("productFeatures")(function* (
   card: Card,

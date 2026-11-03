@@ -23,7 +23,7 @@ export const todayInSydney = (): string =>
   DateTime.formatIsoDate(DateTime.setZoneNamedUnsafe(DateTime.nowUnsafe(), "Australia/Sydney"))
 
 export const decodePointValues = (text: string): Record<string, number> => {
-  const parsed = Schema.decodeUnknownOption(Schema.fromJsonString(Schema.Unknown))(text)
+  const parsed = Schema.decodeOption(Schema.fromJsonString(Schema.Unknown))(text)
   const values: Record<string, number> = {}
 
   if (Option.isNone(parsed) || !Predicate.isObject(parsed.value)) return values
@@ -42,7 +42,7 @@ export const loadPointValues = (read: () => string | null): Record<string, numbe
   })
 
 export const decodeColumnVisibility = (text: string): Record<string, boolean> => {
-  const parsed = Schema.decodeUnknownOption(Schema.fromJsonString(Schema.Unknown))(text)
+  const parsed = Schema.decodeOption(Schema.fromJsonString(Schema.Unknown))(text)
   const values: Record<string, boolean> = {}
 
   if (Option.isNone(parsed) || !Predicate.isObject(parsed.value)) return values

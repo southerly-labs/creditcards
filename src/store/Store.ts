@@ -44,7 +44,7 @@ export const splitCardKey = (key: string) => {
   return { issuer, card }
 }
 
-export class StoreError extends Schema.TaggedError<StoreError>()("StoreError", {
+export class StoreError extends Schema.TaggedError<StoreError, { readonly brand: unique symbol }>()("StoreError", {
   file: Schema.String,
   message: Schema.String
 }) {}
@@ -80,8 +80,10 @@ export class Store extends Context.Service<
         const listDir = (dir: string) =>
           fs.exists(dir).pipe(
             Effect.flatMap((exists) => (exists ? fs.readDirectory(dir) : Effect.succeed([]))),
-            Effect.map((names) => EffectArray.sort(names, Order.String)),
-            Effect.mapError(fail(dir))
+            Effect.mapBoth({
+              onSuccess: (names) => EffectArray.sort(names, Order.String),
+              onFailure: fail(dir)
+            })
           )
 
         const tomlFiles = (dir: string) =>

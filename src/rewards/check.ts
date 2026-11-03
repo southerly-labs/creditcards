@@ -4,7 +4,7 @@ import { HttpClient } from "effect/http"
 import { extractText, getDocumentProxy } from "unpdf"
 import type { Card } from "../model/schema.ts"
 
-export class PageError extends Schema.TaggedError<PageError>()("PageError", {
+export class PageError extends Schema.TaggedError<PageError, { readonly brand: unique symbol }>()("PageError", {
   url: Schema.String,
   message: Schema.String
 }) {}

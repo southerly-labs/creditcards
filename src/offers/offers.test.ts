@@ -12,7 +12,7 @@ const offer: Offer = {
   valid_until: "2026-01-31"
 }
 
-const card = Schema.decodeUnknownSync(Card)({
+const card = Schema.decodeSync(Card)({
   name: "Test",
   type: "personal",
   status: "active",
@@ -39,7 +39,7 @@ describe("offers", () => {
     ).not.toThrow()
   })
   it("rejects invalid and reversed calendar dates", () => {
-    expect(() => Schema.decodeUnknownSync(Offer)({ ...offer, valid_until: "2026-02-30" })).toThrow()
-    expect(() => Schema.decodeUnknownSync(Offer)({ ...offer, valid_until: "2025-01-01" })).toThrow()
+    expect(() => Schema.decodeSync(Offer)({ ...offer, valid_until: "2026-02-30" })).toThrow()
+    expect(() => Schema.decodeSync(Offer)({ ...offer, valid_until: "2025-01-01" })).toThrow()
   })
 })

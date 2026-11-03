@@ -5,7 +5,7 @@ import { sectionLocks } from "../src/provenance/schema.ts"
 import { mergeCard, MissingStep, missingStep } from "../src/sync/merge.ts"
 
 test("section corrections and provenance survive CDR merging", () => {
-  const existing = Schema.decodeUnknownSync(Card)({
+  const existing = Schema.decodeSync(Card)({
     name: "Card",
     type: "personal",
     status: "active",
@@ -37,7 +37,7 @@ test("a rewards correction locks only the CDR-owned rewards fields", () => {
 })
 
 test("a hand-set closed status survives CDR merging", () => {
-  const closed = Schema.decodeUnknownSync(Card)({
+  const closed = Schema.decodeSync(Card)({
     name: "Card",
     type: "personal",
     status: "closed",
@@ -79,7 +79,7 @@ test("lifecycle dates must agree with the status", () => {
 })
 
 test("a card must be missing on two different days before it is discontinued", () => {
-  const card = Schema.decodeUnknownSync(Card)({
+  const card = Schema.decodeSync(Card)({
     name: "Card",
     type: "personal",
     status: "active",

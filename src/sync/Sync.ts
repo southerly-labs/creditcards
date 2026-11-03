@@ -65,7 +65,7 @@ export interface SyncReport {
   }
 }
 
-export class SyncAborted extends Schema.TaggedError<SyncAborted>()("SyncAborted", {
+export class SyncAborted extends Schema.TaggedError<SyncAborted, { readonly brand: unique symbol }>()("SyncAborted", {
   message: Schema.String
 }) {}
 

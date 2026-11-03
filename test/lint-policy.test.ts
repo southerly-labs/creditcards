@@ -16,7 +16,7 @@ const lintSource = async (source: string) => {
       cmd: ["./node_modules/.bin/oxlint", "-c", ".oxlintrc.json", "--format", "json", file]
     })
 
-    const report = Schema.decodeUnknownSync(lintReport)(result.stdout.toString())
+    const report = Schema.decodeSync(lintReport)(result.stdout.toString())
 
     return { exitCode: result.exitCode, diagnostics: report.diagnostics }
   } finally {

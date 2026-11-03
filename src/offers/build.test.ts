@@ -96,7 +96,7 @@ describe("combining offers", () => {
 })
 
 describe("applying offers to a card", () => {
-  const card = Schema.decodeUnknownSync(Card)({
+  const card = Schema.decodeSync(Card)({
     name: "Card",
     type: "personal",
     status: "active",

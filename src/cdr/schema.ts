@@ -2,7 +2,9 @@ import { Schema } from "effect"
 
 const OptString = Schema.optional(Schema.NullOr(Schema.String))
 
-export class DataHolderBrand extends Schema.Class<DataHolderBrand>("cdr/DataHolderBrand")({
+export class DataHolderBrand extends Schema.Class<DataHolderBrand, { readonly brand: unique symbol }>(
+  "cdr/DataHolderBrand"
+)({
   dataHolderBrandId: OptString,
   interimId: OptString,
   brandName: Schema.String,

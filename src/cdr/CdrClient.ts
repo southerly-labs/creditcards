@@ -19,9 +19,9 @@ const LENDING_INDUSTRIES = new Set(["banking", "non-bank-lending"])
 const PRODUCTS_MAX_VERSION = 6
 const PRODUCT_DETAIL_MAX_VERSION = 8
 
-export class CdrError extends Schema.TaggedError<CdrError>()("CdrError", {
+export class CdrError extends Schema.TaggedError<CdrError, { readonly brand: unique symbol }>()("CdrError", {
   url: Schema.String,
-  status: Schema.optional(Schema.Number),
+  status: Schema.optional(Schema.Finite),
   message: Schema.String
 }) {}
 

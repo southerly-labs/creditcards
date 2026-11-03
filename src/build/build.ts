@@ -7,9 +7,12 @@ export type { Api } from "../api/contract.ts"
 
 import { type Dataset, splitCardKey, Store } from "../store/Store.ts"
 
-export class ValidationError extends Schema.TaggedError<ValidationError>()("ValidationError", {
-  problems: Schema.Array(Schema.String)
-}) {}
+export class ValidationError extends Schema.TaggedError<ValidationError, { readonly brand: unique symbol }>()(
+  "ValidationError",
+  {
+    problems: Schema.Array(Schema.String)
+  }
+) {}
 
 export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
   const problems: Array<string> = []
