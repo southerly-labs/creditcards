@@ -231,7 +231,7 @@ const ongoingRate = (rates: ReadonlyArray<LendingRate>, type: string, exclude?: 
   rates
     .values()
     .filter((r) => r.lendingRateType === type && isoMonths(r.additionalValue) === undefined)
-    .filter((r) => !exclude || !exclude.test(r.additionalValue ?? ""))
+    .filter((r) => exclude === undefined || !exclude.test(r.additionalValue ?? ""))
     .map((r) => toPercent(r.rate))
     .find((r) => r !== undefined)
 

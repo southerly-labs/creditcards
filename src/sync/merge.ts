@@ -69,7 +69,7 @@ const equal = (a: unknown, b: unknown) =>
   a === undefined || b === undefined ? a === b : encodeJson(a) === encodeJson(b)
 
 export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard): Obj => {
-  if (!existing) return structuredClone(incoming)
+  if (existing === undefined) return structuredClone(incoming)
   const merged: Obj = structuredClone(existing)
   const locked = existing.locked ?? []
 
@@ -108,7 +108,11 @@ export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<Fi
 
   return paths
     .values()
-    .map((path) => ({ path, before: before ? getPath(before, path) : undefined, after: getPath(after, path) }))
+    .map((path) => ({
+      path,
+      before: before !== undefined ? getPath(before, path) : undefined,
+      after: getPath(after, path)
+    }))
     .filter((c) => !equal(withoutTimestamp(c.path, c.before), withoutTimestamp(c.path, c.after)))
     .toArray()
 }

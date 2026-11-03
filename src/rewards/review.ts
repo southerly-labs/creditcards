@@ -34,7 +34,7 @@ const productFeatures = Effect.fn("productFeatures")(function* (
 ) {
   const cdr = yield* CdrClient
 
-  if (!card.cdr) return yield* RewardsError.make({ message: `${card.name} has no CDR source` })
+  if (card.cdr === undefined) return yield* RewardsError.make({ message: `${card.name} has no CDR source` })
   const baseUri = baseUris.get(card.cdr.brand)
 
   if (baseUri === undefined || baseUri === "")
@@ -116,7 +116,7 @@ export const formatQueue = (items: ReadonlyArray<ReviewItem>): string =>
         `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
         `- Program: ${i.program ?? "—"}`,
         `- Reason: ${i.reason}`,
-        `- Current earn: ${i.earn ? encodeJson(i.earn) : "—"}`,
+        `- Current earn: ${i.earn !== undefined ? encodeJson(i.earn) : "—"}`,
         "",
         "```text",
         i.text || "(no loyalty text)",
@@ -135,12 +135,13 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
   for (const key of keys) {
     const card = dataset.cards.get(key)
 
-    if (!card) return yield* RewardsError.make({ message: `Unknown card ${key}` })
+    if (card === undefined) return yield* RewardsError.make({ message: `Unknown card ${key}` })
 
-    if (!card.rewards) return yield* RewardsError.make({ message: `${key} has no rewards program` })
+    if (card.rewards === undefined) return yield* RewardsError.make({ message: `${key} has no rewards program` })
     const earn = none ? [] : card.rewards.earn
 
-    if (!earn) return yield* RewardsError.make({ message: `${key} has no rewards.earn; set it first or pass --none` })
+    if (earn === undefined)
+      return yield* RewardsError.make({ message: `${key} has no rewards.earn; set it first or pass --none` })
     const hash = loyaltyTextHash(yield* loyaltyFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
     yield* store.writeCard(issuer, slug, {
@@ -228,7 +229,7 @@ export const formatBonusQueue = (items: ReadonlyArray<BonusReviewItem>): string 
         `- Program: ${i.program ?? "—"}`,
         `- Reason: ${i.reason}`,
         `- CDR bonus total: ${i.bonusPoints ?? "—"}`,
-        `- Current signup offer: ${i.signup ? encodeJson(i.signup) : "—"}`,
+        `- Current signup offer: ${i.signup !== undefined ? encodeJson(i.signup) : "—"}`,
         "",
         "```text",
         i.text || "(no bonus text)",
@@ -247,17 +248,17 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
   for (const key of keys) {
     const card = dataset.cards.get(key)
 
-    if (!card) return yield* RewardsError.make({ message: `Unknown card ${key}` })
+    if (card === undefined) return yield* RewardsError.make({ message: `Unknown card ${key}` })
 
-    if (!card.rewards) return yield* RewardsError.make({ message: `${key} has no rewards program` })
+    if (card.rewards === undefined) return yield* RewardsError.make({ message: `${key} has no rewards program` })
     const others = EffectArray.filter(card.offers ?? [], (offer) => offer.id !== "signup")
     const signup = Option.getOrUndefined(EffectArray.findFirst(card.offers ?? [], (offer) => offer.id === "signup"))
 
-    if (!none && !signup) {
+    if (!none && signup === undefined) {
       return yield* RewardsError.make({ message: `${key} has no signup offer; write one first or pass --none` })
     }
 
-    const offers = none || !signup ? others : [...others, { ...signup, source: "manual" as const }]
+    const offers = none || signup === undefined ? others : [...others, { ...signup, source: "manual" as const }]
     const hash = bonusTextHash(yield* bonusFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
     const { offers: _offers, ...rest } = card

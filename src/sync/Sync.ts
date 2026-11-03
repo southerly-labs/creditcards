@@ -92,7 +92,7 @@ const proposeCard = Effect.fn("proposeCard")(function* (
 ) {
   const merged = mergeCard(existing, normalised.card)
 
-  if (!existing) merged["first_seen"] = date
+  if (existing === undefined) merged["first_seen"] = date
   const mergedRewards = merged["rewards"]
   const hasRewards = mergedRewards !== undefined && Schema.is(Card.fields.rewards)(mergedRewards)
   const loyalty = EffectArray.filter(product.features ?? [], (f) => f.featureType === "LOYALTY_PROGRAM")
@@ -174,7 +174,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const activeByBrand = new Map<string, number>()
 
   for (const card of cards.values()) {
-    if (card.status !== "discontinued" && card.cdr)
+    if (card.status !== "discontinued" && card.cdr !== undefined)
       activeByBrand.set(card.cdr.brand, (activeByBrand.get(card.cdr.brand) ?? 0) + 1)
   }
 
@@ -266,9 +266,10 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     const seed = issuerSeed(brand)
     const current = issuers.get(seed.slug)
 
-    const issuer: Issuer = current
-      ? { ...current, cdr_brands: [...current.cdr_brands, brand] }
-      : { name: seed.name, cdr_brands: [brand] }
+    const issuer: Issuer =
+      current !== undefined
+        ? { ...current, cdr_brands: [...current.cdr_brands, brand] }
+        : { name: seed.name, cdr_brands: [brand] }
 
     issuers.set(seed.slug, issuer)
     issuerByBrand.set(brand, seed.slug)
@@ -279,7 +280,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   const keyByCdrId = new Map<string, string>()
 
-  for (const [key, card] of cards) if (card.cdr) keyByCdrId.set(`${card.cdr.brand}|${card.cdr.product_id}`, key)
+  for (const [key, card] of cards)
+    if (card.cdr !== undefined) keyByCdrId.set(`${card.cdr.brand}|${card.cdr.product_id}`, key)
 
   const added: Array<string> = []
   const updated: Array<{ card: string; changes: ReadonlyArray<FieldChange> }> = []
@@ -355,19 +357,19 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       }
 
       const proposed = proposal.card
-      const flagged = existing ? holdCandidates(existing, proposed) : []
+      const flagged = existing !== undefined ? holdCandidates(existing, proposed) : []
 
       const previous =
-        existing && EffectArray.some(flagged, (candidate) => candidate.kind === "approve")
+        existing !== undefined && EffectArray.some(flagged, (candidate) => candidate.kind === "approve")
           ? yield* previousCard(existing, product.productId, { brand, product: raw }, issuerSlug, date, programIndex)
           : undefined
 
       const candidates = EffectArray.map(flagged, (candidate) => withCdrEvidence(candidate, previous))
       let card = proposed
 
-      if (existing) evaluated.add(key)
+      if (existing !== undefined) evaluated.add(key)
 
-      if (existing && candidates.length > 0) {
+      if (existing !== undefined && candidates.length > 0) {
         const resolution = resolveHolds({
           card: key,
           candidates,
@@ -403,11 +405,11 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
       writes.set(key, card)
 
-      if (earnSet) rewardsSet.push({ card: key, earn: earnSet })
+      if (earnSet !== undefined) rewardsSet.push({ card: key, earn: earnSet })
 
       if (BonusPlan.$is("Set")(bonusPlan)) bonusSet.push({ card: key, bonus: bonusPlan.bonus })
 
-      if (existing) updated.push({ card: key, changes })
+      if (existing !== undefined) updated.push({ card: key, changes })
       else added.push(key)
     }
   }
@@ -417,12 +419,17 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const missingByBrand = new Map<string, Array<string>>()
 
   for (const [key, card] of cards) {
-    if (card.status === "discontinued" || !card.cdr || seenIds.has(`${card.cdr.brand}|${card.cdr.product_id}`)) continue
+    if (
+      card.status === "discontinued" ||
+      card.cdr === undefined ||
+      seenIds.has(`${card.cdr.brand}|${card.cdr.product_id}`)
+    )
+      continue
 
     if ((card.locked ?? []).includes("status")) continue
     const status = brandStatus.get(card.cdr.brand)
 
-    if (!status || status.listError !== undefined) continue
+    if (status === undefined || status.listError !== undefined) continue
     missingByBrand.set(card.cdr.brand, [...(missingByBrand.get(card.cdr.brand) ?? []), key])
   }
 

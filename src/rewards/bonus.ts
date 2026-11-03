@@ -56,23 +56,24 @@ const money = (digits: string, thousands: string | undefined) =>
 
 const tranche = (points: number, clause: string): BonusTranche | string => {
   const keep = Option.getOrNull(pipe(clause, EffectString.match(KEEP)))
-  const keepMonths = keep ? Number(keep[1]) : undefined
+  const keepMonths = keep !== null ? Number(keep[1]) : undefined
   const spend = Option.getOrNull(pipe(clause, EffectString.match(SPEND)))
 
-  const minSpend = spend
-    ? spend[1] === undefined
-      ? money(required(spend[3]), spend[4])
-      : money(spend[1], spend[2])
-    : undefined
+  const minSpend =
+    spend !== null
+      ? spend[1] === undefined
+        ? money(required(spend[3]), spend[4])
+        : money(spend[1], spend[2])
+      : undefined
 
-  const window = spend
-    ? pipe(clause, EffectString.slice(spend.index), EffectString.match(WINDOW), Option.getOrNull)
-    : null
+  const window =
+    spend !== null ? pipe(clause, EffectString.slice(spend.index), EffectString.match(WINDOW), Option.getOrNull) : null
 
-  const spendDays = window
-    ? Number(window[1]) *
-      (pipe(EffectString.toLowerCase(required(window[2])), EffectString.startsWith("month")) ? 30 : 1)
-    : undefined
+  const spendDays =
+    window !== null
+      ? Number(window[1]) *
+        (pipe(EffectString.toLowerCase(required(window[2])), EffectString.startsWith("month")) ? 30 : 1)
+      : undefined
 
   const yearTwo = (keepMonths !== undefined && keepMonths >= 12) || YEAR_TWO.test(clause)
   const yearOne = (minSpend !== undefined && spendDays !== undefined) || YEAR_ONE.test(clause)
@@ -94,7 +95,7 @@ const parseFeature = (f: LoyaltyFeature): ReadonlyArray<BonusTranche> | string =
   const text = clean(f.additionalInfo) || clean(f.additionalValue)
   const complex = Option.getOrUndefined(EffectArray.findFirst(COMPLEX, ([re]) => re.test(text)))
 
-  if (complex) return complex[1]
+  if (complex !== undefined) return complex[1]
   const mentions = [...pipe(text, EffectString.matchAll(MENTION))]
   const headlines = EffectArray.filter(mentions, (m) => m[1] !== undefined)
 
@@ -126,7 +127,7 @@ const parseFeature = (f: LoyaltyFeature): ReadonlyArray<BonusTranche> | string =
   const total = EffectArray.reduce(tranches, 0, (sum, t) => sum + t.points)
   const headline = headlines[0]
 
-  if (headline && Number(pipe(required(headline[2]), EffectString.replaceAll(",", ""))) !== total)
+  if (headline !== undefined && Number(pipe(required(headline[2]), EffectString.replaceAll(",", ""))) !== total)
     return "tranches do not add up to the 'up to' total"
   const value = parseNumber(f.additionalValue)
 

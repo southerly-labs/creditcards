@@ -80,7 +80,7 @@ const build = Command.make(
     const changes = new Map<string, string>()
 
     for (const [key, card] of validated.cards) {
-      if (!card.cdr) continue
+      if (card.cdr === undefined) continue
       const changedOn = yield* snapshots.lastChanged(splitCardKey(key).issuer, card.cdr.product_id)
 
       if (changedOn !== undefined) changes.set(key, changedOn)

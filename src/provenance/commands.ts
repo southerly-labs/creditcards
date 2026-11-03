@@ -17,7 +17,7 @@ const correct = Command.make(
     const store = yield* Store
     const card = (yield* store.load).cards.get(key)
 
-    if (!card) return yield* StoreError.make({ file: key, message: "Unknown card" })
+    if (card === undefined) return yield* StoreError.make({ file: key, message: "Unknown card" })
 
     const reviewed_at = DateTime.formatIso(yield* DateTime.now)
 
@@ -52,12 +52,12 @@ const inspect = Command.make(
       for (const locked of card.locked ?? []) {
         const section = EffectString.split(locked, ".")[0] ?? locked
         const review = card.provenance?.sections?.[section]
-        const parsed = review ? DateTime.make(review.reviewed_at) : Option.none()
+        const parsed = review !== undefined ? DateTime.make(review.reviewed_at) : Option.none()
         const age = Option.isSome(parsed) ? (now - DateTime.toEpochMillis(parsed.value)) / 86_400_000 : Number.NaN
 
         if (!Number.isFinite(age) || age >= 90)
           yield* Console.log(
-            `${key} ${locked}: ${Number.isFinite(age) ? `${Math.floor(age)} days since review` : "no dated section review"}${review ? ` — ${review.correction_reason}` : ""}`
+            `${key} ${locked}: ${Number.isFinite(age) ? `${Math.floor(age)} days since review` : "no dated section review"}${review !== undefined ? ` — ${review.correction_reason}` : ""}`
           )
       }
     }

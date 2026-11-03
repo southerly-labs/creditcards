@@ -101,7 +101,7 @@ const introRate = (r: Row) =>
 const intro = (r: Row) => {
   const offer = introRate(r)
 
-  if (!offer) return undefined
+  if (offer === undefined) return undefined
   const what = introTargets[offer.applies_to]
 
   return `${pct(offer.rate)} ${what}${(offer.months ?? 0) !== 0 ? ` ${offer.months}m` : ""}`
@@ -153,7 +153,8 @@ const saveOverrides = () => {
   localStorage.setItem(OVERRIDES_KEY, encodeJson(overrides))
 }
 
-const centsPerPoint = (r: Row) => (r.program ? (overrides[r.program.id] ?? r.program.cents_per_point) : undefined)
+const centsPerPoint = (r: Row) =>
+  r.program !== undefined ? (overrides[r.program.id] ?? r.program.cents_per_point) : undefined
 
 const earnValue = (r: Row) => {
   const earn = baseEarn(r)
@@ -180,7 +181,7 @@ const splitKnown = (r: Row) => {
 const bonusPoints = (r: Row, year?: Tranche["year"]) => {
   const bonus = tranches(r)
 
-  if (!bonus) return undefined
+  if (bonus === undefined) return undefined
 
   const points = EffectArray.reduce(
     EffectArray.filter(bonus, (t) => year === undefined || t.year === year),
@@ -262,7 +263,7 @@ const benefit = (r: Row, firstYear: boolean): Benefit => {
   if (fee === undefined) return { kind: "unknown", title: "Annual fee unknown" }
   const feeText = `minus ${plain(money(fee))} ${firstYear ? "first-year" : "annual"} fee`
 
-  if (!r.program) return { kind: "value", value: -fee, title: `No rewards, ${feeText}` }
+  if (r.program === undefined) return { kind: "value", value: -fee, title: `No rewards, ${feeText}` }
   const points = annualPoints(r.card.rewards?.earn ?? [], spend, r.card.rewards?.earn_rules)
 
   if (points === undefined) return { kind: "unknown", title: `No base earn rate for ${r.program.name}` }
@@ -341,7 +342,7 @@ const columns: ReadonlyArray<Column> = [
     id: "network",
     label: "Network",
     sortValue: (r) => r.card.network,
-    render: (r) => (r.card.network ? `<span class="tag">${r.card.network}</span>` : dash)
+    render: (r) => (r.card.network !== undefined ? `<span class="tag">${r.card.network}</span>` : dash)
   },
   {
     id: "annual-fee",
@@ -392,7 +393,7 @@ const columns: ReadonlyArray<Column> = [
     id: "rewards",
     label: "Rewards",
     sortValue: (r) => r.program?.name,
-    render: (r) => (r.program ? esc(r.program.name) : dash)
+    render: (r) => (r.program !== undefined ? esc(r.program.name) : dash)
   },
   {
     id: "earn",
@@ -403,7 +404,7 @@ const columns: ReadonlyArray<Column> = [
       const earn = r.card.rewards?.earn
       const base = baseEarn(r)
 
-      if (!earn || base === undefined) return dash
+      if (earn === undefined || base === undefined) return dash
       const more = earn.length > 1 ? '<span class="dim">+</span>' : ""
 
       return `<span title="${esc(describeEarn(earn))}">${base}${more}</span>`
@@ -430,7 +431,7 @@ const columns: ReadonlyArray<Column> = [
       const value = earnValue(r)
 
       if (value === undefined) {
-        return baseEarn(r) !== undefined && r.program
+        return baseEarn(r) !== undefined && r.program !== undefined
           ? `<span class="dim" title="No point value for ${esc(r.program.name)}; set one under Point values">?</span>`
           : dash
       }
@@ -485,7 +486,7 @@ const columns: ReadonlyArray<Column> = [
       const value = bonusValue(r)
 
       if (value === undefined) {
-        return bonusPoints(r) !== undefined && r.program
+        return bonusPoints(r) !== undefined && r.program !== undefined
           ? `<span class="dim" title="No point value for ${esc(r.program.name)}; set one under Point values">?</span>`
           : dash
       }
@@ -587,7 +588,7 @@ const toggleColumn = (e: Event) => {
   const id = input.dataset["column"]
   const column = Option.getOrUndefined(EffectArray.findFirst(columns, (c) => c.id === id))
 
-  if (!column) return
+  if (column === undefined) return
 
   if (input.checked === (column.hiddenByDefault !== true)) delete columnChoices[column.id]
   else columnChoices[column.id] = input.checked
@@ -609,7 +610,7 @@ const head = $("head")
 const sortHead = (e: MouseEvent) => {
   const th = e.target instanceof HTMLElement ? e.target.closest("th") : null
 
-  if (!th) return
+  if (th === null) return
   const i = Number(th.dataset["i"])
   sortDir = i === sortIndex && sortDir === "asc" ? "desc" : "asc"
   sortIndex = i
@@ -641,7 +642,7 @@ const render = () => {
   const matchesFilters = (r: Row) => {
     if (!showDisc && r.card.status !== "active") return false
 
-    if (type && r.card.type !== type) return false
+    if (type !== "" && r.card.type !== type) return false
 
     if (program === "none" ? r.program !== undefined : program !== "" && r.program?.type !== program) return false
 
@@ -652,7 +653,7 @@ const render = () => {
     if (government && governmentEarn(r) <= 0) return false
 
     if (
-      q &&
+      q !== "" &&
       !pipe(EffectString.toLowerCase(`${r.card.name} ${r.issuer} ${r.program?.name ?? ""}`), EffectString.includes(q))
     )
       return false
@@ -691,7 +692,7 @@ const render = () => {
 const renderValueGrid = () => {
   const counts = new Map<string, number>()
 
-  for (const r of rows) if (r.program) counts.set(r.program.id, (counts.get(r.program.id) ?? 0) + 1)
+  for (const r of rows) if (r.program !== undefined) counts.set(r.program.id, (counts.get(r.program.id) ?? 0) + 1)
 
   const programs = EffectArray.sort(
     EffectArray.map([...counts.keys()], (id) => ({ id, program: required(api.programs[id]) })),

@@ -30,7 +30,7 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
       if (id !== undefined && !dataset.programs.has(id)) problems.push(`${key}: unknown program ${id}`)
     }
 
-    if (card.cdr) {
+    if (card.cdr !== undefined) {
       const cdrId = `${card.cdr.brand}|${card.cdr.product_id}`
       const other = cdrIds.get(cdrId)
 

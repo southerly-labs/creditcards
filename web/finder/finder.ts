@@ -778,7 +778,7 @@ const typeNames = { personal: "Personal", business: "Business", corporate: "Corp
 const renderSheet = (id: string) => {
   const entry = entryById.get(id)
 
-  if (!entry) return false
+  if (entry === undefined) return false
   const r = { entry, valuation: value(entry, state.spend, overrides, today) }
   const { card } = entry
   const offers = currentOffers(card, today)
@@ -1029,7 +1029,7 @@ const togglePin = (id: string) => {
 const renderValueGrid = () => {
   const counts = new Map<string, number>()
 
-  for (const e of entries) if (e.program) counts.set(e.program.id, (counts.get(e.program.id) ?? 0) + 1)
+  for (const e of entries) if (e.program !== undefined) counts.set(e.program.id, (counts.get(e.program.id) ?? 0) + 1)
 
   const programs = EffectArray.sort(
     EffectArray.map([...counts.keys()], (id) => ({ id, program: required(api.programs[id]) })),
@@ -1089,7 +1089,7 @@ const nearest = (x: number, y: number) => {
 const plotPoint = (e: MouseEvent) => {
   const svg = $("plot").querySelector("svg")
 
-  if (!svg) return undefined
+  if (svg === null) return undefined
   const box = svg.getBoundingClientRect()
 
   return { box, point: nearest(e.clientX - box.left, e.clientY - box.top) }
@@ -1099,7 +1099,7 @@ const hoverPlot = (e: PointerEvent) => {
   const hit = plotPoint(e)
   const ring = $("plot").querySelector(".hover-ring")
 
-  if (!hit?.point) {
+  if (hit?.point === undefined) {
     tip.hidden = true
     ring?.setAttribute("visibility", "hidden")
 
@@ -1123,7 +1123,7 @@ $("plot").addEventListener("pointerleave", () => {
 $("plot").addEventListener("click", (e) => {
   const hit = plotPoint(e)
 
-  if (hit?.point) openSheet(hit.point.r.entry.id)
+  if (hit?.point !== undefined) openSheet(hit.point.r.entry.id)
 })
 
 new ResizeObserver(() => {
@@ -1248,13 +1248,13 @@ const clickAnywhere = (e: MouseEvent) => {
   const pin = target?.closest<HTMLElement>("[data-pin]")
   const open = target?.closest<HTMLElement>("[data-open]")
 
-  if (pin) {
+  if (pin != null) {
     togglePin(pin.dataset["pin"] ?? "")
 
     return
   }
 
-  if (open) {
+  if (open != null) {
     if (compareDialog.open) compareDialog.close()
     openSheet(open.dataset["open"] ?? "")
 
