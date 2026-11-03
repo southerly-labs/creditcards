@@ -1,5 +1,6 @@
 import { findCodeComments } from "./comment-policy.ts"
-import { Array as EffectArray, String as EffectString, pipe } from "effect"
+import { BunRuntime, BunServices } from "@effect/platform-bun"
+import { Console, Effect, FileSystem, Array as EffectArray, String as EffectString, pipe } from "effect"
 
 const roots = ["src", "web", "test", "tools"]
 const extensions = "**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,css,html}"
@@ -21,19 +22,23 @@ const files =
         (file) => !pipe(file, EffectString.startsWith("tools/oxlint/anti-slop/"))
       )
 
-const checkFile = async (file: string) => {
-  const source = await Bun.file(file).text()
-  const comments = await findCodeComments(file, source)
+const checkFile = Effect.fn("checkFile")(function* (file: string) {
+  const source = yield* (yield* FileSystem.FileSystem).readFileString(file)
+  const comments = yield* findCodeComments(file, source)
 
   return EffectArray.map(
     comments,
     (comment) =>
       `${file}:${EffectString.split(pipe(source, EffectString.slice(0, comment.start)), "\n").length}: Code comments are forbidden; use documentation or meaningful names.`
   )
-}
+})
 
-const reports = await Promise.all(EffectArray.map(files, (file) => checkFile(file)))
+const program = Effect.gen(function* () {
+  const reports = yield* Effect.forEach(files, checkFile, { concurrency: "unbounded" })
 
-for (const message of reports.flat()) console.error(message)
+  yield* Effect.forEach(EffectArray.flatten(reports), (message) => Console.error(message))
 
-if (EffectArray.some(reports, (report) => report.length > 0)) process.exitCode = 1
+  if (EffectArray.some(reports, (report) => report.length > 0)) process.exitCode = 1
+})
+
+BunRuntime.runMain(program.pipe(Effect.provide(BunServices.layer)))

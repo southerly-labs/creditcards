@@ -1,12 +1,10 @@
-import { Schema, Array as EffectArray, String as EffectString, pipe } from "effect"
+import { Schema, Array as EffectArray, DateTime, Option } from "effect"
 
 const amount = Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum: 0, maximum: 100_000_000 })))
 const months = Schema.Int.pipe(Schema.check(Schema.isBetween({ minimum: 1, maximum: 120 })))
 
 function validDate(value: string): boolean {
-  const date = new Date(`${value}T00:00:00Z`)
-
-  return Number.isFinite(date.getTime()) && pipe(date.toISOString(), EffectString.slice(0, 10)) === value
+  return Option.exists(DateTime.make(`${value}T00:00:00Z`), (date) => DateTime.formatIsoDateUtc(date) === value)
 }
 
 export const OfferDate = Schema.String.pipe(

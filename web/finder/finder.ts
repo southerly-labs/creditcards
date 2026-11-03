@@ -34,7 +34,8 @@ import {
   Array as EffectArray,
   pipe,
   Option,
-  Order
+  Order,
+  DateTime
 } from "effect"
 
 const MOTION = {
@@ -677,11 +678,10 @@ const offerComponent = (c: OfferComponent) => {
 }
 
 const formatDate = (iso: string) =>
-  new Date(`${pipe(iso, EffectString.slice(0, 10))}T00:00:00Z`).toLocaleDateString("en-AU", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC"
+  Option.match(DateTime.make(`${pipe(iso, EffectString.slice(0, 10))}T00:00:00Z`), {
+    onNone: () => iso,
+    onSome: (date) =>
+      DateTime.format(date, { locale: "en-AU", day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })
   })
 
 const offerBlock = (o: Offer) => {

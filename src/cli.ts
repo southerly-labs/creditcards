@@ -1,4 +1,4 @@
-import { Clock, Array as EffectArray } from "effect"
+import { Array as EffectArray, DateTime } from "effect"
 import { provenanceCommand } from "./provenance/commands.ts"
 import { heldCommand } from "./sync/heldCommand.ts"
 import { encodeJson } from "./util/json.ts"
@@ -88,10 +88,7 @@ const build = Command.make(
 
     const dataset = { ...validated, changes }
 
-    yield* writeFile(
-      `${out}/api.json`,
-      encodeJson(toApi(dataset, new Date(yield* Clock.currentTimeMillis).toISOString()))
-    )
+    yield* writeFile(`${out}/api.json`, encodeJson(toApi(dataset, DateTime.formatIso(yield* DateTime.now))))
     yield* Console.log(`Wrote ${out}/api.json (${dataset.cards.size} cards)`)
   })
 ).pipe(Command.withDescription("Build dist/api.json from data/"))

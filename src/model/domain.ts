@@ -1,4 +1,13 @@
-import { Schema, SchemaAST, Predicate, Option, Array as EffectArray, String as EffectString, pipe } from "effect"
+import {
+  Schema,
+  SchemaAST,
+  Predicate,
+  Option,
+  Array as EffectArray,
+  String as EffectString,
+  pipe,
+  DateTime
+} from "effect"
 
 function validUrl(value: string): boolean | string {
   const url = URL.parse(value)
@@ -16,7 +25,7 @@ export const CalendarDate = Schema.String.check(
     (value) =>
       (/^\d{4}-\d{2}-\d{2}$/u.test(value) &&
         Option.isSome(Schema.decodeOption(Schema.DateTimeUtcFromString)(value)) &&
-        pipe(new Date(value).toISOString(), EffectString.slice(0, 10)) === value) ||
+        Option.exists(DateTime.make(value), (date) => DateTime.formatIsoDateUtc(date) === value)) ||
       "Expected a valid YYYY-MM-DD date"
   )
 )

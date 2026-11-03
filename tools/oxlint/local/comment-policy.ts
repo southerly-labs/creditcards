@@ -1,5 +1,5 @@
 import { parseSync } from "oxc-parser"
-import { String as EffectString, Array as EffectArray, pipe, Option } from "effect"
+import { Effect, String as EffectString, Array as EffectArray, pipe, Option } from "effect"
 
 interface CommentRange {
   readonly start: number
@@ -24,27 +24,31 @@ const cssComment = (match: RegExpMatchArray): ReadonlyArray<CommentRange> => {
   return pipe(match[0], EffectString.startsWith("/*")) ? [{ start, end: start + match[0].length }] : []
 }
 
-export const findCodeComments = async (file: string, source: string): Promise<ReadonlyArray<CommentRange>> => {
+function collectHtmlComments(source: string): Promise<ReadonlyArray<CommentRange>> {
+  const ranges: Array<CommentRange> = []
+  let cursor = 0
+
+  return new HTMLRewriter()
+    .onDocument({
+      comments(comment) {
+        const start = Math.max(cursor, indexFrom(source, `<!--${comment.text}`, cursor))
+        const end = indexFrom(source, "-->", start)
+        ranges.push({ start, end: end === -1 ? source.length : end + 3 })
+        cursor = start + 4
+      }
+    })
+    .transform(new Response(source))
+    .text()
+    .then(() => ranges)
+}
+
+export const findCodeComments = (file: string, source: string): Effect.Effect<ReadonlyArray<CommentRange>> => {
   if (pipe(file, EffectString.endsWith(".css")))
-    return EffectArray.flatMap([...pipe(source, EffectString.matchAll(cssTokens))], (match) => cssComment(match))
+    return Effect.succeed(
+      EffectArray.flatMap([...pipe(source, EffectString.matchAll(cssTokens))], (match) => cssComment(match))
+    )
 
-  if (pipe(file, EffectString.endsWith(".html"))) {
-    const ranges: Array<CommentRange> = []
-    let cursor = 0
-    await new HTMLRewriter()
-      .onDocument({
-        comments(comment) {
-          const start = Math.max(cursor, indexFrom(source, `<!--${comment.text}`, cursor))
-          const end = indexFrom(source, "-->", start)
-          ranges.push({ start, end: end === -1 ? source.length : end + 3 })
-          cursor = start + 4
-        }
-      })
-      .transform(new Response(source))
-      .text()
+  if (pipe(file, EffectString.endsWith(".html"))) return Effect.promise(() => collectHtmlComments(source))
 
-    return ranges
-  }
-
-  return parseSync(file, source).comments
+  return Effect.sync(() => parseSync(file, source).comments)
 }

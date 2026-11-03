@@ -175,7 +175,24 @@
           "unnecessaryTypeofType": "error",
           "unsafeEffectTypeAssertion": "error",
           "unstableApiUsage": "error"
-        }
+        },
+        "overrides": [
+          {
+            "include": [
+              "src/cli.ts",
+              "web/build.ts",
+              "web/server.ts",
+              "web/table.ts",
+              "web/finder/finder.ts",
+              "tools/oxlint/local/check-comments.ts"
+            ],
+            "options": {
+              "diagnosticSeverity": {
+                "strictEffectProvide": "off"
+              }
+            }
+          }
+        ]
       }
     ]
   },
