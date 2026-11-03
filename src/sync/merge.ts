@@ -1,5 +1,5 @@
-import { encodeJson } from "../util/json.ts"
-import { Data, Option, Predicate, Array as EffectArray, String as EffectString, pipe } from "effect"
+import { encodeJson, jsonEqual } from "../util/json.ts"
+import { Effect, Data, Option, Predicate, Array as EffectArray, String as EffectString, pipe } from "effect"
 import { required } from "../util/required.ts"
 import type { Card } from "../model/schema.ts"
 import type { NormalisedCard } from "../cdr/normalise.ts"
@@ -65,9 +65,6 @@ const isLocked = (locked: ReadonlyArray<string>, path: string) =>
     (l) => path === l || pipe(path, EffectString.startsWith(`${l}.`)) || pipe(l, EffectString.startsWith(`${path}.`))
   )
 
-const equal = (a: unknown, b: unknown) =>
-  a === undefined || b === undefined ? a === b : encodeJson(a) === encodeJson(b)
-
 export const mergeCard = (existing: Card | undefined, incoming: NormalisedCard): Obj => {
   if (existing === undefined) return structuredClone(incoming)
   const merged: Obj = structuredClone(existing)
@@ -103,23 +100,28 @@ const withoutTimestamp = (path: string, value: unknown) => {
   return rest
 }
 
-export const diffCard = (before: Card | undefined, after: Obj): ReadonlyArray<FieldChange> => {
-  const paths = [...CDR_OWNED_PATHS, "status", "discontinued", "missing_since", ...EARN_PATHS, ...OFFER_PATHS]
+export const diffCard = Effect.fn("diffCard")(function* (before: Card | undefined, after: Obj) {
+  const changes: Array<FieldChange> = []
 
-  return paths
-    .values()
-    .map((path) => ({
+  for (const path of DIFFED_PATHS) {
+    const change = {
       path,
       before: before !== undefined ? getPath(before, path) : undefined,
       after: getPath(after, path)
-    }))
-    .filter((c) => !equal(withoutTimestamp(c.path, c.before), withoutTimestamp(c.path, c.after)))
-    .toArray()
-}
+    }
+
+    if (!(yield* jsonEqual(withoutTimestamp(path, change.before), withoutTimestamp(path, change.after))))
+      changes.push(change)
+  }
+
+  return changes
+})
 
 export const EARN_PATHS = ["rewards.earn", "rewards.earn_source", "rewards.earn_text_hash"] as const
 
 export const OFFER_PATHS = ["offers", "signup_review"] as const
+
+const DIFFED_PATHS = [...CDR_OWNED_PATHS, "status", "discontinued", "missing_since", ...EARN_PATHS, ...OFFER_PATHS]
 
 const KEY_FIELDS = new Set(["fees.annual", "rates.purchase", "fees.foreign_txn_pct"])
 
@@ -128,12 +130,12 @@ export interface HeldField {
   readonly reason: string
 }
 
-export const heldFields = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<HeldField> => {
+export const heldFields = Effect.fn("heldFields")(function* (changes: ReadonlyArray<FieldChange>) {
   const reasons: Array<HeldField> = []
 
   for (const { path, before, after } of changes) {
     if (KEY_FIELDS.has(path) && before !== undefined && after === undefined) {
-      reasons.push({ path, reason: `${path} disappeared (was ${encodeJson(before)})` })
+      reasons.push({ path, reason: `${path} disappeared (was ${yield* encodeJson(before)})` })
       continue
     }
 
@@ -169,10 +171,10 @@ export const heldFields = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<H
   }
 
   return reasons
-}
+})
 
-export const holdReasons = (changes: ReadonlyArray<FieldChange>): ReadonlyArray<string> =>
-  EffectArray.map(heldFields(changes), (held) => held.reason)
+export const holdReasons = (changes: ReadonlyArray<FieldChange>) =>
+  Effect.map(heldFields(changes), (fields) => EffectArray.map(fields, (held) => held.reason))
 
 export const MAX_DISCONTINUED_SHARE = 0.5
 

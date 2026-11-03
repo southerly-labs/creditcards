@@ -1298,7 +1298,7 @@ element("open-values", HTMLButtonElement).addEventListener("click", () => {
   valuesDialog.showModal()
 })
 
-const saveOverrides = () => store(OVERRIDES_KEY, encodeJson(overrides))
+const saveOverrides = () => store(OVERRIDES_KEY, Effect.runSync(encodeJson(overrides)))
 
 const editPointValue = (e: Event) => {
   const input = e.target

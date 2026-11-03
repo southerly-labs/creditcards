@@ -357,14 +357,14 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       }
 
       const proposed = proposal.card
-      const flagged = existing !== undefined ? holdCandidates(existing, proposed) : []
+      const flagged = existing !== undefined ? yield* holdCandidates(existing, proposed) : []
 
       const previous =
         existing !== undefined && EffectArray.some(flagged, (candidate) => candidate.kind === "approve")
           ? yield* previousCard(existing, product.productId, { brand, product: raw }, issuerSlug, date, programIndex)
           : undefined
 
-      const candidates = EffectArray.map(flagged, (candidate) => withCdrEvidence(candidate, previous))
+      const candidates = yield* Effect.forEach(flagged, (candidate) => withCdrEvidence(candidate, previous))
       let card = proposed
 
       if (existing !== undefined) evaluated.add(key)
@@ -397,7 +397,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         card = reverted
       }
 
-      const changes = diffCard(existing, card)
+      const changes = yield* diffCard(existing, card)
 
       observations.set(key, observedAt)
 
@@ -510,10 +510,16 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   } satisfies SyncReport
 })
 
-export const summariseReport = (r: SyncReport): string => {
-  const fmt = (v: unknown) =>
-    v === undefined ? "—" : typeof v === "object" ? encodeJson(v) : typeof v === "string" ? v : encodeJson(v)
+const formatValue = Effect.fn("formatValue")(function* (v: unknown) {
+  if (v === undefined) return "—"
 
+  return typeof v === "string" ? v : yield* encodeJson(v)
+})
+
+const formatChange = (c: FieldChange) =>
+  Effect.zipWith(formatValue(c.before), formatValue(c.after), (before, after) => `${c.path} ${before} → ${after}`)
+
+export const summariseReport = Effect.fn("summariseReport")(function* (r: SyncReport) {
   const lines = [
     `CDR sync ${r.date}: ${r.cardsSeen} cards seen, ${r.added.length} added, ${r.updated.length} updated, ` +
       `${r.discontinued.length} discontinued, ${r.held.length + EffectArray.filter(r.holds, (hold) => hold.decision === undefined).length} held`,
@@ -532,14 +538,7 @@ export const summariseReport = (r: SyncReport): string => {
           !["cdr", "description", "rewards.earn_source", "rewards.earn_text_hash", "signup_review"].includes(c.path)
       )
 
-      lines.push(
-        `- ${u.card}: ${
-          EffectArray.join(
-            EffectArray.map(shown, (c) => `${c.path} ${fmt(c.before)} → ${fmt(c.after)}`),
-            "; "
-          ) || "metadata"
-        }`
-      )
+      lines.push(`- ${u.card}: ${EffectArray.join(yield* Effect.forEach(shown, formatChange), "; ") || "metadata"}`)
     }
 
     lines.push("")
@@ -585,7 +584,7 @@ export const summariseReport = (r: SyncReport): string => {
     lines.push(`Unreachable brands with no cards in the data: ${r.cardlessBrandErrors}`, "")
 
   return EffectArray.join(lines, "\n")
-}
+})
 
 const earnReviewSection = (r: SyncReport) => [
   `${r.rewards.review.length} cards have earn rates the parser could not read (sync ${r.date}).`,

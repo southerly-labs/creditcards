@@ -1,7 +1,6 @@
 import { defined } from "../util/defined.ts"
 import {
   Predicate,
-  Schema,
   Array as EffectArray,
   String as EffectString,
   Record as EffectRecord,
@@ -142,19 +141,13 @@ export const annualFee = (fees: ReadonlyArray<Fee>) =>
 export const additionalCardFee = (fees: ReadonlyArray<Fee>) =>
   annualised(EffectArray.filter(fees, (f) => f.feeType === "PERIODIC" && ADDITIONAL_CARD.test(f.name ?? "")))
 
-const FeeDiscounts = Schema.Struct({
-  discounts: Schema.optional(
-    Schema.Array(Schema.Struct({ description: Schema.optional(Schema.NullOr(Schema.String)) }))
-  )
-})
-
 export const firstYearFee = (fees: ReadonlyArray<Fee>): number | undefined => {
   const discounted = EffectArray.some(
     fees,
     (f) =>
       f.feeType === "PERIODIC" &&
       !NOT_CARD_FEE.test(f.name ?? "") &&
-      EffectArray.some(Schema.decodeUnknownSync(FeeDiscounts)(f).discounts ?? [], (d) =>
+      EffectArray.some(f.discounts ?? [], (d) =>
         /first year free|\$0 (annual fee )?(in|for) the first year|no annual fee (in|for) the first year/iu.test(
           d.description ?? ""
         )

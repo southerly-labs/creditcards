@@ -1,11 +1,11 @@
-import { assert, test } from "@effect/vitest"
-import { Schema } from "effect"
+import { assert, it, test } from "@effect/vitest"
+import { Effect, Exit, Schema } from "effect"
 import { Card } from "../src/model/schema.ts"
 import { sectionLocks } from "../src/provenance/schema.ts"
 import { mergeCard, MissingStep, missingStep } from "../src/sync/merge.ts"
 
 test("section corrections and provenance survive CDR merging", () => {
-  const existing = Schema.decodeSync(Card)({
+  const existing: Card = {
     name: "Card",
     type: "personal",
     status: "active",
@@ -24,7 +24,7 @@ test("section corrections and provenance survive CDR merging", () => {
         }
       }
     }
-  })
+  }
 
   const merged = mergeCard(existing, { ...existing, fees: { annual: 100 } })
   assert.deepStrictEqual(merged["fees"], { annual: 25 })
@@ -37,7 +37,7 @@ test("a rewards correction locks only the CDR-owned rewards fields", () => {
 })
 
 test("a hand-set closed status survives CDR merging", () => {
-  const closed = Schema.decodeSync(Card)({
+  const closed: Card = {
     name: "Card",
     type: "personal",
     status: "closed",
@@ -47,7 +47,7 @@ test("a hand-set closed status survives CDR merging", () => {
     rates: {},
     limits: {},
     perks: {}
-  })
+  }
 
   const merged = mergeCard(closed, { ...closed, status: "active" })
   assert.strictEqual(merged["status"], "closed")
@@ -58,28 +58,29 @@ test("a hand-set closed status survives CDR merging", () => {
   )
 })
 
-test("lifecycle dates must agree with the status", () => {
-  const card = { name: "Card", type: "personal", fees: {}, rates: {}, limits: {}, perks: {} }
+const decodes = (input: unknown) =>
+  Effect.exit(Schema.decodeUnknownEffect(Card)(input)).pipe(Effect.map(Exit.isSuccess))
 
-  assert.throws(() => {
-    Schema.decodeUnknownSync(Card)({ ...card, status: "active", discontinued: "2026-01-01" })
+it.effect("lifecycle dates must agree with the status", () =>
+  Effect.gen(function* () {
+    const card = { name: "Card", type: "personal", fees: {}, rates: {}, limits: {}, perks: {} }
+
+    assert.isFalse(yield* decodes({ ...card, status: "active", discontinued: "2026-01-01" }))
+    assert.isFalse(yield* decodes({ ...card, status: "active", closed: "2026-01-01" }))
+    assert.isTrue(
+      yield* decodes({
+        ...card,
+        status: "discontinued",
+        first_seen: "2026-10-31",
+        closed: "2025-01-01",
+        discontinued: "2026-01-01"
+      })
+    )
   })
-  assert.throws(() => {
-    Schema.decodeUnknownSync(Card)({ ...card, status: "active", closed: "2026-01-01" })
-  })
-  assert.doesNotThrow(() => {
-    Schema.decodeUnknownSync(Card)({
-      ...card,
-      status: "discontinued",
-      first_seen: "2026-10-31",
-      closed: "2025-01-01",
-      discontinued: "2026-01-01"
-    })
-  })
-})
+)
 
 test("a card must be missing on two different days before it is discontinued", () => {
-  const card = Schema.decodeSync(Card)({
+  const card: Card = {
     name: "Card",
     type: "personal",
     status: "active",
@@ -88,7 +89,7 @@ test("a card must be missing on two different days before it is discontinued", (
     rates: {},
     limits: {},
     perks: {}
-  })
+  }
 
   const marked = { ...card, missing_since: "2026-11-01" }
 

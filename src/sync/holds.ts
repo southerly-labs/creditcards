@@ -65,16 +65,20 @@ const offerCandidates = (existing: Card, proposed: Card): ReadonlyArray<HoldCand
   return candidates
 }
 
-export const holdCandidates = (existing: Card, proposed: Card): ReadonlyArray<HoldCandidate> => [
-  ...EffectArray.map(heldFields(diffCard(existing, proposed)), ({ path, reason }): HoldCandidate => ({
-    change: path,
-    reason,
-    kind: "approve",
-    current: getPath(existing, path),
-    proposed: getPath(proposed, path)
-  })),
-  ...offerCandidates(existing, proposed)
-]
+export const holdCandidates = Effect.fn("holdCandidates")(function* (existing: Card, proposed: Card) {
+  const fields = yield* heldFields(yield* diffCard(existing, proposed))
+
+  return [
+    ...EffectArray.map(fields, ({ path, reason }): HoldCandidate => ({
+      change: path,
+      reason,
+      kind: "approve",
+      current: getPath(existing, path),
+      proposed: getPath(proposed, path)
+    })),
+    ...offerCandidates(existing, proposed)
+  ]
+})
 
 const revertOffer = (card: Card, existing: Card, id: string): Card => {
   const before = Option.getOrUndefined(EffectArray.findFirst(existing.offers ?? [], (offer) => offer.id === id))
@@ -130,25 +134,26 @@ const PLAUSIBLE: Readonly<Record<string, (value: unknown) => boolean>> = {
 
 export const CONFIRMED_BY_CDR = "the issuer's CDR data changed"
 
-export const withCdrEvidence = (
+export const withCdrEvidence = Effect.fn("withCdrEvidence")(function* (
   candidate: HoldCandidate,
   previous: { readonly date: string; readonly card: Card } | undefined
-): HoldCandidate => {
+) {
   if (candidate.kind !== "approve" || previous === undefined || candidate.proposed === undefined) return candidate
 
-  const before = valueAt(previous.card, candidate.change)
-  const fromCdr = encodeJson(before ?? null) === encodeJson(candidate.current ?? null)
-  const changed = encodeJson(before ?? null) !== encodeJson(candidate.proposed)
+  const before = yield* encodeJson(valueAt(previous.card, candidate.change) ?? null)
+  const current = yield* encodeJson(candidate.current ?? null)
+  const proposed = yield* encodeJson(candidate.proposed)
 
-  if (!fromCdr || !changed || PLAUSIBLE[candidate.change]?.(candidate.proposed) !== true) return candidate
+  if (before !== current || before === proposed || PLAUSIBLE[candidate.change]?.(candidate.proposed) !== true)
+    return candidate
 
   return {
     ...candidate,
     kind: "confirm",
     reason: `${candidate.reason}; ${CONFIRMED_BY_CDR} since ${previous.date}`,
-    evidence: `CDR snapshot ${previous.date} gives ${encodeJson(before ?? null)}; today's gives ${encodeJson(candidate.proposed)}`
-  }
-}
+    evidence: `CDR snapshot ${previous.date} gives ${before}; today's gives ${proposed}`
+  } satisfies HoldCandidate
+})
 
 const isCard = Schema.is(Card)
 
@@ -164,7 +169,7 @@ export const revertChange = (card: Card, existing: Card, change: string): Card |
 }
 
 export const holdId = (card: string, change: string, proposed: unknown) =>
-  sha256Prefix(encodeJson([card, change, proposed ?? null]), 12)
+  encodeJson([card, change, proposed ?? null]).pipe(Effect.flatMap((json) => sha256Prefix(json, 12)))
 
 export interface Resolution {
   readonly apply: ReadonlyArray<HoldCandidate>
@@ -172,7 +177,9 @@ export interface Resolution {
   readonly holds: ReadonlyArray<Hold>
 }
 
-const asJson = (value: unknown) => (value === undefined ? undefined : encodeJson(value))
+const asJson = Effect.fn("asJson")(function* (value: unknown) {
+  return value === undefined ? undefined : yield* encodeJson(value)
+})
 
 export const resolveHolds = Effect.fn("resolveHolds")(function* (input: {
   readonly card: string
@@ -196,8 +203,8 @@ export const resolveHolds = Effect.fn("resolveHolds")(function* (input: {
     }
 
     revert.push(candidate)
-    const current = asJson(candidate.current)
-    const proposed = asJson(candidate.proposed)
+    const current = yield* asJson(candidate.current)
+    const proposed = yield* asJson(candidate.proposed)
 
     holds.push(
       entry ?? {

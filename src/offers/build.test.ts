@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@effect/vitest"
-import { Schema, Array as EffectArray, Option } from "effect"
+import { Array as EffectArray, Option } from "effect"
 import { Card } from "../model/schema"
 import type { Offer } from "./schema"
 import { applyOffers, cdrOffers, combineOffers, signupOffer, signupState } from "./build"
@@ -96,7 +96,7 @@ describe("combining offers", () => {
 })
 
 describe("applying offers to a card", () => {
-  const card = Schema.decodeSync(Card)({
+  const card: Card = {
     name: "Card",
     type: "personal",
     status: "active",
@@ -106,7 +106,7 @@ describe("applying offers to a card", () => {
     limits: {},
     perks: {},
     rewards: { program: "qantas" }
-  })
+  }
 
   const cdr = {
     intro: [{ applies_to: "purchase" as const, rate: 0, months: 12 }],

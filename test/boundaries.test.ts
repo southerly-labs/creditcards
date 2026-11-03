@@ -1,4 +1,5 @@
-import { assert, test } from "@effect/vitest"
+import { assert, it, test } from "@effect/vitest"
+import { Effect, Exit } from "effect"
 import {
   decodeApi,
   decodeColumnVisibility,
@@ -10,6 +11,8 @@ import {
 } from "../src/model/api.ts"
 import { encodeJson } from "../src/util/json.ts"
 
+const apiDecodes = (input: unknown) => Effect.exit(decodeApi(input)).pipe(Effect.map(Exit.isSuccess))
+
 const empty = {
   schema_version: 1,
   freshness: { card_count: 0, cdr_products_with_known_updated_at: 0 },
@@ -17,12 +20,14 @@ const empty = {
   issuers: {}
 }
 
-test("the public API boundary rejects malformed card data", () => {
-  assert.throws(() => {
-    decodeApi({ ...empty, issuers: { bank: { name: "Bank", cards: { card: { name: "Card" } } } } })
+it.effect("the public API boundary rejects malformed card data", () =>
+  Effect.gen(function* () {
+    assert.isFalse(
+      yield* apiDecodes({ ...empty, issuers: { bank: { name: "Bank", cards: { card: { name: "Card" } } } } })
+    )
+    assert.deepStrictEqual(yield* decodeApi(empty), empty)
   })
-  assert.deepStrictEqual(decodeApi(empty), empty)
-})
+)
 
 test("point values preserve valid entries alongside invalid ones", () => {
   assert.deepStrictEqual(decodePointValues('{"qantas":1.5,"negative":-1,"text":"2","null":null}'), { qantas: 1.5 })
@@ -59,7 +64,9 @@ test("monthly spend keeps only non-negative numbers", () => {
   assert.strictEqual(loadMonthlySpend(unavailableStorage), undefined)
 })
 
-test("Schema serialization preserves optional report fields and pretty output", () => {
-  assert.strictEqual(encodeJson({ omitted: undefined, kept: [undefined, 1] }), '{"kept":[null,1]}')
-  assert.strictEqual(encodeJson({ kept: 1 }, 2), '{\n  "kept": 1\n}')
-})
+it.effect("Schema serialization preserves optional report fields and pretty output", () =>
+  Effect.gen(function* () {
+    assert.strictEqual(yield* encodeJson({ omitted: undefined, kept: [undefined, 1] }), '{"kept":[null,1]}')
+    assert.strictEqual(yield* encodeJson({ kept: 1 }, 2), '{\n  "kept": 1\n}')
+  })
+)

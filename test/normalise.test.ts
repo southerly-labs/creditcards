@@ -1,6 +1,6 @@
 import { required } from "../src/util/required.ts"
-import { describe, expect, test } from "@effect/vitest"
-import { Schema, Array as EffectArray } from "effect"
+import { assert, describe, expect, it, test } from "@effect/vitest"
+import { Effect, Schema, Array as EffectArray } from "effect"
 import {
   annualFee,
   cardType,
@@ -199,41 +199,47 @@ describe("merge and guardrails", () => {
     perks: {}
   }
 
-  test("CDR-owned fields update, locked and curated fields survive", () => {
-    const merged = Schema.decodeUnknownSync(Card)(
-      mergeCard(existing, {
-        name: "Card",
-        type: "personal",
-        status: "active",
-        fees: { annual: 120, foreign_txn_pct: 3 },
-        rates: { purchase: 21 },
-        limits: {},
-        rewards: { program: "qantas" },
-        perks: {}
-      })
-    )
+  it.effect("CDR-owned fields update, locked and curated fields survive", () =>
+    Effect.gen(function* () {
+      const merged = yield* Schema.decodeUnknownEffect(Card)(
+        mergeCard(existing, {
+          name: "Card",
+          type: "personal",
+          status: "active",
+          fees: { annual: 120, foreign_txn_pct: 3 },
+          rates: { purchase: 21 },
+          limits: {},
+          rewards: { program: "qantas" },
+          perks: {}
+        })
+      )
 
-    expect(merged.fees).toEqual({ annual: 120, foreign_txn_pct: 0 })
-    expect(merged.rewards?.earn).toEqual([{ rate: 1 }])
-  })
+      assert.deepStrictEqual(merged.fees, { annual: 120, foreign_txn_pct: 0 })
+      assert.deepStrictEqual(merged.rewards?.earn, [{ rate: 1 }])
+    })
+  )
 
-  test("a cdr.last_updated bump alone is not a change", () => {
-    const card: Card = { ...existing, cdr: { brand: "B", product_id: "p", last_updated: "2026-10-30" } }
-    const cdr = required(card.cdr)
-    const bumped = { ...card, cdr: { ...cdr, last_updated: "2026-10-31" } }
-    expect(diffCard(card, bumped)).toEqual([])
-    expect(EffectArray.map(diffCard(card, { ...bumped, fees: { annual: 120 } }), (c) => c.path)).toEqual([
-      "fees.annual",
-      "fees.foreign_txn_pct"
-    ])
-  })
+  it.effect("a cdr.last_updated bump alone is not a change", () =>
+    Effect.gen(function* () {
+      const card: Card = { ...existing, cdr: { brand: "B", product_id: "p", last_updated: "2026-10-30" } }
+      const cdr = required(card.cdr)
+      const bumped = { ...card, cdr: { ...cdr, last_updated: "2026-10-31" } }
+      assert.deepStrictEqual(yield* diffCard(card, bumped), [])
+      assert.deepStrictEqual(
+        EffectArray.map(yield* diffCard(card, { ...bumped, fees: { annual: 120 } }), (c) => c.path),
+        ["fees.annual", "fees.foreign_txn_pct"]
+      )
+    })
+  )
 
-  test("implausible changes are held", () => {
-    expect(holdReasons([{ path: "fees.annual", before: 100, after: 1000 }])).toHaveLength(1)
-    expect(holdReasons([{ path: "fees.annual", before: 100, after: 120 }])).toHaveLength(0)
-    expect(holdReasons([{ path: "rates.purchase", before: 20, after: 9 }])).toHaveLength(1)
-    expect(holdReasons([{ path: "rates.purchase", before: 20, after: undefined }])).toHaveLength(1)
-    expect(holdReasons([{ path: "rewards.earn", before: [{ rate: 1 }], after: [{ rate: 3 }] }])).toHaveLength(1)
-    expect(holdReasons([{ path: "rewards.earn", before: [{ rate: 1 }], after: [{ rate: 1.5 }] }])).toHaveLength(0)
-  })
+  it.effect("implausible changes are held", () =>
+    Effect.gen(function* () {
+      assert.lengthOf(yield* holdReasons([{ path: "fees.annual", before: 100, after: 1000 }]), 1)
+      assert.lengthOf(yield* holdReasons([{ path: "fees.annual", before: 100, after: 120 }]), 0)
+      assert.lengthOf(yield* holdReasons([{ path: "rates.purchase", before: 20, after: 9 }]), 1)
+      assert.lengthOf(yield* holdReasons([{ path: "rates.purchase", before: 20, after: undefined }]), 1)
+      assert.lengthOf(yield* holdReasons([{ path: "rewards.earn", before: [{ rate: 1 }], after: [{ rate: 3 }] }]), 1)
+      assert.lengthOf(yield* holdReasons([{ path: "rewards.earn", before: [{ rate: 1 }], after: [{ rate: 1.5 }] }]), 0)
+    })
+  )
 })

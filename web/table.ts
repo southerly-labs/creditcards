@@ -150,7 +150,7 @@ const loadOverrides = () => loadPointValues(() => localStorage.getItem(OVERRIDES
 const overrides: Record<string, number> = loadOverrides()
 
 const saveOverrides = () => {
-  localStorage.setItem(OVERRIDES_KEY, encodeJson(overrides))
+  localStorage.setItem(OVERRIDES_KEY, Effect.runSync(encodeJson(overrides)))
 }
 
 const centsPerPoint = (r: Row) =>
@@ -592,7 +592,7 @@ const toggleColumn = (e: Event) => {
 
   if (input.checked === (column.hiddenByDefault !== true)) delete columnChoices[column.id]
   else columnChoices[column.id] = input.checked
-  localStorage.setItem(COLUMNS_KEY, encodeJson(columnChoices))
+  localStorage.setItem(COLUMNS_KEY, Effect.runSync(encodeJson(columnChoices)))
   render()
 }
 
@@ -600,7 +600,7 @@ $("column-list").addEventListener("change", toggleColumn)
 
 $("column-reset").addEventListener("click", () => {
   for (const id of EffectRecord.keys(columnChoices)) delete columnChoices[id]
-  localStorage.setItem(COLUMNS_KEY, encodeJson(columnChoices))
+  localStorage.setItem(COLUMNS_KEY, Effect.runSync(encodeJson(columnChoices)))
   renderColumnPicker()
   render()
 })

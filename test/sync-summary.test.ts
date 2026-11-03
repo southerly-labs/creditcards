@@ -1,6 +1,6 @@
-import { describe, expect, test } from "@effect/vitest"
+import { assert, describe, expect, it, test } from "@effect/vitest"
 import { type SyncReport, summariseReport, summariseRewardsReview } from "../src/sync/Sync.ts"
-import { String as EffectString, pipe } from "effect"
+import { Effect, String as EffectString, pipe } from "effect"
 
 const report = (earn: number, bonus: number, undetailed: ReadonlyArray<string> = []): SyncReport => ({
   date: "2026-11-01",
@@ -38,11 +38,14 @@ describe("review issue body", () => {
     expect(body).not.toContain("signup bonuses")
   })
 
-  test("counts offers named without details instead of listing them", () => {
-    const undetailed = report(0, 0, ["amex/platinum-card"])
-    expect(summariseRewardsReview(undetailed)).not.toContain("amex/platinum-card")
-    expect(summariseReport(undetailed)).toContain("0 need review, 1 named in CDR without details")
-  })
+  it.effect("counts offers named without details instead of listing them", () =>
+    Effect.gen(function* () {
+      const undetailed = report(0, 0, ["amex/platinum-card"])
+
+      assert.notInclude(summariseRewardsReview(undetailed), "amex/platinum-card")
+      assert.include(yield* summariseReport(undetailed), "0 need review, 1 named in CDR without details")
+    })
+  )
 
   test("says so when nothing needs review", () => {
     expect(summariseRewardsReview(report(0, 0))).toBe("No earn rates or signup bonuses need review (sync 2026-11-01).")

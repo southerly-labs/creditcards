@@ -112,12 +112,14 @@ describe("CDR snapshots", () => {
         assert.deepStrictEqual(yield* listed("p2"), ["2026-11-01.json"])
       })
     )
-  })
 
-  test("ignores key order so reordered responses are not changes", () => {
-    assert.strictEqual(
-      encodeSnapshot({ brand: "Bank", version: 4, product: { b: 1, a: { d: 2, c: 3 } } }),
-      encodeSnapshot({ version: 4, product: { a: { c: 3, d: 2 }, b: 1 }, brand: "Bank" })
+    it.effect("ignores key order so reordered responses are not changes", () =>
+      Effect.gen(function* () {
+        assert.strictEqual(
+          yield* encodeSnapshot({ brand: "Bank", version: 4, product: { b: 1, a: { d: 2, c: 3 } } }),
+          yield* encodeSnapshot({ version: 4, product: { a: { c: 3, d: 2 }, b: 1 }, brand: "Bank" })
+        )
+      })
     )
   })
 

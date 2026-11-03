@@ -49,8 +49,8 @@ const sync = Command.make(
   },
   Effect.fn(function* ({ dryRun, reportDir }) {
     const report = yield* syncCdr({ dryRun })
-    const summary = summariseReport(report)
-    yield* writeFile(`${reportDir}/sync-report.json`, encodeJson(report, 2))
+    const summary = yield* summariseReport(report)
+    yield* writeFile(`${reportDir}/sync-report.json`, yield* encodeJson(report, 2))
     yield* writeFile(`${reportDir}/sync-summary.md`, summary)
     yield* writeFile(`${reportDir}/rewards-review.md`, summariseRewardsReview(report))
     yield* writeFile(
@@ -89,7 +89,7 @@ const build = Command.make(
 
     const dataset = { ...validated, changes }
 
-    yield* writeFile(`${out}/api.json`, encodeJson(toApi(dataset, DateTime.formatIso(yield* DateTime.now))))
+    yield* writeFile(`${out}/api.json`, yield* encodeJson(toApi(dataset, DateTime.formatIso(yield* DateTime.now))))
     yield* Console.log(`Wrote ${out}/api.json (${dataset.cards.size} cards)`)
   })
 ).pipe(Command.withDescription("Build dist/api.json from data/"))
@@ -102,7 +102,7 @@ const rewardsTodo = Command.make(
   },
   Effect.fn(function* ({ issuer, out }) {
     const items = yield* reviewQueue(Option.getOrUndefined(issuer))
-    const text = formatQueue(items)
+    const text = yield* formatQueue(items)
     yield* writeFile(out, text)
     yield* Console.log(text)
     yield* Console.log(`Wrote ${out}`)
@@ -130,7 +130,7 @@ const bonusTodo = Command.make(
     out: Flag.String("out").pipe(Flag.withDefault(".cache/bonus-todo.md"))
   },
   Effect.fn(function* ({ issuer, out }) {
-    const text = formatBonusQueue(yield* bonusReviewQueue(Option.getOrUndefined(issuer)))
+    const text = yield* formatBonusQueue(yield* bonusReviewQueue(Option.getOrUndefined(issuer)))
     yield* writeFile(out, text)
     yield* Console.log(text)
     yield* Console.log(`Wrote ${out}`)
@@ -167,7 +167,7 @@ const rewardsCheck = Command.make(
     if (Option.isSome(show)) return yield* Console.log(normaliseText(yield* pageText(show.value)))
     const results = yield* checkEarnPages((yield* (yield* Store).load).cards)
     const report = formatCheck(results)
-    yield* writeFile(`${reportDir}/earn-check.json`, encodeJson(results, 2))
+    yield* writeFile(`${reportDir}/earn-check.json`, yield* encodeJson(results, 2))
     yield* writeFile(`${reportDir}/earn-check.md`, report)
 
     return yield* Console.log(report)

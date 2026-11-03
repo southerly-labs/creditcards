@@ -48,7 +48,8 @@ export const Fee = Schema.Struct({
   rateBased: Schema.optional(Schema.NullOr(Schema.Struct({ rateType: OptString, rate: OptString }))),
   currency: OptString,
   additionalValue: OptString,
-  additionalInfo: OptString
+  additionalInfo: OptString,
+  discounts: Schema.optional(Schema.NullOr(Schema.Array(Schema.Struct({ description: OptString }))))
 })
 
 export type Fee = typeof Fee.Type

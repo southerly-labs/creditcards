@@ -33,4 +33,4 @@ export const PublicApi = Schema.Struct({
 
 export type Api = typeof PublicApi.Type
 
-export const decodeApi = Schema.decodeUnknownSync(PublicApi)
+export const decodeApi = Schema.decodeUnknownEffect(PublicApi)

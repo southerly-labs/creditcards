@@ -111,8 +111,26 @@ export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | 
   return EffectArray.filter(items, (i) => i !== undefined)
 })
 
-export const formatQueue = (items: ReadonlyArray<ReviewItem>): string =>
-  EffectArray.join(
+const jsonOrDash = (value: unknown) => (value === undefined ? Effect.succeed("—") : encodeJson(value))
+
+export const formatQueue = Effect.fn("formatQueue")(function* (items: ReadonlyArray<ReviewItem>) {
+  const sections = yield* Effect.forEach(items, (i) =>
+    Effect.map(jsonOrDash(i.earn), (earnJson) => [
+      `## ${i.card} — ${i.name}`,
+      "",
+      `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
+      `- Program: ${i.program ?? "—"}`,
+      `- Reason: ${i.reason}`,
+      `- Current earn: ${earnJson}`,
+      "",
+      "```text",
+      i.text || "(no loyalty text)",
+      "```",
+      ""
+    ])
+  )
+
+  return EffectArray.join(
     [
       `# Earn rates to review (${items.length})`,
       "",
@@ -121,22 +139,11 @@ export const formatQueue = (items: ReadonlyArray<ReviewItem>): string =>
       "`bun run cli rewards stamp <issuer/card>...` to mark it manually reviewed.",
       "Use `--none` when the text has no fixed earn rate.",
       "",
-      ...EffectArray.flatMap(items, (i) => [
-        `## ${i.card} — ${i.name}`,
-        "",
-        `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
-        `- Program: ${i.program ?? "—"}`,
-        `- Reason: ${i.reason}`,
-        `- Current earn: ${i.earn !== undefined ? encodeJson(i.earn) : "—"}`,
-        "",
-        "```text",
-        i.text || "(no loyalty text)",
-        "```",
-        ""
-      ])
+      ...EffectArray.flatten(sections)
     ],
     "\n"
   )
+})
 
 export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, none: boolean) {
   const store = yield* Store
@@ -225,8 +232,25 @@ export const bonusReviewQueue = Effect.fn("bonusReviewQueue")(function* (issuer:
   return EffectArray.filter(items, (i) => i !== undefined)
 })
 
-export const formatBonusQueue = (items: ReadonlyArray<BonusReviewItem>): string =>
-  EffectArray.join(
+export const formatBonusQueue = Effect.fn("formatBonusQueue")(function* (items: ReadonlyArray<BonusReviewItem>) {
+  const sections = yield* Effect.forEach(items, (i) =>
+    Effect.map(jsonOrDash(i.signup), (signupJson) => [
+      `## ${i.card} — ${i.name}`,
+      "",
+      `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
+      `- Program: ${i.program ?? "—"}`,
+      `- Reason: ${i.reason}`,
+      `- CDR bonus total: ${i.bonusPoints ?? "—"}`,
+      `- Current signup offer: ${signupJson}`,
+      "",
+      "```text",
+      i.text || "(no bonus text)",
+      "```",
+      ""
+    ])
+  )
+
+  return EffectArray.join(
     [
       `# Signup bonuses to review (${items.length})`,
       "",
@@ -237,23 +261,11 @@ export const formatBonusQueue = (items: ReadonlyArray<BonusReviewItem>): string 
       "`bun run cli rewards bonus-stamp <issuer/card>...`. Use `--none` when there is no",
       "current points offer, for example when it has expired or is cashback only.",
       "",
-      ...EffectArray.flatMap(items, (i) => [
-        `## ${i.card} — ${i.name}`,
-        "",
-        `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
-        `- Program: ${i.program ?? "—"}`,
-        `- Reason: ${i.reason}`,
-        `- CDR bonus total: ${i.bonusPoints ?? "—"}`,
-        `- Current signup offer: ${i.signup !== undefined ? encodeJson(i.signup) : "—"}`,
-        "",
-        "```text",
-        i.text || "(no bonus text)",
-        "```",
-        ""
-      ])
+      ...EffectArray.flatten(sections)
     ],
     "\n"
   )
+})
 
 export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray<string>, none: boolean) {
   const store = yield* Store

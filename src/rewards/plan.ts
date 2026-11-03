@@ -1,4 +1,4 @@
-import { encodeJson } from "../util/json.ts"
+import { jsonEqual } from "../util/json.ts"
 import { Data, Effect } from "effect"
 import type { BonusTranche, Card, EarnRate } from "../model/schema.ts"
 import type { SignupReview } from "../offers/schema.ts"
@@ -11,9 +11,6 @@ export type RewardsPlan =
   | { readonly _tag: "Review"; readonly reason: string; readonly hash: string }
 
 export const RewardsPlan = Data.taggedEnum<RewardsPlan>()
-
-const equal = (a: unknown, b: unknown) =>
-  a === undefined || b === undefined ? a === b : encodeJson(a) === encodeJson(b)
 
 export const planRewards = Effect.fn("planRewards")(function* (
   current: Card["rewards"] | undefined,
@@ -34,7 +31,7 @@ export const planRewards = Effect.fn("planRewards")(function* (
       current?.earn_source === "parser" &&
       current.earn_review?.state === "present" &&
       current.earn_text_hash === hash &&
-      equal(current.earn, parsed.earn)
+      (yield* jsonEqual(current.earn, parsed.earn))
 
     return same ? RewardsPlan.Unchanged() : RewardsPlan.Set({ earn: parsed.earn, hash })
   }
@@ -96,7 +93,10 @@ export const planBonus = Effect.fn("planBonus")(function* (
   if (parsed.bonus.length === 0) return hasParsed ? BonusPlan.Clear() : BonusPlan.Unchanged()
 
   const same =
-    hasParsed && review.state === "present" && review.text_hash === hash && equal(current.parsed, parsed.bonus)
+    hasParsed &&
+    review.state === "present" &&
+    review.text_hash === hash &&
+    (yield* jsonEqual(current.parsed, parsed.bonus))
 
   return same ? BonusPlan.Unchanged() : BonusPlan.Set({ bonus: parsed.bonus, hash })
 })

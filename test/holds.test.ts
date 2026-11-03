@@ -1,5 +1,5 @@
-import { assert, describe, layer, test } from "@effect/vitest"
-import { Effect, Schema, Array as EffectArray } from "effect"
+import { assert, describe, it, layer, test } from "@effect/vitest"
+import { Effect, Array as EffectArray } from "effect"
 import { Digest } from "effect/crypto"
 import { Card } from "../src/model/schema.ts"
 import type { Hold } from "../src/model/holds.ts"
@@ -13,7 +13,7 @@ import {
 } from "../src/sync/holds.ts"
 import { required } from "../src/util/required.ts"
 
-const base = Schema.decodeSync(Card)({
+const base: Card = {
   name: "Card",
   type: "personal",
   status: "active",
@@ -23,32 +23,36 @@ const base = Schema.decodeSync(Card)({
   limits: {},
   perks: {},
   rewards: { program: "qantas", earn: [{ rate: 1 }], earn_source: "parser", earn_text_hash: "old" }
-})
+}
 
 describe("field-level holds", () => {
-  test("only the suspicious field is held", () => {
-    const proposed = { ...base, fees: { annual: 1000, foreign_txn_pct: 2.5 } }
-    const candidates = holdCandidates(base, proposed)
+  it.effect("only the suspicious field is held", () =>
+    Effect.gen(function* () {
+      const proposed = { ...base, fees: { annual: 1000, foreign_txn_pct: 2.5 } }
+      const candidates = yield* holdCandidates(base, proposed)
 
-    assert.deepStrictEqual(
-      EffectArray.map(candidates, (c) => [c.change, c.kind, c.current, c.proposed]),
-      [["fees.annual", "approve", 100, 1000]]
-    )
-    assert.deepStrictEqual(revertChange(proposed, base, "fees.annual")?.fees, { annual: 100, foreign_txn_pct: 2.5 })
-  })
+      assert.deepStrictEqual(
+        EffectArray.map(candidates, (c) => [c.change, c.kind, c.current, c.proposed]),
+        [["fees.annual", "approve", 100, 1000]]
+      )
+      assert.deepStrictEqual(revertChange(proposed, base, "fees.annual")?.fees, { annual: 100, foreign_txn_pct: 2.5 })
+    })
+  )
 
-  test("a held earn rate reverts its source, hash and review with it", () => {
-    const proposed = {
-      ...base,
-      rewards: { program: "qantas", earn: [{ rate: 3 }], earn_source: "parser" as const, earn_text_hash: "new" }
-    }
+  it.effect("a held earn rate reverts its source, hash and review with it", () =>
+    Effect.gen(function* () {
+      const proposed = {
+        ...base,
+        rewards: { program: "qantas", earn: [{ rate: 3 }], earn_source: "parser" as const, earn_text_hash: "new" }
+      }
 
-    assert.deepStrictEqual(
-      EffectArray.map(holdCandidates(base, proposed), (c) => c.change),
-      ["rewards.earn"]
-    )
-    assert.deepStrictEqual(revertChange(proposed, base, "rewards.earn")?.rewards, base.rewards)
-  })
+      assert.deepStrictEqual(
+        EffectArray.map(yield* holdCandidates(base, proposed), (c) => c.change),
+        ["rewards.earn"]
+      )
+      assert.deepStrictEqual(revertChange(proposed, base, "rewards.earn")?.rewards, base.rewards)
+    })
+  )
 
   test("a revert that leaves the card invalid returns nothing", () => {
     const existing = { ...base, limits: { min_credit: 500, max_credit: 1000 } }
@@ -80,8 +84,8 @@ describe("resolving holds", () => {
 
   const recorded = resolve(approve, [], "2026-11-02").pipe(Effect.map((result) => required(result.holds[0])))
 
-  layer(Digest.layerWebCrypto)((it) => {
-    it.effect("a new suspicious change is reverted and recorded", () =>
+  layer(Digest.layerWebCrypto)((digest) => {
+    digest.effect("a new suspicious change is reverted and recorded", () =>
       Effect.gen(function* () {
         assert.deepStrictEqual((yield* resolve(approve, [], "2026-11-02")).revert, [approve])
         assert.deepStrictEqual(yield* recorded, {
@@ -97,7 +101,7 @@ describe("resolving holds", () => {
       })
     )
 
-    it.effect("an approved change is applied and its entry dropped", () =>
+    digest.effect("an approved change is applied and its entry dropped", () =>
       Effect.gen(function* () {
         const approved: Hold = {
           ...(yield* recorded),
@@ -113,7 +117,7 @@ describe("resolving holds", () => {
       })
     )
 
-    it.effect("a rejected change stays reverted until CDR proposes something else", () =>
+    digest.effect("a rejected change stays reverted until CDR proposes something else", () =>
       Effect.gen(function* () {
         const rejected: Hold = {
           ...(yield* recorded),
@@ -131,7 +135,7 @@ describe("resolving holds", () => {
       })
     )
 
-    it.effect("a confirm hold applies once it is still proposed on a later day", () =>
+    digest.effect("a confirm hold applies once it is still proposed on a later day", () =>
       Effect.gen(function* () {
         const first = yield* resolve(confirm, [], "2026-11-02")
         const nextDay = yield* resolve(confirm, first.holds, "2026-11-03")
@@ -158,64 +162,86 @@ describe("offer holds", () => {
     signup_review: { state: "present" as const, source: "parser" as const, text_hash: `h${points}` }
   })
 
-  test("a generated offer that disappears waits a day to confirm", () => {
-    const candidates = holdCandidates(withSignup(100_000), base)
+  it.effect("a generated offer that disappears waits a day to confirm", () =>
+    Effect.gen(function* () {
+      const candidates = yield* holdCandidates(withSignup(100_000), base)
 
-    assert.deepStrictEqual(
-      EffectArray.map(candidates, (c) => [c.change, c.kind]),
-      [["offers.signup", "confirm"]]
-    )
-    assert.deepStrictEqual(revertChange(base, withSignup(100_000), "offers.signup")?.offers, [signup(100_000)])
-    assert.deepStrictEqual(revertChange(base, withSignup(100_000), "offers.signup")?.signup_review, {
-      state: "present",
-      source: "parser",
-      text_hash: "h100000"
+      assert.deepStrictEqual(
+        EffectArray.map(candidates, (c) => [c.change, c.kind]),
+        [["offers.signup", "confirm"]]
+      )
+      assert.deepStrictEqual(revertChange(base, withSignup(100_000), "offers.signup")?.offers, [signup(100_000)])
+      assert.deepStrictEqual(revertChange(base, withSignup(100_000), "offers.signup")?.signup_review, {
+        state: "present",
+        source: "parser",
+        text_hash: "h100000"
+      })
     })
-  })
+  )
 
-  test("a manual offer is never held", () => {
-    assert.deepStrictEqual(holdCandidates(withSignup(100_000, "manual"), base), [])
-  })
+  it.effect("a manual offer is never held", () =>
+    Effect.gen(function* () {
+      assert.deepStrictEqual(yield* holdCandidates(withSignup(100_000, "manual"), base), [])
+    })
+  )
 
-  test("a signup increase over 50% needs approval; smaller changes and decreases apply", () => {
-    assert.deepStrictEqual(
-      EffectArray.map(holdCandidates(withSignup(100_000), withSignup(160_000)), (c) => [c.change, c.kind, c.reason]),
-      [["offers.signup", "approve", "signup points 100000 → 160000"]]
-    )
-    assert.deepStrictEqual(holdCandidates(withSignup(100_000), withSignup(140_000)), [])
-    assert.deepStrictEqual(holdCandidates(withSignup(100_000), withSignup(20_000)), [])
-    assert.deepStrictEqual(revertChange(withSignup(160_000), withSignup(100_000), "offers.signup")?.offers, [
-      signup(100_000)
-    ])
-  })
+  it.effect("a signup increase over 50% needs approval; smaller changes and decreases apply", () =>
+    Effect.gen(function* () {
+      assert.deepStrictEqual(
+        EffectArray.map(yield* holdCandidates(withSignup(100_000), withSignup(160_000)), (c) => [
+          c.change,
+          c.kind,
+          c.reason
+        ]),
+        [["offers.signup", "approve", "signup points 100000 → 160000"]]
+      )
+      assert.deepStrictEqual(yield* holdCandidates(withSignup(100_000), withSignup(140_000)), [])
+      assert.deepStrictEqual(yield* holdCandidates(withSignup(100_000), withSignup(20_000)), [])
+      assert.deepStrictEqual(revertChange(withSignup(160_000), withSignup(100_000), "offers.signup")?.offers, [
+        signup(100_000)
+      ])
+    })
+  )
 })
 
 describe("CDR evidence for held changes", () => {
-  const jump = required(holdCandidates(base, { ...base, fees: { annual: 450, foreign_txn_pct: 3 } })[0])
+  const jump = Effect.map(holdCandidates(base, { ...base, fees: { annual: 450, foreign_txn_pct: 3 } }), (candidates) =>
+    required(candidates[0])
+  )
+
   const yesterday = { date: "2026-11-01", card: base }
 
-  test("a change the previous CDR snapshot does not make waits a day to confirm", () => {
-    const decided = withCdrEvidence(jump, yesterday)
+  it.effect("a change the previous CDR snapshot does not make waits a day to confirm", () =>
+    Effect.gen(function* () {
+      const decided = yield* withCdrEvidence(yield* jump, yesterday)
 
-    assert.strictEqual(decided.kind, "confirm")
-    assert.strictEqual(decided.evidence, "CDR snapshot 2026-11-01 gives 100; today's gives 450")
-  })
+      assert.strictEqual(decided.kind, "confirm")
+      assert.strictEqual(decided.evidence, "CDR snapshot 2026-11-01 gives 100; today's gives 450")
+    })
+  )
 
-  test("a change the previous CDR snapshot already makes stays for a reviewer", () => {
-    const sameAsToday = { date: "2026-11-01", card: { ...base, fees: { annual: 450, foreign_txn_pct: 3 } } }
+  it.effect("a change the previous CDR snapshot already makes stays for a reviewer", () =>
+    Effect.gen(function* () {
+      const sameAsToday = { date: "2026-11-01", card: { ...base, fees: { annual: 450, foreign_txn_pct: 3 } } }
 
-    assert.strictEqual(withCdrEvidence(jump, sameAsToday).kind, "approve")
-    assert.strictEqual(withCdrEvidence(jump, undefined).kind, "approve")
-  })
+      assert.strictEqual((yield* withCdrEvidence(yield* jump, sameAsToday)).kind, "approve")
+      assert.strictEqual((yield* withCdrEvidence(yield* jump, undefined)).kind, "approve")
+    })
+  )
 
-  test("a disappearing field or an implausible value stays for a reviewer", () => {
-    const gone = required(holdCandidates(base, { ...base, fees: { foreign_txn_pct: 3 } })[0])
+  it.effect("a disappearing field or an implausible value stays for a reviewer", () =>
+    Effect.gen(function* () {
+      const gone = required((yield* holdCandidates(base, { ...base, fees: { foreign_txn_pct: 3 } }))[0])
 
-    const earn = required(
-      holdCandidates(base, { ...base, rewards: { ...base.rewards, program: "qantas", earn: [{ rate: 12 }] } })[0]
-    )
+      const earn = required(
+        (yield* holdCandidates(base, {
+          ...base,
+          rewards: { ...base.rewards, program: "qantas", earn: [{ rate: 12 }] }
+        }))[0]
+      )
 
-    assert.strictEqual(withCdrEvidence(gone, yesterday).kind, "approve")
-    assert.strictEqual(withCdrEvidence(earn, yesterday).kind, "approve")
-  })
+      assert.strictEqual((yield* withCdrEvidence(gone, yesterday)).kind, "approve")
+      assert.strictEqual((yield* withCdrEvidence(earn, yesterday)).kind, "approve")
+    })
+  )
 })
