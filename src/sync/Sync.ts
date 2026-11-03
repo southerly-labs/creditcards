@@ -96,7 +96,7 @@ const proposeCard = Effect.fn("proposeCard")(function* (
   const mergedRewards = merged["rewards"]
   const hasRewards = mergedRewards !== undefined && Schema.is(Card.fields.rewards)(mergedRewards)
   const loyalty = EffectArray.filter(product.features ?? [], (f) => f.featureType === "LOYALTY_PROGRAM")
-  const earnPlan = hasRewards ? planRewards(mergedRewards, loyalty) : RewardsPlan.Unchanged()
+  const earnPlan = hasRewards ? yield* planRewards(mergedRewards, loyalty) : RewardsPlan.Unchanged()
 
   if (hasRewards && RewardsPlan.$is("Set")(earnPlan)) {
     merged["rewards"] = {
@@ -114,7 +114,7 @@ const proposeCard = Effect.fn("proposeCard")(function* (
   const currentSignup = signupState(existing)
 
   const bonusPlan: BonusPlan =
-    merged["rewards"] === undefined ? BonusPlan.Unchanged() : planBonus(currentSignup, bonusFeatures(product))
+    merged["rewards"] === undefined ? BonusPlan.Unchanged() : yield* planBonus(currentSignup, bonusFeatures(product))
 
   const decoded = yield* decodeCard(merged).pipe(Effect.result)
 
@@ -370,7 +370,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       if (existing !== undefined) evaluated.add(key)
 
       if (existing !== undefined && candidates.length > 0) {
-        const resolution = resolveHolds({
+        const resolution = yield* resolveHolds({
           card: key,
           candidates,
           entries: EffectArray.filter(priorHolds, (hold) => hold.card === key),
@@ -381,7 +381,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         holds.push(...resolution.holds)
 
         for (const { change, proposed: value } of resolution.apply)
-          released.push({ id: holdId(key, change, value), card: key, change })
+          released.push({ id: yield* holdId(key, change, value), card: key, change })
 
         const reverted = EffectArray.reduce<(typeof resolution.revert)[number], Card | undefined>(
           resolution.revert,

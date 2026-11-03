@@ -8,6 +8,7 @@ import { Snapshots } from "../src/history/Snapshots.ts"
 import { Store } from "../src/store/Store.ts"
 import { syncCdr } from "../src/sync/Sync.ts"
 import { required } from "../src/util/required.ts"
+import { Digest } from "effect/crypto"
 
 const BASE_URI = "https://cdr.bank.example"
 const CARDLESS_URI = "https://cdr.cardless.example"
@@ -97,7 +98,7 @@ const TempDirs = Layer.unwrap(
   })
 )
 
-const Env = Layer.mergeAll(TempDirs, FakeCdr).pipe(
+const Env = Layer.mergeAll(TempDirs, FakeCdr, Digest.layerWebCrypto).pipe(
   Layer.provideMerge(Layer.effect(World, Ref.make(seeded))),
   Layer.provideMerge(BunServices.layer)
 )

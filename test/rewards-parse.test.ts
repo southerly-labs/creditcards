@@ -1,4 +1,6 @@
-import { describe, expect, test } from "@effect/vitest"
+import { assert, describe, expect, layer, test } from "@effect/vitest"
+import { Effect } from "effect"
+import { Digest } from "effect/crypto"
 import { loyaltyTextHash, ParseResult, parseEarn } from "../src/rewards/parse.ts"
 import { planRewards, RewardsPlan } from "../src/rewards/plan.ts"
 
@@ -115,47 +117,69 @@ describe("leaves anything complex for review", () => {
   })
 })
 
-test("text hash is stable and whitespace-insensitive", () => {
-  expect(loyaltyTextHash([feature("Qantas", "Earn  1 point\n per $1")])).toBe(
-    loyaltyTextHash([feature("Qantas", "Earn 1 point per $1")])
-  )
-  expect(loyaltyTextHash([feature("Qantas", "Earn 1 point per $1")])).not.toBe(
-    loyaltyTextHash([feature("Qantas", "Earn 2 points per $1")])
-  )
-})
-
-describe("planRewards", () => {
-  const simple = [feature("Bendigo Bank Rewards", "Earn 1.5 Bendigo Bank Rewards points for every dollar spent")]
-
-  const complex = [
-    feature("Membership Rewards", "2 points per $1 spent on all purchases, excluding government bodies.")
-  ]
-
-  const hash = loyaltyTextHash(simple)
-
-  test("parser sets earn for new cards and leaves unchanged ones alone", () => {
-    expect(planRewards({ program: "x" }, simple)).toEqual(RewardsPlan.Set({ earn: [{ rate: 1.5 }], hash }))
-    expect(
-      planRewards(
-        {
-          program: "x",
-          earn: [{ rate: 1.5 }],
-          earn_source: "parser",
-          earn_review: { state: "present" },
-          earn_text_hash: hash
-        },
-        simple
+layer(Digest.layerWebCrypto)((it) => {
+  it.effect("text hash is stable and whitespace-insensitive", () =>
+    Effect.gen(function* () {
+      assert.strictEqual(
+        yield* loyaltyTextHash([feature("Qantas", "Earn  1 point\n per $1")]),
+        yield* loyaltyTextHash([feature("Qantas", "Earn 1 point per $1")])
       )
-    ).toEqual(RewardsPlan.Unchanged())
-  })
+      assert.notStrictEqual(
+        yield* loyaltyTextHash([feature("Qantas", "Earn 1 point per $1")]),
+        yield* loyaltyTextHash([feature("Qantas", "Earn 2 points per $1")])
+      )
+    })
+  )
 
-  test("complex text goes to review", () => {
-    expect(planRewards({ program: "x" }, complex)._tag).toBe("Review")
-  })
+  describe("planRewards", () => {
+    const simple = [feature("Bendigo Bank Rewards", "Earn 1.5 Bendigo Bank Rewards points for every dollar spent")]
 
-  test("manual earn is never replaced, only re-reviewed when the text changes", () => {
-    const manual = { program: "x", earn: [{ rate: 9 }], earn_source: "manual" as const, earn_text_hash: hash }
-    expect(planRewards(manual, simple)).toEqual(RewardsPlan.Unchanged())
-    expect(planRewards(manual, complex)._tag).toBe("Review")
+    const complex = [
+      feature("Membership Rewards", "2 points per $1 spent on all purchases, excluding government bodies.")
+    ]
+
+    it.effect("parser sets earn for new cards and leaves unchanged ones alone", () =>
+      Effect.gen(function* () {
+        const hash = yield* loyaltyTextHash(simple)
+
+        assert.deepStrictEqual(
+          yield* planRewards({ program: "x" }, simple),
+          RewardsPlan.Set({ earn: [{ rate: 1.5 }], hash })
+        )
+        assert.deepStrictEqual(
+          yield* planRewards(
+            {
+              program: "x",
+              earn: [{ rate: 1.5 }],
+              earn_source: "parser",
+              earn_review: { state: "present" },
+              earn_text_hash: hash
+            },
+            simple
+          ),
+          RewardsPlan.Unchanged()
+        )
+      })
+    )
+
+    it.effect("complex text goes to review", () =>
+      Effect.gen(function* () {
+        assert.strictEqual((yield* planRewards({ program: "x" }, complex))._tag, "Review")
+      })
+    )
+
+    it.effect("manual earn is never replaced, only re-reviewed when the text changes", () =>
+      Effect.gen(function* () {
+        const manual = {
+          program: "x",
+          earn: [{ rate: 9 }],
+          earn_source: "manual" as const,
+          earn_text_hash: yield* loyaltyTextHash(simple)
+        }
+
+        assert.deepStrictEqual(yield* planRewards(manual, simple), RewardsPlan.Unchanged())
+        assert.strictEqual((yield* planRewards(manual, complex))._tag, "Review")
+      })
+    )
   })
 })

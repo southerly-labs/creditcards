@@ -1,6 +1,6 @@
 import { Data, String as EffectString, Array as EffectArray, pipe, Option } from "effect"
 import { required } from "../util/required.ts"
-import { createHash } from "node:crypto"
+import { sha256Prefix } from "../util/hash.ts"
 import type { EarnRate } from "../model/schema.ts"
 
 export interface LoyaltyFeature {
@@ -24,8 +24,7 @@ export const loyaltyText = (features: ReadonlyArray<LoyaltyFeature>): string =>
     "\n"
   )
 
-export const loyaltyTextHash = (features: ReadonlyArray<LoyaltyFeature>): string =>
-  pipe(createHash("sha256").update(loyaltyText(features)).digest("hex"), EffectString.slice(0, 16))
+export const loyaltyTextHash = (features: ReadonlyArray<LoyaltyFeature>) => sha256Prefix(loyaltyText(features), 16)
 
 const review = (reason: string): ParseResult => ParseResult.Review({ reason })
 

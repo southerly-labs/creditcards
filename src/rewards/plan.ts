@@ -1,5 +1,5 @@
 import { encodeJson } from "../util/json.ts"
-import { Data } from "effect"
+import { Data, Effect } from "effect"
 import type { BonusTranche, Card, EarnRate } from "../model/schema.ts"
 import type { SignupReview } from "../offers/schema.ts"
 import { BonusResult, bonusTextHash, parseBonus } from "./bonus.ts"
@@ -15,11 +15,11 @@ export const RewardsPlan = Data.taggedEnum<RewardsPlan>()
 const equal = (a: unknown, b: unknown) =>
   a === undefined || b === undefined ? a === b : encodeJson(a) === encodeJson(b)
 
-export const planRewards = (
+export const planRewards = Effect.fn("planRewards")(function* (
   current: Card["rewards"] | undefined,
   features: ReadonlyArray<LoyaltyFeature>
-): RewardsPlan => {
-  const hash = loyaltyTextHash(features)
+) {
+  const hash = yield* loyaltyTextHash(features)
 
   if (current?.earn_source === "manual") {
     return current.earn_text_hash === hash
@@ -47,7 +47,7 @@ export const planRewards = (
   }
 
   return RewardsPlan.Review({ reason: parsed.reason, hash })
-}
+})
 
 export type BonusPlan =
   | { readonly _tag: "Unchanged" }
@@ -75,8 +75,11 @@ export const applyBonusPlan = (current: SignupState, plan: BonusPlan): SignupSta
     Review: ({ clear }) => (clear ? cleared : current)
   })
 
-export const planBonus = (current: SignupState, features: ReadonlyArray<LoyaltyFeature>): BonusPlan => {
-  const hash = bonusTextHash(features)
+export const planBonus = Effect.fn("planBonus")(function* (
+  current: SignupState,
+  features: ReadonlyArray<LoyaltyFeature>
+) {
+  const hash = yield* bonusTextHash(features)
   const review = current.review
 
   if (review?.source === "manual") {
@@ -96,4 +99,4 @@ export const planBonus = (current: SignupState, features: ReadonlyArray<LoyaltyF
     hasParsed && review.state === "present" && review.text_hash === hash && equal(current.parsed, parsed.bonus)
 
   return same ? BonusPlan.Unchanged() : BonusPlan.Set({ bonus: parsed.bonus, hash })
-}
+})

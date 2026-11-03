@@ -1,5 +1,5 @@
 import { Data, Array as EffectArray, String as EffectString, pipe, Option, Order } from "effect"
-import { createHash } from "node:crypto"
+import { sha256Prefix } from "../util/hash.ts"
 import { parseNumber } from "../cdr/normalise.ts"
 import type { BonusTranche } from "../model/schema.ts"
 import { required } from "../util/required.ts"
@@ -21,8 +21,7 @@ export const bonusText = (features: ReadonlyArray<LoyaltyFeature>): string =>
     "\n"
   )
 
-export const bonusTextHash = (features: ReadonlyArray<LoyaltyFeature>): string =>
-  pipe(createHash("sha256").update(bonusText(features)).digest("hex"), EffectString.slice(0, 16))
+export const bonusTextHash = (features: ReadonlyArray<LoyaltyFeature>) => sha256Prefix(bonusText(features), 16)
 
 const review = (reason: string): BonusResult => BonusResult.Review({ reason })
 

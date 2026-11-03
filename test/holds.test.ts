@@ -1,5 +1,6 @@
-import { assert, describe, test } from "@effect/vitest"
-import { Schema, Array as EffectArray } from "effect"
+import { assert, describe, layer, test } from "@effect/vitest"
+import { Effect, Schema, Array as EffectArray } from "effect"
+import { Digest } from "effect/crypto"
 import { Card } from "../src/model/schema.ts"
 import type { Hold } from "../src/model/holds.ts"
 import {
@@ -77,48 +78,70 @@ describe("resolving holds", () => {
   const resolve = (candidate: HoldCandidate, entries: ReadonlyArray<Hold>, date: string) =>
     resolveHolds({ card: "bank/card", candidates: [candidate], entries, date })
 
-  const recorded = required(resolve(approve, [], "2026-11-02").holds[0])
+  const recorded = resolve(approve, [], "2026-11-02").pipe(Effect.map((result) => required(result.holds[0])))
 
-  test("a new suspicious change is reverted and recorded", () => {
-    assert.deepStrictEqual(resolve(approve, [], "2026-11-02").revert, [approve])
-    assert.deepStrictEqual(recorded, {
-      id: holdId("bank/card", "fees.annual", 1000),
-      card: "bank/card",
-      change: "fees.annual",
-      kind: "approve",
-      reason: "fees.annual 100 → 1000",
-      current: "100",
-      proposed: "1000",
-      since: "2026-11-02"
-    })
-  })
+  layer(Digest.layerWebCrypto)((it) => {
+    it.effect("a new suspicious change is reverted and recorded", () =>
+      Effect.gen(function* () {
+        assert.deepStrictEqual((yield* resolve(approve, [], "2026-11-02")).revert, [approve])
+        assert.deepStrictEqual(yield* recorded, {
+          id: yield* holdId("bank/card", "fees.annual", 1000),
+          card: "bank/card",
+          change: "fees.annual",
+          kind: "approve",
+          reason: "fees.annual 100 → 1000",
+          current: "100",
+          proposed: "1000",
+          since: "2026-11-02"
+        })
+      })
+    )
 
-  test("an approved change is applied and its entry dropped", () => {
-    const approved: Hold = { ...recorded, decision: "approve", decided_on: "2026-11-02", evidence: "CDR says $1,000" }
-    const result = resolve(approve, [approved], "2026-11-03")
+    it.effect("an approved change is applied and its entry dropped", () =>
+      Effect.gen(function* () {
+        const approved: Hold = {
+          ...(yield* recorded),
+          decision: "approve",
+          decided_on: "2026-11-02",
+          evidence: "CDR says $1,000"
+        }
 
-    assert.deepStrictEqual(result.apply, [approve])
-    assert.deepStrictEqual(result.holds, [])
-  })
+        const result = yield* resolve(approve, [approved], "2026-11-03")
 
-  test("a rejected change stays reverted until CDR proposes something else", () => {
-    const rejected: Hold = { ...recorded, decision: "reject", decided_on: "2026-11-02", evidence: "parser misread" }
-    const other = { ...approve, proposed: 900 }
-    const next = resolve(other, [rejected], "2026-11-03")
+        assert.deepStrictEqual(result.apply, [approve])
+        assert.deepStrictEqual(result.holds, [])
+      })
+    )
 
-    assert.deepStrictEqual(resolve(approve, [rejected], "2026-11-03").holds, [rejected])
-    assert.deepStrictEqual(next.revert, [other])
-    assert.isUndefined(next.holds[0]?.decision)
-  })
+    it.effect("a rejected change stays reverted until CDR proposes something else", () =>
+      Effect.gen(function* () {
+        const rejected: Hold = {
+          ...(yield* recorded),
+          decision: "reject",
+          decided_on: "2026-11-02",
+          evidence: "parser misread"
+        }
 
-  test("a confirm hold applies once it is still proposed on a later day", () => {
-    const first = resolve(confirm, [], "2026-11-02")
-    const nextDay = resolve(confirm, first.holds, "2026-11-03")
+        const other = { ...approve, proposed: 900 }
+        const next = yield* resolve(other, [rejected], "2026-11-03")
 
-    assert.deepStrictEqual(first.revert, [confirm])
-    assert.deepStrictEqual(resolve(confirm, first.holds, "2026-11-02").revert, [confirm])
-    assert.deepStrictEqual(nextDay.apply, [confirm])
-    assert.deepStrictEqual(nextDay.holds, [])
+        assert.deepStrictEqual((yield* resolve(approve, [rejected], "2026-11-03")).holds, [rejected])
+        assert.deepStrictEqual(next.revert, [other])
+        assert.isUndefined(next.holds[0]?.decision)
+      })
+    )
+
+    it.effect("a confirm hold applies once it is still proposed on a later day", () =>
+      Effect.gen(function* () {
+        const first = yield* resolve(confirm, [], "2026-11-02")
+        const nextDay = yield* resolve(confirm, first.holds, "2026-11-03")
+
+        assert.deepStrictEqual(first.revert, [confirm])
+        assert.deepStrictEqual((yield* resolve(confirm, first.holds, "2026-11-02")).revert, [confirm])
+        assert.deepStrictEqual(nextDay.apply, [confirm])
+        assert.deepStrictEqual(nextDay.holds, [])
+      })
+    )
   })
 })
 

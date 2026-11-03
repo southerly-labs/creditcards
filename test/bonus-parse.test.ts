@@ -1,4 +1,6 @@
-import { describe, expect, test } from "@effect/vitest"
+import { assert, describe, expect, layer, test } from "@effect/vitest"
+import { Effect } from "effect"
+import { Digest } from "effect/crypto"
 import { BonusResult, bonusTextHash, isResolvableFromCdr, parseBonus } from "../src/rewards/bonus.ts"
 import { applyBonusPlan, BonusPlan, planBonus } from "../src/rewards/plan.ts"
 
@@ -191,54 +193,78 @@ describe("sends unclear offers to review", () => {
   })
 })
 
-test("the text hash changes with the offer", () => {
-  expect(bonusTextHash([feature("80000", "80,000 points")])).not.toBe(
-    bonusTextHash([feature("90000", "90,000 points")])
-  )
-})
-
-describe("plans bonus updates", () => {
-  const split = [feature("80000", "80,000 points when you spend $3,000 within 90 days of account opening.")]
-  const unclear = [feature("40000", "Earn up to 40,000 points when you keep your card open for over 15 months.")]
-  const parsed = [{ points: 80000, year: 1 as const, min_spend: 3000, spend_days: 90 }]
-  const empty = { review: undefined, parsed: undefined }
-  const fromParser = { review: { state: "present" as const, source: "parser" as const, text_hash: "old" }, parsed }
-
-  test("sets parsed tranches", () => {
-    const plan = planBonus(empty, split)
-    expect(plan).toEqual(BonusPlan.Set({ bonus: parsed, hash: bonusTextHash(split) }))
-    expect(applyBonusPlan(empty, plan)).toEqual({
-      review: { state: "present", source: "parser", text_hash: bonusTextHash(split) },
-      parsed
+layer(Digest.layerWebCrypto)((it) => {
+  it.effect("the text hash changes with the offer", () =>
+    Effect.gen(function* () {
+      assert.notStrictEqual(
+        yield* bonusTextHash([feature("80000", "80,000 points")]),
+        yield* bonusTextHash([feature("90000", "90,000 points")])
+      )
     })
-  })
+  )
 
-  test("leaves parsed tranches alone when the text is unchanged", () => {
-    const current = { ...fromParser, review: { ...fromParser.review, text_hash: bonusTextHash(split) } }
-    expect(planBonus(current, split)).toEqual(BonusPlan.Unchanged())
-  })
+  describe("plans bonus updates", () => {
+    const split = [feature("80000", "80,000 points when you spend $3,000 within 90 days of account opening.")]
+    const unclear = [feature("40000", "Earn up to 40,000 points when you keep your card open for over 15 months.")]
+    const parsed = [{ points: 80000, year: 1 as const, min_spend: 3000, spend_days: 90 }]
+    const empty = { review: undefined, parsed: undefined }
+    const fromParser = { review: { state: "present" as const, source: "parser" as const, text_hash: "old" }, parsed }
 
-  test("clears a stale parsed bonus the parser can no longer read", () => {
-    const plan = planBonus(fromParser, unclear)
-    expect(plan).toEqual(BonusPlan.Review({ reason: "only an 'up to' total, no tranches", clear: true }))
-    expect(applyBonusPlan(fromParser, plan)).toEqual({ review: { state: "unknown" }, parsed: undefined })
-  })
+    it.effect("sets parsed tranches", () =>
+      Effect.gen(function* () {
+        const plan = yield* planBonus(empty, split)
+        const hash = yield* bonusTextHash(split)
 
-  test("keeps a manual bonus but asks for review when the text changes", () => {
-    const current = {
-      review: { state: "present" as const, source: "manual" as const, text_hash: "old" },
-      parsed: undefined
-    }
-
-    expect(planBonus(current, unclear)).toEqual(
-      BonusPlan.Review({ reason: "bonus text changed since manual review", clear: false })
+        assert.deepStrictEqual(plan, BonusPlan.Set({ bonus: parsed, hash }))
+        assert.deepStrictEqual(applyBonusPlan(empty, plan), {
+          review: { state: "present", source: "parser", text_hash: hash },
+          parsed
+        })
+      })
     )
-    expect(
-      planBonus({ ...current, review: { ...current.review, text_hash: bonusTextHash(unclear) } }, unclear)
-    ).toEqual(BonusPlan.Unchanged())
-  })
 
-  test("removes a parsed bonus when the offer ends", () => {
-    expect(planBonus(fromParser, [])).toEqual(BonusPlan.Clear())
+    it.effect("leaves parsed tranches alone when the text is unchanged", () =>
+      Effect.gen(function* () {
+        const current = { ...fromParser, review: { ...fromParser.review, text_hash: yield* bonusTextHash(split) } }
+
+        assert.deepStrictEqual(yield* planBonus(current, split), BonusPlan.Unchanged())
+      })
+    )
+
+    it.effect("clears a stale parsed bonus the parser can no longer read", () =>
+      Effect.gen(function* () {
+        const plan = yield* planBonus(fromParser, unclear)
+
+        assert.deepStrictEqual(plan, BonusPlan.Review({ reason: "only an 'up to' total, no tranches", clear: true }))
+        assert.deepStrictEqual(applyBonusPlan(fromParser, plan), { review: { state: "unknown" }, parsed: undefined })
+      })
+    )
+
+    it.effect("keeps a manual bonus but asks for review when the text changes", () =>
+      Effect.gen(function* () {
+        const current = {
+          review: { state: "present" as const, source: "manual" as const, text_hash: "old" },
+          parsed: undefined
+        }
+
+        assert.deepStrictEqual(
+          yield* planBonus(current, unclear),
+          BonusPlan.Review({ reason: "bonus text changed since manual review", clear: false })
+        )
+        assert.deepStrictEqual(
+          yield* planBonus(
+            { ...current, review: { ...current.review, text_hash: yield* bonusTextHash(unclear) } },
+            unclear
+          ),
+          BonusPlan.Unchanged()
+        )
+      })
+    )
+
+    it.effect("removes a parsed bonus when the offer ends", () =>
+      Effect.gen(function* () {
+        assert.deepStrictEqual(yield* planBonus(fromParser, []), BonusPlan.Clear())
+      })
+    )
   })
 })

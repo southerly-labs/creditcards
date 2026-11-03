@@ -23,6 +23,7 @@ import { ParsedComment } from "./review/commands.ts"
 import { Snapshots } from "./history/Snapshots.ts"
 import { splitCardKey, Store } from "./store/Store.ts"
 import { summariseHolds, summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
+import { Digest } from "effect/crypto"
 
 const DATA_DIR = "data"
 const HISTORY_DIR = "history"
@@ -222,7 +223,8 @@ const MainLayer = Layer.mergeAll(
   CdrClient.layer,
   Store.layer(DATA_DIR),
   Snapshots.layer(HISTORY_DIR),
-  FetchHttpClient.layer
+  FetchHttpClient.layer,
+  Digest.layerWebCrypto
 ).pipe(Layer.provideMerge(BunServices.layer))
 
 Command.make("creditcards").pipe(

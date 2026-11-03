@@ -59,8 +59,12 @@ const registerBaseUris = Effect.gen(function* () {
   return new Map(EffectArray.map(brands, (b) => [b.brandName, b.publicBaseUri]))
 })
 
-const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFeature>): ReviewItem | undefined => {
-  const plan = planRewards(card.rewards, features)
+const toReviewItem = Effect.fn("toReviewItem")(function* (
+  key: string,
+  card: Card,
+  features: ReadonlyArray<LoyaltyFeature>
+) {
+  const plan = yield* planRewards(card.rewards, features)
 
   if (!RewardsPlan.$is("Review")(plan)) return undefined
 
@@ -72,8 +76,8 @@ const toReviewItem = (key: string, card: Card, features: ReadonlyArray<LoyaltyFe
     hash: plan.hash,
     text: loyaltyText(features),
     earn: card.rewards?.earn
-  }
-}
+  } satisfies ReviewItem
+})
 
 const reviewCandidates = (cards: ReadonlyMap<string, Card>, issuer: string | undefined) =>
   EffectArray.filter(
@@ -85,6 +89,14 @@ const reviewCandidates = (cards: ReadonlyMap<string, Card>, issuer: string | und
       (issuer === undefined || issuer === "" || splitCardKey(key).issuer === issuer)
   )
 
+const reviewItemFor = Effect.fn("reviewItemFor")(function* (
+  key: string,
+  card: Card,
+  baseUris: ReadonlyMap<string, string>
+) {
+  return yield* toReviewItem(key, card, yield* loyaltyFeatures(card, baseUris))
+})
+
 export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | undefined) {
   const dataset = yield* (yield* Store).load
   const baseUris = yield* registerBaseUris
@@ -92,11 +104,7 @@ export const reviewQueue = Effect.fn("reviewQueue")(function* (issuer: string | 
 
   const items = yield* Effect.forEach(
     candidates,
-    ([key, card]) =>
-      loyaltyFeatures(card, baseUris).pipe(
-        Effect.map((features) => toReviewItem(key, card, features)),
-        Effect.catch((e) => warnReviewFailure(key, e))
-      ),
+    ([key, card]) => reviewItemFor(key, card, baseUris).pipe(Effect.catch((e) => warnReviewFailure(key, e))),
     { concurrency: 8 }
   )
 
@@ -145,7 +153,7 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
 
     if (earn === undefined)
       return yield* RewardsError.make({ message: `${key} has no rewards.earn; set it first or pass --none` })
-    const hash = loyaltyTextHash(yield* loyaltyFeatures(card, baseUris))
+    const hash = yield* loyaltyTextHash(yield* loyaltyFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
     yield* store.writeCard(issuer, slug, {
       ...card,
@@ -176,12 +184,12 @@ export interface BonusReviewItem {
   readonly bonusPoints: number | undefined
 }
 
-const toBonusReviewItem = (
+const toBonusReviewItem = Effect.fn("toBonusReviewItem")(function* (
   key: string,
   card: Card,
   features: ReadonlyArray<LoyaltyFeature>
-): BonusReviewItem | undefined => {
-  const plan = planBonus(signupState(card), features)
+) {
+  const plan = yield* planBonus(signupState(card), features)
 
   if (!BonusPlan.$is("Review")(plan) || !isResolvableFromCdr(plan.reason)) return undefined
 
@@ -193,8 +201,16 @@ const toBonusReviewItem = (
     text: bonusText(features),
     signup: Option.getOrUndefined(EffectArray.findFirst(card.offers ?? [], (offer) => offer.id === "signup")),
     bonusPoints: rawBonusPoints(features)
-  }
-}
+  } satisfies BonusReviewItem
+})
+
+const bonusReviewItemFor = Effect.fn("bonusReviewItemFor")(function* (
+  key: string,
+  card: Card,
+  baseUris: ReadonlyMap<string, string>
+) {
+  return yield* toBonusReviewItem(key, card, yield* bonusFeatures(card, baseUris))
+})
 
 export const bonusReviewQueue = Effect.fn("bonusReviewQueue")(function* (issuer: string | undefined) {
   const dataset = yield* (yield* Store).load
@@ -202,11 +218,7 @@ export const bonusReviewQueue = Effect.fn("bonusReviewQueue")(function* (issuer:
 
   const items = yield* Effect.forEach(
     reviewCandidates(dataset.cards, issuer),
-    ([key, card]) =>
-      bonusFeatures(card, baseUris).pipe(
-        Effect.map((features) => toBonusReviewItem(key, card, features)),
-        Effect.catch((e) => warnReviewFailure(key, e))
-      ),
+    ([key, card]) => bonusReviewItemFor(key, card, baseUris).pipe(Effect.catch((e) => warnReviewFailure(key, e))),
     { concurrency: 8 }
   )
 
@@ -262,7 +274,7 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
     }
 
     const offers = none || signup === undefined ? others : [...others, { ...signup, source: "manual" as const }]
-    const hash = bonusTextHash(yield* bonusFeatures(card, baseUris))
+    const hash = yield* bonusTextHash(yield* bonusFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
     const { offers: _offers, ...rest } = card
 

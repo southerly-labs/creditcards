@@ -1,5 +1,5 @@
-import { createHash } from "node:crypto"
-import { Schema, String as EffectString, Array as EffectArray, pipe, Option } from "effect"
+import { sha256Prefix } from "../util/hash.ts"
+import { Schema, String as EffectString, Array as EffectArray, pipe, Option, Effect } from "effect"
 import type { Hold } from "../model/holds.ts"
 import { Card, EarnRate } from "../model/schema.ts"
 import { Offer } from "../offers/schema.ts"
@@ -163,13 +163,8 @@ export const revertChange = (card: Card, existing: Card, change: string): Card |
   return isCard(reverted) ? reverted : undefined
 }
 
-export const holdId = (card: string, change: string, proposed: unknown): string =>
-  pipe(
-    createHash("sha256")
-      .update(encodeJson([card, change, proposed ?? null]))
-      .digest("hex"),
-    EffectString.slice(0, 12)
-  )
+export const holdId = (card: string, change: string, proposed: unknown) =>
+  sha256Prefix(encodeJson([card, change, proposed ?? null]), 12)
 
 export interface Resolution {
   readonly apply: ReadonlyArray<HoldCandidate>
@@ -179,19 +174,19 @@ export interface Resolution {
 
 const asJson = (value: unknown) => (value === undefined ? undefined : encodeJson(value))
 
-export const resolveHolds = (input: {
+export const resolveHolds = Effect.fn("resolveHolds")(function* (input: {
   readonly card: string
   readonly candidates: ReadonlyArray<HoldCandidate>
   readonly entries: ReadonlyArray<Hold>
   readonly date: string
   readonly history?: string | undefined
-}): Resolution => {
+}) {
   const apply: Array<HoldCandidate> = []
   const revert: Array<HoldCandidate> = []
   const holds: Array<Hold> = []
 
   for (const candidate of input.candidates) {
-    const id = holdId(input.card, candidate.change, candidate.proposed)
+    const id = yield* holdId(input.card, candidate.change, candidate.proposed)
     const entry = Option.getOrUndefined(EffectArray.findFirst(input.entries, (hold) => hold.id === id))
     const confirmed = candidate.kind === "confirm" && entry !== undefined && entry.since < input.date
 
@@ -220,5 +215,5 @@ export const resolveHolds = (input: {
     )
   }
 
-  return { apply, revert, holds }
-}
+  return { apply, revert, holds } satisfies Resolution
+})
