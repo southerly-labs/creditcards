@@ -1,16 +1,20 @@
 import type { Api } from "../src/api/contract.ts"
 import { required } from "../src/util/required.ts"
 import {
-  decodeApi,
   decodeMonthlySpend,
+  fetchApi,
   loadColumnVisibility,
   loadMonthlySpend,
-  loadPointValues
+  loadPointValues,
+  todayInSydney
 } from "../src/model/api.ts"
+import { encodeJson } from "../src/util/json.ts"
+import { FetchHttpClient } from "effect/http"
 import { annualPoints, meetsSpendTarget } from "../src/model/benefit.ts"
 import type { Card, Program } from "../src/model/schema.ts"
 import { offerStatus } from "../src/offers/project.ts"
 import type { OfferComponent } from "../src/offers/schema.ts"
+import { Effect, Record as EffectRecord, String as EffectString, Array as EffectArray, pipe } from "effect"
 
 interface Row {
   readonly id: string
@@ -32,7 +36,14 @@ interface Column {
 }
 
 const esc = (s: string) =>
-  s.replaceAll(/[&<>"']/gu, (c) => required({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]))
+  pipe(
+    s,
+    EffectString.replaceAll("&", "&amp;"),
+    EffectString.replaceAll("<", "&lt;"),
+    EffectString.replaceAll(">", "&gt;"),
+    EffectString.replaceAll('"', "&quot;"),
+    EffectString.replaceAll("'", "&#39;")
+  )
 
 const dash = '<span class="dim">—</span>'
 
@@ -44,9 +55,13 @@ const money = (n: number | undefined) =>
       : `$${n.toLocaleString("en-AU", { maximumFractionDigits: 2 })}`
 
 const pct = (n: number | undefined) =>
-  n === undefined ? dash : n === 0 ? '<span class="zero">0%</span>' : `${n.toFixed(2).replace(/\.?0+$/u, "")}%`
+  n === undefined
+    ? dash
+    : n === 0
+      ? '<span class="zero">0%</span>'
+      : `${pipe(n.toFixed(2), EffectString.replace(/\.?0+$/u, ""))}%`
 
-const plain = (html: string) => html.replaceAll(/<[^>]+>/gu, "")
+const plain = (html: string) => pipe(html, EffectString.replaceAll(/<[^>]+>/gu, ""))
 
 const int = (n: number | undefined) => (n === undefined ? dash : n.toLocaleString("en-AU"))
 
@@ -55,10 +70,10 @@ const introTargets = { purchase: "purchases", balance_transfer: "BT", both: "BT 
   string
 >
 
-const today = new Date().toLocaleDateString("en-CA", { timeZone: "Australia/Sydney" })
+const today = todayInSydney()
 
 const currentOffers = (r: Row) =>
-  (r.card.offers ?? []).filter((o) => ["within_window", "undated"].includes(offerStatus(o, today)))
+  EffectArray.filter(r.card.offers ?? [], (o) => ["within_window", "undated"].includes(offerStatus(o, today)))
 
 type IntroRate = Extract<OfferComponent, { readonly kind: "intro_rate" }>
 
@@ -72,7 +87,8 @@ const isTranche = (c: OfferComponent): c is Tranche => c.kind === "signup_points
 
 const isFeeDiscount = (c: OfferComponent): c is FeeDiscount => c.kind === "fee_discount"
 
-const introRate = (r: Row) => currentOffers(r).flatMap((o) => o.components.filter(isIntroRate))[0]
+const introRate = (r: Row) =>
+  EffectArray.flatMap(currentOffers(r), (o) => EffectArray.filter(o.components, isIntroRate))[0]
 
 const intro = (r: Row) => {
   const offer = introRate(r)
@@ -90,7 +106,7 @@ const baseEarn = (r: Row) => r.card.rewards?.earn?.find((e) => e.category == nul
 const governmentRates = (r: Row) =>
   r.card.rewards?.earn?.filter((e) => /\bgovernment\b|\btaxation\b/iu.test(e.category ?? "")) ?? []
 
-const governmentEarn = (r: Row) => Math.max(0, ...governmentRates(r).map((e) => e.rate))
+const governmentEarn = (r: Row) => Math.max(0, ...EffectArray.map(governmentRates(r), (e) => e.rate))
 
 const describeEarn = (earn: Earn) => {
   let previousCap: number | undefined
@@ -110,7 +126,10 @@ const describeEarn = (earn: Earn) => {
     return `${e.rate} per $1${where}${e.note != null && e.note !== "" ? ` (${e.note})` : ""}`
   }
 
-  return earn.map((e) => describeTier(e)).join("\n")
+  return EffectArray.join(
+    EffectArray.map(earn, (e) => describeTier(e)),
+    "\n"
+  )
 }
 
 const OVERRIDES_KEY = "creditcards.pointValues"
@@ -120,7 +139,7 @@ const loadOverrides = () => loadPointValues(() => localStorage.getItem(OVERRIDES
 const overrides: Record<string, number> = loadOverrides()
 
 const saveOverrides = () => {
-  localStorage.setItem(OVERRIDES_KEY, JSON.stringify(overrides))
+  localStorage.setItem(OVERRIDES_KEY, encodeJson(overrides))
 }
 
 const centsPerPoint = (r: Row) => (r.program ? (overrides[r.program.id] ?? r.program.cents_per_point) : undefined)
@@ -132,9 +151,13 @@ const earnValue = (r: Row) => {
   return earn === undefined || cents === undefined ? undefined : Math.round(earn * cents * 1000) / 1000
 }
 
-const signup = (r: Row) => currentOffers(r).find((o) => o.components.some(isTranche))
+const signup = (r: Row) => currentOffers(r).find((o) => EffectArray.some(o.components, isTranche))
 
-const tranches = (r: Row): ReadonlyArray<Tranche> | undefined => signup(r)?.components.filter(isTranche)
+const tranches = (r: Row): ReadonlyArray<Tranche> | undefined => {
+  const offer = signup(r)
+
+  return offer === undefined ? undefined : EffectArray.filter(offer.components, isTranche)
+}
 
 const splitKnown = (r: Row) => {
   const offer = signup(r)
@@ -146,25 +169,37 @@ const bonusPoints = (r: Row, year?: Tranche["year"]) => {
   const bonus = tranches(r)
 
   if (!bonus) return undefined
-  const points = bonus.filter((t) => year === undefined || t.year === year).reduce((sum, t) => sum + t.points, 0)
+
+  const points = EffectArray.reduce(
+    EffectArray.filter(bonus, (t) => year === undefined || t.year === year),
+    0,
+    (sum, t) => sum + t.points
+  )
 
   return points === 0 ? undefined : points
 }
 
 const describeTranche = (t: Tranche) => {
-  const conditions = [
-    t.min_spend === undefined
-      ? ""
-      : `spend ${plain(money(t.min_spend))}${t.spend_days === undefined ? "" : ` in ${t.spend_days} days`}`,
-    t.keep_months === undefined ? "" : `keep the card ${t.keep_months} months`,
-    t.note ?? ""
-  ].filter(Boolean)
+  const conditions = EffectArray.filter(
+    [
+      t.min_spend === undefined
+        ? ""
+        : `spend ${plain(money(t.min_spend))}${t.spend_days === undefined ? "" : ` in ${t.spend_days} days`}`,
+      t.keep_months === undefined ? "" : `keep the card ${t.keep_months} months`,
+      t.note ?? ""
+    ],
+    Boolean
+  )
 
-  return `${t.year === undefined ? "" : `Year ${t.year}: `}${int(t.points)} points${conditions.length > 0 ? ` (${conditions.join(", ")})` : ""}`
+  return `${t.year === undefined ? "" : `Year ${t.year}: `}${int(t.points)} points${conditions.length > 0 ? ` (${EffectArray.join(conditions, ", ")})` : ""}`
 }
 
 const describeBonus = (r: Row) => {
-  if (splitKnown(r)) return (tranches(r) ?? []).map((t) => describeTranche(t)).join("\n")
+  if (splitKnown(r))
+    return EffectArray.join(
+      EffectArray.map(tranches(r) ?? [], (t) => describeTranche(t)),
+      "\n"
+    )
 
   return "The issuer's CDR data doesn't say how this bonus is split across years"
 }
@@ -197,11 +232,12 @@ type Benefit =
   | { readonly kind: "none" }
 
 const firstYearFee = (r: Row) =>
-  currentOffers(r)
-    .flatMap((o) => o.components.filter(isFeeDiscount))
-    .find((c) => c.fee === "annual" && (c.months ?? 12) >= 12)?.payable ?? r.card.fees.annual
+  EffectArray.flatMap(currentOffers(r), (o) => EffectArray.filter(o.components, isFeeDiscount)).find(
+    (c) => c.fee === "annual" && (c.months ?? 12) >= 12
+  )?.payable ?? r.card.fees.annual
 
-const firstYearTranches = (r: Row) => (splitKnown(r) ? (tranches(r) ?? []) : []).filter((t) => (t.year ?? 1) === 1)
+const firstYearTranches = (r: Row) =>
+  EffectArray.filter(splitKnown(r) ? (tranches(r) ?? []) : [], (t) => (t.year ?? 1) === 1)
 
 const benefit = (r: Row, firstYear: boolean): Benefit => {
   if (monthlySpend === undefined) return { kind: "none" }
@@ -223,20 +259,23 @@ const benefit = (r: Row, firstYear: boolean): Benefit => {
 
   const custom = overrides[r.program.id] !== undefined
   const offered = firstYear ? firstYearTranches(r) : []
-  const earned = offered.filter((t) => meetsSpendTarget(spend, t))
-  const missed = offered.filter((t) => !meetsSpendTarget(spend, t))
-  const bonus = earned.reduce((sum, t) => sum + t.points, 0)
+  const earned = EffectArray.filter(offered, (t) => meetsSpendTarget(spend, t))
+  const missed = EffectArray.filter(offered, (t) => !meetsSpendTarget(spend, t))
+  const bonus = EffectArray.reduce(earned, 0, (sum, t) => sum + t.points)
 
-  const title = [
-    `${int(points)} points a year on ${plain(money(spend))} a month`,
-    ...earned.map((t) => `+ ${describeTranche(t)}`),
-    ...missed.map((t) => `Not reached: ${describeTranche(t)}`),
-    `× ${cents}c per point${custom ? " (your value)" : ""}`,
-    feeText,
-    firstYear
-      ? "Base earn rate only; excludes category rates and year 2 bonuses"
-      : "Base earn rate only; excludes category rates and signup bonuses"
-  ].join("\n")
+  const title = EffectArray.join(
+    [
+      `${int(points)} points a year on ${plain(money(spend))} a month`,
+      ...EffectArray.map(earned, (t) => `+ ${describeTranche(t)}`),
+      ...EffectArray.map(missed, (t) => `Not reached: ${describeTranche(t)}`),
+      `× ${cents}c per point${custom ? " (your value)" : ""}`,
+      feeText,
+      firstYear
+        ? "Base earn rate only; excludes category rates and year 2 bonuses"
+        : "Base earn rate only; excludes category rates and signup bonuses"
+    ],
+    "\n"
+  )
 
   return { kind: "value", value: Math.round(((points + bonus) * cents) / 100 - fee), title }
 }
@@ -268,7 +307,7 @@ const columns: ReadonlyArray<Column> = [
     id: "card",
     label: "Card",
     fixed: true,
-    sortValue: (r) => r.card.name.toLowerCase(),
+    sortValue: (r) => EffectString.toLowerCase(r.card.name),
     render: (r) => {
       const img =
         r.card.image != null && r.card.image !== ""
@@ -439,7 +478,10 @@ const columns: ReadonlyArray<Column> = [
       const custom = r.program !== undefined && overrides[r.program.id] !== undefined
       const cents = `${centsPerPoint(r)}c per point${custom ? " (your value)" : ""}`
 
-      const title = [`${int(bonusPoints(r))} bonus points × ${cents}; before annual fees`, ...yearValues(r)].join("\n")
+      const title = EffectArray.join(
+        [`${int(bonusPoints(r))} bonus points × ${cents}; before annual fees`, ...yearValues(r)],
+        "\n"
+      )
 
       return `<span class="${custom ? "custom" : ""}" title="${esc(title)}">${money(value)}</span>`
     }
@@ -463,12 +505,15 @@ const columns: ReadonlyArray<Column> = [
     label: "Perks",
     sortValue: (r) => (r.card.perks.lounge_access === true ? 100 : 0) + (r.card.perks.insurance?.length ?? 0),
     render: (r) =>
-      [
-        r.card.perks.lounge_access === true ? '<span class="tag">Lounge</span>' : "",
-        r.card.perks.insurance !== undefined && r.card.perks.insurance.length > 0
-          ? `<span class="tag" title="${esc(r.card.perks.insurance.join("\n"))}">${r.card.perks.insurance.length} insurance</span>`
-          : ""
-      ].join(" ") || dash
+      EffectArray.join(
+        [
+          r.card.perks.lounge_access === true ? '<span class="tag">Lounge</span>' : "",
+          r.card.perks.insurance !== undefined && r.card.perks.insurance.length > 0
+            ? `<span class="tag" title="${esc(EffectArray.join(r.card.perks.insurance, "\n"))}">${r.card.perks.insurance.length} insurance</span>`
+            : ""
+        ],
+        " "
+      ) || dash
   }
 ]
 
@@ -482,7 +527,7 @@ const element = <T extends HTMLElement>(id: string, kind: { new (): T }): T => {
 
 const $ = (id: string) => element(id, HTMLElement)
 
-const api = decodeApi(await fetch("/api.json").then((r): Promise<unknown> => r.json()))
+const api = await Effect.runPromise(fetchApi("/api.json").pipe(Effect.provide(FetchHttpClient.layer)))
 
 const makeRow = (issuerId: string, issuer: Api["issuers"][string], cardId: string, card: Row["card"]): Row => {
   const programId = card.rewards?.program
@@ -494,8 +539,8 @@ const makeRow = (issuerId: string, issuer: Api["issuers"][string], cardId: strin
   return { id: `${issuerId}/${cardId}`, issuer: issuer.name, card, program }
 }
 
-const rows: ReadonlyArray<Row> = Object.entries(api.issuers).flatMap(([issuerId, issuer]) =>
-  Object.entries(issuer.cards).map(([cardId, card]) => makeRow(issuerId, issuer, cardId, card))
+const rows: ReadonlyArray<Row> = EffectArray.flatMap(EffectRecord.toEntries(api.issuers), ([issuerId, issuer]) =>
+  EffectArray.map(EffectRecord.toEntries(issuer.cards), ([cardId, card]) => makeRow(issuerId, issuer, cardId, card))
 )
 
 let sortIndex = 2
@@ -508,15 +553,16 @@ const columnChoices: Record<string, boolean> = loadColumnVisibility(() => localS
 const isShown = (c: Column) => c.fixed === true || (columnChoices[c.id] ?? c.hiddenByDefault !== true)
 
 const renderColumnPicker = () => {
-  $("column-list").innerHTML = columns
-    .flatMap((c) =>
+  $("column-list").innerHTML = EffectArray.join(
+    EffectArray.flatMap(columns, (c) =>
       c.fixed === true
         ? []
         : [
             `<label><input type="checkbox" data-column="${esc(c.id)}"${isShown(c) ? " checked" : ""} /> ${esc(c.label)}</label>`
           ]
-    )
-    .join("")
+    ),
+    ""
+  )
 }
 
 const toggleColumn = (e: Event) => {
@@ -530,15 +576,15 @@ const toggleColumn = (e: Event) => {
 
   if (input.checked === (column.hiddenByDefault !== true)) delete columnChoices[column.id]
   else columnChoices[column.id] = input.checked
-  localStorage.setItem(COLUMNS_KEY, JSON.stringify(columnChoices))
+  localStorage.setItem(COLUMNS_KEY, encodeJson(columnChoices))
   render()
 }
 
 $("column-list").addEventListener("change", toggleColumn)
 
 $("column-reset").addEventListener("click", () => {
-  for (const id of Object.keys(columnChoices)) delete columnChoices[id]
-  localStorage.setItem(COLUMNS_KEY, JSON.stringify(columnChoices))
+  for (const id of EffectRecord.keys(columnChoices)) delete columnChoices[id]
+  localStorage.setItem(COLUMNS_KEY, encodeJson(columnChoices))
   renderColumnPicker()
   render()
 })
@@ -567,7 +613,7 @@ const compare = (a: Value, b: Value) => {
 }
 
 const render = () => {
-  const q = element("search", HTMLInputElement).value.trim().toLowerCase()
+  const q = EffectString.toLowerCase(EffectString.trim(element("search", HTMLInputElement).value))
   const type = element("type", HTMLSelectElement).value
   const program = element("program", HTMLSelectElement).value
   const noFx = element("nofx", HTMLInputElement).checked
@@ -588,31 +634,40 @@ const render = () => {
 
     if (government && governmentEarn(r) <= 0) return false
 
-    if (q && !`${r.card.name} ${r.issuer} ${r.program?.name ?? ""}`.toLowerCase().includes(q)) return false
+    if (
+      q &&
+      !pipe(EffectString.toLowerCase(`${r.card.name} ${r.issuer} ${r.program?.name ?? ""}`), EffectString.includes(q))
+    )
+      return false
 
     return true
   }
 
-  const visible = rows.filter((r) => matchesFilters(r))
+  const visible = EffectArray.filter(rows, (r) => matchesFilters(r))
   const col = required(columns[sortIndex])
   const sorted = visible.toSorted((a, b) => compare(col.sortValue(a), col.sortValue(b)))
-  const shown = columns.flatMap((c, i) => (isShown(c) ? [{ c, i }] : []))
+  const shown = EffectArray.flatMap(columns, (c, i) => (isShown(c) ? [{ c, i }] : []))
 
-  head.innerHTML = shown
-    .map(
+  head.innerHTML = EffectArray.join(
+    EffectArray.map(
+      shown,
       ({ c, i }) =>
         `<th class="${c.num === true ? "num" : ""}" data-i="${i}"${i === sortIndex ? ` data-dir="${sortDir}"` : ""}>${c.label}</th>`
-    )
-    .join("")
+    ),
+    ""
+  )
 
-  $("rows").innerHTML = sorted
-    .map(
+  $("rows").innerHTML = EffectArray.join(
+    EffectArray.map(
+      sorted,
       (r) =>
-        `<tr class="${r.card.status === "active" ? "" : "disc"}">${shown
-          .map(({ c }) => `<td class="${c.num === true ? "num" : ""}">${c.render(r)}</td>`)
-          .join("")}</tr>`
-    )
-    .join("")
+        `<tr class="${r.card.status === "active" ? "" : "disc"}">${EffectArray.join(
+          EffectArray.map(shown, ({ c }) => `<td class="${c.num === true ? "num" : ""}">${c.render(r)}</td>`),
+          ""
+        )}</tr>`
+    ),
+    ""
+  )
   $("count").textContent = `${visible.length} of ${rows.length} cards`
 }
 
@@ -621,20 +676,22 @@ const renderValueGrid = () => {
 
   for (const r of rows) if (r.program) counts.set(r.program.id, (counts.get(r.program.id) ?? 0) + 1)
 
-  const programs = [...counts.keys()]
-    .map((id) => ({ id, program: required(api.programs[id]) }))
-    .toSorted(
-      (a, b) => required(counts.get(b.id)) - required(counts.get(a.id)) || a.program.name.localeCompare(b.program.name)
-    )
+  const programs = EffectArray.map([...counts.keys()], (id) => ({ id, program: required(api.programs[id]) })).toSorted(
+    (a, b) => required(counts.get(b.id)) - required(counts.get(a.id)) || a.program.name.localeCompare(b.program.name)
+  )
 
   const renderPointValue = (id: string, p: Api["programs"][string]) => {
-    const basis = [
-      p.value_basis,
-      p.value_source,
-      p.value_updated != null && p.value_updated !== "" && `Updated ${p.value_updated}`
-    ]
-      .filter(Boolean)
-      .join("\n")
+    const basis = EffectArray.join(
+      EffectArray.filter(
+        [
+          p.value_basis,
+          p.value_source,
+          p.value_updated != null && p.value_updated !== "" && `Updated ${p.value_updated}`
+        ],
+        (part): part is string => typeof part === "string" && part !== ""
+      ),
+      "\n"
+    )
 
     const fallback = p.cents_per_point === undefined ? "no default" : `default ${p.cents_per_point}c`
 
@@ -647,20 +704,20 @@ const renderValueGrid = () => {
   }
 
   const renderGroup = (type: Program["type"], title: string) => {
-    const entries = programs.filter(({ program }) => program.type === type)
+    const entries = EffectArray.filter(programs, ({ program }) => program.type === type)
 
     if (entries.length === 0) return ""
 
-    return `<section class="value-group"><h3>${title}</h3><div class="value-grid">${entries
-      .map(({ id, program }) => renderPointValue(id, program))
-      .join("")}</div></section>`
+    return `<section class="value-group"><h3>${title}</h3><div class="value-grid">${EffectArray.join(
+      EffectArray.map(entries, ({ id, program }) => renderPointValue(id, program)),
+      ""
+    )}</div></section>`
   }
 
-  const otherGroups = [
-    renderGroup("bank", "Bank rewards"),
-    renderGroup("retail", "Retail rewards"),
-    renderGroup("cashback", "Cashback")
-  ].join("")
+  const otherGroups = EffectArray.join(
+    [renderGroup("bank", "Bank rewards"), renderGroup("retail", "Retail rewards"), renderGroup("cashback", "Cashback")],
+    ""
+  )
 
   $("value-grid").innerHTML = `${renderGroup("airline", "Frequent flyer programs")}${
     otherGroups === ""
@@ -676,7 +733,7 @@ const updatePointValue = (e: Event) => {
   const id = input.dataset["program"]
 
   if (id == null || id === "") return
-  const value = input.value.trim() === "" ? NaN : Number(input.value)
+  const value = EffectString.trim(input.value) === "" ? NaN : Number(input.value)
 
   if (Number.isFinite(value) && value >= 0) overrides[id] = value
   else delete overrides[id]
@@ -687,7 +744,7 @@ const updatePointValue = (e: Event) => {
 $("value-grid").addEventListener("input", updatePointValue)
 
 $("value-reset").addEventListener("click", () => {
-  for (const id of Object.keys(overrides)) delete overrides[id]
+  for (const id of EffectRecord.keys(overrides)) delete overrides[id]
   saveOverrides()
   renderValueGrid()
   render()

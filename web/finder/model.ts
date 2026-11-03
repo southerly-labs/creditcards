@@ -3,6 +3,7 @@ import { annualPoints, meetsSpendTarget } from "../../src/model/benefit.ts"
 import type { Card, Program } from "../../src/model/schema.ts"
 import { offerStatus } from "../../src/offers/project.ts"
 import type { Offer, OfferComponent } from "../../src/offers/schema.ts"
+import { Array as EffectArray, Record as EffectRecord } from "effect"
 
 export type PublicCard = Omit<Card, "locked">
 
@@ -43,26 +44,28 @@ const makeEntry = (api: Api, issuerId: string, issuer: string, cardId: string, c
 }
 
 export const entriesFrom = (api: Api): ReadonlyArray<Entry> =>
-  Object.entries(api.issuers).flatMap(([issuerId, issuer]) =>
-    Object.entries(issuer.cards).map(([cardId, card]) => makeEntry(api, issuerId, issuer.name, cardId, card))
+  EffectArray.flatMap(EffectRecord.toEntries(api.issuers), ([issuerId, issuer]) =>
+    EffectArray.map(EffectRecord.toEntries(issuer.cards), ([cardId, card]) =>
+      makeEntry(api, issuerId, issuer.name, cardId, card)
+    )
   )
 
 export const currentOffers = (card: PublicCard, today: string): ReadonlyArray<Offer> =>
-  (card.offers ?? []).filter((o) => ["within_window", "undated"].includes(offerStatus(o, today)))
+  EffectArray.filter(card.offers ?? [], (o) => ["within_window", "undated"].includes(offerStatus(o, today)))
 
 export const introRates = (card: PublicCard, today: string): ReadonlyArray<IntroRate> =>
-  currentOffers(card, today).flatMap((o) => o.components.filter(isIntroRate))
+  EffectArray.flatMap(currentOffers(card, today), (o) => EffectArray.filter(o.components, isIntroRate))
 
 export const transferOffer = (card: PublicCard, today: string): IntroRate | undefined =>
-  introRates(card, today)
-    .filter((r) => r.applies_to !== "purchase")
-    .toSorted((a, b) => (b.months ?? 0) - (a.months ?? 0) || a.rate - b.rate)[0]
+  EffectArray.filter(introRates(card, today), (r) => r.applies_to !== "purchase").toSorted(
+    (a, b) => (b.months ?? 0) - (a.months ?? 0) || a.rate - b.rate
+  )[0]
 
 const signupOffer = (card: PublicCard, today: string) =>
-  currentOffers(card, today).find((o) => o.components.some(isSignupPoints))
+  currentOffers(card, today).find((o) => EffectArray.some(o.components, isSignupPoints))
 
 export const signupTranches = (card: PublicCard, today: string): ReadonlyArray<SignupPoints> =>
-  signupOffer(card, today)?.components.filter(isSignupPoints) ?? []
+  EffectArray.filter(signupOffer(card, today)?.components ?? [], isSignupPoints)
 
 export const isBaseRate = (category: string | undefined) => category === undefined || category === ""
 
@@ -87,13 +90,14 @@ const dollars = (points: number | undefined, cents: number | undefined) =>
   points === undefined || cents === undefined ? undefined : Math.round(points * cents) / 100
 
 const sumPoints = (tranches: ReadonlyArray<SignupPoints>) => {
-  const total = tranches.reduce((sum, t) => sum + t.points, 0)
+  const total = EffectArray.reduce(tranches, 0, (sum, t) => sum + t.points)
 
   return total === 0 ? undefined : total
 }
 
 export const firstYearFee = (card: PublicCard, today: string) =>
-  currentOffers(card, today).flatMap((o) => o.components.filter(isYearLongFeeDiscount))[0]?.payable ?? card.fees.annual
+  EffectArray.flatMap(currentOffers(card, today), (o) => EffectArray.filter(o.components, isYearLongFeeDiscount))[0]
+    ?.payable ?? card.fees.annual
 
 export const value = (
   entry: Entry,
@@ -111,9 +115,9 @@ export const value = (
   const tranches = signupTranches(card, today)
   const bonusPoints = sumPoints(tranches)
   const unverified = signupOffer(card, today)?.source === "cdr"
-  const firstYearTranches = unverified ? [] : tranches.filter((t) => (t.year ?? 1) === 1)
+  const firstYearTranches = unverified ? [] : EffectArray.filter(tranches, (t) => (t.year ?? 1) === 1)
   const firstYearBonusPoints = sumPoints(firstYearTranches)
-  const earnedBonusPoints = sumPoints(firstYearTranches.filter((t) => meetsSpendTarget(monthlySpend, t)))
+  const earnedBonusPoints = sumPoints(EffectArray.filter(firstYearTranches, (t) => meetsSpendTarget(monthlySpend, t)))
   const fee = card.fees.annual
   const feeYearOne = firstYearFee(card, today)
   const firstYearBonusValue = dollars(earnedBonusPoints, cents) ?? 0
@@ -220,12 +224,12 @@ export const goals: Record<GoalId, Goal> = {
   }
 }
 
-export const isGoalId = (text: string | null): text is GoalId => goalIds.some((id) => id === text)
+export const isGoalId = (text: string | null): text is GoalId => EffectArray.some(goalIds, (id) => id === text)
 
 export const rank = (rows: ReadonlyArray<Ranked>, goal: GoalId, today: string): ReadonlyArray<Ranked> => {
   const { keep, order } = goals[goal]
 
-  return rows
-    .filter((r) => keep(r, today))
-    .toSorted((a, b) => order(a, b, today) || a.entry.card.name.localeCompare(b.entry.card.name))
+  return EffectArray.filter(rows, (r) => keep(r, today)).toSorted(
+    (a, b) => order(a, b, today) || a.entry.card.name.localeCompare(b.entry.card.name)
+  )
 }

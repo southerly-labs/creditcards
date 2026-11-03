@@ -1,5 +1,14 @@
 import type { Api } from "../../src/api/contract.ts"
-import { attempt, decodeApi, decodeMonthlySpend, loadMonthlySpend, loadPointValues } from "../../src/model/api.ts"
+import {
+  attempt,
+  decodeMonthlySpend,
+  fetchApi,
+  loadMonthlySpend,
+  loadPointValues,
+  todayInSydney
+} from "../../src/model/api.ts"
+import { encodeJson } from "../../src/util/json.ts"
+import { FetchHttpClient } from "effect/http"
 import type { Offer, OfferComponent } from "../../src/offers/schema.ts"
 import { required } from "../../src/util/required.ts"
 import {
@@ -18,6 +27,7 @@ import {
   type Ranked,
   type SignupPoints
 } from "./model.ts"
+import { Effect, Record as EffectRecord, String as EffectString, Array as EffectArray, pipe } from "effect"
 
 const MOTION = {
   sheetMs: 280,
@@ -66,7 +76,14 @@ const oneOf = <T extends string>(options: ReadonlyArray<{ readonly id: T }>, tex
   options.find((o) => o.id === text)?.id ?? fallback
 
 const esc = (s: string) =>
-  s.replaceAll(/[&<>"']/gu, (c) => required({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]))
+  pipe(
+    s,
+    EffectString.replaceAll("&", "&amp;"),
+    EffectString.replaceAll("<", "&lt;"),
+    EffectString.replaceAll(">", "&gt;"),
+    EffectString.replaceAll('"', "&quot;"),
+    EffectString.replaceAll("'", "&#39;")
+  )
 
 const whole = (n: number) => Math.round(n).toLocaleString("en-AU")
 
@@ -81,7 +98,7 @@ const signed = (n: number) => {
   return rounded < 0 ? `−${money(-rounded)}` : `+${money(rounded)}`
 }
 
-const pct = (n: number) => `${n.toFixed(2).replace(/\.?0+$/u, "")}%`
+const pct = (n: number) => `${pipe(n.toFixed(2), EffectString.replace(/\.?0+$/u, ""))}%`
 
 const compactPoints = (n: number) =>
   n >= 1000 ? `${(n / 1000).toLocaleString("en-AU", { maximumFractionDigits: 1 })}k` : whole(n)
@@ -96,19 +113,19 @@ const element = <T extends HTMLElement>(id: string, kind: { new (): T }): T => {
 
 const $ = (id: string) => element(id, HTMLElement)
 
-const today = new Date().toLocaleDateString("en-CA", { timeZone: "Australia/Sydney" })
+const today = todayInSydney()
 
-const api: Api = decodeApi(await fetch("/api.json").then((r): Promise<unknown> => r.json()))
+const api: Api = await Effect.runPromise(fetchApi("/api.json").pipe(Effect.provide(FetchHttpClient.layer)))
 
 const entries = entriesFrom(api)
 
-const entryById = new Map(entries.map((e) => [e.id, e]))
+const entryById = new Map(EffectArray.map(entries, (e) => [e.id, e]))
 
 const readStorage = (key: string) => () => localStorage.getItem(key)
 
 const overrides: Record<string, number> = loadPointValues(readStorage(OVERRIDES_KEY))
 
-const params = new URLSearchParams(location.hash.slice(1))
+const params = new URLSearchParams(pipe(location.hash, EffectString.slice(1)))
 
 const goalParam = params.get("goal")
 
@@ -128,10 +145,10 @@ const state: {
   kind: oneOf<KindId>(kindOptions, params.get("kind"), "any"),
   view: oneOf<ViewId>(viewOptions, params.get("view"), "list"),
   query: params.get("q") ?? "",
-  compare: (params.get("compare") ?? "")
-    .split(",")
-    .filter((id) => entryById.has(id))
-    .slice(0, COMPARE_LIMIT),
+  compare: EffectArray.filter(EffectString.split(params.get("compare") ?? "", ","), (id) => entryById.has(id)).slice(
+    0,
+    COMPARE_LIMIT
+  ),
   card: params.get("card") ?? ""
 }
 
@@ -152,7 +169,7 @@ const writeHash = () => {
 
   if (state.query !== "") next.set("q", state.query)
 
-  if (state.compare.length > 0) next.set("compare", state.compare.join(","))
+  if (state.compare.length > 0) next.set("compare", EffectArray.join(state.compare, ","))
 
   if (state.card !== "") next.set("card", state.card)
   const hash = next.toString()
@@ -161,7 +178,7 @@ const writeHash = () => {
 }
 
 const valued = (): ReadonlyArray<Ranked> =>
-  entries.map((entry) => ({ entry, valuation: value(entry, state.spend, overrides, today) }))
+  EffectArray.map(entries, (entry) => ({ entry, valuation: value(entry, state.spend, overrides, today) }))
 
 const matchesType = (e: Entry) =>
   state.type === "all" || (state.type === "personal" ? e.card.type === "personal" : e.card.type !== "personal")
@@ -177,14 +194,18 @@ const kindMatchers: Record<KindId, (programType: string | undefined) => boolean>
 const matchesKind = (e: Entry) => kindMatchers[state.kind](e.program?.type)
 
 const matchesQuery = (e: Entry) => {
-  const q = state.query.trim().toLowerCase()
+  const q = EffectString.toLowerCase(EffectString.trim(state.query))
 
-  return q === "" || `${e.card.name} ${e.issuer} ${e.program?.name ?? ""}`.toLowerCase().includes(q)
+  return (
+    q === "" ||
+    pipe(EffectString.toLowerCase(`${e.card.name} ${e.issuer} ${e.program?.name ?? ""}`), EffectString.includes(q))
+  )
 }
 
 const visibleRows = () =>
   rankRows(
-    valued().filter(
+    EffectArray.filter(
+      valued(),
       (r) => r.entry.card.status === "active" && matchesType(r.entry) && matchesKind(r.entry) && matchesQuery(r.entry)
     ),
     goalOf(),
@@ -192,7 +213,11 @@ const visibleRows = () =>
   )
 
 const hue = (text: string) =>
-  Array.from({ length: text.length }, (_, i) => text.codePointAt(i) ?? 0).reduce((h, c) => (h * 31 + c) % 360, 7)
+  EffectArray.reduce(
+    Array.from({ length: text.length }, (_, i) => text.codePointAt(i) ?? 0),
+    7,
+    (h, c) => (h * 31 + c) % 360
+  )
 
 const networkNames = { visa: "VISA", mastercard: "mastercard", amex: "AMEX", unionpay: "UnionPay", eftpos: "eftpos" }
 
@@ -296,7 +321,10 @@ const facts = (r: Ranked) => {
     v.firstYearBonusPoints === undefined ? "" : `${compactPoints(v.firstYearBonusPoints)} bonus pts`
   ]
 
-  return items.flatMap((t) => (t === "" ? [] : [`<li>${esc(t)}</li>`])).join("")
+  return EffectArray.join(
+    EffectArray.flatMap(items, (t) => (t === "" ? [] : [`<li>${esc(t)}</li>`])),
+    ""
+  )
 }
 
 const ledger = (r: Ranked, scale: number) => {
@@ -308,13 +336,17 @@ const ledger = (r: Ranked, scale: number) => {
   if (scale <= 0 || (earn === 0 && bonus === 0 && fee === 0)) return ""
   const width = (n: number) => `${Math.max(0, Math.min(100, (n / scale) * 100)).toFixed(1)}%`
 
-  const label = [
-    earn > 0 ? `${money(Math.round(earn))} in points` : "",
-    bonus > 0 ? `${money(Math.round(bonus))} bonus` : "",
-    fee > 0 ? `${money(fee)} fee` : ""
-  ]
-    .filter((t) => t !== "")
-    .join(", ")
+  const label = EffectArray.join(
+    EffectArray.filter(
+      [
+        earn > 0 ? `${money(Math.round(earn))} in points` : "",
+        bonus > 0 ? `${money(Math.round(bonus))} bonus` : "",
+        fee > 0 ? `${money(fee)} fee` : ""
+      ],
+      (t) => t !== ""
+    ),
+    ", "
+  )
 
   return `<span class="ledger" role="img" aria-label="${esc(label)}">
     <span class="half cost"><span class="bar-fee" style="width:${width(fee)}"></span></span>
@@ -325,12 +357,10 @@ const ledger = (r: Ranked, scale: number) => {
 const ledgerScale = (rows: ReadonlyArray<Ranked>) =>
   Math.max(
     1,
-    ...rows
-      .slice(0, 60)
-      .flatMap((r) => [
-        (r.valuation.earnValue ?? 0) + (goalOf() === "bonus" ? (r.valuation.firstYearBonusValue ?? 0) : 0),
-        r.valuation.fee ?? 0
-      ])
+    ...EffectArray.flatMap(rows.slice(0, 60), (r) => [
+      (r.valuation.earnValue ?? 0) + (goalOf() === "bonus" ? (r.valuation.firstYearBonusValue ?? 0) : 0),
+      r.valuation.fee ?? 0
+    ])
   )
 
 const isCompared = (id: string) => state.compare.includes(id)
@@ -368,21 +398,25 @@ const segmented = <T extends string>(
   options: ReadonlyArray<{ readonly id: T; readonly label: string }>,
   current: T
 ) => {
-  $(id).innerHTML = options
-    .map(
+  $(id).innerHTML = EffectArray.join(
+    EffectArray.map(
+      options,
       (o) =>
         `<button type="button" role="radio" data-value="${o.id}" aria-checked="${o.id === current}">${esc(o.label)}</button>`
-    )
-    .join("")
+    ),
+    ""
+  )
 }
 
 const renderControls = () => {
-  $("goals").innerHTML = goalIds
-    .map(
+  $("goals").innerHTML = EffectArray.join(
+    EffectArray.map(
+      goalIds,
       (id) =>
         `<button type="button" role="radio" data-value="${id}" aria-checked="${id === goalOf()}">${esc(goals[id].label)}</button>`
-    )
-    .join("")
+    ),
+    ""
+  )
   $("goal-sentence").textContent = goals[goalOf()].sentence
   segmented("type", typeOptions, state.type)
   segmented("kind", kindOptions, state.kind)
@@ -393,9 +427,8 @@ const spendInput = element("spend", HTMLInputElement)
 const spendRange = element("spend-range", HTMLInputElement)
 
 const nearestStop = (spend: number) =>
-  SPEND_STOPS.reduce(
-    (best, stop, i) => (Math.abs(stop - spend) < Math.abs(required(SPEND_STOPS[best]) - spend) ? i : best),
-    0
+  EffectArray.reduce(SPEND_STOPS, 0, (best, stop, i) =>
+    Math.abs(stop - spend) < Math.abs(required(SPEND_STOPS[best]) - spend) ? i : best
   )
 
 const syncSpend = (fromRange: boolean) => {
@@ -407,7 +440,7 @@ const syncSpend = (fromRange: boolean) => {
 }
 
 const summary = (rows: ReadonlyArray<Ranked>) => {
-  const all = entries.filter((e) => e.card.status === "active").length
+  const all = EffectArray.filter(entries, (e) => e.card.status === "active").length
   const goal = goals[goalOf()]
 
   if (rows.length === 0) return `No cards match. Try fewer filters.`
@@ -420,7 +453,10 @@ let lastRows: ReadonlyArray<Ranked> = []
 const renderList = (rows: ReadonlyArray<Ranked>) => {
   const scale = ledgerScale(rows)
 
-  $("list").innerHTML = rows.map((r, i) => listItem(r, i, scale)).join("")
+  $("list").innerHTML = EffectArray.join(
+    EffectArray.map(rows, (r, i) => listItem(r, i, scale)),
+    ""
+  )
 }
 
 interface Point {
@@ -481,7 +517,7 @@ const renderMap = (rows: ReadonlyArray<Ranked>) => {
   const height = Math.round(Math.min(560, Math.max(320, width * 0.6)))
   const pad = { top: 16, right: 20, bottom: 44, left: 64 }
 
-  const usable = rows.flatMap((r, position) => plottable(r, position))
+  const usable = EffectArray.flatMap(rows, (r, position) => plottable(r, position))
 
   $("map-note").textContent =
     usable.length === rows.length
@@ -495,35 +531,45 @@ const renderMap = (rows: ReadonlyArray<Ranked>) => {
     return
   }
 
-  const xTicks = ticks(0, Math.max(100, ...usable.map((p) => p.x)), 6)
-  const yTicks = ticks(Math.min(0, ...usable.map((p) => p.y)), Math.max(0, ...usable.map((p) => p.y)), 6)
+  const xTicks = ticks(0, Math.max(100, ...EffectArray.map(usable, (p) => p.x)), 6)
+
+  const yTicks = ticks(
+    Math.min(0, ...EffectArray.map(usable, (p) => p.y)),
+    Math.max(0, ...EffectArray.map(usable, (p) => p.y)),
+    6
+  )
+
   const xMax = required(xTicks.at(-1))
   const yMin = required(yTicks[0])
   const yMax = required(yTicks.at(-1))
   const sx = (x: number) => pad.left + (x / xMax) * (width - pad.left - pad.right)
   const sy = (y: number) => pad.top + ((yMax - y) / (yMax - yMin || 1)) * (height - pad.top - pad.bottom)
 
-  points = usable.map((p) => ({ r: p.r, rank: p.rank, x: sx(p.x), y: sy(p.y) }))
+  points = EffectArray.map(usable, (p) => ({ r: p.r, rank: p.rank, x: sx(p.x), y: sy(p.y) }))
 
-  const grid = yTicks
-    .map(
+  const grid = EffectArray.join(
+    EffectArray.map(
+      yTicks,
       (t) =>
         `<line class="${t === 0 ? "zero" : "grid"}" x1="${pad.left}" x2="${width - pad.right}" y1="${sy(t)}" y2="${sy(t)}" />
         <text class="tick" x="${pad.left - 10}" y="${sy(t)}" text-anchor="end" dominant-baseline="middle">${t === 0 ? "$0" : signed(t)}</text>`
-    )
-    .join("")
+    ),
+    ""
+  )
 
-  const xAxis = xTicks
-    .map(
+  const xAxis = EffectArray.join(
+    EffectArray.map(
+      xTicks,
       (t) => `<text class="tick" x="${sx(t)}" y="${height - pad.bottom + 18}" text-anchor="middle">${money(t)}</text>`
-    )
-    .join("")
+    ),
+    ""
+  )
 
-  const labelled = new Set(points.slice(0, 5).map((p) => p.r.entry.id))
+  const labelled = new Set(EffectArray.map(points.slice(0, 5), (p) => p.r.entry.id))
 
   const dot = (p: Point) => {
     const id = p.r.entry.id
-    const cls = [labelled.has(id) ? "top" : "", isCompared(id) ? "pinned" : ""].join(" ")
+    const cls = EffectArray.join([labelled.has(id) ? "top" : "", isCompared(id) ? "pinned" : ""], " ")
 
     return `<circle class="dot ${cls}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5" />`
   }
@@ -537,19 +583,20 @@ const renderMap = (rows: ReadonlyArray<Ranked>) => {
     return `${leader}<text class="label" x="${x + (right ? 2 : -2)}" y="${y}" text-anchor="${right ? "start" : "end"}" dominant-baseline="middle">${p.rank + 1}. ${esc(p.r.entry.card.name)}</text>`
   }
 
-  const dots = points
-    .toReversed()
-    .map((p) => dot(p))
-    .join("")
+  const dots = EffectArray.join(
+    EffectArray.map(EffectArray.reverse(points), (p) => dot(p)),
+    ""
+  )
 
-  const labels = stackLabels(points.filter((p) => labelled.has(p.r.entry.id)))
-    .map((p) => label(p))
-    .join("")
+  const labels = EffectArray.join(
+    EffectArray.map(stackLabels(EffectArray.filter(points, (p) => labelled.has(p.r.entry.id))), (p) => label(p)),
+    ""
+  )
 
   const yTitle = goalOf() === "bonus" ? "Back in year one, after fees" : "Back each year, after the fee"
 
   host.innerHTML = `<svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img"
-    aria-label="Scatter plot of ${points.length} cards: annual fee against ${esc(yTitle.toLowerCase())}. The ranked list has the same data.">
+    aria-label="Scatter plot of ${points.length} cards: annual fee against ${esc(EffectString.toLowerCase(yTitle))}. The ranked list has the same data.">
     ${grid}
     ${xAxis}
     <text class="axis" x="${pad.left}" y="${height - 6}">Annual fee →</text>
@@ -594,15 +641,18 @@ const introTargets = {
 const forMonths = (months: number | undefined) => (months === undefined ? "" : ` for ${months} months`)
 
 const signupText = (c: SignupPoints) => {
-  const conditions = [
-    c.min_spend === undefined
-      ? ""
-      : `spend ${money(c.min_spend)}${c.spend_days === undefined ? "" : ` in ${c.spend_days} days`}`,
-    c.keep_months === undefined ? "" : `keep the card ${c.keep_months} months`
-  ].filter((t) => t !== "")
+  const conditions = EffectArray.filter(
+    [
+      c.min_spend === undefined
+        ? ""
+        : `spend ${money(c.min_spend)}${c.spend_days === undefined ? "" : ` in ${c.spend_days} days`}`,
+      c.keep_months === undefined ? "" : `keep the card ${c.keep_months} months`
+    ],
+    (t) => t !== ""
+  )
 
   return `${whole(c.points)} bonus points${c.year === undefined ? "" : ` in year ${c.year}`}${
-    conditions.length === 0 ? "" : ` when you ${conditions.join(" and ")}`
+    conditions.length === 0 ? "" : ` when you ${EffectArray.join(conditions, " and ")}`
   }`
 }
 
@@ -619,7 +669,7 @@ const offerComponent = (c: OfferComponent) => {
 }
 
 const formatDate = (iso: string) =>
-  new Date(`${iso.slice(0, 10)}T00:00:00Z`).toLocaleDateString("en-AU", {
+  new Date(`${pipe(iso, EffectString.slice(0, 10))}T00:00:00Z`).toLocaleDateString("en-AU", {
     day: "numeric",
     month: "short",
     year: "numeric",
@@ -627,15 +677,26 @@ const formatDate = (iso: string) =>
   })
 
 const offerBlock = (o: Offer) => {
-  const meta = [
-    o.valid_until === undefined ? "" : `Ends ${formatDate(o.valid_until)}`,
-    o.eligibility ?? "",
-    o.application_channel ?? "",
-    o.conditions ?? ""
-  ].filter((t) => t !== "")
+  const meta = EffectArray.filter(
+    [
+      o.valid_until === undefined ? "" : `Ends ${formatDate(o.valid_until)}`,
+      o.eligibility ?? "",
+      o.application_channel ?? "",
+      o.conditions ?? ""
+    ],
+    (t) => t !== ""
+  )
 
-  return `<li><ul class="offer">${o.components.map((c) => `<li>${esc(offerComponent(c))}</li>`).join("")}</ul>${
-    meta.length === 0 ? "" : `<p class="dim">${meta.map((t) => esc(t)).join(" · ")}</p>`
+  return `<li><ul class="offer">${EffectArray.join(
+    EffectArray.map(o.components, (c) => `<li>${esc(offerComponent(c))}</li>`),
+    ""
+  )}</ul>${
+    meta.length === 0
+      ? ""
+      : `<p class="dim">${EffectArray.join(
+          EffectArray.map(meta, (t) => esc(t)),
+          " · "
+        )}</p>`
   }</li>`
 }
 
@@ -659,7 +720,7 @@ const earnLines = (e: Entry) => {
     return `<li><b>${tier.rate}</b> <span>pts per $1 ${esc(where)}${tier.note === undefined ? "" : ` <span class="dim">(${esc(tier.note)})</span>`}</span></li>`
   }
 
-  return earn.map((tier) => line(tier))
+  return EffectArray.map(earn, (tier) => line(tier))
 }
 
 const row = (label: string, text: string | undefined) =>
@@ -701,7 +762,7 @@ const breakdown = (r: Ranked) => {
           v.firstYear === undefined ? "?" : signed(v.firstYear)
         }</dd></div>`
 
-  return `<dl class="breakdown">${lines.join("")}${yearOne}</dl>`
+  return `<dl class="breakdown">${EffectArray.join(lines, "")}${yearOne}</dl>`
 }
 
 const typeNames = { personal: "Personal", business: "Business", corporate: "Corporate" }
@@ -718,12 +779,15 @@ const renderSheet = (id: string) => {
   const compared = isCompared(id)
   const updated = card.cdr?.last_updated
 
-  const chips = [
-    typeNames[card.type],
-    card.network === undefined ? "" : networkNames[card.network],
-    card.perks.lounge_access === true ? "Lounge access" : "",
-    rank < 0 ? "" : `#${rank + 1} for ${goals[goalOf()].label.toLowerCase()}`
-  ].filter((t) => t !== "")
+  const chips = EffectArray.filter(
+    [
+      typeNames[card.type],
+      card.network === undefined ? "" : networkNames[card.network],
+      card.perks.lounge_access === true ? "Lounge access" : "",
+      rank < 0 ? "" : `#${rank + 1} for ${EffectString.toLowerCase(goals[goalOf()].label)}`
+    ],
+    (t) => t !== ""
+  )
 
   $("sheet-body").innerHTML = `
     <header class="sheet-head">
@@ -734,7 +798,10 @@ const renderSheet = (id: string) => {
       ${art(entry, "l")}
       <div>
         <h2 id="sheet-title">${esc(card.name)}</h2>
-        <ul class="chips">${chips.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
+        <ul class="chips">${EffectArray.join(
+          EffectArray.map(chips, (c) => `<li>${esc(c)}</li>`),
+          ""
+        )}</ul>
         <div class="actions">
           ${card.url === undefined ? "" : `<a class="primary" href="${esc(card.url)}" target="_blank" rel="noopener">See it on ${esc(entry.issuer)} ↗</a>`}
           <button type="button" class="ghost pin${compared ? " on" : ""}" data-pin="${esc(id)}" aria-pressed="${compared}">${compared ? "✓ Comparing" : "+ Compare"}</button>
@@ -746,8 +813,15 @@ const renderSheet = (id: string) => {
       <h3>At ${money(state.spend)} a month</h3>
       ${breakdown(r)}
     </section>
-    ${earn.length === 0 ? "" : `<section><h3>How it earns</h3><ul class="earn">${earn.join("")}</ul></section>`}
-    ${offers.length === 0 ? "" : `<section><h3>Current offers</h3><ul class="offers">${offers.map((o) => offerBlock(o)).join("")}</ul></section>`}
+    ${earn.length === 0 ? "" : `<section><h3>How it earns</h3><ul class="earn">${EffectArray.join(earn, "")}</ul></section>`}
+    ${
+      offers.length === 0
+        ? ""
+        : `<section><h3>Current offers</h3><ul class="offers">${EffectArray.join(
+            EffectArray.map(offers, (o) => offerBlock(o)),
+            ""
+          )}</ul></section>`
+    }
     <section class="specs">
       <div>
         <h3>Fees</h3>
@@ -792,7 +866,10 @@ const renderSheet = (id: string) => {
     ${
       (card.perks.insurance ?? []).length === 0
         ? ""
-        : `<section><h3>Insurance</h3><ul class="chips">${(card.perks.insurance ?? []).map((i) => `<li>${esc(i)}</li>`).join("")}</ul></section>`
+        : `<section><h3>Insurance</h3><ul class="chips">${EffectArray.join(
+            EffectArray.map(card.perks.insurance ?? [], (i) => `<li>${esc(i)}</li>`),
+            ""
+          )}</ul></section>`
     }
     <p class="source dim">From ${esc(card.cdr?.brand ?? entry.issuer)}'s Consumer Data Right product data${
       updated === undefined ? "" : `, updated ${formatDate(updated)}`
@@ -849,8 +926,8 @@ const comparedRow = (id: string): ReadonlyArray<Ranked> => {
 }
 
 const compareLine = (c: CompareRow, rows: ReadonlyArray<Ranked>) => {
-  const values = rows.map((r) => c.read(r))
-  const known = values.filter((n) => n !== undefined)
+  const values = EffectArray.map(rows, (r) => c.read(r))
+  const known = EffectArray.filter(values, (n) => n !== undefined)
   const best = known.length < 2 ? undefined : c.better === "high" ? Math.max(...known) : Math.min(...known)
   const distinct = new Set(known).size > 1
 
@@ -859,13 +936,19 @@ const compareLine = (c: CompareRow, rows: ReadonlyArray<Ranked>) => {
       ? `<td class="dim">—</td>`
       : `<td class="${distinct && n === best ? "best" : ""}">${esc(c.show(n))}</td>`
 
-  return `<tr><th scope="row">${esc(c.label)}</th>${values.map((n) => cell(n)).join("")}</tr>`
+  return `<tr><th scope="row">${esc(c.label)}</th>${EffectArray.join(
+    EffectArray.map(values, (n) => cell(n)),
+    ""
+  )}</tr>`
 }
 
 const renderCompare = () => {
-  const rows = state.compare.flatMap((id) => comparedRow(id))
+  const rows = EffectArray.flatMap(state.compare, (id) => comparedRow(id))
 
-  const bodyRows = compareRows.map((c) => compareLine(c, rows)).join("")
+  const bodyRows = EffectArray.join(
+    EffectArray.map(compareRows, (c) => compareLine(c, rows)),
+    ""
+  )
 
   $("compare-body").innerHTML = `
     <header class="sheet-head">
@@ -874,13 +957,15 @@ const renderCompare = () => {
     </header>
     <div class="compare-scroll">
       <table class="compare-table">
-        <thead><tr><td></td>${rows
-          .map(
+        <thead><tr><td></td>${EffectArray.join(
+          EffectArray.map(
+            rows,
             (r) =>
               `<th scope="col"><button type="button" class="open" data-open="${esc(r.entry.id)}">${art(r.entry, "s")}<span class="name">${esc(r.entry.card.name)}</span><span class="issuer">${esc(r.entry.issuer)}</span></button>
               <button type="button" class="link" data-pin="${esc(r.entry.id)}">Remove</button></th>`
-          )
-          .join("")}</tr></thead>
+          ),
+          ""
+        )}</tr></thead>
         <tbody>${bodyRows}</tbody>
       </table>
     </div>
@@ -904,7 +989,10 @@ const renderTray = () => {
   tray.hidden = state.compare.length === 0
   document.body.classList.toggle("has-tray", state.compare.length > 0)
 
-  $("tray-cards").innerHTML = state.compare.flatMap((id) => trayCard(id)).join("")
+  $("tray-cards").innerHTML = EffectArray.join(
+    EffectArray.flatMap(state.compare, (id) => trayCard(id)),
+    ""
+  )
 
   const button = element("open-compare", HTMLButtonElement)
   button.disabled = state.compare.length < 2
@@ -912,7 +1000,7 @@ const renderTray = () => {
 }
 
 const togglePin = (id: string) => {
-  if (isCompared(id)) state.compare = state.compare.filter((x) => x !== id)
+  if (isCompared(id)) state.compare = EffectArray.filter(state.compare, (x) => x !== id)
   else if (state.compare.length < COMPARE_LIMIT) state.compare = [...state.compare, id]
   else state.compare = [...state.compare.slice(1), id]
   render()
@@ -930,17 +1018,16 @@ const renderValueGrid = () => {
 
   for (const e of entries) if (e.program) counts.set(e.program.id, (counts.get(e.program.id) ?? 0) + 1)
 
-  const programs = [...counts.keys()]
-    .map((id) => ({ id, program: required(api.programs[id]) }))
-    .toSorted(
-      (a, b) =>
-        (a.program.type === "airline" ? 0 : 1) - (b.program.type === "airline" ? 0 : 1) ||
-        required(counts.get(b.id)) - required(counts.get(a.id)) ||
-        a.program.name.localeCompare(b.program.name)
-    )
+  const programs = EffectArray.map([...counts.keys()], (id) => ({ id, program: required(api.programs[id]) })).toSorted(
+    (a, b) =>
+      (a.program.type === "airline" ? 0 : 1) - (b.program.type === "airline" ? 0 : 1) ||
+      required(counts.get(b.id)) - required(counts.get(a.id)) ||
+      a.program.name.localeCompare(b.program.name)
+  )
 
-  $("value-grid").innerHTML = `<ul class="values">${programs
-    .map(
+  $("value-grid").innerHTML = `<ul class="values">${EffectArray.join(
+    EffectArray.map(
+      programs,
       ({ id, program }) => `<li>
         <label for="pv-${esc(id)}">${esc(program.name)}<small>${required(counts.get(id))} card${counts.get(id) === 1 ? "" : "s"}${
           program.value_basis === undefined ? "" : ` · ${esc(program.value_basis)}`
@@ -948,8 +1035,9 @@ const renderValueGrid = () => {
         <span class="cents"><input id="pv-${esc(id)}" type="number" min="0" max="10" step="0.05" inputmode="decimal"
           data-program="${esc(id)}" placeholder="${program.cents_per_point ?? "?"}" value="${overrides[id] ?? ""}" />¢</span>
       </li>`
-    )
-    .join("")}</ul>`
+    ),
+    ""
+  )}</ul>`
 }
 
 const tip = $("tip")
@@ -975,7 +1063,7 @@ const HIT_RADIUS = 24
 const nearest = (x: number, y: number) => {
   const distance = (p: Point) => Math.hypot(p.x - x, p.y - y)
 
-  return points.filter((p) => distance(p) < HIT_RADIUS).toSorted((a, b) => distance(a) - distance(b))[0]
+  return EffectArray.filter(points, (p) => distance(p) < HIT_RADIUS).toSorted((a, b) => distance(a) - distance(b))[0]
 }
 
 const plotPoint = (e: MouseEvent) => {
@@ -1099,7 +1187,7 @@ spendRange.addEventListener("input", () => {
 })
 
 spendInput.addEventListener("input", () => {
-  const spend = decodeMonthlySpend(spendInput.value.replaceAll(/[$,\s]/gu, ""))
+  const spend = decodeMonthlySpend(pipe(spendInput.value, EffectString.replaceAll(/[$,\s]/gu, "")))
 
   if (spend !== undefined) setSpend(spend, false)
 })
@@ -1185,14 +1273,14 @@ element("open-values", HTMLButtonElement).addEventListener("click", () => {
   valuesDialog.showModal()
 })
 
-const saveOverrides = () => store(OVERRIDES_KEY, JSON.stringify(overrides))
+const saveOverrides = () => store(OVERRIDES_KEY, encodeJson(overrides))
 
 const editPointValue = (e: Event) => {
   const input = e.target
 
   if (!(input instanceof HTMLInputElement)) return
   const id = input.dataset["program"] ?? ""
-  const cents = input.value.trim() === "" ? Number.NaN : Number(input.value)
+  const cents = EffectString.trim(input.value) === "" ? Number.NaN : Number(input.value)
 
   if (Number.isFinite(cents) && cents >= 0) overrides[id] = cents
   else delete overrides[id]
@@ -1203,7 +1291,7 @@ const editPointValue = (e: Event) => {
 $("value-grid").addEventListener("input", editPointValue)
 
 element("value-reset", HTMLButtonElement).addEventListener("click", () => {
-  for (const id of Object.keys(overrides)) delete overrides[id]
+  for (const id of EffectRecord.keys(overrides)) delete overrides[id]
   saveOverrides()
   renderValueGrid()
   render()
@@ -1212,7 +1300,7 @@ element("value-reset", HTMLButtonElement).addEventListener("click", () => {
 const fresh = api.freshness.cdr_latest_product_updated_at
 
 $("freshness").textContent =
-  `${entries.length} cards from ${Object.keys(api.issuers).length} Australian lenders, read from their Consumer Data Right data${
+  `${entries.length} cards from ${EffectRecord.keys(api.issuers).length} Australian lenders, read from their Consumer Data Right data${
     fresh === undefined ? "" : `. Latest product update ${formatDate(fresh)}`
   }.`
 

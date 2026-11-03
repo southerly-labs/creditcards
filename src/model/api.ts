@@ -1,6 +1,26 @@
-import { Option, Predicate, Result, Schema, String as EffectString, Record as EffectRecord } from "effect"
+import {
+  DateTime,
+  Effect,
+  Option,
+  Predicate,
+  Result,
+  Schema,
+  String as EffectString,
+  Record as EffectRecord
+} from "effect"
+import { HttpClient } from "effect/http"
+import { PublicApi } from "../api/contract.ts"
 
 export { decodeApi } from "../api/contract.ts"
+
+export const fetchApi = (url: string) =>
+  HttpClient.get(url).pipe(
+    Effect.flatMap((response) => response.json),
+    Effect.flatMap(Schema.decodeUnknownEffect(PublicApi))
+  )
+
+export const todayInSydney = (): string =>
+  DateTime.formatIsoDate(DateTime.setZoneNamedUnsafe(DateTime.nowUnsafe(), "Australia/Sydney"))
 
 export const decodePointValues = (text: string): Record<string, number> => {
   const parsed = Schema.decodeUnknownOption(Schema.fromJsonString(Schema.Unknown))(text)
