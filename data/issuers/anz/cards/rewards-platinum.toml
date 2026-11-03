@@ -17,19 +17,19 @@ points = 85000
 year = 1
 min_spend = 3500
 spend_days = 90
-note = "plus $50 back"
 
 [[offers.components]]
 kind = "signup_points"
 program = "anz-rewards"
 points = 40000
 year = 2
-keep_months = 15
+keep_months = 12
 
 [signup_review]
 state = "present"
 source = "manual"
-text_hash = "893b4cfc115c7f55"
+text_hash = "7170198ceb740da5"
+reviewed_at = "2026-11-03"
 
 [cdr]
 brand = "ANZ"
