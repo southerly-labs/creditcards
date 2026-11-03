@@ -34,11 +34,11 @@ const productFeatures = Effect.fn("productFeatures")(function* (
 ) {
   const cdr = yield* CdrClient
 
-  if (!card.cdr) return yield* new RewardsError({ message: `${card.name} has no CDR source` })
+  if (!card.cdr) return yield* RewardsError.make({ message: `${card.name} has no CDR source` })
   const baseUri = baseUris.get(card.cdr.brand)
 
   if (baseUri === undefined || baseUri === "")
-    return yield* new RewardsError({ message: `${card.cdr.brand} is not in the CDR Register` })
+    return yield* RewardsError.make({ message: `${card.cdr.brand} is not in the CDR Register` })
   const { detail } = yield* cdr.getProduct(baseUri, card.cdr.product_id)
 
   return EffectArray.filter(detail.features ?? [], (f) => f.featureType === featureType)
@@ -135,12 +135,12 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
   for (const key of keys) {
     const card = dataset.cards.get(key)
 
-    if (!card) return yield* new RewardsError({ message: `Unknown card ${key}` })
+    if (!card) return yield* RewardsError.make({ message: `Unknown card ${key}` })
 
-    if (!card.rewards) return yield* new RewardsError({ message: `${key} has no rewards program` })
+    if (!card.rewards) return yield* RewardsError.make({ message: `${key} has no rewards program` })
     const earn = none ? [] : card.rewards.earn
 
-    if (!earn) return yield* new RewardsError({ message: `${key} has no rewards.earn; set it first or pass --none` })
+    if (!earn) return yield* RewardsError.make({ message: `${key} has no rewards.earn; set it first or pass --none` })
     const hash = loyaltyTextHash(yield* loyaltyFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
     yield* store.writeCard(issuer, slug, {
@@ -247,14 +247,14 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
   for (const key of keys) {
     const card = dataset.cards.get(key)
 
-    if (!card) return yield* new RewardsError({ message: `Unknown card ${key}` })
+    if (!card) return yield* RewardsError.make({ message: `Unknown card ${key}` })
 
-    if (!card.rewards) return yield* new RewardsError({ message: `${key} has no rewards program` })
+    if (!card.rewards) return yield* RewardsError.make({ message: `${key} has no rewards program` })
     const others = EffectArray.filter(card.offers ?? [], (offer) => offer.id !== "signup")
     const signup = card.offers?.find((offer) => offer.id === "signup")
 
     if (!none && !signup) {
-      return yield* new RewardsError({ message: `${key} has no signup offer; write one first or pass --none` })
+      return yield* RewardsError.make({ message: `${key} has no signup offer; write one first or pass --none` })
     }
 
     const offers = none || !signup ? others : [...others, { ...signup, source: "manual" as const }]

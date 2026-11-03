@@ -249,7 +249,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   ).length
 
   if (activeCdrCards > 0 && cardsSeen < activeCdrCards * MIN_SEEN_SHARE) {
-    return yield* new SyncAborted({
+    return yield* SyncAborted.make({
       message: `Only ${cardsSeen} cards returned vs ${activeCdrCards} active; refusing to sync (likely CDR outage)`
     })
   }

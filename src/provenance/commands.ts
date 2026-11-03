@@ -17,7 +17,7 @@ const correct = Command.make(
     const store = yield* Store
     const card = (yield* store.load).cards.get(key)
 
-    if (!card) return yield* new StoreError({ file: key, message: "Unknown card" })
+    if (!card) return yield* StoreError.make({ file: key, message: "Unknown card" })
 
     const reviewed_at = DateTime.formatIso(yield* DateTime.now)
 

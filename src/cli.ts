@@ -199,7 +199,7 @@ const reviewApply = Command.make(
         EffectArray.join(["Nothing applied:", ...EffectArray.map(result.errors, (error) => `- ${error}`)], "\n")
       )
 
-      return yield* new RewardsError({ message: EffectArray.join(result.errors, "; ") })
+      return yield* RewardsError.make({ message: EffectArray.join(result.errors, "; ") })
     }
 
     yield* writeFile(

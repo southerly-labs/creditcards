@@ -99,7 +99,7 @@ export class Snapshots extends Context.Service<
         const path = yield* Path.Path
 
         const fail = (file: string) => (cause: unknown) =>
-          new SnapshotError({ file, message: cause instanceof Error ? cause.message : String(cause) })
+          SnapshotError.make({ file, message: cause instanceof Error ? cause.message : String(cause) })
 
         const record = Effect.fn("Snapshots.record")(function* (
           issuer: string,

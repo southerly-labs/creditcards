@@ -66,7 +66,7 @@ export class CdrClient extends Context.Service<
         const attempt = (headers: Record<string, string>) =>
           client
             .get(url, { headers: { ...REQUEST_VARIANTS[variant % REQUEST_VARIANTS.length], ...headers } })
-            .pipe(Effect.mapError((cause) => new CdrError({ url, message: String(cause) })))
+            .pipe(Effect.mapError((cause) => CdrError.make({ url, message: String(cause) })))
 
         let response = yield* attempt({ "x-v": String(maxVersion), "x-min-v": "1" })
 
@@ -75,11 +75,11 @@ export class CdrClient extends Context.Service<
         }
 
         if (response.status !== 200) {
-          return yield* new CdrError({ url, status: response.status, message: `HTTP ${response.status}` })
+          return yield* CdrError.make({ url, status: response.status, message: `HTTP ${response.status}` })
         }
 
         const body = yield* response.json.pipe(
-          Effect.mapError((cause) => new CdrError({ url, message: `Invalid JSON: ${String(cause)}` }))
+          Effect.mapError((cause) => CdrError.make({ url, message: `Invalid JSON: ${String(cause)}` }))
         )
 
         const version = Number(response.headers["x-v"] ?? NaN)
@@ -88,13 +88,13 @@ export class CdrClient extends Context.Service<
       })
 
       const schemaError = (url: string) => (error: Schema.SchemaError) =>
-        new CdrError({ url, message: `Schema: ${error.message}` })
+        CdrError.make({ url, message: `Schema: ${error.message}` })
 
       const brands = Effect.gen(function* () {
         const response = yield* client.get(REGISTER_URL, { headers: { "x-v": "2" } }).pipe(
           Effect.flatMap(HttpClientResponse.filterStatusOk),
           Effect.flatMap(HttpClientResponse.schemaBodyJson(RegisterResponse)),
-          Effect.mapError((cause) => new CdrError({ url: REGISTER_URL, message: String(cause) }))
+          Effect.mapError((cause) => CdrError.make({ url: REGISTER_URL, message: String(cause) }))
         )
 
         return EffectArray.filter(response.data, (brand) =>

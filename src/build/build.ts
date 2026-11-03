@@ -59,7 +59,7 @@ export const validate = Effect.gen(function* () {
   const dataset = yield* (yield* Store).load
   const problems = checkReferences(dataset)
 
-  if (problems.length > 0) return yield* new ValidationError({ problems })
+  if (problems.length > 0) return yield* ValidationError.make({ problems })
 
   return dataset
 }).pipe(Effect.withSpan("validate"))

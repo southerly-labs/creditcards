@@ -66,7 +66,7 @@ export class Store extends Context.Service<
         const path = yield* Path.Path
 
         const fail = (file: string) => (cause: unknown) =>
-          new StoreError({ file, message: cause instanceof Error ? cause.message : String(cause) })
+          StoreError.make({ file, message: cause instanceof Error ? cause.message : String(cause) })
 
         const readToml = <A, I>(schema: Schema.Codec<A, I>, file: string) =>
           fs.readFileString(file).pipe(

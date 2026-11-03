@@ -38,7 +38,7 @@ const seeded: WorldState = {
   failing: new Set()
 }
 
-class World extends Context.Service<World, Ref.Ref<WorldState>>()("test/World") {}
+class World extends Context.Service<World, Ref.Ref<WorldState>>()("creditcards/test/sync.test/World") {}
 
 const findProduct = (state: WorldState, productId: string) =>
   required(state.products.find((p) => p.productId === productId))
@@ -50,8 +50,8 @@ const FakeCdr = Layer.effect(
 
     return CdrClient.of({
       brands: Effect.succeed([
-        new DataHolderBrand({ brandName: "Example Bank", industries: ["banking"], publicBaseUri: BASE_URI }),
-        new DataHolderBrand({ brandName: "Cardless Bank", industries: ["banking"], publicBaseUri: CARDLESS_URI })
+        DataHolderBrand.make({ brandName: "Example Bank", industries: ["banking"], publicBaseUri: BASE_URI }),
+        DataHolderBrand.make({ brandName: "Cardless Bank", industries: ["banking"], publicBaseUri: CARDLESS_URI })
       ]),
       listProducts: (baseUri) =>
         Ref.getAndUpdate(world, (state) =>
@@ -59,7 +59,7 @@ const FakeCdr = Layer.effect(
         ).pipe(
           Effect.flatMap((state) =>
             (baseUri === CARDLESS_URI ? state.cardlessDown === true : (state.listFailures ?? 0) > 0)
-              ? Effect.fail(new CdrError({ url: baseUri, message: "TimeoutError" }))
+              ? Effect.fail(CdrError.make({ url: baseUri, message: "TimeoutError" }))
               : Effect.succeed(
                   baseUri === CARDLESS_URI
                     ? []
@@ -75,7 +75,7 @@ const FakeCdr = Layer.effect(
         Ref.get(world).pipe(
           Effect.flatMap((state) =>
             state.failing.has(productId)
-              ? Effect.fail(new CdrError({ url: `${BASE_URI}/${productId}`, message: "TimeoutError" }))
+              ? Effect.fail(CdrError.make({ url: `${BASE_URI}/${productId}`, message: "TimeoutError" }))
               : Effect.succeed({
                   version: 4,
                   raw: findProduct(state, productId),

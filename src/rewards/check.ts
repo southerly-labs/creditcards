@@ -65,7 +65,7 @@ export const pdfText = (url: string, bytes: Uint8Array) =>
       getDocumentProxy(new Uint8Array(bytes), { verbosity: 0 })
         .then((pdf) => extractText(pdf, { mergePages: true }))
         .then((r) => r.text),
-    catch: (cause) => new PageError({ url, message: `PDF: ${cause instanceof Error ? cause.message : String(cause)}` })
+    catch: (cause) => PageError.make({ url, message: `PDF: ${cause instanceof Error ? cause.message : String(cause)}` })
   })
 
 export const normaliseText = (s: string): string =>
@@ -101,13 +101,13 @@ export const pageText = Effect.fn("pageText")(function* (url: string) {
     .get(url, { headers: { "user-agent": USER_AGENT, accept: "text/html,application/pdf,*/*" } })
     .pipe(
       Effect.timeout("30 seconds"),
-      Effect.mapError((cause) => new PageError({ url, message: String(cause) }))
+      Effect.mapError((cause) => PageError.make({ url, message: String(cause) }))
     )
 
-  if (response.status !== 200) return yield* new PageError({ url, message: `HTTP ${response.status}` })
+  if (response.status !== 200) return yield* PageError.make({ url, message: `HTTP ${response.status}` })
 
   const bytes = new Uint8Array(
-    yield* response.arrayBuffer.pipe(Effect.mapError((cause) => new PageError({ url, message: String(cause) })))
+    yield* response.arrayBuffer.pipe(Effect.mapError((cause) => PageError.make({ url, message: String(cause) })))
   )
 
   if (isPdf(bytes, response.headers["content-type"])) return yield* pdfText(url, bytes)

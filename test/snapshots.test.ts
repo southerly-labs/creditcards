@@ -3,7 +3,7 @@ import { assert, describe, layer, test } from "@effect/vitest"
 import { Context, Effect, FileSystem, Layer, Path } from "effect"
 import { encodeSnapshot, productDir, Snapshots } from "../src/history/Snapshots.ts"
 
-class HistoryDir extends Context.Service<HistoryDir, string>()("test/HistoryDir") {}
+class HistoryDir extends Context.Service<HistoryDir, string>()("creditcards/test/snapshots.test/HistoryDir") {}
 
 const TempHistory = Layer.unwrap(
   Effect.gen(function* () {

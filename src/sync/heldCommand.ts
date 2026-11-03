@@ -12,7 +12,7 @@ export const decideHold = Effect.fn("decideHold")(function* (
   const holds = (yield* store.load).holds ?? []
   const hold = holds.find((entry) => entry.id === id)
 
-  if (hold === undefined) return yield* new StoreError({ file: id, message: "Unknown hold" })
+  if (hold === undefined) return yield* StoreError.make({ file: id, message: "Unknown hold" })
   const decided_on = DateTime.formatIsoDateUtc(yield* DateTime.now)
   const decided: Hold = { ...hold, decision, decided_on, evidence }
 
