@@ -50,7 +50,14 @@ export type BonusTranche = typeof BonusTranche.Type
 
 export const EarnCheck = Schema.Struct({
   url: WebUrl,
-  expect: Schema.NonEmptyArray(Schema.NonEmptyString)
+  expect: Schema.NonEmptyArray(Schema.NonEmptyString),
+  known_blocked: Schema.optionalKey(
+    Schema.Struct({
+      reason: Schema.NonEmptyString,
+      evidence: Schema.NonEmptyString,
+      since: CalendarDate
+    })
+  )
 })
 
 export type EarnCheck = typeof EarnCheck.Type
