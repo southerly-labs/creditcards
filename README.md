@@ -205,3 +205,24 @@ Live at <https://creditcards.matthewstibbard.workers.dev>.
 MIT, for both the code and the data in `data/` and `dist/api.json`. See [LICENSE](LICENSE).
 
 The data is provided as is. Card terms change, so check the issuer's own site before you apply for a card.
+
+### Blocked earn pages and daily autonomy
+
+The sync runs the earn checker with `--record-blocked`. An unreadable source keeps its
+quote and gains optional `known_blocked` evidence (reason, HTTP status/challenge header
+and recording date). The first observation needs review; an identical failure on a
+later day is a standing known block. Each run still probes the source normally, without
+bypassing bot protection. Changed evidence, recovery or 30 days blocked requires review
+again. The review issue stays open while any source is unreadable, including standing
+blocks; standing blocks alone do not wake the review webhook.
+
+Every sync, including failed runs, appends a JSON record to `autonomy.jsonl` on the
+separate `metrics` branch and prints it in the job summary. These records come from the
+sync report, earn checker and workflow step outcomes, independently of issue state.
+`open_human_tasks` contains stable task identities, reasons, card/URL and first-observed
+`since` dates. `tasks_opened_today` groups new tasks by reason, retaining earlier openings
+on same-day reruns. `known_blocked` is listed separately. `sync_clear` is true only when
+there are no human tasks, unreadable sources or failed verification steps. First-day
+missing cards and automatic confirmation holds are not human tasks. Missing reports
+preserve earlier tasks and add verification failures. Metrics commits never change
+`main` or trigger the site's main-branch deployment.

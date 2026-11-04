@@ -28,6 +28,7 @@ jobs:
       - run: bun install --frozen-lockfile
 
       - name: Sync
+        id: sync_data
         run: bun run sync
 
       - name: Check issuer earn pages
@@ -38,9 +39,11 @@ jobs:
       # Bot pushes made with GITHUB_TOKEN do not trigger CI, so run the
       # full check here before anything reaches main.
       - name: Check
+        id: check_data
         run: bun run check
 
       - name: Commit to main
+        id: commit_data
         run: |
           if [ -z "$(git status --porcelain data history)" ]; then
             echo "No data changes"
@@ -61,6 +64,7 @@ jobs:
           exit 1
 
       - name: Report held changes
+        id: held_issue
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -80,6 +84,7 @@ jobs:
           fi
 
       - name: Update earn-rate review issue
+        id: rewards_issue
         env:
           EARN_OUTCOME: ${{ steps.earn_pages.outcome }}
           GH_TOKEN: ${{ github.token }}
@@ -105,6 +110,14 @@ jobs:
           else
             gh issue create --title "Earn rates and signup bonuses to review" --label rewards-review --body-file .cache/rewards-review.md
           fi
+
+      - name: Record daily autonomy metrics
+        id: metrics
+        if: always()
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          OUTCOMES: '{"sync":"${{ steps.sync_data.outcome }}","check":"${{ steps.check_data.outcome }}","commit":"${{ steps.commit_data.outcome }}","earn_pages":"${{ steps.earn_pages.outcome }}","held_issue":"${{ steps.held_issue.outcome }}","rewards_issue":"${{ steps.rewards_issue.outcome }}"}'
+        run: bash tools/sync/record-metrics.sh
 
       # Wakes the review agent only when something needs a reviewer. The
       # fingerprint is the set of open items, and the T3 webhook drops a
