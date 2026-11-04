@@ -17,6 +17,7 @@ annual = 2.5
 [rates]
 purchase = 13.45
 cash_advance = 13.45
+interest_free_days = 55
 
 [limits]
 min_credit = 500

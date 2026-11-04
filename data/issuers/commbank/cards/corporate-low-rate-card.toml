@@ -19,6 +19,7 @@ late_payment = 25
 [rates]
 purchase = 14.55
 cash_advance = 14.55
+interest_free_days = 0
 
 [limits]
 [perks]

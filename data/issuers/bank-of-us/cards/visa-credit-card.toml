@@ -20,6 +20,7 @@ late_payment = 20
 [rates]
 purchase = 9.99
 cash_advance = 9.99
+interest_free_days = 58
 
 [limits]
 min_credit = 500
