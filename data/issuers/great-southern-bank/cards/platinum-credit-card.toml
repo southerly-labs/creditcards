@@ -37,6 +37,11 @@ note = "0.5% cashback, uncapped"
 url = "https://www.greatsouthernbank.com.au/credit-cards"
 expect = [ "earn uncapped cashback at 0.50% on every eligible dollar." ]
 
+[rewards.earn_check.known_blocked]
+reason = "Cloudflare JavaScript challenge; persistent across seven syncs"
+evidence = "HTTP 403; cf-mitigated: challenge"
+since = "2026-11-04"
+
 [perks]
 insurance = [ "Travel Insurance", "Purchase Protection" ]
 
