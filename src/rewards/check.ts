@@ -158,11 +158,9 @@ export const classifyCheck = (input: {
       ? "Previously blocked page is readable again"
       : result.error !== blocked.evidence
         ? "Blocked page status changed"
-        : age <= 0
-          ? "First observation of unreadable source"
-          : age >= 30 * 86400000
-            ? "Page has been blocked for 30 days; review the source"
-            : undefined
+        : age >= 30 * 86400000
+          ? "Page has been blocked for 30 days; review the source"
+          : undefined
 
   return { ...result, known_blocked: blocked, ...(attention === undefined ? {} : { attention }) }
 }

@@ -106,7 +106,7 @@ describe("known-blocked sources", () => {
   test("keeps an unchanged block standing until 30 days", () => {
     expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-11-04" }))).toBe(false)
     expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-12-01" }))).toBe(true)
-    expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-11-01" }))).toBe(true)
+    expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-11-01" }))).toBe(false)
   })
 
   test("resurfaces changed status and recovery, including unchanged quotes", () => {
