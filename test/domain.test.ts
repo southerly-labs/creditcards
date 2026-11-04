@@ -42,6 +42,8 @@ test("field gaps name a decision field once, with a dated source", () => {
   }
 
   assert.isTrue(Schema.is(Card)({ ...card, gaps: [gap, { ...gap, field: "network" }] }))
+  assert.isTrue(Schema.is(Card)({ ...card, gaps: [{ ...gap, reason: "not_applicable" }] }))
+  assert.isFalse(Schema.is(Card)({ ...card, gaps: [{ ...gap, reason: "unknown" }] }))
   assert.isFalse(Schema.is(Card)({ ...card, gaps: [gap, gap] }))
   assert.isFalse(Schema.is(Card)({ ...card, gaps: [{ ...gap, field: "fees.additional_card" }] }))
   assert.isFalse(Schema.is(Card)({ ...card, gaps: [{ ...gap, sources: [] }] }))

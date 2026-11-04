@@ -42,6 +42,8 @@ response, or the issuer page or PDF URLs). `reason` is:
 - `not_stated`: no source read states the value.
 - `not_fixed`: a source states it, but not in the field's shape, such as a late
   fee of "3% or $20, whichever is greater". `quote` holds the source's words.
+- `not_applicable`: a source says the field does not apply to the card, such
+  as "interest free period on purchases n/a" on a card that charges no interest.
 - `blocked`: a source could not be read, for example behind a bot challenge.
   The check never tries to get past it.
 

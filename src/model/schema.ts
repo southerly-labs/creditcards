@@ -85,7 +85,7 @@ export type DecisionField = typeof DecisionField.Type
 
 export const FieldGap = Schema.Struct({
   field: DecisionField,
-  reason: Schema.Literals(["not_stated", "not_fixed", "blocked"]),
+  reason: Schema.Literals(["not_stated", "not_fixed", "not_applicable", "blocked"]),
   checked: CalendarDate,
   sources: Schema.NonEmptyArray(Schema.Union([Schema.Literal("cdr"), WebUrl])),
   quote: Schema.optionalKey(Schema.NonEmptyString),
