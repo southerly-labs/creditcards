@@ -34,9 +34,25 @@ for path in sorted((ROOT / "data/issuers").glob("*/cards/*.toml")):
 
 print(f"Active cards: {len(cards)}")
 for field in FIELDS:
-    missing = [str(path) for path, card in cards if not has(card, field)]
+    missing = [(path, card) for path, card in cards if not has(card, field)]
     filled = len(cards) - len(missing)
     percent = 100 * filled / len(cards) if cards else 0
-    print(f"{field}: {filled}/{len(cards)} ({percent:.1f}%)")
-    for path in missing:
-        print(f"  missing: {path}")
+    gaps = {
+        str(path): gap["reason"]
+        for path, card in missing
+        for gap in card.get("gaps", [])
+        if gap["field"] == field
+    }
+    explained = filled + len(gaps)
+    covered = 100 * explained / len(cards) if cards else 0
+    print(
+        f"{field}: {filled}/{len(cards)} ({percent:.1f}%); "
+        f"filled or explained {explained}/{len(cards)} ({covered:.1f}%)"
+    )
+    for path, _ in missing:
+        reason = gaps.get(str(path))
+        print(f"  {'gap ' + reason if reason else 'missing'}: {path}")
+for path, card in cards:
+    for gap in card.get("gaps", []):
+        if has(card, gap["field"]):
+            print(f"stale gap: {path} {gap['field']}")
