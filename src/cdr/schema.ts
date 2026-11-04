@@ -87,7 +87,9 @@ export const ProductDetail = Schema.Struct({
   lastUpdated: OptString,
   applicationUri: OptString,
   additionalInformation: Schema.optional(Schema.NullOr(Schema.Struct({ overviewUri: OptString }))),
-  cardArt: Schema.optional(Schema.NullOr(Schema.Array(Schema.Struct({ imageUri: Schema.String })))),
+  cardArt: Schema.optional(
+    Schema.NullOr(Schema.Array(Schema.Struct({ imageUri: Schema.String, cardScheme: OptString })))
+  ),
   fees: Schema.optional(Schema.NullOr(Schema.Array(Fee))),
   lendingRates: Schema.optional(Schema.NullOr(Schema.Array(LendingRate))),
   features: Schema.optional(Schema.NullOr(Schema.Array(Feature))),

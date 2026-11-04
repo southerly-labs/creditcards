@@ -4,6 +4,7 @@ import { Effect, Schema, Array as EffectArray } from "effect"
 import {
   annualFee,
   cardPageUrl,
+  cardSchemeNetwork,
   cashAdvanceRate,
   cardType,
   foreignTransactionFee,
@@ -11,6 +12,7 @@ import {
   latePaymentFee,
   makeProgramIndex,
   matchProgram,
+  network,
   timesPerYear,
   toPercent
 } from "../src/cdr/normalise.ts"
@@ -137,6 +139,40 @@ describe("late payment fee", () => {
     expect(
       latePaymentFee([{ name: "Late Payment Fee", feeType: "EVENT", additionalInfo: "3% or $20" }])
     ).toBeUndefined()
+  })
+})
+
+describe("network", () => {
+  const art = (...schemes: ReadonlyArray<string | undefined>): ProductDetail => ({
+    productId: "x",
+    name: "Low Rate Card",
+    productCategory: "CRED_AND_CHRG_CARDS",
+    cardArt: EffectArray.map(schemes, (cardScheme) => ({
+      imageUri: "https://bank.example/card.png",
+      ...(cardScheme === undefined ? {} : { cardScheme })
+    }))
+  })
+
+  test("reads the card art scheme when the name names no network", () => {
+    expect(network(art("MASTERCARD"), "Bank")).toBe("mastercard")
+    expect(network(art("VISA", undefined), "Bank")).toBe("visa")
+  })
+
+  test("the card name wins over the card art scheme", () => {
+    const visa: ProductDetail = {
+      productId: "x",
+      name: "Low Rate Visa Credit Card",
+      productCategory: "CRED_AND_CHRG_CARDS",
+      cardArt: [{ imageUri: "https://bank.example/card.png", cardScheme: "MASTERCARD" }]
+    }
+
+    expect(network(visa, "Bank")).toBe("visa")
+  })
+
+  test("ignores OTHER and mixed schemes", () => {
+    expect(cardSchemeNetwork(art("OTHER"))).toBeUndefined()
+    expect(cardSchemeNetwork(art("VISA", "MASTERCARD"))).toBeUndefined()
+    expect(cardSchemeNetwork(art())).toBeUndefined()
   })
 })
 

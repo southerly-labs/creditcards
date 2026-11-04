@@ -317,11 +317,34 @@ const NETWORKS: ReadonlyArray<readonly [Network, RegExp]> = [
   ["unionpay", /union ?pay/iu]
 ]
 
+const CARD_SCHEMES: Readonly<Record<string, Network>> = {
+  AMEX: "amex",
+  EFTPOS: "eftpos",
+  MASTERCARD: "mastercard",
+  UNIONPAY: "unionpay",
+  VISA: "visa"
+}
+
+export const cardSchemeNetwork = (p: ProductDetail): Network | undefined => {
+  const schemes = new Set(
+    EffectArray.map(
+      EffectArray.filter(p.cardArt ?? [], (art) => art.cardScheme != null && art.cardScheme !== ""),
+      (art) => CARD_SCHEMES[EffectString.toUpperCase(art.cardScheme ?? "")]
+    )
+  )
+
+  return schemes.size === 1 ? [...schemes][0] : undefined
+}
+
 const networkImpl = (p: ProductDetail, brandName: string): Network | undefined => {
   if (/american express/iu.test(brandName)) return "amex"
   const fromName = EffectArray.filter(NETWORKS, ([, re]) => re.test(p.name))
 
   if (fromName.length === 1) return required(fromName[0])[0]
+
+  const scheme = cardSchemeNetwork(p)
+
+  if (scheme !== undefined) return scheme
 
   const text = EffectArray.join(
     EffectArray.filter(
