@@ -9,7 +9,22 @@ FIELDS = (
     "fees.annual",
     "limits.min_credit",
     "rates.cash_advance",
+    "rates.interest_free_days",
+    "fees.late_payment",
+    "network",
+    "url",
 )
+
+
+def has(card, field):
+    value = card
+    for key in field.split("."):
+        if not isinstance(value, dict) or key not in value:
+            return False
+        value = value[key]
+    return True
+
+
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 cards = []
 for path in sorted((ROOT / "data/issuers").glob("*/cards/*.toml")):
@@ -19,8 +34,7 @@ for path in sorted((ROOT / "data/issuers").glob("*/cards/*.toml")):
 
 print(f"Active cards: {len(cards)}")
 for field in FIELDS:
-    section, key = field.split(".")
-    missing = [str(path) for path, card in cards if key not in card.get(section, {})]
+    missing = [str(path) for path, card in cards if not has(card, field)]
     filled = len(cards) - len(missing)
     percent = 100 * filled / len(cards) if cards else 0
     print(f"{field}: {filled}/{len(cards)} ({percent:.1f}%)")
