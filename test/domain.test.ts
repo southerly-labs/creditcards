@@ -22,6 +22,33 @@ test("credit limits and count fields reject impossible values", () => {
   assert.isFalse(Schema.is(Card)({ ...card, locked: ["fees.typo"] }))
 })
 
+test("field gaps name a decision field once, with a dated source", () => {
+  const card = {
+    name: "Test",
+    type: "personal",
+    status: "active",
+    first_seen: "2026-10-31",
+    fees: {},
+    rates: {},
+    limits: {},
+    perks: {}
+  }
+
+  const gap = {
+    field: "fees.late_payment",
+    reason: "not_stated",
+    checked: "2026-11-05",
+    sources: ["cdr", "https://bank.example/fees.pdf"]
+  }
+
+  assert.isTrue(Schema.is(Card)({ ...card, gaps: [gap, { ...gap, field: "network" }] }))
+  assert.isFalse(Schema.is(Card)({ ...card, gaps: [gap, gap] }))
+  assert.isFalse(Schema.is(Card)({ ...card, gaps: [{ ...gap, field: "fees.additional_card" }] }))
+  assert.isFalse(Schema.is(Card)({ ...card, gaps: [{ ...gap, sources: [] }] }))
+  assert.isFalse(Schema.is(Card)({ ...card, gaps: [{ ...gap, sources: ["bank.example"] }] }))
+  assert.isFalse(Schema.is(Card)({ ...card, gaps: [{ ...gap, checked: "5 Nov" }] }))
+})
+
 test("tiers compare within categories and cap periods", () => {
   assert.isTrue(orderedTiers([{ cap_monthly: 100 }, { category: "travel", cap_monthly: 50 }, {}]))
   assert.isFalse(orderedTiers([{ cap_monthly: 100 }, { cap_monthly: 100 }]))

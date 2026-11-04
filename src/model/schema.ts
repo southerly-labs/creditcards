@@ -69,6 +69,31 @@ export const RewardsReview = Schema.Struct({
 
 export type RewardsReview = typeof RewardsReview.Type
 
+export const DecisionField = Schema.Literals([
+  "network",
+  "url",
+  "fees.annual",
+  "fees.foreign_txn_pct",
+  "fees.late_payment",
+  "rates.purchase",
+  "rates.cash_advance",
+  "rates.interest_free_days",
+  "limits.min_credit"
+])
+
+export type DecisionField = typeof DecisionField.Type
+
+export const FieldGap = Schema.Struct({
+  field: DecisionField,
+  reason: Schema.Literals(["not_stated", "not_fixed", "blocked"]),
+  checked: CalendarDate,
+  sources: Schema.NonEmptyArray(Schema.Union([Schema.Literal("cdr"), WebUrl])),
+  quote: Schema.optionalKey(Schema.NonEmptyString),
+  note: Schema.optionalKey(Schema.NonEmptyString)
+})
+
+export type FieldGap = typeof FieldGap.Type
+
 const CardFields = Schema.Struct({
   name: Schema.NonEmptyString,
   type: CardType,
@@ -85,6 +110,7 @@ const CardFields = Schema.Struct({
   provenance: Schema.optionalKey(Provenance),
   offers: Schema.optionalKey(Schema.Array(Offer)),
   signup_review: Schema.optionalKey(SignupReview),
+  gaps: Schema.optionalKey(Schema.Array(FieldGap)),
   locked: Schema.optionalKey(Schema.Array(Schema.String)),
   cdr: Schema.optionalKey(
     Schema.Struct({
@@ -166,6 +192,11 @@ export const Card = CardFields.check(
   creditRange,
   earnTierOrder,
   Schema.makeFilter((card) => uniqueOfferIds(card.offers ?? []) || "Offer ids must be unique within a card"),
+  Schema.makeFilter(
+    (card) =>
+      new Set(EffectArray.map(card.gaps ?? [], (gap) => gap.field)).size === (card.gaps ?? []).length ||
+      "Each field can have only one gap"
+  ),
   Schema.makeFilter(
     (card) =>
       EffectArray.every(card.locked ?? [], (path) => recognizesLock(CardFields.ast, path)) || "Unrecognized lock path"

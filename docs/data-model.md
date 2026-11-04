@@ -30,6 +30,25 @@ loyalty text. `priority` determines precedence when multiple programs match.
 Issuer `cdr_brands` lists the Register brands whose products belong to the issuer.
 A card's `locked` entries are dotted paths the automated sync must not overwrite.
 
+## Field gaps
+
+`gaps` explains why a decision field is empty, so a blank is a checked fact
+rather than an unknown. Each entry names one `field` (`network`, `url`,
+`fees.annual`, `fees.foreign_txn_pct`, `fees.late_payment`, `rates.purchase`,
+`rates.cash_advance`, `rates.interest_free_days` or `limits.min_credit`), the
+`checked` date and the `sources` read (`"cdr"` for the card's CDR product
+response, or the issuer page or PDF URLs). `reason` is:
+
+- `not_stated`: no source read states the value.
+- `not_fixed`: a source states it, but not in the field's shape, such as a late
+  fee of "3% or $20, whichever is greater". `quote` holds the source's words.
+- `blocked`: a source could not be read, for example behind a bot challenge.
+  The check never tries to get past it.
+
+`quote` is a short verbatim extract and `note` any further explanation. A gap
+never holds an estimate. A gap left beside a filled value is stale and should
+be removed.
+
 ## Lifecycle dates
 
 - `first_seen`: the date this project first recorded the card. The sync sets it
