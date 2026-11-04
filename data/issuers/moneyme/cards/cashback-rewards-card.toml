@@ -6,6 +6,7 @@ description = "Digital credit card with cashback rewards. Purchase and cash adva
 url = "https://www.moneyme.com.au/credit-card"
 image = "https://cdn.moneyme.com.au/images/assets/cards/cashback-rewards-card.png"
 locked = [ "rewards.program", "rewards.partners" ]
+network = "mastercard"
 
 [provenance.sections.rewards]
 source_urls = [ "https://www.moneyme.com.au/credit-card" ]

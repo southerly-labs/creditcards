@@ -5,6 +5,7 @@ first_seen = "2026-10-31"
 description = "Keep all your everyday business purchase records in one place, with a BusinessChoice Everyday."
 image = "https://www.westpac.com.au/content/dam/public/wbc/images/business/credit-cards/wbc_fc_b_credit-cards_bus-choice-everyday-visa_232x146.png"
 url = "https://www.westpac.com.au/business-banking/credit-cards/low-rate-card/"
+network = "visa"
 
 [cdr]
 brand = "Westpac"

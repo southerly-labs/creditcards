@@ -5,6 +5,7 @@ first_seen = "2026-10-31"
 description = "Single and multi use virtual cards for corporate expenditure"
 url = "https://www.business.hsbc.com.au/en-au/solutions/corporate-card"
 image = "https://www.business.hsbc.com.au/en-au/solutions/virtual-card"
+network = "mastercard"
 
 [cdr]
 brand = "HSBC Bank Australia Limited – Wholesale Banking"
