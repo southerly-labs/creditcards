@@ -4,6 +4,8 @@ status = "active"
 first_seen = "2026-10-31"
 description = "Business Access Plus"
 url = "https://www.coastline.com.au/business/visa-business-credit-card"
+network = "visa"
+locked = [ "network" ]
 
 [cdr]
 brand = "Coastline Bank"
@@ -20,4 +22,8 @@ interest_free_days = 55
 min_credit = 500
 
 [perks]
+[provenance.sections.network]
+source_urls = [ "https://www.coastline.com.au/business/visa-business-credit-card" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "network = visa from the issuer's page: \"visa business credit card take care of business with fee-free transactions, low rates and no annual fee\". CDR does not publish it; the field is locked so the sync keeps it."
 

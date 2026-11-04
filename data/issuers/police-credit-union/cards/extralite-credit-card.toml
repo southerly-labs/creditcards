@@ -4,6 +4,8 @@ status = "active"
 first_seen = "2026-10-31"
 description = "Interest free day Credit Card"
 url = "https://www.policecu.com.au/PCUDocuments/Credit_Application_Form_Car_Loans_Personal%20Loans_&_Credit_Cards.pdf"
+locked = [ "rates.interest_free_days", "network" ]
+network = "visa"
 
 [cdr]
 brand = "Police Credit Union Ltd"
@@ -14,9 +16,19 @@ last_updated = "2026-04-27T11:31:49.000+09:30"
 [rates]
 purchase = 14.24
 cash_advance = 14.24
+interest_free_days = 44
 
 [limits]
 min_credit = 1000
 
 [perks]
+[provenance.sections.rates]
+source_urls = [ "https://www.policecu.com.au/products/extralite-credit-card" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "rates.interest_free_days = 44 from the issuer's page: \"get up to 44 days interest free on purchases\". CDR does not publish it; the field is locked so the sync keeps it."
+
+[provenance.sections.network]
+source_urls = [ "https://www.policecu.com.au/products/extralite-credit-card" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "network = visa from the issuer's page: \"access your money anytime, anywhere visa is accepted\". CDR does not publish it; the field is locked so the sync keeps it."
 

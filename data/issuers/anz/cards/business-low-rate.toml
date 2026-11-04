@@ -6,6 +6,7 @@ first_seen = "2026-10-31"
 description = "A credit card facility for businesses with a low interest ongoing interest rate"
 url = "https://www.anz.com.au/business/credit-cards/low-rate/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-003-anz-au.jpg"
+locked = [ "rates.interest_free_days" ]
 
 [cdr]
 brand = "ANZ"
@@ -21,6 +22,7 @@ late_payment = 35
 [rates]
 purchase = 12.99
 cash_advance = 14.49
+interest_free_days = 0
 
 [limits]
 min_credit = 1000
@@ -28,4 +30,9 @@ max_credit = 50000
 
 [perks]
 insurance = [ "Unauthorised Transactions Insurance" ]
+
+[provenance.sections.rates]
+source_urls = [ "https://www.anz.com.au/business/credit-cards/low-rate/" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "rates.interest_free_days = 0 from the issuer's page: \"interest free days on purchases 0 days\". CDR does not publish it; the field is locked so the sync keeps it."
 

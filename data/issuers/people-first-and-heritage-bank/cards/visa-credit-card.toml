@@ -5,6 +5,7 @@ status = "active"
 first_seen = "2026-10-31"
 description = "The People's Choice Credit Union Visa Credit card offers you the flexibility of more interest free days than most other cards. You can use it for anything from day to day purchases to paying bills or even withdrawing cash."
 url = "https://www.peoplefirstbank.com.au/loans/visa-credit-card"
+locked = [ "rates.interest_free_days" ]
 
 [[offers]]
 id = "intro-both"
@@ -27,9 +28,14 @@ foreign_txn_pct = 3
 [rates]
 purchase = 12.95
 cash_advance = 12.95
+interest_free_days = 62
 
 [limits]
 min_credit = 1000
 
 [perks]
+[provenance.sections.rates]
+source_urls = [ "https://www.peoplefirstbank.com.au/loans/visa-credit-card" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "rates.interest_free_days = 62 from the issuer's page: \"interest free period on purchases up to 62 days\". CDR does not publish it; the field is locked so the sync keeps it."
 

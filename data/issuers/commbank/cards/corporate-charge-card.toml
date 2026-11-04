@@ -6,6 +6,7 @@ description = "Ideal for large organisations with significant expenses. You can 
 image = "https://www.commbank.com.au/business/business-credit-cards.html"
 url = "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/corporate-charge-card.html"
 network = "mastercard"
+locked = [ "rates.interest_free_days" ]
 
 [cdr]
 brand = "CommBank"
@@ -20,8 +21,14 @@ cash_advance_min = 1.25
 [rates]
 purchase = 17.99
 cash_advance = 17.99
+interest_free_days = 31
 
 [limits]
 [perks]
 insurance = [ "Transit Accident Insurance", "Unauthorised Transaction Insurance" ]
+
+[provenance.sections.rates]
+source_urls = [ "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/corporate-charge-card.html" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "rates.interest_free_days = 31 from the issuer's page: \"purchases are interest free for up to 31 days from the date of purchase\". CDR does not publish it; the field is locked so the sync keeps it."
 

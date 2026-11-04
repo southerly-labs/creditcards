@@ -6,6 +6,7 @@ first_seen = "2026-10-31"
 description = "Low Rate Visa Credit Card"
 url = "https://www.firstoptionbank.com.au/credit-card-enquiry/"
 image = "https://firstoptionbank.com.au/wp-content/uploads/2020/11/Credit-Card-Mockup_blue-8.png"
+locked = [ "fees.late_payment" ]
 
 [cdr]
 brand = "First Option Bank"
@@ -14,6 +15,7 @@ last_updated = "2026-06-02T12:56:29.000+10:00"
 
 [fees]
 annual = 48
+late_payment = 0
 
 [rates]
 purchase = 10.49
@@ -24,4 +26,8 @@ interest_free_days = 45
 min_credit = 500
 
 [perks]
+[provenance.sections.fees]
+source_urls = [ "https://www.firstoptionbank.com.au/credit-card/" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "fees.late_payment = 0 from the issuer's page: \"late payment fee no late payment fee\". CDR does not publish it; the field is locked so the sync keeps it."
 

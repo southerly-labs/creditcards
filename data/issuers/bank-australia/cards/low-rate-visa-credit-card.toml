@@ -6,6 +6,7 @@ first_seen = "2026-10-31"
 description = "A lower interest rate to reduce your borrowing costs. Great for those who have a carryover balance each month."
 image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
 url = "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/"
+locked = [ "fees.late_payment" ]
 
 [cdr]
 brand = "Bank Australia"
@@ -17,6 +18,7 @@ annual = 0
 additional_card = 0
 foreign_txn_pct = 3
 cash_advance_min = 3.5
+late_payment = 0
 
 [rates]
 purchase = 12.34
@@ -27,4 +29,8 @@ balance_transfer = 0
 min_credit = 1000
 
 [perks]
+[provenance.sections.fees]
+source_urls = [ "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "fees.late_payment = 0 from the issuer's page: \"our lowest rate credit card comes with no late payment fees and no annual fee\". CDR does not publish it; the field is locked so the sync keeps it."
 
