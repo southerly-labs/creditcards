@@ -8,6 +8,16 @@ url = "https://application.virginmoney.com.au/virginmoney-form/virginmoney-card/
 image = "https://www.virginmoney.com.au/content/dam/virginmoney/cards/2026/credit-cards-vertical/application-form/flyer-credit-card.png"
 
 [[offers]]
+id = "first-year-fee"
+source = "cdr"
+
+[[offers.components]]
+kind = "fee_discount"
+fee = "annual"
+payable = 0
+months = 12
+
+[[offers]]
 id = "signup"
 source = "manual"
 
@@ -74,6 +84,9 @@ cap_monthly = 1500
 
 [[rewards.earn]]
 rate = 0.25
+
+[rewards.earn_review]
+state = "present"
 
 [perks]
 insurance = [ "Mobile Phone Insurance", "Purchase Protection Insurance", "Extended Warranty Insurance" ]
