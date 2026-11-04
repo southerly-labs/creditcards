@@ -5,6 +5,7 @@ status = "active"
 first_seen = "2026-10-31"
 description = "P&N Bank's Visa Platinum Credit Card offers flexible access to credit, up to 45 days interest free on purchases and other lifestyle features and benefits including insurance."
 image = "https://digital.pnbank.com.au/globalassets/internet-banking/onboarding/products/pn-platinum-visa-credit_oct25.png"
+url = "https://www.pnbank.com.au/cards/credit-cards/visa-platinum/"
 
 [cdr]
 brand = "P&N Bank"

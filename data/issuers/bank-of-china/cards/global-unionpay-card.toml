@@ -5,6 +5,7 @@ status = "active"
 first_seen = "2026-10-31"
 description = "The Bank of China Global UnionPay Card"
 image = "https://pic.bankofchina.com/branches/australia/202108/W020210827692909109857.jpg"
+url = "https://www.bankofchina.com/au/en/pbservice/pb4/202102/t20210211_19987339.html"
 
 [cdr]
 brand = "Bank of China"

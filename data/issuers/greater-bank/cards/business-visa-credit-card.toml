@@ -5,6 +5,7 @@ status = "active"
 first_seen = "2026-10-31"
 description = "Credit card for small business"
 image = "https://www.greater.com.au/globalassets/images/gb-cards/gb_visa_credit_card.png"
+url = "https://www.greater.com.au/business/services/"
 
 [cdr]
 brand = "Greater Bank"

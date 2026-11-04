@@ -4,6 +4,7 @@ network = "visa"
 status = "active"
 first_seen = "2026-10-31"
 description = "The People's Choice Credit Union Visa Credit card offers you the flexibility of more interest free days than most other cards. You can use it for anything from day to day purchases to paying bills or even withdrawing cash."
+url = "https://www.peoplefirstbank.com.au/loans/visa-credit-card"
 
 [[offers]]
 id = "intro-both"

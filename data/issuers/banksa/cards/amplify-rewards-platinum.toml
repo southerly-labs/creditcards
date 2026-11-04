@@ -5,6 +5,7 @@ status = "active"
 first_seen = "2026-10-31"
 description = "Our mid-tier credit card that lets you earn Amplify points"
 image = "https://www.banksa.com.au/content/dam/public/open-banking/BSA-Amplify-Platinum-Card-Art-232x146.png"
+url = "https://www.banksa.com.au/personal/credit-cards/rewards/amplify-platinum/summary"
 
 [[offers]]
 id = "signup"

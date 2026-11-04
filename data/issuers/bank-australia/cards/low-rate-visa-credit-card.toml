@@ -5,6 +5,7 @@ status = "active"
 first_seen = "2026-10-31"
 description = "A lower interest rate to reduce your borrowing costs. Great for those who have a carryover balance each month."
 image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
+url = "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/"
 
 [cdr]
 brand = "Bank Australia"

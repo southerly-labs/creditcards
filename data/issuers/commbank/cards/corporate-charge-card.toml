@@ -4,6 +4,7 @@ status = "active"
 first_seen = "2026-10-31"
 description = "Ideal for large organisations with significant expenses. You can set spending limits and access expense reports to monitor spending and forecast costs."
 image = "https://www.commbank.com.au/business/business-credit-cards.html"
+url = "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/corporate-charge-card.html"
 
 [cdr]
 brand = "CommBank"

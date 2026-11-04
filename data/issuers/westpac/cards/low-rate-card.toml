@@ -4,6 +4,7 @@ status = "active"
 first_seen = "2026-10-31"
 description = "Our Low Rate Card provides a lower interest rate on purchases, plus a lower monthly card fee to help reduce your credit card costs."
 image = "https://www.westpac.com.au/content/dam/public/wbc/images/personal/credit-cards/wbc_pp_p_credit-cards_low%20rate_232x146.png"
+url = "https://www.westpac.com.au/credit-cards/low-rate-cards/low-rate"
 
 [cdr]
 brand = "Westpac"

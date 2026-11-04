@@ -4,6 +4,7 @@ network = "visa"
 status = "active"
 first_seen = "2026-10-31"
 description = "A low rate credit card"
+url = "https://auswidebank.com.au/banking/credit-cards/low-rate-visa-credit-card/"
 
 [cdr]
 brand = "Auswide Bank Ltd"

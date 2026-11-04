@@ -5,6 +5,7 @@ status = "active"
 first_seen = "2026-10-31"
 description = "Our mid-tier credit card that lets you earn Amplify points"
 image = "https://www.bankofmelbourne.com.au/content/dam/public/open-banking/bom_p_credit-cards_amplify-platinum.png"
+url = "https://www.bankofmelbourne.com.au/personal/credit-cards/rewards/amplify-platinum/summary"
 
 [[offers]]
 id = "signup"
