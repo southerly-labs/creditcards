@@ -81,19 +81,21 @@ jobs:
 
       - name: Update earn-rate review issue
         env:
+          EARN_OUTCOME: ${{ steps.earn_pages.outcome }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          count=$(jq '(.rewards.review | length) + (.bonus.review | length)' .cache/sync-report.json)
-          changed=0
-          if [ -f .cache/earn-check.json ]; then
-            changed=$(jq '[.[] | select(.missing | length > 0)] | length' .cache/earn-check.json)
+          count=1
+          if [ -f .cache/earn-check.json ] && [ "$EARN_OUTCOME" = "success" ]; then
+            count=$(jq -s -f tools/sync/review-open.jq .cache/sync-report.json .cache/earn-check.json)
             printf '\n' >> .cache/rewards-review.md
             cat .cache/earn-check.md >> .cache/rewards-review.md
+          else
+            printf '\nIssuer page check failed; source verification remains unresolved.\n' >> .cache/rewards-review.md
           fi
           number=$(gh issue list --label rewards-review --state open --json number --jq '.[0].number')
-          if [ "$count" -eq 0 ] && [ "$changed" -eq 0 ]; then
+          if [ "$count" -eq 0 ]; then
             if [ -n "$number" ]; then
-              gh issue close "$number" --comment "All earn rates and signup bonuses are resolved."
+              gh issue close "$number" --comment "No open review tasks or unreadable issuer pages remain."
             fi
             exit 0
           fi
