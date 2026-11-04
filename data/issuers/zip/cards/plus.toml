@@ -21,4 +21,11 @@ min_credit = 2000
 max_credit = 20000
 
 [perks]
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr", "https://zip.co/au/zip-plus" ]
+quote = "interest free when your end of month balance is under $ 1,000"
+note = "No interest is charged in months that end under $1,000 owing; there is no fixed interest-free day count."
 

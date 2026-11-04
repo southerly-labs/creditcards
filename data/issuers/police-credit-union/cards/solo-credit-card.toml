@@ -19,4 +19,25 @@ cash_advance = 8.74
 min_credit = 1000
 
 [perks]
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.policecu.com.au/PCUDocuments/Fees_and_Charges_Personal_Credit_and_Overdraft.pdf" ]
+quote = "credit card late payment fee payable whenever your repayments become in arrears by 21 days or more. payable on the 21st day payable on the 35th day $15.00 $25.00"
+note = "Two fees: $15 at 21 days in arrears and $25 at 35 days."
+
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.policecu.com.au/product-type/credit-cards/", "https://www.policecu.com.au/PCUDocuments/Fees_and_Charges_Personal_Credit_and_Overdraft.pdf" ]
+note = "The credit cards page describes only the extralite card, and the SoLo product page could not be found."
+
+[[gaps]]
+field = "network"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.policecu.com.au/product-type/credit-cards/", "https://www.policecu.com.au/PCUDocuments/Fees_and_Charges_Personal_Credit_and_Overdraft.pdf" ]
+note = "The credit cards page describes only the extralite card, and the SoLo product page could not be found."
 

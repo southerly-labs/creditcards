@@ -49,4 +49,9 @@ url = "https://www.bankaust.com.au/banking/credit-cards/platinum-rewards-credit-
 expect = [ "earn 0.75 qantas points for every $1 spent" ]
 
 [perks]
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.bankaust.com.au/banking/credit-cards/platinum-rewards-credit-card", "https://www.bankaust.com.au/support/disclosures" ]
 

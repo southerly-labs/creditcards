@@ -35,3 +35,10 @@ source_urls = [ "https://www.commbank.com.au/business/business-credit-cards/card
 reviewed_at = "2026-11-04T23:15:29.057Z"
 correction_reason = "network = mastercard from the issuer's page: \"international transaction fee 2.50% when you make a transaction that is converted by mastercard from a foreign currency to australian dollars\". CDR does not publish it; the field is locked so the sync keeps it."
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/procurement-management-account.html", "https://www.commbank.com.au/business/pds/001-033-corporate-card-fees.pdf", "https://www.commbank.com.au/PMACOU" ]
+note = "The procurement management account fee table lists no late payment fee."
+

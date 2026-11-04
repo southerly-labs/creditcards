@@ -22,3 +22,10 @@ interest_free_days = 55
 [perks]
 insurance = [ "Complimentary unauthorised transaction insurance" ]
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.business.hsbc.com.au/en-au/solutions/corporate-card", "https://www.business.hsbc.com.au/en-au/form-downloads-and-interest-rates" ]
+note = "CDR publishes only a $30 \"Late Payment Reminder Fee\". The normaliser deliberately does not read reminder fees as late payment fees, and the pages state no late payment fee."
+

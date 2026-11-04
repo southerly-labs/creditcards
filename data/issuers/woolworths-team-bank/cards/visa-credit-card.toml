@@ -18,4 +18,17 @@ cash_advance = 13.45
 
 [limits]
 [perks]
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://woolworthsteambank.com.au/wp-content/uploads/2025/06/PDS-Fees-Charges-Transaction-Limits_07.2025_FINAL.pdf" ]
+note = "The card URL CDR publishes redirects to a home loans page."
+
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://woolworthsteambank.com.au/wp-content/uploads/2025/06/PDS-Fees-Charges-Transaction-Limits_07.2025_FINAL.pdf" ]
+note = "The card URL CDR publishes redirects to a home loans page."
 

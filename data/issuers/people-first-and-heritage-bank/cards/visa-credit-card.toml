@@ -39,3 +39,11 @@ source_urls = [ "https://www.peoplefirstbank.com.au/loans/visa-credit-card" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"
 correction_reason = "rates.interest_free_days = 62 from the issuer's page: \"interest free period on purchases up to 62 days\". CDR does not publish it; the field is locked so the sync keeps it."
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.peoplefirstbank.com.au/brc-8-1-6" ]
+quote = "arrears administration fee 1 of $25 per account"
+note = "The key facts sheet lists two $25 arrears administration fees under late payment fee, with different triggers (7 days after an arrears notice, and 20 days in arrears)."
+

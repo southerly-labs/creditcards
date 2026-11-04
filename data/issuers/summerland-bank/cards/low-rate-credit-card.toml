@@ -20,4 +20,9 @@ interest_free_days = 55
 
 [limits]
 [perks]
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://summerland.com.au/credit-cards", "https://www.summerland.com.au/detailed-credit-card-product-guide", "https://www.summerland.com.au/fees-charges-transaction-limits" ]
 

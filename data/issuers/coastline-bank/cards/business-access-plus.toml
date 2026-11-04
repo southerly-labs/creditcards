@@ -27,3 +27,9 @@ source_urls = [ "https://www.coastline.com.au/business/visa-business-credit-card
 reviewed_at = "2026-11-04T23:15:29.057Z"
 correction_reason = "network = visa from the issuer's page: \"visa business credit card take care of business with fee-free transactions, low rates and no annual fee\". CDR does not publish it; the field is locked so the sync keeps it."
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.coastline.com.au/business/visa-business-credit-card", "https://www.coastline.com.au/conditions-of-use/" ]
+

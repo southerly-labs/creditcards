@@ -27,4 +27,11 @@ min_credit = 1000
 max_credit = 3000
 
 [perks]
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_applicable"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.commbank.com.au/credit-cards.html" ]
+quote = "available credit limits $1,000, $2,000 or $3,000 interest free period on purchases n/a"
+note = "The card charges 0% p.a. on purchases."
 

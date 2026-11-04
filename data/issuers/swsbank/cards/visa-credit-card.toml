@@ -24,4 +24,9 @@ min_credit = 500
 max_credit = 20000
 
 [perks]
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.swsbank.com.au/loans/credit-facilities/visa-classic-credit-card/", "https://www.swsbank.com.au/help-support/rates-fees/fees-and-charges/" ]
 

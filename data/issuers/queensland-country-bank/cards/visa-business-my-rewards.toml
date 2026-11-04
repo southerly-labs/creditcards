@@ -50,4 +50,9 @@ url = "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochur
 expect = [ "every aud $150 charged to your my rewards card for eligible transactions will result in $1 of reward dollars", "$140 per month ($1,680 annually) for business my rewards card holders" ]
 
 [perks]
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.queenslandcountry.bank/business-banking/business-finance/business-visa-credit-card/", "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_fees-charges.pdf" ]
 

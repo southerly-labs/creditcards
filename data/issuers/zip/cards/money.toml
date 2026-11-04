@@ -21,4 +21,18 @@ min_credit = 1000
 max_credit = 5000
 
 [perks]
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr", "https://help.zip.co/hc/en-us/articles/360001583816-Does-Zip-charge-interest" ]
+quote = "a purchase made with zip money can receive an interest-free period of 3 to 60 months"
+note = "Each purchase has its own interest-free period, set by the merchant offer."
+
+[[gaps]]
+field = "network"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://zip.co/au/zip-money" ]
+note = "The page says Zip Pay and Zip Plus come with a Zip Visa card, but not Zip Money."
 

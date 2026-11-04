@@ -25,4 +25,9 @@ min_credit = 1000
 max_credit = 80000
 
 [perks]
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.beyondbank.com.au/bank-and-save/debit-and-credit-cards/low-rate-visa-credit-card/" ]
 

@@ -14,4 +14,21 @@ last_updated = "2026-10-31T02:15:41.000Z"
 [rates]
 [limits]
 [perks]
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.commbank.com.au/business/business-credit-cards/virtual-cards.html", "https://www.commbank.com.au/important-info/business/business-finance.html" ]
+
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.commbank.com.au/business/business-credit-cards/virtual-cards.html", "https://www.commbank.com.au/important-info/business/business-finance.html" ]
+
+[[gaps]]
+field = "network"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.commbank.com.au/business/business-credit-cards/virtual-cards.html", "https://www.commbank.com.au/important-info/business/business-finance.html" ]
 

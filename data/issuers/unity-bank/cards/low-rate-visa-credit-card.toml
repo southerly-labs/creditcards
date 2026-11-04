@@ -26,4 +26,10 @@ min_credit = 1000
 max_credit = 75000
 
 [perks]
+[[gaps]]
+field = "url"
+reason = "blocked"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.unity.bank/help/rates-fees/", "https://unity.bank/personal-loans/credit-card/low-rate-visa-credit-card/" ]
+note = "CDR publishes no applicationUri or overviewUri. unity.bank failed with transport errors from the checking host, so no product page could be confirmed."
 

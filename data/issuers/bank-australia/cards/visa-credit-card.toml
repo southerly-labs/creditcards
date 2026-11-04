@@ -27,4 +27,9 @@ interest_free_days = 55
 min_credit = 1000
 
 [perks]
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.bankaust.com.au/banking/credit-cards/visa-credit-card", "https://www.bankaust.com.au/support/disclosures" ]
 

@@ -24,4 +24,9 @@ interest_free_days = 55
 min_credit = 500
 
 [perks]
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.coastline.com.au/personal/visa-credit-card", "https://www.coastline.com.au/conditions-of-use/" ]
 
