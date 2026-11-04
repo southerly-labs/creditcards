@@ -19,6 +19,7 @@ cash_advance_min = 0
 late_payment = 15
 
 [rates]
+cash_advance = 21.74
 purchase = 19.99
 interest_free_days = 50
 

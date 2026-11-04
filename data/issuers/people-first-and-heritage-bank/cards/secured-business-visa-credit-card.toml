@@ -16,6 +16,7 @@ annual = 45
 foreign_txn_pct = 3
 
 [rates]
+purchase = 10.65
 cash_advance = 10.65
 interest_free_days = 40
 
