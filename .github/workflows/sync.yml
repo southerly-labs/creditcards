@@ -30,6 +30,11 @@ jobs:
       - name: Sync
         run: bun run sync
 
+      - name: Check issuer earn pages
+        id: earn_pages
+        continue-on-error: true
+        run: bun run cli rewards check --record-blocked
+
       # Bot pushes made with GITHUB_TOKEN do not trigger CI, so run the
       # full check here before anything reaches main.
       - name: Check
@@ -54,13 +59,6 @@ jobs:
             bun run check
           done
           exit 1
-
-      # Report only: compares manual earn rates with the issuer pages in
-      # rewards.earn_check and never writes data/. A failure here must not
-      # block the sync, so it is allowed to fail.
-      - name: Check issuer earn pages
-        continue-on-error: true
-        run: bun run cli rewards check
 
       - name: Report held changes
         env:

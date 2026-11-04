@@ -8,7 +8,7 @@ import { Argument, Command, Flag } from "effect/cli"
 import { FetchHttpClient } from "effect/http"
 import { toApi, validate } from "./build/build.ts"
 import { CdrClient } from "./cdr/CdrClient.ts"
-import { checkEarnPages, formatCheck, normaliseText, pageText } from "./rewards/check.ts"
+import { type CheckResult, checkEarnPages, formatCheck, normaliseText, pageText } from "./rewards/check.ts"
 import {
   bonusReviewQueue,
   formatBonusQueue,
@@ -21,6 +21,7 @@ import {
 import { applyComment } from "./review/apply.ts"
 import { ParsedComment } from "./review/commands.ts"
 import { Snapshots } from "./history/Snapshots.ts"
+import type { EarnCheck } from "./model/schema.ts"
 import { splitCardKey, Store } from "./store/Store.ts"
 import { summariseHolds, summariseReport, summariseRewardsReview, syncCdr } from "./sync/Sync.ts"
 import { Digest } from "effect/crypto"
@@ -151,9 +152,24 @@ const bonusStamp = Command.make(
   })
 ).pipe(Command.withDescription("Mark cards' signup bonuses as manually reviewed against the current CDR text"))
 
+function recordBlockedCheck(input: {
+  readonly check: EarnCheck
+  readonly results: ReadonlyArray<CheckResult>
+  readonly key: string
+  readonly since: string
+}): EarnCheck {
+  const { check, results, key, since } = input
+  const result = EffectArray.findFirst(results, (r) => r.card === key && r.url === check.url)
+
+  if (check.known_blocked !== undefined || Option.isNone(result) || result.value.error === undefined) return check
+
+  return { ...check, known_blocked: { reason: "Issuer page unreadable", evidence: result.value.error, since } }
+}
+
 const rewardsCheck = Command.make(
   "check",
   {
+    recordBlocked: Flag.Boolean("record-blocked").pipe(Flag.withDefault(false)),
     show: Flag.String("show").pipe(
       Flag.withDescription("Print the normalised text of one page, for picking quotes"),
       Flag.optional
@@ -163,16 +179,39 @@ const rewardsCheck = Command.make(
       Flag.withDefault(".cache")
     )
   },
-  Effect.fn(function* ({ show, reportDir }) {
+  Effect.fn(function* ({ show, reportDir, recordBlocked }) {
     if (Option.isSome(show)) return yield* Console.log(normaliseText(yield* pageText(show.value)))
-    const results = yield* checkEarnPages((yield* (yield* Store).load).cards)
+    const store = yield* Store
+    const { cards } = yield* store.load
+    const results = yield* checkEarnPages(cards)
+
+    if (recordBlocked) {
+      const since = DateTime.formatIsoDate(yield* DateTime.now)
+
+      for (const [key, card] of cards) {
+        const checks = card.rewards?.earn_check
+
+        if (checks === undefined || card.rewards === undefined) continue
+        const updated = EffectArray.map(checks, (check) => recordBlockedCheck({ check, results, key, since }))
+
+        if (EffectArray.some(updated, (check) => !EffectArray.contains(checks, check))) {
+          const { issuer, card: slug } = splitCardKey(key)
+          yield* store.writeCard(issuer, slug, { ...card, rewards: { ...card.rewards, earn_check: updated } })
+        }
+      }
+    }
+
     const report = formatCheck(results)
     yield* writeFile(`${reportDir}/earn-check.json`, yield* encodePrettyJson(results))
     yield* writeFile(`${reportDir}/earn-check.md`, report)
 
     return yield* Console.log(report)
   })
-).pipe(Command.withDescription("Check manual earn rates against the issuer pages in rewards.earn_check (report only)"))
+).pipe(
+  Command.withDescription(
+    "Check manual earn rates against the issuer pages in rewards.earn_check (use --record-blocked to retain failure evidence)"
+  )
+)
 
 const rewards = Command.make("rewards").pipe(
   Command.withDescription("Review earn rates and signup bonuses the parsers cannot read"),

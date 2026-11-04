@@ -2,7 +2,15 @@ import { assert, describe, expect, layer, test } from "@effect/vitest"
 import { Effect, Layer, String as EffectString, pipe } from "effect"
 import { HttpClient, HttpClientResponse } from "effect/http"
 import type { Card } from "../src/model/schema.ts"
-import { checkEarnPages, formatCheck, htmlText, missingQuotes, normaliseText } from "../src/rewards/check.ts"
+import {
+  classifyCheck,
+  needsPageReview,
+  checkEarnPages,
+  formatCheck,
+  htmlText,
+  missingQuotes,
+  normaliseText
+} from "../src/rewards/check.ts"
 
 describe("page text", () => {
   test("drops scripts, styles and comments, and separates elements", () => {
@@ -88,5 +96,28 @@ describe("checkEarnPages", () => {
         assert.include(report, "`x/gone` — https://a.example/missing: HTTP 404")
       })
     )
+  })
+})
+
+describe("known-blocked sources", () => {
+  const blocked = { reason: "Cloudflare challenge", evidence: "HTTP 403; cf-mitigated: challenge", since: "2026-11-01" }
+  const result = { card: "x/card", url: "https://example.com", missing: [], error: blocked.evidence }
+
+  test("keeps an unchanged block standing until 30 days", () => {
+    expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-11-04" }))).toBe(false)
+    expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-12-01" }))).toBe(true)
+    expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-11-01" }))).toBe(true)
+  })
+
+  test("resurfaces changed status and recovery, including unchanged quotes", () => {
+    expect(
+      needsPageReview(classifyCheck({ result: { ...result, error: "HTTP 404" }, blocked, date: "2026-11-04" }))
+    ).toBe(true)
+    expect(
+      needsPageReview(
+        classifyCheck({ result: { card: result.card, url: result.url, missing: [] }, blocked, date: "2026-11-04" })
+      )
+    ).toBe(true)
+    expect(needsPageReview(result)).toBe(true)
   })
 })

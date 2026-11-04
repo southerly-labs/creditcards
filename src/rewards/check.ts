@@ -1,8 +1,8 @@
 import { required } from "../util/required.ts"
-import { Effect, Result, Schedule, Schema, Array as EffectArray, String as EffectString, pipe } from "effect"
+import { DateTime, Effect, Result, Schedule, Schema, Array as EffectArray, String as EffectString, pipe } from "effect"
 import { HttpClient } from "effect/http"
 import { extractText, getDocumentProxy } from "unpdf"
-import type { Card } from "../model/schema.ts"
+import type { Card, EarnCheck } from "../model/schema.ts"
 import { dual } from "effect/Function"
 
 export class PageError extends Schema.TaggedError<PageError, { readonly brand: unique symbol }>()("PageError", {
@@ -114,7 +114,12 @@ export const pageText = Effect.fn("pageText")(function* (url: string) {
       Effect.mapError((cause) => PageError.make({ url, message: String(cause) }))
     )
 
-  if (response.status !== 200) return yield* PageError.make({ url, message: `HTTP ${response.status}` })
+  if (response.status !== 200) {
+    const challenge = response.headers["cf-mitigated"]
+    const evidence = `HTTP ${response.status}${challenge === undefined ? "" : `; cf-mitigated: ${challenge}`}`
+
+    return yield* PageError.make({ url, message: evidence })
+  }
 
   const bytes = new Uint8Array(
     yield* response.arrayBuffer.pipe(Effect.mapError((cause) => PageError.make({ url, message: String(cause) })))
@@ -132,12 +137,52 @@ export interface CheckResult {
   readonly missing: ReadonlyArray<string>
 
   readonly error?: string
+  readonly known_blocked?: EarnCheck["known_blocked"]
+  readonly attention?: string
 }
 
+export const classifyCheck = (input: {
+  readonly result: CheckResult
+  readonly blocked: EarnCheck["known_blocked"]
+  readonly date: string
+}): CheckResult => {
+  const { result, blocked, date } = input
+
+  if (blocked === undefined) return result
+
+  const age =
+    DateTime.toEpochMillis(DateTime.makeUnsafe(date)) - DateTime.toEpochMillis(DateTime.makeUnsafe(blocked.since))
+
+  const attention =
+    result.error === undefined
+      ? "Previously blocked page is readable again"
+      : result.error !== blocked.evidence
+        ? "Blocked page status changed"
+        : age <= 0
+          ? "First observation of unreadable source"
+          : age >= 30 * 86400000
+            ? "Page has been blocked for 30 days; review the source"
+            : undefined
+
+  return { ...result, known_blocked: blocked, ...(attention === undefined ? {} : { attention }) }
+}
+
+export const needsPageReview = (result: CheckResult): boolean =>
+  result.missing.length > 0 ||
+  result.attention !== undefined ||
+  (result.error !== undefined && result.known_blocked === undefined)
+
 export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: ReadonlyMap<string, Card>) {
+  const date = DateTime.formatIsoDate(yield* DateTime.now)
+
   const checks = EffectArray.flatMap([...cards], ([card, c]) =>
     c.status !== "discontinued"
-      ? EffectArray.map(c.rewards?.earn_check ?? [], (check) => ({ card, url: check.url, expect: check.expect }))
+      ? EffectArray.map(c.rewards?.earn_check ?? [], (check) => ({
+          card,
+          url: check.url,
+          expect: check.expect,
+          blocked: check.known_blocked
+        }))
       : []
   )
 
@@ -155,12 +200,14 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
     )
   )
 
-  const toCheckResult = ({ card, url, expect }: (typeof checks)[number]): CheckResult => {
+  const toCheckResult = ({ card, url, expect, blocked }: (typeof checks)[number]): CheckResult => {
     const text = required(texts.get(url))
 
-    return Result.isFailure(text)
+    const result = Result.isFailure(text)
       ? { card, url, missing: [], error: text.failure.message }
       : { card, url, missing: missingQuotes(text.success, expect) }
+
+    return classifyCheck({ result, blocked, date })
   }
 
   return EffectArray.map(checks, (check) => toCheckResult(check))
@@ -168,7 +215,8 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
 
 export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {
   const changed = EffectArray.filter(results, (r) => r.missing.length > 0)
-  const failed = EffectArray.filter(results, (r) => r.error !== undefined)
+  const failed = EffectArray.filter(results, (r) => r.error !== undefined && r.known_blocked === undefined)
+  const blocked = EffectArray.filter(results, (r) => r.known_blocked !== undefined)
 
   const lines = [
     `Issuer earn pages: ${results.length} checked, ${changed.length} changed, ${failed.length} unreadable.`,
@@ -193,6 +241,17 @@ export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {
     lines.push(
       "Unreadable (not checked this run):",
       ...EffectArray.map(failed, (r) => `- \`${r.card}\` — ${r.url}: ${r.error}`),
+      ""
+    )
+
+  if (blocked.length > 0)
+    lines.push(
+      "Standing known-blocked sources (quotes retained; checked on every run):",
+      ...EffectArray.map(
+        blocked,
+        (r) =>
+          `- \`${r.card}\` — ${r.url}: ${r.known_blocked?.reason}; ${r.error ?? "readable"}; since ${r.known_blocked?.since}${r.attention === undefined ? "" : ` — ACTION: ${r.attention}`}`
+      ),
       ""
     )
 
