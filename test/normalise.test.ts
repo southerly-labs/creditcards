@@ -3,6 +3,7 @@ import { assert, describe, expect, it, test } from "@effect/vitest"
 import { Effect, Schema, Array as EffectArray } from "effect"
 import {
   annualFee,
+  cardPageUrl,
   cashAdvanceRate,
   cardType,
   foreignTransactionFee,
@@ -136,6 +137,29 @@ describe("late payment fee", () => {
     expect(
       latePaymentFee([{ name: "Late Payment Fee", feeType: "EVENT", additionalInfo: "3% or $20" }])
     ).toBeUndefined()
+  })
+})
+
+describe("card page URL", () => {
+  const product = (extra: Partial<ProductDetail>): ProductDetail => ({
+    productId: "x",
+    name: "Card",
+    productCategory: "CRED_AND_CHRG_CARDS",
+    ...extra
+  })
+
+  test("prefers the application URI and falls back to the overview URI", () => {
+    const overview = { additionalInformation: { overviewUri: "https://bank.example/cards/low-rate" } }
+
+    expect(cardPageUrl(product({ applicationUri: "https://bank.example/apply", ...overview }))).toBe(
+      "https://bank.example/apply"
+    )
+    expect(cardPageUrl(product(overview))).toBe("https://bank.example/cards/low-rate")
+  })
+
+  test("skips an overview URI that is not an absolute web URL", () => {
+    expect(cardPageUrl(product({ additionalInformation: { overviewUri: "www.bank.example/cards" } }))).toBeUndefined()
+    expect(cardPageUrl(product({ additionalInformation: null }))).toBeUndefined()
   })
 })
 

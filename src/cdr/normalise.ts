@@ -6,8 +6,10 @@ import {
   Record as EffectRecord,
   pipe,
   Option,
-  Order
+  Order,
+  Schema
 } from "effect"
+import { WebUrl } from "../model/domain.ts"
 import { required } from "../util/required.ts"
 import type { CdrOfferInputs } from "../offers/build.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
@@ -344,6 +346,12 @@ export const network = dual<
   (p: ProductDetail, brandName: string) => Network | undefined
 >(2, networkImpl)
 
+const isWebUrl = Schema.is(WebUrl)
+
+export const cardPageUrl = (p: ProductDetail): string | undefined =>
+  p.applicationUri ??
+  pipe(Option.fromNullishOr(p.additionalInformation?.overviewUri), Option.filter(isWebUrl), Option.getOrUndefined)
+
 export const matchProgram = dual<
   (text: string) => (index: ProgramIndex) => string | undefined,
   (index: ProgramIndex, text: string) => string | undefined
@@ -449,7 +457,7 @@ const normaliseImpl = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult
       Option.filter((d) => d !== ""),
       Option.getOrUndefined
     ),
-    url: p.applicationUri ?? undefined,
+    url: cardPageUrl(p),
     image,
     cdr: defined({ brand: ctx.brandName, product_id: p.productId, last_updated: p.lastUpdated ?? undefined }),
     fees: defined({
