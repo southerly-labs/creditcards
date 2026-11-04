@@ -19,4 +19,17 @@ foreign_txn_pct = 3.5
 [rates]
 [limits]
 [perks]
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr" ]
+quote = "Three percent (3%) or $30, whichever is greater, will be charged on any overdue amount."
+note = "CDR publishes the late payment fee as a percentage of the overdue amount with a minimum, not a fixed amount."
+
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.americanexpress.com/au/business/payment-solutions/corporate-purchasing-card/" ]
 

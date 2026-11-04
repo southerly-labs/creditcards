@@ -19,3 +19,17 @@ foreign_txn_pct = 3.5
 [perks]
 insurance = [ "American Express® Business Travel Account Insurance" ]
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr" ]
+quote = "Three percent (3%) or $10, whichever is greater, will be charged on any overdue amount."
+note = "CDR publishes the late payment fee as a percentage of the overdue amount with a minimum, not a fixed amount."
+
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.americanexpress.com/au/business/payment-solutions/business-travel-account/" ]
+

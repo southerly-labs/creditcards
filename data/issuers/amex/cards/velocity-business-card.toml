@@ -40,3 +40,19 @@ category = "government"
 insurance = [ "Complimentary Travel Insurance" ]
 lounge_access = true
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr" ]
+quote = "Three percent (3%) or $20, whichever is greater, will be charged on any overdue amount."
+note = "CDR publishes the late payment fee as a percentage of the overdue amount with a minimum, not a fixed amount."
+
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.americanexpress.com/en-au/credit-cards/velocity-business-card/" ]
+quote = "up to 51 days to pay for purchases"
+note = "Charge card. The page states days to pay for purchases, not interest-free days."
+
