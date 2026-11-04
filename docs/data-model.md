@@ -46,8 +46,8 @@ response, or the issuer page or PDF URLs). `reason` is:
   The check never tries to get past it.
 
 `quote` is a short verbatim extract and `note` any further explanation. A gap
-never holds an estimate. A gap left beside a filled value is stale and should
-be removed.
+never holds an estimate. When the sync fills the field from CDR it drops the
+gap; a gap left beside a hand-filled value is stale and should be removed.
 
 ## Lifecycle dates
 

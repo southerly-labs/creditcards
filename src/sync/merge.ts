@@ -84,6 +84,13 @@ const mergeCardImpl = (existing: Card | undefined, incoming: NormalisedCard): Ob
     setPath(merged, path, structuredClone(getPath(incoming, path)))
   }
 
+  if (existing.gaps !== undefined) {
+    const gaps = EffectArray.filter(existing.gaps, (gap) => getPath(merged, gap.field) === undefined)
+
+    if (gaps.length > 0) merged["gaps"] = gaps
+    else delete merged["gaps"]
+  }
+
   merged["status"] = existing.status === "closed" ? "closed" : "active"
   delete merged["discontinued"]
   delete merged["missing_since"]

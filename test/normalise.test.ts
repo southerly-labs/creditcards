@@ -376,6 +376,42 @@ describe("merge and guardrails", () => {
     })
   )
 
+  it.effect("a gap is dropped once CDR fills its field and kept while it stays empty", () =>
+    Effect.gen(function* () {
+      const gap = { reason: "not_stated", checked: "2026-11-05", sources: ["cdr"] } as const
+
+      const withGaps: Card = {
+        ...existing,
+        gaps: [
+          { ...gap, field: "network" },
+          { ...gap, field: "fees.late_payment" }
+        ]
+      }
+
+      const incoming = {
+        name: "Card",
+        type: "personal",
+        network: "visa",
+        status: "active",
+        fees: { annual: 100 },
+        rates: { purchase: 20 },
+        limits: {},
+        rewards: { program: "qantas" },
+        perks: {}
+      } as const
+
+      const merged = yield* Schema.decodeUnknownEffect(Card)(mergeCard(withGaps, incoming))
+
+      assert.deepStrictEqual(merged.gaps, [{ ...gap, field: "fees.late_payment" }])
+
+      const filled = yield* Schema.decodeUnknownEffect(Card)(
+        mergeCard(withGaps, { ...incoming, fees: { annual: 100, late_payment: 20 } })
+      )
+
+      assert.isUndefined(filled.gaps)
+    })
+  )
+
   it.effect("a cdr.last_updated bump alone is not a change", () =>
     Effect.gen(function* () {
       const card: Card = { ...existing, cdr: { brand: "B", product_id: "p", last_updated: "2026-10-30" } }
