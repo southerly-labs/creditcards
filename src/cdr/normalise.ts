@@ -234,6 +234,16 @@ const ongoingRate = (rates: ReadonlyArray<LendingRate>, type: string, exclude?: 
     .map((r) => toPercent(r.rate))
     .find((r) => r !== undefined)
 
+export const cashAdvanceRate = (rates: ReadonlyArray<LendingRate>): number | undefined =>
+  ongoingRate(rates, "CASH_ADVANCE") ??
+  rates
+    .values()
+    .filter((r) => ["FIXED", "PURCHASE"].includes(r.lendingRateType))
+    .filter((r) => /cash advance(?: and balance transfer)? rate/iu.test(r.additionalValue ?? ""))
+    .filter((r) => !/introductory|first|months?/iu.test(`${r.additionalValue ?? ""} ${r.additionalInfo ?? ""}`))
+    .map((r) => toPercent(r.rate))
+    .find((r) => r !== undefined)
+
 export const introOffers = (rates: ReadonlyArray<LendingRate>): Array<IntroOffer> => {
   const offers: Array<IntroOffer> = []
 
@@ -451,8 +461,8 @@ const normaliseImpl = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult
       late_payment: latePaymentFee(fees)
     }),
     rates: defined({
-      purchase: ongoingRate(rates, "PURCHASE", /cash|balance|business secured/iu),
-      cash_advance: ongoingRate(rates, "CASH_ADVANCE"),
+      purchase: ongoingRate(rates, "PURCHASE", /cash|balance/iu),
+      cash_advance: cashAdvanceRate(rates),
       balance_transfer: ongoingRate(rates, "BALANCE_TRANSFER"),
       interest_free_days: interestFreeDays(p)
     }),

@@ -3,6 +3,7 @@ import { assert, describe, expect, it, test } from "@effect/vitest"
 import { Effect, Schema, Array as EffectArray } from "effect"
 import {
   annualFee,
+  cashAdvanceRate,
   cardType,
   foreignTransactionFee,
   introOffers,
@@ -23,6 +24,29 @@ const fixed = (name: string, amount: string, period?: string): Fee => ({
   feeMethodUType: "fixedAmount",
   fixedAmount: { amount },
   ...(period != null && period !== "" ? { additionalValue: period } : {})
+})
+
+describe("cash advance rate labels", () => {
+  test("reads an explicit ongoing cash rate even when its CDR type is wrong", () => {
+    for (const lendingRateType of ["FIXED", "PURCHASE"]) {
+      expect(
+        cashAdvanceRate([
+          { lendingRateType: "PURCHASE", rate: "0.1999", additionalValue: "purchase rate" },
+          { lendingRateType, rate: "0.2174", additionalValue: "cash advance and balance transfer rate" }
+        ])
+      ).toBe(21.74)
+    }
+  })
+
+  test("does not infer a cash rate from purchases or an introductory offer", () => {
+    expect(cashAdvanceRate([{ lendingRateType: "PURCHASE", rate: "0.1999" }])).toBeUndefined()
+    expect(
+      cashAdvanceRate([
+        { lendingRateType: "INTRODUCTORY", rate: "0", additionalValue: "cash advance rate" },
+        { lendingRateType: "FIXED", rate: "0", additionalValue: "cash advance rate for first 6 months" }
+      ])
+    ).toBeUndefined()
+  })
 })
 
 describe("fees", () => {
