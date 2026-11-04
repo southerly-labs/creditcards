@@ -279,8 +279,9 @@ export const introOffers = (rates: ReadonlyArray<LendingRate>): Array<IntroOffer
 }
 
 export const interestFreeDays = (p: ProductDetail): number | undefined => {
-  for (const f of p.features ?? []) {
-    if (f.featureType !== "INTEREST_FREE") continue
+  const features = EffectArray.filter(p.features ?? [], (f) => f.featureType === "INTEREST_FREE")
+
+  for (const f of features) {
     const iso = Option.flatMap(Option.fromNullishOr(f.additionalValue), EffectString.match(/^P(\d+)D$/u))
 
     if (Option.isSome(iso)) return Number(iso.value[1])
@@ -293,7 +294,50 @@ export const interestFreeDays = (p: ProductDetail): number | undefined => {
     if (Option.isSome(text)) return Number(text.value[1])
   }
 
-  return undefined
+  const bare = soleNumber(
+    EffectArray.join(
+      EffectArray.map(features, (f) => `${f.additionalValue ?? ""} ${f.additionalInfo ?? ""}`),
+      "\n"
+    ),
+    /^[\s[(]*(\d+)\s*days[\s\].)]*$/gmu
+  )
+
+  return bare ?? statedInterestFreeDays(productText(p))
+}
+
+const numbersIn = (text: string, pattern: RegExp) =>
+  new Set(EffectArray.map([...pipe(text, EffectString.matchAll(pattern))], (m) => Number(m[1])))
+
+const soleNumber = (text: string, pattern: RegExp): number | undefined => {
+  const numbers = numbersIn(text, pattern)
+
+  return numbers.size === 1 ? [...numbers][0] : undefined
+}
+
+const productText = (p: ProductDetail) =>
+  EffectArray.join(
+    EffectArray.filter(
+      [
+        p.description,
+        ...EffectArray.flatMap(p.features ?? [], (f) => [f.additionalValue, f.additionalInfo]),
+        ...EffectArray.flatMap(p.lendingRates ?? [], (r) => [r.additionalValue, r.additionalInfo])
+      ],
+      Predicate.isNotNullish
+    ),
+    " "
+  )
+
+const STATED_DAYS = /up to (\d+) (?:interest[- ]free days|days(?: of)? interest[- ]free)/giu
+
+const NO_DAYS =
+  /(?:\bwith no|\bdoes not (?:include|have|offer) an?) interest[- ]free days?(?: period)?\b(?!\s+(?:on|for)\b)/iu
+
+export const statedInterestFreeDays = (text: string): number | undefined => {
+  const stated = numbersIn(text, STATED_DAYS)
+
+  if (stated.size > 0) return stated.size === 1 ? [...stated][0] : undefined
+
+  return NO_DAYS.test(text) ? 0 : undefined
 }
 
 export const cardType = (p: ProductDetail): CardType => {

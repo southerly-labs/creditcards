@@ -8,11 +8,13 @@ import {
   cashAdvanceRate,
   cardType,
   foreignTransactionFee,
+  interestFreeDays,
   introOffers,
   latePaymentFee,
   makeProgramIndex,
   matchProgram,
   network,
+  statedInterestFreeDays,
   timesPerYear,
   toPercent
 } from "../src/cdr/normalise.ts"
@@ -139,6 +141,77 @@ describe("late payment fee", () => {
     expect(
       latePaymentFee([{ name: "Late Payment Fee", feeType: "EVENT", additionalInfo: "3% or $20" }])
     ).toBeUndefined()
+  })
+})
+
+describe("interest-free days", () => {
+  const card = (extra: Pick<ProductDetail, "description" | "features" | "lendingRates">): ProductDetail => ({
+    productId: "x",
+    name: "Card",
+    productCategory: "CRED_AND_CHRG_CARDS",
+    ...extra
+  })
+
+  test("reads INTEREST_FREE features", () => {
+    expect(interestFreeDays(card({ features: [{ featureType: "INTEREST_FREE", additionalValue: "P55D" }] }))).toBe(55)
+    expect(interestFreeDays(card({ features: [{ featureType: "INTEREST_FREE", additionalInfo: "[58 days" }] }))).toBe(
+      58
+    )
+  })
+
+  test("a later up-to statement wins over day counts in earlier features", () => {
+    expect(
+      interestFreeDays(
+        card({
+          features: [
+            { featureType: "INTEREST_FREE", additionalInfo: "Select your purchases in the app within 30 days." },
+            { featureType: "INTEREST_FREE", additionalInfo: "Up to 55 days interest free on general purchases." }
+          ]
+        })
+      )
+    ).toBe(55)
+  })
+
+  test("does not convert month durations into days", () => {
+    expect(
+      interestFreeDays(card({ features: [{ featureType: "INTEREST_FREE", additionalValue: "P2M1D" }] }))
+    ).toBeUndefined()
+  })
+
+  test("reads interest-free days stated in descriptions, other features and rate notes", () => {
+    expect(
+      interestFreeDays(card({ description: "You will also receive up to 55 days interest free on purchases." }))
+    ).toBe(55)
+    expect(
+      interestFreeDays(
+        card({ features: [{ featureType: "OTHER", additionalInfo: "Up to 55 days interest free period" }] })
+      )
+    ).toBe(55)
+    expect(
+      interestFreeDays(
+        card({
+          lendingRates: [
+            {
+              lendingRateType: "PURCHASE",
+              rate: "0.14",
+              additionalInfo: "Up to 55 interest free days on all purchases"
+            }
+          ]
+        })
+      )
+    ).toBe(55)
+  })
+
+  test("reads an explicit absence of interest-free days as zero", () => {
+    expect(statedInterestFreeDays("Low rate credit card with no interest free days. Interest charged monthly")).toBe(0)
+    expect(statedInterestFreeDays("Note, this product does not include an interest free day period.")).toBe(0)
+  })
+
+  test("ignores other day counts, conflicting counts and cash advance exclusions", () => {
+    expect(statedInterestFreeDays("Pay within up to 30 days of your statement")).toBeUndefined()
+    expect(statedInterestFreeDays("Up to 44 days interest free, or up to 55 days interest free")).toBeUndefined()
+    expect(statedInterestFreeDays("There are no interest free days on cash advances")).toBeUndefined()
+    expect(statedInterestFreeDays("Card with no interest free days for cash advances")).toBeUndefined()
   })
 })
 
