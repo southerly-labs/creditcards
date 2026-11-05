@@ -9,7 +9,7 @@ url = "https://www.newcastlepermanent.com.au/tools-and-services/apply-for-a-prod
 [cdr]
 brand = "Newcastle Permanent"
 product_id = "CC_valuepluscc"
-last_updated = "2026-08-25T00:00:00+10:00"
+last_updated = "2026-11-05T00:00:00+11:00"
 
 [fees]
 annual = 49
@@ -26,7 +26,6 @@ interest_free_days = 55
 [limits]
 min_credit = 500
 max_credit = 20000
-min_income = 20000
 
 [perks]
 

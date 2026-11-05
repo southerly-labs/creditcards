@@ -10,7 +10,7 @@ image = "https://www.greater.com.au/globalassets/images/gb-cards/gb_visa_credit_
 [cdr]
 brand = "Greater Bank"
 product_id = "3220"
-last_updated = "2026-09-23T14:00:00Z"
+last_updated = "2026-11-04T13:00:00Z"
 
 [fees]
 annual = 49
@@ -27,7 +27,6 @@ interest_free_days = 55
 [limits]
 min_credit = 1000
 max_credit = 25000
-min_income = 20000
 
 [perks]
 

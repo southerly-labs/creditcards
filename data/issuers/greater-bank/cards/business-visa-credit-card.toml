@@ -4,17 +4,18 @@ network = "visa"
 status = "active"
 first_seen = "2026-10-31"
 description = "Credit card for small business"
-image = "https://www.greater.com.au/globalassets/images/gb-cards/gb_visa_credit_card.png"
 url = "https://www.greater.com.au/business/services/"
+image = "https://www.greater.com.au/globalassets/images/gb-cards/gb_visa_credit_card.png"
 
 [cdr]
 brand = "Greater Bank"
 product_id = "3215"
-last_updated = "2026-09-23T14:00:00Z"
+last_updated = "2026-11-04T13:00:00Z"
 
 [fees]
 annual = 69
 foreign_txn_pct = 3
+cash_advance_pct = 2
 late_payment = 20
 
 [rates]
