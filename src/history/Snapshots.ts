@@ -143,7 +143,17 @@ export class Snapshots extends Context.Service<
               )
             : []
 
-          const latest = Option.getOrUndefined(EffectArray.last(EffectArray.sort(existing, Order.String)))
+          const name = `${date}.json`
+          const file = path.join(dir, name)
+
+          const latest = Option.getOrUndefined(
+            EffectArray.last(
+              EffectArray.sort(
+                EffectArray.filter(existing, (n) => n < name),
+                Order.String
+              )
+            )
+          )
 
           if (latest !== undefined) {
             const latestFile = path.join(dir, latest)
@@ -151,10 +161,13 @@ export class Snapshots extends Context.Service<
 
             const saved = yield* Schema.decodeEffect(Saved)(current).pipe(Effect.mapError(fail(latestFile)))
 
-            if (yield* sameProduct(snapshot, saved)) return false
+            if (yield* sameProduct(snapshot, saved)) {
+              if (existing.includes(name)) yield* fs.remove(file).pipe(Effect.mapError(fail(file)))
+
+              return false
+            }
           }
 
-          const file = path.join(dir, `${date}.json`)
           yield* fs.makeDirectory(dir, { recursive: true }).pipe(Effect.mapError(fail(file)))
           yield* fs.writeFileString(file, text).pipe(Effect.mapError(fail(file)))
 

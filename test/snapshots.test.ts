@@ -113,6 +113,17 @@ describe("CDR snapshots", () => {
       })
     )
 
+    it.effect("drops today's file when a later run today matches the day before again", () =>
+      Effect.gen(function* () {
+        const snapshots = yield* Snapshots
+        yield* snapshots.record("bank", "same-day", "2026-11-01", snapshot(99))
+        assert.isTrue(yield* snapshots.record("bank", "same-day", "2026-11-02", snapshot(129)))
+        assert.isFalse(yield* snapshots.record("bank", "same-day", "2026-11-02", snapshot(99)))
+        assert.deepStrictEqual(yield* listed("same-day"), ["2026-11-01.json"])
+        assert.isUndefined(yield* snapshots.lastChanged("bank", "same-day"))
+      })
+    )
+
     it.effect("ignores key order so reordered responses are not changes", () =>
       Effect.gen(function* () {
         assert.strictEqual(
