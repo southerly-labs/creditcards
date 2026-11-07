@@ -12,20 +12,16 @@ import {
 import type { Card } from "./schema.ts"
 
 export const lifecycleOf = (card: Card | undefined): CardLifecycle =>
-  card === undefined ? initialLifecycle : (card.lifecycle ?? lifecycleFromFlat(card))
+  card === undefined
+    ? initialLifecycle
+    : (card.lifecycle ?? lifecycleFromFlat({ ...card, status: card.status ?? "active" }))
+
+export const statusOf = (card: Card) => flatFromLifecycle(lifecycleOf(card))
 
 function replaceLifecycle(card: Card, lifecycle: CardLifecycle): Card {
   const { status: _status, closed: _closed, missing_since: _since, discontinued: _on, ...rest } = card
-  const { status, closed, missing_since, discontinued } = flatFromLifecycle(lifecycle)
 
-  return {
-    ...rest,
-    status,
-    ...(closed === undefined ? {} : { closed }),
-    ...(missing_since === undefined ? {} : { missing_since }),
-    ...(discontinued === undefined ? {} : { discontinued }),
-    lifecycle
-  }
+  return { ...rest, lifecycle }
 }
 
 export const isDelisted = (card: Card): boolean => ListingState.guards.Delisted(lifecycleOf(card).listing)

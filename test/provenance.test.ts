@@ -3,7 +3,7 @@ import { Effect, Exit, Schema } from "effect"
 import { Card } from "../src/model/schema.ts"
 import { sectionLocks } from "../src/provenance/schema.ts"
 import { mergeCard } from "../src/sync/merge.ts"
-import { notSeen, seen, withLifecycle } from "../src/model/lifecycle.ts"
+import { notSeen, seen, statusOf, withLifecycle } from "../src/model/lifecycle.ts"
 
 test("section corrections and provenance survive CDR merging", () => {
   const existing: Card = {
@@ -51,16 +51,16 @@ it.effect("a hand-set closed status survives CDR merging", () =>
       perks: {}
     }
 
-    const merged = withLifecycle(closed, yield* seen(closed))
+    const merged = statusOf(withLifecycle(closed, yield* seen(closed)))
     assert.strictEqual(merged.status, "closed")
     assert.strictEqual(merged.closed, "2025-06-01")
 
     const delisted: Card = { ...closed, status: "discontinued", discontinued: "2026-01-01" }
-    assert.strictEqual(withLifecycle(delisted, yield* seen(delisted)).status, "closed")
+    assert.strictEqual(statusOf(withLifecycle(delisted, yield* seen(delisted))).status, "closed")
 
     const { closed: _closed, ...sellingFields } = delisted
     const selling: Card = sellingFields
-    assert.strictEqual(withLifecycle(selling, yield* seen(selling)).status, "active")
+    assert.strictEqual(statusOf(withLifecycle(selling, yield* seen(selling))).status, "active")
   })
 )
 
@@ -99,13 +99,13 @@ it.effect("a card must be missing on two different days before it is discontinue
     }
 
     const marked = withLifecycle(card, yield* notSeen(card, "2026-11-01"))
-    assert.strictEqual(marked.missing_since, "2026-11-01")
+    assert.strictEqual(statusOf(marked).missing_since, "2026-11-01")
     assert.deepStrictEqual(withLifecycle(marked, yield* notSeen(marked, "2026-11-01")), marked)
 
-    const gone = withLifecycle(marked, yield* notSeen(marked, "2026-11-02"))
+    const gone = statusOf(withLifecycle(marked, yield* notSeen(marked, "2026-11-02")))
     assert.strictEqual(gone.status, "discontinued")
     assert.strictEqual(gone.discontinued, "2026-11-01")
     assert.isUndefined(gone.missing_since)
-    assert.isUndefined(withLifecycle(marked, yield* seen(marked)).missing_since)
+    assert.isUndefined(statusOf(withLifecycle(marked, yield* seen(marked))).missing_since)
   })
 )

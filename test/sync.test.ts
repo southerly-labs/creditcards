@@ -9,6 +9,7 @@ import { Store } from "../src/store/Store.ts"
 import { syncCdr } from "../src/sync/Sync.ts"
 import { required } from "../src/util/required.ts"
 import { Digest } from "effect/crypto"
+import { statusOf } from "../src/model/lifecycle.ts"
 
 const BASE_URI = "https://cdr.bank.example"
 const CARDLESS_URI = "https://cdr.cardless.example"
@@ -170,7 +171,7 @@ describe("syncCdr", () => {
           assert.deepStrictEqual(report.discontinued, [])
         }
 
-        const card = yield* storedCard("example-bank/card-p1")
+        const card = statusOf(yield* storedCard("example-bank/card-p1"))
         assert.strictEqual(card.status, "active")
         assert.isUndefined(card.missing_since)
       })
@@ -184,12 +185,12 @@ describe("syncCdr", () => {
         assert.deepStrictEqual((yield* syncOn(2, gone)).missing, ["example-bank/card-p1"])
         assert.deepStrictEqual((yield* syncOn(3, gone)).discontinued, ["example-bank/card-p1"])
 
-        const card = yield* storedCard("example-bank/card-p1")
+        const card = statusOf(yield* storedCard("example-bank/card-p1"))
         assert.strictEqual(card.status, "discontinued")
         assert.strictEqual(card.discontinued, "2026-11-02")
 
         yield* syncOn(4)
-        assert.strictEqual((yield* storedCard("example-bank/card-p1")).status, "active")
+        assert.strictEqual(statusOf(yield* storedCard("example-bank/card-p1")).status, "active")
       })
     )
 

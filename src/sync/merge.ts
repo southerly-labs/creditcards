@@ -138,7 +138,7 @@ export const EARN_PATHS = ["rewards.earn", "rewards.earn_source", "rewards.earn_
 
 export const OFFER_PATHS = ["offers", "signup_review"] as const
 
-const DIFFED_PATHS = [...CDR_OWNED_PATHS, "status", "discontinued", "missing_since", ...EARN_PATHS, ...OFFER_PATHS]
+const DIFFED_PATHS = [...CDR_OWNED_PATHS, "lifecycle", ...EARN_PATHS, ...OFFER_PATHS]
 
 const KEY_FIELDS = new Set(["fees.annual", "rates.purchase", "fees.foreign_txn_pct"])
 

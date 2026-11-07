@@ -102,11 +102,18 @@ export const CardStatus = Schema.Struct({
   discontinued: Schema.optionalKey(CalendarDate)
 })
 
+const LegacyCardStatus = Schema.Struct({
+  status: Schema.optionalKey(CardStatus.fields.status),
+  closed: CardStatus.fields.closed,
+  missing_since: CardStatus.fields.missing_since,
+  discontinued: CardStatus.fields.discontinued
+})
+
 const CardFields = Schema.Struct({
   name: Schema.NonEmptyString,
   type: CardType,
   network: Schema.optionalKey(Network),
-  ...CardStatus.fields,
+  ...LegacyCardStatus.fields,
   first_seen: CalendarDate,
   lifecycle: Schema.optionalKey(CardLifecycle),
   description: Schema.optionalKey(Schema.String),
@@ -180,7 +187,7 @@ export const earnTierOrder = Schema.makeFilter(
     "Earn tier ceilings must increase within each category and period; uncapped tiers must be last"
 )
 
-type CardStatusFields = Pick<typeof CardFields.Type, "status" | "closed" | "missing_since" | "discontinued">
+type CardStatusFields = typeof LegacyCardStatus.Type
 
 const statusAgrees = (card: CardStatusFields, lifecycle: CardLifecycle): boolean => {
   const flat = flatFromLifecycle(lifecycle)
@@ -193,9 +200,22 @@ const statusAgrees = (card: CardStatusFields, lifecycle: CardLifecycle): boolean
   )
 }
 
+const flatStatusOf = (card: CardStatusFields): CardStatusFields =>
+  card.status === undefined ? { status: "active" } : card
+
 export const Card = CardFields.check(
   Schema.makeFilter(
     (card) =>
+      card.status !== undefined ||
+      (card.lifecycle !== undefined &&
+        card.closed === undefined &&
+        card.missing_since === undefined &&
+        card.discontinued === undefined) ||
+      "A card needs a lifecycle; status, closed, missing_since and discontinued may only accompany it"
+  ),
+  Schema.makeFilter(
+    (card) =>
+      card.status === undefined ||
       (card.discontinued === undefined) === (card.status !== "discontinued") ||
       "A discontinued date goes with status discontinued, and status discontinued needs its date"
   ),
@@ -210,7 +230,8 @@ export const Card = CardFields.check(
   Schema.makeFilter(
     (card) =>
       card.lifecycle === undefined ||
-      statusAgrees(card, card.lifecycle) ||
+      card.status === undefined ||
+      statusAgrees(flatStatusOf(card), card.lifecycle) ||
       "lifecycle disagrees with status, closed, missing_since or discontinued"
   ),
   creditRange,

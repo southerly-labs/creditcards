@@ -1,12 +1,13 @@
 import type { Api } from "../../src/api/contract.ts"
 import { annualPoints, meetsSpendTarget } from "../../src/model/benefit.ts"
-import type { Card, Program } from "../../src/model/schema.ts"
+import type { Program } from "../../src/model/schema.ts"
+import type { PublicCard } from "../../src/api/contract.ts"
 import { offerStatus } from "../../src/offers/project.ts"
 import type { Offer, OfferComponent } from "../../src/offers/schema.ts"
 import { Array as EffectArray, Record as EffectRecord, Option, Order, String as EffectString, pipe } from "effect"
 import { dual } from "effect/Function"
 
-export type PublicCard = Omit<Card, "locked" | "lifecycle">
+export type { PublicCard }
 
 export type PublicProgram = Omit<Program, "aliases" | "priority"> & { readonly id: string }
 
