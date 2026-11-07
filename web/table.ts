@@ -1,4 +1,5 @@
 import type { Api, PublicCard } from "../src/api/contract.ts"
+import { choiceOf, SortEvent, SortState, stepSort, stepVisibility, VisibilityEvent, visibilityOf } from "./table-ui.ts"
 import { required } from "../src/util/required.ts"
 import {
   decodeMonthlySpend,
@@ -559,8 +560,7 @@ const rows: ReadonlyArray<Row> = EffectArray.flatMap(EffectRecord.toEntries(api.
   EffectArray.map(EffectRecord.toEntries(issuer.cards), ([cardId, card]) => makeRow(issuerId, issuer, cardId, card))
 )
 
-let sortIndex = 2
-let sortDir: "asc" | "desc" = "asc"
+let sort: SortState = SortState.cases.Ascending.make({ column: 2 })
 
 const COLUMNS_KEY = "creditcards.columns"
 
@@ -590,8 +590,17 @@ const toggleColumn = (e: Event) => {
 
   if (column === undefined) return
 
-  if (input.checked === (column.hiddenByDefault !== true)) delete columnChoices[column.id]
-  else columnChoices[column.id] = input.checked
+  const visibility = Effect.runSync(
+    stepVisibility(
+      visibilityOf(columnChoices[column.id]),
+      VisibilityEvent.cases.Picked.make({ checked: input.checked, shownByDefault: column.hiddenByDefault !== true })
+    )
+  )
+
+  const choice = choiceOf(visibility)
+
+  if (choice === undefined) delete columnChoices[column.id]
+  else columnChoices[column.id] = choice
   localStorage.setItem(COLUMNS_KEY, Effect.runSync(encodeJson(columnChoices)))
   render()
 }
@@ -599,7 +608,14 @@ const toggleColumn = (e: Event) => {
 $("column-list").addEventListener("change", toggleColumn)
 
 $("column-reset").addEventListener("click", () => {
-  for (const id of EffectRecord.keys(columnChoices)) delete columnChoices[id]
+  for (const id of EffectRecord.keys(columnChoices)) {
+    const choice = choiceOf(
+      Effect.runSync(stepVisibility(visibilityOf(columnChoices[id]), VisibilityEvent.cases.Reset.make({})))
+    )
+
+    if (choice === undefined) delete columnChoices[id]
+  }
+
   localStorage.setItem(COLUMNS_KEY, Effect.runSync(encodeJson(columnChoices)))
   renderColumnPicker()
   render()
@@ -611,9 +627,7 @@ const sortHead = (e: MouseEvent) => {
   const th = e.target instanceof HTMLElement ? e.target.closest("th") : null
 
   if (th === null) return
-  const i = Number(th.dataset["i"])
-  sortDir = i === sortIndex && sortDir === "asc" ? "desc" : "asc"
-  sortIndex = i
+  sort = Effect.runSync(stepSort(sort, SortEvent.cases.HeaderClicked.make({ column: Number(th.dataset["i"]) })))
   render()
 }
 
@@ -662,7 +676,8 @@ const render = () => {
   }
 
   const visible = EffectArray.filter(rows, (r) => matchesFilters(r))
-  const col = required(columns[sortIndex])
+  const col = required(columns[sort.column])
+  const sortDir = SortState.guards.Ascending(sort) ? "asc" : "desc"
   const sorted = EffectArray.sortWith(visible, col.sortValue, compare(sortDir))
   const shown = EffectArray.flatMap(columns, (c, i) => (isShown(c) ? [{ c, i }] : []))
 
@@ -670,7 +685,7 @@ const render = () => {
     EffectArray.map(
       shown,
       ({ c, i }) =>
-        `<th class="${c.num === true ? "num" : ""}" data-i="${i}"${i === sortIndex ? ` data-dir="${sortDir}"` : ""}>${c.label}</th>`
+        `<th class="${c.num === true ? "num" : ""}" data-i="${i}"${i === sort.column ? ` data-dir="${sortDir}"` : ""}>${c.label}</th>`
     ),
     ""
   )
