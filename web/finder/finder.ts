@@ -28,6 +28,18 @@ import {
   type SignupPoints
 } from "./model.ts"
 import {
+  type DialogName,
+  DialogEvent,
+  DialogState,
+  openDialog,
+  stepDialog,
+  stepTray,
+  TrayEvent,
+  TrayState,
+  trayIds,
+  trayOf
+} from "./ui.ts"
+import {
   Effect,
   Record as EffectRecord,
   String as EffectString,
@@ -159,6 +171,15 @@ const state: {
     COMPARE_LIMIT
   ),
   card: params.get("card") ?? ""
+}
+
+let openUi: DialogState = DialogState.cases.Browsing.make({})
+
+let compareTray: TrayState = trayOf(state.compare)
+
+const sendTray = (event: TrayEvent) => {
+  compareTray = Effect.runSync(stepTray(compareTray, event))
+  state.compare = trayIds(compareTray)
 }
 
 const goalOf = () => state.goal
@@ -895,19 +916,37 @@ const renderSheet = (id: string) => {
 
 const sheet = element("sheet", HTMLDialogElement)
 
+const dialogElements = (): ReadonlyArray<readonly [DialogName, HTMLDialogElement]> => [
+  ["sheet", sheet],
+  ["compare", element("compare", HTMLDialogElement)],
+  ["values", element("values", HTMLDialogElement)]
+]
+
+const sendDialog = (event: DialogEvent) => {
+  openUi = Effect.runSync(stepDialog(openUi, event))
+  const open = openDialog(openUi)
+
+  for (const [name, el] of dialogElements()) if (name !== open && el.open) el.close()
+
+  for (const [name, el] of dialogElements()) if (name === open && !el.open) el.showModal()
+  const card = DialogState.guards.Sheet(openUi) ? openUi.card : ""
+
+  if (card !== state.card) {
+    state.card = card
+    writeHash()
+  }
+}
+
 const openSheet = (id: string) => {
   if (!renderSheet(id)) return
-  state.card = id
-  writeHash()
-
-  if (!sheet.open) sheet.showModal()
+  sendDialog(DialogEvent.cases.OpenCard.make({ card: id }))
   sheet.scrollTop = 0
 }
 
-sheet.addEventListener("close", () => {
-  state.card = ""
-  writeHash()
-})
+for (const [name, el] of dialogElements())
+  el.addEventListener("close", () => {
+    sendDialog(DialogEvent.cases.Closed.make({ dialog: name }))
+  })
 
 interface CompareRow {
   readonly label: string
@@ -985,8 +1024,6 @@ const renderCompare = () => {
     <p class="dim">The best value in each row is marked.</p>`
 }
 
-const compareDialog = element("compare", HTMLDialogElement)
-
 const trayCard = (id: string) => {
   const e = entryById.get(id)
 
@@ -1008,22 +1045,18 @@ const renderTray = () => {
   )
 
   const button = element("open-compare", HTMLButtonElement)
-  button.disabled = state.compare.length < 2
-  button.textContent = state.compare.length < 2 ? "Pick one more" : `Compare ${state.compare.length}`
+  button.disabled = !TrayState.guards.Ready(compareTray)
+  button.textContent = TrayState.guards.Ready(compareTray) ? `Compare ${compareTray.ids.length}` : "Pick one more"
 }
 
 const togglePin = (id: string) => {
-  if (isCompared(id)) state.compare = EffectArray.filter(state.compare, (x) => x !== id)
-  else if (state.compare.length < COMPARE_LIMIT) state.compare = [...state.compare, id]
-  else state.compare = [...state.compare.slice(1), id]
+  sendTray(TrayEvent.cases.Toggle.make({ id, limit: COMPARE_LIMIT }))
   render()
 
-  if (sheet.open && state.card !== "") renderSheet(state.card)
+  if (DialogState.guards.Sheet(openUi)) renderSheet(openUi.card)
 
-  if (compareDialog.open) {
-    if (state.compare.length === 0) compareDialog.close()
-    else renderCompare()
-  }
+  if (TrayState.guards.Empty(compareTray)) sendDialog(DialogEvent.cases.TrayEmptied.make({}))
+  else if (DialogState.guards.Comparing(openUi)) renderCompare()
 }
 
 const renderValueGrid = () => {
@@ -1237,7 +1270,7 @@ search.addEventListener("input", () => {
 document.addEventListener("keydown", (e) => {
   const typing = e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement
 
-  if (e.key === "/" && !typing && !sheet.open && !compareDialog.open) {
+  if (e.key === "/" && !typing && DialogState.guards.Browsing(openUi)) {
     e.preventDefault()
     search.focus()
   }
@@ -1255,7 +1288,6 @@ const clickAnywhere = (e: MouseEvent) => {
   }
 
   if (open != null) {
-    if (compareDialog.open) compareDialog.close()
     openSheet(open.dataset["open"] ?? "")
 
     return
@@ -1283,19 +1315,18 @@ document.addEventListener(
 
 element("open-compare", HTMLButtonElement).addEventListener("click", () => {
   renderCompare()
-  compareDialog.showModal()
+  sendDialog(DialogEvent.cases.OpenCompare.make({}))
 })
 
 element("clear-compare", HTMLButtonElement).addEventListener("click", () => {
-  state.compare = []
+  sendTray(TrayEvent.cases.Clear.make({}))
   render()
+  sendDialog(DialogEvent.cases.TrayEmptied.make({}))
 })
-
-const valuesDialog = element("values", HTMLDialogElement)
 
 element("open-values", HTMLButtonElement).addEventListener("click", () => {
   renderValueGrid()
-  valuesDialog.showModal()
+  sendDialog(DialogEvent.cases.OpenValues.make({}))
 })
 
 const saveOverrides = () => store(OVERRIDES_KEY, Effect.runSync(encodeJson(overrides)))
