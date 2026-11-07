@@ -3,6 +3,8 @@ import { dual } from "effect/Function"
 import { Effect, Schema, Record as EffectRecord, Array as EffectArray } from "effect"
 import { type Api, type PublicCard } from "../api/contract.ts"
 import { datasetFreshness } from "../api/freshness.ts"
+import { flatFromLifecycle } from "../machine/cardLifecycle.ts"
+import { lifecycleOf } from "../model/lifecycle.ts"
 
 export type { Api } from "../api/contract.ts"
 
@@ -83,7 +85,18 @@ const toApiImpl = (dataset: Dataset, generatedAt?: string): Api => {
     }
   }
 
-  for (const [key, { locked: _l, lifecycle: _lifecycle, ...stored }] of dataset.cards) {
+  for (const [key, card] of dataset.cards) {
+    const {
+      locked: _l,
+      lifecycle: _lifecycle,
+      status: _status,
+      closed: _closed,
+      missing_since: _since,
+      discontinued: _discontinued,
+      ...stored
+    } = card
+
+    const { status, closed, missing_since, discontinued } = flatFromLifecycle(lifecycleOf(card))
     const { issuer, card: slug } = splitCardKey(key)
     const observedAt = dataset.observations?.get(key)
     const changedOn = dataset.changes?.get(key)
@@ -94,9 +107,14 @@ const toApiImpl = (dataset: Dataset, generatedAt?: string): Api => {
       ...(changedOn === undefined ? {} : { cdr_changed_on: changedOn })
     }
 
-    const card = { ...stored, ...(EffectRecord.keys<string, unknown>(provenance).length === 0 ? {} : { provenance }) }
-
-    required(issuers[issuer]).cards[slug] = card
+    required(issuers[issuer]).cards[slug] = {
+      ...stored,
+      status,
+      ...(closed === undefined ? {} : { closed }),
+      ...(missing_since === undefined ? {} : { missing_since }),
+      ...(discontinued === undefined ? {} : { discontinued }),
+      ...(EffectRecord.keys<string, unknown>(provenance).length === 0 ? {} : { provenance })
+    }
   }
 
   return {

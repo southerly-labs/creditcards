@@ -95,15 +95,19 @@ export const FieldGap = Schema.Struct({
 
 export type FieldGap = typeof FieldGap.Type
 
+export const CardStatus = Schema.Struct({
+  status: Schema.Literals(["active", "closed", "discontinued"]),
+  closed: Schema.optionalKey(CalendarDate),
+  missing_since: Schema.optionalKey(CalendarDate),
+  discontinued: Schema.optionalKey(CalendarDate)
+})
+
 const CardFields = Schema.Struct({
   name: Schema.NonEmptyString,
   type: CardType,
   network: Schema.optionalKey(Network),
-  status: Schema.Literals(["active", "closed", "discontinued"]),
+  ...CardStatus.fields,
   first_seen: CalendarDate,
-  closed: Schema.optionalKey(CalendarDate),
-  missing_since: Schema.optionalKey(CalendarDate),
-  discontinued: Schema.optionalKey(CalendarDate),
   lifecycle: Schema.optionalKey(CardLifecycle),
   description: Schema.optionalKey(Schema.String),
   url: Schema.optionalKey(WebUrl),

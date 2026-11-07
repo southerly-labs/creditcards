@@ -1,7 +1,17 @@
 import { Schema } from "effect"
-import { Card, creditRange, earnTierOrder, Program } from "../model/schema.ts"
+import { Card, CardStatus, creditRange, earnTierOrder, Program } from "../model/schema.ts"
 
-const { locked: _locked, lifecycle: _lifecycle, ...cardFields } = Card.fields
+const {
+  locked: _locked,
+  lifecycle: _lifecycle,
+  status: _status,
+  closed: _closed,
+  missing_since: _since,
+  discontinued: _discontinued,
+  ...storedFields
+} = Card.fields
+
+const cardFields = { ...storedFields, ...CardStatus.fields }
 const { aliases: _aliases, priority: _priority, ...programFields } = Program.fields
 
 export const PublicCard = Schema.Struct(cardFields).check(creditRange, earnTierOrder)
