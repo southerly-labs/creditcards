@@ -25,7 +25,14 @@ import { stepReview } from "../machine/review.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
-import { diffCard, type FieldChange, MAX_DISCONTINUED_SHARE, mergeCard, MIN_SEEN_SHARE } from "./merge.ts"
+import {
+  diffCard,
+  type FieldChange,
+  MAX_DISCONTINUED_SHARE,
+  mergeCard,
+  MIN_SEEN_SHARE,
+  observeMergedGaps
+} from "./merge.ts"
 import { isDelisted, lifecycleLocked, lifecycleOf, notSeen, seen, withLifecycle } from "../model/lifecycle.ts"
 import { ListingState } from "../machine/cardLifecycle.ts"
 
@@ -88,6 +95,8 @@ const proposeCard = Effect.fn("proposeCard")(function* (
   date: string
 ) {
   const merged = mergeCard(existing, normalised.card)
+
+  yield* observeMergedGaps(merged, existing)
 
   if (existing === undefined) merged["first_seen"] = date
   const mergedRewards = merged["rewards"]

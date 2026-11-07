@@ -4,6 +4,7 @@ import { required } from "../util/required.ts"
 import type { Card } from "../model/schema.ts"
 import type { NormalisedCard } from "../cdr/normalise.ts"
 import { dual } from "effect/Function"
+import { observeGaps } from "../machine/fieldGap.ts"
 
 export const CDR_OWNED_PATHS = [
   "name",
@@ -84,13 +85,6 @@ const mergeCardImpl = (existing: Card | undefined, incoming: NormalisedCard): Ob
     setPath(merged, path, structuredClone(getPath(incoming, path)))
   }
 
-  if (existing.gaps !== undefined) {
-    const gaps = EffectArray.filter(existing.gaps, (gap) => getPath(merged, gap.field) === undefined)
-
-    if (gaps.length > 0) merged["gaps"] = gaps
-    else delete merged["gaps"]
-  }
-
   const rewards = merged["rewards"]
 
   if (Predicate.isObject(rewards) && rewards["program"] === undefined && !isLocked(locked, "rewards"))
@@ -98,6 +92,14 @@ const mergeCardImpl = (existing: Card | undefined, incoming: NormalisedCard): Ob
 
   return merged
 }
+
+export const observeMergedGaps = Effect.fn("observeMergedGaps")(function* (merged: Obj, existing: Card | undefined) {
+  if (existing?.gaps === undefined) return
+  const gaps = yield* observeGaps(existing.gaps, (field) => getPath(merged, field) !== undefined)
+
+  if (gaps.length > 0) merged["gaps"] = gaps
+  else delete merged["gaps"]
+})
 
 export const mergeCard = dual<
   (incoming: NormalisedCard) => (existing: Card | undefined) => Obj,

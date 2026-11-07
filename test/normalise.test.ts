@@ -19,7 +19,7 @@ import {
   toPercent
 } from "../src/cdr/normalise.ts"
 import type { Fee, ProductDetail } from "../src/cdr/schema.ts"
-import { diffCard, holdReasons, mergeCard } from "../src/sync/merge.ts"
+import { diffCard, holdReasons, mergeCard, observeMergedGaps } from "../src/sync/merge.ts"
 import { cardSlug } from "../src/sync/issuers.ts"
 import { Card } from "../src/model/schema.ts"
 import { initialLifecycle } from "../src/machine/cardLifecycle.ts"
@@ -401,13 +401,15 @@ describe("merge and guardrails", () => {
         perks: {}
       } as const
 
-      const merged = yield* Schema.decodeUnknownEffect(Card)(mergeCard(withGaps, incoming))
+      const mergedFields = mergeCard(withGaps, incoming)
+      yield* observeMergedGaps(mergedFields, withGaps)
+      const merged = yield* Schema.decodeUnknownEffect(Card)(mergedFields)
 
       assert.deepStrictEqual(merged.gaps, [{ ...gap, field: "fees.late_payment" }])
 
-      const filled = yield* Schema.decodeUnknownEffect(Card)(
-        mergeCard(withGaps, { ...incoming, fees: { annual: 100, late_payment: 20 } })
-      )
+      const filledFields = mergeCard(withGaps, { ...incoming, fees: { annual: 100, late_payment: 20 } })
+      yield* observeMergedGaps(filledFields, withGaps)
+      const filled = yield* Schema.decodeUnknownEffect(Card)(filledFields)
 
       assert.isUndefined(filled.gaps)
     })
