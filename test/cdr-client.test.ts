@@ -21,12 +21,21 @@ const mixed = [
 const requests: Array<string> = []
 let hangFirst = false
 
+const endless = (url: URL) => {
+  const next = new URL(url)
+  next.searchParams.set("page", String(Number(url.searchParams.get("page") ?? "1") + 1))
+
+  return Response.json({ data: { products: [] }, links: { next: next.toString() } })
+}
+
 const reply = (request: Parameters<Parameters<typeof HttpClient.make>[0]>[0], url: URL) =>
   HttpClientResponse.fromWeb(
     request,
-    url.hostname === "reject.example" && url.searchParams.has("product-category")
-      ? new Response("bad request", { status: 400 })
-      : page(mixed)
+    url.hostname === "endless.example"
+      ? endless(url)
+      : url.hostname === "reject.example" && url.searchParams.has("product-category")
+        ? new Response("bad request", { status: 400 })
+        : page(mixed)
   )
 
 const respond = Effect.fn("respond")(function* (
@@ -79,6 +88,17 @@ describe("CdrClient.listProducts", () => {
           ["card"]
         )
         assert.strictEqual(requests.at(-1), "https://reject.example/cds-au/v1/banking/products?page-size=100")
+      })
+    )
+
+    it.effect("fails rather than return a truncated list when the pages run past the cap", () =>
+      Effect.gen(function* () {
+        yield* reset()
+        const cdr = yield* CdrClient
+        const error = yield* Effect.flip(cdr.listProducts("https://endless.example", "CRED_AND_CHRG_CARDS"))
+
+        assert.include(error.message, "More than 20 pages")
+        assert.strictEqual(requests.length, 20)
       })
     )
 

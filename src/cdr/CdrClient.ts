@@ -19,6 +19,8 @@ const LENDING_INDUSTRIES = new Set(["banking", "non-bank-lending"])
 const PRODUCTS_MAX_VERSION = 6
 const PRODUCT_DETAIL_MAX_VERSION = 8
 
+const MAX_PAGES = 20
+
 export class CdrError extends Schema.TaggedError<CdrError, { readonly brand: unique symbol }>()("CdrError", {
   url: Schema.String,
   status: Schema.optional(Schema.Finite),
@@ -111,7 +113,10 @@ export class CdrClient extends Context.Service<
 
         let url: string | null | undefined = firstUrl
 
-        for (let page = 0; url != null && url !== "" && page < 20; page++) {
+        for (let page = 0; url != null && url !== ""; page++) {
+          if (page === MAX_PAGES)
+            return yield* CdrError.make({ url, message: `More than ${MAX_PAGES} pages of products; not all listed` })
+
           const { body }: { body: unknown } = yield* getVersioned(url, PRODUCTS_MAX_VERSION, variant)
 
           const decoded: typeof ProductsPage.Type = yield* decodeProductsPage(body).pipe(
