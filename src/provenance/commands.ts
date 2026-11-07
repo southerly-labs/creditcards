@@ -1,4 +1,4 @@
-import { Console, DateTime, Effect, Option, Schema } from "effect"
+import { Console, DateTime, Effect, Array as EffectArray, Option, Schema } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import { splitCardKey, Store, StoreError } from "../store/Store.ts"
 import { Card } from "../model/schema.ts"
@@ -42,6 +42,29 @@ const correct = Command.make(
   })
 )
 
+const unlock = Command.make(
+  "unlock",
+  { key: Argument.String("card"), path: Flag.String("path") },
+  Effect.fn(function* ({ key, path }) {
+    const store = yield* Store
+    const card = (yield* store.load).cards.get(key)
+
+    if (card === undefined) return yield* StoreError.make({ file: key, message: "Unknown card" })
+    const state = yield* stepLock(lockStateOf(card, path), LockEvent.cases.Unlock.make({}))
+
+    if (!LockState.guards.Unlocked(state) || !(card.locked ?? []).includes(path))
+      return yield* StoreError.make({ file: key, message: `${path} is not locked` })
+    const { locked: _locked, ...rest } = card
+    const locked = EffectArray.filter(card.locked ?? [], (entry) => entry !== path)
+    const parts = splitCardKey(key)
+
+    yield* store.writeCard(parts.issuer, parts.card, locked.length === 0 ? rest : { ...rest, locked })
+    yield* Console.log(`Unlocked ${key} ${path}; the next sync may overwrite it from CDR`)
+
+    return undefined
+  })
+).pipe(Command.withDescription("Release a locked path so the sync owns it again (its provenance review is kept)"))
+
 const inspect = Command.make(
   "inspect",
   {},
@@ -71,4 +94,4 @@ const inspect = Command.make(
   })
 )
 
-export const provenanceCommand = Command.make("provenance").pipe(Command.withSubcommands([correct, inspect]))
+export const provenanceCommand = Command.make("provenance").pipe(Command.withSubcommands([correct, unlock, inspect]))

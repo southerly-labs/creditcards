@@ -24,7 +24,12 @@ rewards. For rewards it locks only the fields CDR owns, `rewards.program` and
 (`rewards stamp`, `rewards bonus-stamp`, `source = "manual"` offers), so the lock
 never blocks the parsers.
 
-`bun run cli provenance inspect` reports locks with no section review or a review
-at least 90 days old. This is report-only; it never unlocks corrections.
+Each locked path follows the section lock machine (`src/machine/sectionLock.ts`):
+Fresh after a correction, Stale once its section review is 90 days old, or Undated
+when its section has no review. `bun run cli provenance inspect` reports stale and
+undated locks. It is report-only and never unlocks a path. To hand a path back to
+the sync, run `bun run cli provenance unlock issuer/card --path <path>`. The
+section's provenance review is kept as history, and the next sync may overwrite
+the value from CDR.
 A CDR observation does not reset this age. Source URLs are supplied by the reviewer;
 the correction command does not fetch or verify their contents.
