@@ -35,6 +35,7 @@ import {
 } from "./merge.ts"
 import { isDelisted, lifecycleLocked, lifecycleOf, notSeen, seen, withLifecycle } from "../model/lifecycle.ts"
 import { ListingState } from "../machine/cardLifecycle.ts"
+import { fetched as fetchedEvent, FetchState, reportedFailure, settleFetch, stepFetch } from "../machine/brandFetch.ts"
 
 const CATEGORY = "CRED_AND_CHRG_CARDS"
 
@@ -172,8 +173,6 @@ const previousCard = Effect.fn("previousCard")(function* (
   return proposal.card === undefined ? undefined : { date: snapshot.date, card: proposal.card }
 })
 
-const retryable = (b: BrandFetch) => b.listError !== undefined && !/HTTP 4\d\d/u.test(b.listError)
-
 export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRun: boolean }) {
   const cdr = yield* CdrClient
   const store = yield* Store
@@ -249,8 +248,12 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   const firstPass = yield* Effect.forEach(brands, fetchBrand, { concurrency: 16 })
 
+  const firstStates = yield* Effect.forEach(firstPass, (result) =>
+    stepFetch(FetchState.cases.FirstTry.make({}), fetchedEvent(result.listError))
+  )
+
   const retried = yield* Effect.forEach(
-    EffectArray.filter(brands, (_, i) => retryable(required(firstPass[i]))),
+    EffectArray.filter(brands, (_, i) => FetchState.guards.Retrying(required(firstStates[i]))),
     (brand) => fetchBrand(brand),
     { concurrency: 1 }
   )
@@ -258,6 +261,10 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const fetched = EffectArray.map(
     firstPass,
     (result) => Option.getOrUndefined(EffectArray.findFirst(retried, (retry) => retry.brand === result.brand)) ?? result
+  )
+
+  const finalStates = yield* Effect.forEach(fetched, (result, i) =>
+    settleFetch(required(firstStates[i]), result.listError)
   )
 
   const cardsSeen = EffectArray.reduce(fetched, 0, (n, b) => n + b.products.length)
@@ -473,7 +480,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   holds.push(...EffectArray.filter(priorHolds, (hold) => !evaluated.has(hold.card) && cards.has(hold.card)))
 
-  const failedBrands = EffectArray.filter(fetched, (b) => retryable(b))
+  const failedBrands = EffectArray.filter(fetched, (_, i) => reportedFailure(required(finalStates[i])))
 
   let snapshotsSaved = 0
 
