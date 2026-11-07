@@ -4,6 +4,7 @@ import { Digest } from "effect/crypto"
 import { Card } from "../src/model/schema.ts"
 import type { Hold } from "../src/model/holds.ts"
 import { HoldState } from "../src/machine/hold.ts"
+import { SourceReview } from "../src/machine/review.ts"
 import {
   type HoldCandidate,
   holdCandidates,
@@ -24,7 +25,8 @@ const base: Card = {
   rates: { purchase: 20 },
   limits: {},
   perks: {},
-  rewards: { program: "qantas", earn: [{ rate: 1 }], earn_source: "parser", earn_text_hash: "old" }
+  rewards: { program: "qantas", earn: [{ rate: 1 }] },
+  earn_state: SourceReview.cases.Parsed.make({ hash: "old" })
 }
 
 describe("field-level holds", () => {
@@ -41,18 +43,21 @@ describe("field-level holds", () => {
     })
   )
 
-  it.effect("a held earn rate reverts its source, hash and review with it", () =>
+  it.effect("a held earn rate reverts its review state with it", () =>
     Effect.gen(function* () {
       const proposed = {
         ...base,
-        rewards: { program: "qantas", earn: [{ rate: 3 }], earn_source: "parser" as const, earn_text_hash: "new" }
+        rewards: { program: "qantas", earn: [{ rate: 3 }] },
+        earn_state: SourceReview.cases.Parsed.make({ hash: "new" })
       }
 
       assert.deepStrictEqual(
         EffectArray.map(yield* holdCandidates(base, proposed), (c) => c.change),
         ["rewards.earn"]
       )
-      assert.deepStrictEqual(revertChange(proposed, base, "rewards.earn")?.rewards, base.rewards)
+      const reverted = revertChange(proposed, base, "rewards.earn")
+      assert.deepStrictEqual(reverted?.rewards, base.rewards)
+      assert.deepStrictEqual(reverted?.earn_state, base.earn_state)
     })
   )
 
@@ -199,7 +204,7 @@ describe("offer holds", () => {
   const withSignup = (points: number, source?: "parser" | "cdr" | "manual") => ({
     ...base,
     offers: [signup(points, source)],
-    signup_review: { state: "present" as const, source: "parser" as const, text_hash: `h${points}` }
+    signup_state: SourceReview.cases.Parsed.make({ hash: `h${points}` })
   })
 
   it.effect("a generated offer that disappears waits a day to confirm", () =>
@@ -211,11 +216,10 @@ describe("offer holds", () => {
         [["offers.signup", "confirm"]]
       )
       assert.deepStrictEqual(revertChange(base, withSignup(100_000), "offers.signup")?.offers, [signup(100_000)])
-      assert.deepStrictEqual(revertChange(base, withSignup(100_000), "offers.signup")?.signup_review, {
-        state: "present",
-        source: "parser",
-        text_hash: "h100000"
-      })
+      assert.deepStrictEqual(
+        revertChange(base, withSignup(100_000), "offers.signup")?.signup_state,
+        SourceReview.cases.Parsed.make({ hash: "h100000" })
+      )
     })
   )
 

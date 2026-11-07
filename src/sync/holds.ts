@@ -29,7 +29,7 @@ export interface HoldCandidate {
 }
 
 const REVERTED_WITH: Readonly<Record<string, ReadonlyArray<string>>> = {
-  "rewards.earn": ["rewards.earn", "rewards.earn_source", "rewards.earn_text_hash", "rewards.earn_review", "earn_state"]
+  "rewards.earn": ["rewards.earn", "earn_state"]
 }
 
 const OFFER_PREFIX = "offers."
@@ -96,14 +96,12 @@ const revertOffer = (card: Card, existing: Card, id: string): Card => {
   const after = card.offers ?? []
   const kept = EffectArray.flatMap(after, (offer) => (offer.id !== id ? [offer] : before === undefined ? [] : [before]))
   const offers = before !== undefined && !EffectArray.some(after, (offer) => offer.id === id) ? [...kept, before] : kept
-  const { offers: _offers, signup_review: _review, signup_state: _state, ...rest } = card
-  const review = id === "signup" ? existing.signup_review : card.signup_review
+  const { offers: _offers, signup_state: _state, ...rest } = card
   const state = id === "signup" ? existing.signup_state : card.signup_state
 
   return {
     ...rest,
     ...(offers.length === 0 ? {} : { offers }),
-    ...(review === undefined ? {} : { signup_review: review }),
     ...(state === undefined ? {} : { signup_state: state })
   }
 }

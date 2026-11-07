@@ -1,11 +1,10 @@
 import { jsonEqual } from "../util/json.ts"
 import { Data, Effect } from "effect"
 import type { BonusTranche, Card, EarnRate } from "../model/schema.ts"
-import type { SignupReview } from "../offers/schema.ts"
 import { BonusResult, parseBonus } from "./bonus.ts"
 import { type LoyaltyFeature, ParseResult, parseEarn } from "./parse.ts"
 import { SourceReview, stepReview } from "../machine/review.ts"
-import { bonusRead, earnRead, earnStateOf, signupStateOf } from "./state.ts"
+import { bonusRead, earnRead, earnStateOf } from "./state.ts"
 import { dual } from "effect/Function"
 
 export type RewardsPlan =
@@ -54,34 +53,26 @@ export type BonusPlan =
 export const BonusPlan = Data.taggedEnum<BonusPlan>()
 
 export interface SignupState {
-  readonly review: SignupReview | undefined
+  readonly state: SourceReview
   readonly parsed: ReadonlyArray<BonusTranche> | undefined
 }
 
-const cleared: SignupState = { review: { state: "unknown" }, parsed: undefined }
-
 export const applyBonusPlan = dual<
-  (plan: BonusPlan) => (current: SignupState) => SignupState,
-  (current: SignupState, plan: BonusPlan) => SignupState
->(2, (current: SignupState, plan: BonusPlan): SignupState =>
+  (plan: BonusPlan) => (current: SignupState) => ReadonlyArray<BonusTranche> | undefined,
+  (current: SignupState, plan: BonusPlan) => ReadonlyArray<BonusTranche> | undefined
+>(2, (current: SignupState, plan: BonusPlan): ReadonlyArray<BonusTranche> | undefined =>
   BonusPlan.$match(plan, {
-    Unchanged: () => current,
-    Set: ({ bonus, hash }) => ({
-      review: { state: "present" as const, source: "parser" as const, text_hash: hash },
-      parsed: bonus
-    }),
-    Clear: () => cleared,
-    Review: ({ clear }) => (clear ? cleared : current)
+    Unchanged: () => current.parsed,
+    Set: ({ bonus }) => bonus,
+    Clear: () => undefined,
+    Review: ({ clear }) => (clear ? undefined : current.parsed)
   })
 )
-
-const signupPrevious = (current: SignupState): SourceReview =>
-  signupStateOf(current.review === undefined ? {} : { signup_review: current.review })
 
 export const planBonus = Effect.fn("planBonus")(function* (
   current: SignupState,
   features: ReadonlyArray<LoyaltyFeature>,
-  previous: SourceReview = signupPrevious(current)
+  previous: SourceReview = current.state
 ) {
   const read = yield* bonusRead(features)
   const next = yield* stepReview(previous, read)

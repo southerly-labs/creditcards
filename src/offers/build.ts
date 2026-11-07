@@ -1,6 +1,8 @@
 import type { BonusTranche, Card, IntroOffer } from "../model/schema"
 import type { SignupState } from "../rewards/plan"
-import type { Offer, OfferComponent, SignupReview } from "./schema"
+import type { Offer, OfferComponent } from "./schema"
+import { reviewedNone } from "../machine/review.ts"
+import { signupStateOf } from "../rewards/state.ts"
 import { Array as EffectArray, Option, pipe } from "effect"
 import { dual } from "effect/Function"
 
@@ -42,9 +44,9 @@ export const signupOffer = (input: {
   readonly program: string
   readonly tranches: ReadonlyArray<BonusTranche> | undefined
   readonly rawTotal: number | undefined
-  readonly review: Pick<SignupReview, "state"> | undefined
+  readonly noOffer: boolean
 }): Offer | undefined => {
-  if (input.review?.state === "none") return undefined
+  if (input.noOffer) return undefined
   const [first, ...rest] = input.tranches ?? []
 
   if (first !== undefined) {
@@ -94,7 +96,7 @@ const parsedTranche = (component: OfferComponent): ReadonlyArray<BonusTranche> =
 }
 
 export const signupState = (card: Card | undefined): SignupState => ({
-  review: card?.signup_review,
+  state: signupStateOf(card),
   parsed: pipe(
     EffectArray.findFirst(card?.offers ?? [], (offer) => offer.id === "signup" && offer.source === "parser"),
     Option.map((offer) => EffectArray.flatMap(offer.components, (component) => parsedTranche(component))),
@@ -112,7 +114,7 @@ const applyOffersImpl = (card: Card, cdr: CdrOfferInputs, signup: SignupState): 
           program: card.rewards.program,
           tranches: signup.parsed,
           rawTotal: cdr.bonusPoints,
-          review: signup.review
+          noOffer: reviewedNone(signup.state)
         })
 
   const offers = combineOffers({
@@ -121,11 +123,7 @@ const applyOffersImpl = (card: Card, cdr: CdrOfferInputs, signup: SignupState): 
     locked: (card.locked ?? []).includes("offers")
   })
 
-  return {
-    ...rest,
-    ...(offers.length === 0 ? {} : { offers }),
-    ...(signup.review === undefined ? {} : { signup_review: signup.review })
-  }
+  return { ...rest, ...(offers.length === 0 ? {} : { offers }) }
 }
 
 export const applyOffers = dual<

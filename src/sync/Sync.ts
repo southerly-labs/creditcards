@@ -20,7 +20,7 @@ import { holdCandidates, holdId, resolveHolds, revertChange, withCdrEvidence } f
 import type { Hold } from "../model/holds.ts"
 import { HoldState, isPending } from "../machine/hold.ts"
 import { isResolvableFromCdr } from "../rewards/bonus.ts"
-import { bonusRead, earnRead, earnStateOf, signupStateOf } from "../rewards/state.ts"
+import { bonusRead, earnRead, earnStateOf, withoutLegacyEarn } from "../rewards/state.ts"
 import { stepReview } from "../machine/review.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
@@ -98,33 +98,29 @@ const proposeCard = Effect.fn("proposeCard")(function* (
     ? yield* planRewards(mergedRewards, loyalty, earnStateOf(existing))
     : RewardsPlan.Unchanged()
 
-  if (hasRewards && RewardsPlan.$is("Set")(earnPlan)) {
-    merged["rewards"] = {
-      ...mergedRewards,
-      earn: earnPlan.earn,
-      earn_source: "parser",
-      earn_text_hash: earnPlan.hash,
-      earn_review: { state: "present" }
-    }
-  } else if (hasRewards && RewardsPlan.$is("Review")(earnPlan)) {
-    merged["rewards"] =
-      mergedRewards.earn_source === "manual" ? mergedRewards : { ...mergedRewards, earn_review: { state: "unknown" } }
+  if (hasRewards) {
+    const rewards = withoutLegacyEarn(mergedRewards)
+    merged["rewards"] = RewardsPlan.$is("Set")(earnPlan) ? { ...rewards, earn: earnPlan.earn } : rewards
   }
 
   const currentSignup = signupState(existing)
 
   const bonusPlan: BonusPlan =
-    merged["rewards"] === undefined
-      ? BonusPlan.Unchanged()
-      : yield* planBonus(currentSignup, bonusFeatures(product), signupStateOf(existing))
+    merged["rewards"] === undefined ? BonusPlan.Unchanged() : yield* planBonus(currentSignup, bonusFeatures(product))
+
+  const nextSignup = hasRewards
+    ? yield* stepReview(currentSignup.state, yield* bonusRead(bonusFeatures(product)))
+    : currentSignup.state
 
   if (hasRewards) {
     merged["earn_state"] = yield* stepReview(earnStateOf(existing), yield* earnRead(loyalty))
-    merged["signup_state"] = yield* stepReview(signupStateOf(existing), yield* bonusRead(bonusFeatures(product)))
+    merged["signup_state"] = nextSignup
   } else {
     delete merged["earn_state"]
     delete merged["signup_state"]
   }
+
+  delete merged["signup_review"]
 
   const decoded = yield* decodeCard(merged).pipe(Effect.result)
 
@@ -137,7 +133,10 @@ const proposeCard = Effect.fn("proposeCard")(function* (
   }
 
   const card = withLifecycle(
-    applyOffers(decoded.success, normalised.offers, applyBonusPlan(currentSignup, bonusPlan)),
+    applyOffers(decoded.success, normalised.offers, {
+      state: nextSignup,
+      parsed: applyBonusPlan(currentSignup, bonusPlan)
+    }),
     yield* seen(existing)
   )
 
@@ -535,16 +534,7 @@ export const summariseReport = Effect.fn("summariseReport")(function* (r: SyncRe
     for (const u of r.updated) {
       const shown = EffectArray.filter(
         u.changes,
-        (c) =>
-          ![
-            "cdr",
-            "description",
-            "rewards.earn_source",
-            "rewards.earn_text_hash",
-            "signup_review",
-            "earn_state",
-            "signup_state"
-          ].includes(c.path)
+        (c) => !["cdr", "description", "earn_state", "signup_state"].includes(c.path)
       )
 
       lines.push(`- ${u.card}: ${EffectArray.join(yield* Effect.forEach(shown, formatChange), "; ") || "metadata"}`)

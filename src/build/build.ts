@@ -4,6 +4,7 @@ import { Effect, Schema, Record as EffectRecord, Array as EffectArray } from "ef
 import { type Api, type PublicCard } from "../api/contract.ts"
 import { datasetFreshness } from "../api/freshness.ts"
 import { flatFromLifecycle } from "../machine/cardLifecycle.ts"
+import { earnStateOf, publicRewards, publicSignupReview, signupStateOf } from "../rewards/state.ts"
 
 export type { Api } from "../api/contract.ts"
 
@@ -85,7 +86,17 @@ const toApiImpl = (dataset: Dataset, generatedAt?: string): Api => {
   }
 
   for (const [key, card] of dataset.cards) {
-    const { locked: _l, lifecycle, earn_state: _earnState, signup_state: _signupState, ...stored } = card
+    const {
+      locked: _l,
+      lifecycle,
+      earn_state: _earnState,
+      signup_state: _signupState,
+      signup_review: _review,
+      rewards,
+      ...stored
+    } = card
+
+    const signupReview = publicSignupReview(signupStateOf(card))
 
     const { status, closed, missing_since, discontinued } = flatFromLifecycle(lifecycle)
     const { issuer, card: slug } = splitCardKey(key)
@@ -100,6 +111,8 @@ const toApiImpl = (dataset: Dataset, generatedAt?: string): Api => {
 
     required(issuers[issuer]).cards[slug] = {
       ...stored,
+      ...(rewards === undefined ? {} : { rewards: publicRewards(rewards, earnStateOf(card)) }),
+      ...(signupReview === undefined ? {} : { signup_review: signupReview }),
       status,
       ...(closed === undefined ? {} : { closed }),
       ...(missing_since === undefined ? {} : { missing_since }),

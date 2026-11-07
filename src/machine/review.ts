@@ -176,3 +176,6 @@ export const unread: SourceReview = SourceReview.cases.Unread.make({})
 
 export const needsReview = (state: SourceReview): boolean =>
   SourceReview.guards.Unreadable(state) || SourceReview.guards.Stale(state)
+
+export const reviewedNone = (state: SourceReview): boolean =>
+  (SourceReview.guards.Reviewed(state) || SourceReview.guards.Stale(state)) && state.outcome === "none"

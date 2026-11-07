@@ -3,6 +3,7 @@ import { Effect } from "effect"
 import { Digest } from "effect/crypto"
 import { BonusResult, bonusTextHash, isResolvableFromCdr, parseBonus } from "../src/rewards/bonus.ts"
 import { applyBonusPlan, BonusPlan, planBonus } from "../src/rewards/plan.ts"
+import { SourceReview, unread } from "../src/machine/review.ts"
 
 const feature = (additionalValue: string, additionalInfo = "") => ({ additionalValue, additionalInfo })
 const parse = (value: string, info?: string) => parseBonus([feature(value, info)])
@@ -207,8 +208,8 @@ layer(Digest.layerWebCrypto)((it) => {
     const split = [feature("80000", "80,000 points when you spend $3,000 within 90 days of account opening.")]
     const unclear = [feature("40000", "Earn up to 40,000 points when you keep your card open for over 15 months.")]
     const parsed = [{ points: 80000, year: 1 as const, min_spend: 3000, spend_days: 90 }]
-    const empty = { review: undefined, parsed: undefined }
-    const fromParser = { review: { state: "present" as const, source: "parser" as const, text_hash: "old" }, parsed }
+    const empty = { state: unread, parsed: undefined }
+    const fromParser = { state: SourceReview.cases.Parsed.make({ hash: "old" }), parsed }
 
     it.effect("sets parsed tranches", () =>
       Effect.gen(function* () {
@@ -216,16 +217,13 @@ layer(Digest.layerWebCrypto)((it) => {
         const hash = yield* bonusTextHash(split)
 
         assert.deepStrictEqual(plan, BonusPlan.Set({ bonus: parsed, hash }))
-        assert.deepStrictEqual(applyBonusPlan(empty, plan), {
-          review: { state: "present", source: "parser", text_hash: hash },
-          parsed
-        })
+        assert.deepStrictEqual(applyBonusPlan(empty, plan), parsed)
       })
     )
 
     it.effect("leaves parsed tranches alone when the text is unchanged", () =>
       Effect.gen(function* () {
-        const current = { ...fromParser, review: { ...fromParser.review, text_hash: yield* bonusTextHash(split) } }
+        const current = { ...fromParser, state: SourceReview.cases.Parsed.make({ hash: yield* bonusTextHash(split) }) }
 
         assert.deepStrictEqual(yield* planBonus(current, split), BonusPlan.Unchanged())
       })
@@ -236,14 +234,14 @@ layer(Digest.layerWebCrypto)((it) => {
         const plan = yield* planBonus(fromParser, unclear)
 
         assert.deepStrictEqual(plan, BonusPlan.Review({ reason: "only an 'up to' total, no tranches", clear: true }))
-        assert.deepStrictEqual(applyBonusPlan(fromParser, plan), { review: { state: "unknown" }, parsed: undefined })
+        assert.isUndefined(applyBonusPlan(fromParser, plan))
       })
     )
 
     it.effect("keeps a manual bonus but asks for review when the text changes", () =>
       Effect.gen(function* () {
         const current = {
-          review: { state: "present" as const, source: "manual" as const, text_hash: "old" },
+          state: SourceReview.cases.Reviewed.make({ hash: "old", outcome: "present" }),
           parsed: undefined
         }
 
@@ -253,7 +251,10 @@ layer(Digest.layerWebCrypto)((it) => {
         )
         assert.deepStrictEqual(
           yield* planBonus(
-            { ...current, review: { ...current.review, text_hash: yield* bonusTextHash(unclear) } },
+            {
+              ...current,
+              state: SourceReview.cases.Reviewed.make({ hash: yield* bonusTextHash(unclear), outcome: "present" })
+            },
             unclear
           ),
           BonusPlan.Unchanged()

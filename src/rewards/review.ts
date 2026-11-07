@@ -10,7 +10,7 @@ import { splitCardKey, Store } from "../store/Store.ts"
 import { loyaltyText, loyaltyTextHash, type LoyaltyFeature } from "./parse.ts"
 import { bonusText, bonusTextHash, isResolvableFromCdr } from "./bonus.ts"
 import { BonusPlan, planBonus, planRewards, RewardsPlan } from "./plan.ts"
-import { earnStateOf, signupStateOf } from "./state.ts"
+import { earnStateOf, signupStateOf, withoutLegacyEarn } from "./state.ts"
 import { ReviewEvent, stepReview } from "../machine/review.ts"
 
 export interface ReviewItem {
@@ -172,19 +172,12 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
       ReviewEvent.cases.Stamp.make({ hash, outcome: earn.length === 0 ? "none" : "present", on })
     )
 
+    const rewards = withoutLegacyEarn(card.rewards)
+
     yield* store.writeCard(issuer, slug, {
       ...card,
       earn_state: earnState,
-      rewards: {
-        ...card.rewards,
-        earn,
-        earn_source: "manual",
-        earn_text_hash: hash,
-        earn_review: {
-          state: earn.length === 0 ? "none" : "present",
-          reviewed_at: DateTime.formatIsoDateUtc(yield* DateTime.now)
-        }
-      }
+      rewards: { ...rewards, earn }
     })
     yield* Effect.logInfo(`Stamped ${key} (${hash})`)
   }
@@ -207,7 +200,7 @@ const toBonusReviewItem = Effect.fn("toBonusReviewItem")(function* (
   card: Card,
   features: ReadonlyArray<LoyaltyFeature>
 ) {
-  const plan = yield* planBonus(signupState(card), features, signupStateOf(card))
+  const plan = yield* planBonus(signupState(card), features)
 
   if (!BonusPlan.$is("Review")(plan) || !isResolvableFromCdr(plan.reason)) return undefined
 
@@ -299,7 +292,7 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
     const offers = none || signup === undefined ? others : [...others, { ...signup, source: "manual" as const }]
     const hash = yield* bonusTextHash(yield* bonusFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
-    const { offers: _offers, ...rest } = card
+    const { offers: _offers, signup_review: _review, ...rest } = card
     const on = DateTime.formatIsoDateUtc(yield* DateTime.now)
 
     const reviewed = yield* stepReview(
@@ -310,13 +303,7 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
     yield* store.writeCard(issuer, slug, {
       ...rest,
       signup_state: reviewed,
-      ...(offers.length === 0 ? {} : { offers }),
-      signup_review: {
-        state: none ? "none" : "present",
-        source: "manual",
-        text_hash: hash,
-        reviewed_at: DateTime.formatIsoDateUtc(yield* DateTime.now)
-      }
+      ...(offers.length === 0 ? {} : { offers })
     })
     yield* Effect.logInfo(`Stamped bonus for ${key} (${hash})`)
   }

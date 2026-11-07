@@ -4,6 +4,7 @@ import { Card } from "../model/schema"
 import type { Offer } from "./schema"
 import { applyOffers, cdrOffers, combineOffers, signupOffer, signupState } from "./build"
 import { initialLifecycle } from "../machine/cardLifecycle.ts"
+import { SourceReview, unread } from "../machine/review.ts"
 
 const tranches = [
   { points: 100_000, year: 1 as const, min_spend: 6000, spend_days: 90 },
@@ -33,7 +34,7 @@ describe("building offers", () => {
   })
 
   it("prefers parsed tranches over the raw CDR total", () => {
-    const offer = signupOffer({ program: "qantas", tranches, rawTotal: 150_000, review: undefined })
+    const offer = signupOffer({ program: "qantas", tranches, rawTotal: 150_000, noOffer: false })
 
     expect(offer?.source).toBe("parser")
     expect(offer?.components).toEqual([
@@ -43,16 +44,16 @@ describe("building offers", () => {
   })
 
   it("falls back to the raw total with no year when nothing is parsed", () => {
-    expect(signupOffer({ program: "qantas", tranches: undefined, rawTotal: 150_000, review: undefined })).toEqual({
+    expect(signupOffer({ program: "qantas", tranches: undefined, rawTotal: 150_000, noOffer: false })).toEqual({
       id: "signup",
       source: "cdr",
       components: [{ kind: "signup_points", program: "qantas", points: 150_000 }]
     })
-    expect(signupOffer({ program: "qantas", tranches: [], rawTotal: undefined, review: undefined })).toBeUndefined()
+    expect(signupOffer({ program: "qantas", tranches: [], rawTotal: undefined, noOffer: false })).toBeUndefined()
   })
 
   it("writes no signup offer once a review says there is none", () => {
-    expect(signupOffer({ program: "qantas", tranches, rawTotal: 150_000, review: { state: "none" } })).toBeUndefined()
+    expect(signupOffer({ program: "qantas", tranches, rawTotal: 150_000, noOffer: true })).toBeUndefined()
   })
 })
 
@@ -115,7 +116,7 @@ describe("applying offers to a card", () => {
     bonusPoints: 170_000
   }
 
-  const nothingReviewed = { review: undefined, parsed: undefined }
+  const nothingReviewed = { state: unread, parsed: undefined }
 
   const signupOf = (applied: Card) =>
     Option.getOrUndefined(EffectArray.findFirst(applied.offers ?? [], (offer) => offer.id === "signup"))
@@ -132,10 +133,9 @@ describe("applying offers to a card", () => {
   })
 
   it("writes no signup offer after a manual no-bonus review", () => {
-    const review = { state: "none" as const, source: "manual" as const, text_hash: "abc" }
-    const applied = applyOffers(card, cdr, { review, parsed: undefined })
+    const state = SourceReview.cases.Reviewed.make({ hash: "abc", outcome: "none" })
+    const applied = applyOffers(card, cdr, { state, parsed: undefined })
 
-    expect(applied.signup_review).toEqual(review)
     expect(signupOf(applied)).toBeUndefined()
   })
 
@@ -146,17 +146,17 @@ describe("applying offers to a card", () => {
       components: [{ kind: "signup_points", program: "qantas", points: 90_000, year: 1 }]
     }
 
-    const review = { state: "present" as const, source: "manual" as const, text_hash: "abc" }
+    const state = SourceReview.cases.Reviewed.make({ hash: "abc", outcome: "present" })
 
-    expect(signupOf(applyOffers({ ...card, offers: [manual] }, cdr, { review, parsed: undefined }))).toEqual(manual)
+    expect(signupOf(applyOffers({ ...card, offers: [manual] }, cdr, { state, parsed: undefined }))).toEqual(manual)
   })
 
   it("round-trips parsed tranches through the stored parser offer", () => {
     const parsed = [{ points: 80_000, year: 1 as const, min_spend: 3000, spend_days: 90 }]
-    const review = { state: "present" as const, source: "parser" as const, text_hash: "abc" }
-    const applied = applyOffers(card, cdr, { review, parsed })
+    const state = SourceReview.cases.Parsed.make({ hash: "abc" })
+    const applied = applyOffers({ ...card, signup_state: state }, cdr, { state, parsed })
 
-    expect(signupState(applied)).toEqual({ review, parsed })
+    expect(signupState(applied)).toEqual({ state, parsed })
     expect(applyOffers(applied, cdr, signupState(applied))).toEqual(applied)
   })
 })
