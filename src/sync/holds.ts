@@ -195,6 +195,18 @@ const asJson = Effect.fn("asJson")(function* (value: unknown) {
   return value === undefined ? undefined : yield* encodeJson(value)
 })
 
+const refreshKind = (entry: Hold, candidate: HoldCandidate): Hold => {
+  if (entry.kind === candidate.kind) return entry
+  const { evidence: _evidence, ...rest } = entry
+
+  return {
+    ...rest,
+    kind: candidate.kind,
+    reason: candidate.reason,
+    ...(candidate.evidence === undefined ? {} : { evidence: candidate.evidence })
+  }
+}
+
 export const resolveHolds = Effect.fn("resolveHolds")(function* (input: {
   readonly card: string
   readonly candidates: ReadonlyArray<HoldCandidate>
@@ -221,18 +233,20 @@ export const resolveHolds = Effect.fn("resolveHolds")(function* (input: {
     const proposed = yield* asJson(candidate.proposed)
 
     holds.push(
-      entry ?? {
-        id,
-        card: input.card,
-        change: candidate.change,
-        kind: candidate.kind,
-        reason: candidate.reason,
-        ...(current === undefined ? {} : { current }),
-        ...(proposed === undefined ? {} : { proposed }),
-        since: input.date,
-        ...(input.history === undefined ? {} : { history: input.history }),
-        ...(candidate.evidence === undefined ? {} : { evidence: candidate.evidence })
-      }
+      entry !== undefined
+        ? refreshKind(entry, candidate)
+        : {
+            id,
+            card: input.card,
+            change: candidate.change,
+            kind: candidate.kind,
+            reason: candidate.reason,
+            ...(current === undefined ? {} : { current }),
+            ...(proposed === undefined ? {} : { proposed }),
+            since: input.date,
+            ...(input.history === undefined ? {} : { history: input.history }),
+            ...(candidate.evidence === undefined ? {} : { evidence: candidate.evidence })
+          }
     )
   }
 

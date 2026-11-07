@@ -136,6 +136,20 @@ describe("resolving holds", () => {
       })
     )
 
+    digest.effect("a held change takes today's kind, so reports match how it will resolve", () =>
+      Effect.gen(function* () {
+        const confirmed = { ...approve, kind: "confirm" as const, reason: "confirmed by CDR", evidence: "snapshot" }
+        const held = yield* resolve(confirmed, [yield* recorded], "2026-11-02")
+
+        assert.deepStrictEqual(held.revert, [confirmed])
+        assert.strictEqual(held.holds[0]?.kind, "confirm")
+        assert.strictEqual(held.holds[0]?.reason, "confirmed by CDR")
+        assert.strictEqual(held.holds[0]?.evidence, "snapshot")
+        assert.strictEqual(held.holds[0]?.since, "2026-11-02")
+        assert.deepStrictEqual((yield* resolve(approve, held.holds, "2026-11-03")).holds[0]?.kind, "approve")
+      })
+    )
+
     digest.effect("a confirm hold applies once it is still proposed on a later day", () =>
       Effect.gen(function* () {
         const first = yield* resolve(confirm, [], "2026-11-02")
