@@ -1,7 +1,6 @@
 name = "The Qantas American Express Discovery Card"
 type = "personal"
 network = "amex"
-status = "active"
 first_seen = "2026-10-31"
 description = "The Qantas American Express Discovery Card has no annual fee and offers Qantas Points for every dollar spent."
 url = "https://www.americanexpress.com/en-au/credit-cards/qantas-discovery-card/"

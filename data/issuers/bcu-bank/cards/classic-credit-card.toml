@@ -1,7 +1,6 @@
 name = "Classic Credit Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Our Classic Credit Card offers a competitive rate, up to 52 days interest free, and is protected by Visa's Zero Liability policy."
 url = "https://www.bcu.com.au/cards/credit-cards/classic-credit-card/"

@@ -1,7 +1,6 @@
 name = "MyCard Premier Qantas"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "The Product is a premium rewards credit card that provides individuals with a line of credit facility, the ability to earn Qantas Frequent Flyer Points (Qantas Points) and access to ancillary benefits and complimentary insurances"
 url = "https://www.mycard.com.au/credit-cards/premier-card-qantas"

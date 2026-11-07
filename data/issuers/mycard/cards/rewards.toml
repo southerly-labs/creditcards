@@ -1,7 +1,6 @@
 name = "MyCard Rewards"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "The Product is a rewards credit card that provides individuals with a line of credit facility, the ability to earn MyCard Reward Points (Reward Points) and access to ancillary benefits and complimentary insurances.\n\nThe product is intended for everyday spend and to provide everyday benefits and discounts through its rewards program."
 url = "https://mycard.com.au/credit-cards/rewards-card"

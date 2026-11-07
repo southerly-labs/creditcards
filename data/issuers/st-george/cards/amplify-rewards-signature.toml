@@ -1,7 +1,6 @@
 name = "Amplify Rewards Signature"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Our top-tier credit card that lets you earn Amplify points"
 url = "https://www.stgeorge.com.au/personal/credit-cards/rewards/amplify-signature/summary"

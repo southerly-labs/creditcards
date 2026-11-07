@@ -1,7 +1,6 @@
 name = "BusinessChoice Rewards Platinum"
 type = "business"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Receive Qantas Points for eligible purchases and tax payments, plus complimentary extended insurance."
 url = "https://www.westpac.com.au/business-banking/credit-cards/rewards-cards/businesschoice-rewards/"

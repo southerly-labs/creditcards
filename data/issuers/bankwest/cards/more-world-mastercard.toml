@@ -1,7 +1,6 @@
 name = "Bankwest More World Mastercard"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "A credit card for earning points to redeem for digital vouchers or cashback."
 url = "https://www.bankwest.com.au/credit-cards/rewards"

@@ -1,7 +1,6 @@
 name = "HSBC Corporate or Purchasing Card"
 type = "corporate"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "Corporate or Purchasing cards for corporate expenditure including T&E and  Procurement spend"
 url = "https://www.business.hsbc.com.au/en-au/cards-email-us"

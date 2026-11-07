@@ -1,7 +1,6 @@
 name = "Secured Business Visa Credit Card"
 type = "business"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Business Credit card gives business owners access to a credit card facility, plus the option of having more than one card to cover monthly fuel, accommodation and other business expenses."
 url = "https://www.heritage.com.au/banking/credit-cards/business-visa"

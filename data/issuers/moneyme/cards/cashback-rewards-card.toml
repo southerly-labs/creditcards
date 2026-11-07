@@ -1,7 +1,6 @@
 name = "MoneyMe Cashback Rewards Card"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "Digital credit card with cashback rewards. Purchase and cash advance rates are personalised to your Equifax OneScore credit band. Credit limits up to $20,000."
 url = "https://www.moneyme.com.au/credit-card"

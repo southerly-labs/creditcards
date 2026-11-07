@@ -1,7 +1,6 @@
 name = "Low Rate credit card"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "With a low interest rate on purchases, our Low Rate credit card makes it easier to pay off purchases over time."
 url = "https://www.commbank.com.au/credit-cards/low-rate.html"

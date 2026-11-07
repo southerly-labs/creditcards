@@ -1,7 +1,6 @@
 name = "Visa Credit Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "No annual fee and interest fee days to reduce your card costs. Great for those who pay off their card in full each month."
 url = "https://www.bankaust.com.au/banking/credit-cards/visa-credit-card"

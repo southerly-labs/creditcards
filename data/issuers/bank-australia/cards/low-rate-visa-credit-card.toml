@@ -1,7 +1,6 @@
 name = "Low Rate Visa Credit Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "A lower interest rate to reduce your borrowing costs. Great for those who have a carryover balance each month."
 url = "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/"

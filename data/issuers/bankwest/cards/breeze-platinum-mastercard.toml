@@ -1,7 +1,6 @@
 name = "Bankwest Breeze Platinum Mastercard"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "A credit card with our lowest ongoing rate."
 url = "https://www.bankwest.com.au/credit-cards/low-rate"

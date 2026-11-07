@@ -1,7 +1,6 @@
 name = "Credit Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "A Low Rate VISA Credit Card with a low annual fee and up to 55 days interest free period on purchases."
 url = "https://www.policebank.com.au/visa-cards/visa-credit-card/"

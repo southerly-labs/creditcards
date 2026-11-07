@@ -1,7 +1,6 @@
 name = "CommBank Neo Card"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "A new way to pay with no interest, a low maximum credit limit and a simple monthly fee based on your limit."
 url = "https://www.commbank.com.au/credit-cards/commbank-neo.html"

@@ -1,7 +1,6 @@
 name = "Visa Credit Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Low rate, low fee, personal credit card"
 url = "https://www.greater.com.au/personal/credit-cards/"

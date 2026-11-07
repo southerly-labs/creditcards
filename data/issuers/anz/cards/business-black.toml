@@ -1,7 +1,6 @@
 name = "ANZ Business Black"
 type = "business"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "A credit card facility for businesses where you can earn rewards on eligible transactions and receive domestic and international travel insurance"
 url = "https://www.anz.com.au/business/credit-cards/business-black/"

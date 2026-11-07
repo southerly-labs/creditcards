@@ -1,7 +1,6 @@
 name = "Low Rate Credit Card from American Express®"
 type = "personal"
 network = "amex"
-status = "active"
 first_seen = "2026-10-31"
 description = "Save with no annual Card fee and our lowest interest rate on purchases."
 url = "https://www.americanexpress.com/au/credit-cards/low-rate-credit-card/"

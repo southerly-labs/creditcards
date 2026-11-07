@@ -1,7 +1,6 @@
 name = "NAB Business Card"
 type = "business"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Manage your employee's business expenses by giving them their own charge card."
 url = "https://www.nab.com.au/business/business-cards/nab-business-card"

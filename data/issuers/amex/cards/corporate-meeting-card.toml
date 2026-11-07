@@ -1,7 +1,6 @@
 name = "American Express® Corporate Meeting Card"
 type = "corporate"
 network = "amex"
-status = "active"
 first_seen = "2026-10-31"
 description = "Corporate Charge Card for consolidating meeting and event-related spend in one statement, providing visibility and streamlining reconciliation."
 url = "https://www.americanexpress.com/au/business/payment-solutions/"

@@ -1,7 +1,6 @@
 name = "Bank of China Global UnionPay Card"
 type = "personal"
 network = "unionpay"
-status = "active"
 first_seen = "2026-10-31"
 description = "The Bank of China Global UnionPay Card"
 url = "https://www.bankofchina.com/au/en/pbservice/pb4/202102/t20210211_19987339.html"

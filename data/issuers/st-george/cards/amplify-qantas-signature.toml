@@ -1,7 +1,6 @@
 name = "Amplify Qantas Signature"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Our top-tier credit card for Qantas point lovers"
 url = "https://www.stgeorge.com.au/personal/credit-cards/frequent-flyer/amplify-signature/summary"

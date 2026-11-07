@@ -1,7 +1,6 @@
 name = "American Express® Qantas Corporate Gold Card"
 type = "corporate"
 network = "amex"
-status = "active"
 first_seen = "2026-10-31"
 description = "Qantas Corporate Charge Card for consolidating employee expenses that provides improved cash flow and increased visibility and control, while offering employees a range of rewards and travel benefits."
 url = "https://www.americanexpress.com/en-au/business/corporate-credit-cards/qantas-gold-corporate-card/"

@@ -1,7 +1,6 @@
 name = "Credit Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "A Low Rate and low Annual Fee Credit  card"
 url = "https://www.borderbank.com.au/forms/visa-cards"

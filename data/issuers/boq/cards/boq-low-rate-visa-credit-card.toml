@@ -1,7 +1,6 @@
 name = "BOQ Low Rate Visa Credit Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "If paying down your balance each month is keeping you up, our Low Rate Visa Credit Card can help you keep costs down."
 url = "https://www.boq.com.au/personal/credit-cards/low-rate-credit-card"

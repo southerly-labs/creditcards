@@ -1,7 +1,6 @@
 name = "VISA CREDIT CARD"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Low Rate Visa Credit Card"
 url = "https://www.firstoptionbank.com.au/credit-card-enquiry/"

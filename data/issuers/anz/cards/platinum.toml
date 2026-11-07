@@ -1,7 +1,6 @@
 name = "ANZ Platinum"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Our low fee, platinum credit card  with  complimentary insurances (conditions and exclusions apply)"
 url = "https://www.anz.com.au/personal/credit-cards/low-annual-fee/platinum/"

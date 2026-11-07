@@ -1,7 +1,6 @@
 name = "NAB Low Rate Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "A simple low interest rate credit card with your choice of offers: get a promotional balance transfer or select our cash back offer"
 url = "https://www.nab.com.au/personal/credit-cards/low-rate/nab-low-rate-card"

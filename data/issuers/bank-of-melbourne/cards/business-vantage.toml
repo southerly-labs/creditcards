@@ -1,7 +1,6 @@
 name = "Business Vantage"
 type = "business"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "A low interest rate on purchases to help manage your business cash flow"
 url = "https://www.bankofmelbourne.com.au/business/credit-card/low-rate"

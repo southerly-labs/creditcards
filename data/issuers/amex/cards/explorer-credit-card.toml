@@ -1,7 +1,6 @@
 name = "The American Express® Explorer Credit Card"
 type = "personal"
 network = "amex"
-status = "active"
 first_seen = "2026-10-31"
 description = "Turn everyday spend into extraordinary adventures with your new travel companion."
 url = "https://www.americanexpress.com/au/credit-cards/explorer-credit-card/"

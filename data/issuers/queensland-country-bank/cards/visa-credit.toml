@@ -1,7 +1,6 @@
 name = "Visa Credit"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Our Visa Credit Card comes with a competitive low interest rate, low annual fee and up to 55 days interest free on purchases and BPAY if you pay your card in full by the due date"
 url = "https://www.queenslandcountry.bank/Banking/credit-cards/Visa-My-Rewards-Credit-Card/"

@@ -1,7 +1,6 @@
 name = "American Express® Personal Card"
 type = "personal"
 network = "amex"
-status = "active"
 first_seen = "2026-10-31"
 description = "Charge Card with Membership Rewards"
 url = "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-green-card/"

@@ -1,7 +1,6 @@
 name = "Business Visa Credit Card"
 type = "business"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Credit card for small business"
 url = "https://www.greater.com.au/business/services/"

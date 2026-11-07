@@ -1,7 +1,6 @@
 name = "Altitude Velocity Platinum"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "Earn Velocity Points directly into your Velocity Frequent Flyer account and enjoy Platinum credit card benefits."
 url = "https://www.westpac.com.au/credit-cards/reward/altitude-velocity-platinum/summary"

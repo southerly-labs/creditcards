@@ -1,7 +1,6 @@
 name = "ANZ Business 55 Interest Free Days"
 type = "business"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "A credit card facility for businesses with up to 55 days interest free on purchases (if you pay your closing balance in full by the due date each month)"
 url = "https://www.anz.com.au/business/credit-cards/interest-free/"

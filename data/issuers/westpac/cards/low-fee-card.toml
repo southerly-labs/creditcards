@@ -1,7 +1,6 @@
 name = "Low Fee Card"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "A simple credit card with no annual card fee ($5k p.a. minimum spend applies) and up to 55 days interest?free on purchases."
 url = "https://www.westpac.com.au/credit-cards/low-fee/summary"

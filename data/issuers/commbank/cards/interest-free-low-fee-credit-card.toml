@@ -1,7 +1,6 @@
 name = "Interest-free Low Fee credit card"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "CommBank's simplest credit card yet with no interest and no late fees. Just a simple monthly fee."
 url = "https://www.commbank.com.au/credit-cards/interest-free-low-fee.html"

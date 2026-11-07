@@ -1,7 +1,6 @@
 name = "NAB Rewards Business Signature Card"
 type = "business"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "With a business credit card, earn and redeem NAB Rewards Points."
 url = "https://www.nab.com.au/business/business-cards/nab-rewards-business-signature-card"

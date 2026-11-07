@@ -1,7 +1,6 @@
 name = "MyCard Clear"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "The Product is a low interest rate credit card that provides individuals with a line of credit facility that has a low rate."
 url = "https://mycard.com.au/credit-cards/clear-card"

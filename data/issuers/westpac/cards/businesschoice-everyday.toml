@@ -1,7 +1,6 @@
 name = "BusinessChoice Everyday"
 type = "business"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Keep all your everyday business purchase records in one place, with a BusinessChoice Everyday."
 url = "https://www.westpac.com.au/business-banking/credit-cards/low-rate-card/"

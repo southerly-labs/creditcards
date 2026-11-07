@@ -1,7 +1,6 @@
 name = "Macquarie Ratesaver Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "The Macquarie RateSaver Credit Card is designed for customers who want a credit card with a lower annual fee and/or interest rates than those that apply to rewards credit cards."
 url = "https://www.macquarie.com.au/everyday-banking/credit-cards.html"

@@ -1,7 +1,6 @@
 name = "Visa Credit Card"
 type = "personal"
 network = "visa"
-status = "active"
 first_seen = "2026-10-31"
 description = "Visa Credit Card"
 url = "https://woolworthsteambank.com.au/loan/"

@@ -1,7 +1,6 @@
 name = "Low Fee credit card"
 type = "personal"
 network = "mastercard"
-status = "active"
 first_seen = "2026-10-31"
 description = "Enjoy the flexibility and convenience of a credit card with a low monthly fee."
 url = "https://www.commbank.com.au/credit-cards/low-fee.html"
