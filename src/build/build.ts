@@ -1,6 +1,6 @@
 import { required } from "../util/required.ts"
 import { dual } from "effect/Function"
-import { Effect, Schema, Record as EffectRecord, Array as EffectArray } from "effect"
+import { Effect, Result, Schema, Record as EffectRecord, Array as EffectArray } from "effect"
 import { type Api, type PublicCard } from "../api/contract.ts"
 import { datasetFreshness } from "../api/freshness.ts"
 import { flatFromLifecycle } from "../machine/cardLifecycle.ts"
@@ -17,14 +17,43 @@ export class ValidationError extends Schema.TaggedError<ValidationError, { reado
   }
 ) {}
 
+const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u
+
+const compiles = (pattern: string): boolean => Result.isSuccess(Result.try(() => new RegExp(pattern, "iu")))
+
 export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
   const problems: Array<string> = []
   const cdrIds = new Map<string, string>()
+  const brandIssuer = new Map<string, string>()
+
+  for (const [slug, issuer] of dataset.issuers) {
+    if (!SLUG.test(slug)) problems.push(`issuers/${slug}: folder name is not a slug`)
+
+    for (const brand of issuer.cdr_brands) {
+      const other = brandIssuer.get(brand)
+
+      if (other !== undefined) problems.push(`issuers/${slug}: CDR brand ${brand} also belongs to ${other}`)
+      else brandIssuer.set(brand, slug)
+    }
+  }
+
+  for (const [id, program] of dataset.programs) {
+    if (!SLUG.test(id)) problems.push(`programs/${id}: file name is not a slug`)
+
+    for (const alias of program.aliases ?? []) {
+      if (!compiles(alias)) problems.push(`programs/${id}: alias ${alias} is not a valid regular expression`)
+    }
+  }
 
   for (const [key, card] of dataset.cards) {
-    const { issuer } = splitCardKey(key)
+    const { issuer, card: slug } = splitCardKey(key)
 
     if (!dataset.issuers.has(issuer)) problems.push(`${key}: unknown issuer ${issuer}`)
+
+    if (!SLUG.test(slug)) problems.push(`${key}: file name is not a slug`)
+
+    if (card.cdr !== undefined && dataset.issuers.has(issuer) && brandIssuer.get(card.cdr.brand) !== issuer)
+      problems.push(`${key}: CDR brand ${card.cdr.brand} is not in ${issuer}'s cdr_brands`)
 
     const offerPrograms = EffectArray.flatMap(card.offers ?? [], (offer) =>
       EffectArray.flatMap(offer.components, (component) =>

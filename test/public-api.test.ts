@@ -3,6 +3,7 @@ import { Effect, Exit } from "effect"
 import { checkReferences, toApi } from "../src/build/build.ts"
 import { decodeApi } from "../src/api/contract.ts"
 import type { Offer } from "../src/offers/schema.ts"
+import type { Card } from "../src/model/schema.ts"
 import type { Dataset } from "../src/store/Store.ts"
 import { String as EffectString, pipe } from "effect"
 import { encodeJson } from "../src/util/json.ts"
@@ -157,3 +158,26 @@ it.effect("public cards publish stored offers as they are", () =>
     assert.deepStrictEqual(api.issuers["bank"]?.cards["card"]?.offers, offers)
   })
 )
+
+test("brands, aliases and slugs must be consistent", () => {
+  const dataset: Dataset = {
+    issuers: new Map([
+      ["bank", { name: "Bank", cdr_brands: ["Bank Brand"] }],
+      ["other", { name: "Other", cdr_brands: ["Bank Brand"] }],
+      ["Bad_Issuer", { name: "Bad", cdr_brands: [] }]
+    ]),
+    programs: new Map([["points", { name: "Points", type: "bank", aliases: ["points (plus"] }]]),
+    cards: new Map<string, Card>([
+      ["bank/card", { ...card, cdr: { brand: "Unlisted Brand", product_id: "p1" } }],
+      ["bank/Card_2", card]
+    ])
+  }
+
+  assert.deepStrictEqual(checkReferences(dataset), [
+    "issuers/other: CDR brand Bank Brand also belongs to bank",
+    "issuers/Bad_Issuer: folder name is not a slug",
+    "programs/points: alias points (plus is not a valid regular expression",
+    "bank/card: CDR brand Unlisted Brand is not in bank's cdr_brands",
+    "bank/Card_2: file name is not a slug"
+  ])
+})
