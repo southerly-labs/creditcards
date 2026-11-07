@@ -2,7 +2,7 @@ import { Provenance } from "../provenance/schema.ts"
 import { Schema, Array as EffectArray } from "effect"
 import { EarnRule } from "./earn.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "./domain.ts"
-import { Offer, SignupReview, uniqueOfferIds } from "../offers/schema"
+import { Offer, uniqueOfferIds } from "../offers/schema"
 import { CardLifecycle } from "../machine/cardLifecycle.ts"
 import { SourceReview } from "../machine/review.ts"
 
@@ -71,6 +71,20 @@ export const RewardsReview = Schema.Struct({
 
 export type RewardsReview = typeof RewardsReview.Type
 
+export const CardRewards = Schema.Struct({
+  program: Slug,
+  partners: Schema.optionalKey(Schema.Array(Slug)),
+  earn: Schema.optionalKey(Schema.Array(EarnRate)),
+  earn_rules: Schema.optionalKey(Schema.Array(EarnRule)),
+  earn_check: Schema.optionalKey(Schema.Array(EarnCheck))
+})
+
+export const LegacyEarnFields = {
+  earn_review: Schema.optionalKey(RewardsReview),
+  earn_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
+  earn_text_hash: Schema.optionalKey(Schema.String)
+}
+
 export const DecisionField = Schema.Literals([
   "network",
   "url",
@@ -115,7 +129,6 @@ const CardFields = Schema.Struct({
 
   provenance: Schema.optionalKey(Provenance),
   offers: Schema.optionalKey(Schema.Array(Offer)),
-  signup_review: Schema.optionalKey(SignupReview),
   signup_state: Schema.optionalKey(SourceReview),
   earn_state: Schema.optionalKey(SourceReview),
   gaps: Schema.optionalKey(Schema.Array(FieldGap)),
@@ -146,20 +159,7 @@ const CardFields = Schema.Struct({
     max_credit: Schema.optionalKey(Aud),
     min_income: Schema.optionalKey(Aud)
   }),
-  rewards: Schema.optionalKey(
-    Schema.Struct({
-      program: Slug,
-      partners: Schema.optionalKey(Schema.Array(Slug)),
-      earn: Schema.optionalKey(Schema.Array(EarnRate)),
-      earn_rules: Schema.optionalKey(Schema.Array(EarnRule)),
-
-      earn_review: Schema.optionalKey(RewardsReview),
-      earn_source: Schema.optionalKey(Schema.Literals(["parser", "manual"])),
-
-      earn_text_hash: Schema.optionalKey(Schema.String),
-      earn_check: Schema.optionalKey(Schema.Array(EarnCheck))
-    })
-  ),
+  rewards: Schema.optionalKey(CardRewards),
   perks: Schema.Struct({
     insurance: Schema.optionalKey(Schema.Array(Schema.String)),
     lounge_access: Schema.optionalKey(Schema.Boolean)

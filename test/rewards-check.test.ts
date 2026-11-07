@@ -55,7 +55,7 @@ describe("checkEarnPages", () => {
     rates: {},
     limits: {},
     perks: {},
-    rewards: { program: "qantas", earn: [{ rate: 1 }], earn_source: "manual", earn_check: [{ url, expect: [quote] }] }
+    rewards: { program: "qantas", earn: [{ rate: 1 }], earn_check: [{ url, expect: [quote] }] }
   })
 
   const pages: Record<string, Response> = {

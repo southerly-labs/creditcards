@@ -14,9 +14,10 @@ spend above it earns nothing. Category entries override the base rate for that
 category. The parser accepts only simple base rates or spend tiers; complex,
 conditional, category and bonus rates go to human review.
 
-`earn_source` records whether the parser or a person supplied the rates. Manual
-rates are never overwritten. `earn_text_hash` records the CDR loyalty text they
-were derived from; changed text requests another review. `earn_check` holds issuer
+`earn_state` (top level, beside `rewards`) records whether the parser or a person
+supplied the rates and which CDR loyalty text they came from; see
+[rewards review states](rewards-review.md). Reviewed rates are never overwritten,
+and changed text requests another review. `rewards.earn_check` holds issuer
 HTML/PDF sources and short expected quotes; matching ignores case and whitespace.
 
 `cents_per_point` is a curated value estimate. Airline programs use a flight
@@ -88,7 +89,7 @@ lists tranches of points, each paid in `year` 1 or 2 of holding the card. A
 first-year tranche usually needs `min_spend` AUD within `spend_days` of approval;
 months in the source are stored as 30 days each. A second-year tranche is paid
 for keeping the card open `keep_months`, or for spending again around the first
-anniversary. `signup_review` works like the earn review metadata, over the CDR
+anniversary. `signup_state` works like `earn_state`, over the CDR
 `BONUS_REWARDS` text. Alternative offers, expiring offers and cashback are left
 to human review.
 

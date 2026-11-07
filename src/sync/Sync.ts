@@ -20,7 +20,7 @@ import { holdCandidates, holdId, resolveHolds, revertChange, withCdrEvidence } f
 import type { Hold } from "../model/holds.ts"
 import { HoldState, isPending } from "../machine/hold.ts"
 import { isResolvableFromCdr } from "../rewards/bonus.ts"
-import { bonusRead, earnRead, earnStateOf, withoutLegacyEarn } from "../rewards/state.ts"
+import { bonusRead, earnRead, earnStateOf } from "../rewards/state.ts"
 import { stepReview } from "../machine/review.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
@@ -99,7 +99,7 @@ const proposeCard = Effect.fn("proposeCard")(function* (
     : RewardsPlan.Unchanged()
 
   if (hasRewards) {
-    const rewards = withoutLegacyEarn(mergedRewards)
+    const rewards = mergedRewards
     merged["rewards"] = RewardsPlan.$is("Set")(earnPlan) ? { ...rewards, earn: earnPlan.earn } : rewards
   }
 
@@ -119,8 +119,6 @@ const proposeCard = Effect.fn("proposeCard")(function* (
     delete merged["earn_state"]
     delete merged["signup_state"]
   }
-
-  delete merged["signup_review"]
 
   const decoded = yield* decodeCard(merged).pipe(Effect.result)
 

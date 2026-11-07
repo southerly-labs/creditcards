@@ -1,22 +1,33 @@
 # Rewards section review states
 
-Optional rewards.earn_review and signup_review objects carry state: unknown,
-present, or none. Absence of an object is unknown review status, never evidence
-of reviewed absence. signup_review also carries its source and text hash; see
-[offers](offers.md).
+Each card with a rewards program records two review states, `earn_state` for the
+CDR loyalty text behind `rewards.earn` and `signup_state` for the CDR
+`BONUS_REWARDS` text behind the signup offer. Both are driven by one statechart,
+`src/machine/review.ts`, and stored as a table with a `_tag`:
 
-Parser success writes present without reviewed_at. Failed earn parsing writes
-unknown while retaining the existing legacy rates. Removing a parser bonus writes
-unknown: missing CDR text does not prove that no offer exists.
+- `Unread`: nothing has been read from the text yet, or the bonus text names no
+  offer. A missing state means `Unread`.
+- `Parsed` (`hash`): the parser read the text with that hash and wrote the rates
+  or tranches.
+- `Unreadable` (`hash`): the parser could not read the text with that hash. Earn
+  rates keep their previous values; a parsed bonus is removed. Needs a reviewer.
+- `Reviewed` (`hash`, `outcome`, optional `on`): a person stamped the section
+  against the text with that hash. `outcome` is `present` (a nonempty earn array
+  or a signup offer) or `none` (no fixed earn rate, or no current points signup
+  offer; it does not assert the absence of cashback or other benefits). `on` is
+  the UTC date of stamping; it is never inferred, so older reviews have none.
+- `Stale` (same fields): the text has changed since that review. Needs a
+  reviewer. If the text changes back, it returns to `Reviewed`.
 
-Manual stamp commands record present for a nonempty earn array or a signup offer,
-or none for an empty earn array or --none, with reviewed_at set to the actual UTC date of stamping.
-None means no fixed earn rate or no current points signup offer, respectively;
-it does not assert absence of cashback or other benefits. Dates are never inferred
-from sync timestamps, source updates, or legacy manual flags.
+Each sync sends the machine a `Read` (the text's hash and whether the parser read
+it, found nothing or could not read it). `bun run cli rewards stamp`,
+`rewards bonus-stamp` and the `/earn-none` and `/bonus-none` comment commands send
+`Stamp`, from any state. Reviewed and stale sections are never overwritten by the
+parser. Failed issuer-page quote checks still request review independently.
 
-Manual sections remain protected. Changed source hashes still enter the existing
-review queue, and failed issuer-page quote checks still request review. A review
-object describes the last recorded assessment, not a guarantee that sources are
-still current; consumers must retain those stale-source signals. Existing manual
-records are not backfilled because their actual review dates are unknown.
+`api.json` keeps publishing the older fields, derived from these states:
+`rewards.earn_source` (`parser` for Parsed and Unreadable, `manual` for Reviewed
+and Stale), `rewards.earn_text_hash`, `rewards.earn_review` (`state` of `present`,
+`none` or `unknown`, and `reviewed_at`) and `signup_review` (`state`, `source`,
+`text_hash`, `reviewed_at`). A missing object still means unknown, never reviewed
+absence.

@@ -129,7 +129,6 @@ describe("applying offers to a card", () => {
       ["first-year-fee", "cdr"],
       ["signup", "cdr"]
     ])
-    expect(applied.signup_review).toBeUndefined()
   })
 
   it("writes no signup offer after a manual no-bonus review", () => {

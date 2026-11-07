@@ -4,7 +4,7 @@ import type { BonusTranche, Card, EarnRate } from "../model/schema.ts"
 import { BonusResult, parseBonus } from "./bonus.ts"
 import { type LoyaltyFeature, ParseResult, parseEarn } from "./parse.ts"
 import { SourceReview, stepReview } from "../machine/review.ts"
-import { bonusRead, earnRead, earnStateOf } from "./state.ts"
+import { bonusRead, earnRead } from "./state.ts"
 import { dual } from "effect/Function"
 
 export type RewardsPlan =
@@ -17,7 +17,7 @@ export const RewardsPlan = Data.taggedEnum<RewardsPlan>()
 export const planRewards = Effect.fn("planRewards")(function* (
   current: Card["rewards"] | undefined,
   features: ReadonlyArray<LoyaltyFeature>,
-  previous: SourceReview = earnStateOf(current === undefined ? {} : { rewards: current })
+  previous: SourceReview
 ) {
   const read = yield* earnRead(features)
   const next = yield* stepReview(previous, read)

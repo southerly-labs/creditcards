@@ -35,13 +35,13 @@ Consumers should show it as an unsplit total and not count it as a first-year bo
 
 ## Signup review
 
-`card.signup_review` records the last assessment of the signup bonus: `state`
-(`present`, `none` or `unknown`), `source` (`parser` or `manual`), the CDR
-`text_hash` it was based on, and `reviewed_at` for manual reviews. Parser success
-writes `present`; a parsed bonus the parser can no longer read, or whose offer
-ended, becomes `unknown`. `bun run cli rewards bonus-stamp` marks the hand-written
-signup offer `manual` and records `present`, or with `--none` removes the signup
-offer and records `none`. A manual `none` means a person confirmed the card has no
+`card.signup_state` records the last assessment of the signup bonus as a review
+machine state (see [rewards review states](rewards-review.md)): `Parsed` when the
+parser wrote the tranches, `Unreadable` when it can no longer read the text (the
+parsed bonus is removed), `Unread` when the offer ended, and `Reviewed` or `Stale`
+after a person stamped it. `bun run cli rewards bonus-stamp` marks the
+hand-written signup offer `manual` and records outcome `present`, or with `--none`
+removes the signup offer and records `none`. A manual `none` means a person confirmed the card has no
 current points signup offer, so the raw total is not shown either. When the CDR
 text hash no longer matches a manual review, the card returns to the review queue.
 

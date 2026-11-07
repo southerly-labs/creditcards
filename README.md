@@ -34,7 +34,7 @@ locked = ["fees.foreign_txn_pct"]
 
 Banks publish earn rates as prose, so they are filled in two ways:
 
-- **Parser.** During the sync, a conservative rule-based parser (`src/rewards/parse.ts`) sets `rewards.earn` for simple cases: a single rate or spend tiers. These cards have `earn_source = "parser"`.
+- **Parser.** During the sync, a conservative rule-based parser (`src/rewards/parse.ts`) sets `rewards.earn` for simple cases: a single rate or spend tiers. These cards have `earn_state` `Parsed`.
 - **Review.** Everything else (category rates, bonuses, exclusions, cashback) is listed in the `rewards-review` issue. Resolve it locally, by hand or in a Claude Code session:
 
   ```sh
@@ -43,7 +43,7 @@ Banks publish earn rates as prose, so they are filled in two ways:
   bun run cli rewards stamp anz/business-black   # mark it reviewed (--none if no fixed rate)
   ```
 
-  Stamped cards have `earn_source = "manual"` and are never overwritten. If the bank's loyalty text changes, the card goes back on the review list.
+  Stamped cards have `earn_state` `Reviewed` and are never overwritten. If the bank's loyalty text changes, the state becomes `Stale` and the card goes back on the review list. See [rewards review states](docs/rewards-review.md).
 
 - **Issuer pages.** Some cards' CDR text has no earn rate, so the rate was read from the issuer's own page or terms PDF. These cards list that source under `rewards.earn_check`, with short quotes of the earn wording:
 
@@ -92,7 +92,7 @@ keep_months = 12
 
   Offers that CDR only names ("New Card Member Offer", with no amounts) can't be resolved from CDR, so they are left off the issue and `bonus-todo`; the sync commit only counts them.
 
-  Stamping marks the signup offer `manual` and records `signup_review` (`state`, `source = "manual"`, the CDR text hash and the date). `--none` records `state = "none"` and removes the signup offer, so the raw CDR total is not shown either. If the bank's bonus text changes, the card goes back on the review list.
+  Stamping marks the signup offer `manual` and records `signup_state` `Reviewed` (the CDR text hash, outcome `present` and the date). `--none` records outcome `none` and removes the signup offer, so the raw CDR total is not shown either. If the bank's bonus text changes, the card goes back on the review list.
 
 To freeze all of a card's offers, add `"offers"` to its `locked` list.
 

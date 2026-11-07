@@ -86,15 +86,7 @@ const toApiImpl = (dataset: Dataset, generatedAt?: string): Api => {
   }
 
   for (const [key, card] of dataset.cards) {
-    const {
-      locked: _l,
-      lifecycle,
-      earn_state: _earnState,
-      signup_state: _signupState,
-      signup_review: _review,
-      rewards,
-      ...stored
-    } = card
+    const { locked: _l, lifecycle, earn_state: _earnState, signup_state: _signupState, rewards, ...stored } = card
 
     const signupReview = publicSignupReview(signupStateOf(card))
 

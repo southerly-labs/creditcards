@@ -3,6 +3,7 @@ import { Effect } from "effect"
 import { Digest } from "effect/crypto"
 import { loyaltyTextHash, ParseResult, parseEarn } from "../src/rewards/parse.ts"
 import { planRewards, RewardsPlan } from "../src/rewards/plan.ts"
+import { SourceReview, unread } from "../src/machine/review.ts"
 
 const feature = (additionalValue: string, additionalInfo = "") => ({ additionalValue, additionalInfo })
 const parse = (value: string, info?: string) => parseEarn([feature(value, info)])
@@ -143,20 +144,11 @@ layer(Digest.layerWebCrypto)((it) => {
         const hash = yield* loyaltyTextHash(simple)
 
         assert.deepStrictEqual(
-          yield* planRewards({ program: "x" }, simple),
+          yield* planRewards({ program: "x" }, simple, unread),
           RewardsPlan.Set({ earn: [{ rate: 1.5 }], hash })
         )
         assert.deepStrictEqual(
-          yield* planRewards(
-            {
-              program: "x",
-              earn: [{ rate: 1.5 }],
-              earn_source: "parser",
-              earn_review: { state: "present" },
-              earn_text_hash: hash
-            },
-            simple
-          ),
+          yield* planRewards({ program: "x", earn: [{ rate: 1.5 }] }, simple, SourceReview.cases.Parsed.make({ hash })),
           RewardsPlan.Unchanged()
         )
       })
@@ -164,21 +156,17 @@ layer(Digest.layerWebCrypto)((it) => {
 
     it.effect("complex text goes to review", () =>
       Effect.gen(function* () {
-        assert.strictEqual((yield* planRewards({ program: "x" }, complex))._tag, "Review")
+        assert.strictEqual((yield* planRewards({ program: "x" }, complex, unread))._tag, "Review")
       })
     )
 
     it.effect("manual earn is never replaced, only re-reviewed when the text changes", () =>
       Effect.gen(function* () {
-        const manual = {
-          program: "x",
-          earn: [{ rate: 9 }],
-          earn_source: "manual" as const,
-          earn_text_hash: yield* loyaltyTextHash(simple)
-        }
+        const manual = { program: "x", earn: [{ rate: 9 }] }
+        const reviewed = SourceReview.cases.Reviewed.make({ hash: yield* loyaltyTextHash(simple), outcome: "present" })
 
-        assert.deepStrictEqual(yield* planRewards(manual, simple), RewardsPlan.Unchanged())
-        assert.strictEqual((yield* planRewards(manual, complex))._tag, "Review")
+        assert.deepStrictEqual(yield* planRewards(manual, simple, reviewed), RewardsPlan.Unchanged())
+        assert.strictEqual((yield* planRewards(manual, complex, reviewed))._tag, "Review")
       })
     )
   })

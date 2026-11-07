@@ -105,7 +105,7 @@ export const signupState = (card: Card | undefined): SignupState => ({
 })
 
 const applyOffersImpl = (card: Card, cdr: CdrOfferInputs, signup: SignupState): Card => {
-  const { offers: stored, signup_review: _review, ...rest } = card
+  const { offers: stored, ...rest } = card
 
   const offer =
     card.rewards === undefined

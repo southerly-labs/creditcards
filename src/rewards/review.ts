@@ -10,7 +10,7 @@ import { splitCardKey, Store } from "../store/Store.ts"
 import { loyaltyText, loyaltyTextHash, type LoyaltyFeature } from "./parse.ts"
 import { bonusText, bonusTextHash, isResolvableFromCdr } from "./bonus.ts"
 import { BonusPlan, planBonus, planRewards, RewardsPlan } from "./plan.ts"
-import { earnStateOf, signupStateOf, withoutLegacyEarn } from "./state.ts"
+import { earnStateOf, signupStateOf } from "./state.ts"
 import { ReviewEvent, stepReview } from "../machine/review.ts"
 
 export interface ReviewItem {
@@ -172,7 +172,7 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
       ReviewEvent.cases.Stamp.make({ hash, outcome: earn.length === 0 ? "none" : "present", on })
     )
 
-    const rewards = withoutLegacyEarn(card.rewards)
+    const rewards = card.rewards
 
     yield* store.writeCard(issuer, slug, {
       ...card,
@@ -292,7 +292,7 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
     const offers = none || signup === undefined ? others : [...others, { ...signup, source: "manual" as const }]
     const hash = yield* bonusTextHash(yield* bonusFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
-    const { offers: _offers, signup_review: _review, ...rest } = card
+    const { offers: _offers, ...rest } = card
     const on = DateTime.formatIsoDateUtc(yield* DateTime.now)
 
     const reviewed = yield* stepReview(
