@@ -65,6 +65,13 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
       if (id !== undefined && !dataset.programs.has(id)) problems.push(`${key}: unknown program ${id}`)
     }
 
+    for (const id of new Set(offerPrograms)) {
+      if (id !== card.rewards?.program)
+        problems.push(
+          `${key}: signup points in ${id}, but the site values bonuses at the card's program ${card.rewards?.program ?? "(none)"}`
+        )
+    }
+
     if (card.cdr !== undefined) {
       const cdrId = `${card.cdr.brand}|${card.cdr.product_id}`
       const other = cdrIds.get(cdrId)
