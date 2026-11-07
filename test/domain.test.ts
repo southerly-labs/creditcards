@@ -60,6 +60,29 @@ test("tiers compare within categories and cap periods", () => {
   assert.isTrue(orderedTiers([{ cap_monthly: 100 }, { cap_monthly: 200 }]))
 })
 
+test("signup points are in the card's own rewards program", () => {
+  const card = {
+    name: "Test",
+    type: "personal",
+    lifecycle: initialLifecycle,
+    first_seen: "2026-10-31",
+    fees: {},
+    rates: {},
+    limits: {},
+    perks: {},
+    rewards: { program: "points" }
+  }
+
+  const offer = (program: string) => ({
+    id: "signup",
+    source: "manual",
+    components: [{ kind: "signup_points", program, points: 50_000, year: 1 }]
+  })
+
+  assert.isTrue(Schema.is(Card)({ ...card, offers: [offer("points")] }))
+  assert.isFalse(Schema.is(Card)({ ...card, offers: [offer("partner")] }))
+})
+
 test("the base earn tier has no category rather than an empty one", () => {
   assert.isTrue(Schema.is(EarnRate)({ rate: 1 }))
   assert.isTrue(Schema.is(EarnRate)({ rate: 2, category: "travel" }))

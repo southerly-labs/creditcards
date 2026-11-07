@@ -194,6 +194,15 @@ export const Card = CardFields.check(
   Schema.makeFilter((card) => uniqueOfferIds(card.offers ?? []) || "Offer ids must be unique within a card"),
   Schema.makeFilter(
     (card) =>
+      EffectArray.every(card.offers ?? [], (offer) =>
+        EffectArray.every(
+          offer.components,
+          (component) => component.kind !== "signup_points" || component.program === card.rewards?.program
+        )
+      ) || "Signup points must be in the card's rewards.program; the site values bonuses at that program's rate"
+  ),
+  Schema.makeFilter(
+    (card) =>
       new Set(EffectArray.map(card.gaps ?? [], (gap) => gap.field)).size === (card.gaps ?? []).length ||
       "Each field can have only one gap"
   ),

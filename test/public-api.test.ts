@@ -91,16 +91,15 @@ it.effect("public cards keep card-level domain checks", () =>
   })
 )
 
-test("offer signup programs must be known and be the card's own program", () => {
+test("offer signup programs must reference known programs", () => {
   const dataset: Dataset = {
     issuers: new Map([["bank", { name: "Bank", cdr_brands: [] }]]),
-    programs: new Map([["points", { name: "Points", type: "bank" }]]),
+    programs: new Map(),
     cards: new Map([
       [
         "bank/card",
         {
           ...card,
-          rewards: { program: "points" },
           offers: [
             {
               id: "offer-1",
@@ -113,10 +112,7 @@ test("offer signup programs must be known and be the card's own program", () => 
     ])
   }
 
-  assert.deepStrictEqual(checkReferences(dataset), [
-    "bank/card: unknown program missing",
-    "bank/card: signup points in missing, but the site values bonuses at the card's program points"
-  ])
+  assert.deepStrictEqual(checkReferences(dataset), ["bank/card: unknown program missing"])
 })
 
 it.effect("CDR observations publish on cards and must reference known cards", () =>
