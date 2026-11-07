@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "Enjoy the benefits of our Low Rate Credit Card and receive up to 62 days interest free days on purchases or take advantage of our balance transfer offer."
 url = "https://www.beyondbank.com.au/bank-and-save/debit-and-credit-cards/low-rate-visa-credit-card/"
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.beyondbank.com.au/bank-and-save/debit-and-credit-cards/low-rate-visa-credit-card/" ]
+
 [cdr]
 brand = "Beyond Bank Australia"
 product_id = "11"
@@ -25,9 +31,4 @@ min_credit = 1000
 max_credit = 80000
 
 [perks]
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.beyondbank.com.au/bank-and-save/debit-and-credit-cards/low-rate-visa-credit-card/" ]
 

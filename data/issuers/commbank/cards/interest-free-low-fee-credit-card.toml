@@ -7,6 +7,14 @@ description = "CommBank's simplest credit card yet with no interest and no late 
 url = "https://www.commbank.com.au/credit-cards/interest-free-low-fee.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-IFLF-credit-card.png"
 
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_applicable"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.commbank.com.au/credit-cards.html" ]
+quote = "credit limit $400 - $1,500 interest free period on purchases n/a"
+note = "The card charges 0% p.a. on purchases."
+
 [cdr]
 brand = "CommBank"
 product_id = "d34e453e721640f983c03922f567463a"
@@ -25,11 +33,4 @@ min_credit = 400
 max_credit = 1500
 
 [perks]
-[[gaps]]
-field = "rates.interest_free_days"
-reason = "not_applicable"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.commbank.com.au/credit-cards.html" ]
-quote = "credit limit $400 - $1,500 interest free period on purchases n/a"
-note = "The card charges 0% p.a. on purchases."
 

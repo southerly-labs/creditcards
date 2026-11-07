@@ -1,11 +1,18 @@
 name = "HSBC Virtual Card"
 type = "corporate"
+network = "mastercard"
 status = "active"
 first_seen = "2026-10-31"
 description = "Single and multi use virtual cards for corporate expenditure"
 url = "https://www.business.hsbc.com.au/en-au/solutions/corporate-card"
 image = "https://www.business.hsbc.com.au/en-au/solutions/virtual-card"
-network = "mastercard"
+
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.business.hsbc.com.au/en-au/solutions/corporate-card", "https://www.business.hsbc.com.au/en-au/form-downloads-and-interest-rates" ]
+note = "CDR publishes only a $30 \"Late Payment Reminder Fee\". The normaliser deliberately does not read reminder fees as late payment fees, and the pages state no late payment fee."
 
 [cdr]
 brand = "HSBC Bank Australia Limited – Wholesale Banking"
@@ -21,11 +28,4 @@ interest_free_days = 55
 [limits]
 [perks]
 insurance = [ "Complimentary unauthorised transaction insurance" ]
-
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.business.hsbc.com.au/en-au/solutions/corporate-card", "https://www.business.hsbc.com.au/en-au/form-downloads-and-interest-rates" ]
-note = "CDR publishes only a $30 \"Late Payment Reminder Fee\". The normaliser deliberately does not read reminder fees as late payment fees, and the pages state no late payment fee."
 

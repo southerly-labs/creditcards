@@ -7,20 +7,6 @@ description = "Corporate Charge Card for consolidating meeting and event-related
 url = "https://www.americanexpress.com/au/business/payment-solutions/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG710CMC01S3.gif"
 
-[cdr]
-brand = "American Express"
-product_id = "16fa9ae1-0fc1-4a6c-a785-d2f6a5d14712"
-last_updated = "2026-07-08T02:30:00.000Z"
-
-[fees]
-annual = 206
-foreign_txn_pct = 3.5
-
-[rates]
-[limits]
-[perks]
-insurance = [ "International & Domestic Travel Insurance" ]
-
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_fixed"
@@ -34,4 +20,18 @@ field = "rates.interest_free_days"
 reason = "not_stated"
 checked = "2026-11-05"
 sources = [ "cdr", "https://www.americanexpress.com/au/business/payment-solutions/corporate-meeting-card/" ]
+
+[cdr]
+brand = "American Express"
+product_id = "16fa9ae1-0fc1-4a6c-a785-d2f6a5d14712"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 206
+foreign_txn_pct = 3.5
+
+[rates]
+[limits]
+[perks]
+insurance = [ "International & Domestic Travel Insurance" ]
 

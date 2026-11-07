@@ -8,6 +8,11 @@ url = "https://www.firstoptionbank.com.au/credit-card-enquiry/"
 image = "https://firstoptionbank.com.au/wp-content/uploads/2020/11/Credit-Card-Mockup_blue-8.png"
 locked = [ "fees.late_payment" ]
 
+[provenance.sections.fees]
+source_urls = [ "https://www.firstoptionbank.com.au/credit-card/" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "fees.late_payment = 0 from the issuer's page: \"late payment fee no late payment fee\". CDR does not publish it; the field is locked so the sync keeps it."
+
 [cdr]
 brand = "First Option Bank"
 product_id = "VISA_CREDIT_CARD"
@@ -26,8 +31,4 @@ interest_free_days = 45
 min_credit = 500
 
 [perks]
-[provenance.sections.fees]
-source_urls = [ "https://www.firstoptionbank.com.au/credit-card/" ]
-reviewed_at = "2026-11-04T23:15:29.057Z"
-correction_reason = "fees.late_payment = 0 from the issuer's page: \"late payment fee no late payment fee\". CDR does not publish it; the field is locked so the sync keeps it."
 

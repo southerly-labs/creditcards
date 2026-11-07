@@ -8,6 +8,11 @@ url = "https://apply.creditunionsa.com.au/cusa/servlet/SmartForm.html?formCode=j
 image = "https://cms.creditunionsa.com.au/assets/images/20220112_SecondaryPageBanners_Cards_VisaCreditCard.jpg"
 locked = [ "rates.interest_free_days" ]
 
+[provenance.sections.rates]
+source_urls = [ "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "rates.interest_free_days = 55 from the issuer's page: \"up to 55 days interest-free on purchases\". CDR does not publish it; the field is locked so the sync keeps it."
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"
@@ -17,6 +22,12 @@ kind = "intro_rate"
 applies_to = "balance_transfer"
 rate = 0
 months = 6
+
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/", "https://www.creditunionsa.com.au/fees/credit-cards-and-overdrafts/", "https://www.creditunionsa.com.au/fees/other-fees/", "https://www.creditunionsa.com.au/globalassets/pdfs/brc_1095.pdf" ]
 
 [cdr]
 brand = "Credit Union SA"
@@ -37,14 +48,4 @@ min_credit = 1000
 max_credit = 20000
 
 [perks]
-[provenance.sections.rates]
-source_urls = [ "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/" ]
-reviewed_at = "2026-11-04T23:15:29.057Z"
-correction_reason = "rates.interest_free_days = 55 from the issuer's page: \"up to 55 days interest-free on purchases\". CDR does not publish it; the field is locked so the sync keeps it."
-
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/", "https://www.creditunionsa.com.au/fees/credit-cards-and-overdrafts/", "https://www.creditunionsa.com.au/fees/other-fees/", "https://www.creditunionsa.com.au/globalassets/pdfs/brc_1095.pdf" ]
 

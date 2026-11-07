@@ -4,8 +4,8 @@ network = "unionpay"
 status = "active"
 first_seen = "2026-10-31"
 description = "The Bank of China Global UnionPay Card"
-image = "https://pic.bankofchina.com/branches/australia/202108/W020210827692909109857.jpg"
 url = "https://www.bankofchina.com/au/en/pbservice/pb4/202102/t20210211_19987339.html"
+image = "https://pic.bankofchina.com/branches/australia/202108/W020210827692909109857.jpg"
 
 [cdr]
 brand = "Bank of China"
@@ -20,8 +20,8 @@ cash_advance_min = 0
 late_payment = 15
 
 [rates]
-cash_advance = 21.74
 purchase = 19.99
+cash_advance = 21.74
 interest_free_days = 50
 
 [limits]

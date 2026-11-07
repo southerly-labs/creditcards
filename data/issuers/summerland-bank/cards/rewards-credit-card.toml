@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "Earn Rewards points on your everyday spend."
 url = "https://application.summerland.com.au/nPortal__SelfRegistration?product=a0uOm000005EqqcIAC&core=es5&_gl=1*199l32e*_gcl_au*MTYyNjUxNDAwNi4xNzQwNjkxMDQ1"
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://summerland.com.au/credit-cards", "https://www.summerland.com.au/detailed-credit-card-product-guide", "https://www.summerland.com.au/fees-charges-transaction-limits" ]
+
 [cdr]
 brand = "Summerland Bank"
 product_id = "75"
@@ -29,9 +35,4 @@ rate = 1
 note = "max 100,000 points per 12 months; points are paid back as cash every six months"
 
 [perks]
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://summerland.com.au/credit-cards", "https://www.summerland.com.au/detailed-credit-card-product-guide", "https://www.summerland.com.au/fees-charges-transaction-limits" ]
 

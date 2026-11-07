@@ -8,6 +8,11 @@ url = "https://www.anz.com.au/business/credit-cards/low-rate/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-003-anz-au.jpg"
 locked = [ "rates.interest_free_days" ]
 
+[provenance.sections.rates]
+source_urls = [ "https://www.anz.com.au/business/credit-cards/low-rate/" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "rates.interest_free_days = 0 from the issuer's page: \"interest free days on purchases 0 days\". CDR does not publish it; the field is locked so the sync keeps it."
+
 [cdr]
 brand = "ANZ"
 product_id = "ca69da6f-d4e9-ba91-1aba-41fa429f031e"
@@ -30,9 +35,4 @@ max_credit = 50000
 
 [perks]
 insurance = [ "Unauthorised Transactions Insurance" ]
-
-[provenance.sections.rates]
-source_urls = [ "https://www.anz.com.au/business/credit-cards/low-rate/" ]
-reviewed_at = "2026-11-04T23:15:29.057Z"
-correction_reason = "rates.interest_free_days = 0 from the issuer's page: \"interest free days on purchases 0 days\". CDR does not publish it; the field is locked so the sync keeps it."
 

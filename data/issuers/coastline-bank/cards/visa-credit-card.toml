@@ -7,6 +7,12 @@ description = "Visa Credit Card"
 url = "https://www.coastline.com.au/personal/visa-credit-card"
 image = "https://cdn.sanity.io/images/djf521sf/production/f1a8b68a2b2fddc3f600a06d308a13cd170bbbe0-1536x969.png"
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.coastline.com.au/personal/visa-credit-card", "https://www.coastline.com.au/conditions-of-use/" ]
+
 [cdr]
 brand = "Coastline Bank"
 product_id = "21"
@@ -24,9 +30,4 @@ interest_free_days = 55
 min_credit = 500
 
 [perks]
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.coastline.com.au/personal/visa-credit-card", "https://www.coastline.com.au/conditions-of-use/" ]
 

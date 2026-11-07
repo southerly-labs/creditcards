@@ -7,18 +7,6 @@ description = "Corporate Charge Card for consolidating business spend in one sta
 url = "https://www.americanexpress.com/au/business/payment-solutions/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAURGOT00000S3.gif"
 
-[cdr]
-brand = "American Express"
-product_id = "0f3233bb-96d2-4228-bd0d-34bc4a0bbcb1"
-last_updated = "2026-07-08T02:30:00.000Z"
-
-[fees]
-annual = 206
-foreign_txn_pct = 3.5
-
-[rates]
-[limits]
-[perks]
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_fixed"
@@ -32,4 +20,17 @@ field = "rates.interest_free_days"
 reason = "not_stated"
 checked = "2026-11-05"
 sources = [ "cdr", "https://www.americanexpress.com/au/business/payment-solutions/corporate-purchasing-card/" ]
+
+[cdr]
+brand = "American Express"
+product_id = "0f3233bb-96d2-4228-bd0d-34bc4a0bbcb1"
+last_updated = "2026-07-08T02:30:00.000Z"
+
+[fees]
+annual = 206
+foreign_txn_pct = 3.5
+
+[rates]
+[limits]
+[perks]
 

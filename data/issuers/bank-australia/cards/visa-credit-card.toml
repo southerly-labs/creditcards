@@ -4,8 +4,14 @@ network = "visa"
 status = "active"
 first_seen = "2026-10-31"
 description = "No annual fee and interest fee days to reduce your card costs. Great for those who pay off their card in full each month."
-image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
 url = "https://www.bankaust.com.au/banking/credit-cards/visa-credit-card"
+image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
+
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.bankaust.com.au/banking/credit-cards/visa-credit-card", "https://www.bankaust.com.au/support/disclosures" ]
 
 [cdr]
 brand = "Bank Australia"
@@ -27,9 +33,4 @@ interest_free_days = 55
 min_credit = 1000
 
 [perks]
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.bankaust.com.au/banking/credit-cards/visa-credit-card", "https://www.bankaust.com.au/support/disclosures" ]
 

@@ -1,12 +1,25 @@
 name = "Corporate charge card"
 type = "corporate"
+network = "mastercard"
 status = "active"
 first_seen = "2026-10-31"
 description = "Ideal for large organisations with significant expenses. You can set spending limits and access expense reports to monitor spending and forecast costs."
-image = "https://www.commbank.com.au/business/business-credit-cards.html"
 url = "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/corporate-charge-card.html"
-network = "mastercard"
+image = "https://www.commbank.com.au/business/business-credit-cards.html"
 locked = [ "rates.interest_free_days" ]
+
+[provenance.sections.rates]
+source_urls = [ "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/corporate-charge-card.html" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "rates.interest_free_days = 31 from the issuer's page: \"purchases are interest free for up to 31 days from the date of purchase\". CDR does not publish it; the field is locked so the sync keeps it."
+
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_applicable"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.commbank.com.au/business/pds/001-033-corporate-card-fees.pdf" ]
+quote = "late payment charge (charged if the minimum payment on credit cards, or full payment for charge cards, is not received by the due date) n/a $20.00 $25.00"
+note = "The fee table's first column is the corporate charge card, so its late payment charge is n/a; the $20 and $25 are the corporate credit cards. The fee's own description still mentions charge cards."
 
 [cdr]
 brand = "CommBank"
@@ -26,17 +39,4 @@ interest_free_days = 31
 [limits]
 [perks]
 insurance = [ "Transit Accident Insurance", "Unauthorised Transaction Insurance" ]
-
-[provenance.sections.rates]
-source_urls = [ "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/corporate-charge-card.html" ]
-reviewed_at = "2026-11-04T23:15:29.057Z"
-correction_reason = "rates.interest_free_days = 31 from the issuer's page: \"purchases are interest free for up to 31 days from the date of purchase\". CDR does not publish it; the field is locked so the sync keeps it."
-
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_applicable"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.commbank.com.au/business/pds/001-033-corporate-card-fees.pdf" ]
-quote = "late payment charge (charged if the minimum payment on credit cards, or full payment for charge cards, is not received by the due date) n/a $20.00 $25.00"
-note = "The fee table's first column is the corporate charge card, so its late payment charge is n/a; the $20 and $25 are the corporate credit cards. The fee's own description still mentions charge cards."
 

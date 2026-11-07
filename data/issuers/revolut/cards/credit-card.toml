@@ -5,6 +5,13 @@ first_seen = "2026-10-31"
 description = "A Revolut credit card with interest-free periods on purchases and variable interest rates. Features and fees vary depending on your plan. See our website for details."
 url = "https://www.revolut.com/en-AU/credit-card/"
 
+[[gaps]]
+field = "network"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.revolut.com/en-AU/legal/cctermsandconditions/", "https://www.revolut.com/en-AU/legal/credit-card-fees-au/" ]
+note = "The overview page CDR links returned HTTP 404."
+
 [cdr]
 brand = "Revolut"
 product_id = "550e8400-e29b-41d4-a716-446655440005"
@@ -33,11 +40,4 @@ earn_text_hash = "48844b97c459c362"
 
 [perks]
 insurance = [ "Everyday Protection and/or Travel Insurance" ]
-
-[[gaps]]
-field = "network"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.revolut.com/en-AU/legal/cctermsandconditions/", "https://www.revolut.com/en-AU/legal/credit-card-fees-au/" ]
-note = "The overview page CDR links returned HTTP 404."
 

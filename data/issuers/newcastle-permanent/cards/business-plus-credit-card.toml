@@ -5,6 +5,13 @@ status = "active"
 first_seen = "2026-10-31"
 description = "A business credit card designed to help separate company and business expenses, manage spending, and simplify bookkeeping."
 
+[[gaps]]
+field = "url"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr" ]
+note = "CDR publishes no applicationUri or overviewUri for this card, and a search of newcastlepermanent.com.au found only its terms documents, no product page."
+
 [cdr]
 brand = "Newcastle Permanent"
 product_id = "CC_businesspluscc"
@@ -27,10 +34,4 @@ min_credit = 500
 max_credit = 50000
 
 [perks]
-[[gaps]]
-field = "url"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr" ]
-note = "CDR publishes no applicationUri or overviewUri for this card, and a search of newcastlepermanent.com.au found only its terms documents, no product page."
 

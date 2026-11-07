@@ -4,8 +4,14 @@ network = "visa"
 status = "active"
 first_seen = "2026-10-31"
 description = "Business Credit card gives business owners access to a credit card facility, plus the option of having more than one card to cover monthly fuel, accommodation and other business expenses."
-image = "https://www.heritage.com.au/inbound/open-banking/card-art/business-visa"
 url = "https://www.heritage.com.au/banking/credit-cards/business-visa"
+image = "https://www.heritage.com.au/inbound/open-banking/card-art/business-visa"
+
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.heritage.com.au/banking/credit-cards/business-visa", "https://www.heritage.com.au/inbound/brochures/fees-and-limits-guide", "https://www.heritage.com.au/inbound/brochures/guide-to-credit-cards" ]
 
 [cdr]
 brand = "People First and Heritage Bank"
@@ -31,9 +37,4 @@ earn_source = "manual"
 earn_text_hash = "2aa766aa275293df"
 
 [perks]
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.heritage.com.au/banking/credit-cards/business-visa", "https://www.heritage.com.au/inbound/brochures/fees-and-limits-guide", "https://www.heritage.com.au/inbound/brochures/guide-to-credit-cards" ]
 

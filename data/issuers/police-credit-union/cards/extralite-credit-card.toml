@@ -1,27 +1,12 @@
 name = "extralite Credit Card"
 type = "personal"
+network = "visa"
 status = "active"
 first_seen = "2026-10-31"
 description = "Interest free day Credit Card"
 url = "https://www.policecu.com.au/PCUDocuments/Credit_Application_Form_Car_Loans_Personal%20Loans_&_Credit_Cards.pdf"
 locked = [ "rates.interest_free_days", "network" ]
-network = "visa"
 
-[cdr]
-brand = "Police Credit Union Ltd"
-product_id = "extralite_Credit_Card"
-last_updated = "2026-04-27T11:31:49.000+09:30"
-
-[fees]
-[rates]
-purchase = 14.24
-cash_advance = 14.24
-interest_free_days = 44
-
-[limits]
-min_credit = 1000
-
-[perks]
 [provenance.sections.rates]
 source_urls = [ "https://www.policecu.com.au/products/extralite-credit-card" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"
@@ -39,4 +24,20 @@ checked = "2026-11-05"
 sources = [ "cdr", "https://www.policecu.com.au/PCUDocuments/Fees_and_Charges_Personal_Credit_and_Overdraft.pdf" ]
 quote = "credit card late payment fee payable whenever your repayments become in arrears by 21 days or more. payable on the 21st day payable on the 35th day $15.00 $25.00"
 note = "Two fees: $15 at 21 days in arrears and $25 at 35 days."
+
+[cdr]
+brand = "Police Credit Union Ltd"
+product_id = "extralite_Credit_Card"
+last_updated = "2026-04-27T11:31:49.000+09:30"
+
+[fees]
+[rates]
+purchase = 14.24
+cash_advance = 14.24
+interest_free_days = 44
+
+[limits]
+min_credit = 1000
+
+[perks]
 

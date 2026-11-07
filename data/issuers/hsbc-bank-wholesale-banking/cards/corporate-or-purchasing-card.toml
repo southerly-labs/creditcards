@@ -1,11 +1,18 @@
 name = "HSBC Corporate or Purchasing Card"
 type = "corporate"
+network = "mastercard"
 status = "active"
 first_seen = "2026-10-31"
 description = "Corporate or Purchasing cards for corporate expenditure including T&E and  Procurement spend"
 url = "https://www.business.hsbc.com.au/en-au/cards-email-us"
 image = "https://www.business.hsbc.com.au/-/jssmedia/media/australia/images/campaigns/au-corporate-cardface-img.jpg?h=516&iar=0&w=800&hash=64E0EE07E5471A3DC30D08CD12733021"
-network = "mastercard"
+
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.business.hsbc.com.au/en-au/solutions/corporate-card", "https://www.business.hsbc.com.au/en-au/form-downloads-and-interest-rates" ]
+note = "CDR publishes only a $30 \"Late Payment Reminder Fee\". The normaliser deliberately does not read reminder fees as late payment fees, and the pages state no late payment fee."
 
 [cdr]
 brand = "HSBC Bank Australia Limited – Wholesale Banking"
@@ -24,11 +31,4 @@ interest_free_days = 55
 [limits]
 [perks]
 insurance = [ "Complimentary travel & unauthorised transaction insurance" ]
-
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.business.hsbc.com.au/en-au/solutions/corporate-card", "https://www.business.hsbc.com.au/en-au/form-downloads-and-interest-rates" ]
-note = "CDR publishes only a $30 \"Late Payment Reminder Fee\". The normaliser deliberately does not read reminder fees as late payment fees, and the pages state no late payment fee."
 

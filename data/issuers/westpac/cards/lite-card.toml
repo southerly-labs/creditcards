@@ -1,12 +1,17 @@
 name = "Westpac Lite Card"
 type = "personal"
+network = "mastercard"
 status = "active"
 first_seen = "2026-10-31"
 description = "Our Lite credit card has 0% foreign transaction fee, a lower purchase rate and lower monthly fee - designed for all things international."
 url = "https://www.westpac.com.au/credit-cards/low-rate-cards/westpac-lite-card/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Westpac%20Lite%20Card_232x146_purple.jpg"
-network = "mastercard"
 locked = [ "fees.late_payment" ]
+
+[provenance.sections.fees]
+source_urls = [ "https://www.westpac.com.au/credit-cards/low-rate-cards/westpac-lite-card" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "fees.late_payment = 0 from the issuer's page: \"missed payment fee $0\". CDR does not publish it; the field is locked so the sync keeps it."
 
 [cdr]
 brand = "Westpac"
@@ -29,9 +34,4 @@ min_income = 30000
 
 [perks]
 lounge_access = true
-
-[provenance.sections.fees]
-source_urls = [ "https://www.westpac.com.au/credit-cards/low-rate-cards/westpac-lite-card" ]
-reviewed_at = "2026-11-04T23:15:29.057Z"
-correction_reason = "fees.late_payment = 0 from the issuer's page: \"missed payment fee $0\". CDR does not publish it; the field is locked so the sync keeps it."
 

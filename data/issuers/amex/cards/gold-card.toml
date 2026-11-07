@@ -4,8 +4,22 @@ network = "amex"
 status = "active"
 first_seen = "2026-10-31"
 description = "Charge Card with Membership Rewards and travel benefits."
-image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGGL00010S3.gif"
 url = "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-gold-card/"
+image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGGL00010S3.gif"
+
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr" ]
+quote = "Three percent (3%) or $20, whichever is greater, will be charged on any overdue amount."
+note = "CDR publishes the late payment fee as a percentage of the overdue amount with a minimum, not a fixed amount."
+
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-gold-card/", "https://www.americanexpress.com/au/credit-cards/manage-your-card/pay-bill/" ]
 
 [cdr]
 brand = "American Express"
@@ -31,18 +45,4 @@ note = "excluding government bodies"
 [perks]
 insurance = [ "Complimentary Travel Insurance", "Card Purchase Cover", "Card Refund Cover", "Buyer’s Advantage Cover" ]
 lounge_access = true
-
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_fixed"
-checked = "2026-11-05"
-sources = [ "cdr" ]
-quote = "Three percent (3%) or $20, whichever is greater, will be charged on any overdue amount."
-note = "CDR publishes the late payment fee as a percentage of the overdue amount with a minimum, not a fixed amount."
-
-[[gaps]]
-field = "rates.interest_free_days"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-gold-card/", "https://www.americanexpress.com/au/credit-cards/manage-your-card/pay-bill/" ]
 

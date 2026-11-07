@@ -4,8 +4,8 @@ network = "visa"
 status = "active"
 first_seen = "2026-10-31"
 description = "Our mid-tier credit card for Qantas point lovers"
-image = "https://www.bankofmelbourne.com.au/content/dam/public/open-banking/bom_p_credit-cards_amplify-platinum.png"
 url = "https://www.bankofmelbourne.com.au/personal/credit-cards/frequent-flyer/amplify-platinum/summary"
+image = "https://www.bankofmelbourne.com.au/content/dam/public/open-banking/bom_p_credit-cards_amplify-platinum.png"
 
 [[offers]]
 id = "signup"

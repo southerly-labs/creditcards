@@ -8,6 +8,11 @@ url = "https://apply.qudosbank.com.au/Apply/credit-card"
 image = "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b43c551b6f4a8c20ec8_lifestyle-card-no-border.png"
 locked = [ "rates.interest_free_days" ]
 
+[provenance.sections.rates]
+source_urls = [ "https://www.qudosbank.com.au/products/credit-cards/lifestyle-credit-card" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "rates.interest_free_days = 55 from the issuer's page: \"up to 55 days interest free on purchases only applies if your account is paid in full by the due date each month\". CDR does not publish it; the field is locked so the sync keeps it."
+
 [[offers]]
 id = "intro-both"
 source = "cdr"
@@ -40,8 +45,4 @@ min_credit = 1000
 max_credit = 20000
 
 [perks]
-[provenance.sections.rates]
-source_urls = [ "https://www.qudosbank.com.au/products/credit-cards/lifestyle-credit-card" ]
-reviewed_at = "2026-11-04T23:15:29.057Z"
-correction_reason = "rates.interest_free_days = 55 from the issuer's page: \"up to 55 days interest free on purchases only applies if your account is paid in full by the due date each month\". CDR does not publish it; the field is locked so the sync keeps it."
 

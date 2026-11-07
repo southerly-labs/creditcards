@@ -1,11 +1,21 @@
 name = "Classic Credit Card"
 type = "personal"
+network = "visa"
 status = "active"
 first_seen = "2026-10-31"
 description = "Use your credit card for shopping, online purchasing, travelling overseas or even to consolidate other credit or store card debt."
 url = "https://www.nicu.com.au/banking/banking-enquiry"
 locked = [ "fees.late_payment", "network" ]
-network = "visa"
+
+[provenance.sections.fees]
+source_urls = [ "https://www.nicu.com.au/banking/cards/visa-classic-credit-card" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "fees.late_payment = 15 from the issuer's page: \"late payment fee $15\". CDR does not publish it; the field is locked so the sync keeps it."
+
+[provenance.sections.network]
+source_urls = [ "https://www.nicu.com.au/banking/cards/visa-classic-credit-card" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "network = visa from the issuer's page: \"visa classic credit card a simple credit card with a low ongoing annual fee\". CDR does not publish it; the field is locked so the sync keeps it."
 
 [cdr]
 brand = "Northern Inland Credit Union Limited"
@@ -24,13 +34,4 @@ interest_free_days = 55
 
 [limits]
 [perks]
-[provenance.sections.fees]
-source_urls = [ "https://www.nicu.com.au/banking/cards/visa-classic-credit-card" ]
-reviewed_at = "2026-11-04T23:15:29.057Z"
-correction_reason = "fees.late_payment = 15 from the issuer's page: \"late payment fee $15\". CDR does not publish it; the field is locked so the sync keeps it."
-
-[provenance.sections.network]
-source_urls = [ "https://www.nicu.com.au/banking/cards/visa-classic-credit-card" ]
-reviewed_at = "2026-11-04T23:15:29.057Z"
-correction_reason = "network = visa from the issuer's page: \"visa classic credit card a simple credit card with a low ongoing annual fee\". CDR does not publish it; the field is locked so the sync keeps it."
 

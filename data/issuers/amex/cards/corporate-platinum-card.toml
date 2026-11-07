@@ -7,6 +7,22 @@ description = "Corporate Charge Card for consolidating employee expenses that pr
 url = "https://www.americanexpress.com/en-au/business/corporate-credit-cards/platinum-corporate-card/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAURGPL00000S3.gif"
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr" ]
+quote = "Three percent (3%) or $30, whichever is greater, will be charged on any overdue amount."
+note = "CDR publishes the late payment fee as a percentage of the overdue amount with a minimum, not a fixed amount."
+
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_fixed"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-corporate-card/" ]
+quote = "benefits requiring individual enrolment up to 51 days to pay for purchases"
+note = "Corporate charge card. The page lists days to pay for purchases under benefits requiring individual enrolment, not interest-free days."
+
 [cdr]
 brand = "American Express"
 product_id = "70ad0bdd-7a5c-4a6c-ae29-47138b2717e0"
@@ -38,20 +54,4 @@ category = "government"
 [perks]
 insurance = [ "International & Domestic Travel Insurance" ]
 lounge_access = true
-
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_fixed"
-checked = "2026-11-05"
-sources = [ "cdr" ]
-quote = "Three percent (3%) or $30, whichever is greater, will be charged on any overdue amount."
-note = "CDR publishes the late payment fee as a percentage of the overdue amount with a minimum, not a fixed amount."
-
-[[gaps]]
-field = "rates.interest_free_days"
-reason = "not_fixed"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.americanexpress.com/au/business/business-credit-cards/membership-benefits/platinum-corporate-card/" ]
-quote = "benefits requiring individual enrolment up to 51 days to pay for purchases"
-note = "Corporate charge card. The page lists days to pay for purchases under benefits requiring individual enrolment, not interest-free days."
 

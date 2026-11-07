@@ -5,15 +5,6 @@ first_seen = "2026-10-31"
 description = "Virtual Cards offer solutions for streamlining business expenditure, which provides large businesses the ability to take advantage of extended payment terms, transaction level payment security, and transaction level data through the deployment of single-use or multi-use virtual cards. To access Virtual Cards, you will need to set up a Procurement Management Account. Please refer to Procurement Management Account for additional product information and pricing."
 url = "https://www.commbank.com.au/business/business-credit-cards/virtual-cards.html"
 
-[cdr]
-brand = "CommBank"
-product_id = "29967abaf0f640afb581333158f003cc"
-last_updated = "2026-10-31T02:15:41.000Z"
-
-[fees]
-[rates]
-[limits]
-[perks]
 [[gaps]]
 field = "rates.interest_free_days"
 reason = "not_stated"
@@ -31,4 +22,14 @@ field = "network"
 reason = "not_stated"
 checked = "2026-11-05"
 sources = [ "cdr", "https://www.commbank.com.au/business/business-credit-cards/virtual-cards.html", "https://www.commbank.com.au/important-info/business/business-finance.html" ]
+
+[cdr]
+brand = "CommBank"
+product_id = "29967abaf0f640afb581333158f003cc"
+last_updated = "2026-10-31T02:15:41.000Z"
+
+[fees]
+[rates]
+[limits]
+[perks]
 

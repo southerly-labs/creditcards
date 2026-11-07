@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "Benefit from a low interest rate on purchases."
 url = "https://application.summerland.com.au/nPortal__SelfRegistration?product=a0uOm000005EqqbIAC&core=es5&_gl=1*cy7mzo*_gcl_au*MTYyNjUxNDAwNi4xNzQwNjkxMDQ1"
 
+[[gaps]]
+field = "fees.late_payment"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://summerland.com.au/credit-cards", "https://www.summerland.com.au/detailed-credit-card-product-guide", "https://www.summerland.com.au/fees-charges-transaction-limits" ]
+
 [cdr]
 brand = "Summerland Bank"
 product_id = "74"
@@ -20,9 +26,4 @@ interest_free_days = 55
 
 [limits]
 [perks]
-[[gaps]]
-field = "fees.late_payment"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://summerland.com.au/credit-cards", "https://www.summerland.com.au/detailed-credit-card-product-guide", "https://www.summerland.com.au/fees-charges-transaction-limits" ]
 

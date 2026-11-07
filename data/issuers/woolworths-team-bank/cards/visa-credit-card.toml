@@ -6,18 +6,6 @@ first_seen = "2026-10-31"
 description = "Visa Credit Card"
 url = "https://woolworthsteambank.com.au/loan/"
 
-[cdr]
-brand = "Woolworths Team Bank"
-product_id = "S90"
-last_updated = "2025-08-26T11:59:05.000+10:00"
-
-[fees]
-[rates]
-purchase = 13.45
-cash_advance = 13.45
-
-[limits]
-[perks]
 [[gaps]]
 field = "rates.interest_free_days"
 reason = "not_stated"
@@ -31,4 +19,17 @@ reason = "not_stated"
 checked = "2026-11-05"
 sources = [ "cdr", "https://woolworthsteambank.com.au/wp-content/uploads/2025/06/PDS-Fees-Charges-Transaction-Limits_07.2025_FINAL.pdf" ]
 note = "The card URL CDR publishes redirects to a home loans page."
+
+[cdr]
+brand = "Woolworths Team Bank"
+product_id = "S90"
+last_updated = "2025-08-26T11:59:05.000+10:00"
+
+[fees]
+[rates]
+purchase = 13.45
+cash_advance = 13.45
+
+[limits]
+[perks]
 

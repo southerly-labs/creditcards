@@ -1,11 +1,18 @@
 name = "MoneyMe Luxury Escapes Card"
 type = "personal"
+network = "mastercard"
 status = "active"
 first_seen = "2026-10-31"
 description = "Digital credit card with Luxury Escapes loyalty benefits. Purchase and cash advance rates are personalised to your Equifax OneScore credit band. Credit limits up to $30,000."
 url = "https://www.moneyme.com.au/credit-card"
 image = "https://www.moneyme.com.au/assets/cards/luxury-escapes-card.png"
-network = "mastercard"
+
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.moneyme.com.au/credit-card", "https://mmestoragecdn.blob.core.windows.net/web2/v3/images/legal/credit-guide.pdf" ]
+note = "CDR links this card to the same overview page as the Cashback Rewards card, and that page describes only the Cashback Rewards card."
 
 [cdr]
 brand = "MoneyMe"
@@ -32,10 +39,4 @@ earn_source = "manual"
 earn_text_hash = "94d6bf46386e2e6c"
 
 [perks]
-[[gaps]]
-field = "rates.interest_free_days"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.moneyme.com.au/credit-card", "https://mmestoragecdn.blob.core.windows.net/web2/v3/images/legal/credit-guide.pdf" ]
-note = "CDR links this card to the same overview page as the Cashback Rewards card, and that page describes only the Cashback Rewards card."
 

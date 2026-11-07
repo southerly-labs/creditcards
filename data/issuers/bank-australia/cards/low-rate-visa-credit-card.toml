@@ -4,9 +4,20 @@ network = "visa"
 status = "active"
 first_seen = "2026-10-31"
 description = "A lower interest rate to reduce your borrowing costs. Great for those who have a carryover balance each month."
-image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
 url = "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/"
+image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
 locked = [ "fees.late_payment" ]
+
+[provenance.sections.fees]
+source_urls = [ "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/" ]
+reviewed_at = "2026-11-04T23:15:29.057Z"
+correction_reason = "fees.late_payment = 0 from the issuer's page: \"our lowest rate credit card comes with no late payment fees and no annual fee\". CDR does not publish it; the field is locked so the sync keeps it."
+
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_stated"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/", "https://www.bankaust.com.au/support/disclosures" ]
 
 [cdr]
 brand = "Bank Australia"
@@ -29,14 +40,4 @@ balance_transfer = 0
 min_credit = 1000
 
 [perks]
-[provenance.sections.fees]
-source_urls = [ "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/" ]
-reviewed_at = "2026-11-04T23:15:29.057Z"
-correction_reason = "fees.late_payment = 0 from the issuer's page: \"our lowest rate credit card comes with no late payment fees and no annual fee\". CDR does not publish it; the field is locked so the sync keeps it."
-
-[[gaps]]
-field = "rates.interest_free_days"
-reason = "not_stated"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/", "https://www.bankaust.com.au/support/disclosures" ]
 

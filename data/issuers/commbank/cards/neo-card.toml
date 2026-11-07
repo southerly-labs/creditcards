@@ -7,6 +7,14 @@ description = "A new way to pay with no interest, a low maximum credit limit and
 url = "https://www.commbank.com.au/credit-cards/commbank-neo.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-commbank-neo-credit-card.png"
 
+[[gaps]]
+field = "rates.interest_free_days"
+reason = "not_applicable"
+checked = "2026-11-05"
+sources = [ "cdr", "https://www.commbank.com.au/credit-cards.html" ]
+quote = "available credit limits $1,000, $2,000 or $3,000 interest free period on purchases n/a"
+note = "The card charges 0% p.a. on purchases."
+
 [cdr]
 brand = "CommBank"
 product_id = "ce01a5a0965b45d281b624ff2e6d2f12"
@@ -27,11 +35,4 @@ min_credit = 1000
 max_credit = 3000
 
 [perks]
-[[gaps]]
-field = "rates.interest_free_days"
-reason = "not_applicable"
-checked = "2026-11-05"
-sources = [ "cdr", "https://www.commbank.com.au/credit-cards.html" ]
-quote = "available credit limits $1,000, $2,000 or $3,000 interest free period on purchases n/a"
-note = "The card charges 0% p.a. on purchases."
 
