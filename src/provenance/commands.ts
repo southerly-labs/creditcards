@@ -1,8 +1,9 @@
-import { Console, DateTime, Effect, Option, Schema, String as EffectString } from "effect"
+import { Console, DateTime, Effect, Option, Schema } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import { splitCardKey, Store, StoreError } from "../store/Store.ts"
 import { Card } from "../model/schema.ts"
 import { ProvenanceSection, sectionLocks } from "./schema.ts"
+import { LockEvent, LockState, lockSection, lockStateOf, stepLock } from "../machine/sectionLock.ts"
 
 const correct = Command.make(
   "correct",
@@ -46,19 +47,25 @@ const inspect = Command.make(
   {},
   Effect.fn(function* () {
     const cards = (yield* (yield* Store).load).cards
-    const now = DateTime.toEpochMillis(yield* DateTime.now)
+    const current = yield* DateTime.now
+    const now = DateTime.formatIso(current)
+    const nowMs = DateTime.toEpochMillis(current)
 
     for (const [key, card] of cards) {
-      for (const locked of card.locked ?? []) {
-        const section = EffectString.split(locked, ".")[0] ?? locked
-        const review = card.provenance?.sections?.[section]
-        const parsed = review !== undefined ? DateTime.make(review.reviewed_at) : Option.none()
-        const age = Option.isSome(parsed) ? (now - DateTime.toEpochMillis(parsed.value)) / 86_400_000 : Number.NaN
+      for (const path of card.locked ?? []) {
+        const state = yield* stepLock(lockStateOf(card, path), LockEvent.cases.Aged.make({ now }))
+        const review = card.provenance?.sections?.[lockSection(path)]
 
-        if (!Number.isFinite(age) || age >= 90)
-          yield* Console.log(
-            `${key} ${locked}: ${Number.isFinite(age) ? `${Math.floor(age)} days since review` : "no dated section review"}${review !== undefined ? ` — ${review.correction_reason}` : ""}`
-          )
+        if (LockState.guards.Undated(state)) yield* Console.log(`${key} ${path}: no dated section review`)
+
+        if (LockState.guards.Stale(state)) {
+          const age = Option.match(DateTime.make(state.reviewed_at), {
+            onNone: () => "an unreadable review date",
+            onSome: (at) => `${Math.floor((nowMs - DateTime.toEpochMillis(at)) / 86_400_000)} days since review`
+          })
+
+          yield* Console.log(`${key} ${path}: ${age}${review === undefined ? "" : ` — ${review.correction_reason}`}`)
+        }
       }
     }
   })
