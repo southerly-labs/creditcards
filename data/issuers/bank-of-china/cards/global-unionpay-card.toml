@@ -42,8 +42,6 @@ min_credit = 500
 
 [rewards]
 program = "bank-of-china-rewards"
-earn_source = "manual"
-earn_text_hash = "de215437106e7bee"
 
 [[rewards.earn]]
 rate = 5

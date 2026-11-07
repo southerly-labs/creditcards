@@ -24,11 +24,6 @@ year = 1
 min_spend = 6000
 spend_days = 90
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "b2f3afd75fa90136"
-
 [signup_state]
 _tag = "Parsed"
 hash = "b2f3afd75fa90136"
@@ -60,8 +55,6 @@ max_credit = 80000
 
 [rewards]
 program = "amplify"
-earn_source = "manual"
-earn_text_hash = "7f477ad6a085f69d"
 
 [[rewards.earn]]
 rate = 1

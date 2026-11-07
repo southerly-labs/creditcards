@@ -50,8 +50,6 @@ max_credit = 50000
 [rewards]
 program = "commbank-yello"
 partners = [ "qantas" ]
-earn_source = "manual"
-earn_text_hash = "81943427c26e2288"
 
 [[rewards.earn]]
 rate = 1

@@ -31,11 +31,6 @@ points = 50000
 year = 2
 keep_months = 15
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "686f08102fd1bd86"
-
 [signup_state]
 _tag = "Parsed"
 hash = "686f08102fd1bd86"
@@ -67,8 +62,6 @@ max_credit = 50000
 
 [rewards]
 program = "anz-rewards"
-earn_source = "manual"
-earn_text_hash = "9896b62ac6cac1ad"
 
 [[rewards.earn]]
 rate = 1.5

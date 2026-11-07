@@ -41,11 +41,6 @@ points = 20000
 year = 2
 keep_months = 12
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "ddbf8ad4d5634393"
-
 [signup_state]
 _tag = "Parsed"
 hash = "ddbf8ad4d5634393"
@@ -76,8 +71,6 @@ min_credit = 6000
 
 [rewards]
 program = "qantas"
-earn_source = "manual"
-earn_text_hash = "4834ff3e91a8963e"
 
 [[rewards.earn]]
 rate = 1

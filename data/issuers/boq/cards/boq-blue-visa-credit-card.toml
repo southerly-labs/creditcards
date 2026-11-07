@@ -24,11 +24,6 @@ year = 1
 min_spend = 3500
 spend_days = 90
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "c10673c7f6226686"
-
 [signup_state]
 _tag = "Parsed"
 hash = "c10673c7f6226686"
@@ -63,8 +58,6 @@ min_income = 25000
 
 [rewards]
 program = "boq-rewards"
-earn_source = "manual"
-earn_text_hash = "41a34bbc7ba58c25"
 
 [[rewards.earn]]
 rate = 1

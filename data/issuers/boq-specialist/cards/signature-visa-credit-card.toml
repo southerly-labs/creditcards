@@ -53,8 +53,6 @@ min_income = 120000
 [rewards]
 program = "qantas"
 partners = [ "velocity" ]
-earn_source = "manual"
-earn_text_hash = "de85cd107bedb49b"
 
 [[rewards.earn]]
 rate = 1

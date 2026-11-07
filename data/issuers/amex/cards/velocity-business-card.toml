@@ -51,8 +51,6 @@ purchase = 23.99
 [limits]
 [rewards]
 program = "velocity"
-earn_source = "manual"
-earn_text_hash = "19aab4663a42f245"
 
 [[rewards.earn]]
 rate = 1

@@ -44,8 +44,6 @@ min_income = 200000
 
 [rewards]
 program = "qantas"
-earn_source = "manual"
-earn_text_hash = "cd2235b1a67c0222"
 
 [[rewards.earn]]
 rate = 1.25

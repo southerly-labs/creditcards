@@ -41,11 +41,6 @@ points = 20000
 year = 2
 keep_months = 12
 
-[signup_review]
-state = "present"
-source = "manual"
-text_hash = "eb06502653fe6523"
-
 [signup_state]
 _tag = "Reviewed"
 hash = "eb06502653fe6523"
@@ -79,8 +74,6 @@ min_income = 75000
 
 [rewards]
 program = "velocity"
-earn_source = "parser"
-earn_text_hash = "d5677f03c96c5847"
 
 [[rewards.earn]]
 rate = 0.75

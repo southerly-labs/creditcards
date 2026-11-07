@@ -51,8 +51,6 @@ purchase = 23.99
 [limits]
 [rewards]
 program = "amex-membership-rewards"
-earn_source = "manual"
-earn_text_hash = "0945044b855bb667"
 
 [[rewards.earn]]
 rate = 2.25

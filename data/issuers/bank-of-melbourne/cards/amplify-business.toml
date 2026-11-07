@@ -40,8 +40,6 @@ interest_free_days = 55
 [rewards]
 program = "amplify"
 partners = [ "qantas" ]
-earn_source = "manual"
-earn_text_hash = "ed0343da11bedeea"
 
 [[rewards.earn]]
 rate = 1.5

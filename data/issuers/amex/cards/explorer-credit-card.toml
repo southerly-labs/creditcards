@@ -40,8 +40,6 @@ min_credit = 3000
 
 [rewards]
 program = "amex-membership-rewards"
-earn_source = "manual"
-earn_text_hash = "cb5992b48c9dca7a"
 
 [[rewards.earn]]
 rate = 2

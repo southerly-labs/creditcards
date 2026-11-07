@@ -31,11 +31,6 @@ points = 30000
 year = 2
 keep_months = 12
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "afb248138194b514"
-
 [signup_state]
 _tag = "Parsed"
 hash = "afb248138194b514"
@@ -67,8 +62,6 @@ min_credit = 2000
 
 [rewards]
 program = "commbank-yello"
-earn_source = "manual"
-earn_text_hash = "17f0b26b02654255"
 
 [[rewards.earn]]
 rate = 0.5

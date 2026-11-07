@@ -11,11 +11,6 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
-[signup_review]
-state = "none"
-source = "manual"
-text_hash = "8cbf8ea47c3eb87f"
-
 [signup_state]
 _tag = "Reviewed"
 hash = "8cbf8ea47c3eb87f"
@@ -48,8 +43,6 @@ max_credit = 75000
 
 [rewards]
 program = "qantas"
-earn_source = "manual"
-earn_text_hash = "f06a45d1ed32331e"
 
 [[rewards.earn]]
 rate = 1

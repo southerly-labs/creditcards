@@ -41,8 +41,6 @@ min_credit = 500
 
 [rewards]
 program = "commbank-yello"
-earn_source = "manual"
-earn_text_hash = "1b346b64d67f9c7b"
 
 [[rewards.earn]]
 rate = 0.5

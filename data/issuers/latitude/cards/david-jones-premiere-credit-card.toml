@@ -45,8 +45,6 @@ min_income = 20000
 
 [rewards]
 program = "david-jones-rewards"
-earn_source = "manual"
-earn_text_hash = "1911dfd51d125a9a"
 
 [[rewards.earn]]
 rate = 1

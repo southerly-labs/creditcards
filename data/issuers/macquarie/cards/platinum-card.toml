@@ -41,8 +41,6 @@ min_income = 50000
 
 [rewards]
 program = "macquarie-rewards"
-earn_source = "parser"
-earn_text_hash = "aed64dc0575f10fb"
 
 [[rewards.earn]]
 rate = 1

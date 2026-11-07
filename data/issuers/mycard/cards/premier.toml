@@ -43,8 +43,6 @@ max_credit = 100000
 
 [rewards]
 program = "mycard-rewards"
-earn_source = "manual"
-earn_text_hash = "c86b835641baa400"
 
 [[rewards.earn]]
 rate = 1.5

@@ -32,11 +32,6 @@ year = 2
 min_spend = 9000
 spend_days = 90
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "f6f66837df334641"
-
 [signup_state]
 _tag = "Parsed"
 hash = "f6f66837df334641"
@@ -69,8 +64,6 @@ min_income = 75000
 
 [rewards]
 program = "westpac-altitude"
-earn_source = "manual"
-earn_text_hash = "c83e17de5a870e2a"
 
 [[rewards.earn]]
 rate = 1

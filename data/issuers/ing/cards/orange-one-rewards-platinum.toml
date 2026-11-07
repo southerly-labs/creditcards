@@ -44,8 +44,6 @@ min_income = 36000
 
 [rewards]
 program = "cashback"
-earn_source = "manual"
-earn_text_hash = "cfaa11731a4b4b52"
 
 [[rewards.earn]]
 rate = 1

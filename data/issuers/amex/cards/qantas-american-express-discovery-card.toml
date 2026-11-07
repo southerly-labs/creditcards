@@ -40,8 +40,6 @@ min_credit = 2000
 
 [rewards]
 program = "qantas"
-earn_source = "manual"
-earn_text_hash = "973c6e72cc27c8ee"
 
 [[rewards.earn]]
 rate = 0.75

@@ -36,11 +36,6 @@ spend_days = 120
 keep_months = 15
 note = "paid once both conditions are met"
 
-[signup_review]
-state = "present"
-source = "manual"
-text_hash = "fab9865e7aa5f535"
-
 [signup_state]
 _tag = "Reviewed"
 hash = "fab9865e7aa5f535"
@@ -72,8 +67,6 @@ min_credit = 6000
 
 [rewards]
 program = "qantas"
-earn_source = "parser"
-earn_text_hash = "29076c1fbd38a43a"
 
 [[rewards.earn]]
 rate = 1

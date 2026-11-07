@@ -51,11 +51,6 @@ points = 20000
 year = 2
 keep_months = 12
 
-[signup_review]
-state = "present"
-source = "manual"
-text_hash = "3a5ff197ec65e884"
-
 [signup_state]
 _tag = "Reviewed"
 hash = "3a5ff197ec65e884"
@@ -89,8 +84,6 @@ min_income = 35000
 
 [rewards]
 program = "velocity"
-earn_source = "parser"
-earn_text_hash = "63a745e491608be2"
 
 [[rewards.earn]]
 rate = 0.5
@@ -98,9 +91,6 @@ cap_monthly = 1500
 
 [[rewards.earn]]
 rate = 0.25
-
-[rewards.earn_review]
-state = "present"
 
 [perks]
 insurance = [ "Mobile Phone Insurance", "Purchase Protection Insurance", "Extended Warranty Insurance" ]

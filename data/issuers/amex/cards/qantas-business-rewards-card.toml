@@ -51,8 +51,6 @@ purchase = 23.99
 [limits]
 [rewards]
 program = "qantas"
-earn_source = "manual"
-earn_text_hash = "32ff597ac06f2436"
 
 [[rewards.earn]]
 rate = 1.25

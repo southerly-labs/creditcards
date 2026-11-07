@@ -50,8 +50,6 @@ cash_advance_pct = 3.5
 [limits]
 [rewards]
 program = "amex-membership-rewards"
-earn_source = "manual"
-earn_text_hash = "80cd70ebed7b98dd"
 
 [[rewards.earn]]
 rate = 1.5

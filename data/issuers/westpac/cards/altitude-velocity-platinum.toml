@@ -32,11 +32,6 @@ year = 2
 min_spend = 6000
 spend_days = 90
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "8fda879f47c5b5ef"
-
 [signup_state]
 _tag = "Parsed"
 hash = "8fda879f47c5b5ef"
@@ -69,8 +64,6 @@ min_income = 30000
 
 [rewards]
 program = "velocity"
-earn_source = "manual"
-earn_text_hash = "2ce603631e19448c"
 
 [[rewards.earn]]
 rate = 0.33

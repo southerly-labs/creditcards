@@ -41,11 +41,6 @@ points = 30000
 year = 2
 keep_months = 12
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "722c5ba25ebd4d2b"
-
 [signup_state]
 _tag = "Parsed"
 hash = "722c5ba25ebd4d2b"
@@ -76,8 +71,6 @@ min_credit = 15000
 
 [rewards]
 program = "nab-rewards"
-earn_source = "manual"
-earn_text_hash = "8f68f8958d69c208"
 
 [[rewards.earn]]
 rate = 1.5

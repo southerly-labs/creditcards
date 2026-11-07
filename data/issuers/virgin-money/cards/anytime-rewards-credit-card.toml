@@ -24,11 +24,6 @@ year = 1
 min_spend = 3000
 spend_days = 90
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "d5413ae24dba1271"
-
 [signup_state]
 _tag = "Parsed"
 hash = "d5413ae24dba1271"
@@ -62,8 +57,6 @@ min_income = 35000
 
 [rewards]
 program = "virgin-money-rewards"
-earn_source = "manual"
-earn_text_hash = "6b396e6b0d9311f2"
 
 [[rewards.earn]]
 rate = 0.5

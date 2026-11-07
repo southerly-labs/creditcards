@@ -40,8 +40,6 @@ min_credit = 3000
 
 [rewards]
 program = "velocity"
-earn_source = "manual"
-earn_text_hash = "a248a58cf67c93d2"
 
 [[rewards.earn]]
 rate = 1.25

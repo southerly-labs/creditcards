@@ -31,12 +31,6 @@ points = 40000
 year = 2
 keep_months = 12
 
-[signup_review]
-state = "present"
-source = "manual"
-text_hash = "7170198ceb740da5"
-reviewed_at = "2026-11-03"
-
 [signup_state]
 _tag = "Reviewed"
 hash = "7170198ceb740da5"
@@ -70,8 +64,6 @@ min_credit = 6000
 
 [rewards]
 program = "anz-rewards"
-earn_source = "parser"
-earn_text_hash = "cb0bec3f5007e57e"
 
 [[rewards.earn]]
 rate = 1.5

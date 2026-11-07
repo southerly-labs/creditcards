@@ -42,8 +42,6 @@ min_credit = 15000
 
 [rewards]
 program = "anz-rewards"
-earn_source = "parser"
-earn_text_hash = "f3d5ec4300bcff57"
 
 [[rewards.earn]]
 rate = 2

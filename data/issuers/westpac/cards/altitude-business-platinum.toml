@@ -42,8 +42,6 @@ max_credit = 150000
 
 [rewards]
 program = "westpac-altitude"
-earn_source = "manual"
-earn_text_hash = "3fd7654e013a4ccf"
 
 [[rewards.earn]]
 rate = 1.5

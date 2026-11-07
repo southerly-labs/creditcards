@@ -32,11 +32,6 @@ year = 2
 min_spend = 6000
 spend_days = 90
 
-[signup_review]
-state = "present"
-source = "parser"
-text_hash = "ae4882d204900bdc"
-
 [signup_state]
 _tag = "Parsed"
 hash = "ae4882d204900bdc"
@@ -69,8 +64,6 @@ min_income = 30000
 
 [rewards]
 program = "qantas"
-earn_source = "manual"
-earn_text_hash = "ca98dd612dc6da80"
 
 [[rewards.earn]]
 rate = 0.33
