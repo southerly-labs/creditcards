@@ -7,6 +7,12 @@ description = "The Product is rewards credit card that provides individuals with
 url = "https://www.coles.com.au/credit-cards/low-rate"
 image = "https://www.coles.com.au/credit-cards/low-rate"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Coles Credit Cards"
 product_id = "8520f466-2c02-4af7-83fa-8ae13162a034"

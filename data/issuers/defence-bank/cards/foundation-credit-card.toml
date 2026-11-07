@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "A Visa credit card that gives back. Half of the annual $45 card fee is donated to the Defence Bank Foundation - a charity whose sole beneficiary is Defence Community Dogs."
 url = "https://www.defencebank.com.au/creditcard"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

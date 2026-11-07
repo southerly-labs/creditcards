@@ -7,6 +7,12 @@ description = "Earn NAB Rewards Points and enjoy platinum services and complimen
 url = "https://www.nab.com.au/personal/credit-cards/nab-rewards/nab-rewards-platinum-card"
 image = "https://www.nab.com.au/personal/credit-cards/nab-rewards-cards"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

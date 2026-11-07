@@ -7,6 +7,12 @@ description = "Our Blue Visa Credit Card rewards you when you buy - earning you 
 url = "https://application.boq.com.au/boq-forms/boq-card/boq-card-apply?"
 image = "https://marvel-b1-cdn.bc0a.com/f00000000185299/www.boq.com.au/content/dam/boq/images/cards/visa-cc-blue.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

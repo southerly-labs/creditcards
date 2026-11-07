@@ -7,6 +7,12 @@ description = "Amplify Business is a personal liability business credit card tha
 url = "https://www.bankofmelbourne.com.au/business/credit-card/rewards"
 image = "https://www.bankofmelbourne.com.au/content/dam/bom/images/business/credit-card/BOM_Business-Amplify-credit-card_261x166.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bank of Melbourne"
 product_id = "BOMCCBusAmplifyBusiness"

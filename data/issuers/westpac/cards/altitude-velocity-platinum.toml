@@ -7,6 +7,12 @@ description = "Earn Velocity Points directly into your Velocity Frequent Flyer a
 url = "https://www.westpac.com.au/credit-cards/reward/altitude-velocity-platinum/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Velocity%20Platinum_232x146_velocity.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

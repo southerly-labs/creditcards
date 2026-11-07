@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "One for the everyday spenders who make good use of their plastic."
 url = "https://www.humebank.com.au/everyday/hume-clear-visa-credit-card/"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Hume Bank"
 product_id = "S32V1"

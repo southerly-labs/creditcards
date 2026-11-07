@@ -5,6 +5,12 @@ first_seen = "2026-10-31"
 description = "A Revolut credit card with interest-free periods on purchases and variable interest rates. Features and fees vary depending on your plan. See our website for details."
 url = "https://www.revolut.com/en-AU/credit-card/"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "network"
 reason = "not_stated"

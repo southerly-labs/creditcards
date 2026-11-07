@@ -7,6 +7,12 @@ description = "The Latitude 28° Global Platinum Mastercard offers $0 internatio
 url = "https://cards.latitudefinancial.com/28degrees"
 image = "https://images.ctfassets.net/w0q68lqdeo57/7b5n6ycF7fUnsuJsYeAKWq/5c87be8f2127f8a7f82701d7cd94beec/cc-28d_1.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Latitude Credit Cards"
 product_id = "107798f7-b01a-4ba6-a934-caca8a2b4a80"

@@ -7,6 +7,12 @@ description = "The Product is a rewards credit card that provides individuals wi
 url = "https://www.koganmoney.com.au/credit-cards/kogan-money-black-card/"
 image = "https://koganmoney.com.au/credit-cards/kogan-money-black-card/"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Kogan Money Credit Cards"
 product_id = "229ba4a9-71f0-4339-b447-e00a6b524b90"

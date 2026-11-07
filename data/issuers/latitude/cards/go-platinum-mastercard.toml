@@ -7,6 +7,12 @@ description = "Latitude GO Platinum Mastercard gives you flexible ways to pay—
 url = "https://cards.latitudefinancial.com/go"
 image = "https://images.ctfassets.net/w0q68lqdeo57/nSOSoK5ijzPC1bFSUVI0R/38d5e36622991106264051df7a8d2c54/cc-go_2.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Latitude Credit Cards"
 product_id = "8546d98a-3507-4856-b544-058d08f0c551"

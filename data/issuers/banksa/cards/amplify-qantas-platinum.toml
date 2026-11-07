@@ -7,6 +7,12 @@ description = "Our mid-tier credit card for Qantas point lovers"
 url = "https://www.banksa.com.au/personal/credit-cards/frequent-flyer/amplify-platinum/summary"
 image = "https://www.banksa.com.au/content/dam/public/open-banking/BSA-Amplify-Platinum-Card-Art-232x146.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

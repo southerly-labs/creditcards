@@ -7,6 +7,12 @@ description = "Get more from your business credit card purchases. Maximise your 
 url = "https://www.nab.com.au/business/business-cards/nab-qantas-business-signature-card"
 image = "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

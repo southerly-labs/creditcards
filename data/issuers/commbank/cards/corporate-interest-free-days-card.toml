@@ -7,6 +7,12 @@ description = "Designed for medium to large businesses wanting to maximise cash 
 url = "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/corporate-interest-free-days-card.html"
 image = "https://www.commbank.com.au/content/dam/commbank/assets/business/cards/corp-credit-card-thumb6.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "CommBank"
 product_id = "a24ddd5d53b5447abe15665b73be4597"

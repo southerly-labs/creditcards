@@ -7,6 +7,12 @@ description = "A credit card facility for businesses with up to 55 days interest
 url = "https://www.anz.com.au/business/credit-cards/interest-free/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-003-anz-au.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "ANZ"
 product_id = "f673c6f6-b10a-282a-7484-32443c848f69"

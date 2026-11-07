@@ -7,6 +7,12 @@ description = "For business owners who value exceptional service and rewards."
 url = "https://www.americanexpress.com/en-au/credit-cards/platinum-business-card/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUP822VQR00S3.gif"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_fixed"

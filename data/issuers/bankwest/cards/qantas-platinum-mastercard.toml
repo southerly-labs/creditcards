@@ -7,6 +7,12 @@ description = "A credit card for earning unlimited Qantas Points."
 url = "https://www.bankwest.com.au/credit-cards/qantas-frequent-flyer"
 image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-qantas-platinum.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

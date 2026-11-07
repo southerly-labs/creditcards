@@ -7,6 +7,12 @@ description = "The product is a low fee credit card that provides individuals wi
 url = "https://www.mycard.com.au/credit-cards/simplicity-card"
 image = "https://www.mycard.com.au/credit-cards/simplicity-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1759891922057/mycard-simplicity-digital-card-1536x969.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "MyCard"
 product_id = "7916a828-1572-43bb-9a1f-c0af9b082f17"

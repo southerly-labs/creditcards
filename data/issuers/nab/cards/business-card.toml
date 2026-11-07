@@ -7,6 +7,12 @@ description = "Manage your employee's business expenses by giving them their own
 url = "https://www.nab.com.au/business/business-cards/nab-business-card"
 image = "https://share.google/images/6TnXKbyjA2NmZ6iRJ"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "5f5dfdb4-43b1-41e6-923e-546bb801e026"

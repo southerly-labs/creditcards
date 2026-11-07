@@ -7,6 +7,12 @@ description = "A credit card with our lowest ongoing rate."
 url = "https://www.bankwest.com.au/credit-cards/low-rate"
 image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-breeze-platinum.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

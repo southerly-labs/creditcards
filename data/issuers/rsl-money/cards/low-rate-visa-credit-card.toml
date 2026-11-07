@@ -7,6 +7,12 @@ description = "With a low annual fee and a low ongoing interest rate for purchas
 url = "https://www.rslmoney.com.au/contact"
 image = "https://www.australianmilitarybank.com.au/sites/default/files/RSLCredit.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "RSL Money"
 product_id = "9d1bd433-1c09-47dd-8841-a68e1dc715d1"

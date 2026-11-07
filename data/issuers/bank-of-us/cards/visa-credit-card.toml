@@ -7,6 +7,12 @@ description = "A Bank of us Visa Credit Card gives you all the features you'd ex
 url = "https://bankofus.com.au/online-application?refer=bank-accounts"
 image = "https://secureapps.bankofus.com.au/ibank3/Images/OBCreditCard.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bank of us"
 product_id = "Visa_Credit_Card"

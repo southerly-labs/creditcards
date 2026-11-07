@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "A low interest rate credit card."
 url = "https://themutual.apply-online.com.au/#/d632e613-271c-4718-95ae-9dhw9dh2rm"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Maitland Mutual Limited"
 product_id = "Mutual_Visa_Credit_Card"

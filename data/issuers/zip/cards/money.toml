@@ -5,6 +5,12 @@ first_seen = "2026-10-31"
 description = "Larger-purchase account with flexible repayments and promotional interest-free periods at eligible merchants."
 url = "https://zip.co/au/zip-money"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "rates.interest_free_days"
 reason = "not_fixed"

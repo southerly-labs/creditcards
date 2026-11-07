@@ -8,6 +8,12 @@ url = "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-car
 image = "https://cdn.bfldr.com/1R31Y8GR/at/wmvt8jb3gkghqnhkxrj8fxh/1_Credit.png?auto=webp&format=png"
 locked = [ "fees.late_payment" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.fees]
 source_urls = [ "https://www.bankaust.com.au/banking/credit-cards/low-rate-visa-credit-card/" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

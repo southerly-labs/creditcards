@@ -7,6 +7,12 @@ description = "Corporate or Purchasing cards for corporate expenditure including
 url = "https://www.business.hsbc.com.au/en-au/cards-email-us"
 image = "https://www.business.hsbc.com.au/-/jssmedia/media/australia/images/campaigns/au-corporate-cardface-img.jpg?h=516&iar=0&w=800&hash=64E0EE07E5471A3DC30D08CD12733021"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_stated"

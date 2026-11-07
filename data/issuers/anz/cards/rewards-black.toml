@@ -7,6 +7,12 @@ description = "Our highest Reward Points earning potential"
 url = "https://www.anz.com.au/personal/credit-cards/rewards/black/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/rewards-black-2016.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "ANZ"
 product_id = "6396b1bd-1c47-9c28-59b8-6847f208a9a7"

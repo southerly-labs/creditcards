@@ -7,6 +7,12 @@ description = "Use your credit card for shopping, travelling overseas or even to
 url = "https://www.hpbank.com.au/banking/credit-card"
 image = "https://www.hpbank.com.au/content/dam/channels/websites/common-assets/open-banking/hpb-mozo.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-both"
 source = "cdr"

@@ -8,6 +8,12 @@ url = "https://www.commbank.com.au/business/business-credit-cards/cards-for-larg
 image = "https://www.commbank.com.au/business/business-credit-cards.html"
 locked = [ "rates.interest_free_days" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.rates]
 source_urls = [ "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/corporate-charge-card.html" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

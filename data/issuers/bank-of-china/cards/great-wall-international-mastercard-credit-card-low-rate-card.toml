@@ -7,6 +7,12 @@ description = "The Bank of China Great Wall International Credit Card (Credit Ca
 url = "https://www.bankofchina.com/au/en/pbservice/pb4/201801/t20180125_11256138.html"
 image = "http://pic.bankofchina.com/branches/australia/201801/W020180125416583778464.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bank of China"
 product_id = "MAULMAU2"

@@ -7,6 +7,12 @@ description = "Our Visa My Rewards Credit Card comes with a competitive low inte
 url = "https://www.queenslandcountry.bank/Banking/credit-cards/Visa-My-Rewards-Credit-Card/"
 image = "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visacreditmyrewards.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_stated"

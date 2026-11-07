@@ -8,6 +8,12 @@ url = "https://www.queenslandcountry.bank/business-banking/business-finance/busi
 image = "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visabusiness-reward.jpg"
 locked = [ "rewards.program", "rewards.partners" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.rewards]
 source_urls = [ "https://www.queenslandcountry.bank/siteassets/documents/brochures/brochure_My_Rewards_TCs.pdf" ]
 reviewed_at = "2026-11-01T07:23:23.263Z"

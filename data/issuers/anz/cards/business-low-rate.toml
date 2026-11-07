@@ -8,6 +8,12 @@ url = "https://www.anz.com.au/business/credit-cards/low-rate/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-003-anz-au.jpg"
 locked = [ "rates.interest_free_days" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.rates]
 source_urls = [ "https://www.anz.com.au/business/credit-cards/low-rate/" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

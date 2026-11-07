@@ -7,6 +7,12 @@ description = "Our mid-tier credit card that lets you earn Amplify points"
 url = "https://www.bankofmelbourne.com.au/personal/credit-cards/rewards/amplify-platinum/summary"
 image = "https://www.bankofmelbourne.com.au/content/dam/public/open-banking/bom_p_credit-cards_amplify-platinum.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

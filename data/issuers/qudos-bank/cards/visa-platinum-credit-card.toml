@@ -7,6 +7,12 @@ description = "Earn Qantas Points* on your everyday purchases and enjoy a host o
 url = "https://apply.qudosbank.com.au/Apply/credit-card"
 image = "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b434aae6516cad1ecd0_visa-platinum-credit-card.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Qudos Bank"
 product_id = "9a6f5620-e93c-4e0c-bc23-d7f979b97f69"

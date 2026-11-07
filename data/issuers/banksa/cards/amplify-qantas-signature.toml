@@ -7,6 +7,12 @@ description = "Our top-tier credit card for Qantas point lovers"
 url = "https://www.banksa.com.au/personal/credit-cards/frequent-flyer/amplify-signature/summary"
 image = "https://www.banksa.com.au/content/dam/public/open-banking/BSA-Amplify-Signature-Card-Art-232x146.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

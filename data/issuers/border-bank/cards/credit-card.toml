@@ -7,6 +7,12 @@ description = "A Low Rate and low Annual Fee Credit  card"
 url = "https://www.borderbank.com.au/forms/visa-cards"
 image = "https://www.borderbank.com.au/wp-content/uploads/2026/01/BB_D-Cuscal_3168716_PB_Border-Bank_V903_PW-Visa-Credit-HOR-digital-artwork_521x323.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Border Bank"
 product_id = "911351e1-56ff-47b2-a31f-2e2730db41ef"

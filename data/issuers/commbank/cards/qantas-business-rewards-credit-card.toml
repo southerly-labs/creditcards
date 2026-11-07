@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "Be rewarded for essential business spend and save on business travel. Take advantage of offers and partner discounts whilst purchasing with confidence and convenience knowing you are backed by two of Australia's largest brands"
 url = "https://www.commbank.com.au/business/business-credit-cards.html"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [signup_review]
 state = "none"
 source = "manual"

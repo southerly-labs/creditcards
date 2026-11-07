@@ -7,6 +7,12 @@ description = "As a business owner, keeping track of expenses is important and c
 url = "https://www.bendigobank.com.au/business/cards/business-credit-mastercard/"
 image = "https://www.bendigobank.com.au/siteassets/business/cards-for-business/business-credit-card/exploreimage-businesscreditcard.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bendigo Bank"
 product_id = "602197f1-0e90-46bd-8c0b-3bced15dd31c"

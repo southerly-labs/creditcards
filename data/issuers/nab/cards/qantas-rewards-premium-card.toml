@@ -7,6 +7,12 @@ description = "Earn Qantas Points and enjoy platinum services and complimentary 
 url = "https://www.nab.com.au/personal/credit-cards/qantas-rewards/nab-qantas-rewards-premium-card"
 image = "https://www.nab.com.au/personal/credit-cards/qantas-rewards"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

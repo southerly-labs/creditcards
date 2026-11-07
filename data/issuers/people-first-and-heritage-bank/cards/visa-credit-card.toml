@@ -7,6 +7,12 @@ description = "The People's Choice Credit Union Visa Credit card offers you the 
 url = "https://www.peoplefirstbank.com.au/loans/visa-credit-card"
 locked = [ "rates.interest_free_days" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.rates]
 source_urls = [ "https://www.peoplefirstbank.com.au/loans/visa-credit-card" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

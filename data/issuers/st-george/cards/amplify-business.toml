@@ -7,6 +7,12 @@ description = "Amplify Business is a personal liability business credit card tha
 url = "https://www.stgeorge.com.au/business/credit-card/rewards"
 image = "https://www.stgeorge.com.au/content/dam/stg/images/business/credit-cards/Business-Amplify-credit-card_261x166.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "St.George Bank"
 product_id = "STGCCBusAmplifyBusiness"

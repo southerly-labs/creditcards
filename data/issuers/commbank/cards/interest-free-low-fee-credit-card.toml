@@ -7,6 +7,12 @@ description = "CommBank's simplest credit card yet with no interest and no late 
 url = "https://www.commbank.com.au/credit-cards/interest-free-low-fee.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-IFLF-credit-card.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "rates.interest_free_days"
 reason = "not_applicable"

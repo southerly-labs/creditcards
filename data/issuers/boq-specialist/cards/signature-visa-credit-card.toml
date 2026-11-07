@@ -8,6 +8,12 @@ url = "https://www.boqspecialist.com.au/personal-banking/credit-cards"
 image = "https://bankofqueensland.sharepoint.com/sites/OpenBanking508-Operationalsupport/Shared%20Documents/Operational%20support/Customer%20Templates%20&%20Notices/BOQS_512px.png"
 locked = [ "rates.interest_free_days", "fees.late_payment" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.rates]
 source_urls = [ "https://www.boqspecialist.com.au/content/dam/boq-specialist/files/products/credit-cards/terms-and-conditions/CREDIT-CARD-KEY-FACTS-SHEET.pdf" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

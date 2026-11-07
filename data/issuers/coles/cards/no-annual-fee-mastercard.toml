@@ -7,6 +7,12 @@ description = "The Product is a no annual fee credit card that provides individu
 url = "https://www.coles.com.au/credit-cards/no-annual-fee"
 image = "https://www.coles.com.au/credit-cards/no-annual-fee"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Coles Credit Cards"
 product_id = "d2f29089-d0ee-44bc-bd6f-05f6419841b7"

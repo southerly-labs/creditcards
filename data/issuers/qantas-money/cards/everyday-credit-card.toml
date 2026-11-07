@@ -7,6 +7,12 @@ description = "The Product is a low annual fee rewards credit card that provides
 url = "https://www.qantasmoney.com/credit-cards"
 image = "https://www.qantasmoney.com/credit-cards/everyday#everyday"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Qantas Money Credit Cards"
 product_id = "3c2e5891-989b-4722-bc22-c30cb30137b6"

@@ -7,6 +7,12 @@ description = "Enjoy the flexibility and convenience of a credit card with a low
 url = "https://www.commbank.com.au/credit-cards/low-fee.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-low-fee-credit-card.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "CommBank"
 product_id = "76d24ebc94e94b368f829e343dce4b49"

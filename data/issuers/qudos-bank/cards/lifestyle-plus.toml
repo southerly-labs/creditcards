@@ -7,6 +7,12 @@ description = "If you're looking for more freedom in your credit card, our low r
 url = "https://apply.qudosbank.com.au/Apply/credit-card"
 image = "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b43b4cbff72f2f01708_lifestyle-plus-card-no-border.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Qudos Bank"
 product_id = "79cd516c-e420-421b-b6c9-3a98ee95fe63"

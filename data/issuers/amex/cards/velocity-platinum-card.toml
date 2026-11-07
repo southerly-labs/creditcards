@@ -7,6 +7,12 @@ description = "The American Express Velocity Platinum Card has a suite of airlin
 url = "https://www.americanexpress.com/en-au/credit-cards/velocity-platinum-card/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUP58100000S3.gif"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "American Express"
 product_id = "7e02379f-2d16-492d-a271-3a273f2187d3"

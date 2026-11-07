@@ -7,6 +7,12 @@ description = "Our low fee, platinum credit card  with  complimentary insurances
 url = "https://www.anz.com.au/personal/credit-cards/low-annual-fee/platinum/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-012-anz-au.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "ANZ"
 product_id = "4cfce209-2f9c-e506-0dd6-7de6bd04e6d6"

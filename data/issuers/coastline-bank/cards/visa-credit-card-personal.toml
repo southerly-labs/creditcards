@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "Visa Credit Card"
 url = "https://apply.coastline.com.au/cip/coastline/p/coastline/consumercredit/application.html?a=UDIYMN06R7P6YVQ7&s=APPLICATION::UDIYMN06R7P6YVQ7"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_stated"

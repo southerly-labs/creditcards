@@ -7,6 +7,12 @@ description = "Our premier Velocity credit card gets you our highest Velocity Po
 url = "https://www.westpac.com.au/credit-cards/reward/altitude-velocity-black/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Velocity%20Black%20Card_232x146_velocity_black.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

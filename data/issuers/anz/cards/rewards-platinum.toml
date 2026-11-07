@@ -7,6 +7,12 @@ description = "Be rewarded for your everyday purchases and access a flexible Rew
 url = "https://www.anz.com.au/personal/credit-cards/rewards/platinum/"
 image = "https://www.anz.com.au/content/dam/anzcomau/external/images/open-banking/new-cards-blank-011-anz-au.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "manual"

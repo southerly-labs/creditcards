@@ -7,6 +7,12 @@ description = "Latitude Gem Visa gives you flexible ways to pay—enjoy 0% inter
 url = "https://www.latitudefinancial.com.au/credit-cards/gem-visa/"
 image = "https://images.ctfassets.net/w0q68lqdeo57/36zO0PpVXQ6EmGzLrYLv5/ab9ca7780ee536ec210a5d73959f567f/cc-gem_1.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Latitude Credit Cards"
 product_id = "01fbc1c8-d7e1-4403-ab17-b555a054eba3"

@@ -7,6 +7,12 @@ description = "This product is suitable for members who are an active student at
 url = "https://www.policebank.com.au/academy"
 image = "https://www.policebank.com.au/wp-content/uploads/2026/01/PB_D-CUSCAL-LS-3472549-Police-Bank-V145HC_512x321.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

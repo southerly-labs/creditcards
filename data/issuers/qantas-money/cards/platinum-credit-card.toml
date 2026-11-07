@@ -7,6 +7,12 @@ description = "The Product is a rewards credit card that provides individuals wi
 url = "https://www.qantasmoney.com/credit-cards"
 image = "https://www.qantasmoney.com/credit-cards"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Qantas Money Credit Cards"
 product_id = "9da83225-c177-4d60-9475-fb0d2c7a74b4"

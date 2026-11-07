@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "A basic credit card for everyday banking"
 url = "https://www.bankvic.com.au/apply-for-credit"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

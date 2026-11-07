@@ -8,6 +8,13 @@ description = "Embrace a world of luxury with the David Jones Prestige Credit Ca
 url = "https://cards.latitudefinancial.com/davidjonesprestige"
 image = "https://www.davidjones.com/images/assetimages/2024/CreditCard/card_Prestige.png"
 
+[lifecycle.listing]
+_tag = "Delisted"
+on = "2026-11-06"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Latitude Credit Cards"
 product_id = "2276afae-ea3e-4a8b-98c2-889e876aab89"

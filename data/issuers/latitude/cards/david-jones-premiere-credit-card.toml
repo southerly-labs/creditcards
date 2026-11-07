@@ -8,6 +8,13 @@ description = "Elevate your everyday spending with the David Jones Premiere Cred
 url = "https://cards.latitudefinancial.com/davidjonespremiere"
 image = "https://www.davidjones.com/images/assetimages/2024/CreditCard/card_Premiere.png"
 
+[lifecycle.listing]
+_tag = "Delisted"
+on = "2026-11-06"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Latitude Credit Cards"
 product_id = "59ad92b9-5500-40b3-8da6-3b9580b6c13c"

@@ -7,6 +7,12 @@ description = "A simple low interest rate credit card with your choice of offers
 url = "https://www.nab.com.au/personal/credit-cards/low-rate/nab-low-rate-card"
 image = "https://www.nab.com.au/content/experience-fragments/nab/en/featured_banner/product/personal_credit_card/nab-low-rate-product-cards/master"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

@@ -7,6 +7,12 @@ description = "If you're looking for a low-cost credit card the Visa Classic Cre
 url = "https://www.pnbank.com.au/cards/credit-cards/visa-classic/"
 image = "https://digital.pnbank.com.au/globalassets/internet-banking/onboarding/products/pn-visa-credit_oct25.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "P&N Bank"
 product_id = "41"

@@ -7,6 +7,12 @@ description = "Our top-tier credit card that lets you earn Amplify points"
 url = "https://www.bankofmelbourne.com.au/personal/credit-cards/rewards/amplify-signature/summary"
 image = "https://www.bankofmelbourne.com.au/content/dam/public/open-banking/bom_p_credit-cards_amplify-signature%20232x146.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

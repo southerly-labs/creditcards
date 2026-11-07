@@ -6,6 +6,12 @@ first_seen = "2026-10-31"
 description = "Visa Credit Card"
 url = "https://woolworthsteambank.com.au/loan/"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "rates.interest_free_days"
 reason = "not_stated"

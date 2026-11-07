@@ -8,6 +8,12 @@ url = "https://www.firstoptionbank.com.au/credit-card-enquiry/"
 image = "https://firstoptionbank.com.au/wp-content/uploads/2020/11/Credit-Card-Mockup_blue-8.png"
 locked = [ "fees.late_payment" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.fees]
 source_urls = [ "https://www.firstoptionbank.com.au/credit-card/" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

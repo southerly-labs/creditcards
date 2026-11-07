@@ -7,6 +7,12 @@ description = "The Qantas Rewards Signature card gives customers the opportunity
 url = "https://www.nab.com.au/personal/credit-cards/qantas-rewards/nab-qantas-rewards-signature-card"
 image = "https://www.nab.com.au/personal/credit-cards/qantas-rewards/nab-qantas-rewards-signature-card"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

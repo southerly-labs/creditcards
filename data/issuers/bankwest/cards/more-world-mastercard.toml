@@ -7,6 +7,12 @@ description = "A credit card for earning points to redeem for digital vouchers o
 url = "https://www.bankwest.com.au/credit-cards/rewards"
 image = "https://www.bankwest.com.au/content/dam/bankwest/bwapps/openbanking/cards-credit-mastercard-more-world.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "intro-balance-transfer"
 source = "cdr"

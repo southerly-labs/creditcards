@@ -7,6 +7,12 @@ description = "Our mid-tier credit card that lets you earn Amplify points"
 url = "https://www.stgeorge.com.au/personal/credit-cards/rewards/amplify-platinum/summary"
 image = "https://www.stgeorge.com.au/content/dam/public/open-banking/STG-Amplify-Platinum-Card-Art-232x146.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

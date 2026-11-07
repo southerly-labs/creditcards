@@ -7,6 +7,12 @@ description = "Business Credit card gives business owners access to a credit car
 url = "https://www.heritage.com.au/banking/credit-cards/business-visa"
 image = "https://www.heritage.com.au/inbound/open-banking/card-art/business-visa"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_stated"

@@ -8,6 +8,13 @@ description = "A low rate credit card with up to 55 days interest free on purcha
 url = "https://nationalseniors.com.au/what-we-offer/national-seniors-credit-card"
 image = "https://cms.communityfirst.com.au/wp-content/uploads/2026/05/National-Seniors-Visa-Card.png"
 
+[lifecycle.listing]
+_tag = "Delisted"
+on = "2026-11-04"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "CommFCU"
 product_id = "S53-NSA-LRCC"

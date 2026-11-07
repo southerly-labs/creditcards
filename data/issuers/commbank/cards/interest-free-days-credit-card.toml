@@ -7,6 +7,12 @@ description = "Designed for those looking for a card with a competitive interest
 url = "https://www.commbank.com.au/business/business-credit-cards/business-interest-free-days-credit-card.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/personal-liability/mastercard-business-interest-free-credit-card.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "CommBank"
 product_id = "5b47845a7f0044e58db616bb734e8350"

@@ -7,6 +7,12 @@ description = "The Bank of China Global UnionPay Card"
 url = "https://www.bankofchina.com/au/en/pbservice/pb4/202102/t20210211_19987339.html"
 image = "https://pic.bankofchina.com/branches/australia/202108/W020210827692909109857.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bank of China"
 product_id = "UAURUAU1"

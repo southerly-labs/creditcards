@@ -8,6 +8,12 @@ url = "https://www.commbank.com.au/business/business-credit-cards/business-award
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/personal-liability/mastercard-business-platinum-credit-card.png"
 locked = [ "rewards.program", "rewards.partners" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.rewards]
 source_urls = [ "https://www.commbank.com.au/business/business-credit-cards/business-platinum-credit-card.html" ]
 reviewed_at = "2026-11-01T07:23:22.414Z"

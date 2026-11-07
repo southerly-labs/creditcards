@@ -7,6 +7,12 @@ description = "American Express's top tier card with a suite of elevated benefit
 url = "https://www.americanexpress.com/au/credit-cards/the-platinum-card/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGPL00001S3.gif"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_fixed"

@@ -8,6 +8,12 @@ url = "https://apply.qudosbank.com.au/Apply/credit-card"
 image = "https://cdn.prod.website-files.com/663aabca709a328fd2c0ea2e/66d15b43c551b6f4a8c20ec8_lifestyle-card-no-border.png"
 locked = [ "rates.interest_free_days" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.rates]
 source_urls = [ "https://www.qudosbank.com.au/products/credit-cards/lifestyle-credit-card" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

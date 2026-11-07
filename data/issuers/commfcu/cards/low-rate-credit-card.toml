@@ -7,6 +7,12 @@ description = "A low rate credit card with the same low rate on cash advances an
 url = "https://www.communityfirst.com.au/applying-for-a-loan"
 image = "https://cms.communityfirst.com.au/wp-content/uploads/2026/05/CFCU-Visa-Card.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "CommFCU"
 product_id = "S6-LRCC"

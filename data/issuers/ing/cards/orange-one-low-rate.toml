@@ -7,6 +7,12 @@ description = "The credit card that gives you a low interest rate plus no ING in
 url = "https://www.ing.com.au/credit-cards/orange-one.html"
 image = "https://www.ing.com.au/img/OO/OO_Visa.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "ING BANK (Australia) Ltd"
 product_id = "5031dc6b-6993-4de1-8e0b-a96de30c2f28"

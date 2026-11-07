@@ -7,6 +7,12 @@ description = "Charge Card with Membership Rewards and travel benefits."
 url = "https://www.americanexpress.com/au/credit-cards/membership-benefits/the-gold-card/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/AAUCGGL00010S3.gif"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_fixed"

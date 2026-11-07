@@ -7,6 +7,12 @@ description = "Make big plans with the metal Card that turns your business purch
 url = "https://www.americanexpress.com/en-au/credit-cards/business-gold-plus-card/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG821XYZ00S3.gif"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_fixed"

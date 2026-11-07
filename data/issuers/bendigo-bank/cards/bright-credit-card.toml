@@ -7,6 +7,12 @@ description = "All the security and convenience you’d expect, a low annual fee
 url = "https://www.bendigobank.com.au/personal/credit-cards/check-my-eligibility/?ccproduct=bright"
 image = "https://www.bendigobank.com.au/siteassets/personal/creditcards/bendigo-bright-credit-card/promoexploretiles/highlightsection-bright.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bendigo Bank"
 product_id = "aab92b58-4260-4b57-8f7f-5e448805b766"

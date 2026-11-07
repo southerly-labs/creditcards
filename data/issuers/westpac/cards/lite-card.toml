@@ -8,6 +8,12 @@ url = "https://www.westpac.com.au/credit-cards/low-rate-cards/westpac-lite-card/
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Westpac%20Lite%20Card_232x146_purple.jpg"
 locked = [ "fees.late_payment" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.fees]
 source_urls = [ "https://www.westpac.com.au/credit-cards/low-rate-cards/westpac-lite-card" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

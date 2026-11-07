@@ -7,6 +7,12 @@ description = "Earn Qantas Points directly to your Qantas Frequent Flyer account
 url = "https://www.westpac.com.au/credit-cards/reward/altitude-qantas-platinum/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Rewards%20Platinum_232x146_grey.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

@@ -7,6 +7,12 @@ description = "Credit card for small business"
 url = "https://www.greater.com.au/business/services/"
 image = "https://www.greater.com.au/globalassets/images/gb-cards/gb_visa_credit_card.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Greater Bank"
 product_id = "3215"

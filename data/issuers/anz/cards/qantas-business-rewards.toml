@@ -7,6 +7,12 @@ description = "A credit card facility for businesses where you can earn Qantas p
 url = "http://www.anz.com.au/business/credit-cards/qantas-business-rewards/"
 image = "https://www.anz.com.au/content/dam/anzcomau/images/business/products/credit-cards/qbr-700x300.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

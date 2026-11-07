@@ -7,6 +7,12 @@ description = "Platinum Rewards Credit Card lets you earn points as you shop, wh
 url = "https://applynow.bendigobank.com.au/apply/#/apply/new/creditCards/loanDetails/productSelection?productCode=RCA-M1-PRM-PRM"
 image = "https://www.bendigobank.com.au/siteassets/personal/creditcards/platinumrewards/promoexploretiles/highlightsection-platinumrewards.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bendigo Bank"
 product_id = "4550220b-7b80-4c6a-a446-221e42453768"

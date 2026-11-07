@@ -9,6 +9,13 @@ url = "https://www.commbank.com.au/credit-cards/awards.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-awards-credit-card.png"
 locked = [ "rewards.program", "rewards.partners" ]
 
+[lifecycle.listing]
+_tag = "Missing"
+since = "2026-11-07"
+
+[lifecycle.sales]
+_tag = "Closed"
+
 [provenance.sections.rewards]
 source_urls = [ "https://www.commbank.com.au/commbank-yello/terms-and-conditions/commbank-product-offer-terms.html" ]
 reviewed_at = "2026-11-01T07:35:38.300Z"

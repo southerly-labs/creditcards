@@ -7,6 +7,12 @@ description = "Our premier Qantas credit card gets you a high Qantas Points earn
 url = "https://www.westpac.com.au/credit-cards/reward/altitude-qantas-black/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Altitude%20Black%20Mastercard_232x146_black.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

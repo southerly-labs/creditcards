@@ -7,6 +7,12 @@ description = "Get cashback on eligible purchases with a BCU Rewards Credit Card
 url = "https://www.bcu.com.au/cards/credit-cards/rewards-credit-card/"
 image = "https://digital.pnbank.com.au/globalassets/internet-banking/onboarding/products/bcu-visa-credit-rewards_oct25.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "BCU Bank"
 product_id = "164"

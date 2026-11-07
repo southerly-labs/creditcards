@@ -7,6 +7,12 @@ description = "With one of the lowest annual fees in the market, and a competiti
 url = "https://applynow.bendigobank.com.au/apply/#/apply/new/creditCards/loanDetails/productSelection?productCode=RCA-M1-PFF-PFF"
 image = "https://www.bendigobank.com.au/siteassets/personal/creditcards/qantasplatinum/promoexploretiles/highlightsection-qantas.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bendigo Bank"
 product_id = "f2476015-6ff3-4165-8d89-c8ca7fe76735"

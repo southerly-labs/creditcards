@@ -7,6 +7,12 @@ description = "Amplify Business is a personal liability business credit card tha
 url = "https://www.banksa.com.au/business/credit-card/rewards"
 image = "https://www.banksa.com.au/content/dam/bsa/images/business/credit-cards/BSA_Business-Amplify-credit-card_261x166.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "BankSA"
 product_id = "BSACCBusAmplifyBusiness"

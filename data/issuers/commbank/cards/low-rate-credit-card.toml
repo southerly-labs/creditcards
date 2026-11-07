@@ -7,6 +7,12 @@ description = "With a low interest rate on purchases, our Low Rate credit card m
 url = "https://www.commbank.com.au/credit-cards/low-rate.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-low-rate-credit-card.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "CommBank"
 product_id = "67b2f138050940d8977cbbaebbfcc636"

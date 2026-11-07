@@ -7,6 +7,12 @@ description = "Interest free day Credit Card"
 url = "https://www.policecu.com.au/PCUDocuments/Credit_Application_Form_Car_Loans_Personal%20Loans_&_Credit_Cards.pdf"
 locked = [ "rates.interest_free_days", "network" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.rates]
 source_urls = [ "https://www.policecu.com.au/products/extralite-credit-card" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

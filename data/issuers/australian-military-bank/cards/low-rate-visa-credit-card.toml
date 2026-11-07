@@ -7,6 +7,12 @@ description = "With a low annual fee and a low ongoing interest rate for purchas
 url = "https://ib.australianmilitarybank.com.au/AMBInternetBanking/?pd=AMBCC"
 image = "https://www.australianmilitarybank.com.au/sites/default/files/AMBCredit.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Australian Military Bank"
 product_id = "e1f63c50-20bb-457a-8fee-da684c281a0a"

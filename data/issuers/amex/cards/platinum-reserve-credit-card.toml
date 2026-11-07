@@ -7,6 +7,12 @@ description = "The American Express Platinum Reserve Credit Card is the ideal co
 url = "https://www.americanexpress.com/au/credit-cards/platinum-reserve-card/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUP07100010S3.gif"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "American Express"
 product_id = "fee5ec63-439a-481b-89db-d56145715a33"

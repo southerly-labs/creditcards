@@ -7,6 +7,12 @@ description = "The Macquarie Platinum Rewards Credit Card is designed for custom
 url = "https://www.macquarie.com.au/everyday-banking/credit-cards.html"
 image = "https://www.macquarie.com.au/assets/bfs/images/open-banking/credit-cards/Macquarie_VISA_PLATINUM_front_Master_Masked_CDR.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Macquarie Bank Limited"
 product_id = "498415VGSGLD"

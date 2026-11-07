@@ -7,6 +7,12 @@ description = "Latitude Low Rate Mastercard with a low purchase rate of 13.99% p
 url = "https://www.latitudefinancial.com.au/credit-cards/low-rate/"
 image = "https://images.ctfassets.net/w0q68lqdeo57/GlKmCLDJ2z1Xd52kge2dE/ed4c3987aabeabad1733f88218cde8c6/cc-lr_1.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Latitude Credit Cards"
 product_id = "fc9d7803-dad4-45a2-9b1b-cebf3bf65653"

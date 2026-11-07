@@ -7,6 +7,12 @@ description = "Our Visa Credit Card comes with a competitive low interest rate, 
 url = "https://www.queenslandcountry.bank/Banking/credit-cards/Visa-My-Rewards-Credit-Card/"
 image = "https://www.queenslandcountry.bank/siteassets/images/product-pages/card-designs/visacredit-grey.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_stated"

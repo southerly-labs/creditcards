@@ -7,6 +7,12 @@ description = "A simple credit card with no annual card fee ($5k p.a. minimum sp
 url = "https://www.westpac.com.au/credit-cards/low-fee/summary"
 image = "https://www.westpac.com.au/content/dam/public/open-banking/Low%20Fee%20Card_232x146_dark.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Westpac"
 product_id = "CCLowFee"

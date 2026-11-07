@@ -7,6 +7,12 @@ description = "Digital credit card with Luxury Escapes loyalty benefits. Purchas
 url = "https://www.moneyme.com.au/credit-card"
 image = "https://www.moneyme.com.au/assets/cards/luxury-escapes-card.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "rates.interest_free_days"
 reason = "not_stated"

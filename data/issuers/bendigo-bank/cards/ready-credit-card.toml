@@ -7,6 +7,12 @@ description = "Bendigo Ready Credit Card lets you enjoy a $0 annual fee - this y
 url = "https://www.bendigobank.com.au/personal/credit-cards/ready/"
 image = "https://www.bendigobank.com.au/siteassets/personal/creditcards/bendigoreadycreditcard/promoexploretiles/highlightsection-ready.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bendigo Bank"
 product_id = "c9e36d80-661e-4aad-87d5-90521d174882"

@@ -7,6 +7,12 @@ description = "Be rewarded for your spending with Qantas Points. Great for those
 url = "https://www.bankaust.com.au/banking/credit-cards/platinum-rewards-credit-card"
 image = "https://cdn.bfldr.com/1R31Y8GR/at/8pjw5xj3k6637fhx8gw7tb/1_Platinum.png?auto=webp&format=png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_stated"

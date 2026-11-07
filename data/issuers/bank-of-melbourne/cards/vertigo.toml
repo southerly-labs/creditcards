@@ -7,6 +7,12 @@ description = "An everyday card with a low rate on purchases, and a low monthly 
 url = "https://www.bankofmelbourne.com.au/personal/credit-cards/low-rate"
 image = "https://www.bankofmelbourne.com.au/content/dam/public/open-banking/BOM-Vertigo-Card-Art-232x146.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bank of Melbourne"
 product_id = "BOMCCVertigocard"

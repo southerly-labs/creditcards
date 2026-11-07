@@ -7,6 +7,12 @@ description = "Enjoy new lifestyle and travel benefits with the Ultimate credit 
 url = "https://www.commbank.com.au/credit-cards/ultimate.html"
 image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/credit-cards/retail/mastercard-ultimate-credit-card.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [[offers]]
 id = "signup"
 source = "parser"

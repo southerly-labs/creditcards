@@ -7,6 +7,12 @@ description = "The Product is a premium rewards credit card that provides indivi
 url = "https://www.mycard.com.au/credit-cards/premier-card-qantas"
 image = "https://www.mycard.com.au/credit-cards/premier-card-qantas/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1762786581973/mycard-premier-digital-card-1536x969.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "MyCard"
 product_id = "df13d083-6e71-4a4f-a855-4389ec0e07e1"

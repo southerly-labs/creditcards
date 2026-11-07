@@ -7,6 +7,12 @@ description = "The American Express Velocity Escape Plus Card offers Velocity Po
 url = "https://www.americanexpress.com/en-au/credit-cards/velocity-escape-plus-card/"
 image = "https://icm.aexp-static.com/Internet/CardArt/JAPA/au-cardasset-config/images/GAUG55155200S3.gif"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "American Express"
 product_id = "3f291709-5f70-4b5a-8a57-212b715844d2"

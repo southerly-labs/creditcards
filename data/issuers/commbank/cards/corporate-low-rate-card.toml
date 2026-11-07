@@ -7,6 +7,12 @@ description = "Designed for medium businesses wishing to manage their cash flow 
 url = "https://www.commbank.com.au/business/business-credit-cards/cards-for-larger-business/corporate-low-rate-card.html"
 image = "https://www.commbank.com.au/content/dam/commbank/assets/business/cards/corp-credit-card-thumb6.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "CommBank"
 product_id = "d44d38acc5b34c5bb76117f290d97134"

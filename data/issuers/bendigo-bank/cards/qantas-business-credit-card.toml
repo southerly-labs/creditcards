@@ -7,6 +7,12 @@ description = "With one of the lowest annual fees in the market, and a range of 
 url = "https://www.bendigobank.com.au/business/cards/qantas-business-mastercard/"
 image = "https://www.bendigobank.com.au/siteassets/business/cards-for-business/qantasbusinesscreditcard/exploreimage-businessrewardscard.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Bendigo Bank"
 product_id = "05bc94b5-8ce3-4c8d-9843-678b9de0e2ae"

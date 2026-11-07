@@ -7,6 +7,12 @@ description = "The Product is a premium rewards credit card that provides indivi
 url = "https://mycard.com.au/credit-cards/premier-card"
 image = "https://www.mycard.com.au/credit-cards/premier-card/_jcr_content/root/container_1841667468/backgroundcontainer/banner/thumbnail_image.coreimg.png/1762874647410/mycard-premier-digital-card-1536x969.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "MyCard"
 product_id = "1c178978-1bac-4858-894a-eec4b71b1d68"

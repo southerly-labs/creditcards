@@ -7,6 +7,12 @@ description = "Use your credit card for shopping, online purchasing, travelling 
 url = "https://www.nicu.com.au/banking/banking-enquiry"
 locked = [ "fees.late_payment", "network" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.fees]
 source_urls = [ "https://www.nicu.com.au/banking/cards/visa-classic-credit-card" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

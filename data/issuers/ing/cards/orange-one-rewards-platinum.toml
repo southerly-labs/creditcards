@@ -7,6 +7,12 @@ description = "The credit card that comes with up to $30 a month cashback on you
 url = "https://www.ing.com.au/credit-cards/orange-one-platinum.html"
 image = "https://www.ing.com.au/img/OO/OO_Visa%20Platinum.png"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "ING BANK (Australia) Ltd"
 product_id = "a4ea7460-9e69-499d-84dd-f281c7a04130"

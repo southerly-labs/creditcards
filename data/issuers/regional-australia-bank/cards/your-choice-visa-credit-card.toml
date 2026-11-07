@@ -7,6 +7,12 @@ description = "Versatile and competitive no frills credit card with low rates, l
 url = "https://apply.regionalaustraliabank.com.au/cip/rab/p/community/personalcredit/application.html?OfficeUseApplicationType=Credit%20card&SelectCreditCardType=Your%20Choice%20Visa"
 image = "https://regionalaustraliabank-prod.imgix.net/getContentAsset/76e93286-ba9c-4671-a273-76cfa028b41c/3beffb48-3dfa-48f3-8905-aded8557907a/Visa-Your-Choice-regional-australia-bank.png?auto=format&w=800"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "Regional Australia Bank"
 product_id = "8d097100-9251-4174-a9e5-8af00812ca87"

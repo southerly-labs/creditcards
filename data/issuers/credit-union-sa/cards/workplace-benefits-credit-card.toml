@@ -8,6 +8,12 @@ url = "https://apply.creditunionsa.com.au/cusa/servlet/SmartForm.html?formCode=j
 image = "https://cms.creditunionsa.com.au/assets/images/20220112_SecondaryPageBanners_Cards_VisaCreditCard.jpg"
 locked = [ "rates.interest_free_days" ]
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [provenance.sections.rates]
 source_urls = [ "https://www.creditunionsa.com.au/cards/workplace-benefits-credit-card/" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"

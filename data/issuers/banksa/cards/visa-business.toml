@@ -7,6 +7,12 @@ description = "A low interest rate on purchases to help manage your business cas
 url = "https://www.banksa.com.au/business/credit-card/low-rate"
 image = "https://www.banksa.com.au/content/dam/bsa/images/business/credit-cards/BSA_VISA-business-credit-card_261x166.jpg"
 
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
 [cdr]
 brand = "BankSA"
 product_id = "BSACCBusVISABusiness"
