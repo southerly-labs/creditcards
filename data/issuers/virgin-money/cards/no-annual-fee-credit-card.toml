@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "775b95fba636d7a1"
+outcome = "none"
+
 [cdr]
 brand = "Virgin Money"
 product_id = "8db23721-102c-ee11-9965-002248e1d56c"

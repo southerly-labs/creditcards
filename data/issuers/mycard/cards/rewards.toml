@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "1d6df1b26a3ba75b"
+outcome = "present"
+
 [cdr]
 brand = "MyCard"
 product_id = "a919d339-bab4-464d-a7af-51aec0ca6c62"

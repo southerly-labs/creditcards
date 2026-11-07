@@ -10,6 +10,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "48844b97c459c362"
+outcome = "none"
+
 [[gaps]]
 field = "network"
 reason = "not_stated"

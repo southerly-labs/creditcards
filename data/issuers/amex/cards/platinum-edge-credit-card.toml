@@ -22,6 +22,14 @@ fee = "annual"
 payable = 0
 months = 12
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "cd2841cbc8a026d4"
+outcome = "present"
+
 [cdr]
 brand = "American Express"
 product_id = "e0118b95-48c6-47dc-9f76-545330338cde"

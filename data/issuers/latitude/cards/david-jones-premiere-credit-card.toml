@@ -13,6 +13,14 @@ on = "2026-11-06"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "1911dfd51d125a9a"
+outcome = "present"
+
 [cdr]
 brand = "Latitude Credit Cards"
 product_id = "59ad92b9-5500-40b3-8da6-3b9580b6c13c"

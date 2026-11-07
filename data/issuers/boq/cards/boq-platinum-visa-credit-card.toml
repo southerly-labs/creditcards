@@ -29,6 +29,15 @@ state = "present"
 source = "parser"
 text_hash = "5d6e0b9a996dd1e9"
 
+[signup_state]
+_tag = "Parsed"
+hash = "5d6e0b9a996dd1e9"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "9d837f7569fdf6a3"
+outcome = "present"
+
 [cdr]
 brand = "Bank of Queensland Limited"
 product_id = "78126e21-102c-ee11-9966-002248e1dc43"

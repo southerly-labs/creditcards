@@ -37,6 +37,15 @@ state = "present"
 source = "parser"
 text_hash = "f6f66837df334641"
 
+[signup_state]
+_tag = "Parsed"
+hash = "f6f66837df334641"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "c83e17de5a870e2a"
+outcome = "present"
+
 [cdr]
 brand = "Westpac"
 product_id = "CCAltBlackRewards"

@@ -37,6 +37,15 @@ state = "present"
 source = "parser"
 text_hash = "8fda879f47c5b5ef"
 
+[signup_state]
+_tag = "Parsed"
+hash = "8fda879f47c5b5ef"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "2ce603631e19448c"
+outcome = "present"
+
 [cdr]
 brand = "Westpac"
 product_id = "CCAltPlatVelocity"

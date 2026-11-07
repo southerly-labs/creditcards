@@ -41,6 +41,15 @@ state = "present"
 source = "manual"
 text_hash = "fab9865e7aa5f535"
 
+[signup_state]
+_tag = "Reviewed"
+hash = "fab9865e7aa5f535"
+outcome = "present"
+
+[earn_state]
+_tag = "Parsed"
+hash = "bbd7b1dc953eb4fc"
+
 [cdr]
 brand = "Bankwest"
 product_id = "ff24e3061b6a4de3b91c101607c3f15f"

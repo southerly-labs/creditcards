@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "374d9f00addc01e9"
+outcome = "present"
+
 [cdr]
 brand = "Bendigo Bank"
 product_id = "f2476015-6ff3-4165-8d89-c8ca7fe76735"

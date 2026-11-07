@@ -29,6 +29,15 @@ state = "present"
 source = "parser"
 text_hash = "d4779dfb7c511d6e"
 
+[signup_state]
+_tag = "Parsed"
+hash = "d4779dfb7c511d6e"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "53c9b1030208d183"
+outcome = "present"
+
 [cdr]
 brand = "BankSA"
 product_id = "BSACCAmplifyPlatinumcardFrequentFlyer"

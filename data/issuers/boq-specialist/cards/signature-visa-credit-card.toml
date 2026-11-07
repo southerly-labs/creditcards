@@ -23,6 +23,14 @@ source_urls = [ "https://www.boqspecialist.com.au/content/dam/boq-specialist/fil
 reviewed_at = "2026-11-04T23:15:29.057Z"
 correction_reason = "fees.late_payment = 0 from the issuer's page: \"annual fee $400 late payment fee $0\". CDR does not publish it; the field is locked so the sync keeps it."
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "de85cd107bedb49b"
+outcome = "present"
+
 [cdr]
 brand = "BOQ Specialist"
 product_id = "09186288-5c03-ee11-8f6e-00224814dce7"

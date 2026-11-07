@@ -36,6 +36,15 @@ state = "present"
 source = "parser"
 text_hash = "afb248138194b514"
 
+[signup_state]
+_tag = "Parsed"
+hash = "afb248138194b514"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "17f0b26b02654255"
+outcome = "present"
+
 [cdr]
 brand = "CommBank"
 product_id = "ff7e709bc7f8414da253f9c10308fe24"

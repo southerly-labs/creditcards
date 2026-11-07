@@ -37,6 +37,16 @@ source = "manual"
 text_hash = "7170198ceb740da5"
 reviewed_at = "2026-11-03"
 
+[signup_state]
+_tag = "Reviewed"
+hash = "7170198ceb740da5"
+outcome = "present"
+on = "2026-11-03"
+
+[earn_state]
+_tag = "Parsed"
+hash = "cb0bec3f5007e57e"
+
 [cdr]
 brand = "ANZ"
 product_id = "f60fb83e-bbfb-abe3-07e2-f70acf7e30ca"

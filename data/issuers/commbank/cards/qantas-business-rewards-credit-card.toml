@@ -16,6 +16,16 @@ state = "none"
 source = "manual"
 text_hash = "aefca5b2cd75f78d"
 
+[signup_state]
+_tag = "Reviewed"
+hash = "aefca5b2cd75f78d"
+outcome = "none"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "7b736c16a85bde5d"
+outcome = "none"
+
 [cdr]
 brand = "CommBank"
 product_id = "e15ed5da59354af78c9e8aa0f4f841cf"

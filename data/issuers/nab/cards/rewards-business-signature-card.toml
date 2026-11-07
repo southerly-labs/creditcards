@@ -36,6 +36,15 @@ state = "present"
 source = "parser"
 text_hash = "8f3694bd93fa160d"
 
+[signup_state]
+_tag = "Parsed"
+hash = "8f3694bd93fa160d"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "e389f2345b5b2dd6"
+outcome = "present"
+
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
 product_id = "ff87d1af-392d-421a-903e-20b9517ea13e"

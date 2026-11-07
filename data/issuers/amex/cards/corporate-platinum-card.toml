@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "785de1c0caa40d72"
+outcome = "present"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_fixed"

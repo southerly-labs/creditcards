@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "cd2235b1a67c0222"
+outcome = "present"
+
 [cdr]
 brand = "Qantas Money Credit Cards"
 product_id = "9db7d421-cc03-4dca-af57-05cbe5f183e2"

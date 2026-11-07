@@ -12,6 +12,13 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Parsed"
+hash = "aed64dc0575f10fb"
+
 [cdr]
 brand = "Macquarie Bank Limited"
 product_id = "498415VGSGLD"

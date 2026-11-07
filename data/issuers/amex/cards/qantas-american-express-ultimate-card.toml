@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "1d2295c08750ea21"
+outcome = "present"
+
 [cdr]
 brand = "American Express"
 product_id = "24661db6-5c63-48e3-9267-cfa85aef6e27"

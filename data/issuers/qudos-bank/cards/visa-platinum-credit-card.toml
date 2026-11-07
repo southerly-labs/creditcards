@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "42a9697f1034f396"
+outcome = "present"
+
 [cdr]
 brand = "Qudos Bank"
 product_id = "9a6f5620-e93c-4e0c-bc23-d7f979b97f69"

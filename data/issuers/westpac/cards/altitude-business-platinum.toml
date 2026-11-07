@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "3fd7654e013a4ccf"
+outcome = "present"
+
 [cdr]
 brand = "Westpac"
 product_id = "CCAltBusPlat"

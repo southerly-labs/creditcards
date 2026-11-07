@@ -29,6 +29,15 @@ state = "present"
 source = "parser"
 text_hash = "b4be23e3213f7f1d"
 
+[signup_state]
+_tag = "Parsed"
+hash = "b4be23e3213f7f1d"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "e35a24722f7fa116"
+outcome = "present"
+
 [cdr]
 brand = "BankSA"
 product_id = "BSACCAmplifySignaturecardRewards"

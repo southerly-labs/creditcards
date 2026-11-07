@@ -12,6 +12,13 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Parsed"
+hash = "f3d5ec4300bcff57"
+
 [cdr]
 brand = "ANZ"
 product_id = "6396b1bd-1c47-9c28-59b8-6847f208a9a7"

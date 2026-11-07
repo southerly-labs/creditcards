@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "06c03d7ec6690764"
+outcome = "present"
+
 [cdr]
 brand = "Coles Credit Cards"
 product_id = "d2f29089-d0ee-44bc-bd6f-05f6419841b7"

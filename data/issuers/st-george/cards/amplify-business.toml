@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "ed0343da11bedeea"
+outcome = "present"
+
 [cdr]
 brand = "St.George Bank"
 product_id = "STGCCBusAmplifyBusiness"

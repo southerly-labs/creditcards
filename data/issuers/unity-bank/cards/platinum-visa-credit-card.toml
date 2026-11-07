@@ -16,6 +16,16 @@ state = "none"
 source = "manual"
 text_hash = "8cbf8ea47c3eb87f"
 
+[signup_state]
+_tag = "Reviewed"
+hash = "8cbf8ea47c3eb87f"
+outcome = "none"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "f06a45d1ed32331e"
+outcome = "present"
+
 [cdr]
 brand = "Unity Bank"
 product_id = "S78_PLATINUM_VISA_CREDIT_CARD"

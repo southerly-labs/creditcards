@@ -29,6 +29,15 @@ state = "present"
 source = "parser"
 text_hash = "53a384c55699a0ea"
 
+[signup_state]
+_tag = "Parsed"
+hash = "53a384c55699a0ea"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "58e4db0e75dcac5b"
+outcome = "present"
+
 [cdr]
 brand = "St.George Bank"
 product_id = "STGCCAmplifySignaturecardFrequentFlyer"

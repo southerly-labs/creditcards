@@ -21,6 +21,13 @@ applies_to = "balance_transfer"
 rate = 9.96
 months = 6
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Parsed"
+hash = "e775fa5444f0f356"
+
 [cdr]
 brand = "BankVic"
 product_id = "S17_QANTAS_CREDIT_CARD"

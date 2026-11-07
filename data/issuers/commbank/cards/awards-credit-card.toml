@@ -19,6 +19,14 @@ source_urls = [ "https://www.commbank.com.au/commbank-yello/terms-and-conditions
 reviewed_at = "2026-11-01T07:35:38.300Z"
 correction_reason = "The CommBank Yello terms list the Awards credit card as a Yello Earn Card (no longer available for sale) with Yello earn rates of 0.5/0.75/1.0 points per $1 by tier and 2.0 internationally. CDR still describes CommBank Awards points and lists Qantas first, and its own text says Qantas opt-in closed for this card on 25 Aug 2023, so the qantas partner is dropped."
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "1b346b64d67f9c7b"
+outcome = "present"
+
 [cdr]
 brand = "CommBank"
 product_id = "6512302188d8496baba2fbfd7dbba9a7"

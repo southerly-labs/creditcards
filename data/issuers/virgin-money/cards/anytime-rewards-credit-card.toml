@@ -29,6 +29,15 @@ state = "present"
 source = "parser"
 text_hash = "d5413ae24dba1271"
 
+[signup_state]
+_tag = "Parsed"
+hash = "d5413ae24dba1271"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "6b396e6b0d9311f2"
+outcome = "present"
+
 [cdr]
 brand = "Virgin Money"
 product_id = "085dd673-e910-ef11-9f89-002248921877"

@@ -36,6 +36,14 @@ state = "present"
 source = "parser"
 text_hash = "90db95e59cb0f220"
 
+[signup_state]
+_tag = "Parsed"
+hash = "90db95e59cb0f220"
+
+[earn_state]
+_tag = "Parsed"
+hash = "32ddb1497debe067"
+
 [cdr]
 brand = "ANZ"
 product_id = "325e19d1-2a52-53c6-073e-4b01e86e6936"

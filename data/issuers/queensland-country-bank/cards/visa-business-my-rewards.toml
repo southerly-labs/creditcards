@@ -18,6 +18,14 @@ source_urls = [ "https://www.queenslandcountry.bank/siteassets/documents/brochur
 reviewed_at = "2026-11-01T07:23:23.263Z"
 correction_reason = "My Rewards terms (effective 10 Aug 2026) pay cash back: $1 of reward dollars per $150, credited to the card account monthly, capped at $140 a month for business cards. CDR describes it as a points program, which the normaliser maps to queensland-country-bank-rewards."
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "33f923b631025751"
+outcome = "present"
+
 [[gaps]]
 field = "fees.late_payment"
 reason = "not_stated"

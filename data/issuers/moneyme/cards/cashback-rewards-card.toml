@@ -23,6 +23,14 @@ source_urls = [ "https://www.moneyme.com.au/credit-card" ]
 reviewed_at = "2026-11-04T23:15:29.057Z"
 correction_reason = "rates.interest_free_days = 44 from the issuer's page: \"interest-free up to 44 days\". CDR does not publish it; the field is locked so the sync keeps it."
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "e3b0c44298fc1c14"
+outcome = "present"
+
 [cdr]
 brand = "MoneyMe"
 product_id = "moneyme-credit-card"

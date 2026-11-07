@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "69d9fba1ea649fe6"
+outcome = "none"
+
 [cdr]
 brand = "Latitude Credit Cards"
 product_id = "01fbc1c8-d7e1-4403-ab17-b555a054eba3"

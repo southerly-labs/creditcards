@@ -37,6 +37,15 @@ state = "present"
 source = "parser"
 text_hash = "3cec594c92684fff"
 
+[signup_state]
+_tag = "Parsed"
+hash = "3cec594c92684fff"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "b8cc84a3c34c4e28"
+outcome = "present"
+
 [cdr]
 brand = "Westpac"
 product_id = "CCAltBlackQantas"

@@ -12,6 +12,14 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[signup_state]
+_tag = "Unread"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "cfaa11731a4b4b52"
+outcome = "present"
+
 [cdr]
 brand = "ING BANK (Australia) Ltd"
 product_id = "a4ea7460-9e69-499d-84dd-f281c7a04130"

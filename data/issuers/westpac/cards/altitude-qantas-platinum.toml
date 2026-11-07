@@ -37,6 +37,15 @@ state = "present"
 source = "parser"
 text_hash = "ae4882d204900bdc"
 
+[signup_state]
+_tag = "Parsed"
+hash = "ae4882d204900bdc"
+
+[earn_state]
+_tag = "Reviewed"
+hash = "ca98dd612dc6da80"
+outcome = "present"
+
 [cdr]
 brand = "Westpac"
 product_id = "CCAltPlatQantas"
