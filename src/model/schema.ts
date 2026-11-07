@@ -192,9 +192,8 @@ const statusAgrees = (card: CardStatusFields, lifecycle: CardLifecycle): boolean
 export const Card = CardFields.check(
   Schema.makeFilter(
     (card) =>
-      card.discontinued === undefined ||
-      card.status === "discontinued" ||
-      "A discontinued date needs status discontinued"
+      (card.discontinued === undefined) === (card.status !== "discontinued") ||
+      "A discontinued date goes with status discontinued, and status discontinued needs its date"
   ),
   Schema.makeFilter(
     (card) =>

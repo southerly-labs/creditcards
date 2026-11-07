@@ -168,6 +168,14 @@ describe("card schema with a lifecycle", () => {
     )
   })
 
+  it("needs a discontinued date exactly when the status is discontinued", () => {
+    const { missing_since: _since, ...listed } = card
+
+    assert.isTrue(Schema.is(Card)({ ...listed, status: "discontinued", discontinued: "2026-11-05" }))
+    assert.isFalse(Schema.is(Card)({ ...listed, status: "discontinued" }))
+    assert.isFalse(Schema.is(Card)({ ...listed, status: "active", discontinued: "2026-11-05" }))
+  })
+
   it("rejects a lifecycle that disagrees with them", () => {
     assert.isFalse(Schema.is(Card)({ ...card, lifecycle: initialLifecycle }))
     assert.isFalse(

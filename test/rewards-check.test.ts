@@ -48,6 +48,7 @@ describe("checkEarnPages", () => {
     type: "personal",
     first_seen: "2026-10-31",
     status,
+    ...(status === "discontinued" ? { discontinued: "2026-11-01" } : {}),
     fees: {},
     rates: {},
     limits: {},
