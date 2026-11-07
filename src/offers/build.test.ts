@@ -1,5 +1,5 @@
-import { describe, expect, it } from "@effect/vitest"
-import { Array as EffectArray, Option } from "effect"
+import { assert, describe, expect, it } from "@effect/vitest"
+import { Array as EffectArray, Effect, Option } from "effect"
 import { Card } from "../model/schema"
 import type { Offer } from "./schema"
 import { applyOffers, cdrOffers, combineOffers, signupOffer, signupState } from "./build"
@@ -78,23 +78,33 @@ describe("combining offers", () => {
 
   const cashback: Offer = { id: "cashback", source: "manual", components: [{ kind: "cash_credit", amount: 200 }] }
 
-  it("replaces generated offers and drops stale ones", () => {
-    const stale: Offer = { ...intro, id: "intro-both" }
+  it.effect("replaces generated offers and drops stale ones", () =>
+    Effect.gen(function* () {
+      const stale: Offer = { ...intro, id: "intro-both" }
 
-    expect(combineOffers({ existing: [stale], generated: [intro, signup], locked: false })).toEqual([intro, signup])
-  })
+      assert.deepStrictEqual(yield* combineOffers({ existing: [stale], generated: [intro, signup], locked: false }), [
+        intro,
+        signup
+      ])
+    })
+  )
 
-  it("lets a manual offer override a generated one with the same id, in place", () => {
-    expect(combineOffers({ existing: [manualSignup, cashback], generated: [intro, signup], locked: false })).toEqual([
-      intro,
-      manualSignup,
-      cashback
-    ])
-  })
+  it.effect("lets a manual offer override a generated one with the same id, in place", () =>
+    Effect.gen(function* () {
+      assert.deepStrictEqual(
+        yield* combineOffers({ existing: [manualSignup, cashback], generated: [intro, signup], locked: false }),
+        [intro, manualSignup, cashback]
+      )
+    })
+  )
 
-  it("leaves everything alone when offers are locked", () => {
-    expect(combineOffers({ existing: [cashback], generated: [intro, signup], locked: true })).toEqual([cashback])
-  })
+  it.effect("leaves everything alone when offers are locked", () =>
+    Effect.gen(function* () {
+      assert.deepStrictEqual(yield* combineOffers({ existing: [cashback], generated: [intro, signup], locked: true }), [
+        cashback
+      ])
+    })
+  )
 })
 
 describe("applying offers to a card", () => {
@@ -121,41 +131,55 @@ describe("applying offers to a card", () => {
   const signupOf = (applied: Card) =>
     Option.getOrUndefined(EffectArray.findFirst(applied.offers ?? [], (offer) => offer.id === "signup"))
 
-  it("writes CDR offers and the raw total when nothing has been reviewed", () => {
-    const applied = applyOffers(card, cdr, nothingReviewed)
+  it.effect("writes CDR offers and the raw total when nothing has been reviewed", () =>
+    Effect.gen(function* () {
+      const applied = yield* applyOffers(card, cdr, nothingReviewed)
 
-    expect(EffectArray.map(applied.offers ?? [], (offer) => [offer.id, offer.source])).toEqual([
-      ["intro-purchase", "cdr"],
-      ["first-year-fee", "cdr"],
-      ["signup", "cdr"]
-    ])
-  })
+      assert.deepStrictEqual(
+        EffectArray.map(applied.offers ?? [], (offer) => [offer.id, offer.source]),
+        [
+          ["intro-purchase", "cdr"],
+          ["first-year-fee", "cdr"],
+          ["signup", "cdr"]
+        ]
+      )
+    })
+  )
 
-  it("writes no signup offer after a manual no-bonus review", () => {
-    const state = SourceReview.cases.Reviewed.make({ hash: "abc", outcome: "none" })
-    const applied = applyOffers(card, cdr, { state, parsed: undefined })
+  it.effect("writes no signup offer after a manual no-bonus review", () =>
+    Effect.gen(function* () {
+      const state = SourceReview.cases.Reviewed.make({ hash: "abc", outcome: "none" })
+      const applied = yield* applyOffers(card, cdr, { state, parsed: undefined })
 
-    expect(signupOf(applied)).toBeUndefined()
-  })
+      assert.isUndefined(signupOf(applied))
+    })
+  )
 
-  it("keeps a manual signup offer over the raw total", () => {
-    const manual: Offer = {
-      id: "signup",
-      source: "manual",
-      components: [{ kind: "signup_points", program: "qantas", points: 90_000, year: 1 }]
-    }
+  it.effect("keeps a manual signup offer over the raw total", () =>
+    Effect.gen(function* () {
+      const manual: Offer = {
+        id: "signup",
+        source: "manual",
+        components: [{ kind: "signup_points", program: "qantas", points: 90_000, year: 1 }]
+      }
 
-    const state = SourceReview.cases.Reviewed.make({ hash: "abc", outcome: "present" })
+      const state = SourceReview.cases.Reviewed.make({ hash: "abc", outcome: "present" })
 
-    expect(signupOf(applyOffers({ ...card, offers: [manual] }, cdr, { state, parsed: undefined }))).toEqual(manual)
-  })
+      assert.deepStrictEqual(
+        signupOf(yield* applyOffers({ ...card, offers: [manual] }, cdr, { state, parsed: undefined })),
+        manual
+      )
+    })
+  )
 
-  it("round-trips parsed tranches through the stored parser offer", () => {
-    const parsed = [{ points: 80_000, year: 1 as const, min_spend: 3000, spend_days: 90 }]
-    const state = SourceReview.cases.Parsed.make({ hash: "abc" })
-    const applied = applyOffers({ ...card, signup_state: state }, cdr, { state, parsed })
+  it.effect("round-trips parsed tranches through the stored parser offer", () =>
+    Effect.gen(function* () {
+      const parsed = [{ points: 80_000, year: 1 as const, min_spend: 3000, spend_days: 90 }]
+      const state = SourceReview.cases.Parsed.make({ hash: "abc" })
+      const applied = yield* applyOffers({ ...card, signup_state: state }, cdr, { state, parsed })
 
-    expect(signupState(applied)).toEqual({ state, parsed })
-    expect(applyOffers(applied, cdr, signupState(applied))).toEqual(applied)
-  })
+      assert.deepStrictEqual(signupState(applied), { state, parsed })
+      assert.deepStrictEqual(yield* applyOffers(applied, cdr, signupState(applied)), applied)
+    })
+  )
 })

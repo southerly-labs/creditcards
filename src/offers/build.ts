@@ -2,9 +2,9 @@ import type { BonusTranche, Card, IntroOffer } from "../model/schema"
 import type { SignupState } from "../rewards/plan"
 import type { Offer, OfferComponent } from "./schema"
 import { reviewedNone } from "../machine/review.ts"
+import { OfferSlotEvent, offerIn, slotOf, stepOfferSlot } from "../machine/offerSlot.ts"
 import { signupStateOf } from "../rewards/state.ts"
-import { Array as EffectArray, Option, pipe } from "effect"
-import { dual } from "effect/Function"
+import { Array as EffectArray, Effect, Option, pipe } from "effect"
 
 export interface CdrOfferInputs {
   readonly intro?: ReadonlyArray<IntroOffer> | undefined
@@ -71,22 +71,35 @@ export const signupOffer = (input: {
   }
 }
 
-export const combineOffers = (input: {
+export const combineOffers = Effect.fn("combineOffers")(function* (input: {
   readonly existing: ReadonlyArray<Offer> | undefined
   readonly generated: ReadonlyArray<Offer>
   readonly locked: boolean
-}): ReadonlyArray<Offer> => {
+}) {
   const existing = input.existing ?? []
 
   if (input.locked) return existing
-  const manual = EffectArray.filter(existing, (offer) => offer.source === "manual")
-  const manualById = new Map(EffectArray.map(manual, (offer) => [offer.id, offer] as const))
+  const byId = new Map(EffectArray.map(existing, (offer) => [offer.id, offer] as const))
+  const generatedIds = new Set(EffectArray.map(input.generated, (offer) => offer.id))
   const offers: Array<Offer> = []
 
-  for (const offer of input.generated) offers.push(manualById.get(offer.id) ?? offer)
+  for (const offer of input.generated) {
+    const kept = offerIn(
+      yield* stepOfferSlot(slotOf(byId.get(offer.id)), OfferSlotEvent.cases.Regenerated.make({ offer }))
+    )
 
-  return [...offers, ...EffectArray.filter(manual, (offer) => !offers.includes(offer))]
-}
+    if (kept !== undefined) offers.push(kept)
+  }
+
+  for (const offer of existing) {
+    if (generatedIds.has(offer.id)) continue
+    const kept = offerIn(yield* stepOfferSlot(slotOf(offer), OfferSlotEvent.cases.Regenerated.make({})))
+
+    if (kept !== undefined) offers.push(kept)
+  }
+
+  return offers
+})
 
 const parsedTranche = (component: OfferComponent): ReadonlyArray<BonusTranche> => {
   if (component.kind !== "signup_points" || component.year === undefined) return []
@@ -104,7 +117,7 @@ export const signupState = (card: Card | undefined): SignupState => ({
   )
 })
 
-const applyOffersImpl = (card: Card, cdr: CdrOfferInputs, signup: SignupState): Card => {
+export const applyOffers = Effect.fn("applyOffers")(function* (card: Card, cdr: CdrOfferInputs, signup: SignupState) {
   const { offers: stored, ...rest } = card
 
   const offer =
@@ -117,16 +130,11 @@ const applyOffersImpl = (card: Card, cdr: CdrOfferInputs, signup: SignupState): 
           noOffer: reviewedNone(signup.state)
         })
 
-  const offers = combineOffers({
+  const offers = yield* combineOffers({
     existing: stored,
     generated: [...cdrOffers(cdr), ...(offer === undefined ? [] : [offer])],
     locked: (card.locked ?? []).includes("offers")
   })
 
-  return { ...rest, ...(offers.length === 0 ? {} : { offers }) }
-}
-
-export const applyOffers = dual<
-  (cdr: CdrOfferInputs, signup: SignupState) => (card: Card) => Card,
-  (card: Card, cdr: CdrOfferInputs, signup: SignupState) => Card
->(3, applyOffersImpl)
+  return { ...rest, ...(offers.length === 0 ? {} : { offers }) } satisfies Card
+})

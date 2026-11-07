@@ -140,7 +140,7 @@ const proposeCard = Effect.fn("proposeCard")(function* (
   }
 
   const card = withLifecycle(
-    applyOffers(decoded.success, normalised.offers, {
+    yield* applyOffers(decoded.success, normalised.offers, {
       state: nextSignup,
       parsed: applyBonusPlan(currentSignup, bonusPlan)
     }),
