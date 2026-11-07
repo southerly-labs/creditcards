@@ -23,7 +23,8 @@ payable = 0
 months = 12
 
 [signup_state]
-_tag = "Unread"
+_tag = "Unreadable"
+hash = "17073aaa8a1bd4f1"
 
 [earn_state]
 _tag = "Reviewed"

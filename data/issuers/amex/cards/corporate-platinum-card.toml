@@ -13,7 +13,8 @@ _tag = "Listed"
 _tag = "Selling"
 
 [signup_state]
-_tag = "Unread"
+_tag = "Unreadable"
+hash = "23d39124cd661409"
 
 [earn_state]
 _tag = "Reviewed"
