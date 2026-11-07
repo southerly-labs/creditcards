@@ -10,6 +10,8 @@ import { splitCardKey, Store } from "../store/Store.ts"
 import { loyaltyText, loyaltyTextHash, type LoyaltyFeature } from "./parse.ts"
 import { bonusText, bonusTextHash, isResolvableFromCdr } from "./bonus.ts"
 import { BonusPlan, planBonus, planRewards, RewardsPlan } from "./plan.ts"
+import { earnStateOf, signupStateOf } from "./state.ts"
+import { ReviewEvent, stepReview } from "../machine/review.ts"
 
 export interface ReviewItem {
   readonly card: string
@@ -163,8 +165,16 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
       return yield* RewardsError.make({ message: `${key} has no rewards.earn; set it first or pass --none` })
     const hash = yield* loyaltyTextHash(yield* loyaltyFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
+    const on = DateTime.formatIsoDateUtc(yield* DateTime.now)
+
+    const earnState = yield* stepReview(
+      earnStateOf(card),
+      ReviewEvent.cases.Stamp.make({ hash, outcome: earn.length === 0 ? "none" : "present", on })
+    )
+
     yield* store.writeCard(issuer, slug, {
       ...card,
+      earn_state: earnState,
       rewards: {
         ...card.rewards,
         earn,
@@ -290,9 +300,16 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
     const hash = yield* bonusTextHash(yield* bonusFeatures(card, baseUris))
     const { issuer, card: slug } = splitCardKey(key)
     const { offers: _offers, ...rest } = card
+    const on = DateTime.formatIsoDateUtc(yield* DateTime.now)
+
+    const reviewed = yield* stepReview(
+      signupStateOf(card),
+      ReviewEvent.cases.Stamp.make({ hash, outcome: none ? "none" : "present", on })
+    )
 
     yield* store.writeCard(issuer, slug, {
       ...rest,
+      signup_state: reviewed,
       ...(offers.length === 0 ? {} : { offers }),
       signup_review: {
         state: none ? "none" : "present",

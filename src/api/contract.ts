@@ -1,7 +1,13 @@
 import { Schema } from "effect"
 import { Card, CardStatus, creditRange, earnTierOrder, Program } from "../model/schema.ts"
 
-const { locked: _locked, lifecycle: _lifecycle, ...storedFields } = Card.fields
+const {
+  locked: _locked,
+  lifecycle: _lifecycle,
+  earn_state: _earnState,
+  signup_state: _signupState,
+  ...storedFields
+} = Card.fields
 
 const cardFields = { ...storedFields, ...CardStatus.fields }
 const { aliases: _aliases, priority: _priority, ...programFields } = Program.fields

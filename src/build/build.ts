@@ -85,7 +85,7 @@ const toApiImpl = (dataset: Dataset, generatedAt?: string): Api => {
   }
 
   for (const [key, card] of dataset.cards) {
-    const { locked: _l, lifecycle, ...stored } = card
+    const { locked: _l, lifecycle, earn_state: _earnState, signup_state: _signupState, ...stored } = card
 
     const { status, closed, missing_since, discontinued } = flatFromLifecycle(lifecycle)
     const { issuer, card: slug } = splitCardKey(key)

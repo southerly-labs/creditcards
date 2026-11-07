@@ -4,6 +4,7 @@ import { EarnRule } from "./earn.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "./domain.ts"
 import { Offer, SignupReview, uniqueOfferIds } from "../offers/schema"
 import { CardLifecycle } from "../machine/cardLifecycle.ts"
+import { SourceReview } from "../machine/review.ts"
 
 const between = (minimum: number, maximum: number) =>
   Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum, maximum })))
@@ -115,6 +116,8 @@ const CardFields = Schema.Struct({
   provenance: Schema.optionalKey(Provenance),
   offers: Schema.optionalKey(Schema.Array(Offer)),
   signup_review: Schema.optionalKey(SignupReview),
+  signup_state: Schema.optionalKey(SourceReview),
+  earn_state: Schema.optionalKey(SourceReview),
   gaps: Schema.optionalKey(Schema.Array(FieldGap)),
   locked: Schema.optionalKey(Schema.Array(Schema.String)),
   cdr: Schema.optionalKey(
@@ -180,6 +183,12 @@ export const earnTierOrder = Schema.makeFilter(
 )
 
 export const Card = CardFields.check(
+  Schema.makeFilter(
+    (card) =>
+      (card.earn_state === undefined && card.signup_state === undefined) ||
+      card.rewards !== undefined ||
+      "earn_state and signup_state need a rewards program"
+  ),
   creditRange,
   earnTierOrder,
   Schema.makeFilter((card) => uniqueOfferIds(card.offers ?? []) || "Offer ids must be unique within a card"),
