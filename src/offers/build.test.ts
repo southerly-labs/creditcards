@@ -3,6 +3,7 @@ import { Array as EffectArray, Option } from "effect"
 import { Card } from "../model/schema"
 import type { Offer } from "./schema"
 import { applyOffers, cdrOffers, combineOffers, signupOffer, signupState } from "./build"
+import { initialLifecycle } from "../machine/cardLifecycle.ts"
 
 const tranches = [
   { points: 100_000, year: 1 as const, min_spend: 6000, spend_days: 90 },
@@ -99,7 +100,7 @@ describe("applying offers to a card", () => {
   const card: Card = {
     name: "Card",
     type: "personal",
-    status: "active",
+    lifecycle: initialLifecycle,
     first_seen: "2026-10-31",
     fees: {},
     rates: {},

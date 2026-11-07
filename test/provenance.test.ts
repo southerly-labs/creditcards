@@ -1,15 +1,16 @@
 import { assert, it, test } from "@effect/vitest"
-import { Effect, Exit, Schema } from "effect"
-import { Card } from "../src/model/schema.ts"
+import { Effect } from "effect"
+import type { Card } from "../src/model/schema.ts"
 import { sectionLocks } from "../src/provenance/schema.ts"
 import { mergeCard } from "../src/sync/merge.ts"
 import { notSeen, seen, statusOf, withLifecycle } from "../src/model/lifecycle.ts"
+import { initialLifecycle, ListingState, SalesState } from "../src/machine/cardLifecycle.ts"
 
 test("section corrections and provenance survive CDR merging", () => {
   const existing: Card = {
     name: "Card",
     type: "personal",
-    status: "active",
+    lifecycle: initialLifecycle,
     first_seen: "2026-10-31",
     fees: { annual: 25 },
     rates: {},
@@ -39,12 +40,13 @@ test("a rewards correction locks only the CDR-owned rewards fields", () => {
 
 it.effect("a hand-set closed status survives CDR merging", () =>
   Effect.gen(function* () {
+    const closedSales = SalesState.cases.Closed.make({ on: "2025-06-01" })
+
     const closed: Card = {
       name: "Card",
       type: "personal",
-      status: "closed",
       first_seen: "2026-10-31",
-      closed: "2025-06-01",
+      lifecycle: { listing: ListingState.cases.Listed.make({}), sales: closedSales },
       fees: {},
       rates: {},
       limits: {},
@@ -55,33 +57,15 @@ it.effect("a hand-set closed status survives CDR merging", () =>
     assert.strictEqual(merged.status, "closed")
     assert.strictEqual(merged.closed, "2025-06-01")
 
-    const delisted: Card = { ...closed, status: "discontinued", discontinued: "2026-01-01" }
+    const delisted: Card = {
+      ...closed,
+      lifecycle: { listing: ListingState.cases.Delisted.make({ on: "2026-01-01" }), sales: closedSales }
+    }
+
     assert.strictEqual(statusOf(withLifecycle(delisted, yield* seen(delisted))).status, "closed")
 
-    const { closed: _closed, ...sellingFields } = delisted
-    const selling: Card = sellingFields
+    const selling: Card = { ...delisted, lifecycle: { ...delisted.lifecycle, sales: initialLifecycle.sales } }
     assert.strictEqual(statusOf(withLifecycle(selling, yield* seen(selling))).status, "active")
-  })
-)
-
-const decodes = (input: unknown) =>
-  Effect.exit(Schema.decodeUnknownEffect(Card)(input)).pipe(Effect.map(Exit.isSuccess))
-
-it.effect("lifecycle dates must agree with the status", () =>
-  Effect.gen(function* () {
-    const card = { name: "Card", type: "personal", fees: {}, rates: {}, limits: {}, perks: {} }
-
-    assert.isFalse(yield* decodes({ ...card, status: "active", discontinued: "2026-01-01" }))
-    assert.isFalse(yield* decodes({ ...card, status: "active", closed: "2026-01-01" }))
-    assert.isTrue(
-      yield* decodes({
-        ...card,
-        status: "discontinued",
-        first_seen: "2026-10-31",
-        closed: "2025-01-01",
-        discontinued: "2026-01-01"
-      })
-    )
   })
 )
 
@@ -90,7 +74,7 @@ it.effect("a card must be missing on two different days before it is discontinue
     const card: Card = {
       name: "Card",
       type: "personal",
-      status: "active",
+      lifecycle: initialLifecycle,
       first_seen: "2026-10-31",
       fees: {},
       rates: {},

@@ -168,25 +168,6 @@ export interface FlatLifecycle {
   readonly discontinued?: string
 }
 
-const listingFromFlat = (card: FlatLifecycle): ListingState => {
-  if (card.status === "discontinued" && card.discontinued !== undefined)
-    return ListingState.cases.Delisted.make({ on: card.discontinued })
-
-  if (card.missing_since !== undefined) return ListingState.cases.Missing.make({ since: card.missing_since })
-
-  return ListingState.cases.Listed.make({})
-}
-
-const salesFromFlat = (card: FlatLifecycle): SalesState =>
-  card.status === "closed" || card.closed !== undefined
-    ? SalesState.cases.Closed.make(card.closed === undefined ? {} : { on: card.closed })
-    : SalesState.cases.Selling.make({})
-
-export const lifecycleFromFlat = (card: FlatLifecycle): CardLifecycle => ({
-  listing: listingFromFlat(card),
-  sales: salesFromFlat(card)
-})
-
 export const flatFromLifecycle = (lifecycle: CardLifecycle): FlatLifecycle => {
   const { listing, sales } = lifecycle
   const delisted = ListingState.guards.Delisted(listing) ? listing : undefined

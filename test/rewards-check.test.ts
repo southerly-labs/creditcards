@@ -11,6 +11,7 @@ import {
   missingQuotes,
   normaliseText
 } from "../src/rewards/check.ts"
+import { initialLifecycle, ListingState } from "../src/machine/cardLifecycle.ts"
 
 describe("page text", () => {
   test("drops scripts, styles and comments, and separates elements", () => {
@@ -43,12 +44,13 @@ describe("missing quotes", () => {
 })
 
 describe("checkEarnPages", () => {
-  const card = (url: string, quote: string, status: Card["status"] = "active"): Card => ({
+  const card = (url: string, quote: string, delisted = false): Card => ({
     name: "Card",
     type: "personal",
     first_seen: "2026-10-31",
-    status,
-    ...(status === "discontinued" ? { discontinued: "2026-11-01" } : {}),
+    lifecycle: delisted
+      ? { ...initialLifecycle, listing: ListingState.cases.Delisted.make({ on: "2026-11-01" }) }
+      : initialLifecycle,
     fees: {},
     rates: {},
     limits: {},
@@ -81,7 +83,7 @@ describe("checkEarnPages", () => {
             ["x/ok", card("https://a.example/card", "1 point per $1")],
             ["x/changed", card("https://a.example/card", "2 points per $1")],
             ["x/gone", card("https://a.example/missing", "1 point per $1")],
-            ["x/old", card("https://a.example/card", "3 points per $1", "discontinued")]
+            ["x/old", card("https://a.example/card", "3 points per $1", true)]
           ])
         )
 

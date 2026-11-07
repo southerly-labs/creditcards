@@ -1,4 +1,4 @@
-import type { Api } from "../src/api/contract.ts"
+import type { Api, PublicCard } from "../src/api/contract.ts"
 import { required } from "../src/util/required.ts"
 import {
   decodeMonthlySpend,
@@ -27,7 +27,7 @@ import {
 interface Row {
   readonly id: string
   readonly issuer: string
-  readonly card: Omit<Card, "locked">
+  readonly card: PublicCard
   readonly program: (Omit<Program, "aliases" | "priority"> & { readonly id: string }) | undefined
 }
 

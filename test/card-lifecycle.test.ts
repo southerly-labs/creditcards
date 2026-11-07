@@ -1,16 +1,14 @@
 import { assert, describe, it } from "@effect/vitest"
 import { Machine } from "@typeonce/effect-machine"
 import { MachineTest } from "@typeonce/effect-machine/testing"
-import { Array as EffectArray, Effect, Schema } from "effect"
+import { Array as EffectArray, Effect, Option, Schema } from "effect"
 import {
   CardLifecycleEvent,
   CardLifecycleMachine,
   CardLifecycleStates,
   type CardLifecycle,
-  type FlatLifecycle,
   flatFromLifecycle,
   initialLifecycle,
-  lifecycleFromFlat,
   ListingState,
   SalesState,
   stepLifecycle,
@@ -111,7 +109,7 @@ describe("card lifecycle", () => {
 })
 
 describe("card lifecycle persistence", () => {
-  const recorded: ReadonlyArray<readonly [FlatLifecycle, CardLifecycle]> = [
+  const recorded: ReadonlyArray<readonly [ReturnType<typeof flatFromLifecycle>, CardLifecycle]> = [
     [{ status: "active" }, initialLifecycle],
     [
       { status: "closed", missing_since: "2026-11-07" },
@@ -131,9 +129,8 @@ describe("card lifecycle persistence", () => {
     ]
   ]
 
-  it("maps every flat status combination to a lifecycle and back", () => {
+  it("publishes each lifecycle as the flat status fields", () => {
     for (const [flat, lifecycle] of recorded) {
-      assert.deepStrictEqual(lifecycleFromFlat(flat), lifecycle)
       assert.deepStrictEqual(flatFromLifecycle(lifecycle), flat)
     }
   })
@@ -148,41 +145,34 @@ describe("card lifecycle persistence", () => {
   )
 })
 
-describe("card schema with a lifecycle", () => {
+describe("stored card schema", () => {
   const card = {
     name: "Test",
     type: "personal",
-    status: "closed",
     first_seen: "2026-10-31",
-    missing_since: "2026-11-07",
     fees: {},
     rates: {},
     limits: {},
     perks: {}
   }
 
-  it("accepts a lifecycle that agrees with the flat status fields", () => {
-    assert.isTrue(Schema.is(Card)(card))
-    assert.isTrue(
-      Schema.is(Card)({ ...card, lifecycle: lifecycleFromFlat({ status: "closed", missing_since: "2026-11-07" }) })
-    )
+  it("requires a lifecycle and no longer accepts the flat status fields", () => {
+    assert.isTrue(Schema.is(Card)({ ...card, lifecycle: initialLifecycle }))
+    assert.isFalse(Schema.is(Card)(card))
+    assert.isFalse(Schema.is(Card)({ ...card, status: "active" }))
   })
 
-  it("needs a discontinued date exactly when the status is discontinued", () => {
-    const { missing_since: _since, ...listed } = card
+  it("rejects a listing or sales state the machine does not have", () => {
+    const decodesWith = (lifecycle: string) =>
+      Option.isSome(
+        Schema.decodeOption(Schema.fromJsonString(Card))(
+          `{"name":"Test","type":"personal","first_seen":"2026-10-31","fees":{},"rates":{},"limits":{},"perks":{},"lifecycle":${lifecycle}}`
+        )
+      )
 
-    assert.isTrue(Schema.is(Card)({ ...listed, status: "discontinued", discontinued: "2026-11-05" }))
-    assert.isFalse(Schema.is(Card)({ ...listed, status: "discontinued" }))
-    assert.isFalse(Schema.is(Card)({ ...listed, status: "active", discontinued: "2026-11-05" }))
-  })
-
-  it("rejects a lifecycle that disagrees with them", () => {
-    assert.isFalse(Schema.is(Card)({ ...card, lifecycle: initialLifecycle }))
-    assert.isFalse(
-      Schema.is(Card)({
-        ...card,
-        lifecycle: { listing: Missing.make({ since: "2026-11-06" }), sales: Closed.make({}) }
-      })
-    )
+    assert.isTrue(decodesWith('{"listing":{"_tag":"Missing","since":"2026-11-01"},"sales":{"_tag":"Selling"}}'))
+    assert.isFalse(decodesWith('{"listing":{"_tag":"Gone"},"sales":{"_tag":"Selling"}}'))
+    assert.isFalse(decodesWith('{"listing":{"_tag":"Missing"},"sales":{"_tag":"Selling"}}'))
+    assert.isFalse(decodesWith('{"listing":{"_tag":"Listed"}}'))
   })
 })

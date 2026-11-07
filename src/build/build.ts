@@ -4,7 +4,6 @@ import { Effect, Schema, Record as EffectRecord, Array as EffectArray } from "ef
 import { type Api, type PublicCard } from "../api/contract.ts"
 import { datasetFreshness } from "../api/freshness.ts"
 import { flatFromLifecycle } from "../machine/cardLifecycle.ts"
-import { lifecycleOf } from "../model/lifecycle.ts"
 
 export type { Api } from "../api/contract.ts"
 
@@ -86,17 +85,9 @@ const toApiImpl = (dataset: Dataset, generatedAt?: string): Api => {
   }
 
   for (const [key, card] of dataset.cards) {
-    const {
-      locked: _l,
-      lifecycle: _lifecycle,
-      status: _status,
-      closed: _closed,
-      missing_since: _since,
-      discontinued: _discontinued,
-      ...stored
-    } = card
+    const { locked: _l, lifecycle, ...stored } = card
 
-    const { status, closed, missing_since, discontinued } = flatFromLifecycle(lifecycleOf(card))
+    const { status, closed, missing_since, discontinued } = flatFromLifecycle(lifecycle)
     const { issuer, card: slug } = splitCardKey(key)
     const observedAt = dataset.observations?.get(key)
     const changedOn = dataset.changes?.get(key)

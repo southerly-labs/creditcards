@@ -6,6 +6,7 @@ import type { Offer } from "../src/offers/schema.ts"
 import type { Dataset } from "../src/store/Store.ts"
 import { String as EffectString, pipe } from "effect"
 import { encodeJson } from "../src/util/json.ts"
+import { initialLifecycle } from "../src/machine/cardLifecycle.ts"
 
 const apiDecodes = (input: unknown) => Effect.exit(decodeApi(input)).pipe(Effect.map(Exit.isSuccess))
 
@@ -31,7 +32,7 @@ it.effect("public projection retains review evidence and excludes storage contro
           {
             name: "Card",
             type: "personal",
-            status: "active",
+            lifecycle: initialLifecycle,
             first_seen: "2026-10-31",
             locked: ["fees.annual"],
             fees: {},
@@ -63,7 +64,7 @@ it.effect("public projection retains review evidence and excludes storage contro
 const card = {
   name: "Card",
   type: "personal",
-  status: "active",
+  lifecycle: initialLifecycle,
   first_seen: "2026-10-31",
   fees: {},
   rates: {},
@@ -71,13 +72,17 @@ const card = {
   perks: {}
 } as const
 
+const { lifecycle: _lifecycle, ...storedFields } = card
+
+const publicCard = { ...storedFields, status: "active" }
+
 it.effect("public cards keep card-level domain checks", () =>
   Effect.gen(function* () {
     const api = (limits: { readonly min_credit: number; readonly max_credit: number }) => ({
       schema_version: 1,
       freshness: { card_count: 1, cdr_products_with_known_updated_at: 0 },
       programs: {},
-      issuers: { bank: { name: "Bank", cards: { card: { ...card, limits } } } }
+      issuers: { bank: { name: "Bank", cards: { card: { ...publicCard, limits } } } }
     })
 
     assert.isFalse(yield* apiDecodes(api({ min_credit: 10_000, max_credit: 1000 })))

@@ -22,6 +22,7 @@ import type { Fee, ProductDetail } from "../src/cdr/schema.ts"
 import { diffCard, holdReasons, mergeCard } from "../src/sync/merge.ts"
 import { cardSlug } from "../src/sync/issuers.ts"
 import { Card } from "../src/model/schema.ts"
+import { initialLifecycle } from "../src/machine/cardLifecycle.ts"
 
 const fixed = (name: string, amount: string, period?: string): Fee => ({
   name,
@@ -346,7 +347,7 @@ describe("merge and guardrails", () => {
   const existing: Card = {
     name: "Card",
     type: "personal",
-    status: "active",
+    lifecycle: initialLifecycle,
     first_seen: "2026-10-31",
     locked: ["fees.foreign_txn_pct"],
     fees: { annual: 100, foreign_txn_pct: 0 },
@@ -362,7 +363,7 @@ describe("merge and guardrails", () => {
         mergeCard(existing, {
           name: "Card",
           type: "personal",
-          status: "active",
+          lifecycle: initialLifecycle,
           fees: { annual: 120, foreign_txn_pct: 3 },
           rates: { purchase: 21 },
           limits: {},
@@ -392,7 +393,7 @@ describe("merge and guardrails", () => {
         name: "Card",
         type: "personal",
         network: "visa",
-        status: "active",
+        lifecycle: initialLifecycle,
         fees: { annual: 100 },
         rates: { purchase: 20 },
         limits: {},

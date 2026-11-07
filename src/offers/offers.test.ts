@@ -3,6 +3,7 @@ import { Effect, Exit, Schema } from "effect"
 import { Card } from "../model/schema"
 import { Offer } from "./schema"
 import { offerStatus } from "./project"
+import { initialLifecycle } from "../machine/cardLifecycle.ts"
 
 const offer: Offer = {
   id: "offer-1",
@@ -15,7 +16,7 @@ const offer: Offer = {
 const card: Card = {
   name: "Test",
   type: "personal",
-  status: "active",
+  lifecycle: initialLifecycle,
   first_seen: "2026-10-31",
   fees: {},
   rates: {},

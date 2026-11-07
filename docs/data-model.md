@@ -56,14 +56,23 @@ gap; a gap left beside a hand-filled value is stale and should be removed.
 - `first_seen`: the date this project first recorded the card. The sync sets it
   when it adds a card. Cards that existed when the project started have
   2026-10-31; it is not the issuer's launch date.
-- `status`: `active`, `closed` (the issuer no longer sells it but still lists it
-  in CDR; set by hand and kept by the sync) or `discontinued` (it left CDR).
-- `closed`: the date the card closed to new applicants, when known. Allowed with
-  status `closed` or `discontinued`.
-- `missing_since`: the first day a sync did not see the card. Cleared when a sync
-  sees it again.
-- `discontinued`: the day the card left CDR (its `missing_since`), set once a sync
-  on a later day still misses it. Only with status `discontinued`.
+- `lifecycle`: the card's state in two independent parts, each a table with a
+  `_tag`. The sync moves it through the lifecycle machine
+  (`src/machine/cardLifecycle.ts`); only `sales` is set by hand.
+  - `lifecycle.listing` is whether CDR lists the card: `Listed`;
+    `Missing` with `since`, the first day a sync did not see it; or `Delisted`
+    with `on`, the day it left CDR (its `since`). A card becomes `Delisted` only
+    when a sync on a later day still misses it, and goes back to `Listed` when a
+    sync sees it again.
+  - `lifecycle.sales` is whether the issuer still sells it: `Selling`, or
+    `Closed` with an optional `on`, the date it closed to new applicants. A
+    closed card keeps this when it goes missing or is delisted.
+
+  Lock `lifecycle` to stop the sync marking a card missing.
+
+`api.json` keeps the older flat fields, derived from `lifecycle`: `status`
+(`discontinued` when delisted, else `closed` when closed, else `active`),
+`closed`, `missing_since` and `discontinued`.
 
 `api.json` adds two derived dates under `provenance`: `cdr_observed_at`, the last
 successful sync that saw the card (from `data/cdr-observations.toml`), and

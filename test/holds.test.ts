@@ -12,11 +12,12 @@ import {
   withCdrEvidence
 } from "../src/sync/holds.ts"
 import { required } from "../src/util/required.ts"
+import { initialLifecycle } from "../src/machine/cardLifecycle.ts"
 
 const base: Card = {
   name: "Card",
   type: "personal",
-  status: "active",
+  lifecycle: initialLifecycle,
   first_seen: "2026-10-31",
   fees: { annual: 100, foreign_txn_pct: 3 },
   rates: { purchase: 20 },

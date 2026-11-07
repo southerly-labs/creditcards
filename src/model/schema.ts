@@ -3,7 +3,7 @@ import { Schema, Array as EffectArray } from "effect"
 import { EarnRule } from "./earn.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "./domain.ts"
 import { Offer, SignupReview, uniqueOfferIds } from "../offers/schema"
-import { CardLifecycle, flatFromLifecycle } from "../machine/cardLifecycle.ts"
+import { CardLifecycle } from "../machine/cardLifecycle.ts"
 
 const between = (minimum: number, maximum: number) =>
   Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum, maximum })))
@@ -102,20 +102,12 @@ export const CardStatus = Schema.Struct({
   discontinued: Schema.optionalKey(CalendarDate)
 })
 
-const LegacyCardStatus = Schema.Struct({
-  status: Schema.optionalKey(CardStatus.fields.status),
-  closed: CardStatus.fields.closed,
-  missing_since: CardStatus.fields.missing_since,
-  discontinued: CardStatus.fields.discontinued
-})
-
 const CardFields = Schema.Struct({
   name: Schema.NonEmptyString,
   type: CardType,
   network: Schema.optionalKey(Network),
-  ...LegacyCardStatus.fields,
   first_seen: CalendarDate,
-  lifecycle: Schema.optionalKey(CardLifecycle),
+  lifecycle: CardLifecycle,
   description: Schema.optionalKey(Schema.String),
   url: Schema.optionalKey(WebUrl),
   image: Schema.optionalKey(WebUrl),
@@ -187,53 +179,7 @@ export const earnTierOrder = Schema.makeFilter(
     "Earn tier ceilings must increase within each category and period; uncapped tiers must be last"
 )
 
-type CardStatusFields = typeof LegacyCardStatus.Type
-
-const statusAgrees = (card: CardStatusFields, lifecycle: CardLifecycle): boolean => {
-  const flat = flatFromLifecycle(lifecycle)
-
-  return (
-    flat.status === card.status &&
-    flat.closed === card.closed &&
-    flat.missing_since === card.missing_since &&
-    flat.discontinued === card.discontinued
-  )
-}
-
-const flatStatusOf = (card: CardStatusFields): CardStatusFields =>
-  card.status === undefined ? { status: "active" } : card
-
 export const Card = CardFields.check(
-  Schema.makeFilter(
-    (card) =>
-      card.status !== undefined ||
-      (card.lifecycle !== undefined &&
-        card.closed === undefined &&
-        card.missing_since === undefined &&
-        card.discontinued === undefined) ||
-      "A card needs a lifecycle; status, closed, missing_since and discontinued may only accompany it"
-  ),
-  Schema.makeFilter(
-    (card) =>
-      card.status === undefined ||
-      (card.discontinued === undefined) === (card.status !== "discontinued") ||
-      "A discontinued date goes with status discontinued, and status discontinued needs its date"
-  ),
-  Schema.makeFilter(
-    (card) =>
-      card.closed === undefined || card.status !== "active" || "A closed date needs status closed or discontinued"
-  ),
-  Schema.makeFilter(
-    (card) =>
-      card.missing_since === undefined || card.status !== "discontinued" || "A discontinued card cannot be missing"
-  ),
-  Schema.makeFilter(
-    (card) =>
-      card.lifecycle === undefined ||
-      card.status === undefined ||
-      statusAgrees(flatStatusOf(card), card.lifecycle) ||
-      "lifecycle disagrees with status, closed, missing_since or discontinued"
-  ),
   creditRange,
   earnTierOrder,
   Schema.makeFilter((card) => uniqueOfferIds(card.offers ?? []) || "Offer ids must be unique within a card"),

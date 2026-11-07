@@ -1,13 +1,14 @@
 import { assert, test } from "@effect/vitest"
 import { Schema } from "effect"
 import { Card } from "../src/model/schema.ts"
+import { initialLifecycle } from "../src/machine/cardLifecycle.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "../src/model/domain.ts"
 
 test("credit limits and count fields reject impossible values", () => {
   const card = {
     name: "Test",
     type: "personal",
-    status: "active",
+    lifecycle: initialLifecycle,
     first_seen: "2026-10-31",
     fees: {},
     rates: {},
@@ -26,7 +27,7 @@ test("field gaps name a decision field once, with a dated source", () => {
   const card = {
     name: "Test",
     type: "personal",
-    status: "active",
+    lifecycle: initialLifecycle,
     first_seen: "2026-10-31",
     fees: {},
     rates: {},

@@ -10,6 +10,7 @@ import {
   Schema
 } from "effect"
 import { WebUrl } from "../model/domain.ts"
+import { initialLifecycle } from "../machine/cardLifecycle.ts"
 import { required } from "../util/required.ts"
 import type { CdrOfferInputs } from "../offers/build.ts"
 import type { Card, CardType, IntroOffer, Network, Program } from "../model/schema.ts"
@@ -517,7 +518,7 @@ const normaliseImpl = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult
     name: EffectString.trim(p.name),
     type: cardType(p),
     network: net,
-    status: "active" as const,
+    lifecycle: initialLifecycle,
     description: pipe(
       Option.fromNullishOr(p.description),
       Option.map(EffectString.trim),
