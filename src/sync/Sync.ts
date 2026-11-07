@@ -93,7 +93,10 @@ const proposeCard = Effect.fn("proposeCard")(function* (
   const mergedRewards = merged["rewards"]
   const hasRewards = mergedRewards !== undefined && Schema.is(Card.fields.rewards)(mergedRewards)
   const loyalty = EffectArray.filter(product.features ?? [], (f) => f.featureType === "LOYALTY_PROGRAM")
-  const earnPlan = hasRewards ? yield* planRewards(mergedRewards, loyalty) : RewardsPlan.Unchanged()
+
+  const earnPlan = hasRewards
+    ? yield* planRewards(mergedRewards, loyalty, earnStateOf(existing))
+    : RewardsPlan.Unchanged()
 
   if (hasRewards && RewardsPlan.$is("Set")(earnPlan)) {
     merged["rewards"] = {
@@ -111,7 +114,9 @@ const proposeCard = Effect.fn("proposeCard")(function* (
   const currentSignup = signupState(existing)
 
   const bonusPlan: BonusPlan =
-    merged["rewards"] === undefined ? BonusPlan.Unchanged() : yield* planBonus(currentSignup, bonusFeatures(product))
+    merged["rewards"] === undefined
+      ? BonusPlan.Unchanged()
+      : yield* planBonus(currentSignup, bonusFeatures(product), signupStateOf(existing))
 
   if (hasRewards) {
     merged["earn_state"] = yield* stepReview(earnStateOf(existing), yield* earnRead(loyalty))
@@ -531,7 +536,15 @@ export const summariseReport = Effect.fn("summariseReport")(function* (r: SyncRe
       const shown = EffectArray.filter(
         u.changes,
         (c) =>
-          !["cdr", "description", "rewards.earn_source", "rewards.earn_text_hash", "signup_review"].includes(c.path)
+          ![
+            "cdr",
+            "description",
+            "rewards.earn_source",
+            "rewards.earn_text_hash",
+            "signup_review",
+            "earn_state",
+            "signup_state"
+          ].includes(c.path)
       )
 
       lines.push(`- ${u.card}: ${EffectArray.join(yield* Effect.forEach(shown, formatChange), "; ") || "metadata"}`)

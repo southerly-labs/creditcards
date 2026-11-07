@@ -67,7 +67,7 @@ const toReviewItem = Effect.fn("toReviewItem")(function* (
   card: Card,
   features: ReadonlyArray<LoyaltyFeature>
 ) {
-  const plan = yield* planRewards(card.rewards, features)
+  const plan = yield* planRewards(card.rewards, features, earnStateOf(card))
 
   if (!RewardsPlan.$is("Review")(plan)) return undefined
 
@@ -207,7 +207,7 @@ const toBonusReviewItem = Effect.fn("toBonusReviewItem")(function* (
   card: Card,
   features: ReadonlyArray<LoyaltyFeature>
 ) {
-  const plan = yield* planBonus(signupState(card), features)
+  const plan = yield* planBonus(signupState(card), features, signupStateOf(card))
 
   if (!BonusPlan.$is("Review")(plan) || !isResolvableFromCdr(plan.reason)) return undefined
 
