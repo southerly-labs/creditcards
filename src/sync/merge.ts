@@ -1,5 +1,5 @@
 import { encodeJson, jsonEqual } from "../util/json.ts"
-import { Effect, Data, Option, Predicate, Array as EffectArray, String as EffectString, pipe } from "effect"
+import { Effect, Option, Predicate, Array as EffectArray, String as EffectString, pipe } from "effect"
 import { required } from "../util/required.ts"
 import type { Card } from "../model/schema.ts"
 import type { NormalisedCard } from "../cdr/normalise.ts"
@@ -90,10 +90,6 @@ const mergeCardImpl = (existing: Card | undefined, incoming: NormalisedCard): Ob
     if (gaps.length > 0) merged["gaps"] = gaps
     else delete merged["gaps"]
   }
-
-  merged["status"] = existing.status === "closed" ? "closed" : "active"
-  delete merged["discontinued"]
-  delete merged["missing_since"]
 
   const rewards = merged["rewards"]
 
@@ -198,23 +194,5 @@ export const holdReasons = (changes: ReadonlyArray<FieldChange>) =>
   Effect.map(heldFields(changes), (fields) => EffectArray.map(fields, (held) => held.reason))
 
 export const MAX_DISCONTINUED_SHARE = 0.5
-
-export type MissingStep =
-  | { readonly _tag: "Mark" }
-  | { readonly _tag: "Wait" }
-  | { readonly _tag: "Discontinue"; readonly since: string }
-
-export const MissingStep = Data.taggedEnum<MissingStep>()
-
-const missingStepImpl = (card: Card, date: string): MissingStep => {
-  if (card.missing_since === undefined) return MissingStep.Mark()
-
-  return card.missing_since < date ? MissingStep.Discontinue({ since: card.missing_since }) : MissingStep.Wait()
-}
-
-export const missingStep = dual<
-  (date: string) => (card: Card) => MissingStep,
-  (card: Card, date: string) => MissingStep
->(2, missingStepImpl)
 
 export const MIN_SEEN_SHARE = 0.8

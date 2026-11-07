@@ -2,7 +2,8 @@ import { assert, it, test } from "@effect/vitest"
 import { Effect, Exit, Schema } from "effect"
 import { Card } from "../src/model/schema.ts"
 import { sectionLocks } from "../src/provenance/schema.ts"
-import { mergeCard, MissingStep, missingStep } from "../src/sync/merge.ts"
+import { mergeCard } from "../src/sync/merge.ts"
+import { notSeen, seen, withLifecycle } from "../src/sync/lifecycle.ts"
 
 test("section corrections and provenance survive CDR merging", () => {
   const existing: Card = {
@@ -36,27 +37,32 @@ test("a rewards correction locks only the CDR-owned rewards fields", () => {
   assert.deepStrictEqual(sectionLocks("fees"), ["fees"])
 })
 
-test("a hand-set closed status survives CDR merging", () => {
-  const closed: Card = {
-    name: "Card",
-    type: "personal",
-    status: "closed",
-    first_seen: "2026-10-31",
-    closed: "2025-06-01",
-    fees: {},
-    rates: {},
-    limits: {},
-    perks: {}
-  }
+it.effect("a hand-set closed status survives CDR merging", () =>
+  Effect.gen(function* () {
+    const closed: Card = {
+      name: "Card",
+      type: "personal",
+      status: "closed",
+      first_seen: "2026-10-31",
+      closed: "2025-06-01",
+      fees: {},
+      rates: {},
+      limits: {},
+      perks: {}
+    }
 
-  const merged = mergeCard(closed, { ...closed, status: "active" })
-  assert.strictEqual(merged["status"], "closed")
-  assert.strictEqual(merged["closed"], "2025-06-01")
-  assert.strictEqual(
-    mergeCard({ ...closed, status: "discontinued", discontinued: "2026-01-01" }, closed)["status"],
-    "active"
-  )
-})
+    const merged = withLifecycle(closed, yield* seen(closed))
+    assert.strictEqual(merged.status, "closed")
+    assert.strictEqual(merged.closed, "2025-06-01")
+
+    const delisted: Card = { ...closed, status: "discontinued", discontinued: "2026-01-01" }
+    assert.strictEqual(withLifecycle(delisted, yield* seen(delisted)).status, "closed")
+
+    const { closed: _closed, ...sellingFields } = delisted
+    const selling: Card = sellingFields
+    assert.strictEqual(withLifecycle(selling, yield* seen(selling)).status, "active")
+  })
+)
 
 const decodes = (input: unknown) =>
   Effect.exit(Schema.decodeUnknownEffect(Card)(input)).pipe(Effect.map(Exit.isSuccess))
@@ -79,22 +85,27 @@ it.effect("lifecycle dates must agree with the status", () =>
   })
 )
 
-test("a card must be missing on two different days before it is discontinued", () => {
-  const card: Card = {
-    name: "Card",
-    type: "personal",
-    status: "active",
-    first_seen: "2026-10-31",
-    fees: {},
-    rates: {},
-    limits: {},
-    perks: {}
-  }
+it.effect("a card must be missing on two different days before it is discontinued", () =>
+  Effect.gen(function* () {
+    const card: Card = {
+      name: "Card",
+      type: "personal",
+      status: "active",
+      first_seen: "2026-10-31",
+      fees: {},
+      rates: {},
+      limits: {},
+      perks: {}
+    }
 
-  const marked = { ...card, missing_since: "2026-11-01" }
+    const marked = withLifecycle(card, yield* notSeen(card, "2026-11-01"))
+    assert.strictEqual(marked.missing_since, "2026-11-01")
+    assert.deepStrictEqual(withLifecycle(marked, yield* notSeen(marked, "2026-11-01")), marked)
 
-  assert.deepStrictEqual(missingStep(card, "2026-11-01"), MissingStep.Mark())
-  assert.deepStrictEqual(missingStep(marked, "2026-11-01"), MissingStep.Wait())
-  assert.deepStrictEqual(missingStep(marked, "2026-11-02"), MissingStep.Discontinue({ since: "2026-11-01" }))
-  assert.strictEqual(mergeCard(marked, card)["missing_since"], undefined)
-})
+    const gone = withLifecycle(marked, yield* notSeen(marked, "2026-11-02"))
+    assert.strictEqual(gone.status, "discontinued")
+    assert.strictEqual(gone.discontinued, "2026-11-01")
+    assert.isUndefined(gone.missing_since)
+    assert.isUndefined(withLifecycle(marked, yield* seen(marked)).missing_since)
+  })
+)

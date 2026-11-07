@@ -22,15 +22,9 @@ import { isResolvableFromCdr } from "../rewards/bonus.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
-import {
-  diffCard,
-  type FieldChange,
-  MAX_DISCONTINUED_SHARE,
-  mergeCard,
-  MissingStep,
-  missingStep,
-  MIN_SEEN_SHARE
-} from "./merge.ts"
+import { diffCard, type FieldChange, MAX_DISCONTINUED_SHARE, mergeCard, MIN_SEEN_SHARE } from "./merge.ts"
+import { lifecycleOf, notSeen, seen, withLifecycle } from "./lifecycle.ts"
+import { ListingState } from "../machine/cardLifecycle.ts"
 
 const CATEGORY = "CRED_AND_CHRG_CARDS"
 
@@ -126,7 +120,10 @@ const proposeCard = Effect.fn("proposeCard")(function* (
     } satisfies Proposal
   }
 
-  const card = applyOffers(decoded.success, normalised.offers, applyBonusPlan(currentSignup, bonusPlan))
+  const card = withLifecycle(
+    applyOffers(decoded.success, normalised.offers, applyBonusPlan(currentSignup, bonusPlan)),
+    yield* seen(existing)
+  )
 
   return { earnPlan, bonusPlan, card } satisfies Proposal
 })
@@ -447,20 +444,17 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
     for (const key of keys) {
       const missingCard = required(cards.get(key))
-      MissingStep.$match(missingStep(missingCard, date), {
-        Discontinue: ({ since }) => {
-          const { missing_since: _since, ...rest } = missingCard
-          writes.set(key, { ...rest, status: "discontinued", discontinued: since })
-          discontinued.push(key)
-        },
-        Mark: () => {
-          writes.set(key, { ...missingCard, missing_since: date })
-          missing.push(key)
-        },
-        Wait: () => {
-          missing.push(key)
-        }
-      })
+      const before = lifecycleOf(missingCard)
+      const after = yield* notSeen(missingCard, date)
+
+      if (ListingState.guards.Delisted(after.listing)) {
+        writes.set(key, withLifecycle(missingCard, after))
+        discontinued.push(key)
+        continue
+      }
+
+      if (after.listing._tag !== before.listing._tag) writes.set(key, withLifecycle(missingCard, after))
+      missing.push(key)
     }
   }
 
