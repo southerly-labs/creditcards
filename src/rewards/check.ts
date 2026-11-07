@@ -3,6 +3,7 @@ import { DateTime, Effect, Result, Schedule, Schema, Array as EffectArray, Strin
 import { HttpClient } from "effect/http"
 import { extractText, getDocumentProxy } from "unpdf"
 import type { Card, EarnCheck } from "../model/schema.ts"
+import { isDelisted } from "../model/lifecycle.ts"
 import { dual } from "effect/Function"
 
 export class PageError extends Schema.TaggedError<PageError, { readonly brand: unique symbol }>()("PageError", {
@@ -174,7 +175,7 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
   const date = DateTime.formatIsoDate(yield* DateTime.now)
 
   const checks = EffectArray.flatMap([...cards], ([card, c]) =>
-    c.status !== "discontinued"
+    !isDelisted(c)
       ? EffectArray.map(c.rewards?.earn_check ?? [], (check) => ({
           card,
           url: check.url,

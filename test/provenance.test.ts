@@ -3,7 +3,7 @@ import { Effect, Exit, Schema } from "effect"
 import { Card } from "../src/model/schema.ts"
 import { sectionLocks } from "../src/provenance/schema.ts"
 import { mergeCard } from "../src/sync/merge.ts"
-import { notSeen, seen, withLifecycle } from "../src/sync/lifecycle.ts"
+import { notSeen, seen, withLifecycle } from "../src/model/lifecycle.ts"
 
 test("section corrections and provenance survive CDR merging", () => {
   const existing: Card = {

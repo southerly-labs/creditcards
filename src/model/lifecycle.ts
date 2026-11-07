@@ -6,9 +6,10 @@ import {
   flatFromLifecycle,
   initialLifecycle,
   lifecycleFromFlat,
+  ListingState,
   stepLifecycle
 } from "../machine/cardLifecycle.ts"
-import type { Card } from "../model/schema.ts"
+import type { Card } from "./schema.ts"
 
 export const lifecycleOf = (card: Card | undefined): CardLifecycle =>
   card === undefined ? initialLifecycle : (card.lifecycle ?? lifecycleFromFlat(card))
@@ -26,6 +27,11 @@ function replaceLifecycle(card: Card, lifecycle: CardLifecycle): Card {
     lifecycle
   }
 }
+
+export const isDelisted = (card: Card): boolean => ListingState.guards.Delisted(lifecycleOf(card).listing)
+
+export const lifecycleLocked = (card: Card): boolean =>
+  (card.locked ?? []).includes("lifecycle") || (card.locked ?? []).includes("status")
 
 export const withLifecycle = dual<
   (lifecycle: CardLifecycle) => (card: Card) => Card,

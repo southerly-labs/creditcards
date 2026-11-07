@@ -2,6 +2,7 @@ import { encodeJson } from "../util/json.ts"
 import { DateTime, Effect, Schema, Array as EffectArray, Option } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
 import type { Card, EarnRate } from "../model/schema.ts"
+import { isDelisted } from "../model/lifecycle.ts"
 import { signupState } from "../offers/build.ts"
 import type { Offer } from "../offers/schema.ts"
 import { rawBonusPoints } from "../cdr/normalise.ts"
@@ -83,7 +84,7 @@ const reviewCandidates = (cards: ReadonlyMap<string, Card>, issuer: string | und
   EffectArray.filter(
     [...cards],
     ([key, card]) =>
-      card.status !== "discontinued" &&
+      !isDelisted(card) &&
       card.rewards !== undefined &&
       card.cdr !== undefined &&
       (issuer === undefined || issuer === "" || splitCardKey(key).issuer === issuer)

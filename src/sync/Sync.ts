@@ -23,7 +23,7 @@ import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
 import { diffCard, type FieldChange, MAX_DISCONTINUED_SHARE, mergeCard, MIN_SEEN_SHARE } from "./merge.ts"
-import { lifecycleOf, notSeen, seen, withLifecycle } from "./lifecycle.ts"
+import { isDelisted, lifecycleLocked, lifecycleOf, notSeen, seen, withLifecycle } from "../model/lifecycle.ts"
 import { ListingState } from "../machine/cardLifecycle.ts"
 
 const CATEGORY = "CRED_AND_CHRG_CARDS"
@@ -171,7 +171,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const activeByBrand = new Map<string, number>()
 
   for (const card of cards.values()) {
-    if (card.status !== "discontinued" && card.cdr !== undefined)
+    if (!isDelisted(card) && card.cdr !== undefined)
       activeByBrand.set(card.cdr.brand, (activeByBrand.get(card.cdr.brand) ?? 0) + 1)
   }
 
@@ -240,10 +240,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   const cardsSeen = EffectArray.reduce(fetched, 0, (n, b) => n + b.products.length)
 
-  const activeCdrCards = EffectArray.filter(
-    [...cards.values()],
-    (c) => c.status !== "discontinued" && c.cdr !== undefined
-  ).length
+  const activeCdrCards = EffectArray.filter([...cards.values()], (c) => !isDelisted(c) && c.cdr !== undefined).length
 
   if (activeCdrCards > 0 && cardsSeen < activeCdrCards * MIN_SEEN_SHARE) {
     return yield* SyncAborted.make({
@@ -416,14 +413,9 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const missingByBrand = new Map<string, Array<string>>()
 
   for (const [key, card] of cards) {
-    if (
-      card.status === "discontinued" ||
-      card.cdr === undefined ||
-      seenIds.has(`${card.cdr.brand}|${card.cdr.product_id}`)
-    )
-      continue
+    if (isDelisted(card) || card.cdr === undefined || seenIds.has(`${card.cdr.brand}|${card.cdr.product_id}`)) continue
 
-    if ((card.locked ?? []).includes("status")) continue
+    if (lifecycleLocked(card)) continue
     const status = brandStatus.get(card.cdr.brand)
 
     if (status === undefined || status.listError !== undefined) continue
@@ -431,10 +423,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   }
 
   for (const [brand, keys] of missingByBrand) {
-    const active = EffectArray.filter(
-      [...cards.values()],
-      (c) => c.status !== "discontinued" && c.cdr?.brand === brand
-    ).length
+    const active = EffectArray.filter([...cards.values()], (c) => !isDelisted(c) && c.cdr?.brand === brand).length
 
     if (keys.length / active > MAX_DISCONTINUED_SHARE && keys.length > 1) {
       for (const key of keys)
