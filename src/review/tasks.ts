@@ -215,18 +215,22 @@ export const reviewOpenCount = ({ report, pages }: QueueInput): number =>
   (report.discontinued ?? []).length +
   EffectArray.filter(pages, (page) => page.missing.length > 0 || present(page.error) || present(page.attention)).length
 
+const sorted = (values: ReadonlyArray<string>) => EffectArray.sort(values, Order.String)
+
+const byPage = Order.mapInput(Order.String, (page: TaskPage) => `${page.card ?? ""}\u0000${page.url ?? ""}`)
+
 export const webhookItems = ({ report, pages }: QueueInput) => ({
-  holds: EffectArray.map(awaitingApproval(report), (hold) => hold.id),
-  held: EffectArray.map(report.held ?? [], (item) => item.card),
-  earn: EffectArray.map(report.rewards?.review ?? [], (item) => item.card),
-  bonus: EffectArray.map(report.bonus?.review ?? [], (item) => item.card),
-  earn_check: EffectArray.map(EffectArray.filter(pages, pageNeedsReview), (page) => ({
+  holds: sorted(EffectArray.map(awaitingApproval(report), (hold) => hold.id)),
+  held: sorted(EffectArray.map(report.held ?? [], (item) => item.card)),
+  earn: sorted(EffectArray.map(report.rewards?.review ?? [], (item) => item.card)),
+  bonus: sorted(EffectArray.map(report.bonus?.review ?? [], (item) => item.card)),
+  earn_check: EffectArray.map(EffectArray.sort(EffectArray.filter(pages, pageNeedsReview), byPage), (page) => ({
     card: page.card ?? null,
     url: page.url ?? null,
     error: page.error ?? null,
     attention: page.attention ?? null,
-    missing: page.missing
+    missing: sorted(page.missing)
   })),
-  discontinued: report.discontinued ?? [],
-  brands: EffectArray.map(report.brandErrors ?? [], (item) => item.brand)
+  discontinued: sorted(report.discontinued ?? []),
+  brands: sorted(EffectArray.map(report.brandErrors ?? [], (item) => item.brand))
 })

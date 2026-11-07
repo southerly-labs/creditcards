@@ -57,6 +57,31 @@ describe("review issue", () => {
 })
 
 describe("review webhook", () => {
+  it("lists items in a fixed order so an unchanged queue keeps its fingerprint", () => {
+    const report = {
+      ...empty,
+      rewards: { review: [{ card: "b/two" }, { card: "a/one" }] },
+      brandErrors: [{ brand: "Zed" }, { brand: "Alpha" }]
+    }
+
+    const pages = [
+      { card: "x/b", url: "https://b", missing: ["q2", "q1"] },
+      { card: "x/a", url: "https://a", missing: ["q"] }
+    ]
+
+    const reversed = {
+      ...report,
+      rewards: { review: EffectArray.reverse(report.rewards.review) },
+      brandErrors: EffectArray.reverse(report.brandErrors)
+    }
+
+    assert.deepStrictEqual(
+      webhookItems({ report, pages }),
+      webhookItems({ report: reversed, pages: EffectArray.reverse(pages) })
+    )
+    assert.deepStrictEqual(webhookItems({ report, pages }).earn, ["a/one", "b/two"])
+  })
+
   it("excludes first-day missing cards and standing blocks but retains discontinuations", () => {
     const items = webhookItems({
       report: { ...empty, discontinued: ["x/gone"] },
