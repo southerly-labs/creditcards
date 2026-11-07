@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@effect/platform-bun": "4.1.0",
+    "@typeonce/effect-machine": "0.46.0",
     "effect": "4.1.0",
     "smol-toml": "1.9.1",
     "unpdf": "1.9.1"
