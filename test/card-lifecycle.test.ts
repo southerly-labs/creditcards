@@ -1,7 +1,7 @@
 import { assert, describe, it } from "@effect/vitest"
 import { Machine } from "@typeonce/effect-machine"
 import { MachineTest } from "@typeonce/effect-machine/testing"
-import { Array as EffectArray, Effect } from "effect"
+import { Array as EffectArray, Effect, Schema } from "effect"
 import {
   CardLifecycleEvent,
   CardLifecycleMachine,
@@ -17,6 +17,7 @@ import {
   toSnapshot
 } from "../src/machine/cardLifecycle.ts"
 import { encodedSnapshot, regionNodes } from "../src/machine/snapshot.ts"
+import { Card } from "../src/model/schema.ts"
 
 const { Seen, NotSeen, Close, Reopen } = CardLifecycleEvent.cases
 const { Listed, Missing, Delisted } = ListingState.cases
@@ -145,4 +146,35 @@ describe("card lifecycle persistence", () => {
       }
     })
   )
+})
+
+describe("card schema with a lifecycle", () => {
+  const card = {
+    name: "Test",
+    type: "personal",
+    status: "closed",
+    first_seen: "2026-10-31",
+    missing_since: "2026-11-07",
+    fees: {},
+    rates: {},
+    limits: {},
+    perks: {}
+  }
+
+  it("accepts a lifecycle that agrees with the flat status fields", () => {
+    assert.isTrue(Schema.is(Card)(card))
+    assert.isTrue(
+      Schema.is(Card)({ ...card, lifecycle: lifecycleFromFlat({ status: "closed", missing_since: "2026-11-07" }) })
+    )
+  })
+
+  it("rejects a lifecycle that disagrees with them", () => {
+    assert.isFalse(Schema.is(Card)({ ...card, lifecycle: initialLifecycle }))
+    assert.isFalse(
+      Schema.is(Card)({
+        ...card,
+        lifecycle: { listing: Missing.make({ since: "2026-11-06" }), sales: Closed.make({}) }
+      })
+    )
+  })
 })

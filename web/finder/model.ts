@@ -6,7 +6,7 @@ import type { Offer, OfferComponent } from "../../src/offers/schema.ts"
 import { Array as EffectArray, Record as EffectRecord, Option, Order, String as EffectString, pipe } from "effect"
 import { dual } from "effect/Function"
 
-export type PublicCard = Omit<Card, "locked">
+export type PublicCard = Omit<Card, "locked" | "lifecycle">
 
 export type PublicProgram = Omit<Program, "aliases" | "priority"> & { readonly id: string }
 

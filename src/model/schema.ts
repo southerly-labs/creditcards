@@ -3,6 +3,7 @@ import { Schema, Array as EffectArray } from "effect"
 import { EarnRule } from "./earn.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "./domain.ts"
 import { Offer, SignupReview, uniqueOfferIds } from "../offers/schema"
+import { CardLifecycle, flatFromLifecycle } from "../machine/cardLifecycle.ts"
 
 const between = (minimum: number, maximum: number) =>
   Schema.Finite.pipe(Schema.check(Schema.isBetween({ minimum, maximum })))
@@ -103,6 +104,7 @@ const CardFields = Schema.Struct({
   closed: Schema.optionalKey(CalendarDate),
   missing_since: Schema.optionalKey(CalendarDate),
   discontinued: Schema.optionalKey(CalendarDate),
+  lifecycle: Schema.optionalKey(CardLifecycle),
   description: Schema.optionalKey(Schema.String),
   url: Schema.optionalKey(WebUrl),
   image: Schema.optionalKey(WebUrl),
@@ -174,6 +176,19 @@ export const earnTierOrder = Schema.makeFilter(
     "Earn tier ceilings must increase within each category and period; uncapped tiers must be last"
 )
 
+type CardStatusFields = Pick<typeof CardFields.Type, "status" | "closed" | "missing_since" | "discontinued">
+
+const statusAgrees = (card: CardStatusFields, lifecycle: CardLifecycle): boolean => {
+  const flat = flatFromLifecycle(lifecycle)
+
+  return (
+    flat.status === card.status &&
+    flat.closed === card.closed &&
+    flat.missing_since === card.missing_since &&
+    flat.discontinued === card.discontinued
+  )
+}
+
 export const Card = CardFields.check(
   Schema.makeFilter(
     (card) =>
@@ -188,6 +203,12 @@ export const Card = CardFields.check(
   Schema.makeFilter(
     (card) =>
       card.missing_since === undefined || card.status !== "discontinued" || "A discontinued card cannot be missing"
+  ),
+  Schema.makeFilter(
+    (card) =>
+      card.lifecycle === undefined ||
+      statusAgrees(card, card.lifecycle) ||
+      "lifecycle disagrees with status, closed, missing_since or discontinued"
   ),
   creditRange,
   earnTierOrder,

@@ -83,7 +83,7 @@ const toApiImpl = (dataset: Dataset, generatedAt?: string): Api => {
     }
   }
 
-  for (const [key, { locked: _l, ...stored }] of dataset.cards) {
+  for (const [key, { locked: _l, lifecycle: _lifecycle, ...stored }] of dataset.cards) {
     const { issuer, card: slug } = splitCardKey(key)
     const observedAt = dataset.observations?.get(key)
     const changedOn = dataset.changes?.get(key)
