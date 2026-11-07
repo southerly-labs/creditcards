@@ -16,8 +16,8 @@ for attempt in 1 2 3; do
   for report in sync-report earn-check; do
     if [ ! -f ".cache/$report.json" ]; then echo null > ".cache/$report.json"; fi
   done
-  jq -sc --arg date "$(date -u +%F)" --arg run "$RUN_URL" --argjson outcomes "$OUTCOMES" \
-    -f tools/sync/metrics.jq .cache/sync-report.json .cache/earn-check.json .cache/previous-metrics.json > .cache/autonomy.json
+  bun run cli review tasks --date "$(date -u +%F)" --run "$RUN_URL" --outcomes "$OUTCOMES" --out .cache/review-tasks.json
+  jq -c .metrics .cache/review-tasks.json > .cache/autonomy.json
   cat .cache/autonomy.json >> .cache/autonomy.jsonl
   blob=$(git hash-object -w .cache/autonomy.jsonl)
   index=$(mktemp)

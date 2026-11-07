@@ -91,7 +91,8 @@ jobs:
         run: |
           count=1
           if [ -f .cache/earn-check.json ] && [ "$EARN_OUTCOME" = "success" ]; then
-            count=$(jq -s -f tools/sync/review-open.jq .cache/sync-report.json .cache/earn-check.json)
+            bun run cli review tasks --out .cache/review-tasks.json
+            count=$(jq .open .cache/review-tasks.json)
             printf '\n' >> .cache/rewards-review.md
             cat .cache/earn-check.md >> .cache/rewards-review.md
           else
@@ -137,7 +138,8 @@ jobs:
           if [ "$STATUS" != "success" ] || [ "$EARN_OUTCOME" != "success" ] || [ ! -f .cache/sync-report.json ]; then
             items=$(jq -nc --arg run "$GITHUB_RUN_ID" '{failed: [$run]}')
           else
-            items=$(jq -sc -f tools/sync/webhook.jq .cache/sync-report.json .cache/earn-check.json)
+            bun run cli review tasks --out .cache/review-tasks.json
+            items=$(jq -c .webhook .cache/review-tasks.json)
           fi
           if [ "$(jq '[.[] | length] | add' <<< "$items")" -eq 0 ]; then
             echo "Nothing needs a reviewer"

@@ -3,7 +3,7 @@ import { provenanceCommand } from "./provenance/commands.ts"
 import { heldCommand } from "./sync/heldCommand.ts"
 import { encodeJson, encodePrettyJson, jsonEqual } from "./util/json.ts"
 import { BunRuntime, BunServices } from "@effect/platform-bun"
-import { Console, Effect, FileSystem, Layer, Option, Path } from "effect"
+import { Console, Effect, FileSystem, Layer, Option, Path, Schema } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import { FetchHttpClient } from "effect/http"
 import { toApi, validate } from "./build/build.ts"
@@ -26,6 +26,7 @@ import {
   stampBonus
 } from "./rewards/review.ts"
 import { applyComment } from "./review/apply.ts"
+import { metricsRecord, PreviousMetrics, reviewOpenCount, TaskPage, TaskReport, webhookItems } from "./review/tasks.ts"
 import { ParsedComment } from "./review/commands.ts"
 import { Snapshots } from "./history/Snapshots.ts"
 import type { EarnCheck } from "./model/schema.ts"
@@ -265,9 +266,56 @@ const reviewApply = Command.make(
   })
 ).pipe(Command.withDescription("Apply /approve, /reject, /earn-none and /bonus-none commands from an issue comment"))
 
+const readJsonFile = Effect.fn("readJsonFile")(function* <A, I>(schema: Schema.Codec<A, I>, file: string) {
+  const fs = yield* FileSystem.FileSystem
+  const text = (yield* fs.exists(file)) ? yield* fs.readFileString(file) : "null"
+
+  return yield* Schema.decodeEffect(Schema.fromJsonString(schema))(text)
+})
+
+const reviewTasks = Command.make(
+  "tasks",
+  {
+    report: Flag.String("report").pipe(Flag.withDefault(".cache/sync-report.json")),
+    pages: Flag.String("pages").pipe(Flag.withDefault(".cache/earn-check.json")),
+    previous: Flag.String("previous").pipe(Flag.withDefault(".cache/previous-metrics.json")),
+    outcomes: Flag.String("outcomes").pipe(Flag.withDefault("{}")),
+    run: Flag.String("run").pipe(Flag.withDefault("")),
+    date: Flag.String("date").pipe(Flag.optional),
+    out: Flag.String("out").pipe(Flag.withDefault(".cache/review-tasks.json"))
+  },
+  Effect.fn(function* ({ report, pages, previous, outcomes, run, date, out }) {
+    const syncReport = yield* readJsonFile(Schema.NullOr(TaskReport), report)
+    const pageResults = yield* readJsonFile(Schema.NullOr(Schema.Array(TaskPage)), pages)
+    const previousMetrics = (yield* readJsonFile(Schema.NullOr(PreviousMetrics), previous)) ?? {}
+
+    const stepOutcomes = yield* Schema.decodeEffect(Schema.fromJsonString(Schema.Record(Schema.String, Schema.String)))(
+      outcomes
+    )
+
+    const today = Option.getOrElse(date, () => DateTime.formatIsoDateUtc(DateTime.nowUnsafe()))
+    const queue = { report: syncReport ?? {}, pages: pageResults ?? [] }
+
+    const metrics = yield* metricsRecord({
+      report: syncReport,
+      pages: pageResults,
+      previous: previousMetrics,
+      outcomes: stepOutcomes,
+      run,
+      date: today
+    })
+
+    yield* writeFile(out, yield* encodeJson({ open: reviewOpenCount(queue), webhook: webhookItems(queue), metrics }))
+  })
+).pipe(
+  Command.withDescription(
+    "Work out the open human review tasks from a sync report and earn page check (for the issues, webhook and metrics)"
+  )
+)
+
 const review = Command.make("review").pipe(
   Command.withDescription("Apply review decisions written as issue comment commands"),
-  Command.withSubcommands([reviewApply])
+  Command.withSubcommands([reviewApply, reviewTasks])
 )
 
 const MainLayer = Layer.mergeAll(
