@@ -68,7 +68,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          pending=$(jq '(.held | length) + ([.holds[] | select(has("decision") | not)] | length)' .cache/sync-report.json)
+          pending=$(jq '(.held | length) + ([.holds[] | select(.state._tag == "AwaitingApproval" or .state._tag == "AwaitingConfirmation")] | length)' .cache/sync-report.json)
           number=$(gh issue list --label sync-held --state open --json number --jq '.[0].number')
           if [ "$pending" -eq 0 ]; then
             if [ -n "$number" ]; then

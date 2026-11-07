@@ -214,8 +214,8 @@ describe("syncCdr", () => {
         const jumped = { ...seeded, products: [product("p1", "450.00"), ...seeded.products.slice(1)] }
         const held = required((yield* syncOn(2, jumped)).holds[0])
 
-        assert.strictEqual(held.kind, "confirm")
-        assert.strictEqual(held.evidence, "CDR snapshot 2026-11-01 gives 99; today's gives 450")
+        assert.strictEqual(held.state._tag, "AwaitingConfirmation")
+        assert.strictEqual(held.cdr_evidence, "CDR snapshot 2026-11-01 gives 99; today's gives 450")
         assert.strictEqual((yield* storedCard("example-bank/card-p1")).fees.annual, 99)
 
         const report = yield* syncOn(3, jumped)
@@ -233,8 +233,8 @@ describe("syncCdr", () => {
         const typo = { ...seeded, products: [product("p1", "3000.00"), ...seeded.products.slice(1)] }
         const held = required((yield* syncOn(2, typo)).holds[0])
 
-        assert.strictEqual(held.kind, "approve")
-        assert.isUndefined(held.evidence)
+        assert.strictEqual(held.state._tag, "AwaitingApproval")
+        assert.isUndefined(held.cdr_evidence)
       })
     )
 
@@ -245,8 +245,8 @@ describe("syncCdr", () => {
         yield* (yield* Store).writeCard("example-bank", "card-p1", { ...card, fees: { ...card.fees, annual: 450 } })
         const held = required((yield* syncOn(2)).holds[0])
 
-        assert.strictEqual(held.kind, "approve")
-        assert.isUndefined(held.evidence)
+        assert.strictEqual(held.state._tag, "AwaitingApproval")
+        assert.isUndefined(held.cdr_evidence)
       })
     )
 

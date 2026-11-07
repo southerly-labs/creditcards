@@ -3,6 +3,7 @@ import { Effect, Array as EffectArray } from "effect"
 import { Digest } from "effect/crypto"
 import { Card } from "../src/model/schema.ts"
 import type { Hold } from "../src/model/holds.ts"
+import { HoldState } from "../src/machine/hold.ts"
 import {
   type HoldCandidate,
   holdCandidates,
@@ -93,11 +94,11 @@ describe("resolving holds", () => {
           id: yield* holdId("bank/card", "fees.annual", 1000),
           card: "bank/card",
           change: "fees.annual",
-          kind: "approve",
           reason: "fees.annual 100 → 1000",
           current: "100",
           proposed: "1000",
-          since: "2026-11-02"
+          since: "2026-11-02",
+          state: HoldState.cases.AwaitingApproval.make({})
         })
       })
     )
@@ -106,9 +107,7 @@ describe("resolving holds", () => {
       Effect.gen(function* () {
         const approved: Hold = {
           ...(yield* recorded),
-          decision: "approve",
-          decided_on: "2026-11-02",
-          evidence: "CDR says $1,000"
+          state: HoldState.cases.Approved.make({ on: "2026-11-02", evidence: "CDR says $1,000" })
         }
 
         const result = yield* resolve(approve, [approved], "2026-11-03")
@@ -122,9 +121,7 @@ describe("resolving holds", () => {
       Effect.gen(function* () {
         const rejected: Hold = {
           ...(yield* recorded),
-          decision: "reject",
-          decided_on: "2026-11-02",
-          evidence: "parser misread"
+          state: HoldState.cases.Rejected.make({ on: "2026-11-02", evidence: "parser misread" })
         }
 
         const other = { ...approve, proposed: 900 }
@@ -132,7 +129,14 @@ describe("resolving holds", () => {
 
         assert.deepStrictEqual((yield* resolve(approve, [rejected], "2026-11-03")).holds, [rejected])
         assert.deepStrictEqual(next.revert, [other])
-        assert.isUndefined(next.holds[0]?.decision)
+        assert.deepStrictEqual(next.holds, [
+          {
+            ...(yield* recorded),
+            id: yield* holdId("bank/card", "fees.annual", 900),
+            proposed: "900",
+            since: "2026-11-03"
+          }
+        ])
       })
     )
 
@@ -142,11 +146,32 @@ describe("resolving holds", () => {
         const held = yield* resolve(confirmed, [yield* recorded], "2026-11-02")
 
         assert.deepStrictEqual(held.revert, [confirmed])
-        assert.strictEqual(held.holds[0]?.kind, "confirm")
+        assert.deepStrictEqual(held.holds[0]?.state, HoldState.cases.AwaitingConfirmation.make({}))
         assert.strictEqual(held.holds[0]?.reason, "confirmed by CDR")
-        assert.strictEqual(held.holds[0]?.evidence, "snapshot")
+        assert.strictEqual(held.holds[0]?.cdr_evidence, "snapshot")
         assert.strictEqual(held.holds[0]?.since, "2026-11-02")
-        assert.deepStrictEqual((yield* resolve(approve, held.holds, "2026-11-03")).holds[0]?.kind, "approve")
+        assert.deepStrictEqual(
+          (yield* resolve(approve, held.holds, "2026-11-03")).holds[0]?.state,
+          HoldState.cases.AwaitingApproval.make({})
+        )
+      })
+    )
+
+    digest.effect("a hold CDR no longer proposes is withdrawn, whatever its state", () =>
+      Effect.gen(function* () {
+        const rejected: Hold = {
+          ...(yield* recorded),
+          state: HoldState.cases.Rejected.make({ on: "2026-11-02", evidence: "parser misread" })
+        }
+
+        const quiet = yield* resolveHolds({
+          card: "bank/card",
+          candidates: [],
+          entries: [yield* recorded, rejected],
+          date: "2026-11-03"
+        })
+
+        assert.deepStrictEqual(quiet, { apply: [], revert: [], holds: [] })
       })
     )
 

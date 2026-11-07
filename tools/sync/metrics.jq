@@ -1,7 +1,7 @@
 .[0] as $sync | .[1] as $pages | (.[2] // {}) as $previous |
 ($sync.date // $date) as $today |
 ([
-  ($sync.holds[]? | select(.kind == "approve" and (has("decision") | not)) | {id: ("hold:" + .id), reason: "held_change", card, since: (.since // $today)}),
+  ($sync.holds[]? | select(.state._tag == "AwaitingApproval") | {id: ("hold:" + .id), reason: "held_change", card, since: (.since // $today)}),
   ($sync.held[]? | {id: ("held:" + .card), reason: "held_card", card}),
   ($sync.rewards.review[]? | {id: ("earn:" + .card), reason: "earn_review", card}),
   ($sync.bonus.review[]? | {id: ("bonus:" + .card), reason: "bonus_review", card}),

@@ -1,6 +1,6 @@
 .[0] as $sync | .[1] as $pages |
 $sync | {
-  holds: [.holds[] | select(.kind == "approve" and (has("decision") | not)) | .id],
+  holds: [.holds[] | select(.state._tag == "AwaitingApproval") | .id],
   held: [.held[].card],
   earn: [.rewards.review[].card],
   bonus: [.bonus.review[].card],

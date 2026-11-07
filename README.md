@@ -112,7 +112,7 @@ Updates auto-merge. Changes that look wrong are held back and listed in a `sync-
 
 Before asking a reviewer, the sync rebuilds the card from the issuer's previous CDR response in `history/` with the current code. If that gives the stored value and today's response gives the new one, the issuer really changed its data, so the hold becomes a confirm hold with that comparison as its evidence and applies if a sync on a later day still proposes it. It stays for a reviewer when the previous response already gives the new value (a parser change), when there is no earlier response, when a field disappears, or when the new value is outside a plausible range (annual fee above $2,500, a rate above 40%, a foreign transaction fee above 5%, a base earn rate above 10, a signup bonus above 500,000 points).
 
-For the field and offer rules, only the suspicious field or offer is held: the rest of the card still updates. Each held change is recorded in `data/sync-holds.toml` with a stable id, the current and proposed values, the date it was first held and the card's `history/` folder, so the issuer's raw CDR responses can be compared. A reviewer decides each one:
+For the field and offer rules, only the suspicious field or offer is held: the rest of the card still updates. Each held change is recorded in `data/sync-holds.toml` with a stable id, the current and proposed values, the date it was first held and the card's `history/` folder, so the issuer's raw CDR responses can be compared. Its `state` is where the hold machine (`src/machine/hold.ts`) has it: `AwaitingApproval` or `AwaitingConfirmation` while pending (following the kind CDR history gives the change that day), or `Approved` or `Rejected` with the decision's date and evidence. An approved or confirmed change is applied and its entry removed; an entry is also removed once CDR stops proposing that value. A reviewer decides each one:
 
 ```sh
 bun run cli held list
@@ -129,7 +129,7 @@ You can also decide from GitHub without a checkout: comment on the `sync-held` o
 /bonus-none <issuer/card>...     same as rewards bonus-stamp --none
 ```
 
-After each sync, if anything needs a reviewer (undecided `approve` holds, whole cards held, earn rates or bonuses to review, flagged earn pages, cards not seen or discontinued, brand errors) or the sync failed, the workflow posts the list to the review agent's webhook (repo secret `T3_REVIEW_WEBHOOK`). The post carries a fingerprint of that list and the webhook ignores a fingerprint it has already seen, so the agent runs only when the queue changes.
+After each sync, if anything needs a reviewer (holds awaiting approval, whole cards held, earn rates or bonuses to review, flagged earn pages, cards not seen or discontinued, brand errors) or the sync failed, the workflow posts the list to the review agent's webhook (repo secret `T3_REVIEW_WEBHOOK`). The post carries a fingerprint of that list and the webhook ignores a fingerprint it has already seen, so the agent runs only when the queue changes.
 
 The next sync applies an approved change and drops its entry. A rejected change keeps the current value for as long as CDR proposes that exact value; a different proposal is held afresh. Invalid records and vanished issuers still hold the whole card.
 

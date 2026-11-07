@@ -2,13 +2,22 @@ import { sha256Prefix } from "../util/hash.ts"
 import type { Digest } from "effect/crypto"
 import { Schema, String as EffectString, Array as EffectArray, pipe, Option, Effect } from "effect"
 import type { Hold } from "../model/holds.ts"
+import {
+  HoldEvent,
+  type HoldKind,
+  HoldOutcome,
+  type HoldState,
+  isPending,
+  pendingState,
+  stepHold
+} from "../machine/hold.ts"
 import { Card, EarnRate } from "../model/schema.ts"
 import { Offer } from "../offers/schema.ts"
 import { encodeJson } from "../util/json.ts"
 import { diffCard, getPath, heldFields, setPath } from "./merge.ts"
 import { dual } from "effect/Function"
 
-export type HoldKind = "approve" | "confirm"
+export type { HoldKind }
 
 export interface HoldCandidate {
   readonly change: string
@@ -195,16 +204,43 @@ const asJson = Effect.fn("asJson")(function* (value: unknown) {
   return value === undefined ? undefined : yield* encodeJson(value)
 })
 
-const refreshKind = (entry: Hold, candidate: HoldCandidate): Hold => {
-  if (entry.kind === candidate.kind) return entry
-  const { evidence: _evidence, ...rest } = entry
+const newHold = Effect.fn("newHold")(function* (input: {
+  readonly id: string
+  readonly card: string
+  readonly candidate: HoldCandidate
+  readonly date: string
+  readonly history?: string | undefined
+}) {
+  const { id, card, candidate, date, history } = input
+  const current = yield* asJson(candidate.current)
+  const proposed = yield* asJson(candidate.proposed)
 
   return {
-    ...rest,
-    kind: candidate.kind,
+    id,
+    card,
+    change: candidate.change,
     reason: candidate.reason,
-    ...(candidate.evidence === undefined ? {} : { evidence: candidate.evidence })
-  }
+    ...(current === undefined ? {} : { current }),
+    ...(proposed === undefined ? {} : { proposed }),
+    since: date,
+    ...(history === undefined ? {} : { history }),
+    ...(candidate.evidence === undefined ? {} : { cdr_evidence: candidate.evidence }),
+    state: pendingState(candidate.kind)
+  } satisfies Hold
+})
+
+const heldAs = (entry: Hold, candidate: HoldCandidate, state: HoldState): Hold => {
+  if (entry.state._tag === state._tag) return entry
+  const { cdr_evidence: _evidence, ...rest } = entry
+
+  return isPending(state)
+    ? {
+        ...rest,
+        reason: candidate.reason,
+        ...(candidate.evidence === undefined ? {} : { cdr_evidence: candidate.evidence }),
+        state
+      }
+    : { ...entry, state }
 }
 
 export const resolveHolds = Effect.fn("resolveHolds")(function* (input: {
@@ -217,37 +253,35 @@ export const resolveHolds = Effect.fn("resolveHolds")(function* (input: {
   const apply: Array<HoldCandidate> = []
   const revert: Array<HoldCandidate> = []
   const holds: Array<Hold> = []
+  const proposedIds = new Set<string>()
 
   for (const candidate of input.candidates) {
     const id = yield* holdId(input.card, candidate.change, candidate.proposed)
+    proposedIds.add(id)
     const entry = Option.getOrUndefined(EffectArray.findFirst(input.entries, (hold) => hold.id === id))
-    const confirmed = candidate.kind === "confirm" && entry !== undefined && entry.since < input.date
 
-    if (entry?.decision === "approve" || (confirmed && entry.decision === undefined)) {
-      apply.push(candidate)
+    if (entry === undefined) {
+      revert.push(candidate)
+      holds.push(yield* newHold({ id, card: input.card, candidate, date: input.date, history: input.history }))
       continue
     }
 
-    revert.push(candidate)
-    const current = yield* asJson(candidate.current)
-    const proposed = yield* asJson(candidate.proposed)
-
-    holds.push(
-      entry !== undefined
-        ? refreshKind(entry, candidate)
-        : {
-            id,
-            card: input.card,
-            change: candidate.change,
-            kind: candidate.kind,
-            reason: candidate.reason,
-            ...(current === undefined ? {} : { current }),
-            ...(proposed === undefined ? {} : { proposed }),
-            since: input.date,
-            ...(input.history === undefined ? {} : { history: input.history }),
-            ...(candidate.evidence === undefined ? {} : { evidence: candidate.evidence })
-          }
+    const outcome = yield* stepHold(
+      entry.state,
+      HoldEvent.cases.Proposed.make({ kind: candidate.kind, today: input.date, since: entry.since })
     )
+
+    if (HoldOutcome.guards.Held(outcome)) {
+      revert.push(candidate)
+      holds.push(heldAs(entry, candidate, outcome.state))
+    } else apply.push(candidate)
+  }
+
+  for (const entry of input.entries) {
+    if (proposedIds.has(entry.id)) continue
+    const outcome = yield* stepHold(entry.state, HoldEvent.cases.Withdrawn.make({}))
+
+    if (HoldOutcome.guards.Held(outcome)) holds.push({ ...entry, state: outcome.state })
   }
 
   return { apply, revert, holds } satisfies Resolution

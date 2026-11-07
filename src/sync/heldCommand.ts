@@ -1,6 +1,7 @@
 import { Console, DateTime, Effect, Array as EffectArray, Option } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import type { Hold } from "../model/holds.ts"
+import { HoldEvent, HoldOutcome, stepHold } from "../machine/hold.ts"
 import { Store, StoreError } from "../store/Store.ts"
 
 export const decideHold = Effect.fn("decideHold")(function* (
@@ -13,8 +14,17 @@ export const decideHold = Effect.fn("decideHold")(function* (
   const hold = Option.getOrUndefined(EffectArray.findFirst(holds, (entry) => entry.id === id))
 
   if (hold === undefined) return yield* StoreError.make({ file: id, message: "Unknown hold" })
-  const decided_on = DateTime.formatIsoDateUtc(yield* DateTime.now)
-  const decided: Hold = { ...hold, decision, decided_on, evidence }
+  const on = DateTime.formatIsoDateUtc(yield* DateTime.now)
+
+  const outcome = yield* stepHold(
+    hold.state,
+    decision === "approve"
+      ? HoldEvent.cases.Approve.make({ on, evidence })
+      : HoldEvent.cases.Reject.make({ on, evidence })
+  )
+
+  if (!HoldOutcome.guards.Held(outcome)) return yield* StoreError.make({ file: id, message: "Hold is no longer open" })
+  const decided: Hold = { ...hold, state: outcome.state }
 
   yield* store.writeHolds(EffectArray.map(holds, (entry) => (entry.id === id ? decided : entry)))
 
@@ -47,7 +57,7 @@ const list = Command.make(
       yield* Console.log(
         EffectArray.join(
           [
-            `${hold.id} ${hold.kind} ${hold.card} ${hold.change}${hold.decision === undefined ? "" : ` [${hold.decision}]`}`,
+            `${hold.id} ${hold.state._tag} ${hold.card} ${hold.change}`,
             `  reason: ${hold.reason} (since ${hold.since})`,
             `  current: ${hold.current ?? "—"}`,
             `  proposed: ${hold.proposed ?? "—"}`,

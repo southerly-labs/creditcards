@@ -18,6 +18,7 @@ import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } fro
 import { applyOffers, signupState } from "../offers/build.ts"
 import { holdCandidates, holdId, resolveHolds, revertChange, withCdrEvidence } from "./holds.ts"
 import type { Hold } from "../model/holds.ts"
+import { HoldState, isPending } from "../machine/hold.ts"
 import { isResolvableFromCdr } from "../rewards/bonus.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
@@ -363,11 +364,13 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
       if (existing !== undefined) evaluated.add(key)
 
-      if (existing !== undefined && candidates.length > 0) {
+      const entries = EffectArray.filter(priorHolds, (hold) => hold.card === key)
+
+      if (existing !== undefined && (candidates.length > 0 || entries.length > 0)) {
         const resolution = yield* resolveHolds({
           card: key,
           candidates,
-          entries: EffectArray.filter(priorHolds, (hold) => hold.card === key),
+          entries,
           date,
           history: existing.cdr && `history/cdr/${productDir(issuerSlug, existing.cdr.product_id)}/`
         })
@@ -505,7 +508,7 @@ const formatChange = (c: FieldChange) =>
 export const summariseReport = Effect.fn("summariseReport")(function* (r: SyncReport) {
   const lines = [
     `CDR sync ${r.date}: ${r.cardsSeen} cards seen, ${r.added.length} added, ${r.updated.length} updated, ` +
-      `${r.discontinued.length} discontinued, ${r.held.length + EffectArray.filter(r.holds, (hold) => hold.decision === undefined).length} held`,
+      `${r.discontinued.length} discontinued, ${r.held.length + EffectArray.filter(r.holds, (hold) => isPending(hold.state)).length} held`,
     ""
   ]
 
@@ -608,9 +611,8 @@ const holdLine = (hold: Hold) =>
   `- \`${hold.id}\` ${hold.card} ${hold.change}: ${hold.reason} (since ${hold.since}${hold.history === undefined ? "" : `, ${hold.history}`})`
 
 export const summariseHolds = (r: SyncReport): ReadonlyArray<string> => {
-  const pending = EffectArray.filter(r.holds, (hold) => hold.decision === undefined)
-  const review = EffectArray.filter(pending, (hold) => hold.kind === "approve")
-  const confirm = EffectArray.filter(pending, (hold) => hold.kind === "confirm")
+  const review = EffectArray.filter(r.holds, (hold) => HoldState.guards.AwaitingApproval(hold.state))
+  const confirm = EffectArray.filter(r.holds, (hold) => HoldState.guards.AwaitingConfirmation(hold.state))
   const lines: Array<string> = []
 
   if (review.length > 0) {

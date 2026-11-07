@@ -21,6 +21,14 @@ test("review issue stays open for unreadable pages, including standing blocks", 
   expect(reviewCount('[{"missing":[]}]')).toBe(0)
 })
 
+test("only holds awaiting approval keep the review issue open", () => {
+  const hold = (tag: string) => ({ id: tag, card: "x/card", since: "2026-11-01", state: { _tag: tag } })
+  expect(reviewCount("[]", { ...empty, holds: [hold("AwaitingApproval")] })).toBe(1)
+  expect(
+    reviewCount("[]", { ...empty, holds: [hold("AwaitingConfirmation"), hold("Approved"), hold("Rejected")] })
+  ).toBe(0)
+})
+
 test("other unresolved tasks also prevent closure", () => {
   expect(reviewCount("[]", { ...empty, brandErrors: ["outage"] })).toBe(1)
 })
