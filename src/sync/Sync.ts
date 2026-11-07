@@ -10,7 +10,7 @@ import {
   Record as EffectRecord,
   String as EffectString
 } from "effect"
-import { CdrClient, type CdrError, REQUEST_VARIANTS, type VersionedProduct } from "../cdr/CdrClient.ts"
+import { CdrClient, CdrError, REQUEST_VARIANTS, type VersionedProduct } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise, type NormaliseResult } from "../cdr/normalise.ts"
 import { type CdrSnapshot, productDir, Snapshots } from "../history/Snapshots.ts"
 import { ProductDetail, type ProductSummary } from "../cdr/schema.ts"
@@ -232,13 +232,19 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     const products = yield* Effect.forEach(
       listed.success,
       (summary) =>
-        cdr
-          .getProduct(brand.publicBaseUri, summary.productId)
-          .pipe(
-            Effect.catchTag("CdrError", (e) =>
-              Effect.sync(() => (productErrors.push(`${summary.name}: ${e.message}`), undefined))
-            )
+        cdr.getProduct(brand.publicBaseUri, summary.productId).pipe(
+          Effect.filterOrFail(
+            (product) => product.detail.productId === summary.productId,
+            (product) =>
+              CdrError.make({
+                url: summary.productId,
+                message: `detail has product id ${product.detail.productId}, listed as ${summary.productId}`
+              })
           ),
+          Effect.catchTag("CdrError", (e) =>
+            Effect.sync(() => (productErrors.push(`${summary.name}: ${e.message}`), undefined))
+          )
+        ),
       { concurrency: 4 }
     )
 

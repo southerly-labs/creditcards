@@ -29,6 +29,7 @@ const product = (productId: string, annual: string): ProductDetail => ({
 interface WorldState {
   readonly products: ReadonlyArray<ProductDetail>
   readonly failing: ReadonlySet<string>
+  readonly renamed?: Readonly<Record<string, string>>
   readonly listFailures?: number
   readonly cardlessDown?: boolean
 }
@@ -44,6 +45,12 @@ class World extends Context.Service<World, Ref.Ref<WorldState>>()("creditcards/t
 
 const findProduct = (state: WorldState, productId: string) =>
   required(Option.getOrUndefined(EffectArray.findFirst(state.products, (p) => p.productId === productId)))
+
+const detailFor = (state: WorldState, productId: string): ProductDetail => {
+  const detail = findProduct(state, productId)
+
+  return { ...detail, productId: state.renamed?.[productId] ?? productId }
+}
 
 const FakeCdr = Layer.effect(
   CdrClient,
@@ -81,7 +88,7 @@ const FakeCdr = Layer.effect(
               : Effect.succeed({
                   version: 4,
                   raw: findProduct(state, productId),
-                  detail: findProduct(state, productId)
+                  detail: detailFor(state, productId)
                 })
           )
         )
@@ -174,6 +181,21 @@ describe("syncCdr", () => {
         const card = statusOf(yield* storedCard("example-bank/card-p1"))
         assert.strictEqual(card.status, "active")
         assert.isUndefined(card.missing_since)
+      })
+    )
+
+    it.effect("treats a detail response for a different product id as a failed request", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const renamed = { ...seeded, renamed: { p1: "P1" } }
+
+        for (const day of [2, 3]) {
+          const report = yield* syncOn(day, renamed)
+          assert.deepStrictEqual(report.added, [])
+          assert.deepStrictEqual(report.missing, [])
+        }
+
+        assert.strictEqual(statusOf(yield* storedCard("example-bank/card-p1")).status, "active")
       })
     )
 
