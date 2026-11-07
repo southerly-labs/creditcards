@@ -15,7 +15,8 @@ import { makeProgramIndex, normalise, type NormaliseResult } from "../cdr/normal
 import { type CdrSnapshot, productDir, Snapshots } from "../history/Snapshots.ts"
 import { ProductDetail, type ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
-import { applyOffers, signupState } from "../offers/build.ts"
+import { applyOffers, generatedOffers, signupState } from "../offers/build.ts"
+import { Offer } from "../offers/schema.ts"
 import { holdCandidates, holdId, resolveHolds, revertChange, withCdrEvidence } from "./holds.ts"
 import type { Hold } from "../model/holds.ts"
 import { HoldState, isPending } from "../machine/hold.ts"
@@ -85,6 +86,8 @@ interface BrandFetch {
 
 const decodeCard = Schema.decodeUnknownEffect(Card)
 
+const decodeOffers = Schema.decodeUnknownEffect(Schema.Array(Offer))
+
 type Proposal =
   | { readonly earnPlan: RewardsPlan; readonly bonusPlan: BonusPlan; readonly card: Card; readonly invalid?: never }
   | { readonly earnPlan: RewardsPlan; readonly bonusPlan: BonusPlan; readonly card?: never; readonly invalid: string }
@@ -130,25 +133,28 @@ const proposeCard = Effect.fn("proposeCard")(function* (
     delete merged["signup_state"]
   }
 
+  const invalid = (failure: { readonly message: string }): Proposal => ({
+    earnPlan,
+    bonusPlan,
+    invalid: EffectArray.join(EffectString.split(failure.message, "\n").slice(0, 3), " ")
+  })
+
   const decoded = yield* decodeCard(merged).pipe(Effect.result)
 
-  if (Result.isFailure(decoded)) {
-    return {
-      earnPlan,
-      bonusPlan,
-      invalid: EffectArray.join(EffectString.split(decoded.failure.message, "\n").slice(0, 3), " ")
-    } satisfies Proposal
-  }
+  if (Result.isFailure(decoded)) return invalid(decoded.failure)
+  const signup = { state: nextSignup, parsed: applyBonusPlan(currentSignup, bonusPlan) }
 
-  const card = withLifecycle(
-    yield* applyOffers(decoded.success, normalised.offers, {
-      state: nextSignup,
-      parsed: applyBonusPlan(currentSignup, bonusPlan)
-    }),
-    yield* seen(existing)
-  )
+  const offers = yield* decodeOffers(generatedOffers(decoded.success, normalised.offers, signup)).pipe(Effect.result)
 
-  return { earnPlan, bonusPlan, card } satisfies Proposal
+  if (Result.isFailure(offers)) return invalid(offers.failure)
+
+  const assembled = withLifecycle(yield* applyOffers(decoded.success, normalised.offers, signup), yield* seen(existing))
+
+  const card = yield* decodeCard(assembled).pipe(Effect.result)
+
+  if (Result.isFailure(card)) return invalid(card.failure)
+
+  return { earnPlan, bonusPlan, card: card.success } satisfies Proposal
 })
 
 const decodeProduct = Schema.decodeUnknownEffect(ProductDetail)

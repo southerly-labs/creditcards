@@ -5,6 +5,7 @@ import { reviewedNone } from "../machine/review.ts"
 import { OfferSlotEvent, offerIn, slotOf, stepOfferSlot } from "../machine/offerSlot.ts"
 import { signupStateOf } from "../rewards/state.ts"
 import { Array as EffectArray, Effect, Option, pipe } from "effect"
+import { dual } from "effect/Function"
 
 export interface CdrOfferInputs {
   readonly intro?: ReadonlyArray<IntroOffer> | undefined
@@ -117,9 +118,7 @@ export const signupState = (card: Card | undefined): SignupState => ({
   )
 })
 
-export const applyOffers = Effect.fn("applyOffers")(function* (card: Card, cdr: CdrOfferInputs, signup: SignupState) {
-  const { offers: stored, ...rest } = card
-
+const generatedOffersImpl = (card: Card, cdr: CdrOfferInputs, signup: SignupState): Array<Offer> => {
   const offer =
     card.rewards === undefined
       ? undefined
@@ -130,9 +129,20 @@ export const applyOffers = Effect.fn("applyOffers")(function* (card: Card, cdr: 
           noOffer: reviewedNone(signup.state)
         })
 
+  return [...cdrOffers(cdr), ...(offer === undefined ? [] : [offer])]
+}
+
+export const generatedOffers = dual<
+  (cdr: CdrOfferInputs, signup: SignupState) => (card: Card) => Array<Offer>,
+  (card: Card, cdr: CdrOfferInputs, signup: SignupState) => Array<Offer>
+>(3, generatedOffersImpl)
+
+export const applyOffers = Effect.fn("applyOffers")(function* (card: Card, cdr: CdrOfferInputs, signup: SignupState) {
+  const { offers: stored, ...rest } = card
+
   const offers = yield* combineOffers({
     existing: stored,
-    generated: [...cdrOffers(cdr), ...(offer === undefined ? [] : [offer])],
+    generated: generatedOffers(card, cdr, signup),
     locked: (card.locked ?? []).includes("offers")
   })
 

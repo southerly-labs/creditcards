@@ -250,6 +250,31 @@ describe("syncCdr", () => {
       })
     )
 
+    it.effect("holds a card whose generated offer is invalid and still syncs the rest", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const p1 = required(seeded.products[0])
+
+        const badIntro = {
+          ...p1,
+          lendingRates: [
+            ...(p1.lendingRates ?? []),
+            { lendingRateType: "INTRODUCTORY", rate: "0.99", additionalValue: "P6M" }
+          ]
+        }
+
+        const raised = EffectArray.map(seeded.products.slice(1), (p) => product(p.productId, "120.00"))
+        const report = yield* syncOn(2, { ...seeded, products: [badIntro, ...raised] })
+
+        assert.deepStrictEqual(
+          EffectArray.map(report.held, (h) => h.card),
+          ["example-bank/card-p1"]
+        )
+        assert.strictEqual((yield* storedCard("example-bank/card-p2")).fees.annual, 120)
+        assert.isUndefined((yield* storedCard("example-bank/card-p1")).offers)
+      })
+    )
+
     it.effect("aborts when far fewer cards come back than are active", () =>
       Effect.gen(function* () {
         yield* syncOn(1)
