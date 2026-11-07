@@ -4,8 +4,12 @@ on:
   issue_comment:
     types: [created]
 
+# One group per comment. GitHub keeps only one pending run per group and
+# cancels the older one, so a shared group (this used to share `sync`)
+# dropped comments without a reply. A push that races the sync is rebased
+# below, and a conflict fails the job, which replies on the issue.
 concurrency:
-  group: sync
+  group: review-${{ github.event.comment.id }}
   cancel-in-progress: false
 
 permissions:
