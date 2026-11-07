@@ -1,6 +1,6 @@
 import { assert, test } from "@effect/vitest"
 import { Schema } from "effect"
-import { Card } from "../src/model/schema.ts"
+import { Card, EarnRate } from "../src/model/schema.ts"
 import { initialLifecycle } from "../src/machine/cardLifecycle.ts"
 import { CalendarDate, Timestamp, WebUrl, orderedTiers, recognizesLock } from "../src/model/domain.ts"
 
@@ -58,6 +58,12 @@ test("tiers compare within categories and cap periods", () => {
   assert.isFalse(orderedTiers([{}, { cap_monthly: 100 }]))
   assert.isFalse(orderedTiers([{ cap_annual: 200 }, { cap_annual: 100 }]))
   assert.isTrue(orderedTiers([{ cap_monthly: 100 }, { cap_monthly: 200 }]))
+})
+
+test("the base earn tier has no category rather than an empty one", () => {
+  assert.isTrue(Schema.is(EarnRate)({ rate: 1 }))
+  assert.isTrue(Schema.is(EarnRate)({ rate: 2, category: "travel" }))
+  assert.isFalse(Schema.is(EarnRate)({ rate: 1, category: "" }))
 })
 
 test("dates and URLs must be real and complete", () => {

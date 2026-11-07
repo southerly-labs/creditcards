@@ -31,7 +31,7 @@ export type IntroOffer = typeof IntroOffer.Type
 
 export const EarnRate = Schema.Struct({
   rate: between(0, 20),
-  category: Schema.optionalKey(Schema.String),
+  category: Schema.optionalKey(Schema.NonEmptyString),
   cap_monthly: Schema.optionalKey(Aud),
   cap_annual: Schema.optionalKey(Aud),
   note: Schema.optionalKey(Schema.String)
