@@ -4,6 +4,7 @@ import { HttpClient } from "effect/http"
 import { extractText, getDocumentProxy } from "unpdf"
 import type { Card, EarnCheck } from "../model/schema.ts"
 import { isDelisted } from "../model/lifecycle.ts"
+import { knownBlockedOf, PageEvent, pageAttention, pageStateOf, stepPage } from "../machine/blockedPage.ts"
 import { dual } from "effect/Function"
 
 export class PageError extends Schema.TaggedError<PageError, { readonly brand: unique symbol }>()("PageError", {
@@ -142,29 +143,32 @@ export interface CheckResult {
   readonly attention?: string
 }
 
-export const classifyCheck = (input: {
+const pageEvent = (result: Pick<CheckResult, "error">, date: string): PageEvent =>
+  result.error === undefined || result.error === ""
+    ? PageEvent.cases.Read.make({})
+    : PageEvent.cases.Failed.make({ error: result.error, date })
+
+export const nextKnownBlocked = Effect.fn("nextKnownBlocked")(function* (input: {
+  readonly result: Pick<CheckResult, "error">
+  readonly blocked: EarnCheck["known_blocked"]
+  readonly date: string
+}) {
+  return knownBlockedOf(yield* stepPage(pageStateOf(input.blocked), pageEvent(input.result, input.date)))
+})
+
+export const classifyCheck = Effect.fn("classifyCheck")(function* (input: {
   readonly result: CheckResult
   readonly blocked: EarnCheck["known_blocked"]
   readonly date: string
-}): CheckResult => {
+}) {
   const { result, blocked, date } = input
 
   if (blocked === undefined) return result
+  const previous = pageStateOf(blocked)
+  const attention = pageAttention(previous, yield* stepPage(previous, pageEvent(result, date)), date)
 
-  const age =
-    DateTime.toEpochMillis(DateTime.makeUnsafe(date)) - DateTime.toEpochMillis(DateTime.makeUnsafe(blocked.since))
-
-  const attention =
-    result.error === undefined
-      ? "Previously blocked page is readable again"
-      : result.error !== blocked.evidence
-        ? "Blocked page status changed"
-        : age >= 30 * 86400000
-          ? "Page has been blocked for 30 days; review the source"
-          : undefined
-
-  return { ...result, known_blocked: blocked, ...(attention === undefined ? {} : { attention }) }
-}
+  return { ...result, known_blocked: blocked, ...(attention === undefined ? {} : { attention }) } satisfies CheckResult
+})
 
 export const needsPageReview = (result: CheckResult): boolean =>
   result.missing.length > 0 ||
@@ -199,7 +203,7 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
     )
   )
 
-  const toCheckResult = ({ card, url, expect, blocked }: (typeof checks)[number]): CheckResult => {
+  const toCheckResult = ({ card, url, expect, blocked }: (typeof checks)[number]) => {
     const text = required(texts.get(url))
 
     const result = Result.isFailure(text)
@@ -209,7 +213,7 @@ export const checkEarnPages = Effect.fn("checkEarnPages")(function* (cards: Read
     return classifyCheck({ result, blocked, date })
   }
 
-  return EffectArray.map(checks, (check) => toCheckResult(check))
+  return yield* Effect.forEach(checks, (check) => toCheckResult(check))
 })
 
 export const formatCheck = (results: ReadonlyArray<CheckResult>): string => {

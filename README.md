@@ -213,7 +213,9 @@ quote and gains optional `known_blocked` evidence (reason, HTTP status/challenge
 and recording date). The first observation needs review; an identical failure on the
 next check is a standing known block. Each run still probes the source normally, without
 bypassing bot protection. Changed evidence, recovery or 30 days blocked requires review
-again. The review issue stays open while any source is unreadable, including standing
+again. The blocked-page machine (`src/machine/blockedPage.ts`) records each run: changed
+evidence replaces the stored evidence (keeping the reason and date), and a page that
+reads again has its `known_blocked` removed, so each change is raised once. The review issue stays open while any source is unreadable, including standing
 blocks; standing blocks alone do not wake the review webhook.
 
 Every sync, including failed runs, appends a JSON record to `autonomy.jsonl` on the

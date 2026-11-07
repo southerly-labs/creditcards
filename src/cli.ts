@@ -1,14 +1,21 @@
 import { Array as EffectArray, DateTime } from "effect"
 import { provenanceCommand } from "./provenance/commands.ts"
 import { heldCommand } from "./sync/heldCommand.ts"
-import { encodeJson, encodePrettyJson } from "./util/json.ts"
+import { encodeJson, encodePrettyJson, jsonEqual } from "./util/json.ts"
 import { BunRuntime, BunServices } from "@effect/platform-bun"
 import { Console, Effect, FileSystem, Layer, Option, Path } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import { FetchHttpClient } from "effect/http"
 import { toApi, validate } from "./build/build.ts"
 import { CdrClient } from "./cdr/CdrClient.ts"
-import { type CheckResult, checkEarnPages, formatCheck, normaliseText, pageText } from "./rewards/check.ts"
+import {
+  type CheckResult,
+  checkEarnPages,
+  formatCheck,
+  nextKnownBlocked,
+  normaliseText,
+  pageText
+} from "./rewards/check.ts"
 import {
   bonusReviewQueue,
   formatBonusQueue,
@@ -152,19 +159,21 @@ const bonusStamp = Command.make(
   })
 ).pipe(Command.withDescription("Mark cards' signup bonuses as manually reviewed against the current CDR text"))
 
-function recordBlockedCheck(input: {
+const recordBlockedCheck = Effect.fn("recordBlockedCheck")(function* (input: {
   readonly check: EarnCheck
   readonly results: ReadonlyArray<CheckResult>
   readonly key: string
-  readonly since: string
-}): EarnCheck {
-  const { check, results, key, since } = input
+  readonly date: string
+}) {
+  const { check, results, key, date } = input
   const result = EffectArray.findFirst(results, (r) => r.card === key && r.url === check.url)
 
-  if (check.known_blocked !== undefined || Option.isNone(result) || result.value.error === undefined) return check
+  if (Option.isNone(result)) return check
+  const { known_blocked: _blocked, ...rest } = check
+  const known_blocked = yield* nextKnownBlocked({ result: result.value, blocked: check.known_blocked, date })
 
-  return { ...check, known_blocked: { reason: "Issuer page unreadable", evidence: result.value.error, since } }
-}
+  return known_blocked === undefined ? rest : { ...rest, known_blocked }
+})
 
 const rewardsCheck = Command.make(
   "check",
@@ -192,9 +201,12 @@ const rewardsCheck = Command.make(
         const checks = card.rewards?.earn_check
 
         if (checks === undefined || card.rewards === undefined) continue
-        const updated = EffectArray.map(checks, (check) => recordBlockedCheck({ check, results, key, since }))
 
-        if (EffectArray.some(updated, (check) => !EffectArray.contains(checks, check))) {
+        const updated = yield* Effect.forEach(checks, (check) =>
+          recordBlockedCheck({ check, results, key, date: since })
+        )
+
+        if (!(yield* jsonEqual(updated, checks))) {
           const { issuer, card: slug } = splitCardKey(key)
           yield* store.writeCard(issuer, slug, { ...card, rewards: { ...card.rewards, earn_check: updated } })
         }
@@ -209,7 +221,7 @@ const rewardsCheck = Command.make(
   })
 ).pipe(
   Command.withDescription(
-    "Check manual earn rates against the issuer pages in rewards.earn_check (use --record-blocked to retain failure evidence)"
+    "Check manual earn rates against the issuer pages in rewards.earn_check (use --record-blocked to record, update and clear known blocks)"
   )
 )
 

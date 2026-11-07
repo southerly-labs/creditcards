@@ -1,9 +1,10 @@
-import { assert, describe, expect, layer, test } from "@effect/vitest"
+import { assert, describe, expect, it as effectIt, layer, test } from "@effect/vitest"
 import { Effect, Layer, String as EffectString, pipe } from "effect"
 import { HttpClient, HttpClientResponse } from "effect/http"
 import type { Card } from "../src/model/schema.ts"
 import {
   classifyCheck,
+  nextKnownBlocked,
   needsPageReview,
   checkEarnPages,
   formatCheck,
@@ -106,21 +107,38 @@ describe("known-blocked sources", () => {
   const blocked = { reason: "Cloudflare challenge", evidence: "HTTP 403; cf-mitigated: challenge", since: "2026-11-01" }
   const result = { card: "x/card", url: "https://example.com", missing: [], error: blocked.evidence }
 
-  test("keeps an unchanged block standing until 30 days", () => {
-    expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-11-04" }))).toBe(false)
-    expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-12-01" }))).toBe(true)
-    expect(needsPageReview(classifyCheck({ result, blocked, date: "2026-11-01" }))).toBe(false)
-  })
+  const reviewed = (input: Parameters<typeof classifyCheck>[0]) => Effect.map(classifyCheck(input), needsPageReview)
 
-  test("resurfaces changed status and recovery, including unchanged quotes", () => {
-    expect(
-      needsPageReview(classifyCheck({ result: { ...result, error: "HTTP 404" }, blocked, date: "2026-11-04" }))
-    ).toBe(true)
-    expect(
-      needsPageReview(
-        classifyCheck({ result: { card: result.card, url: result.url, missing: [] }, blocked, date: "2026-11-04" })
+  effectIt.effect("keeps an unchanged block standing until 30 days", () =>
+    Effect.gen(function* () {
+      assert.isFalse(yield* reviewed({ result, blocked, date: "2026-11-04" }))
+      assert.isTrue(yield* reviewed({ result, blocked, date: "2026-12-01" }))
+      assert.isFalse(yield* reviewed({ result, blocked, date: "2026-11-01" }))
+    })
+  )
+
+  effectIt.effect("resurfaces changed status and recovery, including unchanged quotes", () =>
+    Effect.gen(function* () {
+      assert.isTrue(yield* reviewed({ result: { ...result, error: "HTTP 404" }, blocked, date: "2026-11-04" }))
+      assert.isTrue(
+        yield* reviewed({ result: { card: result.card, url: result.url, missing: [] }, blocked, date: "2026-11-04" })
       )
-    ).toBe(true)
-    expect(needsPageReview(result)).toBe(true)
-  })
+      assert.isTrue(needsPageReview(result))
+    })
+  )
+
+  effectIt.effect("records a new block, updates its evidence and clears it once the page reads", () =>
+    Effect.gen(function* () {
+      assert.deepStrictEqual(yield* nextKnownBlocked({ result, blocked: undefined, date: "2026-11-07" }), {
+        reason: "Issuer page unreadable",
+        evidence: blocked.evidence,
+        since: "2026-11-07"
+      })
+      assert.deepStrictEqual(yield* nextKnownBlocked({ result: { error: "HTTP 404" }, blocked, date: "2026-11-07" }), {
+        ...blocked,
+        evidence: "HTTP 404"
+      })
+      assert.isUndefined(yield* nextKnownBlocked({ result: {}, blocked, date: "2026-11-07" }))
+    })
+  )
 })
