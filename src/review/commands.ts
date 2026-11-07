@@ -16,7 +16,7 @@ export const ParsedComment = Data.taggedEnum<ParsedComment>()
 
 const HOLD_ID = /^[0-9a-f]{12}$/u
 
-const CARD_KEY = /^[a-z0-9-]+\/[a-z0-9-]+$/u
+const CARD_KEY = /^[a-z0-9-]+\/[a-z0-9-]+(?:@[0-9a-f]{16})?$/u
 
 export const COMMAND_HELP = EffectArray.join(
   [

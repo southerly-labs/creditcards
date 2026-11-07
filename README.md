@@ -43,6 +43,8 @@ Banks publish earn rates as prose, so they are filled in two ways:
   bun run cli rewards stamp anz/business-black   # mark it reviewed (--none if no fixed rate)
   ```
 
+  The review issue and `todo` list each card as `issuer/card@hash`, where the hash is of the CDR text you were shown. Stamp with that form and the stamp is refused if the bank has changed the text since; a bare `issuer/card` still works but stamps whatever the text is now.
+
   Stamped cards have `earn_state` `Reviewed` and are never overwritten. If the bank's loyalty text changes, the state becomes `Stale` and the card goes back on the review list. See [rewards review states](docs/rewards-review.md).
 
 - **Issuer pages.** Some cards' CDR text has no earn rate, so the rate was read from the issuer's own page or terms PDF. These cards list that source under `rewards.earn_check`, with short quotes of the earn wording:

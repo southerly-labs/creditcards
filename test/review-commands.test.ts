@@ -38,6 +38,13 @@ describe("review commands in issue comments", () => {
     )
   })
 
+  test("accepts a card key pinned to the text hash it was listed with", () => {
+    assert.deepStrictEqual(commands("/earn-none anz/rewards@0123456789abcdef"), [
+      ReviewCommand.EarnNone({ cards: ["anz/rewards@0123456789abcdef"] })
+    ])
+    assert.include(errors("/bonus-none anz/rewards@nothex")[0], "not an issuer/card key")
+  })
+
   test("a comment without commands parses to none", () => {
     assert.deepStrictEqual(commands("Thanks, will look tomorrow. See a/b"), [])
   })

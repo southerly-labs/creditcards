@@ -20,7 +20,7 @@ import { Offer } from "../offers/schema.ts"
 import { holdCandidates, holdId, resolveHolds, revertChange, withCdrEvidence } from "./holds.ts"
 import type { Hold } from "../model/holds.ts"
 import { HoldState, isPending } from "../machine/hold.ts"
-import { isResolvableFromCdr } from "../rewards/bonus.ts"
+import { bonusTextHash, isResolvableFromCdr } from "../rewards/bonus.ts"
 import { bonusRead, earnRead, earnStateOf } from "../rewards/state.ts"
 import { stepReview } from "../machine/review.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
@@ -43,6 +43,12 @@ const CATEGORY = "CRED_AND_CHRG_CARDS"
 const bonusFeatures = (p: ProductDetail) =>
   EffectArray.filter(p.features ?? [], (f) => f.featureType === "BONUS_REWARDS")
 
+export interface ReviewEntry {
+  readonly card: string
+  readonly reason: string
+  readonly hash?: string
+}
+
 export interface SyncReport {
   readonly date: string
   readonly cardsSeen: number
@@ -61,12 +67,12 @@ export interface SyncReport {
 
   readonly rewards: {
     readonly set: ReadonlyArray<{ readonly card: string; readonly earn: ReadonlyArray<EarnRate> }>
-    readonly review: ReadonlyArray<{ readonly card: string; readonly reason: string }>
+    readonly review: ReadonlyArray<ReviewEntry>
   }
 
   readonly bonus: {
     readonly set: ReadonlyArray<{ readonly card: string; readonly bonus: ReadonlyArray<BonusTranche> }>
-    readonly review: ReadonlyArray<{ readonly card: string; readonly reason: string }>
+    readonly review: ReadonlyArray<ReviewEntry>
     readonly undetailed: ReadonlyArray<string>
   }
 }
@@ -330,9 +336,9 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const newPrograms: Array<string> = []
   const writes = new Map<string, Card>()
   const rewardsSet: Array<{ card: string; earn: ReadonlyArray<EarnRate> }> = []
-  const rewardsReview: Array<{ card: string; reason: string }> = []
+  const rewardsReview: Array<ReviewEntry> = []
   const bonusSet: Array<{ card: string; bonus: ReadonlyArray<BonusTranche> }> = []
-  const bonusReview: Array<{ card: string; reason: string }> = []
+  const bonusReview: Array<ReviewEntry> = []
   const bonusUndetailed: Array<string> = []
   const snapshotWrites: Array<{ issuer: string; productId: string; snapshot: CdrSnapshot }> = []
 
@@ -379,10 +385,16 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
       const bonusPlan = proposal.bonusPlan
       const earnSet = RewardsPlan.$is("Set")(earnPlan) ? earnPlan.earn : undefined
 
-      if (RewardsPlan.$is("Review")(earnPlan)) rewardsReview.push({ card: key, reason: earnPlan.reason })
+      if (RewardsPlan.$is("Review")(earnPlan))
+        rewardsReview.push({ card: key, reason: earnPlan.reason, hash: earnPlan.hash })
 
       if (BonusPlan.$is("Review")(bonusPlan)) {
-        if (isResolvableFromCdr(bonusPlan.reason)) bonusReview.push({ card: key, reason: bonusPlan.reason })
+        if (isResolvableFromCdr(bonusPlan.reason))
+          bonusReview.push({
+            card: key,
+            reason: bonusPlan.reason,
+            hash: yield* bonusTextHash(bonusFeatures(product))
+          })
         else bonusUndetailed.push(key)
       }
 
@@ -611,25 +623,29 @@ export const summariseReport = Effect.fn("summariseReport")(function* (r: SyncRe
   return EffectArray.join(lines, "\n")
 })
 
+const reviewKey = (entry: ReviewEntry) => (entry.hash === undefined ? entry.card : `${entry.card}@${entry.hash}`)
+
 const earnReviewSection = (r: SyncReport) => [
   `${r.rewards.review.length} cards have earn rates the parser could not read (sync ${r.date}).`,
   "",
   "To resolve them locally, run `bun run cli rewards todo` (optionally `--issuer <slug>`), set",
-  "`rewards.earn` from the CDR text it prints, then `bun run cli rewards stamp <issuer/card>...`.",
+  "`rewards.earn` from the CDR text it prints, then `bun run cli rewards stamp <issuer/card@hash>...`.",
   'See "Earn rates" in the README. When a card has no fixed earn rate, comment',
-  "`/earn-none <issuer/card>...` here instead.",
+  "`/earn-none <issuer/card@hash>...` here instead. Keep the `@hash`: the stamp is refused if",
+  "the CDR text has changed since this list was written.",
   "",
-  ...EffectArray.map(r.rewards.review, (i) => `- [ ] \`${i.card}\` — ${i.reason}`)
+  ...EffectArray.map(r.rewards.review, (i) => `- [ ] \`${reviewKey(i)}\` — ${i.reason}`)
 ]
 
 const bonusReviewSection = (r: SyncReport) => [
   `${r.bonus.review.length} cards have signup bonuses the parser could not split by year (sync ${r.date}).`,
   "",
   "Run `bun run cli rewards bonus-todo`, write a manual signup offer from the CDR text it prints, then",
-  '`bun run cli rewards bonus-stamp <issuer/card>...`. See "Signup bonuses" in the README. When a',
-  "card has no current points offer, comment `/bonus-none <issuer/card>...` here instead.",
+  '`bun run cli rewards bonus-stamp <issuer/card@hash>...`. See "Signup bonuses" in the README. When a',
+  "card has no current points offer, comment `/bonus-none <issuer/card@hash>...` here instead.",
+  "Keep the `@hash`: the stamp is refused if the CDR text has changed since this list was written.",
   "",
-  ...EffectArray.map(r.bonus.review, (i) => `- [ ] \`${i.card}\` — ${i.reason}`)
+  ...EffectArray.map(r.bonus.review, (i) => `- [ ] \`${reviewKey(i)}\` — ${i.reason}`)
 ]
 
 export const summariseRewardsReview = (r: SyncReport): string => {

@@ -13,6 +13,19 @@ import { BonusPlan, planBonus, planRewards, RewardsPlan } from "./plan.ts"
 import { earnStateOf, signupStateOf } from "./state.ts"
 import { ReviewEvent, stepReview } from "../machine/review.ts"
 
+const STAMP_TARGET = /^(?<key>[^@]+)(?:@(?<hash>[0-9a-f]{16}))?$/u
+
+const stampTarget = (target: string): { readonly key: string; readonly expected: string | undefined } => {
+  const groups = STAMP_TARGET.exec(target)?.groups
+
+  return { key: groups?.["key"] ?? target, expected: groups?.["hash"] }
+}
+
+const textChanged = (target: string, expected: string, hash: string) =>
+  RewardsError.make({
+    message: `${target}: the CDR text changed since it was listed (now ${hash}, listed ${expected}); re-read it before stamping`
+  })
+
 export interface ReviewItem {
   readonly card: string
   readonly name: string
@@ -124,6 +137,7 @@ export const formatQueue = Effect.fn("formatQueue")(function* (items: ReadonlyAr
       `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
       `- Program: ${i.program ?? "—"}`,
       `- Reason: ${i.reason}`,
+      `- Stamp as: \`${i.card}@${i.hash}\``,
       `- Current earn: ${earnJson}`,
       "",
       "```text",
@@ -153,7 +167,8 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
   const dataset = yield* store.load
   const baseUris = yield* registerBaseUris
 
-  for (const key of keys) {
+  for (const target of keys) {
+    const { key, expected } = stampTarget(target)
     const card = dataset.cards.get(key)
 
     if (card === undefined) return yield* RewardsError.make({ message: `Unknown card ${key}` })
@@ -164,6 +179,8 @@ export const stamp = Effect.fn("stamp")(function* (keys: ReadonlyArray<string>, 
     if (earn === undefined)
       return yield* RewardsError.make({ message: `${key} has no rewards.earn; set it first or pass --none` })
     const hash = yield* loyaltyTextHash(yield* loyaltyFeatures(card, baseUris))
+
+    if (expected !== undefined && expected !== hash) return yield* textChanged(target, expected, hash)
     const { issuer, card: slug } = splitCardKey(key)
     const on = DateTime.formatIsoDateUtc(yield* DateTime.now)
 
@@ -190,6 +207,7 @@ export interface BonusReviewItem {
   readonly name: string
   readonly program: string | undefined
   readonly reason: string
+  readonly hash: string
   readonly text: string
   readonly signup: Offer | undefined
   readonly bonusPoints: number | undefined
@@ -209,6 +227,7 @@ const toBonusReviewItem = Effect.fn("toBonusReviewItem")(function* (
     name: card.name,
     program: card.rewards?.program,
     reason: plan.reason,
+    hash: yield* bonusTextHash(features),
     text: bonusText(features),
     signup: Option.getOrUndefined(EffectArray.findFirst(card.offers ?? [], (offer) => offer.id === "signup")),
     bonusPoints: rawBonusPoints(features)
@@ -244,6 +263,7 @@ export const formatBonusQueue = Effect.fn("formatBonusQueue")(function* (items: 
       `- File: data/issuers/${splitCardKey(i.card).issuer}/cards/${splitCardKey(i.card).card}.toml`,
       `- Program: ${i.program ?? "—"}`,
       `- Reason: ${i.reason}`,
+      `- Stamp as: \`${i.card}@${i.hash}\``,
       `- CDR bonus total: ${i.bonusPoints ?? "—"}`,
       `- Current signup offer: ${signupJson}`,
       "",
@@ -276,7 +296,8 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
   const dataset = yield* store.load
   const baseUris = yield* registerBaseUris
 
-  for (const key of keys) {
+  for (const target of keys) {
+    const { key, expected } = stampTarget(target)
     const card = dataset.cards.get(key)
 
     if (card === undefined) return yield* RewardsError.make({ message: `Unknown card ${key}` })
@@ -291,6 +312,8 @@ export const stampBonus = Effect.fn("stampBonus")(function* (keys: ReadonlyArray
 
     const offers = none || signup === undefined ? others : [...others, { ...signup, source: "manual" as const }]
     const hash = yield* bonusTextHash(yield* bonusFeatures(card, baseUris))
+
+    if (expected !== undefined && expected !== hash) return yield* textChanged(target, expected, hash)
     const { issuer, card: slug } = splitCardKey(key)
     const { offers: _offers, ...rest } = card
     const on = DateTime.formatIsoDateUtc(yield* DateTime.now)

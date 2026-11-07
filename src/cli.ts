@@ -121,7 +121,10 @@ const rewardsTodo = Command.make(
 const rewardsStamp = Command.make(
   "stamp",
   {
-    cards: Argument.String("card").pipe(Argument.withDescription("issuer/card keys"), Argument.atLeast(1)),
+    cards: Argument.String("card").pipe(
+      Argument.withDescription("issuer/card keys, optionally with @hash from the review list"),
+      Argument.atLeast(1)
+    ),
     none: Flag.Boolean("none").pipe(
       Flag.withDescription("Record that the card has no fixed earn rate"),
       Flag.withDefault(false)
@@ -149,7 +152,10 @@ const bonusTodo = Command.make(
 const bonusStamp = Command.make(
   "bonus-stamp",
   {
-    cards: Argument.String("card").pipe(Argument.withDescription("issuer/card keys"), Argument.atLeast(1)),
+    cards: Argument.String("card").pipe(
+      Argument.withDescription("issuer/card keys, optionally with @hash from the review list"),
+      Argument.atLeast(1)
+    ),
     none: Flag.Boolean("none").pipe(
       Flag.withDescription("Record that the card has no current points offer"),
       Flag.withDefault(false)
