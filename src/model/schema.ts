@@ -136,6 +136,7 @@ const CardFields = Schema.Struct({
   cdr: Schema.optionalKey(
     Schema.Struct({
       brand: Schema.String,
+      brand_id: Schema.optionalKey(Schema.NonEmptyString),
       product_id: Schema.String,
       last_updated: Schema.optionalKey(Timestamp)
     })

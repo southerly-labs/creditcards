@@ -47,6 +47,7 @@ export const makeProgramIndex = (programs: Record<string, Program>): ProgramInde
 export interface NormaliseContext {
   readonly issuerSlug: string
   readonly brandName: string
+  readonly brandId?: string | undefined
   readonly programs: ProgramIndex
 }
 
@@ -527,7 +528,12 @@ const normaliseImpl = (p: ProductDetail, ctx: NormaliseContext): NormaliseResult
     ),
     url: cardPageUrl(p),
     image,
-    cdr: defined({ brand: ctx.brandName, product_id: p.productId, last_updated: p.lastUpdated ?? undefined }),
+    cdr: defined({
+      brand: ctx.brandName,
+      brand_id: ctx.brandId,
+      product_id: p.productId,
+      last_updated: p.lastUpdated ?? undefined
+    }),
     fees: defined({
       annual: annualFee(fees),
       additional_card: additionalCardFee(fees),

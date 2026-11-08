@@ -1,4 +1,4 @@
-import { Schema } from "effect"
+import { Option, Schema, Array as EffectArray } from "effect"
 
 const OptString = Schema.optional(Schema.NullOr(Schema.String))
 
@@ -14,6 +14,14 @@ export class DataHolderBrand extends Schema.Class<DataHolderBrand, { readonly br
   abn: OptString,
   lastUpdated: OptString
 }) {}
+
+export const brandId = (brand: DataHolderBrand): string | undefined =>
+  Option.getOrUndefined(
+    Option.flatMap(
+      EffectArray.findFirst([brand.dataHolderBrandId, brand.interimId], (id) => id != null && id !== ""),
+      Option.fromNullishOr
+    )
+  )
 
 export const RegisterResponse = Schema.Struct({
   data: Schema.Array(DataHolderBrand)

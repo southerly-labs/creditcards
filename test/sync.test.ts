@@ -30,6 +30,7 @@ interface WorldState {
   readonly products: ReadonlyArray<ProductDetail>
   readonly failing: ReadonlySet<string>
   readonly renamed?: Readonly<Record<string, string>>
+  readonly brandName?: string
   readonly listFailures?: number
   readonly cardlessDown?: boolean
 }
@@ -58,10 +59,17 @@ const FakeCdr = Layer.effect(
     const world = yield* World
 
     return CdrClient.of({
-      brands: Effect.succeed([
-        DataHolderBrand.make({ brandName: "Example Bank", industries: ["banking"], publicBaseUri: BASE_URI }),
-        DataHolderBrand.make({ brandName: "Cardless Bank", industries: ["banking"], publicBaseUri: CARDLESS_URI })
-      ]),
+      brands: Ref.get(world).pipe(
+        Effect.map((state) => [
+          DataHolderBrand.make({
+            brandName: state.brandName ?? "Example Bank",
+            dataHolderBrandId: "example-bank-id",
+            industries: ["banking"],
+            publicBaseUri: BASE_URI
+          }),
+          DataHolderBrand.make({ brandName: "Cardless Bank", industries: ["banking"], publicBaseUri: CARDLESS_URI })
+        ])
+      ),
       listProducts: (baseUri) =>
         Ref.getAndUpdate(world, (state) =>
           baseUri === BASE_URI ? { ...state, listFailures: Math.max((state.listFailures ?? 0) - 1, 0) } : state
@@ -136,6 +144,7 @@ describe("syncCdr", () => {
         assert.strictEqual(card.fees.late_payment, 15)
         assert.strictEqual(card.fees.foreign_txn_pct, 3)
         assert.strictEqual(card.first_seen, "2026-11-01")
+        assert.deepStrictEqual(card.cdr, { brand: "Example Bank", brand_id: "example-bank-id", product_id: "p1" })
       })
     )
 

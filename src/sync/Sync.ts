@@ -13,7 +13,7 @@ import {
 import { CdrClient, CdrError, REQUEST_VARIANTS, type VersionedProduct } from "../cdr/CdrClient.ts"
 import { makeProgramIndex, normalise, type NormaliseResult } from "../cdr/normalise.ts"
 import { type CdrSnapshot, productDir, Snapshots } from "../history/Snapshots.ts"
-import { ProductDetail, type ProductSummary } from "../cdr/schema.ts"
+import { brandId, ProductDetail, type ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
 import { applyOffers, generatedOffers, signupState } from "../offers/build.ts"
 import { Offer } from "../offers/schema.ts"
@@ -83,6 +83,7 @@ export class SyncAborted extends Schema.TaggedError<SyncAborted, { readonly bran
 
 interface BrandFetch {
   readonly brand: string
+  readonly brandId: string | undefined
   readonly products: ReadonlyArray<VersionedProduct>
   readonly listed: ReadonlyArray<string>
 
@@ -168,7 +169,7 @@ const decodeProduct = Schema.decodeUnknownEffect(ProductDetail)
 const previousCard = Effect.fn("previousCard")(function* (
   existing: Card,
   productId: string,
-  current: Pick<CdrSnapshot, "brand" | "product">,
+  current: Pick<CdrSnapshot, "brand" | "product"> & { readonly brandId: string | undefined },
   issuerSlug: string,
   date: string,
   programs: ReturnType<typeof makeProgramIndex>
@@ -179,7 +180,14 @@ const previousCard = Effect.fn("previousCard")(function* (
   const detail = yield* decodeProduct(snapshot.product).pipe(Effect.option)
 
   if (Option.isNone(detail)) return undefined
-  const normalised = normalise(detail.value, { issuerSlug, brandName: current.brand, programs })
+
+  const normalised = normalise(detail.value, {
+    issuerSlug,
+    brandName: current.brand,
+    brandId: current.brandId,
+    programs
+  })
+
   const proposal = yield* proposeCard(existing, detail.value, normalised, date)
 
   return proposal.card === undefined ? undefined : { date: snapshot.date, card: proposal.card }
@@ -226,6 +234,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     if (Result.isFailure(listed)) {
       return {
         brand: brand.brandName,
+        brandId: brandId(brand),
         products: [],
         listed: [],
         listError: listed.failure.message,
@@ -256,6 +265,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
     return {
       brand: brand.brandName,
+      brandId: brandId(brand),
       products: EffectArray.filter(products, (p) => p !== undefined),
       listed: EffectArray.map(listed.success, (summary) => summary.productId),
       listError:
@@ -342,7 +352,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const bonusUndetailed: Array<string> = []
   const snapshotWrites: Array<{ issuer: string; productId: string; snapshot: CdrSnapshot }> = []
 
-  for (const { brand, products } of fetched) {
+  for (const { brand, brandId: id, products } of fetched) {
     if (products.length === 0) continue
     const issuerSlug = resolveIssuer(brand)
     const issuerName = required(issuers.get(issuerSlug)).name
@@ -354,7 +364,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         snapshot: { brand, version: Number.isFinite(version) ? version : null, product: raw }
       })
 
-      const normalised = normalise(product, { issuerSlug, brandName: brand, programs: programIndex })
+      const normalised = normalise(product, { issuerSlug, brandName: brand, brandId: id, programs: programIndex })
       const { card: incoming, fallbackProgram } = normalised
 
       if (fallbackProgram != null && fallbackProgram !== "" && !programs.has(fallbackProgram)) {
@@ -408,7 +418,14 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
       const previous =
         existing !== undefined && EffectArray.some(flagged, (candidate) => candidate.kind === "approve")
-          ? yield* previousCard(existing, product.productId, { brand, product: raw }, issuerSlug, date, programIndex)
+          ? yield* previousCard(
+              existing,
+              product.productId,
+              { brand, brandId: id, product: raw },
+              issuerSlug,
+              date,
+              programIndex
+            )
           : undefined
 
       const candidates = yield* Effect.forEach(flagged, (candidate) => withCdrEvidence(candidate, previous))
