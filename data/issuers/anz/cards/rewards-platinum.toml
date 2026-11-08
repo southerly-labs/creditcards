@@ -33,7 +33,7 @@ keep_months = 12
 
 [signup_state]
 _tag = "Reviewed"
-hash = "7170198ceb740da5"
+hash = "69a5aed6112cc994"
 outcome = "present"
 on = "2026-11-03"
 

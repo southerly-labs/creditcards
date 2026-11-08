@@ -30,7 +30,7 @@ hash = "b4be23e3213f7f1d"
 
 [earn_state]
 _tag = "Reviewed"
-hash = "e35a24722f7fa116"
+hash = "13e53cde16af9936"
 outcome = "present"
 
 [cdr]

@@ -17,7 +17,7 @@ _tag = "Unread"
 
 [earn_state]
 _tag = "Reviewed"
-hash = "bb4416768ffb7649"
+hash = "dcdbef56a4d9c5d9"
 outcome = "none"
 
 [cdr]

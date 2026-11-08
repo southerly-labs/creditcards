@@ -43,7 +43,7 @@ keep_months = 12
 
 [signup_state]
 _tag = "Parsed"
-hash = "d41fdaa4314cc2cd"
+hash = "e371651382507d0a"
 
 [earn_state]
 _tag = "Reviewed"
