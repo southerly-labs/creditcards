@@ -1,6 +1,8 @@
 import { encodeJson } from "../util/json.ts"
 import { DateTime, Effect, Schema, Array as EffectArray, Option } from "effect"
 import { CdrClient } from "../cdr/CdrClient.ts"
+import { brandId } from "../cdr/schema.ts"
+import { cardBrand, fetchedBrands } from "../sync/brands.ts"
 import type { Card, EarnRate } from "../model/schema.ts"
 import { isDelisted } from "../model/lifecycle.ts"
 import { signupState } from "../offers/build.ts"
@@ -54,7 +56,7 @@ const productFeatures = Effect.fn("productFeatures")(function* (
   const cdr = yield* CdrClient
 
   if (card.cdr === undefined) return yield* RewardsError.make({ message: `${card.name} has no CDR source` })
-  const baseUri = baseUris.get(card.cdr.brand)
+  const baseUri = baseUris.get(cardBrand(card.cdr))
 
   if (baseUri === undefined || baseUri === "")
     return yield* RewardsError.make({ message: `${card.cdr.brand} is not in the CDR Register` })
@@ -72,7 +74,14 @@ const bonusFeatures = (card: Card, baseUris: ReadonlyMap<string, string>) =>
 const registerBaseUris = Effect.gen(function* () {
   const brands = yield* (yield* CdrClient).brands
 
-  return new Map(EffectArray.map(brands, (b) => [b.brandName, b.publicBaseUri]))
+  return new Map(
+    EffectArray.flatMap(brands, (b) =>
+      EffectArray.map(
+        fetchedBrands({ name: b.brandName, id: brandId(b) }),
+        (ident) => [ident, b.publicBaseUri] as const
+      )
+    )
+  )
 })
 
 const toReviewItem = Effect.fn("toReviewItem")(function* (

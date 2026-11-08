@@ -137,6 +137,8 @@ The next sync applies an approved change and drops its entry. A rejected change 
 
 A data holder whose product list fails (a timeout, a transport error or a 5xx) is asked again on its own after every other brand has been fetched, since many time out only under the parallel first pass. The sync commit lists brands that still fail and have cards in the data; brands with no cards are only counted.
 
+Cards are matched to CDR products by the CDR Register's brand id (`cdr.brand_id`), falling back to the brand name for the few brands without one, since brand names are not unique in the Register. A renamed brand keeps its cards and issuer, and the sync adds the new name to the issuer's `cdr_brands`.
+
 Cards that disappear from CDR are marked delisted, not deleted. The first sync that misses a card sets `lifecycle.listing` to `Missing` with that day as `since`; it becomes `Delisted`, dated `since`, only if a sync on a later day still misses it, so one bad response from a data holder can't discontinue it. A card the issuer no longer sells but still lists in CDR gets `lifecycle.sales` set to `Closed` by hand, with an `on` date when it is known; the sync keeps it. `api.json` still publishes these as `status`, `missing_since`, `discontinued` and `closed`. See [the data model](docs/data-model.md#lifecycle-dates).
 
 ## Development

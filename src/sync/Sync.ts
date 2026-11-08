@@ -25,6 +25,7 @@ import { bonusRead, earnRead, earnStateOf } from "../rewards/state.ts"
 import { stepReview } from "../machine/review.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
+import { cardBrand, fetchedBrands } from "./brands.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
 import {
   diffCard,
@@ -213,11 +214,14 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   for (const card of cards.values()) {
     if (!isDelisted(card) && card.cdr !== undefined)
-      activeByBrand.set(card.cdr.brand, (activeByBrand.get(card.cdr.brand) ?? 0) + 1)
+      activeByBrand.set(cardBrand(card.cdr), (activeByBrand.get(cardBrand(card.cdr)) ?? 0) + 1)
   }
 
+  const hasCards = (brand: { readonly name: string; readonly id: string | undefined }) =>
+    EffectArray.some(fetchedBrands(brand), (ident) => (activeByBrand.get(ident) ?? 0) > 0)
+
   const fetchBrand = Effect.fn("syncCdr.fetchBrand")(function* (brand: (typeof brands)[number]) {
-    const expectsCards = (activeByBrand.get(brand.brandName) ?? 0) > 0
+    const expectsCards = hasCards({ name: brand.brandName, id: brandId(brand) })
 
     const list = Effect.fn("CdrClient.listWithFallback")(function* (
       variant: number
@@ -288,7 +292,10 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   const fetched = EffectArray.map(
     firstPass,
-    (result) => Option.getOrUndefined(EffectArray.findFirst(retried, (retry) => retry.brand === result.brand)) ?? result
+    (result) =>
+      Option.getOrUndefined(
+        EffectArray.findFirst(retried, (retry) => retry.brand === result.brand && retry.brandId === result.brandId)
+      ) ?? result
   )
 
   const finalStates = yield* Effect.forEach(fetched, (result, i) =>
@@ -308,9 +315,26 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const issuerByBrand = new Map<string, string>()
 
   for (const [slug, issuer] of issuers) for (const b of issuer.cdr_brands) issuerByBrand.set(b, slug)
+  const issuerByBrandId = new Map<string, string>()
+
+  for (const [key, card] of cards)
+    if (card.cdr?.brand_id !== undefined) issuerByBrandId.set(card.cdr.brand_id, splitCardKey(key).issuer)
   const newIssuers: Array<string> = []
 
-  const resolveIssuer = (brand: string) => {
+  const resolveIssuer = (brand: string, id: string | undefined) => {
+    const owner = id === undefined ? undefined : issuerByBrandId.get(id)
+    const ownerIssuer = owner === undefined ? undefined : issuers.get(owner)
+
+    if (owner !== undefined && ownerIssuer !== undefined) {
+      if (!ownerIssuer.cdr_brands.includes(brand)) {
+        issuers.set(owner, { ...ownerIssuer, cdr_brands: [...ownerIssuer.cdr_brands, brand] })
+        issuerByBrand.set(brand, owner)
+        newIssuers.push(owner)
+      }
+
+      return owner
+    }
+
     const existing = issuerByBrand.get(brand)
 
     if (existing != null && existing !== "") return existing
@@ -332,7 +356,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const keyByCdrId = new Map<string, string>()
 
   for (const [key, card] of cards)
-    if (card.cdr !== undefined) keyByCdrId.set(`${card.cdr.brand}|${card.cdr.product_id}`, key)
+    if (card.cdr !== undefined) keyByCdrId.set(`${cardBrand(card.cdr)}|${card.cdr.product_id}`, key)
 
   const added: Array<string> = []
   const updated: Array<{ card: string; changes: ReadonlyArray<FieldChange> }> = []
@@ -354,7 +378,8 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
 
   for (const { brand, brandId: id, products } of fetched) {
     if (products.length === 0) continue
-    const issuerSlug = resolveIssuer(brand)
+    const issuerSlug = resolveIssuer(brand, id)
+    const idents = fetchedBrands({ name: brand, id })
     const issuerName = required(issuers.get(issuerSlug)).name
 
     for (const { detail: product, raw, version } of products) {
@@ -373,7 +398,13 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         newPrograms.push(fallbackProgram)
       }
 
-      let key = keyByCdrId.get(`${brand}|${product.productId}`)
+      let key = Option.getOrUndefined(
+        EffectArray.findFirst(
+          EffectArray.map(idents, (ident) => keyByCdrId.get(`${ident}|${product.productId}`)),
+          (found) => found !== undefined
+        )
+      )
+
       const existing = key != null && key !== "" ? cards.get(key) : undefined
 
       if (key == null || key === "") {
@@ -387,7 +418,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
         for (let i = 2; cards.has(cardKey(issuerSlug, slug)) || writes.has(cardKey(issuerSlug, slug)); i++)
           slug = `${base}-${i}`
         key = cardKey(issuerSlug, slug)
-        keyByCdrId.set(`${brand}|${product.productId}`, key)
+        keyByCdrId.set(`${required(idents[0])}|${product.productId}`, key)
       }
 
       const proposal = yield* proposeCard(existing, product, normalised, date)
@@ -480,26 +511,39 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
-  const seenIds = new Set(EffectArray.flatMap(fetched, (b) => EffectArray.map(b.listed, (id) => `${b.brand}|${id}`)))
-  const brandStatus = new Map(EffectArray.map(fetched, (b) => [b.brand, b]))
+  const identsOf = (b: BrandFetch) => fetchedBrands({ name: b.brand, id: b.brandId })
+
+  const seenIds = new Set(
+    EffectArray.flatMap(fetched, (b) =>
+      EffectArray.flatMap(identsOf(b), (ident) => EffectArray.map(b.listed, (id) => `${ident}|${id}`))
+    )
+  )
+
+  const brandStatus = new Map(EffectArray.flatMap(fetched, (b) => EffectArray.map(identsOf(b), (ident) => [ident, b])))
   const missingByBrand = new Map<string, Array<string>>()
 
   for (const [key, card] of cards) {
-    if (isDelisted(card) || card.cdr === undefined || seenIds.has(`${card.cdr.brand}|${card.cdr.product_id}`)) continue
+    if (isDelisted(card) || card.cdr === undefined || seenIds.has(`${cardBrand(card.cdr)}|${card.cdr.product_id}`))
+      continue
 
     if (lifecycleLocked(card)) continue
-    const status = brandStatus.get(card.cdr.brand)
+    const status = brandStatus.get(cardBrand(card.cdr))
 
     if (status === undefined || status.listError !== undefined) continue
-    missingByBrand.set(card.cdr.brand, [...(missingByBrand.get(card.cdr.brand) ?? []), key])
+    missingByBrand.set(cardBrand(card.cdr), [...(missingByBrand.get(cardBrand(card.cdr)) ?? []), key])
   }
 
   for (const [brand, keys] of missingByBrand) {
-    const active = EffectArray.filter([...cards.values()], (c) => !isDelisted(c) && c.cdr?.brand === brand).length
+    const active = EffectArray.filter(
+      [...cards.values()],
+      (c) => !isDelisted(c) && c.cdr !== undefined && cardBrand(c.cdr) === brand
+    ).length
+
+    const brandName = brandStatus.get(brand)?.brand ?? brand
 
     if (keys.length / active > MAX_DISCONTINUED_SHARE && keys.length > 1) {
       for (const key of keys)
-        held.push({ card: key, reasons: [`${keys.length}/${active} ${brand} cards vanished at once`] })
+        held.push({ card: key, reasons: [`${keys.length}/${active} ${brandName} cards vanished at once`] })
       continue
     }
 
@@ -555,10 +599,10 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     newIssuers: [...new Set(newIssuers)],
     newPrograms,
     brandErrors: EffectArray.map(
-      EffectArray.filter(failedBrands, (b) => activeByBrand.has(b.brand)),
+      EffectArray.filter(failedBrands, (b) => hasCards({ name: b.brand, id: b.brandId })),
       (b) => ({ brand: b.brand, error: required(b.listError) })
     ),
-    cardlessBrandErrors: EffectArray.filter(failedBrands, (b) => !activeByBrand.has(b.brand)).length,
+    cardlessBrandErrors: EffectArray.filter(failedBrands, (b) => !hasCards({ name: b.brand, id: b.brandId })).length,
     snapshotsSaved,
     rewards: { set: rewardsSet, review: rewardsReview },
     bonus: { set: bonusSet, review: bonusReview, undetailed: bonusUndetailed }

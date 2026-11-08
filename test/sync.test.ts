@@ -5,7 +5,8 @@ import { TestClock } from "effect/testing"
 import { CdrClient, CdrError } from "../src/cdr/CdrClient.ts"
 import { DataHolderBrand, type ProductDetail } from "../src/cdr/schema.ts"
 import { Snapshots } from "../src/history/Snapshots.ts"
-import { Store } from "../src/store/Store.ts"
+import { splitCardKey, Store } from "../src/store/Store.ts"
+import { checkReferences } from "../src/build/build.ts"
 import { syncCdr } from "../src/sync/Sync.ts"
 import { required } from "../src/util/required.ts"
 import { Digest } from "effect/crypto"
@@ -205,6 +206,42 @@ describe("syncCdr", () => {
         }
 
         assert.strictEqual(statusOf(yield* storedCard("example-bank/card-p1")).status, "active")
+      })
+    )
+
+    it.effect("follows a renamed brand by its Register id instead of seeing new cards", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const report = yield* syncOn(2, { ...seeded, brandName: "Example Bank Australia" })
+
+        assert.deepStrictEqual(report.added, [])
+        assert.deepStrictEqual(report.missing, [])
+        assert.strictEqual((yield* storedCard("example-bank/card-p1")).cdr?.brand, "Example Bank Australia")
+
+        const dataset = yield* (yield* Store).load
+        assert.deepStrictEqual(dataset.issuers.get("example-bank")?.cdr_brands, [
+          "Example Bank",
+          "Example Bank Australia"
+        ])
+        assert.deepStrictEqual(checkReferences(dataset), [])
+      })
+    )
+
+    it.effect("still matches cards stored before they recorded a brand id", () =>
+      Effect.gen(function* () {
+        yield* syncOn(1)
+        const store = yield* Store
+
+        for (const [key, card] of (yield* store.load).cards) {
+          const { brand_id: _id, ...cdr } = required(card.cdr)
+          const { issuer, card: slug } = splitCardKey(key)
+          yield* store.writeCard(issuer, slug, { ...card, cdr })
+        }
+
+        const report = yield* syncOn(2)
+        assert.deepStrictEqual(report.added, [])
+        assert.deepStrictEqual(report.missing, [])
+        assert.strictEqual((yield* storedCard("example-bank/card-p1")).cdr?.brand_id, "example-bank-id")
       })
     )
 
