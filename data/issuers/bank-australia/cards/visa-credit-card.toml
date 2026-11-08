@@ -20,6 +20,7 @@ sources = [ "cdr", "https://www.bankaust.com.au/banking/credit-cards/visa-credit
 
 [cdr]
 brand = "Bank Australia"
+brand_id = "578efc60-4eb1-eb11-a822-000d3a884a20"
 product_id = "7f413f78-bbd6-4cd7-836b-04887d0e15dc"
 last_updated = "2026-10-27T22:30:45.766Z"
 

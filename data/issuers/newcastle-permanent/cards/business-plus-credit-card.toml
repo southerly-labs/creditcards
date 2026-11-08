@@ -19,8 +19,9 @@ note = "CDR publishes no applicationUri or overviewUri for this card, and a sear
 
 [cdr]
 brand = "Newcastle Permanent"
+brand_id = "d5306c4e-ea83-ec11-a82b-000d3a884a20"
 product_id = "CC_businesspluscc"
-last_updated = "2026-08-25T00:00:00+10:00"
+last_updated = "2026-11-05T00:00:00+11:00"
 
 [fees]
 annual = 55

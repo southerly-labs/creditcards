@@ -39,6 +39,7 @@ note = "Charge card. The page states days to pay for purchases, not interest-fre
 
 [cdr]
 brand = "American Express"
+brand_id = "e368df64-f07b-f111-9b47-6045bd3f59f5"
 product_id = "29422ec1-d2ad-479f-a41b-9686b29c2bf9"
 last_updated = "2026-07-09T05:00:00.000Z"
 

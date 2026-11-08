@@ -19,6 +19,7 @@ sources = [ "cdr", "https://www.swsbank.com.au/loans/credit-facilities/visa-clas
 
 [cdr]
 brand = "SWSbank"
+brand_id = "ffc015ae-7ebf-eb11-a823-000d3a884a20"
 product_id = "S3_VC"
 last_updated = "2025-09-15T11:05:37.000+10:00"
 

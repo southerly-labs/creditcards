@@ -14,8 +14,9 @@ _tag = "Selling"
 
 [cdr]
 brand = "CommBank"
+brand_id = "25233bad-e494-ea11-a831-000d3a8842e1"
 product_id = "76d24ebc94e94b368f829e343dce4b49"
-last_updated = "2026-10-31T02:15:41.000Z"
+last_updated = "2026-11-09T02:15:50.000Z"
 
 [fees]
 annual = 36

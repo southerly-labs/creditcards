@@ -34,6 +34,7 @@ months = 9
 
 [cdr]
 brand = "Police Bank"
+brand_id = "37a16559-cd30-ee11-a83d-000d3a8830d6"
 product_id = "4b04816d-c585-4702-88f8-19f928de57a0"
 last_updated = "2026-07-28T22:48:33.717Z"
 

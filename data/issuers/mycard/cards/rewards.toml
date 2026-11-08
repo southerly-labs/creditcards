@@ -22,8 +22,9 @@ outcome = "present"
 
 [cdr]
 brand = "MyCard"
+brand_id = "cae03d79-bdc1-eb11-a823-000d3a884a20"
 product_id = "a919d339-bab4-464d-a7af-51aec0ca6c62"
-last_updated = "2026-08-24T00:00:00Z"
+last_updated = "2026-11-02T00:00:00Z"
 
 [fees]
 annual = 249

@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
+brand_id = "25797662-e294-ea11-a831-000d3a8842e1"
 product_id = "5f5dfdb4-43b1-41e6-923e-546bb801e026"
 last_updated = "2026-06-01T13:59:59Z"
 

@@ -14,8 +14,9 @@ _tag = "Selling"
 
 [cdr]
 brand = "ANZ"
+brand_id = "f4562bb8-e394-ea11-a831-000d3a8842e1"
 product_id = "4cfce209-2f9c-e506-0dd6-7de6bd04e6d6"
-last_updated = "2026-10-28T16:00:00.000Z"
+last_updated = "2026-11-02T13:00:00.000Z"
 
 [fees]
 annual = 87

@@ -20,6 +20,7 @@ correction_reason = "fees.late_payment = 0 from the issuer's page: \"late paymen
 
 [cdr]
 brand = "First Option Bank"
+brand_id = "19568386-2b43-eb11-a81e-000d3a884a20"
 product_id = "VISA_CREDIT_CARD"
 last_updated = "2026-06-02T12:56:29.000+10:00"
 

@@ -21,6 +21,7 @@ note = "No interest is charged in months that end under $1,000 owing; there is n
 
 [cdr]
 brand = "Zip"
+brand_id = "b74ce68c-195f-f111-9b47-6045bd3f59f5"
 product_id = "zip-plus"
 last_updated = "2026-08-04T00:00:00+00:00"
 

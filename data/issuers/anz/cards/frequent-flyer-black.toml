@@ -41,6 +41,7 @@ hash = "32ddb1497debe067"
 
 [cdr]
 brand = "ANZ"
+brand_id = "f4562bb8-e394-ea11-a831-000d3a8842e1"
 product_id = "325e19d1-2a52-53c6-073e-4b01e86e6936"
 last_updated = "2026-10-27T22:00:00.000Z"
 

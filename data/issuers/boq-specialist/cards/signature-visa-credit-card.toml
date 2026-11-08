@@ -33,6 +33,7 @@ outcome = "present"
 
 [cdr]
 brand = "BOQ Specialist"
+brand_id = "e7682728-370d-ec11-a826-000d3a884a20"
 product_id = "09186288-5c03-ee11-8f6e-00224814dce7"
 last_updated = "2026-10-26T02:59:52Z"
 

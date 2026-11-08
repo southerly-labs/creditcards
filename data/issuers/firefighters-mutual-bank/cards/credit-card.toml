@@ -24,6 +24,7 @@ months = 6
 
 [cdr]
 brand = "Firefighters Mutual Bank"
+brand_id = "494c5cad-30b1-eb11-a822-000d3a884a20"
 product_id = "5d479361-d2b4-42e6-83d4-7e5a2d7dcde5"
 last_updated = "2026-09-09T15:09:04.000+10:00"
 

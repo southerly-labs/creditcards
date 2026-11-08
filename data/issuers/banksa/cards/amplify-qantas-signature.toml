@@ -35,6 +35,7 @@ outcome = "present"
 
 [cdr]
 brand = "BankSA"
+brand_id = "01608f70-e4ae-eb11-a822-000d3a884a20"
 product_id = "BSACCAmplifySignaturecardFrequentFlyer"
 last_updated = "2026-10-29T01:03:01Z"
 

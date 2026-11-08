@@ -27,6 +27,7 @@ sources = [ "cdr", "https://www.americanexpress.com/au/business/payment-solution
 
 [cdr]
 brand = "American Express"
+brand_id = "e368df64-f07b-f111-9b47-6045bd3f59f5"
 product_id = "c781a9a6-0826-4a95-bf79-a312f41d9d0d"
 last_updated = "2026-07-09T06:00:00.000Z"
 

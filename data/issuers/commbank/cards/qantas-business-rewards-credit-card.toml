@@ -23,8 +23,9 @@ outcome = "none"
 
 [cdr]
 brand = "CommBank"
+brand_id = "25233bad-e494-ea11-a831-000d3a8842e1"
 product_id = "e15ed5da59354af78c9e8aa0f4f841cf"
-last_updated = "2026-10-31T02:15:41.000Z"
+last_updated = "2026-11-09T02:15:50.000Z"
 
 [fees]
 annual = 0

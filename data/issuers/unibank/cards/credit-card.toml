@@ -24,6 +24,7 @@ months = 6
 
 [cdr]
 brand = "UniBank"
+brand_id = "8ac1db25-30b1-eb11-a822-000d3a884a20"
 product_id = "43087eca-5a54-4c91-81c3-9849af36008d"
 last_updated = "2026-09-09T15:10:25.000+10:00"
 

@@ -37,6 +37,7 @@ sources = [ "cdr", "https://www.americanexpress.com/au/credit-cards/the-platinum
 
 [cdr]
 brand = "American Express"
+brand_id = "e368df64-f07b-f111-9b47-6045bd3f59f5"
 product_id = "f6754d9e-0000-4ac6-a101-43cd474eed1f"
 last_updated = "2026-10-01T23:00:00.000Z"
 

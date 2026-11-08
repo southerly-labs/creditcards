@@ -8,8 +8,8 @@ image = "https://www.commbank.com.au/content/dam/commbank-assets/open-banking/cr
 locked = [ "rewards.program", "rewards.partners" ]
 
 [lifecycle.listing]
-_tag = "Missing"
-since = "2026-11-07"
+_tag = "Delisted"
+on = "2026-11-07"
 
 [lifecycle.sales]
 _tag = "Closed"

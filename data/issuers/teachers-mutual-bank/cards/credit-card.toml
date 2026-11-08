@@ -24,6 +24,7 @@ months = 6
 
 [cdr]
 brand = "Teachers Mutual Bank"
+brand_id = "480a35cd-4c7d-eb11-a820-000d3a884a20"
 product_id = "5aee7d43-7685-43c7-849b-d1cdba21c895"
 last_updated = "2026-09-09T15:13:03.000+10:00"
 

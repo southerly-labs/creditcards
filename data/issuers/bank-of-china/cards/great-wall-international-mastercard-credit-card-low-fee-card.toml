@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Bank of China"
+brand_id = "457ab798-5811-ec11-a826-000d3a884a20"
 product_id = "MALAMAU4"
 last_updated = "2024-09-25T04:00:00.000+10:00"
 

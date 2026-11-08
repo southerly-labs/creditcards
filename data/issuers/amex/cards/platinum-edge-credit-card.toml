@@ -33,6 +33,7 @@ outcome = "present"
 
 [cdr]
 brand = "American Express"
+brand_id = "e368df64-f07b-f111-9b47-6045bd3f59f5"
 product_id = "e0118b95-48c6-47dc-9f76-545330338cde"
 last_updated = "2026-07-08T02:30:00.000Z"
 

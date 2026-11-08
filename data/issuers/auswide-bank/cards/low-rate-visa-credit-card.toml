@@ -13,6 +13,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Auswide Bank Ltd"
+brand_id = "036fc691-efae-eb11-a822-000d3a884a20"
 product_id = "02ef924b-4492-49bf-b248-5571909c10c1"
 last_updated = "2026-06-24T16:11:08.000+10:00"
 

@@ -22,8 +22,9 @@ outcome = "present"
 
 [cdr]
 brand = "Coles Credit Cards"
+brand_id = "5c95f4fd-37bc-eb11-a823-000d3a884a20"
 product_id = "52d7855f-39b1-4dd4-af37-e1d3d2da67e4"
-last_updated = "2026-09-16T00:12:00Z"
+last_updated = "2026-11-02T00:12:00Z"
 
 [fees]
 annual = 99

@@ -24,6 +24,7 @@ correction_reason = "network = visa from the issuer's page: \"visa classic credi
 
 [cdr]
 brand = "Northern Inland Credit Union Limited"
+brand_id = "d1aafe41-365b-ed11-a834-000d3a8830d6"
 product_id = "NICUS55"
 last_updated = "2026-01-21T11:16:44.000+11:00"
 

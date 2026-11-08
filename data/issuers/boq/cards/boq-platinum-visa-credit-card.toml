@@ -35,6 +35,7 @@ outcome = "present"
 
 [cdr]
 brand = "Bank of Queensland Limited"
+brand_id = "227cc6c0-350d-ec11-a826-000d3a884a20"
 product_id = "78126e21-102c-ee11-9966-002248e1dc43"
 last_updated = "2026-10-21T04:44:46Z"
 

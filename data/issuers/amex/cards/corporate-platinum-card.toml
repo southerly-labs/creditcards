@@ -39,6 +39,7 @@ note = "Corporate charge card. The page lists days to pay for purchases under be
 
 [cdr]
 brand = "American Express"
+brand_id = "e368df64-f07b-f111-9b47-6045bd3f59f5"
 product_id = "70ad0bdd-7a5c-4a6c-ae29-47138b2717e0"
 last_updated = "2026-07-08T02:30:00.000Z"
 

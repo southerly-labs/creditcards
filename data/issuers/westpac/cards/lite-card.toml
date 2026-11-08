@@ -20,6 +20,7 @@ correction_reason = "fees.late_payment = 0 from the issuer's page: \"missed paym
 
 [cdr]
 brand = "Westpac"
+brand_id = "ffe2945b-e094-ea11-a831-000d3a8842e1"
 product_id = "CCLite"
 last_updated = "2026-10-29T02:41:55Z"
 

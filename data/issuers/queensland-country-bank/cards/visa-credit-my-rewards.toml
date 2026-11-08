@@ -20,8 +20,9 @@ sources = [ "cdr", "https://www.queenslandcountry.bank/Banking/credit-cards/Visa
 
 [cdr]
 brand = "Queensland Country Bank"
+brand_id = "7179a2ee-f6a2-eb11-a822-000d3a884a20"
 product_id = "55"
-last_updated = "2026-10-31T00:00:23.8439437Z"
+last_updated = "2026-11-08T22:00:23.9966396Z"
 
 [fees]
 annual = 89

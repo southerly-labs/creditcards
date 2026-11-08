@@ -13,6 +13,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Unity Bank"
+brand_id = "bf7df75a-52bf-eb11-a823-000d3a884a20"
 product_id = "S79_BUSINESS_LOW_RATE_CREDIT_CARD"
 last_updated = "2026-09-30T10:27:11.000+10:00"
 

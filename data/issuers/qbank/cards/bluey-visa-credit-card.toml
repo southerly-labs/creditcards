@@ -23,6 +23,7 @@ months = 12
 
 [cdr]
 brand = "QBANK"
+brand_id = "2830e32a-4edd-eb11-a824-000d3a884a20"
 product_id = "S25_Bluey"
 last_updated = "2026-10-19T06:10:22.000+10:00"
 

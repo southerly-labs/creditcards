@@ -30,6 +30,7 @@ hash = "e775fa5444f0f356"
 
 [cdr]
 brand = "BankVic"
+brand_id = "09f9da8a-78bf-eb11-a823-000d3a884a20"
 product_id = "S17_QANTAS_CREDIT_CARD"
 last_updated = "2026-08-13T15:52:02.000+10:00"
 

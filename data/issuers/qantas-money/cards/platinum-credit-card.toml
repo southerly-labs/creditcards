@@ -22,8 +22,9 @@ outcome = "present"
 
 [cdr]
 brand = "Qantas Money Credit Cards"
+brand_id = "640ec6df-38bc-eb11-a823-000d3a884a20"
 product_id = "9da83225-c177-4d60-9475-fb0d2c7a74b4"
-last_updated = "2026-04-27T00:12:00Z"
+last_updated = "2026-11-02T00:12:00Z"
 
 [fees]
 annual = 399

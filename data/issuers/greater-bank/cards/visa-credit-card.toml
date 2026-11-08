@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Greater Bank"
+brand_id = "fa840998-cd28-ed11-a832-000d3a8830d6"
 product_id = "3220"
 last_updated = "2026-11-04T13:00:00Z"
 

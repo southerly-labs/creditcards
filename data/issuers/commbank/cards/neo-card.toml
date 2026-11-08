@@ -22,8 +22,9 @@ note = "The card charges 0% p.a. on purchases."
 
 [cdr]
 brand = "CommBank"
+brand_id = "25233bad-e494-ea11-a831-000d3a8842e1"
 product_id = "ce01a5a0965b45d281b624ff2e6d2f12"
-last_updated = "2026-10-31T02:15:41.000Z"
+last_updated = "2026-11-09T02:15:50.000Z"
 
 [fees]
 annual = 720

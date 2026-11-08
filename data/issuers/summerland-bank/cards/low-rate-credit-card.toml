@@ -19,8 +19,9 @@ sources = [ "cdr", "https://summerland.com.au/credit-cards", "https://www.summer
 
 [cdr]
 brand = "Summerland Bank"
+brand_id = "fa919a73-7ba1-eb11-a821-000d3a884a20"
 product_id = "74"
-last_updated = "2026-10-31T00:00:40.9098183Z"
+last_updated = "2026-11-08T22:00:41.6085862Z"
 
 [fees]
 annual = 49

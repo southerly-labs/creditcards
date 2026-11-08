@@ -36,6 +36,7 @@ sources = [ "cdr", "https://www.creditunionsa.com.au/cards/workplace-benefits-cr
 
 [cdr]
 brand = "Credit Union SA"
+brand_id = "9bf24742-68ac-eb11-a822-000d3a884a20"
 product_id = "CREDITUNIONSA_OD_570"
 last_updated = "2026-06-29T00:00:00.000+10:00"
 

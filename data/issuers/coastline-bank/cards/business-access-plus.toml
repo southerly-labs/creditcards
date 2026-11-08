@@ -25,6 +25,7 @@ sources = [ "cdr", "https://www.coastline.com.au/business/visa-business-credit-c
 
 [cdr]
 brand = "Coastline Bank"
+brand_id = "439e1c2a-b0be-eb11-a823-000d3a884a20"
 product_id = "66"
 last_updated = "2026-03-24T04:00:14.5359085Z"
 

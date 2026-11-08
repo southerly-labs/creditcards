@@ -42,8 +42,9 @@ outcome = "present"
 
 [cdr]
 brand = "CommBank"
+brand_id = "25233bad-e494-ea11-a831-000d3a8842e1"
 product_id = "ff7e709bc7f8414da253f9c10308fe24"
-last_updated = "2026-11-01T02:15:42.000Z"
+last_updated = "2026-11-09T02:15:50.000Z"
 
 [fees]
 annual = 228

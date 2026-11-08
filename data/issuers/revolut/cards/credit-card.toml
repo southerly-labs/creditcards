@@ -27,6 +27,7 @@ note = "The overview page CDR links returned HTTP 404."
 
 [cdr]
 brand = "Revolut"
+brand_id = "a890809f-ee12-ed11-a831-000d3a8830d6"
 product_id = "550e8400-e29b-41d4-a716-446655440005"
 last_updated = "2026-07-08T14:04:01.589894Z"
 

@@ -13,6 +13,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Maitland Mutual Limited"
+brand_id = "49c500b3-dacf-eb11-a824-000d3a884a20"
 product_id = "Mutual_Visa_Credit_Card"
 last_updated = "2026-07-15T07:46:22.000+10:00"
 

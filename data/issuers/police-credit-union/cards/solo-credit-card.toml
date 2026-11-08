@@ -34,6 +34,7 @@ note = "The credit cards page describes only the extralite card, and the SoLo pr
 
 [cdr]
 brand = "Police Credit Union Ltd"
+brand_id = "e9a1ff83-96c2-eb11-a823-000d3a884a20"
 product_id = "SoLo_Credit_Card"
 last_updated = "2026-04-27T11:33:53.000+09:30"
 

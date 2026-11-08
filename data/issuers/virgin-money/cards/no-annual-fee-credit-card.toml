@@ -22,6 +22,7 @@ outcome = "none"
 
 [cdr]
 brand = "Virgin Money"
+brand_id = "5f4a4ddc-670f-ec11-a826-000d3a884a20"
 product_id = "8db23721-102c-ee11-9965-002248e1d56c"
 last_updated = "2026-07-12T23:59:15Z"
 

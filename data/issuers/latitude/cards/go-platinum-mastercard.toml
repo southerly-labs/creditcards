@@ -14,8 +14,9 @@ _tag = "Selling"
 
 [cdr]
 brand = "Latitude Credit Cards"
+brand_id = "ace09c43-2271-f111-9b47-6045bd3f59f5"
 product_id = "8546d98a-3507-4856-b544-058d08f0c551"
-last_updated = "2026-09-30T03:28:00.000Z"
+last_updated = "2026-11-05T09:37:20.074Z"
 
 [fees]
 annual = 143.4

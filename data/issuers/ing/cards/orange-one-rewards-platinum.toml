@@ -22,6 +22,7 @@ outcome = "present"
 
 [cdr]
 brand = "ING BANK (Australia) Ltd"
+brand_id = "fc9352a8-ad27-eb11-a834-000d3a8842e1"
 product_id = "a4ea7460-9e69-499d-84dd-f281c7a04130"
 last_updated = "2026-08-11T06:21:03.003Z"
 

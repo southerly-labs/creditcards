@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Australian Military Bank"
+brand_id = "2ee9e2a8-1c98-eb11-a821-000d3a884a20"
 product_id = "e1f63c50-20bb-457a-8fee-da684c281a0a"
 last_updated = "2026-09-30T14:00:00.323756Z"
 

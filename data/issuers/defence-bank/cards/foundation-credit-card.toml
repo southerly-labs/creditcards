@@ -23,6 +23,7 @@ months = 6
 
 [cdr]
 brand = "Defence Bank"
+brand_id = "1a74d48b-7e9e-eb11-a821-000d3a884a20"
 product_id = "552"
 last_updated = "2026-03-16T00:00:00.000+11:00"
 

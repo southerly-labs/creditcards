@@ -22,8 +22,9 @@ outcome = "none"
 
 [cdr]
 brand = "Latitude Credit Cards"
+brand_id = "ace09c43-2271-f111-9b47-6045bd3f59f5"
 product_id = "01fbc1c8-d7e1-4403-ab17-b555a054eba3"
-last_updated = "2026-09-10T07:10:11.831Z"
+last_updated = "2026-11-05T09:33:58.561Z"
 
 [fees]
 annual = 143.4

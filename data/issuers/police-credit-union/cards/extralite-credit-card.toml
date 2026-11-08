@@ -32,6 +32,7 @@ note = "Two fees: $15 at 21 days in arrears and $25 at 35 days."
 
 [cdr]
 brand = "Police Credit Union Ltd"
+brand_id = "e9a1ff83-96c2-eb11-a823-000d3a884a20"
 product_id = "extralite_Credit_Card"
 last_updated = "2026-04-27T11:31:49.000+09:30"
 

@@ -27,6 +27,7 @@ note = "The page says Zip Pay and Zip Plus come with a Zip Visa card, but not Zi
 
 [cdr]
 brand = "Zip"
+brand_id = "b74ce68c-195f-f111-9b47-6045bd3f59f5"
 product_id = "zip-money"
 last_updated = "2026-08-04T00:00:00+00:00"
 

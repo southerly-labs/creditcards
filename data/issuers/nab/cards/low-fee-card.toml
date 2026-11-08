@@ -24,6 +24,7 @@ months = 12
 
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
+brand_id = "25797662-e294-ea11-a831-000d3a8842e1"
 product_id = "fbce13b1-77db-4226-9f55-9028ee31884f"
 last_updated = "2026-10-01T13:59:59Z"
 

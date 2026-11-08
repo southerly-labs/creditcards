@@ -42,6 +42,7 @@ outcome = "present"
 
 [cdr]
 brand = "ANZ"
+brand_id = "f4562bb8-e394-ea11-a831-000d3a8842e1"
 product_id = "b395fe15-e8e0-43b5-824d-5a1fab936161"
 last_updated = "2026-10-04T23:00:00.000Z"
 

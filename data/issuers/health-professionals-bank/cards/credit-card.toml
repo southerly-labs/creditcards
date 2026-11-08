@@ -24,6 +24,7 @@ months = 6
 
 [cdr]
 brand = "Health Professionals Bank"
+brand_id = "3445ce0d-31b1-eb11-a822-000d3a884a20"
 product_id = "a6b1d3e9-de46-421f-a05e-84e40d3238d9"
 last_updated = "2026-09-09T15:07:02.000+10:00"
 

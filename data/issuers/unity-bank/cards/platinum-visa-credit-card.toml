@@ -23,6 +23,7 @@ outcome = "present"
 
 [cdr]
 brand = "Unity Bank"
+brand_id = "bf7df75a-52bf-eb11-a823-000d3a884a20"
 product_id = "S78_PLATINUM_VISA_CREDIT_CARD"
 last_updated = "2026-09-14T10:49:01.000+10:00"
 

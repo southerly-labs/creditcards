@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Bank First"
+brand_id = "6033e46f-ea9c-eb11-a821-000d3a884a20"
 product_id = "22e0e7ff-db3f-4934-9c47-730ac3a1b980"
 last_updated = "2026-06-15T23:24:20.344287Z"
 

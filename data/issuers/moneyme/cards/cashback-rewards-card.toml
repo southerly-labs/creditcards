@@ -33,6 +33,7 @@ outcome = "present"
 
 [cdr]
 brand = "MoneyMe"
+brand_id = "608d291b-0c75-f111-9b47-6045bd3f59f5"
 product_id = "moneyme-credit-card"
 last_updated = "2026-10-08T00:00:00Z"
 

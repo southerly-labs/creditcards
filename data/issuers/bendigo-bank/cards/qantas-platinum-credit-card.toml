@@ -22,6 +22,7 @@ outcome = "present"
 
 [cdr]
 brand = "Bendigo Bank"
+brand_id = "459574b5-999d-eb11-a821-000d3a884a20"
 product_id = "f2476015-6ff3-4165-8d89-c8ca7fe76735"
 last_updated = "2026-10-28T05:19:01.570Z"
 

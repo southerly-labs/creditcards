@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "American Express"
+brand_id = "e368df64-f07b-f111-9b47-6045bd3f59f5"
 product_id = "4bfa1b93-6392-4a07-aafc-812f4947fe21"
 last_updated = "2026-07-08T02:30:00.000Z"
 

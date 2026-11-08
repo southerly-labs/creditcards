@@ -52,6 +52,7 @@ outcome = "present"
 
 [cdr]
 brand = "NATIONAL AUSTRALIA BANK"
+brand_id = "25797662-e294-ea11-a831-000d3a8842e1"
 product_id = "c43ad795-9db1-4e1f-a7f5-845714ecedfd"
 last_updated = "2026-10-01T13:59:59Z"
 

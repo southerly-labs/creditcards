@@ -21,6 +21,7 @@ note = "CDR publishes only a $30 \"Late Payment Reminder Fee\". The normaliser d
 
 [cdr]
 brand = "HSBC Bank Australia Limited – Wholesale Banking"
+brand_id = "94847394-0cfd-ec11-a830-000d3a8830d6"
 product_id = "CR2"
 last_updated = "2025-12-02T07:07:11.406Z"
 

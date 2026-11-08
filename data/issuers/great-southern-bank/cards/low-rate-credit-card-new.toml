@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Great Southern Bank"
+brand_id = "aff66646-9ad8-eb11-a824-000d3a884a20"
 product_id = "2691-0100"
 last_updated = "2026-10-30T21:01:00.00000Z"
 

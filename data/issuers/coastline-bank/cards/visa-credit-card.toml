@@ -20,6 +20,7 @@ sources = [ "cdr", "https://www.coastline.com.au/personal/visa-credit-card", "ht
 
 [cdr]
 brand = "Coastline Bank"
+brand_id = "439e1c2a-b0be-eb11-a823-000d3a884a20"
 product_id = "21"
 last_updated = "2026-10-14T14:00:14.4205168Z"
 

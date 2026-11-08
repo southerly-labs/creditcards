@@ -28,6 +28,7 @@ sources = [ "cdr", "https://www.heritage.com.au/banking/credit-cards/business-vi
 
 [cdr]
 brand = "People First and Heritage Bank"
+brand_id = "b111c64b-b6c9-eb11-a823-000d3a884a20"
 product_id = "59c9ee22-c20e-4f97-bb8c-692b7fa4ad99"
 last_updated = "2026-06-04T00:02:48.231Z"
 

@@ -14,8 +14,9 @@ _tag = "Selling"
 
 [cdr]
 brand = "BankSA"
+brand_id = "01608f70-e4ae-eb11-a822-000d3a884a20"
 product_id = "BSACCVertigocard"
-last_updated = "2026-10-29T01:03:02Z"
+last_updated = "2026-11-05T02:44:45Z"
 
 [fees]
 annual = 84

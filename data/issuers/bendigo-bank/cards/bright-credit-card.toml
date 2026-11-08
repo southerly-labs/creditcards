@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Bendigo Bank"
+brand_id = "459574b5-999d-eb11-a821-000d3a884a20"
 product_id = "aab92b58-4260-4b57-8f7f-5e448805b766"
 last_updated = "2026-10-23T01:26:50.341Z"
 

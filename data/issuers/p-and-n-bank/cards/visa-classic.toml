@@ -14,8 +14,9 @@ _tag = "Selling"
 
 [cdr]
 brand = "P&N Bank"
+brand_id = "14037661-e1ab-eb11-a822-000d3a884a20"
 product_id = "41"
-last_updated = "2026-06-28T16:00:22.3851793Z"
+last_updated = "2026-11-03T20:00:29.2114598Z"
 
 [fees]
 annual = 49

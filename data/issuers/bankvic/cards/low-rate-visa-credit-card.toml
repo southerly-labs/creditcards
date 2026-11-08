@@ -23,6 +23,7 @@ months = 6
 
 [cdr]
 brand = "BankVic"
+brand_id = "09f9da8a-78bf-eb11-a823-000d3a884a20"
 product_id = "S15_VISA_CLASSIC_CREDIT_CA"
 last_updated = "2025-11-21T14:27:08.000+11:00"
 

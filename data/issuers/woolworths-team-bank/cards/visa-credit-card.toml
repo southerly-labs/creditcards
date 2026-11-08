@@ -27,6 +27,7 @@ note = "The card URL CDR publishes redirects to a home loans page."
 
 [cdr]
 brand = "Woolworths Team Bank"
+brand_id = "27562b79-f6c8-eb11-a823-000d3a884a20"
 product_id = "S90"
 last_updated = "2025-08-26T11:59:05.000+10:00"
 

@@ -23,8 +23,9 @@ months = 5
 
 [cdr]
 brand = "Horizon Bank"
+brand_id = "5c2e8067-d2de-eb11-a824-000d3a884a20"
 product_id = "S97_S970001"
-last_updated = "2025-10-23T15:35:57.000+11:00"
+last_updated = "2026-11-04T10:53:38.000+11:00"
 
 [fees]
 late_payment = 10

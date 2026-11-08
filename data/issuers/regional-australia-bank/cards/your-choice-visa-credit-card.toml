@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Regional Australia Bank"
+brand_id = "264db1e2-8e1d-eb11-a834-000d3a8842e1"
 product_id = "8d097100-9251-4174-a9e5-8af00812ca87"
 last_updated = "2026-06-29T04:05:39.586605Z"
 

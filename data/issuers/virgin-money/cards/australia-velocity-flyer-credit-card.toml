@@ -62,6 +62,7 @@ hash = "63a745e491608be2"
 
 [cdr]
 brand = "Virgin Money"
+brand_id = "5f4a4ddc-670f-ec11-a826-000d3a884a20"
 product_id = "76126e21-102c-ee11-9966-002248e1dc43"
 last_updated = "2026-10-21T04:44:27Z"
 

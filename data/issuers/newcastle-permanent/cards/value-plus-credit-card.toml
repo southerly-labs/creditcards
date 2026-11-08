@@ -13,6 +13,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "Newcastle Permanent"
+brand_id = "d5306c4e-ea83-ec11-a82b-000d3a884a20"
 product_id = "CC_valuepluscc"
 last_updated = "2026-11-05T00:00:00+11:00"
 

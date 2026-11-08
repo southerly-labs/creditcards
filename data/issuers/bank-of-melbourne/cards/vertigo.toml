@@ -14,8 +14,9 @@ _tag = "Selling"
 
 [cdr]
 brand = "Bank of Melbourne"
+brand_id = "5570db5a-e5ae-eb11-a822-000d3a884a20"
 product_id = "BOMCCVertigocard"
-last_updated = "2026-10-29T01:03:01Z"
+last_updated = "2026-11-05T02:44:44Z"
 
 [fees]
 annual = 84

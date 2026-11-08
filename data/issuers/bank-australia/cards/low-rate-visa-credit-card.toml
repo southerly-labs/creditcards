@@ -26,8 +26,9 @@ sources = [ "cdr", "https://www.bankaust.com.au/banking/credit-cards/low-rate-vi
 
 [cdr]
 brand = "Bank Australia"
+brand_id = "578efc60-4eb1-eb11-a822-000d3a884a20"
 product_id = "a3e1054a-73da-469f-863e-0f3418967627"
-last_updated = "2026-10-31T21:00:23.444Z"
+last_updated = "2026-11-04T05:54:46.474Z"
 
 [fees]
 annual = 0

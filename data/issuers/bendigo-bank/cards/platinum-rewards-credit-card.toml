@@ -21,6 +21,7 @@ hash = "5be5c402c0cb10af"
 
 [cdr]
 brand = "Bendigo Bank"
+brand_id = "459574b5-999d-eb11-a821-000d3a884a20"
 product_id = "4550220b-7b80-4c6a-a446-221e42453768"
 last_updated = "2026-10-26T03:56:23.669Z"
 

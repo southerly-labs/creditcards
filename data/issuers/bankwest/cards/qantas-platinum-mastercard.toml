@@ -47,6 +47,7 @@ hash = "bbd7b1dc953eb4fc"
 
 [cdr]
 brand = "Bankwest"
+brand_id = "ae94b39d-6f30-eb11-a81d-000d3a884a20"
 product_id = "ff24e3061b6a4de3b91c101607c3f15f"
 last_updated = "2026-10-09T11:08:30.000Z"
 

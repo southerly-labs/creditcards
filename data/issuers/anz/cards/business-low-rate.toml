@@ -20,6 +20,7 @@ correction_reason = "rates.interest_free_days = 0 from the issuer's page: \"inte
 
 [cdr]
 brand = "ANZ"
+brand_id = "f4562bb8-e394-ea11-a831-000d3a8842e1"
 product_id = "ca69da6f-d4e9-ba91-1aba-41fa429f031e"
 last_updated = "2026-03-15T13:00:00.000Z"
 

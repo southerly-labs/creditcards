@@ -22,6 +22,7 @@ outcome = "present"
 
 [cdr]
 brand = "Qudos Bank"
+brand_id = "ac4892a0-44ad-eb11-a822-000d3a884a20"
 product_id = "9a6f5620-e93c-4e0c-bc23-d7f979b97f69"
 last_updated = "2026-10-31T21:58:08.869Z"
 

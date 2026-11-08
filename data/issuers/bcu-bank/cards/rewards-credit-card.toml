@@ -14,6 +14,7 @@ _tag = "Selling"
 
 [cdr]
 brand = "BCU Bank"
+brand_id = "902e9d5b-e4ab-eb11-a822-000d3a884a20"
 product_id = "164"
 last_updated = "2026-07-10T14:00:53.0189421Z"
 

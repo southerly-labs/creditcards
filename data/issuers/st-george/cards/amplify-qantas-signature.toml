@@ -35,6 +35,7 @@ outcome = "present"
 
 [cdr]
 brand = "St.George Bank"
+brand_id = "31cc0d98-e3ae-eb11-a822-000d3a884a20"
 product_id = "STGCCAmplifySignaturecardFrequentFlyer"
 last_updated = "2026-10-29T01:03:01Z"
 
