@@ -195,6 +195,15 @@ describe("sends unclear offers to review", () => {
 })
 
 layer(Digest.layerWebCrypto)((it) => {
+  it.effect("the text hash ignores the order CDR lists features in", () =>
+    Effect.gen(function* () {
+      const a = feature("80000", "80,000 points")
+      const b = feature("20000", "20,000 points in year 2")
+
+      assert.strictEqual(yield* bonusTextHash([a, b]), yield* bonusTextHash([b, a]))
+    })
+  )
+
   it.effect("the text hash changes with the offer", () =>
     Effect.gen(function* () {
       assert.notStrictEqual(

@@ -132,6 +132,15 @@ layer(Digest.layerWebCrypto)((it) => {
     })
   )
 
+  it.effect("text hash ignores the order CDR lists features in", () =>
+    Effect.gen(function* () {
+      const qantas = feature("Qantas", "Earn 1 point per $1")
+      const partner = feature("Partner", "Convert points")
+
+      assert.strictEqual(yield* loyaltyTextHash([qantas, partner]), yield* loyaltyTextHash([partner, qantas]))
+    })
+  )
+
   describe("planRewards", () => {
     const simple = [feature("Bendigo Bank Rewards", "Earn 1.5 Bendigo Bank Rewards points for every dollar spent")]
 

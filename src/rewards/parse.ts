@@ -1,4 +1,4 @@
-import { Data, String as EffectString, Array as EffectArray, pipe, Option } from "effect"
+import { Data, String as EffectString, Array as EffectArray, pipe, Option, Order } from "effect"
 import { required } from "../util/required.ts"
 import { sha256Prefix } from "../util/hash.ts"
 import type { EarnRate } from "../model/schema.ts"
@@ -16,15 +16,16 @@ export const ParseResult = Data.taggedEnum<ParseResult>()
 
 const clean = (s: string | null | undefined) => EffectString.trim(pipe(s ?? "", EffectString.replaceAll(/\s+/gu, " ")))
 
-export const loyaltyText = (features: ReadonlyArray<LoyaltyFeature>): string =>
-  EffectArray.join(
-    EffectArray.map(features, (f) =>
-      EffectArray.join(EffectArray.filter([clean(f.additionalValue), clean(f.additionalInfo)], Boolean), " — ")
-    ),
-    "\n"
+const featureLines = (features: ReadonlyArray<LoyaltyFeature>) =>
+  EffectArray.map(features, (f) =>
+    EffectArray.join(EffectArray.filter([clean(f.additionalValue), clean(f.additionalInfo)], Boolean), " — ")
   )
 
-export const loyaltyTextHash = (features: ReadonlyArray<LoyaltyFeature>) => sha256Prefix(loyaltyText(features), 16)
+export const loyaltyText = (features: ReadonlyArray<LoyaltyFeature>): string =>
+  EffectArray.join(featureLines(features), "\n")
+
+export const loyaltyTextHash = (features: ReadonlyArray<LoyaltyFeature>) =>
+  sha256Prefix(EffectArray.join(EffectArray.sort(featureLines(features), Order.String), "\n"), 16)
 
 const review = (reason: string): ParseResult => ParseResult.Review({ reason })
 

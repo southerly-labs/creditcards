@@ -13,15 +13,16 @@ export const BonusResult = Data.taggedEnum<BonusResult>()
 
 const clean = (s: string | null | undefined) => EffectString.trim(pipe(s ?? "", EffectString.replaceAll(/\s+/gu, " ")))
 
-export const bonusText = (features: ReadonlyArray<LoyaltyFeature>): string =>
-  EffectArray.join(
-    EffectArray.map(features, (f) =>
-      EffectArray.join(EffectArray.filter([clean(f.additionalValue), clean(f.additionalInfo)], Boolean), " — ")
-    ),
-    "\n"
+const featureLines = (features: ReadonlyArray<LoyaltyFeature>) =>
+  EffectArray.map(features, (f) =>
+    EffectArray.join(EffectArray.filter([clean(f.additionalValue), clean(f.additionalInfo)], Boolean), " — ")
   )
 
-export const bonusTextHash = (features: ReadonlyArray<LoyaltyFeature>) => sha256Prefix(bonusText(features), 16)
+export const bonusText = (features: ReadonlyArray<LoyaltyFeature>): string =>
+  EffectArray.join(featureLines(features), "\n")
+
+export const bonusTextHash = (features: ReadonlyArray<LoyaltyFeature>) =>
+  sha256Prefix(EffectArray.join(EffectArray.sort(featureLines(features), Order.String), "\n"), 16)
 
 const review = (reason: string): BonusResult => BonusResult.Review({ reason })
 
