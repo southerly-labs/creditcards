@@ -1,7 +1,9 @@
-import { Array as EffectArray, Option } from "effect"
+import { Array as EffectArray, Option, Record as EffectRecord, Schema } from "effect"
 import { SourceReview } from "../machine/review.ts"
 import type { Card } from "../model/schema.ts"
 import { getPath } from "../sync/merge.ts"
+import { CalendarDate, Timestamp } from "../model/domain.ts"
+import { lockSection } from "../machine/sectionLock.ts"
 
 const reviewedOutcome = (state: SourceReview | undefined) =>
   state !== undefined && (SourceReview.guards.Reviewed(state) || SourceReview.guards.Stale(state))
@@ -54,9 +56,38 @@ const gapProblems = (card: Card): ReadonlyArray<string> =>
     getPath(card, gap.field) === undefined ? [] : [`gap for ${gap.field} is stale: the field has a value`]
   )
 
+const isMoment = Schema.is(Schema.Union([Timestamp, CalendarDate]))
+
+const DERIVED_PROVENANCE = ["cdr_observed_at", "cdr_changed_on"] as const
+
+const provenanceProblems = (card: Card): ReadonlyArray<string> => {
+  const provenance = card.provenance
+
+  if (provenance === undefined) return []
+
+  const derived = EffectArray.flatMap(DERIVED_PROVENANCE, (field) =>
+    provenance[field] === undefined ? [] : [`provenance.${field} is derived at build time and must not be stored`]
+  )
+
+  const lockedSections = new Set(EffectArray.map(card.locked ?? [], lockSection))
+
+  const sections = EffectArray.flatMap(EffectRecord.toEntries(provenance.sections ?? {}), ([name, section]) => [
+    ...(lockedSections.has(name)
+      ? []
+      : [`provenance.sections.${name} records a correction but nothing under ${name} is locked`]),
+    ...(isMoment(section.reviewed_at) ? [] : [`provenance.sections.${name}.reviewed_at is not a date or timestamp`]),
+    ...(section.observed_at === undefined || isMoment(section.observed_at)
+      ? []
+      : [`provenance.sections.${name}.observed_at is not a date or timestamp`])
+  ])
+
+  return [...derived, ...sections]
+}
+
 export const cardProblems = (card: Card): ReadonlyArray<string> => [
   ...earnProblems(card),
   ...signupProblems(card),
   ...offerProblems(card),
-  ...gapProblems(card)
+  ...gapProblems(card),
+  ...provenanceProblems(card)
 ]

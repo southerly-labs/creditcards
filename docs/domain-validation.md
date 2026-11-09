@@ -38,3 +38,14 @@ Offers with `source = "cdr"` must use an id the sync generates (`intro-purchase`
 Anything else written by hand must be `source = "manual"`, or the next sync would
 treat it as generated and remove it. A `gaps` entry is rejected when its field has
 a value: remove the gap when you fill the field by hand.
+
+Stored `provenance` must not contain `cdr_observed_at` or `cdr_changed_on`: the
+build derives both, and a stored value would be published as if it had been
+observed. Each `provenance.sections` entry must match a lock on the card (its
+name is a lock path's first segment, as `provenance correct` writes it), and its
+`reviewed_at` and `observed_at` must be a date or an ISO timestamp.
+
+Each entry in `data/sync-holds.toml` must name a change the sync holds (a diffed
+card path or `offers.<id>`), store `current` and `proposed` as JSON, carry the id
+the sync computes from its card, change and proposed value, and, once decided,
+be decided no earlier than its `since` date.

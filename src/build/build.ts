@@ -12,6 +12,7 @@ import { type Dataset, splitCardKey, Store } from "../store/Store.ts"
 import { isEffectiveLock } from "../sync/merge.ts"
 import { cardBrand } from "../sync/brands.ts"
 import { cardProblems } from "./consistency.ts"
+import { holdIdProblems, holdProblems } from "./holdChecks.ts"
 
 export class ValidationError extends Schema.TaggedError<ValidationError, { readonly brand: unique symbol }>()(
   "ValidationError",
@@ -93,6 +94,7 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
 
     if (holdIds.has(hold.id)) problems.push(`sync-holds: duplicate id ${hold.id}`)
     holdIds.add(hold.id)
+    problems.push(...holdProblems(hold))
   }
 
   for (const key of dataset.observations?.keys() ?? []) {
@@ -104,7 +106,7 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
 
 export const validate = Effect.gen(function* () {
   const dataset = yield* (yield* Store).load
-  const problems = checkReferences(dataset)
+  const problems = [...checkReferences(dataset), ...(yield* holdIdProblems(dataset.holds ?? []))]
 
   if (problems.length > 0) return yield* ValidationError.make({ problems })
 
