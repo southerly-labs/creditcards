@@ -68,20 +68,21 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          pending=$(jq '(.held | length) + ([.holds[] | select(.state._tag == "AwaitingApproval" or .state._tag == "AwaitingConfirmation")] | length)' .cache/sync-report.json)
           number=$(gh issue list --label sync-held --state open --json number --jq '.[0].number')
-          if [ "$pending" -eq 0 ]; then
-            if [ -n "$number" ]; then
-              gh issue close "$number" --comment "No changes are held."
-            fi
-            exit 0
-          fi
-          gh label create sync-held --color D93F0B --description "Data changes held back by sync guardrails" --force
-          if [ -n "$number" ]; then
-            gh issue edit "$number" --body-file .cache/sync-held.md
-          else
-            gh issue create --title "CDR sync: changes held for review" --label sync-held --body-file .cache/sync-held.md
-          fi
+          bun run cli review issue held ${number:+--number "$number"} --out .cache/held-issue.json
+          case "$(jq -r ._tag .cache/held-issue.json)" in
+            Create)
+              gh label create sync-held --color D93F0B --description "Data changes held back by sync guardrails" --force
+              gh issue create --title "CDR sync: changes held for review" --label sync-held --body-file .cache/sync-held.md
+              ;;
+            Edit)
+              gh label create sync-held --color D93F0B --description "Data changes held back by sync guardrails" --force
+              gh issue edit "$(jq -r .number .cache/held-issue.json)" --body-file .cache/sync-held.md
+              ;;
+            Close)
+              gh issue close "$(jq -r .number .cache/held-issue.json)" --comment "No changes are held."
+              ;;
+          esac
 
       - name: Update earn-rate review issue
         id: rewards_issue
@@ -89,28 +90,29 @@ jobs:
           EARN_OUTCOME: ${{ steps.earn_pages.outcome }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          count=1
+          checked=()
           if [ -f .cache/earn-check.json ] && [ "$EARN_OUTCOME" = "success" ]; then
-            bun run cli review tasks --out .cache/review-tasks.json
-            count=$(jq .open .cache/review-tasks.json)
+            checked=(--checked)
             printf '\n' >> .cache/rewards-review.md
             cat .cache/earn-check.md >> .cache/rewards-review.md
           else
             printf '\nIssuer page check failed; source verification remains unresolved.\n' >> .cache/rewards-review.md
           fi
           number=$(gh issue list --label rewards-review --state open --json number --jq '.[0].number')
-          if [ "$count" -eq 0 ]; then
-            if [ -n "$number" ]; then
-              gh issue close "$number" --comment "No open review tasks or unreadable issuer pages remain."
-            fi
-            exit 0
-          fi
-          gh label create rewards-review --color 0E8A16 --description "Earn rates and signup bonuses the parsers could not read" --force
-          if [ -n "$number" ]; then
-            gh issue edit "$number" --body-file .cache/rewards-review.md
-          else
-            gh issue create --title "Earn rates and signup bonuses to review" --label rewards-review --body-file .cache/rewards-review.md
-          fi
+          bun run cli review issue rewards ${number:+--number "$number"} "${checked[@]}" --out .cache/rewards-issue.json
+          case "$(jq -r ._tag .cache/rewards-issue.json)" in
+            Create)
+              gh label create rewards-review --color 0E8A16 --description "Earn rates and signup bonuses the parsers could not read" --force
+              gh issue create --title "Earn rates and signup bonuses to review" --label rewards-review --body-file .cache/rewards-review.md
+              ;;
+            Edit)
+              gh label create rewards-review --color 0E8A16 --description "Earn rates and signup bonuses the parsers could not read" --force
+              gh issue edit "$(jq -r .number .cache/rewards-issue.json)" --body-file .cache/rewards-review.md
+              ;;
+            Close)
+              gh issue close "$(jq -r .number .cache/rewards-issue.json)" --comment "No open review tasks or unreadable issuer pages remain."
+              ;;
+          esac
 
       - name: Record daily autonomy metrics
         id: metrics
