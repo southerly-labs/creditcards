@@ -10,7 +10,9 @@ public. These are descriptive evidence, not a guarantee of verification.
 
 Builds emit schema_version 1 and freshness, and the decoder requires both.
 The web app is deployed with the api.json it reads, so it never needs to decode
-an older document. generated_at is the build serialization time,
+an older document. The build decodes what it is about to write with the same
+contract and fails if it does not match, so the site never ships an api.json
+it would reject. generated_at is the build serialization time,
 not source freshness or the time of a successful sync.
 
 freshness.cdr_latest_product_updated_at is the latest parseable, timezone-qualified

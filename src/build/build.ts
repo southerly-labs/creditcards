@@ -1,7 +1,7 @@
 import { required } from "../util/required.ts"
 import { dual } from "effect/Function"
 import { Effect, Result, Schema, Record as EffectRecord, Array as EffectArray } from "effect"
-import { type Api, type PublicCard } from "../api/contract.ts"
+import { type Api, decodeApi, type PublicCard } from "../api/contract.ts"
 import { datasetFreshness } from "../api/freshness.ts"
 import { flatFromLifecycle } from "../machine/cardLifecycle.ts"
 import { earnStateOf, publicRewards, publicSignupReview, signupStateOf } from "../rewards/state.ts"
@@ -155,3 +155,15 @@ export const toApi = dual<
   (generatedAt?: string) => (dataset: Dataset) => Api,
   (dataset: Dataset, generatedAt?: string) => Api
 >((args) => typeof args[0] === "object", toApiImpl)
+
+export const publicApi = Effect.fn("publicApi")(function* (dataset: Dataset, generatedAt: string) {
+  const api = toApi(dataset, generatedAt)
+
+  yield* decodeApi(api).pipe(
+    Effect.mapError((error) =>
+      ValidationError.make({ problems: [`api.json does not match its contract: ${error.message}`] })
+    )
+  )
+
+  return api
+})

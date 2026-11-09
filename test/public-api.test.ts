@@ -1,6 +1,6 @@
 import { assert, it, test } from "@effect/vitest"
 import { Effect, Exit } from "effect"
-import { checkReferences, toApi } from "../src/build/build.ts"
+import { checkReferences, publicApi, toApi } from "../src/build/build.ts"
 import { decodeApi } from "../src/api/contract.ts"
 import type { Offer } from "../src/offers/schema.ts"
 import type { Card } from "../src/model/schema.ts"
@@ -88,6 +88,25 @@ it.effect("public cards keep card-level domain checks", () =>
 
     assert.isFalse(yield* apiDecodes(api({ min_credit: 10_000, max_credit: 1000 })))
     assert.isTrue(yield* apiDecodes(api({ min_credit: 1000, max_credit: 10_000 })))
+  })
+)
+
+it.effect("the build refuses an api.json the site could not decode", () =>
+  Effect.gen(function* () {
+    const dataset = (limits: { readonly min_credit: number; readonly max_credit: number }): Dataset => ({
+      issuers: new Map([["bank", { name: "Bank", cdr_brands: [] }]]),
+      programs: new Map(),
+      cards: new Map([["bank/card", { ...card, limits }]])
+    })
+
+    const built = yield* publicApi(dataset({ min_credit: 1000, max_credit: 10_000 }), "2026-01-01T00:00:00Z")
+    assert.strictEqual(built.freshness.card_count, 1)
+
+    const refused = yield* Effect.flip(
+      publicApi(dataset({ min_credit: 10_000, max_credit: 1000 }), "2026-01-01T00:00:00Z")
+    )
+
+    assert.match(refused.problems[0] ?? "", /^api\.json does not match its contract/u)
   })
 )
 

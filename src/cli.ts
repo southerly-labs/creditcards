@@ -6,7 +6,7 @@ import { BunRuntime, BunServices } from "@effect/platform-bun"
 import { Console, Effect, FileSystem, Layer, Option, Path, Schema } from "effect"
 import { Argument, Command, Flag } from "effect/cli"
 import { FetchHttpClient } from "effect/http"
-import { toApi, validate } from "./build/build.ts"
+import { publicApi, validate } from "./build/build.ts"
 import { CdrClient } from "./cdr/CdrClient.ts"
 import {
   type CheckResult,
@@ -98,7 +98,10 @@ const build = Command.make(
 
     const dataset = { ...validated, changes }
 
-    yield* writeFile(`${out}/api.json`, yield* encodeJson(toApi(dataset, DateTime.formatIso(yield* DateTime.now))))
+    yield* writeFile(
+      `${out}/api.json`,
+      yield* encodeJson(yield* publicApi(dataset, DateTime.formatIso(yield* DateTime.now)))
+    )
     yield* Console.log(`Wrote ${out}/api.json (${dataset.cards.size} cards)`)
   })
 ).pipe(Command.withDescription("Build dist/api.json from data/"))
