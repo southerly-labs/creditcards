@@ -5,9 +5,10 @@ import { decodeApi } from "../src/api/contract.ts"
 import type { Offer } from "../src/offers/schema.ts"
 import type { Card } from "../src/model/schema.ts"
 import type { Dataset } from "../src/store/Store.ts"
-import { String as EffectString, pipe } from "effect"
+import { Array as EffectArray, String as EffectString, pipe } from "effect"
 import { encodeJson } from "../src/util/json.ts"
 import { initialLifecycle } from "../src/machine/cardLifecycle.ts"
+import { SourceReview } from "../src/machine/review.ts"
 
 const apiDecodes = (input: unknown) => Effect.exit(decodeApi(input)).pipe(Effect.map(Exit.isSuccess))
 
@@ -245,5 +246,42 @@ test("a CDR product belongs to one card under the key the sync matches on", () =
     "bank/b: same CDR product as bank/a",
     "bank/d: same CDR product as bank/c",
     "bank/f: same CDR product as bank/e"
+  ])
+})
+
+test("review states must agree with the earn rates and signup offer they describe", () => {
+  const rewards = { program: "points" }
+  const rate = [{ rate: 1 }]
+  const reviewed = (outcome: "present" | "none") => SourceReview.cases.Reviewed.make({ hash: "h", outcome })
+
+  const signup = (source: "manual" | "parser"): Offer => ({
+    id: "signup",
+    source,
+    components: [{ kind: "signup_points", program: "points", points: 50_000, year: 1 }]
+  })
+
+  const cards: ReadonlyArray<readonly [string, Card]> = [
+    ["ok", { ...card, rewards: { ...rewards, earn: rate }, earn_state: SourceReview.cases.Parsed.make({ hash: "h" }) }],
+    ["parsed-empty", { ...card, rewards, earn_state: SourceReview.cases.Parsed.make({ hash: "h" }) }],
+    ["present-empty", { ...card, rewards: { ...rewards, earn: [] }, earn_state: reviewed("present") }],
+    ["none-rates", { ...card, rewards: { ...rewards, earn: rate }, earn_state: reviewed("none") }],
+    ["none-ok", { ...card, rewards: { ...rewards, earn: [] }, earn_state: reviewed("none") }],
+    ["signup-parser", { ...card, rewards, offers: [signup("parser")], signup_state: reviewed("present") }],
+    ["signup-ok", { ...card, rewards, offers: [signup("manual")], signup_state: reviewed("present") }],
+    ["signup-none", { ...card, rewards, offers: [signup("manual")], signup_state: reviewed("none") }]
+  ]
+
+  const dataset: Dataset = {
+    issuers: new Map([["bank", { name: "Bank", cdr_brands: [] }]]),
+    programs: new Map([["points", { name: "Points", type: "bank" }]]),
+    cards: new Map(EffectArray.map(cards, ([slug, value]) => [`bank/${slug}`, value] as const))
+  }
+
+  assert.deepStrictEqual(checkReferences(dataset), [
+    "bank/parsed-empty: earn_state is Parsed but rewards.earn is empty",
+    "bank/present-empty: earn_state records a reviewed earn rate but rewards.earn is empty",
+    "bank/none-rates: earn_state records no fixed earn rate but rewards.earn has rates",
+    "bank/signup-parser: signup_state records a reviewed signup offer but there is no manual signup offer",
+    "bank/signup-none: signup_state records no signup offer but the card has one"
   ])
 })

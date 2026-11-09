@@ -11,6 +11,7 @@ export type { Api } from "../api/contract.ts"
 import { type Dataset, splitCardKey, Store } from "../store/Store.ts"
 import { isEffectiveLock } from "../sync/merge.ts"
 import { cardBrand } from "../sync/brands.ts"
+import { cardProblems } from "./consistency.ts"
 
 export class ValidationError extends Schema.TaggedError<ValidationError, { readonly brand: unique symbol }>()(
   "ValidationError",
@@ -57,6 +58,8 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
 
     if (card.cdr !== undefined && dataset.issuers.has(issuer) && brandIssuer.get(card.cdr.brand) !== issuer)
       problems.push(`${key}: CDR brand ${card.cdr.brand} is not in ${issuer}'s cdr_brands`)
+
+    for (const problem of cardProblems(card)) problems.push(`${key}: ${problem}`)
 
     for (const path of card.locked ?? []) {
       if (!isEffectiveLock(path)) problems.push(`${key}: the sync never writes ${path}, so locking it has no effect`)

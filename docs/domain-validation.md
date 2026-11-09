@@ -25,3 +25,9 @@ which locks the whole `cdr` table), or be exactly `lifecycle` or `offers`.
 Checks live at the shared schema boundary used by dataset validation, API
 decoding, and sync's existing invalid-record hold path. No source facts or review
 dates are inferred or changed.
+
+Review states must agree with the data they describe (`src/build/consistency.ts`).
+An `earn_state` of `Parsed`, or `Reviewed`/`Stale` with outcome `present`, needs a
+non-empty `rewards.earn`; outcome `none` needs it empty or absent. A
+`signup_state` with outcome `present` needs a `manual` offer with id `signup`;
+outcome `none` needs no `signup` offer.
