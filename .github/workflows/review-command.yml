@@ -33,6 +33,7 @@ jobs:
       COMMENT_URL: ${{ github.event.comment.html_url }}
       COMMENT_BY: ${{ github.event.comment.user.login }}
       COMMENT_BODY: ${{ github.event.comment.body }}
+      ISSUE_BODY: ${{ github.event.issue.body }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -46,7 +47,8 @@ jobs:
         run: |
           mkdir -p .cache
           printf '%s\n' "$COMMENT_BODY" > .cache/comment.md
-          bun run cli review apply --body-file .cache/comment.md --by "$COMMENT_BY" --url "$COMMENT_URL" --out .cache/review-result.md
+          printf '%s\n' "$ISSUE_BODY" > .cache/issue.md
+          bun run cli review apply --body-file .cache/comment.md --issue-file .cache/issue.md --by "$COMMENT_BY" --url "$COMMENT_URL" --out .cache/review-result.md
 
       # Bot pushes made with GITHUB_TOKEN do not trigger CI, so run the
       # full check here before anything reaches main.

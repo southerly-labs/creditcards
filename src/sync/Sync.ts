@@ -26,6 +26,7 @@ import { stepReview } from "../machine/review.ts"
 import { applyBonusPlan, BonusPlan, planBonus, planRewards, RewardsPlan } from "../rewards/plan.ts"
 import { cardKey, splitCardKey, Store } from "../store/Store.ts"
 import { cardBrand, fetchedBrands } from "./brands.ts"
+import { BONUS_REVIEW_INTRO, EARN_REVIEW_INTRO } from "../review/listed.ts"
 import { cardSlug, issuerSeed } from "./issuers.ts"
 import {
   diffCard,
@@ -724,7 +725,7 @@ export const summariseReport = Effect.fn("summariseReport")(function* (r: SyncRe
 const reviewKey = (entry: ReviewEntry) => (entry.hash === undefined ? entry.card : `${entry.card}@${entry.hash}`)
 
 const earnReviewSection = (r: SyncReport) => [
-  `${r.rewards.review.length} cards have earn rates the parser could not read (sync ${r.date}).`,
+  `${r.rewards.review.length} ${EARN_REVIEW_INTRO} (sync ${r.date}).`,
   "",
   "To resolve them locally, run `bun run cli rewards todo` (optionally `--issuer <slug>`), set",
   "`rewards.earn` from the CDR text it prints, then `bun run cli rewards stamp <issuer/card@hash>...`.",
@@ -736,7 +737,7 @@ const earnReviewSection = (r: SyncReport) => [
 ]
 
 const bonusReviewSection = (r: SyncReport) => [
-  `${r.bonus.review.length} cards have signup bonuses the parser could not split by year (sync ${r.date}).`,
+  `${r.bonus.review.length} ${BONUS_REVIEW_INTRO} (sync ${r.date}).`,
   "",
   "Run `bun run cli rewards bonus-todo`, write a manual signup offer from the CDR text it prints, then",
   '`bun run cli rewards bonus-stamp <issuer/card@hash>...`. See "Signup bonuses" in the README. When a',

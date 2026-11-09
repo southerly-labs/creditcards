@@ -248,11 +248,18 @@ const reviewApply = Command.make(
     bodyFile: Flag.String("body-file").pipe(Flag.withDescription("File holding the comment text")),
     by: Flag.String("by").pipe(Flag.withDescription("Login of the comment author")),
     url: Flag.String("url").pipe(Flag.withDescription("URL of the comment")),
+    issueFile: Flag.String("issue-file").pipe(
+      Flag.withDescription("File holding the body of the issue the comment is on"),
+      Flag.optional
+    ),
     out: Flag.String("out").pipe(Flag.withDefault(".cache/review-result.md"))
   },
-  Effect.fn(function* ({ bodyFile, by, url, out }) {
-    const body = yield* (yield* FileSystem.FileSystem).readFileString(bodyFile)
-    const result = yield* applyComment(body, { by, url })
+  Effect.fn(function* ({ bodyFile, by, url, issueFile, out }) {
+    const fs = yield* FileSystem.FileSystem
+    const body = yield* fs.readFileString(bodyFile)
+    const issue = Option.isSome(issueFile) ? yield* fs.readFileString(issueFile.value) : ""
+
+    const result = yield* applyComment(body, { by, url, issue })
 
     if (ParsedComment.$is("Invalid")(result)) {
       yield* writeFile(
