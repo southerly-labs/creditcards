@@ -7,13 +7,15 @@ import { DataHolderBrand, type ProductDetail } from "../src/cdr/schema.ts"
 import { Snapshots } from "../src/history/Snapshots.ts"
 import { splitCardKey, Store } from "../src/store/Store.ts"
 import { checkReferences } from "../src/build/build.ts"
-import { syncCdr } from "../src/sync/Sync.ts"
+import { LISTING_CHANGE, syncCdr } from "../src/sync/Sync.ts"
+import { decideHold } from "../src/sync/heldCommand.ts"
 import { required } from "../src/util/required.ts"
 import { Digest } from "effect/crypto"
 import { statusOf } from "../src/model/lifecycle.ts"
 
 const BASE_URI = "https://cdr.bank.example"
 const CARDLESS_URI = "https://cdr.cardless.example"
+const SMALL_URI = "https://cdr.small.example"
 
 const product = (productId: string, annual: string): ProductDetail => ({
   productId,
@@ -34,6 +36,7 @@ interface WorldState {
   readonly brandName?: string
   readonly listFailures?: number
   readonly cardlessDown?: boolean
+  readonly small?: ReadonlyArray<ProductDetail>
 }
 
 const seeded: WorldState = {
@@ -46,7 +49,14 @@ const seeded: WorldState = {
 class World extends Context.Service<World, Ref.Ref<WorldState>>()("creditcards/test/sync.test/World") {}
 
 const findProduct = (state: WorldState, productId: string) =>
-  required(Option.getOrUndefined(EffectArray.findFirst(state.products, (p) => p.productId === productId)))
+  required(
+    Option.getOrUndefined(
+      EffectArray.findFirst([...state.products, ...(state.small ?? [])], (p) => p.productId === productId)
+    )
+  )
+
+const listed = (products: ReadonlyArray<ProductDetail>) =>
+  EffectArray.map(products, (p) => ({ productId: p.productId, name: p.name, productCategory: p.productCategory }))
 
 const detailFor = (state: WorldState, productId: string): ProductDetail => {
   const detail = findProduct(state, productId)
@@ -68,7 +78,13 @@ const FakeCdr = Layer.effect(
             industries: ["banking"],
             publicBaseUri: BASE_URI
           }),
-          DataHolderBrand.make({ brandName: "Cardless Bank", industries: ["banking"], publicBaseUri: CARDLESS_URI })
+          DataHolderBrand.make({ brandName: "Cardless Bank", industries: ["banking"], publicBaseUri: CARDLESS_URI }),
+          DataHolderBrand.make({
+            brandName: "Small Bank",
+            dataHolderBrandId: "small-bank-id",
+            industries: ["banking"],
+            publicBaseUri: SMALL_URI
+          })
         ])
       ),
       listProducts: (baseUri) =>
@@ -81,11 +97,9 @@ const FakeCdr = Layer.effect(
               : Effect.succeed(
                   baseUri === CARDLESS_URI
                     ? []
-                    : EffectArray.map(state.products, (p) => ({
-                        productId: p.productId,
-                        name: p.name,
-                        productCategory: p.productCategory
-                      }))
+                    : baseUri === SMALL_URI
+                      ? listed(state.small ?? [])
+                      : listed(state.products)
                 )
           )
         ),
@@ -259,6 +273,48 @@ describe("syncCdr", () => {
 
         yield* syncOn(4)
         assert.strictEqual(statusOf(yield* storedCard("example-bank/card-p1")).status, "active")
+      })
+    )
+
+    it.effect("holds cards that vanish together for approval instead of marking them missing", () =>
+      Effect.gen(function* () {
+        const withSmall = { ...seeded, small: [product("s1", "99.00"), product("s2", "99.00")] }
+        yield* syncOn(1, withSmall)
+
+        const report = yield* syncOn(2)
+        const vanished = EffectArray.filter(report.holds, (hold) => hold.change === LISTING_CHANGE)
+
+        assert.deepStrictEqual(report.missing, [])
+        assert.deepStrictEqual(report.held, [])
+        assert.deepStrictEqual(
+          EffectArray.map(vanished, (hold) => [hold.state._tag, hold.reason, hold.proposed]),
+          EffectArray.replicate(["AwaitingApproval", "2/2 Small Bank cards vanished at once", '{"_tag":"Missing"}'], 2)
+        )
+
+        const [first, second] = [required(vanished[0]), required(vanished[1])]
+        assert.isUndefined(statusOf(yield* storedCard(first.card)).missing_since)
+        assert.deepStrictEqual(
+          EffectArray.map((yield* syncOn(3)).holds, (hold) => hold.id),
+          [first.id, second.id]
+        )
+
+        yield* decideHold(first.id, "approve", "the issuer closed this range")
+        const approved = yield* syncOn(4)
+
+        assert.deepStrictEqual(approved.missing, [first.card])
+        assert.deepStrictEqual(
+          EffectArray.map(approved.released, (hold) => hold.id),
+          [first.id]
+        )
+        assert.deepStrictEqual(
+          EffectArray.map(approved.holds, (hold) => hold.id),
+          [second.id]
+        )
+        assert.strictEqual(statusOf(yield* storedCard(first.card)).missing_since, "2026-11-04")
+
+        const back = yield* syncOn(5, withSmall)
+        assert.deepStrictEqual(back.holds, [])
+        assert.strictEqual(statusOf(yield* storedCard(first.card)).status, "active")
       })
     )
 

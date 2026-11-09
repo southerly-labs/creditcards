@@ -17,7 +17,7 @@ import { brandId, ProductDetail, type ProductSummary } from "../cdr/schema.ts"
 import { type BonusTranche, Card, type EarnRate, type Issuer, type Program } from "../model/schema.ts"
 import { applyOffers, generatedOffers, signupState } from "../offers/build.ts"
 import { Offer } from "../offers/schema.ts"
-import { holdCandidates, holdId, resolveHolds, revertChange, withCdrEvidence } from "./holds.ts"
+import { type HoldCandidate, holdCandidates, holdId, resolveHolds, revertChange, withCdrEvidence } from "./holds.ts"
 import type { Hold } from "../model/holds.ts"
 import { HoldState, isPending } from "../machine/hold.ts"
 import { bonusTextHash, isResolvableFromCdr } from "../rewards/bonus.ts"
@@ -40,6 +40,8 @@ import { ListingState } from "../machine/cardLifecycle.ts"
 import { fetched as fetchedEvent, FetchState, reportedFailure, settleFetch, stepFetch } from "../machine/brandFetch.ts"
 
 const CATEGORY = "CRED_AND_CHRG_CARDS"
+
+export const LISTING_CHANGE = "lifecycle.listing"
 
 const bonusFeatures = (p: ProductDetail) =>
   EffectArray.filter(p.features ?? [], (f) => f.featureType === "BONUS_REWARDS")
@@ -365,6 +367,7 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
   const holds: Array<Hold> = []
   const released: Array<{ id: string; card: string; change: string }> = []
   const evaluated = new Set<string>()
+  const settled = new Set<string>()
   const discontinued: Array<string> = []
   const missing: Array<string> = []
   const newPrograms: Array<string> = []
@@ -540,17 +543,46 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     ).length
 
     const brandName = brandStatus.get(brand)?.brand ?? brand
-
-    if (keys.length / active > MAX_DISCONTINUED_SHARE && keys.length > 1) {
-      for (const key of keys)
-        held.push({ card: key, reasons: [`${keys.length}/${active} ${brandName} cards vanished at once`] })
-      continue
-    }
+    const vanished = keys.length / active > MAX_DISCONTINUED_SHARE && keys.length > 1
 
     for (const key of keys) {
       const missingCard = required(cards.get(key))
       const before = lifecycleOf(missingCard)
       const after = yield* notSeen(missingCard, date)
+
+      const candidates: ReadonlyArray<HoldCandidate> =
+        vanished && ListingState.guards.Listed(before.listing)
+          ? [
+              {
+                change: LISTING_CHANGE,
+                reason: `${keys.length}/${active} ${brandName} cards vanished at once`,
+                kind: "approve",
+                current: { _tag: before.listing._tag },
+                proposed: { _tag: after.listing._tag }
+              }
+            ]
+          : []
+
+      const entries = EffectArray.filter(priorHolds, (hold) => hold.card === key && hold.change === LISTING_CHANGE)
+
+      if (candidates.length > 0 || entries.length > 0) {
+        for (const entry of entries) settled.add(entry.id)
+
+        const resolution = yield* resolveHolds({
+          card: key,
+          candidates,
+          entries,
+          date,
+          history: missingCard.cdr && `history/cdr/${productDir(splitCardKey(key).issuer, missingCard.cdr.product_id)}/`
+        })
+
+        holds.push(...resolution.holds)
+
+        for (const { change, proposed } of resolution.apply)
+          released.push({ id: yield* holdId(key, change, proposed), card: key, change })
+
+        if (resolution.revert.length > 0) continue
+      }
 
       if (ListingState.guards.Delisted(after.listing)) {
         writes.set(key, withLifecycle(missingCard, after))
@@ -563,7 +595,12 @@ export const syncCdr = Effect.fn("syncCdr")(function* (options: { readonly dryRu
     }
   }
 
-  holds.push(...EffectArray.filter(priorHolds, (hold) => !evaluated.has(hold.card) && cards.has(hold.card)))
+  holds.push(
+    ...EffectArray.filter(
+      priorHolds,
+      (hold) => !evaluated.has(hold.card) && !settled.has(hold.id) && cards.has(hold.card)
+    )
+  )
 
   const failedBrands = EffectArray.filter(fetched, (_, i) => reportedFailure(required(finalStates[i])))
 

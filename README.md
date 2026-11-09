@@ -112,7 +112,7 @@ Updates auto-merge. Changes that look wrong are held back and listed in a `sync-
 - a signup offer's total points rising by more than 50%
 - an offer the sync generated (from CDR or the bonus parser) disappearing: this one needs no reviewer and is applied if a sync on a later day still doesn't see the offer
 - records that fail schema validation
-- more than half of an issuer's cards vanishing at once
+- more than half of an issuer's cards vanishing at once: each listed card gets a `lifecycle.listing` hold instead of being marked missing. Approve it to let the card go missing (and be discontinued on a later day as usual); reject it to keep the card listed while it stays away. The hold is withdrawn if the card comes back or the vanishing drops below half.
 
 Before asking a reviewer, the sync rebuilds the card from the issuer's previous CDR response in `history/` with the current code. If that gives the stored value and today's response gives the new one, the issuer really changed its data, so the hold becomes a confirm hold with that comparison as its evidence and applies if a sync on a later day still proposes it. It stays for a reviewer when the previous response already gives the new value (a parser change), when there is no earlier response, when a field disappears, or when the new value is outside a plausible range (annual fee above $2,500, a rate above 40%, a foreign transaction fee above 5%, a base earn rate above 10, a signup bonus above 500,000 points).
 
@@ -135,7 +135,7 @@ You can also decide from GitHub without a checkout: comment on the `sync-held` o
 
 After each sync, if anything needs a reviewer (holds awaiting approval, whole cards held, earn rates or bonuses to review, flagged earn pages, cards not seen or discontinued, brand errors) or the sync failed, the workflow posts the list to the review agent's webhook (repo secret `T3_REVIEW_WEBHOOK`). The post carries a fingerprint of that list and the webhook ignores a fingerprint it has already seen, so the agent runs only when the queue changes.
 
-The next sync applies an approved change and drops its entry. A rejected change keeps the current value for as long as CDR proposes that exact value; a different proposal is held afresh. Invalid records and vanished issuers still hold the whole card.
+The next sync applies an approved change and drops its entry. A rejected change keeps the current value for as long as CDR proposes that exact value; a different proposal is held afresh. Invalid records still hold the whole card.
 
 A data holder whose product list fails (a timeout, a transport error or a 5xx) is asked again on its own after every other brand has been fetched, since many time out only under the parallel first pass. The sync commit lists brands that still fail and have cards in the data; brands with no cards are only counted.
 
