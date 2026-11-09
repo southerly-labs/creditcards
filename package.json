@@ -22,7 +22,8 @@
     "verify:holds": "bash tools/verify/run.sh .cursor/skills/verify-sync-holds SyncHolds holds-table.ts",
     "verify:lifecycle": "bash tools/verify/run.sh .cursor/skills/verify-card-lifecycle CardLifecycle lifecycle-table.ts",
     "verify:rewards-review": "bash tools/verify/run.sh .cursor/skills/verify-rewards-review RewardsReview review-table.ts",
-    "verify:review-queue": "bash tools/verify/run.sh .cursor/skills/verify-review-queue ReviewQueue queue-table.ts"
+    "verify:review-queue": "bash tools/verify/run.sh .cursor/skills/verify-review-queue ReviewQueue queue-table.ts",
+    "verify:overrides": "bash tools/verify/run.sh .cursor/skills/verify-manual-overrides ManualOverrides overrides-table.ts"
   },
   "dependencies": {
     "@effect/platform-bun": "4.1.0",
