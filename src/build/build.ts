@@ -9,6 +9,7 @@ import { earnStateOf, publicRewards, publicSignupReview, signupStateOf } from ".
 export type { Api } from "../api/contract.ts"
 
 import { type Dataset, splitCardKey, Store } from "../store/Store.ts"
+import { isEffectiveLock } from "../sync/merge.ts"
 
 export class ValidationError extends Schema.TaggedError<ValidationError, { readonly brand: unique symbol }>()(
   "ValidationError",
@@ -54,6 +55,10 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
 
     if (card.cdr !== undefined && dataset.issuers.has(issuer) && brandIssuer.get(card.cdr.brand) !== issuer)
       problems.push(`${key}: CDR brand ${card.cdr.brand} is not in ${issuer}'s cdr_brands`)
+
+    for (const path of card.locked ?? []) {
+      if (!isEffectiveLock(path)) problems.push(`${key}: the sync never writes ${path}, so locking it has no effect`)
+    }
 
     const offerPrograms = EffectArray.flatMap(card.offers ?? [], (offer) =>
       EffectArray.flatMap(offer.components, (component) =>

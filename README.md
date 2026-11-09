@@ -30,6 +30,8 @@ The CDR sync only owns the fields listed in `CDR_OWNED_PATHS` (`src/sync/merge.t
 locked = ["fees.foreign_txn_pct"]
 ```
 
+`bun run validate` rejects a lock on a field the sync never writes, such as `rewards.earn` (stamp the card instead) or `lifecycle.listing` (lock `lifecycle`), since it would protect nothing.
+
 ### Earn rates
 
 Banks publish earn rates as prose, so they are filled in two ways:

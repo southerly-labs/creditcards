@@ -75,6 +75,12 @@ const isLocked = (locked: ReadonlyArray<string>, path: string) =>
     (l) => path === l || pipe(path, EffectString.startsWith(`${l}.`)) || pipe(l, EffectString.startsWith(`${path}.`))
   )
 
+export const WHOLE_LOCKS = ["lifecycle", "offers"] as const
+
+export const isEffectiveLock = (path: string): boolean =>
+  EffectArray.some(WHOLE_LOCKS, (whole) => whole === path) ||
+  EffectArray.some(CDR_OWNED_PATHS, (owned) => isLocked([path], owned))
+
 const mergeCardImpl = (existing: Card | undefined, incoming: NormalisedCard): Obj => {
   if (existing === undefined) return structuredClone(incoming)
   const merged: Obj = structuredClone(existing)

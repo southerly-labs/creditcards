@@ -16,7 +16,11 @@ These checks validate syntax, not source accuracy or freshness.
 Lock paths derive from the current card schema, including optional fields and
 parent objects. Arrays are locked as a whole, without numeric element paths.
 Schema additions automatically become recognized lock targets. Unknown paths
-are rejected rather than silently failing to protect a field.
+are rejected rather than silently failing to protect a field. Dataset validation
+also rejects a known path the sync never writes: a lock must cover a path in
+`CDR_OWNED_PATHS` (a parent such as `fees`, or a child such as `cdr.brand`,
+which locks the whole `cdr` table), or be exactly `lifecycle` or `offers`.
+`rewards.earn` cannot be locked; a manual review stamp protects earn rates.
 
 Checks live at the shared schema boundary used by dataset validation, API
 decoding, and sync's existing invalid-record hold path. No source facts or review

@@ -200,3 +200,29 @@ test("brands, aliases and slugs must be consistent", () => {
     "bank/Card_2: file name is not a slug"
   ])
 })
+
+test("locks must name a path the sync writes", () => {
+  const locked = [
+    "fees",
+    "rates.purchase",
+    "cdr.brand",
+    "rewards",
+    "lifecycle",
+    "offers",
+    "rewards.earn",
+    "lifecycle.listing",
+    "gaps"
+  ]
+
+  const dataset: Dataset = {
+    issuers: new Map([["bank", { name: "Bank", cdr_brands: [] }]]),
+    programs: new Map(),
+    cards: new Map([["bank/card", { ...card, locked }]])
+  }
+
+  assert.deepStrictEqual(checkReferences(dataset), [
+    "bank/card: the sync never writes rewards.earn, so locking it has no effect",
+    "bank/card: the sync never writes lifecycle.listing, so locking it has no effect",
+    "bank/card: the sync never writes gaps, so locking it has no effect"
+  ])
+})
