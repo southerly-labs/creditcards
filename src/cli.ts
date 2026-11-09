@@ -28,6 +28,8 @@ import {
 import { applyComment } from "./review/apply.ts"
 import { metricsRecord, PreviousMetrics, reviewOpenCount, TaskPage, TaskReport, webhookItems } from "./review/tasks.ts"
 import { ParsedComment } from "./review/commands.ts"
+import { heldIssueEvent, ReviewIssueKind, rewardsIssueEvent } from "./review/issue.ts"
+import { planIssue } from "./machine/reviewIssue.ts"
 import { Snapshots } from "./history/Snapshots.ts"
 import type { EarnCheck } from "./model/schema.ts"
 import { splitCardKey, Store } from "./store/Store.ts"
@@ -322,9 +324,48 @@ const reviewTasks = Command.make(
   )
 )
 
+const reviewIssue = Command.make(
+  "issue",
+  {
+    kind: Argument.Literals("kind", ReviewIssueKind).pipe(
+      Argument.withDescription("held for the sync-held issue, rewards for the rewards-review issue")
+    ),
+    number: Flag.Int("number").pipe(Flag.withDescription("Number of the open issue, if there is one"), Flag.optional),
+    checked: Flag.Boolean("checked").pipe(
+      Flag.withDescription("The issuer page check succeeded (rewards only)"),
+      Flag.withDefault(false)
+    ),
+    report: Flag.String("report").pipe(Flag.withDefault(".cache/sync-report.json")),
+    pages: Flag.String("pages").pipe(Flag.withDefault(".cache/earn-check.json")),
+    out: Flag.String("out").pipe(Flag.withDefault(".cache/review-issue.json"))
+  },
+  Effect.fn(function* ({ kind, number, checked, report, pages, out }) {
+    const syncReport = yield* readJsonFile(Schema.NullOr(TaskReport), report)
+
+    if (syncReport === null) return yield* RewardsError.make({ message: `No sync report at ${report}` })
+
+    const pageResults = kind === "rewards" ? yield* readJsonFile(Schema.NullOr(Schema.Array(TaskPage)), pages) : null
+
+    const event =
+      kind === "held"
+        ? heldIssueEvent(syncReport)
+        : rewardsIssueEvent({ report: syncReport, pages: pageResults ?? [] }, checked && pageResults !== null)
+
+    const action = yield* planIssue(Option.getOrUndefined(number), event)
+
+    yield* writeFile(out, yield* encodeJson(action))
+
+    return yield* Console.log(`${kind} issue: ${action._tag}`)
+  })
+).pipe(
+  Command.withDescription(
+    "Work out whether to create, edit or close a review issue (prints the action to --out as JSON)"
+  )
+)
+
 const review = Command.make("review").pipe(
   Command.withDescription("Apply review decisions written as issue comment commands"),
-  Command.withSubcommands([reviewApply, reviewTasks])
+  Command.withSubcommands([reviewApply, reviewTasks, reviewIssue])
 )
 
 const MainLayer = Layer.mergeAll(
