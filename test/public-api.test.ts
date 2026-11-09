@@ -226,3 +226,24 @@ test("locks must name a path the sync writes", () => {
     "bank/card: the sync never writes gaps, so locking it has no effect"
   ])
 })
+
+test("a CDR product belongs to one card under the key the sync matches on", () => {
+  const dataset: Dataset = {
+    issuers: new Map([["bank", { name: "Bank", cdr_brands: ["Bank", "Bank Australia"] }]]),
+    programs: new Map(),
+    cards: new Map<string, Card>([
+      ["bank/a", { ...card, cdr: { brand: "Bank", brand_id: "b1", product_id: "p1" } }],
+      ["bank/b", { ...card, cdr: { brand: "Bank Australia", brand_id: "b1", product_id: "p1" } }],
+      ["bank/c", { ...card, cdr: { brand: "Bank", product_id: "p2" } }],
+      ["bank/d", { ...card, cdr: { brand: "Bank", product_id: "p2" } }],
+      ["bank/e", { ...card, cdr: { brand: "Bank Australia", brand_id: "b2", product_id: "p1" } }],
+      ["bank/f", { ...card, cdr: { brand: "Bank Australia", product_id: "p1" } }]
+    ])
+  }
+
+  assert.deepStrictEqual(checkReferences(dataset), [
+    "bank/b: same CDR product as bank/a",
+    "bank/d: same CDR product as bank/c",
+    "bank/f: same CDR product as bank/e"
+  ])
+})

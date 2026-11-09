@@ -10,6 +10,7 @@ export type { Api } from "../api/contract.ts"
 
 import { type Dataset, splitCardKey, Store } from "../store/Store.ts"
 import { isEffectiveLock } from "../sync/merge.ts"
+import { cardBrand } from "../sync/brands.ts"
 
 export class ValidationError extends Schema.TaggedError<ValidationError, { readonly brand: unique symbol }>()(
   "ValidationError",
@@ -25,6 +26,7 @@ const compiles = (pattern: string): boolean => Result.isSuccess(Result.try(() =>
 export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
   const problems: Array<string> = []
   const cdrIds = new Map<string, string>()
+  const namedIds = new Map<string, string>()
   const brandIssuer = new Map<string, string>()
 
   for (const [slug, issuer] of dataset.issuers) {
@@ -71,11 +73,13 @@ export const checkReferences = (dataset: Dataset): ReadonlyArray<string> => {
     }
 
     if (card.cdr !== undefined) {
-      const cdrId = `${card.cdr.brand}|${card.cdr.product_id}`
-      const other = cdrIds.get(cdrId)
+      const matched = `${cardBrand(card.cdr)}|${card.cdr.product_id}`
+      const named = `name:${card.cdr.brand}|${card.cdr.product_id}`
+      const other = cdrIds.get(matched) ?? (card.cdr.brand_id === undefined ? namedIds.get(named) : cdrIds.get(named))
 
-      if (other != null && other !== "") problems.push(`${key}: same CDR product as ${other}`)
-      cdrIds.set(cdrId, key)
+      if (other !== undefined) problems.push(`${key}: same CDR product as ${other}`)
+      cdrIds.set(matched, key)
+      namedIds.set(named, key)
     }
   }
 
