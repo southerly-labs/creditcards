@@ -19,7 +19,11 @@ export class ValidationError extends Schema.TaggedError<ValidationError, { reado
   {
     problems: Schema.Array(Schema.String)
   }
-) {}
+) {
+  override get message(): string {
+    return EffectArray.join(this.problems, "\n")
+  }
+}
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u
 

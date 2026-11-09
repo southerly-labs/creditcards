@@ -1,7 +1,7 @@
 import { assert, layer, test } from "@effect/vitest"
 import { Effect } from "effect"
 import { Digest } from "effect/crypto"
-import { checkReferences } from "../src/build/build.ts"
+import { checkReferences, ValidationError } from "../src/build/build.ts"
 import { holdIdProblems } from "../src/build/holdChecks.ts"
 import { initialLifecycle } from "../src/machine/cardLifecycle.ts"
 import { HoldState } from "../src/machine/hold.ts"
@@ -29,6 +29,10 @@ const dataset = (cards: ReadonlyMap<string, Card>, holds: ReadonlyArray<Hold> = 
   programs: new Map(),
   cards,
   holds
+})
+
+test("a validation error's message lists its problems", () => {
+  assert.strictEqual(ValidationError.make({ problems: ["a: one", "b: two"] }).message, "a: one\nb: two")
 })
 
 const section = (reviewed_at: string) => ({
