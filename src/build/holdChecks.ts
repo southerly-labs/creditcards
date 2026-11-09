@@ -3,6 +3,9 @@ import { HoldState } from "../machine/hold.ts"
 import type { Hold } from "../model/holds.ts"
 import { holdId } from "../sync/holds.ts"
 import { DIFFED_PATHS } from "../sync/merge.ts"
+import { LISTING_CHANGE } from "../sync/Sync.ts"
+
+const HELD_PATHS: ReadonlySet<string> = new Set([...DIFFED_PATHS, LISTING_CHANGE])
 
 const OFFER_CHANGE = /^offers\.[a-z0-9]+(?:-[a-z0-9]+)*$/u
 
@@ -23,7 +26,7 @@ export const holdProblems = (hold: Hold): ReadonlyArray<string> => {
   const on = decidedOn(hold.state)
 
   return [
-    ...(EffectArray.some(DIFFED_PATHS, (path) => path === hold.change) || OFFER_CHANGE.test(hold.change)
+    ...(HELD_PATHS.has(hold.change) || OFFER_CHANGE.test(hold.change)
       ? []
       : [`${at}: ${hold.change} is not a change the sync holds`]),
     ...EffectArray.flatMap(["current", "proposed"] as const, (field) =>

@@ -7,6 +7,7 @@ import { DataHolderBrand, type ProductDetail } from "../src/cdr/schema.ts"
 import { Snapshots } from "../src/history/Snapshots.ts"
 import { splitCardKey, Store } from "../src/store/Store.ts"
 import { checkReferences } from "../src/build/build.ts"
+import { holdIdProblems } from "../src/build/holdChecks.ts"
 import { LISTING_CHANGE, syncCdr } from "../src/sync/Sync.ts"
 import { decideHold } from "../src/sync/heldCommand.ts"
 import { required } from "../src/util/required.ts"
@@ -290,6 +291,10 @@ describe("syncCdr", () => {
           EffectArray.map(vanished, (hold) => [hold.state._tag, hold.reason, hold.proposed]),
           EffectArray.replicate(["AwaitingApproval", "2/2 Small Bank cards vanished at once", '{"_tag":"Missing"}'], 2)
         )
+
+        const stored = yield* (yield* Store).load
+        assert.deepStrictEqual(checkReferences(stored), [])
+        assert.deepStrictEqual(yield* holdIdProblems(stored.holds ?? []), [])
 
         const [first, second] = [required(vanished[0]), required(vanished[1])]
         assert.isUndefined(statusOf(yield* storedCard(first.card)).missing_since)

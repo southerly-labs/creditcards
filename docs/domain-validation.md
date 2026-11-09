@@ -46,6 +46,7 @@ name is a lock path's first segment, as `provenance correct` writes it), and its
 `reviewed_at` and `observed_at` must be a date or an ISO timestamp.
 
 Each entry in `data/sync-holds.toml` must name a change the sync holds (a diffed
-card path or `offers.<id>`), store `current` and `proposed` as JSON, carry the id
+card path, `lifecycle.listing` for cards that vanished together, or
+`offers.<id>`), store `current` and `proposed` as JSON, carry the id
 the sync computes from its card, change and proposed value, and, once decided,
 be decided no earlier than its `since` date.
