@@ -285,3 +285,43 @@ test("review states must agree with the earn rates and signup offer they describ
     "bank/signup-none: signup_state records no signup offer but the card has one"
   ])
 })
+
+test("generated offers use the ids the sync generates, and gaps only sit beside empty fields", () => {
+  const offer = (id: string, source: Offer["source"]): Offer => ({
+    id,
+    source,
+    components: [{ kind: "intro_rate", applies_to: "purchase", rate: 0 }]
+  })
+
+  const gap = (field: "fees.annual" | "rates.purchase") =>
+    ({ field, reason: "not_stated", checked: "2026-11-01", sources: ["cdr"] }) as const
+
+  const dataset: Dataset = {
+    issuers: new Map([["bank", { name: "Bank", cdr_brands: [] }]]),
+    programs: new Map(),
+    cards: new Map([
+      [
+        "bank/card",
+        {
+          ...card,
+          fees: { annual: 0 },
+          gaps: [gap("fees.annual"), gap("rates.purchase")],
+          offers: [
+            offer("intro-purchase", "cdr"),
+            offer("intro-both-2", "cdr"),
+            offer("first-year-fee", "cdr"),
+            offer("spring-promo", "manual"),
+            offer("spring-promo-cdr", "cdr"),
+            offer("intro-purchase-parser", "parser")
+          ]
+        }
+      ]
+    ])
+  }
+
+  assert.deepStrictEqual(checkReferences(dataset), [
+    "bank/card: offer spring-promo-cdr has source cdr, which the sync never generates under that id",
+    "bank/card: offer intro-purchase-parser has source parser, which the sync never generates under that id",
+    "bank/card: gap for fees.annual is stale: the field has a value"
+  ])
+})

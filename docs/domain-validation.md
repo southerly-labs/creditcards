@@ -31,3 +31,10 @@ An `earn_state` of `Parsed`, or `Reviewed`/`Stale` with outcome `present`, needs
 non-empty `rewards.earn`; outcome `none` needs it empty or absent. A
 `signup_state` with outcome `present` needs a `manual` offer with id `signup`;
 outcome `none` needs no `signup` offer.
+
+Offers with `source = "cdr"` must use an id the sync generates (`intro-purchase`,
+`intro-balance-transfer` or `intro-both`, each optionally with a `-2`-style suffix,
+`first-year-fee` or `signup`), and `source = "parser"` is only valid on `signup`.
+Anything else written by hand must be `source = "manual"`, or the next sync would
+treat it as generated and remove it. A `gaps` entry is rejected when its field has
+a value: remove the gap when you fill the field by hand.
