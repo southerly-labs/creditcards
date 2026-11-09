@@ -70,11 +70,15 @@ SyncReads ==
 
 \* A maintainer reads the card in the issue and comments /earn-none, either
 \* copying the issue's `issuer/card@hash` (pinned) or the bare `issuer/card`.
-\* stamp() hashes the CDR text live and refuses a pinned hash that no longer
-\* matches (textChanged in src/rewards/review.ts).
+\* applyComment pins a bare card to the hash the issue body lists, and stamp()
+\* refuses a hash that no longer matches the live CDR text (textChanged in
+\* src/rewards/review.ts). StampLandsRows is the real applyComment's answer.
+Lands(pinned, changed) == (CHOOSE r \in StampLandsRows : r[1] = pinned /\ r[2] = changed)[3]
+
 MaintainerStamps ==
   \E pinned \in BOOLEAN, o \in {"none", "present"} :
-    LET accepted == IF pinned THEN PinnedStampAccepted /\ listed = text ELSE BareStampAccepted
+    LET parsed == IF pinned THEN PinnedStampAccepted ELSE BareStampAccepted
+        accepted == parsed /\ Lands(pinned, text # listed)
         r == RRow(tag, outcome, "Stamp", text = hash, o)
     IN /\ Step
        /\ listed # NoText

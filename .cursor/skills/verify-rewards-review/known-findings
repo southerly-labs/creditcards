@@ -1,7 +1,2 @@
 # Rules the current code is known to break. They are reported as findings, not fixed here.
-# StampCoversListedText: a bare `/earn-none issuer/card` or `/bonus-none issuer/card`
-# comment (without the issue's @hash) stamps whatever CDR text is live when the
-# comment is applied, which can be text the rewards-review issue never listed.
-# Replayed against the real applyComment and stamp on 2026-11-09. Remove this
-# line once commands require the @hash, so a regression fails the run.
-StampCoversListedText
+# None today. StampCoversListedText was fixed in 896add3; it is enforced again.

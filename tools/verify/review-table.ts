@@ -1,5 +1,13 @@
-import { BunRuntime } from "@effect/platform-bun"
-import { Console, Effect, Array as EffectArray } from "effect"
+import { BunRuntime, BunServices } from "@effect/platform-bun"
+import { Console, Effect, Exit, Array as EffectArray, FileSystem, Layer, Path } from "effect"
+import { Digest } from "effect/crypto"
+import { CdrClient, CdrError } from "../../src/cdr/CdrClient.ts"
+import { DataHolderBrand } from "../../src/cdr/schema.ts"
+import { initialLifecycle } from "../../src/machine/cardLifecycle.ts"
+import { loyaltyTextHash } from "../../src/rewards/parse.ts"
+import { applyComment } from "../../src/review/apply.ts"
+import { Store } from "../../src/store/Store.ts"
+import { type SyncReport, summariseRewardsReview } from "../../src/sync/Sync.ts"
 import {
   needsReview,
   type ReadOutcome,
@@ -81,6 +89,94 @@ const reviewRow = Effect.fn("reviewRow")(function* (state: StateInput, input: Ev
 
 const accepted = (body: string) => ParsedComment.$is("Commands")(parseComment(body))
 
+const BASE_URI = "https://cdr.bank.example"
+
+const feature = (info: string) => [{ featureType: "LOYALTY_PROGRAM", additionalValue: "Points", additionalInfo: info }]
+
+const LISTED_TEXT = feature("See the website for earn rates")
+
+const EDITED_TEXT = feature("Earn 2 points per $1 on travel")
+
+const issuer = { features: LISTED_TEXT }
+
+const FakeCdr = Layer.succeed(
+  CdrClient,
+  CdrClient.of({
+    brands: Effect.succeed([
+      DataHolderBrand.make({ brandName: "Bank", industries: ["banking"], publicBaseUri: BASE_URI })
+    ]),
+    listProducts: () => Effect.fail(CdrError.make({ url: BASE_URI, message: "unused" })),
+    getProduct: (_baseUri, productId) => {
+      const detail = { productId, name: "Card", productCategory: "CRED_AND_CHRG_CARDS", features: issuer.features }
+
+      return Effect.succeed({ version: 4, raw: detail, detail })
+    }
+  })
+)
+
+const emptyReport = (hash: string): SyncReport => ({
+  date: "2026-11-09",
+  cardsSeen: 1,
+  added: [],
+  updated: [],
+  discontinued: [],
+  missing: [],
+  held: [],
+  holds: [],
+  released: [],
+  newIssuers: [],
+  newPrograms: [],
+  brandErrors: [],
+  cardlessBrandErrors: 0,
+  snapshotsSaved: 0,
+  rewards: { set: [], review: [{ card: "bank/card", reason: "unreadable", hash }] },
+  bonus: { set: [], review: [], undetailed: [] }
+})
+
+const seedCard = Effect.gen(function* () {
+  const store = yield* Store
+  yield* store.writeIssuer("bank", { name: "Bank", cdr_brands: ["Bank"] })
+  yield* store.writeCard("bank", "card", {
+    name: "Card",
+    type: "personal",
+    first_seen: "2026-11-01",
+    lifecycle: initialLifecycle,
+    cdr: { brand: "Bank", product_id: "p1" },
+    fees: {},
+    rates: {},
+    limits: {},
+    perks: {},
+    rewards: { program: "points" }
+  })
+})
+
+const TempStore = Layer.unwrap(
+  Effect.gen(function* () {
+    const fs = yield* FileSystem.FileSystem
+    const path = yield* Path.Path
+
+    return Store.layer(path.join(yield* fs.makeTempDirectoryScoped(), "data"))
+  })
+)
+
+const replyLands = Effect.fn("replyLands")(function* (pinned: boolean, textChanged: boolean) {
+  const listedHash = yield* loyaltyTextHash(LISTED_TEXT)
+  const issue = summariseRewardsReview(emptyReport(listedHash))
+  const body = pinned ? `/earn-none bank/card@${listedHash}` : "/earn-none bank/card"
+
+  issuer.features = LISTED_TEXT
+  yield* seedCard
+  issuer.features = textChanged ? EDITED_TEXT : LISTED_TEXT
+
+  return yield* applyComment(body, { by: "verify", url: "https://verify.example", issue })
+})
+
+const stampLands = (pinned: boolean, textChanged: boolean) =>
+  replyLands(pinned, textChanged).pipe(
+    Effect.exit,
+    Effect.map((exit) => [pinned, textChanged, Exit.isSuccess(exit)])
+  )
+
 const program = Effect.gen(function* () {
   const rows = yield* Effect.forEach(
     EffectArray.flatMap(STATES, (state) => EffectArray.map(EVENTS, (input) => [state, input] as const)),
@@ -89,18 +185,28 @@ const program = Effect.gen(function* () {
 
   const needs = EffectArray.map(STATES, (state) => [state[0], state[1], needsReview(stateOf(state))])
 
+  const stamps = yield* Effect.forEach(
+    EffectArray.flatMap([true, false], (pinned) =>
+      EffectArray.map([true, false], (changed) => [pinned, changed] as const)
+    ),
+    ([pinned, changed]) => stampLands(pinned, changed)
+  )
+
   yield* Console.log(
     tlaModule(
       "RewardsReviewCode",
-      ["src/machine/review.ts", "src/review/commands.ts (parseComment)"],
+      ["src/machine/review.ts", "src/review/commands.ts (parseComment)", "src/review/apply.ts (applyComment)"],
       [
         tlaRows("ReviewRows", rows),
         tlaRows("NeedsReviewRows", needs),
         tlaConstant("BareStampAccepted", accepted("/earn-none example/card")),
-        tlaConstant("PinnedStampAccepted", accepted(`/earn-none example/card@${NEW}`))
+        tlaConstant("PinnedStampAccepted", accepted(`/earn-none example/card@${NEW}`)),
+        tlaRows("StampLandsRows", stamps)
       ]
     )
   )
 })
 
-BunRuntime.runMain(program)
+const Env = Layer.mergeAll(TempStore, FakeCdr, Digest.layerWebCrypto).pipe(Layer.provideMerge(BunServices.layer))
+
+BunRuntime.runMain(program.pipe(Effect.provide(Env)))
