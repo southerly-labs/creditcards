@@ -259,7 +259,9 @@ const reviewApply = Command.make(
     const body = yield* fs.readFileString(bodyFile)
     const issue = Option.isSome(issueFile) ? yield* fs.readFileString(issueFile.value) : ""
 
-    const result = yield* applyComment(body, { by, url, issue })
+    const result = yield* applyComment(body, { by, url, issue }).pipe(
+      Effect.tapError((error) => writeFile(out, `Nothing applied:\n- ${error.message}`))
+    )
 
     if (ParsedComment.$is("Invalid")(result)) {
       yield* writeFile(
