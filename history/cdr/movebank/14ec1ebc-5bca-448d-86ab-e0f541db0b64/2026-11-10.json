@@ -1,0 +1,140 @@
+{
+  "brand": "MoveBank",
+  "product": {
+    "brand": "MoveBank",
+    "constraints": [
+      {
+        "additionalInfo": "\nMaximum credit limit is $25,000",
+        "additionalValue": "25000.00",
+        "constraintType": "MAX_LIMIT"
+      },
+      {
+        "additionalInfo": "\nMinimum credit limit is $1,000",
+        "additionalValue": "1000.00",
+        "constraintType": "MIN_LIMIT"
+      }
+    ],
+    "description": "Low Rate Credit Card. Not available to new customers.",
+    "effectiveFrom": "2026-09-05T04:00:00Z",
+    "eligibility": [
+      {
+        "additionalInfo": "Must be an individual applying in their own name (not a company, trust or other entity).",
+        "eligibilityType": "NATURAL_PERSON"
+      },
+      {
+        "additionalValue": "18",
+        "eligibilityType": "MIN_AGE"
+      }
+    ],
+    "features": [
+      {
+        "additionalValue": " Visa Credit Card",
+        "featureType": "CARD_ACCESS"
+      },
+      {
+        "additionalInfo": "\nInterest-free period on purchases (up to 45 days)",
+        "additionalValue": "P45D",
+        "featureType": "INTEREST_FREE"
+      }
+    ],
+    "fees": [
+      {
+        "additionalValue": "Applicable where payment is late",
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "LATE_PAYMENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Late payment fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "10.00"
+        },
+        "name": "Overlimit fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "rateBased",
+        "feeType": "EVENT",
+        "name": "Foreign currency conversion fee",
+        "rateBased": {
+          "rate": "0.02",
+          "rateType": "TRANSACTION"
+        }
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "15.00"
+        },
+        "name": "Quick debit Dishonour fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Visa Cash Advance Fee"
+      },
+      {
+        "currency": "AUD",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "EVENT",
+        "fixedAmount": {
+          "amount": "5.00"
+        },
+        "name": "Overseas ATM withdrawal"
+      },
+      {
+        "additionalValue": "P1Y",
+        "currency": "AUD",
+        "feeCapPeriod": "P1Y",
+        "feeMethodUType": "fixedAmount",
+        "feeType": "PERIODIC",
+        "fixedAmount": {
+          "amount": "59.00"
+        },
+        "name": "Annual Card Fee"
+      }
+    ],
+    "isTailored": false,
+    "lastUpdated": "2026-11-09T09:50:01.843873Z",
+    "lendingRates": [
+      {
+        "additionalInfo": "\nApplies to purchases not paid in full by the statement due date.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "PURCHASE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.0899",
+        "repaymentType": "UNCONSTRAINED"
+      },
+      {
+        "additionalInfo": "Applies to cash advances (cash withdrawals, cash-like transactions and payments from the card) from the transaction date.",
+        "applicationFrequency": "P1M",
+        "applicationType": "PERIODIC",
+        "calculationFrequency": "P1D",
+        "interestPaymentDue": "IN_ARREARS",
+        "lendingRateType": "CASH_ADVANCE",
+        "loanPurpose": "UNCONSTRAINED",
+        "rate": "0.1299",
+        "repaymentType": "UNCONSTRAINED"
+      }
+    ],
+    "name": "Low Rate Credit Card",
+    "productCategory": "CRED_AND_CHRG_CARDS",
+    "productId": "14ec1ebc-5bca-448d-86ab-e0f541db0b64"
+  },
+  "version": 7
+}

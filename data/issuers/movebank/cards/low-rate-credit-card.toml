@@ -1,0 +1,34 @@
+name = "Low Rate Credit Card"
+type = "personal"
+network = "visa"
+first_seen = "2026-11-10"
+description = "Low Rate Credit Card. Not available to new customers."
+
+[lifecycle.listing]
+_tag = "Listed"
+
+[lifecycle.sales]
+_tag = "Selling"
+
+[cdr]
+brand = "MoveBank"
+brand_id = "89d458be-14ae-eb11-a822-000d3a884a20"
+product_id = "14ec1ebc-5bca-448d-86ab-e0f541db0b64"
+last_updated = "2026-11-09T09:50:01.843873Z"
+
+[fees]
+annual = 59
+foreign_txn_pct = 2
+late_payment = 15
+
+[rates]
+purchase = 8.99
+cash_advance = 12.99
+interest_free_days = 45
+
+[limits]
+min_credit = 1000
+max_credit = 25000
+
+[perks]
+
