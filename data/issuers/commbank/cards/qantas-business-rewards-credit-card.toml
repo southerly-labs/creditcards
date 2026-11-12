@@ -11,10 +11,25 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[[offers]]
+id = "signup"
+source = "manual"
+valid_until = "2027-03-31"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 170000
+year = 1
+min_spend = 6000
+spend_days = 90
+note = "Qantas Business Rewards bonus points"
+
 [signup_state]
-_tag = "Stale"
-hash = "aefca5b2cd75f78d"
-outcome = "none"
+_tag = "Reviewed"
+hash = "fa1d0ab9bba196dd"
+outcome = "present"
+on = "2026-11-12"
 
 [earn_state]
 _tag = "Reviewed"
