@@ -2,7 +2,7 @@ name = "Low Rate Credit Card"
 type = "personal"
 network = "visa"
 first_seen = "2026-11-10"
-description = "Low Rate Credit Card. Not available to new customers."
+description = "Low Rate Credit Card. Note this product is no longer available for sale."
 
 [lifecycle.listing]
 _tag = "Listed"
@@ -14,7 +14,7 @@ _tag = "Selling"
 brand = "MoveBank"
 brand_id = "89d458be-14ae-eb11-a822-000d3a884a20"
 product_id = "14ec1ebc-5bca-448d-86ab-e0f541db0b64"
-last_updated = "2026-11-09T09:50:01.843873Z"
+last_updated = "2026-11-12T22:53:23.957216Z"
 
 [fees]
 annual = 59
