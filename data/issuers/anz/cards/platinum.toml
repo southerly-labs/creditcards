@@ -16,7 +16,7 @@ _tag = "Selling"
 brand = "ANZ"
 brand_id = "f4562bb8-e394-ea11-a831-000d3a8842e1"
 product_id = "4cfce209-2f9c-e506-0dd6-7de6bd04e6d6"
-last_updated = "2026-11-02T13:00:00.000Z"
+last_updated = "2026-11-15T01:30:00.000Z"
 
 [fees]
 annual = 87
@@ -31,7 +31,7 @@ balance_transfer = 23.49
 interest_free_days = 55
 
 [limits]
-min_credit = 6000
+min_credit = 1000
 
 [perks]
 insurance = [ "International Travel Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess in Australia Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance" ]

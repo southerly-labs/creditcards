@@ -45,7 +45,7 @@ hash = "cb0bec3f5007e57e"
 brand = "ANZ"
 brand_id = "f4562bb8-e394-ea11-a831-000d3a8842e1"
 product_id = "f60fb83e-bbfb-abe3-07e2-f70acf7e30ca"
-last_updated = "2026-11-02T13:00:00.000Z"
+last_updated = "2026-11-15T01:30:00.000Z"
 
 [fees]
 annual = 149
@@ -61,7 +61,7 @@ balance_transfer = 23.49
 interest_free_days = 44
 
 [limits]
-min_credit = 6000
+min_credit = 1000
 
 [rewards]
 program = "anz-rewards"

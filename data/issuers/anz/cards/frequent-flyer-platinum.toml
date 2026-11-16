@@ -43,7 +43,7 @@ hash = "07e97f4586816cef"
 brand = "ANZ"
 brand_id = "f4562bb8-e394-ea11-a831-000d3a8842e1"
 product_id = "d8101ca7-369f-f465-27f6-50f388c81b3a"
-last_updated = "2026-10-27T22:00:00.000Z"
+last_updated = "2026-11-15T01:30:00.000Z"
 
 [fees]
 annual = 295
@@ -59,7 +59,7 @@ balance_transfer = 23.49
 interest_free_days = 44
 
 [limits]
-min_credit = 6000
+min_credit = 1000
 
 [rewards]
 program = "qantas"
