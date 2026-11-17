@@ -36,16 +36,16 @@ sources = [ "cdr", "https://www.queenslandcountry.bank/business-banking/business
 brand = "Queensland Country Bank"
 brand_id = "7179a2ee-f6a2-eb11-a822-000d3a884a20"
 product_id = "19"
-last_updated = "2026-11-08T22:00:23.9966396Z"
+last_updated = "2026-11-17T02:00:25.8794642Z"
 
 [fees]
 annual = 85
 foreign_txn_pct = 3.65
 
 [rates]
-purchase = 14.99
-cash_advance = 14.99
-balance_transfer = 14.99
+purchase = 15.24
+cash_advance = 15.24
+balance_transfer = 15.24
 interest_free_days = 55
 
 [limits]

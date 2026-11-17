@@ -29,7 +29,7 @@ note = "The overview page CDR links returned HTTP 404."
 brand = "Revolut"
 brand_id = "a890809f-ee12-ed11-a831-000d3a8830d6"
 product_id = "550e8400-e29b-41d4-a716-446655440005"
-last_updated = "2026-07-08T14:04:01.589894Z"
+last_updated = "2026-11-16T10:26:14.734897Z"
 
 [fees]
 foreign_txn_pct = 1.5
@@ -37,7 +37,7 @@ cash_advance_pct = 3
 late_payment = 30
 
 [rates]
-purchase = 20.99
+purchase = 21.99
 cash_advance = 23.99
 interest_free_days = 44
 

@@ -54,7 +54,7 @@ outcome = "present"
 brand = "NATIONAL AUSTRALIA BANK"
 brand_id = "25797662-e294-ea11-a831-000d3a8842e1"
 product_id = "c43ad795-9db1-4e1f-a7f5-845714ecedfd"
-last_updated = "2026-10-01T13:59:59Z"
+last_updated = "2026-11-16T13:59:59Z"
 
 [fees]
 annual = 195
@@ -64,7 +64,7 @@ late_payment = 20
 [rates]
 purchase = 22.49
 cash_advance = 22.99
-balance_transfer = 21.74
+balance_transfer = 22.99
 interest_free_days = 44
 
 [limits]
