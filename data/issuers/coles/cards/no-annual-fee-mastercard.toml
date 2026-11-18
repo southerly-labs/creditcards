@@ -24,7 +24,7 @@ outcome = "present"
 brand = "Coles Credit Cards"
 brand_id = "5c95f4fd-37bc-eb11-a823-000d3a884a20"
 product_id = "d2f29089-d0ee-44bc-bd6f-05f6419841b7"
-last_updated = "2026-11-02T00:12:00Z"
+last_updated = "2026-11-17T00:12:00Z"
 
 [fees]
 annual = 0
@@ -54,5 +54,4 @@ url = "https://www.coles.com.au/content/dam/coles/coles-financial-services/credi
 expect = [ "coles no annual fee mastercard® 1 flybuys point per $2 on each eligible transaction points are capped at the first $5,000 of eligible transactions in each statement period" ]
 
 [perks]
-insurance = [ "Complimentary insurance" ]
 

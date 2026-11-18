@@ -59,4 +59,5 @@ url = "https://www.coles.com.au/content/dam/coles/coles-financial-services/credi
 expect = [ "coles rewards mastercard® 2 flybuys points per $1 on each coles spend 1 flybuys point per $1 on each eligible transaction everywhere else points are capped at the first $8,000 of eligible transactions in each statement period" ]
 
 [perks]
+insurance = [ "Complimentary mobile phone insurance" ]
 
