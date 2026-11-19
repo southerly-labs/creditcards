@@ -18,22 +18,22 @@ source = "cdr"
 [[offers.components]]
 kind = "intro_rate"
 applies_to = "balance_transfer"
-rate = 12.739
+rate = 12.989
 months = 12
 
 [cdr]
 brand = "QBANK"
 brand_id = "2830e32a-4edd-eb11-a824-000d3a884a20"
 product_id = "S25_Bluey"
-last_updated = "2026-10-19T06:10:22.000+10:00"
+last_updated = "2026-11-19T05:52:18.000+10:00"
 
 [fees]
 foreign_txn_pct = 3.65
 late_payment = 8
 
 [rates]
-purchase = 12.74
-cash_advance = 12.74
+purchase = 12.99
+cash_advance = 12.99
 balance_transfer = 0
 interest_free_days = 55
 
