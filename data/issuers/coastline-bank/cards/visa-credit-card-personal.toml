@@ -21,12 +21,12 @@ sources = [ "cdr", "https://www.coastline.com.au/personal/visa-credit-card", "ht
 brand = "Coastline Bank"
 brand_id = "439e1c2a-b0be-eb11-a823-000d3a884a20"
 product_id = "25"
-last_updated = "2026-10-14T14:00:14.4205168Z"
+last_updated = "2026-11-19T14:00:14.3852757Z"
 
 [fees]
 [rates]
-purchase = 10.24
-cash_advance = 10.24
+purchase = 10.49
+cash_advance = 10.49
 interest_free_days = 55
 
 [limits]
