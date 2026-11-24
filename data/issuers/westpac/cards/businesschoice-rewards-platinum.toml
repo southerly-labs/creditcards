@@ -29,8 +29,10 @@ _tag = "Parsed"
 hash = "1af1ee08480f3fbd"
 
 [earn_state]
-_tag = "Unreadable"
+_tag = "Reviewed"
 hash = "dcab41b45dbf8d14"
+outcome = "present"
+on = "2026-11-24"
 
 [cdr]
 brand = "Westpac"
@@ -55,6 +57,15 @@ max_credit = 250000
 
 [rewards]
 program = "qantas"
+
+[[rewards.earn]]
+rate = 0.5
+note = "0.75 Qantas Points per $1.50 on eligible business purchases; capped at 100,000 Qantas Points per facility per month (shared with government payments, bonus points excluded)"
+
+[[rewards.earn]]
+rate = 0.33
+category = "government"
+note = "0.5 Qantas Points per $1.50; counts toward the 100,000 points monthly cap"
 
 [perks]
 insurance = [ "Complimentary insurance", "International Travel insurance", "Interstate Flight Inconvenience insurance", "Overseas Transit Accident insurance", "Purchase Protection insurance", "Extended Warranty insurance", "Account holder's Unauthorised Transaction insurance" ]
