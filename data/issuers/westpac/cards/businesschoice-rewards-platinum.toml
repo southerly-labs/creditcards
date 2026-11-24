@@ -12,11 +12,31 @@ _tag = "Listed"
 [lifecycle.sales]
 _tag = "Selling"
 
+[[offers]]
+id = "signup"
+source = "parser"
+
+[[offers.components]]
+kind = "signup_points"
+program = "qantas"
+points = 100000
+year = 1
+min_spend = 8000
+spend_days = 90
+
+[signup_state]
+_tag = "Parsed"
+hash = "1af1ee08480f3fbd"
+
+[earn_state]
+_tag = "Unreadable"
+hash = "dcab41b45dbf8d14"
+
 [cdr]
 brand = "Westpac"
 brand_id = "ffe2945b-e094-ea11-a831-000d3a8842e1"
 product_id = "CCBusChoiceRewardsPlat"
-last_updated = "2026-10-29T02:41:55Z"
+last_updated = "2026-11-24T00:05:45Z"
 
 [fees]
 annual = 210
@@ -32,6 +52,9 @@ interest_free_days = 55
 [limits]
 min_credit = 2000
 max_credit = 250000
+
+[rewards]
+program = "qantas"
 
 [perks]
 insurance = [ "Complimentary insurance", "International Travel insurance", "Interstate Flight Inconvenience insurance", "Overseas Transit Accident insurance", "Purchase Protection insurance", "Extended Warranty insurance", "Account holder's Unauthorised Transaction insurance" ]
