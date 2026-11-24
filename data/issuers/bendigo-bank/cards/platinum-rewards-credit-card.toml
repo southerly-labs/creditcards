@@ -16,8 +16,10 @@ _tag = "Selling"
 _tag = "Unread"
 
 [earn_state]
-_tag = "Unreadable"
+_tag = "Reviewed"
 hash = "a2566cdc510de18a"
+outcome = "present"
+on = "2026-11-24"
 
 [cdr]
 brand = "Bendigo Bank"
@@ -45,7 +47,11 @@ max_credit = 50000
 program = "bendigo-bank-rewards"
 
 [[rewards.earn]]
-rate = 1.5
+rate = 1
+
+[[rewards.earn]]
+rate = 2
+category = "international spend"
 
 [perks]
 insurance = [ "International Travel Insurance", "Extended Warranty Insurance", "Purchase Protection Insurance", "Domestic Travel Insurance", "Rental Vehicle Excess Insurance" ]
