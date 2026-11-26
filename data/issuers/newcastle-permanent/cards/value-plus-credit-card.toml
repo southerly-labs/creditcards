@@ -4,6 +4,7 @@ network = "visa"
 first_seen = "2026-10-31"
 description = "A personal credit card with up to 55 days interest free on purchases, a low annual fee and competitive interest rate."
 url = "https://www.newcastlepermanent.com.au/tools-and-services/apply-for-a-product"
+image = "https://www.ngmgroup.com.au/globalassets/images/np-card-design/cs-854_visa_credit_vector_mockup_value-01.png"
 
 [lifecycle.listing]
 _tag = "Listed"
@@ -15,7 +16,7 @@ _tag = "Selling"
 brand = "Newcastle Permanent"
 brand_id = "d5306c4e-ea83-ec11-a82b-000d3a884a20"
 product_id = "CC_valuepluscc"
-last_updated = "2026-11-05T00:00:00+11:00"
+last_updated = "2026-11-25T00:00:00+11:00"
 
 [fees]
 annual = 49

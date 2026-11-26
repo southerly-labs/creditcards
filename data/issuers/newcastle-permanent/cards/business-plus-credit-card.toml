@@ -3,6 +3,7 @@ type = "business"
 network = "visa"
 first_seen = "2026-10-31"
 description = "A business credit card designed to help separate company and business expenses, manage spending, and simplify bookkeeping."
+image = "https://www.ngmgroup.com.au/globalassets/images/np-card-design/cs-854_visa_credit_vector_mockup_business-01.png"
 
 [lifecycle.listing]
 _tag = "Listed"
@@ -21,7 +22,7 @@ note = "CDR publishes no applicationUri or overviewUri for this card, and a sear
 brand = "Newcastle Permanent"
 brand_id = "d5306c4e-ea83-ec11-a82b-000d3a884a20"
 product_id = "CC_businesspluscc"
-last_updated = "2026-11-05T00:00:00+11:00"
+last_updated = "2026-11-25T00:00:00+11:00"
 
 [fees]
 annual = 55
